@@ -1,12 +1,14 @@
 baseURL: https://thallesgsrv.github.io/Big-O-Library/
 title: Big-O-Library
-languageCode: pt-br
+locale: pt-BR
 defaultContentLanguage: pt-br
+
+theme: hextra
 
 module:
   imports:
     - path: github.com/imfing/hextra
-
+    
 menu:
   main:
     - name: Conteúdo
@@ -24,13 +26,13 @@ menu:
 
 params:
   navbar:
-    displayTitle: false
+    displayTitle: true
     displayLogo: true
     logo:
       path: images/logo-light.svg
       dark: images/logo-dark.svg
-      width: 116
-      height: 24
+      width: 48
+      height: 12
   theme:
     default: system
     displayToggle: true
@@ -43,3 +45,17 @@ params:
   footer:
     displayCopyright: false
     displayPoweredBy: false
+
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      passthrough:
+        enable: true
+        delimiters:
+          block:
+            - ['\[', '\]']
+            - ['$$', '$$']
+          inline:
+            - ['\(', '\)']

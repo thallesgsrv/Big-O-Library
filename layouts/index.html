@@ -1,0 +1,33 @@
+{{ define "main" }}
+  <div class="hx:mx-auto hx:flex hextra-max-page-width">
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-8 hx:md:px-12">
+        <section class="bo-hero hx:rounded-md hx:p-8 hx:mb-8 hx:flex hx:flex-col hx:items-center hx:justify-center">
+          {{- $logoPath := .Site.Params.navbar.logo.path | default "images/logo.svg" -}}
+          {{- $logoDark := .Site.Params.navbar.logo.dark | default $logoPath -}}
+          <a class="hx:mb-4" href="{{ .Site.Home.RelPermalink }}">
+            <img class="bo-hero-logo hx:block hx:dark:hidden" src="{{ $logoPath | relURL }}" alt="{{ .Site.Title }}" />
+            <img class="bo-hero-logo hx:hidden hx:dark:block" src="{{ $logoDark | relURL }}" alt="{{ .Site.Title }}" />
+          </a>
+          {{ if .Site.Params.homeTitle }}
+            <h1 class="bo-hero-title hx:text-3xl hx:md:text-5xl hx:font-extrabold hx:text-center">{{ .Site.Params.homeTitle }}</h1>
+          {{ else if .Title }}
+            <h1 class="bo-hero-title hx:text-3xl hx:md:text-5xl hx:font-extrabold hx:text-center">{{ .Title }}</h1>
+          {{ else }}
+            <h1 class="bo-hero-title hx:text-3xl hx:md:text-5xl hx:font-extrabold hx:text-center">{{ .Site.Title }}</h1>
+          {{ end }}
+          {{ with .Site.Params.description }}
+            <p class="bo-hero-sub hx:mt-3 hx:text-center hx:text-slate-700 hx:dark:text-slate-300">{{ . }}</p>
+          {{ end }}
+        </section>
+
+        <div class="content">
+          {{ partial "custom/content-begin.html" . }}
+          {{ .Content }}
+          {{ partial "custom/content-end.html" . }}
+        </div>
+      </main>
+    </article>
+  </div>
+{{ end }}
