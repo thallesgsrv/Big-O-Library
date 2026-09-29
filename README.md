@@ -5,9 +5,9 @@
 <h1 align="center">Big-O-Library</h1>
 
 <p align="center">
-  <img src="https://img.shields.io/github/contributors/https://github.com/thallesgsrv/Big-O-Library.git/Big-O-Library?style=flat-square" alt="Contribuidores">
-  <img src="https://img.shields.io/github/last-commit/https://github.com/thallesgsrv/Big-O-Library.git/Big-O-Library?style=flat-square" alt="Último commit">
-  <img src="https://img.shields.io/github/stars/https://github.com/thallesgsrv/Big-O-Library.git/Big-O-Library?style=flat-square" alt="Estrelas">
+  <img src="https://img.shields.io/github/contributors/https://github.com/thallesgsrv/Big-O-Library?style=flat-square" alt="Contribuidores">
+  <img src="https://img.shields.io/github/last-commit/https://github.com/thallesgsrv/Big-O-Library?style=flat-square" alt="Último commit">
+  <img src="https://img.shields.io/github/stars/https://github.com/thallesgsrv/Big-O-Library?style=flat-square" alt="Estrelas">
 </p>
 
 <p align="center">
