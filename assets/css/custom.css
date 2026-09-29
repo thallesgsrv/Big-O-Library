@@ -1,0 +1,15 @@
+:root {
+  --primary-hue: 166deg;
+  --primary-saturation: 84%;
+  --primary-lightness: 31%;
+}
+
+.dark {
+  --primary-hue: 166deg;
+  --primary-saturation: 66%;
+  --primary-lightness: 53%;
+}
+
+.theme-dark { display: none; }
+.dark .theme-dark { display: inline; }
+.dark .theme-light { display: none; }

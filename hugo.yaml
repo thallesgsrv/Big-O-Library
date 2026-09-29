@@ -1,0 +1,45 @@
+baseURL: https://thallesgsrv.github.io/Big-O-Library/
+title: Big-O-Library
+languageCode: pt-br
+defaultContentLanguage: pt-br
+
+module:
+  imports:
+    - path: github.com/imfing/hextra
+
+menu:
+  main:
+    - name: Conteúdo
+      pageRef: /docs
+      weight: 1
+    - name: Buscar
+      weight: 2
+      params:
+        type: search
+    - name: GitHub
+      weight: 3
+      url: https://github.com/thallesgsrv/Big-O-Library
+      params:
+        icon: github
+
+params:
+  navbar:
+    displayTitle: false
+    displayLogo: true
+    logo:
+      path: images/logo-light.svg
+      dark: images/logo-dark.svg
+      width: 116
+      height: 24
+  theme:
+    default: system
+    displayToggle: true
+  search:
+    enable: true
+    type: flexsearch
+  editURL:
+    enable: true
+    base: https://github.com/thallesgsrv/Big-O-Library/edit/main/content
+  footer:
+    displayCopyright: false
+    displayPoweredBy: false
