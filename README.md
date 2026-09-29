@@ -2,11 +2,7 @@
   <img src="assets/images/bigo-library.svg" alt="Big-O-Library" width="220">
 </p>
 
-<p align="center">
-  <img src="https://img.shields.io/badge/status-em%20desenvolvimento-yellow?style=for-the-badge" alt="Status: em desenvolvimento">
-  <img src="https://img.shields.io/badge/licen%C3%A7a-MIT-blue?style=for-the-badge" alt="Licença MIT">
-  <img src="https://img.shields.io/badge/contribui%C3%A7%C3%B5es-abertas-brightgreen?style=for-the-badge" alt="Contribuições abertas">
-</p>
+<h1 align="center">Big-O-Library</h1>
 
 <p align="center">
   <img src="https://img.shields.io/github/contributors/https://github.com/thallesgsrv/Big-O-Library.git/Big-O-Library?style=flat-square" alt="Contribuidores">
@@ -14,7 +10,11 @@
   <img src="https://img.shields.io/github/stars/https://github.com/thallesgsrv/Big-O-Library.git/Big-O-Library?style=flat-square" alt="Estrelas">
 </p>
 
-<h1 align="center">Big-O-Library</h1>
+<p align="center">
+  <img src="https://img.shields.io/badge/status-em%20desenvolvimento-yellow?style=for-the-badge" alt="Status: em desenvolvimento">
+  <img src="https://img.shields.io/badge/licen%C3%A7a-MIT-blue?style=for-the-badge" alt="Licença MIT">
+  <img src="https://img.shields.io/badge/contribui%C3%A7%C3%B5es-abertas-brightgreen?style=for-the-badge" alt="Contribuições abertas">
+</p>
 
 <p align="center">
   Acervo colaborativo de materiais das disciplinas de Ciência da Computação.
