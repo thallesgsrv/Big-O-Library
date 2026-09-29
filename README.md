@@ -43,4 +43,10 @@ Em desenvolvimento.
 
 ## Histórico de Estrelas
 
-[![Star History Chart](https://api.star-history.com/svg?repos=thallesgsrv/Big-O-Library&type=Date)](https://www.star-history.com/#thallesgsrv/Big-O-Library&Date)
+<a href="https://www.star-history.com/?repos=thallesgsrv%2FBig-O-Library&type=date&legend=top-left">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="https://api.star-history.com/chart?repos=thallesgsrv/Big-O-Library&type=date&theme=dark&legend=top-left" />
+    <source media="(prefers-color-scheme: light)" srcset="https://api.star-history.com/chart?repos=thallesgsrv/Big-O-Library&type=date&legend=top-left" />
+    <img alt="Star History Chart" src="https://api.star-history.com/chart?repos=thallesgsrv/Big-O-Library&type=date&legend=top-left" />
+  </picture>
+</a>
