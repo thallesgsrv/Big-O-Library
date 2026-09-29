@@ -1,0 +1,50 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Big-O-Library – Docs</title>
+    <link>http://localhost:1313/Big-O-Library/docs/</link>
+    <description>Recent content in Docs on Big-O-Library</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>pt-br</language>
+    
+	  <atom:link href="http://localhost:1313/Big-O-Library/docs/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+      
+        
+      
+    
+    
+    <item>
+      <title>Big-O-Library</title>
+      <link>http://localhost:1313/Big-O-Library/docs/01-periodo/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>http://localhost:1313/Big-O-Library/docs/01-periodo/</guid>
+      <description>
+        
+        
+        &lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;!-- raw HTML omitted --&gt;
+&lt;p&gt;A ideia surgiu a partir da forma como o professor &lt;a href=&#34;https://github.com/joaoarthurbm&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;João Arthur&lt;/a&gt; organizou e disponibilizou o material de sua disciplina. O objetivo é levar esse modelo para as demais disciplinas do curso.&lt;/p&gt;
+&lt;h2&gt;Recomendações&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;recomendações&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#recomenda%c3%a7%c3%b5es&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Antes de consultar qualquer material, um conselho: se algo não fizer sentido na primeira leitura, releia quantas vezes for preciso. Nada escrito por outra pessoa é impossível de entender, e o resultado depende do quanto você está disposto a se dedicar.&lt;/p&gt;
+&lt;p&gt;Sobre dedicação, vale assistir a &lt;a href=&#34;https://youtu.be/TRPBY_lxJfE&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Você tem brio?&lt;/a&gt;, de Clóvis de Barros Filho.&lt;/p&gt;
+&lt;h2&gt;Conteúdo&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;conteúdo&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#conte%c3%bado&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;O projeto está no início. Os materiais serão listados aqui à medida que forem adicionados.&lt;/p&gt;
+&lt;h2&gt;Contribuição&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;contribuição&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#contribui%c3%a7%c3%a3o&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Contribuições são bem-vindas. Se você já cursou alguma disciplina e quer compartilhar material, abra uma &lt;a href=&#34;https://github.com/thallesgsrv/Big-O-Library/issues&#34;target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;issue&lt;/a&gt; ou envie um Pull Request.&lt;/p&gt;
+&lt;h2&gt;Avisos&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;avisos&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#avisos&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Este projeto é um material complementar produzido por estudantes e não substitui o conteúdo oficial, as aulas ou as orientações dos professores.&lt;/p&gt;
+&lt;p&gt;Sempre que possível, materiais de terceiros serão referenciados e vinculados à fonte original, respeitando suas licenças e direitos autorais.&lt;/p&gt;
+&lt;h2&gt;Status&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;status&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#status&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Em desenvolvimento.&lt;/p&gt;
+&lt;h2&gt;Histórico de Estrelas&lt;span class=&#34;hx:absolute hx:-mt-20&#34; id=&#34;histórico-de-estrelas&#34;&gt;&lt;/span&gt;
+    &lt;a href=&#34;#hist%c3%b3rico-de-estrelas&#34; class=&#34;subheading-anchor&#34; aria-label=&#34;Permalink for this section&#34;&gt;&lt;/a&gt;&lt;/h2&gt;&lt;!-- raw HTML omitted --&gt;
+
+      </description>
+    </item>
+    
+  </channel>
+</rss>
