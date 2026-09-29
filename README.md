@@ -1,17 +1,27 @@
-<picture>
-  <source media="(prefers-color-scheme: dark)" srcset="assets/images/bigo-library-dark.svg">
-  <source media="(prefers-color-scheme: light)" srcset="assets/images/bigo-library-light.svg">
-  <img src="assets/images/bigo-library-light.svg" alt="Big-O-Library" width="300">
-</picture>
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="assets/images/bigo-library-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="assets/images/bigo-library-light.svg">
+    <img src="assets/images/bigo-library-light.svg" alt="Big-O-Library" width="300">
+  </picture>
+</p>
 
-# Big-O-Library ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square) ![Stars](https://img.shields.io/github/stars/thallesgsrv/Big-O-Library?style=flat-square)
+<h1 align="center">
+  Big-O-Library
+  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="License">
+  <img src="https://img.shields.io/github/stars/thallesgsrv/Big-O-Library?style=flat-square" alt="Stars">
+</h1>
 
-[![Status](https://img.shields.io/badge/Status-Em_desenvolvimento-yellow?style=for-the-badge)](#status)
-[![Contribuições](https://img.shields.io/badge/Contribui%C3%A7%C3%B5es-Abertas-brightgreen?style=for-the-badge)](#contribuição)
+<p align="center">
+  <a href="#status"><img src="https://img.shields.io/badge/Status-Em_desenvolvimento-yellow?style=for-the-badge" alt="Status"></a>
+  <a href="#contribuição"><img src="https://img.shields.io/badge/Contribui%C3%A7%C3%B5es-Abertas-brightgreen?style=for-the-badge" alt="Contribuições"></a>
+</p>
 
-Acervo colaborativo de materiais das disciplinas de Ciência da Computação.
+<p align="center">
+  Acervo colaborativo de materiais das disciplinas de Ciência da Computação.
+</p>
 
-A ideia surgiu a partir da forma como o professor João Arthur organizou e disponibilizou o material de sua disciplina. O objetivo é levar esse modelo para as demais disciplinas do curso.
+A ideia surgiu a partir da forma como o professor [João Arthur](https://github.com/joaoarthurbm) organizou e disponibilizou o material de sua disciplina. O objetivo é levar esse modelo para as demais disciplinas do curso.
 
 ## Conteúdo
 
