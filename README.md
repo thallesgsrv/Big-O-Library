@@ -23,6 +23,12 @@
 
 A ideia surgiu a partir da forma como o professor [João Arthur](https://github.com/joaoarthurbm) organizou e disponibilizou o material de sua disciplina. O objetivo é levar esse modelo para as demais disciplinas do curso.
 
+## Recomendações
+
+Antes de consultar qualquer material, um conselho: se algo não fizer sentido na primeira leitura, releia quantas vezes for preciso. Nada escrito por outra pessoa é impossível de entender, e o resultado depende do quanto você está disposto a se dedicar.
+
+Sobre dedicação, vale assistir a [Você tem brio?](https://youtu.be/TRPBY_lxJfE), de Clóvis de Barros Filho.
+
 ## Conteúdo
 
 O projeto está no início. Os materiais serão listados aqui à medida que forem adicionados.
