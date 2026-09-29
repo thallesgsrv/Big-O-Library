@@ -1,36 +1,25 @@
-<p align="center">
-  <img src="assets/images/bigo-library.svg" alt="Big-O-Library" width="220">
-</p>
+<picture>
+  <source media="(prefers-color-scheme: dark)" srcset="assets/images/bigo-library-dark.svg">
+  <source media="(prefers-color-scheme: light)" srcset="assets/images/bigo-library-light.svg">
+  <img src="assets/images/bigo-library-light.svg" alt="Big-O-Library" width="300">
+</picture>
 
-<h1 align="center">Big-O-Library</h1>
+# Big-O-Library ![License](https://img.shields.io/badge/license-MIT-blue?style=flat-square) ![Stars](https://img.shields.io/github/stars/thallesgsrv/Big-O-Library?style=flat-square)
 
-<p align="center">
-  <img src="https://img.shields.io/github/contributors/https://github.com/thallesgsrv/Big-O-Library?style=flat-square" alt="Contribuidores">
-  <img src="https://img.shields.io/github/last-commit/https://github.com/thallesgsrv/Big-O-Library?style=flat-square" alt="Último commit">
-  <img src="https://img.shields.io/github/stars/https://github.com/thallesgsrv/Big-O-Library?style=flat-square" alt="Estrelas">
-</p>
+[![Status](https://img.shields.io/badge/Status-Em_desenvolvimento-yellow?style=for-the-badge)](#status)
+[![Contribuições](https://img.shields.io/badge/Contribui%C3%A7%C3%B5es-Abertas-brightgreen?style=for-the-badge)](#contribuição)
 
-<p align="center">
-  <img src="https://img.shields.io/badge/status-em%20desenvolvimento-yellow?style=for-the-badge" alt="Status: em desenvolvimento">
-  <img src="https://img.shields.io/badge/licen%C3%A7a-MIT-blue?style=for-the-badge" alt="Licença MIT">
-  <img src="https://img.shields.io/badge/contribui%C3%A7%C3%B5es-abertas-brightgreen?style=for-the-badge" alt="Contribuições abertas">
-</p>
-
-<p align="center">
-  Acervo colaborativo de materiais das disciplinas de Ciência da Computação.
-</p>
-
-## Sobre o projeto
-
-O Big-O-Library reúne, em um só lugar, materiais de estudo das disciplinas do curso de Ciência da Computação, produzidos e organizados por alunos.
+Acervo colaborativo de materiais das disciplinas de Ciência da Computação.
 
 A ideia surgiu a partir da forma como o professor João Arthur organizou e disponibilizou o material de sua disciplina. O objetivo é levar esse modelo para as demais disciplinas do curso.
 
-O projeto está no início, e o formato e o escopo do que será disponibilizado ainda estão em definição.
+## Conteúdo
+
+O projeto está no início. Os materiais serão listados aqui à medida que forem adicionados.
 
 ## Contribuição
 
-Contribuições são bem-vindas. Se você já cursou alguma disciplina e quer compartilhar material, abra uma issue ou envie um Pull Request.
+Contribuições são bem-vindas. Se você já cursou alguma disciplina e quer compartilhar material, abra uma [issue](https://github.com/thallesgsrv/Big-O-Library/issues) ou envie um Pull Request.
 
 ## Avisos
 
@@ -42,6 +31,6 @@ Sempre que possível, materiais de terceiros serão referenciados e vinculados �
 
 Em desenvolvimento.
 
-<p align="center">
-  <sub>Feito por alunos, para alunos.</sub>
-</p>
+## Histórico de Estrelas
+
+[![Star History Chart](https://api.star-history.com/svg?repos=thallesgsrv/Big-O-Library&type=Date)](https://www.star-history.com/#thallesgsrv/Big-O-Library&Date)
