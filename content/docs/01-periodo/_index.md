@@ -5,8 +5,3 @@ breadcrumbDisable: true
 ---
 
 Materiais do primeiro período do curso, organizados por disciplina.
-
-## Disciplinas
-
-- Programação 1
-- outras disciplinas em breve

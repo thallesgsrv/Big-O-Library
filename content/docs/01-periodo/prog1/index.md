@@ -1,6 +1,7 @@
 ---
 title: Programação 1
 weight: 1
+description: Lógica de programação e primeiros programas.
 ---
 
 A disciplina de Programação 1 introduz os conceitos fundamentais da lógica de programação, do raciocínio algorítmico e da escrita de programas simples.

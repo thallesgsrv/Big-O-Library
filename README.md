@@ -35,7 +35,7 @@ O projeto está no início. Os materiais serão listados aqui à medida que fore
 
 ## Contribuição
 
-Contribuições são bem-vindas. Se você já cursou alguma disciplina e quer compartilhar material, abra uma [issue](https://github.com/thallesgsrv/Big-O-Library/issues) ou envie um Pull Request.
+Contribuições são bem-vindas. Se você já cursou alguma disciplina e quer compartilhar material, abra uma [issue](https://github.com/thallesgsrv/Big-O-Library/issues) ou envie um [Pull Request](https://github.com/thallesgsrv/Big-O-Library/pulls).
 
 ## Avisos
 

@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{- /* cor do período (01-periodo -> --p1 ...) e complexidade correspondente */ -}}
-{{- $cx := slice "O(1)" "O(log n)" "O(√n)" "O(n)" "O(n log n)" "O(n²)" "O(n³)" "O(2ⁿ)" "O(n!)" -}}
+{{- $cx := partial "bo-cx.html" . -}}
 {{- $n := replaceRE `.*/0([1-9])-periodo/.*` "$1" .RelPermalink -}}
 {{- $pc := "var(--ac)" -}}
 {{- $badge := "" -}}
@@ -46,7 +46,7 @@
           {{- if .Parent -}}
             {{- $parent := .Parent -}}
             {{- if or (in $parent.RelPermalink "01-periodo/") (in $parent.RelPermalink "02-periodo/") (in $parent.RelPermalink "03-periodo/") (in $parent.RelPermalink "04-periodo/") (in $parent.RelPermalink "05-periodo/") (in $parent.RelPermalink "06-periodo/") (in $parent.RelPermalink "07-periodo/") (in $parent.RelPermalink "08-periodo/") (in $parent.RelPermalink "09-periodo/") (in $parent.RelPermalink "optativas/") -}}
-              <a href="/Big-O-Library/docs/">← Materiais</a>
+              <a href="{{ "docs/" | relURL }}">← Materiais</a>
             {{- else -}}
               <a href="{{ $parent.RelPermalink }}">← {{ $parent.Title }}</a>
             {{- end -}}
@@ -76,6 +76,7 @@
       var cmd = document.createElement('div');
       cmd.className = 'bo-cmd';
       cmd.textContent = '$ cat ' + (el.id || el.textContent.trim().toLowerCase().replace(/\s+/g, '-')) + '.md';
+      if (/^contribui/.test(el.id)) sec.className += ' bo-sec-cta';
       c.insertBefore(sec, el);
       sec.appendChild(cmd);
       sec.appendChild(el);

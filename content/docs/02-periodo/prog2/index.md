@@ -1,6 +1,7 @@
 ---
 title: Programação 2
-weight: 2
+weight: 1
+description: Orientação a objetos e estruturas de dados.
 ---
 
 A disciplina de Programação 2 aprofunda os conceitos de programação, introduzindo estruturas de dados mais complexas, orientação a objetos e boas práticas de desenvolvimento.

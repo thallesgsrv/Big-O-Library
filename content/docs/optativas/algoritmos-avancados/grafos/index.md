@@ -1,6 +1,7 @@
 ---
 title: Grafos
-weight: 9
+weight: 1
+description: Representações, buscas e caminhos mínimos.
 ---
 
 A disciplina de Grafos estuda estruturas de grafos, algoritmos de busca, caminho mínimo e aplicações práticas em redes e problemas de otimização.

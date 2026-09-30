@@ -1,5 +1,7 @@
 {{ define "main" }}
-{{- $cx := slice "O(1)" "O(log n)" "O(√n)" "O(n)" "O(nlog n)" "O(n²)" "O(n³)" "O(2ⁿ)" "O(n!)" -}}
+{{- $cx := partial "bo-cx.html" . -}}
+{{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
 <div class="bo-wrap">
   <div class="bo-mhead">
     <div class="bo-prompt">~/big-o-library $ ls materiais/</div>
@@ -7,17 +9,21 @@
     <p class="bo-lead">Conteúdos organizados por disciplina e período. A cor é o custo: quanto mais você avança, mais quente fica.</p>
     <div class="bo-small">O projeto está no início. Os materiais serão listados aqui à medida que forem adicionados.</div>
   </div>
+
   <div class="bo-lsh">$ ls -l periodos/ <span>&nbsp;&nbsp; # a cor é o custo</span></div>
   <div class="bo-pgrid">
-    {{- $i := 0 -}}
+    {{- /* o número do período vem do nome da pasta (01-periodo → 1), não de um contador */ -}}
     {{- range .Pages.ByWeight -}}
-      {{- if not (in .RelPermalink "optativas") -}}
-        {{- $i = add $i 1 -}}
-        {{- $n := $i -}}
+      {{- $num := replaceRE `^.*/0?([1-9])-periodo/?$` "$1" .RelPermalink -}}
+      {{- if and (ne .Section "optativas") (eq (len $num) 1) -}}
+        {{- $n := int $num -}}
+        {{- $subs := .Pages.ByWeight -}}
         <div class="bo-per">
-          <div class="bo-per-top"><span class="bo-per-o" style="color:var(--p{{ $n }})">{{ index $cx (sub $n 1) }}</span><a class="bo-per-n" href="{{ .RelPermalink }}">{{ $n }}º período</a></div>
+          <div class="bo-per-top">
+            <span class="bo-per-o" style="color:var(--p{{ $n }})" aria-hidden="true">{{ index $cx (sub $n 1) }}</span>
+            <a class="bo-per-n" href="{{ .RelPermalink }}">{{ $n }}º período <span aria-hidden="true">→</span></a>
+          </div>
           <div class="bo-per-l" style="background:var(--p{{ $n }})"></div>
-          {{- $subs := .Pages.ByWeight -}}
           {{- if $subs -}}
             <ul class="bo-per-list">{{ range $subs }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
           {{- else -}}
@@ -27,36 +33,28 @@
       {{- end -}}
     {{- end -}}
   </div>
-  {{ with $.GetPage "/docs/optativas" }}
-  <a id="optativas-link-materiais" class="bo-opt" href="{{ .RelPermalink }}"><b>O(∞) <i>&nbsp;optativas</i></b><span>side quests, sem ordem definida</span></a>
-  <div id="optativas-list-materiais" style="display:none;margin-top:12px">
-    {{ $opt := site.GetPage "section" "docs/optativas" }}
-    {{ if $opt }}
-      <div class="bo-grid3">
-        {{ range $opt.Pages }}
-          <a class="bo-card" href="{{ .RelPermalink }}"><div class="bo-bar"></div><div class="bo-t">{{ .Title }}</div><div class="bo-d">{{ with .Params.description }}{{ . }}{{ else }}Material optativo{{ end }}</div></a>
+
+  {{- /* Optativas: cabeçalho clicável + lista das optativas logo abaixo, sempre visível (sem JS) */ -}}
+  {{ with site.GetPage "/docs/optativas" }}
+  <section class="bo-optsec" aria-labelledby="optativas-titulo">
+    <a id="optativas-titulo" class="bo-opt" href="{{ .RelPermalink }}"><b>O(∞) <i>&nbsp;optativas</i></b><span>side quests, sem ordem definida</span></a>
+    {{ $opts := .Pages.ByWeight }}
+    {{ if $opts }}
+      <ul class="bo-optlist">
+        {{ range $opts }}
+          <li>
+            <a class="bo-card" href="{{ .RelPermalink }}">
+              <div class="bo-bar"></div>
+              <div class="bo-t">{{ .Title }}</div>
+              <div class="bo-d">{{ with .Params.description }}{{ . }}{{ else }}Material optativo{{ end }}</div>
+            </a>
+          </li>
         {{ end }}
-      </div>
+      </ul>
     {{ else }}
-      <div class="bo-card bo-text"><div class="bo-bar"></div><div class="bo-d">Nenhuma optativa encontrada.</div></div>
+      <div class="bo-per-soon">nenhuma optativa por enquanto — em breve</div>
     {{ end }}
-  </div>
-  <script>
-    (function(){
-      var link = document.getElementById('optativas-link-materiais');
-      var list = document.getElementById('optativas-list-materiais');
-      if(!link || !list) return;
-      link.addEventListener('click', function(e){
-        e.preventDefault();
-        if(list.style.display === 'none' || list.style.display === ''){
-          list.style.display = 'block';
-          try{ list.scrollIntoView({behavior:'smooth', block:'start'}); }catch(err){}
-        } else {
-          list.style.display = 'none';
-        }
-      });
-    })();
-  </script>
+  </section>
   {{ end }}
 </div>
 {{ end }}

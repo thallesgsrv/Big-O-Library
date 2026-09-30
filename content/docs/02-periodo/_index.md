@@ -5,7 +5,3 @@ breadcrumbDisable: true
 ---
 
 Materiais do segundo período do curso, organizados por disciplina.
-
-## Disciplinas
-
-- disciplina em breve

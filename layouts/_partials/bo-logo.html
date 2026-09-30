@@ -1,4 +1,5 @@
-{{- /* Logo animada o(library)_ ; uso: partial "bo-logo.html" (dict "size" "24px") */ -}}
-{{ $size := .size }}
-{{ if not $size }}{{ $size = "24px" }}{{ end }}
-<span class="lg" style="font-size: {{ $size }};" aria-label="o(library)"><span class="ac">o(</span><span class="w"><span class="k1">library</span><span class="k2">1</span><span class="k3">log n</span><span class="k4">n</span><span class="k5">n²</span></span><span class="ac">)</span><span class="cur">_</span></span>
+{{- /* Logo animada o(library)_ ; uso: partial "bo-logo.html" (dict "size" "24px")
+       O tamanho pode ser qualquer valor CSS válido (inclusive clamp()). O safeCSS evita que o
+       html/template troque valores como clamp(...) por "ZgotmplZ" dentro do atributo style. */ -}}
+{{ $size := .size | default "24px" }}
+<span class="lg" style="font-size: {{ $size | safeCSS }};" aria-label="o(library)" role="img"><span class="ac" aria-hidden="true">o(</span><span class="w" aria-hidden="true"><span class="k1">library</span><span class="k2">1</span><span class="k3">log n</span><span class="k4">n</span><span class="k5">n²</span></span><span class="ac" aria-hidden="true">)</span><span class="cur" aria-hidden="true">_</span></span>

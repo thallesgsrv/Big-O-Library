@@ -1,6 +1,7 @@
 ---
-title: Laborátorio de Programação 1
-weight: 1
+title: Laboratório de Programação 1
+weight: 2
+description: Prática de programação do primeiro período.
 ---
 
 A disciplina de Programação 1 introduz os conceitos fundamentais da lógica de programação, do raciocínio algorítmico e da escrita de programas simples.

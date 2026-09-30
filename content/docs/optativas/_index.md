@@ -5,7 +5,3 @@ breadcrumbDisable: true
 ---
 
 Materiais das optativas do curso, organizados por optativa.
-
-## Disciplinas
-
-- disciplina em breve

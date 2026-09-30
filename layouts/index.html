@@ -1,9 +1,11 @@
 {{ define "main" }}
+{{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
+{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
 <div class="bo-wrap">
   <section class="bo-hero">
     <div class="bo-hero-text">
       <div class="bo-prompt">~/big-o-library $ ls sobre/</div>
-      <div class="bo-hero-logo">{{ partial "bo-logo.html" (dict "size" "clamp(48px,9vw,104px)") }}</div>
+      <div class="bo-hero-logo">{{ partial "bo-logo.html" (dict "size" "min(14cqi, 88px)") }}</div>
       <h1 class="bo-h1">O acervo acadêmico da <em>Ciência da Computação</em></h1>
       <p class="bo-lead">Materiais, referências e conteúdos de apoio organizados por disciplina e período. Quanto mais você avança, mais o custo cresce.</p>
       <div class="bo-btns">

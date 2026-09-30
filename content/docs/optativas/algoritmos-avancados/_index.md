@@ -1,6 +1,9 @@
 ---
 title: Algoritmos Avançados
-weight: 9
+weight: 1
+description: Técnicas avançadas de projeto e análise de algoritmos.
+aliases:
+  - /docs/optativas/algoritmos-avançados/
 ---
 
 A disciplina de Algoritmos Avançados explora técnicas sofisticadas de projeto e análise de algoritmos, incluindo grafos, dinâmica e outros tópicos de complexidade computacional.
