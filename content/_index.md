@@ -31,15 +31,20 @@ layout: hextra-home
 
 </div>
 
-{{< hextra/feature-grid >}}
-
-{{< hextra/feature-card title="Por disciplina" subtitle="Conteúdos organizados de acordo com as disciplinas e períodos do curso." >}}
-
-{{< hextra/feature-card title="Conteúdo acadêmico" subtitle="Livros, listas, provas, anotações, referências e materiais complementares." >}}
-
-{{< hextra/feature-card title="Colaborativo" subtitle="Construído pela comunidade para facilitar o acesso ao conhecimento." >}}
-
-{{< /hextra/feature-grid >}}
+<div class="bo-cards">
+<div class="bo-card">
+<h3>Por disciplina</h3>
+<p>Conteúdos organizados de acordo com as disciplinas e períodos do curso.</p>
+</div>
+<div class="bo-card">
+<h3>Conteúdo acadêmico</h3>
+<p>Livros, listas, provas, anotações, referências e materiais complementares.</p>
+</div>
+<a class="bo-card" href="colaboradores/">
+<h3>Colaborativo</h3>
+<p>Construído pela comunidade para facilitar o acesso ao conhecimento.</p>
+</a>
+</div>
 
 <div class="bo-content">
 

@@ -5,21 +5,20 @@ defaultContentLanguage: pt-br
 
 theme: hextra
 
-module:
-  imports:
-    - path: github.com/imfing/hextra
-    
 menu:
   main:
-    - name: Conteúdo
+    - name: Disciplinas
       pageRef: /docs
       weight: 1
-    - name: Buscar
+    - name: Colaboradores
+      pageRef: /colaboradores
       weight: 2
+    - name: Buscar
+      weight: 3
       params:
         type: search
     - name: GitHub
-      weight: 3
+      weight: 4
       url: https://github.com/thallesgsrv/Big-O-Library
       params:
         icon: github
@@ -29,13 +28,13 @@ params:
     displayTitle: true
     displayLogo: true
     logo:
-      path: images/logo-light.svg
-      dark: images/logo-dark.svg
-      width: 48
-      height: 12
+      path: images/icon-light.svg
+      dark: images/icon-dark.svg
+      width: 28
+      height: 28
   theme:
     default: system
-    displayToggle: true
+    displayToggle: false
   search:
     enable: true
     type: flexsearch

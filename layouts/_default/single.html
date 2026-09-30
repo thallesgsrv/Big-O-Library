@@ -1,3 +1,4 @@
+```html
 {{ define "main" }}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
@@ -23,7 +24,42 @@
         <div class="bo-content-card hx:bg-white hx:dark:bg-slate-900 hx:rounded-md hx:p-6 hx:shadow-sm">
           <div class="content">
             {{ partial "custom/content-begin.html" . }}
+
             {{ .Content }}
+
+            {{ if eq .RelPermalink "/colaboradores/" }}
+              {{ $contributors := resources.GetRemote "https://api.github.com/repos/thallesgsrv/Big-O-Library/contributors" | transform.Unmarshal }}
+
+              <div class="bo-people">
+                {{ range $contributors }}
+                  <a
+                    class="bo-person"
+                    href="{{ .html_url }}"
+                    target="_blank"
+                    rel="noopener"
+                  >
+                    <img
+                      src="{{ .avatar_url }}"
+                      alt="{{ .login }}"
+                      width="48"
+                      height="48"
+                      loading="lazy"
+                    >
+
+                    <span class="bo-person-text">
+                      <strong>{{ .login }}</strong>
+
+                      {{ if eq .login "thallesgsrv" }}
+                        <span>Criador e mantenedor</span>
+                      {{ else }}
+                        <span>Contribuidor</span>
+                      {{ end }}
+                    </span>
+                  </a>
+                {{ end }}
+              </div>
+            {{ end }}
+
             {{ partial "custom/content-end.html" . }}
           </div>
         </div>
@@ -35,3 +71,4 @@
     </article>
   </div>
 {{ end }}
+```
