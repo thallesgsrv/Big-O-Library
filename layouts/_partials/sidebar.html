@@ -20,7 +20,10 @@
   {{- end -}}
 {{- end -}}
 
-<aside class="hextra-sidebar-container hx:flex hx:flex-col hx:print:hidden hx:md:top-[var(--hextra-navbar-height)] hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
+{{- $isColaboradores := or (eq $context.RelPermalink "/colaboradores/") (eq $context.RelPermalink "/colaboradores") (and $context.File (eq $context.File.Path "colaboradores.md")) (eq $context.Title "Colaboradores") -}}
+{{- $sidebarSeparatorClass := cond $isColaboradores "bo-no-separator" "" -}}
+
+<aside class="hextra-sidebar-container {{ $sidebarSeparatorClass }} hx:flex hx:flex-col hx:print:hidden hx:md:top-[var(--hextra-navbar-height)] hx:md:shrink-0 hx:md:w-64 hx:md:self-start hx:max-md:[transform:translate3d(0,-100%,0)] {{ $sidebarClass }}">
   <div class="hextra-scrollbar hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow hx:md:h-[calc(100vh-var(--hextra-navbar-height)-var(--menu-height))]">
     <ul class="hx:flex hx:flex-col hx:gap-1 hx:md:hidden">
       <!-- Nav -->
@@ -74,7 +77,10 @@
   {{- $useMainMenu := and (eq $level 0) $toc -}}
   {{- $mainMenuEntries := slice -}}
 
-  {{- $items := where (union .context.RegularPages .context.Sections) "Params.sidebar.exclude" "!=" true -}}
+  {{- $items := where .context.Pages "Params.sidebar.exclude" "!=" true -}}
+  {{- if eq (len $items) 0 -}}
+    {{- $items = where (union .context.RegularPages .context.Sections) "Params.sidebar.exclude" "!=" true -}}
+  {{- end -}}
   {{- if $useMainMenu -}}
     {{- range $menuItem := site.Menus.main -}}
       {{- $menuType := $menuItem.Params.type | default "" -}}
@@ -231,7 +237,7 @@
       {{- end -}}
     {{- else -}}
       <div class="hextra-sidebar-children hx:ltr:pr-0 hx:rtl:pl-0 hx:overflow-hidden">
-        <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:ltr:ml-3 hx:ltr:pl-3 hx:ltr:before:left-0 hx:rtl:mr-3 hx:rtl:pr-3 hx:rtl:before:right-0 hx:dark:before:bg-neutral-800'>
+        <ul class='hx:relative hx:flex hx:flex-col hx:gap-1 hx:before:absolute hx:before:inset-y-1 hx:before:w-px hx:before:bg-gray-200 hx:before:content-[""] hx:dark:before:bg-neutral-800'>
           {{- range $items.ByWeight }}
             {{- $active := eq $pageURL .RelPermalink -}}
             {{- $shouldOpen := or (.Params.sidebar.open) (.IsAncestor $page) $active | default true }}

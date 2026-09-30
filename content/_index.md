@@ -11,7 +11,7 @@ layout: hextra-home
 <div class="bo-headline">
 
 {{< hextra/hero-headline >}}
-  O acervo acadêmico da<br class="hx:sm:block hx:hidden" />
+  O acervo acadêmico da <br class="hx:sm:block hx:hidden" />
   Ciência da Computação
 {{< /hextra/hero-headline >}}
 

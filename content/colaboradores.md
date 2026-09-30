@@ -3,8 +3,10 @@ title: Colaboradores
 hideEdit: true
 ---
 
+<div class="bo-colaboradores-page">
 <div id="bo-contributors" class="bo-people">
   <span>Carregando colaboradores...</span>
+</div>
 </div>
 
 <script>
