@@ -29,7 +29,34 @@
   </div>
   {{ with $.GetPage "/docs/optativas" }}
   <a id="optativas-link-materiais" class="bo-opt" href="{{ .RelPermalink }}"><b>O(∞) <i>&nbsp;optativas</i></b><span>side quests, sem ordem definida</span></a>
+  <div id="optativas-list-materiais" style="display:none;margin-top:12px">
+    {{ $opt := site.GetPage "section" "docs/optativas" }}
+    {{ if $opt }}
+      <div class="bo-grid3">
+        {{ range $opt.Pages }}
+          <a class="bo-card" href="{{ .RelPermalink }}"><div class="bo-bar"></div><div class="bo-t">{{ .Title }}</div><div class="bo-d">{{ with .Params.description }}{{ . }}{{ else }}Material optativo{{ end }}</div></a>
+        {{ end }}
+      </div>
+    {{ else }}
+      <div class="bo-card bo-text"><div class="bo-bar"></div><div class="bo-d">Nenhuma optativa encontrada.</div></div>
+    {{ end }}
+  </div>
+  <script>
+    (function(){
+      var link = document.getElementById('optativas-link-materiais');
+      var list = document.getElementById('optativas-list-materiais');
+      if(!link || !list) return;
+      link.addEventListener('click', function(e){
+        e.preventDefault();
+        if(list.style.display === 'none' || list.style.display === ''){
+          list.style.display = 'block';
+          try{ list.scrollIntoView({behavior:'smooth', block:'start'}); }catch(err){}
+        } else {
+          list.style.display = 'none';
+        }
+      });
+    })();
+  </script>
   {{ end }}
-  {{ partial "optativas-list.html" . }}
 </div>
 {{ end }}

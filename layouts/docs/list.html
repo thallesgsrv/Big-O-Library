@@ -1,0 +1,74 @@
+{{ define "main" }}
+  <div class="hx:mx-auto hx:flex hextra-max-page-width">
+    {{ partial "sidebar.html" (dict "context" .) }}
+    {{ partial "toc.html" . }}
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
+        {{ partial "custom/page-begin.html" . }}
+        {{ partial "breadcrumb.html" (dict "page" . "enable" true) }}
+        <div class="content">
+          {{ if .Title }}
+            <div class="hx:flex hx:flex-col hx:sm:flex-row hx:items-start hx:sm:items-center hx:sm:justify-between hx:gap-4 hx:mb-4">
+              <div style="display:flex;align-items:center;gap:12px">
+                <h1 class="hx:mb-0">{{ .Title }}</h1>
+                <a id="optativas-link-docs" class="bo-opt" href="{{ "docs/optativas/" | relURL }}"><b>O(∞) <i>&nbsp;optativas</i></b><span>side quests, sem ordem definida</span></a>
+              </div>
+              {{ partial "components/page-context-menu" . }}
+            </div>
+          {{ end }}
+          {{ partial "custom/content-begin.html" . }}
+          {{ .Content }}
+          {{ partial "custom/content-end.html" . }}
+
+          <!-- Optativas: cartão toggle e contêiner oculto preenchido pelo Hugo -->
+          <div class="bo-optativas-section" style="margin-top:18px">
+            <a class="bo-card bo-opt-toggle" id="optativas-toggle-docs" href="javascript:void(0)"><div class="bo-bar"></div><div class="bo-t">optativas</div><div class="bo-d">Clique para ver as optativas disponíveis.</div></a>
+            <div id="optativas-list-docs" style="display:none;margin-top:12px">
+              {{ $opt := site.GetPage "section" "docs/optativas" }}
+              {{ if $opt }}
+                <div class="bo-grid3">
+                  {{ range $opt.Pages }}
+                    <a class="bo-card" href="{{ .RelPermalink }}"><div class="bo-bar"></div><div class="bo-t">{{ .Title }}</div><div class="bo-d">{{ with .Params.description }}{{ . }}{{ else }}Material optativo{{ end }}</div></a>
+                  {{ end }}
+                </div>
+              {{ else }}
+                <div class="bo-card bo-text"><div class="bo-bar"></div><div class="bo-d">Nenhuma optativa encontrada.</div></div>
+              {{ end }}
+            </div>
+          </div>
+
+        </div>
+        {{ partial "components/last-updated.html" . }}
+        {{- if (site.Params.page.displayPagination | default true) -}}
+          {{- partial "components/pager.html" . -}}
+        {{- end -}}
+        {{ partial "components/comments.html" . }}
+        {{ partial "custom/page-end.html" . }}
+      </main>
+    </article>
+  </div>
+
+  <script>
+    (function(){
+      var toggle = document.getElementById('optativas-toggle-docs');
+      var list = document.getElementById('optativas-list-docs');
+      var link = document.getElementById('optativas-link-docs');
+      if(!toggle || !list) return;
+      function doToggle(e, fromLink){
+        if(e) e.preventDefault();
+        var opening = (list.style.display === 'none' || list.style.display === '');
+        if(opening){
+          list.style.display = 'block';
+          toggle.classList.add('active');
+          if(fromLink){ try{ list.scrollIntoView({behavior:'smooth', block:'start'}); }catch(e){}
+          }
+        } else {
+          list.style.display = 'none';
+          toggle.classList.remove('active');
+        }
+      }
+      toggle.addEventListener('click', doToggle);
+      if(link) link.addEventListener('click', function(e){ doToggle(e, true); });
+    })();
+  </script>
+{{ end }}
