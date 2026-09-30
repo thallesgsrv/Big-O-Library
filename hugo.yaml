@@ -34,7 +34,7 @@ params:
       height: 28
   theme:
     default: system
-    displayToggle: false
+    displayToggle: true
   search:
     enable: true
     type: flexsearch

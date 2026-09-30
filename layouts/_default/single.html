@@ -7,57 +7,26 @@
         {{ partial "custom/page-begin.html" . }}
 
         {{/* hero */}}
-        <header class="bo-page-hero hx:mb-8 hx:text-center">
+        <header class="bo-page-hero">
           {{ if .Params.hero }}
-            <img class="bo-page-hero-image hx:mx-auto hx:rounded-md hx:mb-4" src="{{ .Params.hero | relURL }}" alt="{{ .Title }}" />
+            <img class="bo-page-hero-image" src="{{ .Params.hero | relURL }}" alt="{{ .Title }}" />
           {{ end }}
           {{ if .Title }}
-            <h1 class="bo-page-title hx:text-3xl hx:md:text-4xl hx:font-extrabold">{{ .Title }}</h1>
+            <h1 class="bo-page-title">{{ .Title }}</h1>
           {{ end }}
-          <p class="bo-page-meta hx:mt-2 hx:text-sm hx:text-slate-600 hx:dark:text-slate-400">{{ .Date.Format "02 Jan 2006" }} · {{ .ReadingTime }} min read</p>
+          {{ if not .Date.IsZero }}
+            <p class="bo-page-meta">{{ .Date.Format "02 Jan 2006" }} · {{ .ReadingTime }} min de leitura</p>
+          {{ end }}
           {{ if .Params.summary }}
-            <p class="bo-page-summary hx:mt-4 hx:text-center hx:text-slate-700 hx:dark:text-slate-300">{{ .Params.summary }}</p>
+            <p class="bo-page-summary">{{ .Params.summary }}</p>
           {{ end }}
         </header>
 
-        <div class="bo-content-card hx:bg-white hx:dark:bg-slate-900 hx:rounded-md hx:p-6 hx:shadow-sm">
+        <div class="bo-content-card">
           <div class="content">
             {{ partial "custom/content-begin.html" . }}
 
             {{ .Content }}
-
-            {{ if eq .RelPermalink "/colaboradores/" }}
-              {{ $contributors := resources.GetRemote "https://api.github.com/repos/thallesgsrv/Big-O-Library/contributors" | transform.Unmarshal }}
-
-              <div class="bo-people">
-                {{ range $contributors }}
-                  <a
-                    class="bo-person"
-                    href="{{ .html_url }}"
-                    target="_blank"
-                    rel="noopener"
-                  >
-                    <img
-                      src="{{ .avatar_url }}"
-                      alt="{{ .login }}"
-                      width="48"
-                      height="48"
-                      loading="lazy"
-                    >
-
-                    <span class="bo-person-text">
-                      <strong>{{ .login }}</strong>
-
-                      {{ if eq .login "thallesgsrv" }}
-                        <span>Criador e mantenedor</span>
-                      {{ else }}
-                        <span>Contribuidor</span>
-                      {{ end }}
-                    </span>
-                  </a>
-                {{ end }}
-              </div>
-            {{ end }}
 
             {{ partial "custom/content-end.html" . }}
           </div>

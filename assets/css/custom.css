@@ -1,11 +1,16 @@
 @import url("https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700;800&display=swap");
 
+/* Variáveis*/
+
 :root {
   --bo-accent: #0f766e;
   --bo-accent-soft: rgba(15, 118, 110, 0.08);
   --bo-border: rgba(15, 23, 42, 0.08);
   --bo-card-border: rgba(15, 23, 42, 0.14);
   --bo-card-bg: rgba(15, 23, 42, 0.03);
+  --bo-muted: rgb(75 85 99);
+  --bo-subtle: rgb(107 114 128);
+  --bo-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
 
   --primary-hue: 175deg;
   --primary-saturation: 77%;
@@ -18,11 +23,17 @@ html.dark {
   --bo-border: rgba(255, 255, 255, 0.08);
   --bo-card-border: rgba(255, 255, 255, 0.14);
   --bo-card-bg: rgba(255, 255, 255, 0.04);
+  --bo-muted: rgb(156 163 175);
+  --bo-subtle: rgb(156 163 175);
+  --bo-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
 
   --primary-hue: 171deg;
   --primary-saturation: 77%;
   --primary-lightness: 64%;
 }
+
+/*
+ Base */
 
 html,
 body,
@@ -33,6 +44,7 @@ select,
 body :not(.katex, .katex *) {
   font-family: "JetBrains Mono", monospace !important;
 }
+
 
 .bo-light,
 .bo-logo-light {
@@ -54,7 +66,13 @@ html.dark .bo-logo-dark {
   display: block;
 }
 
-/* Logo */
+a.bo-card:focus-visible,
+.bo-person:focus-visible {
+  outline: 2px solid var(--bo-accent);
+  outline-offset: 2px;
+}
+
+/* Página inicial */
 
 .bo-home-hero {
   width: 100%;
@@ -78,8 +96,6 @@ html.dark .bo-logo-dark {
   object-fit: contain;
 }
 
-/* Tagline */
-
 .bo-tagline {
   margin-top: 1rem;
   margin-bottom: 0;
@@ -87,14 +103,8 @@ html.dark .bo-logo-dark {
   font-size: 1.05rem;
   line-height: 1.6;
 
-  color: rgb(75 85 99);
+  color: var(--bo-muted);
 }
-
-html.dark .bo-tagline {
-  color: rgb(156 163 175);
-}
-
-/* Hero */
 
 .bo-headline {
   margin-top: 1.25rem;
@@ -109,13 +119,13 @@ html.dark .bo-tagline {
   margin-bottom: 3.5rem;
 }
 
-/* Cartões da página inicial */
+/* Cartões */
 
 .bo-cards {
   width: 100%;
 
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(15rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(15rem, 100%), 1fr));
   gap: 1rem;
 }
 
@@ -146,14 +156,12 @@ html.dark .bo-tagline {
   font-size: 0.92rem;
   line-height: 1.6;
 
-  color: rgb(75 85 99);
+  color: var(--bo-muted);
 }
 
-html.dark .bo-card p {
-  color: rgb(156 163 175);
-}
 
-a.bo-card {
+a.bo-card,
+.bo-person {
   transition:
     transform 0.2s ease,
     box-shadow 0.2s ease,
@@ -161,17 +169,14 @@ a.bo-card {
     background-color 0.2s ease;
 }
 
-a.bo-card:hover {
+a.bo-card:hover,
+.bo-person:hover {
   transform: translateY(-2px);
 
   border-color: var(--bo-accent);
   background: var(--bo-accent-soft);
 
-  box-shadow: 0 8px 24px rgba(15, 23, 42, 0.08);
-}
-
-html.dark a.bo-card:hover {
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
+  box-shadow: var(--bo-shadow);
 }
 
 /* Conteúdo */
@@ -205,11 +210,7 @@ html.dark a.bo-card:hover {
 
 .bo-content p {
   line-height: 1.8;
-  color: rgb(75 85 99);
-}
-
-html.dark .bo-content p {
-  color: rgb(156 163 175);
+  color: var(--bo-muted);
 }
 
 .bo-content ul {
@@ -223,17 +224,6 @@ html.dark .bo-content p {
   line-height: 1.7;
 }
 
-.bo-stars {
-  display: block;
-}
-
-.bo-stars img {
-  max-width: 100%;
-  height: auto;
-}
-
-/* Links */
-
 .bo-content a {
   color: var(--bo-accent);
   text-decoration: none;
@@ -241,6 +231,15 @@ html.dark .bo-content p {
 
 .bo-content a:hover {
   text-decoration: underline;
+}
+
+.bo-stars {
+  display: block;
+}
+
+.bo-stars img {
+  max-width: 100%;
+  height: auto;
 }
 
 /* Aviso */
@@ -266,6 +265,9 @@ html.dark .bo-content p {
 /* Tabelas e código */
 
 .content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
   border-collapse: collapse;
 }
 
@@ -280,20 +282,21 @@ html.dark .bo-content p {
   overflow-x: auto;
 }
 
-/* Barra de navegação*/
+/* Barra de navegação */
 
-/* ícone da marca ao lado do nome */
+/* Ícone da marca ao lado do nome */
 .hextra-nav-container nav img {
   height: 28px;
   width: auto;
 }
 
+/* Ícones da barra */
 .hextra-nav-container nav svg {
   width: 24px;
   height: 24px;
 }
 
-/* campo de busca com lupa */
+/* Campo de busca com lupa */
 .hextra-search-wrapper .hextra-search-input {
   padding-left: 2.25rem !important;
 
@@ -309,13 +312,14 @@ html.dark .bo-content p {
   }
 }
 
-/* Página de colaboradores*/
+/* Página de colaboradores */
 
 .bo-people {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(16rem, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(min(17rem, 100%), 1fr));
   gap: 1rem;
 
+  width: 100%;
   margin: 1.5rem 0;
 }
 
@@ -335,28 +339,59 @@ html.dark .bo-content p {
   text-decoration: none !important;
 }
 
-.bo-person:hover {
-  border-color: var(--bo-accent);
-}
-
 .bo-person img {
+  flex-shrink: 0;
+
   width: 48px;
   height: 48px;
   margin: 0;
 
   border-radius: 50%;
+  object-fit: cover;
 }
 
 .bo-person-text {
   display: flex;
   flex-direction: column;
+  flex: 1;
+  min-width: 0;
+
   line-height: 1.4;
 }
 
-.bo-person-text span {
-  font-size: 0.85rem;
-  color: rgb(107 114 128);
+.bo-person-text strong {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
 }
+
+.bo-person-text span {
+  font-size: 0.8rem;
+  color: var(--bo-subtle);
+}
+
+.bo-person-count {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  flex-shrink: 0;
+
+  line-height: 1.2;
+  text-align: right;
+}
+
+.bo-person-count b {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--bo-accent);
+}
+
+.bo-person-count small {
+  font-size: 0.7rem;
+  color: var(--bo-subtle);
+}
+
+/* Botão de tema */
 
 .bo-theme-btn {
   display: inline-flex;
@@ -388,6 +423,10 @@ html.dark .bo-content p {
   display: none;
 }
 
+.bo-theme-btn .bo-moon {
+  display: block;
+}
+
 html.dark .bo-theme-btn .bo-sun {
   display: block;
 }
@@ -396,7 +435,62 @@ html.dark .bo-theme-btn .bo-moon {
   display: none;
 }
 
+/* Rodapé e acessibilidade */
+
 .hextra-footer {
   display: none;
 }
 
+@media (prefers-reduced-motion: reduce) {
+  a.bo-card,
+  .bo-person {
+    transition: none;
+  }
+
+  a.bo-card:hover,
+  .bo-person:hover {
+    transform: none;
+  }
+}
+
+/* Cabeçalho e cartão de conteúdo das páginas */
+
+.bo-page-hero {
+  margin-bottom: 2rem;
+  text-align: center;
+}
+
+.bo-page-hero-image {
+  display: block;
+  margin: 0 auto 1rem;
+  max-width: 100%;
+  height: auto;
+  border-radius: 0.5rem;
+}
+
+.bo-page-title {
+  font-size: 1.875rem;
+  font-weight: 800;
+}
+
+@media (min-width: 768px) {
+  .bo-page-title {
+    font-size: 2.25rem;
+  }
+}
+
+.bo-page-meta {
+  margin-top: 0.5rem;
+  font-size: 0.875rem;
+  color: var(--bo-subtle);
+}
+
+.bo-page-summary {
+  margin-top: 1rem;
+  color: var(--bo-muted);
+}
+
+.bo-content-card {
+  padding: 0;
+  background: transparent;
+}
