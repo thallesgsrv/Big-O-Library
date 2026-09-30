@@ -3,32 +3,35 @@
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
     {{ partial "toc.html" . }}
     <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
-      <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-6 hx:md:px-12">
+      <main id="content" class="hx:w-full hx:min-w-0 hx:px-6 hx:pt-6 hx:md:px-12">
         {{ partial "custom/page-begin.html" . }}
 
-        {{/* hero */}}
-        <header class="bo-page-hero">
-          {{ if .Params.hero }}
-            <img class="bo-page-hero-image" src="{{ .Params.hero | relURL }}" alt="{{ .Title }}" />
-          {{ end }}
-          {{ if .Title }}
-            <h1 class="bo-page-title">{{ .Title }}</h1>
-          {{ end }}
-          {{ if not .Date.IsZero }}
-            <p class="bo-page-meta">{{ .Date.Format "02 Jan 2006" }} · {{ .ReadingTime }} min de leitura</p>
-          {{ end }}
-          {{ if .Params.summary }}
-            <p class="bo-page-summary">{{ .Params.summary }}</p>
-          {{ end }}
-        </header>
+        <div class="bo-page">
+          {{/* hero */}}
+          <header class="bo-page-hero">
+            <div class="bo-prompt">~/big-o-library $ cat {{ with .File }}{{ .ContentBaseName }}{{ else }}{{ $.Title | urlize }}{{ end }}.md</div>
+            {{ if .Params.hero }}
+              <img class="bo-page-hero-image" src="{{ .Params.hero | relURL }}" alt="{{ .Title }}" />
+            {{ end }}
+            {{ if .Title }}
+              <h1 class="bo-page-title">{{ .Title }}</h1>
+            {{ end }}
+            {{ if not .Date.IsZero }}
+              <p class="bo-page-meta">{{ .Date.Format "02 Jan 2006" }} · {{ .ReadingTime }} min de leitura</p>
+            {{ end }}
+            {{ if .Params.summary }}
+              <p class="bo-page-summary">{{ .Params.summary }}</p>
+            {{ end }}
+          </header>
 
-        <div class="bo-content-card">
-          <div class="content">
-            {{ partial "custom/content-begin.html" . }}
+          <div class="bo-content-card">
+            <div class="content">
+              {{ partial "custom/content-begin.html" . }}
 
-            {{ .Content }}
+              {{ .Content }}
 
-            {{ partial "custom/content-end.html" . }}
+              {{ partial "custom/content-end.html" . }}
+            </div>
           </div>
         </div>
 
