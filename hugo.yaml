@@ -7,22 +7,25 @@ theme: hextra
 
 menu:
   main:
-    - name: Disciplinas
-      pageRef: /docs
+    - name: sobre
+      pageRef: /
       weight: 1
-    - name: Colaboradores
-      pageRef: /colaboradores
+    - name: materiais
+      pageRef: /docs
       weight: 2
-    - name: Buscar
+    - name: colaboradores
+      pageRef: /colaboradores
       weight: 3
+    - name: Buscar
+      weight: 4
       params:
         type: search
     - name: Tema
-      weight: 4
+      weight: 5
       params:
         type: theme-toggle
     - name: GitHub
-      weight: 5
+      weight: 6
       url: https://github.com/thallesgsrv/Big-O-Library
       params:
         icon: github
