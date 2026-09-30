@@ -124,6 +124,7 @@ a.bo-card:hover{border-color:var(--ac)}
 .bo-per-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:15px}
 .bo-per-list a{color:var(--txt);text-decoration:none}.bo-per-list a:hover{color:var(--ac)}
 .bo-per-soon{font-size:15px;color:var(--mute)}
+/* ===== Optativas ===== */
 .bo-opt{margin:20px 0 56px;background:var(--card);border:1px dashed var(--axis);border-radius:10px;padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;text-decoration:none!important}
 .bo-opt b{font-size:22px;font-weight:400;color:var(--txt)}.bo-opt i{font-style:normal;font-size:15px;color:var(--mute)}
 .bo-opt span{font-size:13px;color:var(--mute)}

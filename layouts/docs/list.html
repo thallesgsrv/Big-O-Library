@@ -20,7 +20,6 @@
           {{ .Content }}
           {{ partial "custom/content-end.html" . }}
 
-          <!-- Optativas: cartão toggle e contêiner oculto preenchido pelo Hugo -->
           <div class="bo-optativas-section" style="margin-top:18px">
             <a class="bo-card bo-opt-toggle" id="optativas-toggle-docs" href="javascript:void(0)"><div class="bo-bar"></div><div class="bo-t">optativas</div><div class="bo-d">Clique para ver as optativas disponíveis.</div></a>
             <div id="optativas-list-docs" style="display:none;margin-top:12px">
@@ -36,7 +35,6 @@
               {{ end }}
             </div>
           </div>
-
         </div>
         {{ partial "components/last-updated.html" . }}
         {{- if (site.Params.page.displayPagination | default true) -}}
