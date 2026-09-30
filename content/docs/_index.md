@@ -1,6 +1,7 @@
 ---
 title: Conteúdo
 weight: 1
+hideEdit: true
 ---
 
 Aqui estão reunidas as disciplinas e os materiais disponíveis na biblioteca.

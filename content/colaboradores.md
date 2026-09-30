@@ -1,5 +1,6 @@
 ---
 title: Colaboradores
+hideEdit: true
 ---
 
 <div id="bo-contributors" class="bo-people">
