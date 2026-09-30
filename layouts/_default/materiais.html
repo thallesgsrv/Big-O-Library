@@ -34,27 +34,9 @@
     {{- end -}}
   </div>
 
-  {{- /* Optativas: cabeçalho clicável + lista das optativas logo abaixo, sempre visível (sem JS) */ -}}
+  {{- /* Optativas: apenas o botão que leva para a página de optativas */ -}}
   {{ with site.GetPage "/docs/optativas" }}
-  <section class="bo-optsec" aria-labelledby="optativas-titulo">
-    <a id="optativas-titulo" class="bo-opt" href="{{ .RelPermalink }}"><b>O(∞) <i>&nbsp;optativas</i></b><span>side quests, sem ordem definida</span></a>
-    {{ $opts := .Pages.ByWeight }}
-    {{ if $opts }}
-      <ul class="bo-optlist">
-        {{ range $opts }}
-          <li>
-            <a class="bo-card" href="{{ .RelPermalink }}">
-              <div class="bo-bar"></div>
-              <div class="bo-t">{{ .Title }}</div>
-              <div class="bo-d">{{ with .Params.description }}{{ . }}{{ else }}Material optativo{{ end }}</div>
-            </a>
-          </li>
-        {{ end }}
-      </ul>
-    {{ else }}
-      <div class="bo-per-soon">nenhuma optativa por enquanto — em breve</div>
-    {{ end }}
-  </section>
+  <a class="bo-opt" href="{{ .RelPermalink }}"><b>O(∞) <i>&nbsp;optativas</i></b><span>side quests, sem ordem definida <span aria-hidden="true">→</span></span></a>
   {{ end }}
 </div>
 {{ end }}
