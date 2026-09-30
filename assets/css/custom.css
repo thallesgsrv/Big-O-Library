@@ -296,7 +296,7 @@ a.bo-card:hover,
   height: 24px;
 }
 
-/* Campo de busca com lupa */
+/* Campo de busca */
 .hextra-search-wrapper .hextra-search-input {
   padding-left: 2.25rem !important;
 
@@ -389,50 +389,6 @@ a.bo-card:hover,
 .bo-person-count small {
   font-size: 0.7rem;
   color: var(--bo-subtle);
-}
-
-/* Botão de tema */
-
-.bo-theme-btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-
-  width: 36px;
-  height: 36px;
-  padding: 0;
-
-  border: 0;
-  border-radius: 0.5rem;
-  background: transparent;
-
-  color: inherit;
-  cursor: pointer;
-}
-
-.bo-theme-btn:hover {
-  background: rgba(128, 128, 128, 0.15);
-}
-
-.hextra-nav-container nav .bo-theme-btn svg {
-  width: 20px;
-  height: 20px;
-}
-
-.bo-theme-btn .bo-sun {
-  display: none;
-}
-
-.bo-theme-btn .bo-moon {
-  display: block;
-}
-
-html.dark .bo-theme-btn .bo-sun {
-  display: block;
-}
-
-html.dark .bo-theme-btn .bo-moon {
-  display: none;
 }
 
 /* Rodapé e acessibilidade */
