@@ -91,9 +91,9 @@ a{color:var(--ac)}a:hover{color:var(--ac-h)}
 .bo-b2{border:1px solid var(--line);color:var(--txt)!important;text-decoration:none!important;font-size:15px;padding:14px 24px;border-radius:6px}
 .bo-chart{flex:0 1 520px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
 .bo-chart svg{width:100%;height:auto;display:block}
-.bo-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:12px;color:inherit;text-decoration:none!important}
+.bo-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:18px;display:flex;flex-direction:column;gap:10px;color:inherit;text-decoration:none!important}
 a.bo-card:hover{border-color:var(--ac)}
-.bo-grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
+.bo-grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(220px,1fr));gap:14px}
 .bo-bar{width:32px;height:3px;background:var(--ac)}
 .bo-t{font-size:17px;font-weight:500;color:var(--txt)}
 .bo-d{font-size:14px;line-height:1.7;color:var(--mute)}
@@ -124,9 +124,16 @@ a.bo-card:hover{border-color:var(--ac)}
 .bo-per-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:15px}
 .bo-per-list a{color:var(--txt);text-decoration:none}.bo-per-list a:hover{color:var(--ac)}
 .bo-per-soon{font-size:15px;color:var(--mute)}
-.bo-opt{margin:20px 0 56px;background:var(--card);border:1px dashed var(--axis);border-radius:10px;padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;text-decoration:none!important}
-.bo-opt b{font-size:22px;font-weight:400;color:var(--txt)}.bo-opt i{font-style:normal;font-size:15px;color:var(--mute)}
+.bo-opt{margin:12px 0 12px;background:var(--card);border:1px dashed var(--axis);border-radius:10px;padding:14px 18px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;text-decoration:none!important;transition:box-shadow .18s ease,transform .12s ease}
+.bo-opt b{font-size:20px;font-weight:500;color:var(--txt)}.bo-opt i{font-style:normal;font-size:14px;color:var(--mute)}
 .bo-opt span{font-size:13px;color:var(--mute)}
+.bo-opt:focus,.bo-opt:hover{box-shadow:0 6px 18px color-mix(in srgb, var(--axis) 12%, transparent);transform:translateY(-2px)}
+.bo-opt.active{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 4%,var(--card))}
+
+.bo-optativas-wrap{overflow:hidden;max-height:0;opacity:0;transition:max-height .28s ease,opacity .22s ease;margin-top:8px}
+.bo-optativas-wrap.open{max-height:2000px;opacity:1}
+.bo-optativas-wrap .bo-grid3{gap:12px}
+.bo-optativas-wrap .bo-card{padding:14px}
 
 /* ===== Páginas de conteúdo (layout padrão e disciplinas) ===== */
 .bo-page{--pc:var(--ac);max-width:960px;margin:0 auto;padding:24px 0 56px}

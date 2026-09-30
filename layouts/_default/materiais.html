@@ -28,7 +28,8 @@
     {{- end -}}
   </div>
   {{ with $.GetPage "/docs/optativas" }}
-  <a class="bo-opt" href="{{ .RelPermalink }}"><b>O(∞) <i>&nbsp;optativas</i></b><span>side quests, sem ordem definida</span></a>
+  <a id="optativas-link-materiais" class="bo-opt" href="{{ .RelPermalink }}"><b>O(∞) <i>&nbsp;optativas</i></b><span>side quests, sem ordem definida</span></a>
   {{ end }}
+  {{ partial "optativas-list.html" . }}
 </div>
 {{ end }}
