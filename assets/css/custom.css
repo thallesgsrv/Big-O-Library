@@ -225,3 +225,24 @@ a.bo-credits-person:focus-visible{outline:2px solid var(--ac);outline-offset:2px
 .bo-credits-dates .bo-credits-label{margin-right:2px}
 .bo-credits-sep{margin:0 6px;color:var(--axis)}
 @media (max-width:640px){.bo-credits{padding:14px 16px}.bo-credits-sep{display:none}.bo-credits-dates time{display:inline-block;margin-right:12px}}
+
+/* Leitura em celular e desktop: blocos de código, links longos, imagens e âncoras */
+html{scroll-padding-top:5rem;-webkit-text-size-adjust:100%;text-size-adjust:100%}
+.bo-doc .content img{max-width:100%;height:auto}
+.bo-doc .content pre{overflow-x:auto;-webkit-overflow-scrolling:touch;line-height:1.6;tab-size:2}
+.bo-doc .content :not(pre)>code{overflow-wrap:anywhere}
+.bo-doc .content li,.bo-doc .content p{overflow-wrap:break-word}
+.bo-doc .content a{text-underline-offset:3px}
+.bo-doc .content a:focus-visible{outline:2px solid var(--ac);outline-offset:2px;border-radius:3px}
+.bo-doc .content blockquote{max-width:100%}
+@media (max-width:640px){
+  .bo-page{padding-bottom:40px}
+  .bo-page-hero{padding:20px 0 20px;gap:12px}
+  .bo-doc .content pre{font-size:12.5px}
+  .bo-doc .content .bo-sec ul{gap:.75rem}
+  .bo-doc .content .bo-sec li a{display:inline-block;padding-block:.15rem}
+  .bo-sec{margin-top:16px}
+}
+@media (min-width:1024px){
+  .bo-doc .content .bo-sec li{line-height:1.7}
+}

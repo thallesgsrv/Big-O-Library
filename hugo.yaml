@@ -37,6 +37,9 @@ menu:
         icon: github
 
 params:
+  description: O acervo acadêmico da Ciência da Computação. Materiais, referências e conteúdos de apoio organizados por disciplina e período.
+  images:
+    - images/og.png
   navbar:
     displayTitle: true
     displayLogo: true
