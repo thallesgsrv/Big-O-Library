@@ -9,7 +9,7 @@ enableGitInfo: true
 
 services:
   googleAnalytics:
-    id: G-XXXXXXXXXX
+    id: G-PJVWNC1DHT
 
 privacy:
   googleAnalytics:
@@ -45,16 +45,6 @@ menu:
 
 params:
   description: O acervo acadêmico da Ciência da Computação. Materiais, referências e conteúdos de apoio organizados por disciplina e período.
-  images:
-    - images/og.png
-  navbar:
-    displayTitle: true
-    displayLogo: true
-    logo:
-      path: images/icon-light.svg
-      dark: images/icon-dark.svg
-      width: 28
-      height: 28
   theme:
     default: system
     displayToggle: true

@@ -39,7 +39,11 @@
 
           {{ partial "bo-credits.html" . }}
 
-          <p class="bo-page-foot"><a href="{{ "docs/" | relURL }}">← Materiais</a></p>
+          {{ if .Parent }}
+            <p class="bo-page-foot"><a href="{{ .Parent.RelPermalink }}">← {{ .Parent.Title }}</a></p>
+          {{ else }}
+            <p class="bo-page-foot"><a href="{{ "docs/" | relURL }}">← Materiais</a></p>
+          {{ end }}
         </div>
         {{ partial "components/last-updated.html" . }}
         {{- if (site.Params.page.displayPagination | default true) -}}
