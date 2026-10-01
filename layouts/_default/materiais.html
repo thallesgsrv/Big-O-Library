@@ -17,26 +17,22 @@
       {{- $num := replaceRE `^.*/0?([1-9])-periodo/?$` "$1" .RelPermalink -}}
       {{- if and (ne .Section "optativas") (eq (len $num) 1) -}}
         {{- $n := int $num -}}
-        {{- $subs := .Pages.ByWeight -}}
-        <div class="bo-per">
-          <div class="bo-per-top">
-            <span class="bo-per-o" style="color:var(--p{{ $n }})" aria-hidden="true">{{ index $cx (sub $n 1) }}</span>
-            <a class="bo-per-n" href="{{ .RelPermalink }}">{{ $n }}º período <span aria-hidden="true">→</span></a>
-          </div>
-          <div class="bo-per-l" style="background:var(--p{{ $n }})"></div>
-          {{- if $subs -}}
-            <ul class="bo-per-list">{{ range $subs }}<li><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>{{ end }}</ul>
-          {{- else -}}
-            <div class="bo-per-soon">em breve</div>
-          {{- end -}}
-        </div>
+        {{- /* o card inteiro é o link; as disciplinas só aparecem na página do período */ -}}
+        <a class="bo-per" style="--c:var(--p{{ $n }})" href="{{ .RelPermalink }}">
+          <span class="bo-per-o" aria-hidden="true">{{ index $cx (sub $n 1) }}</span>
+          <span class="bo-per-l"></span>
+          <span class="bo-per-n">{{ $n }}º período <span class="bo-per-go" aria-hidden="true">→</span></span>
+        </a>
       {{- end -}}
     {{- end -}}
+    {{- /* Optativas: mesmo card e mesmo tamanho dos períodos, no final da grade */ -}}
+    {{- with site.GetPage "/docs/optativas" -}}
+      <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}">
+        <span class="bo-per-o" aria-hidden="true">O(∞)</span>
+        <span class="bo-per-l"></span>
+        <span class="bo-per-n">optativas <span class="bo-per-go" aria-hidden="true">→</span></span>
+      </a>
+    {{- end -}}
   </div>
-
-  {{- /* Optativas: apenas o botão que leva para a página de optativas */ -}}
-  {{ with site.GetPage "/docs/optativas" }}
-  <a class="bo-opt" href="{{ .RelPermalink }}"><b>O(∞) <i>&nbsp;optativas</i></b><span>side quests, sem ordem definida <span aria-hidden="true">→</span></span></a>
-  {{ end }}
 </div>
 {{ end }}

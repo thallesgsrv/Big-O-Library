@@ -28,6 +28,8 @@ a{color:var(--ac)}a:hover{color:var(--ac-h)}
 .content p,.content li{color:var(--body);line-height:1.75}
 .content a{color:var(--ac)}
 .content code,.content pre{background:var(--card)!important;border:1px solid var(--line);color:var(--txt)}
+/* o <code> dentro de <pre> não deve herdar a borda/fundo do código inline (gerava barras verticais nas bordas) */
+.content pre code{border:0!important;background:transparent!important;padding:0!important;border-radius:0}
 .bo-wrap{max-width:1280px;margin:0 auto;padding:0 clamp(20px,5vw,64px)}
 
 /* ===== Header: hover dos botões ===== */
@@ -116,28 +118,25 @@ a.bo-card:hover{border-color:var(--ac)}
 .bo-small{font-size:13px;color:var(--mute)}
 .bo-lsh{font-size:15px;color:var(--ac);margin-bottom:24px}.bo-lsh span{color:var(--mute)}
 .bo-pgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:20px}
-.bo-per{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:12px}
-.bo-per-top{display:flex;justify-content:space-between;align-items:baseline;gap:8px}
-.bo-per-o{font-size:26px;font-weight:500}
-.bo-per{transition:border-color .2s ease}.bo-per:hover,.bo-per:focus-within{border-color:var(--ac)}
-.bo-per-n{font-size:14px;color:var(--txt)!important;text-decoration:none;white-space:nowrap}
-.bo-per-n span{color:var(--mute);transition:transform .2s ease,color .2s ease;display:inline-block}
-.bo-per-n:hover,.bo-per-n:focus-visible{color:var(--ac)!important}.bo-per-n:hover span{color:var(--ac);transform:translateX(3px)}
-.bo-per-l{width:32px;height:3px}
-.bo-per-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:6px;font-size:15px}
-.bo-per-list a{color:var(--txt);text-decoration:none}.bo-per-list a:hover{color:var(--ac)}
+/* ===== Cards de período / optativas: o card inteiro é um link que "flutua" ao interagir ===== */
+.bo-per{--c:var(--ac);position:relative;display:flex;flex-direction:column;gap:14px;padding:22px;background:var(--card);border:1px solid var(--line);border-radius:10px;color:inherit;text-decoration:none!important;transition:transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s ease,border-color .2s ease;-webkit-tap-highlight-color:transparent}
+.bo-per-o{font-size:26px;font-weight:500;color:var(--c);line-height:1.2}
+.bo-per-l{width:32px;height:3px;background:var(--c);border-radius:2px;transition:width .25s ease}
+.bo-per-n{font-size:15px;color:var(--txt);display:flex;justify-content:space-between;align-items:baseline;gap:8px}
+.bo-per-go{color:var(--mute);display:inline-block;transition:transform .25s ease,color .2s ease}
+.bo-per:focus-visible,.bo-per:active{border-color:var(--c);transform:translateY(-3px);box-shadow:0 12px 24px -14px color-mix(in srgb,var(--c) 60%,transparent)}
+@media (hover:hover){
+  .bo-per:hover{border-color:var(--c);transform:translateY(-6px);box-shadow:0 18px 30px -16px color-mix(in srgb,var(--c) 65%,transparent),0 2px 8px rgba(0,0,0,.06)}
+  .bo-per:hover .bo-per-l{width:64px}
+  .bo-per:hover .bo-per-go{color:var(--c);transform:translateX(4px)}
+}
 .bo-per-soon{font-size:15px;color:var(--mute)}
 /* ===== Optativas ===== */
-.bo-opt{transition:border-color .2s ease}
-.bo-opt:hover{border-color:var(--ac);border-style:solid}
 .bo-optlist{list-style:none;margin:0;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(260px,100%),1fr));gap:20px}
 .bo-optlist>li{margin:0!important;padding:0!important;display:flex}
 .bo-optlist>li>.bo-card{flex:1}
 .content .bo-optlist{margin-left:0!important;margin-top:1rem}
 .content .bo-optlist>li::marker{content:none}
-.bo-opt{margin:20px 0 56px;background:var(--card);border:1px dashed var(--axis);border-radius:10px;padding:20px 22px;display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;text-decoration:none!important}
-.bo-opt b{font-size:22px;font-weight:400;color:var(--txt)}.bo-opt i{font-style:normal;font-size:15px;color:var(--mute)}
-.bo-opt span{font-size:13px;color:var(--mute)}
 
 /* ===== Páginas de conteúdo (layout padrão e disciplinas) ===== */
 .bo-page{--pc:var(--ac);max-width:960px;margin:0 auto;padding:24px 0 56px}
@@ -189,10 +188,42 @@ a.bo-card:hover{border-color:var(--ac)}
 .bo-footer-in{display:flex;justify-content:space-between;gap:16px;flex-wrap:wrap}
 .bo-footer-col{display:flex;flex-direction:column;gap:16px}
 /* ===== Acessibilidade e detalhes ===== */
-a.bo-card:focus-visible,.bo-opt:focus-visible,.bo-b1:focus-visible,.bo-b2:focus-visible,.bo-person:focus-visible,.bo-per-list a:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
+a.bo-card:focus-visible,.bo-b1:focus-visible,.bo-b2:focus-visible,.bo-person:focus-visible,.bo-per:focus-visible{outline:2px solid var(--ac);outline-offset:3px}
 .bo-b1,.bo-b2{transition:filter .2s ease,border-color .2s ease}
 .bo-b1:hover{filter:brightness(1.06)}.bo-b2:hover{border-color:var(--ac)}
-a.bo-card{transition:border-color .2s ease,transform .15s ease}a.bo-card:hover{transform:translateY(-2px)}
-@media (prefers-reduced-motion:reduce){a.bo-card,.bo-b1,.bo-b2,.bo-per-n span{transition:none!important;transform:none!important}}
+a.bo-card,.bo-person{transition:border-color .2s ease,transform .25s cubic-bezier(.2,.7,.3,1),box-shadow .25s ease}
+@media (hover:hover){a.bo-card:hover,.bo-person:hover{transform:translateY(-5px);box-shadow:0 16px 28px -16px color-mix(in srgb,var(--ac) 55%,transparent),0 2px 8px rgba(0,0,0,.05)}}
+a.bo-card:active,.bo-person:active{transform:translateY(-2px)}
+@media (prefers-reduced-motion:reduce){a.bo-card,.bo-person,.bo-per,.bo-per *,.bo-b1,.bo-b2{transition:none!important;transform:none!important}}
 .bo-sec-cta{background:transparent;border:1px dashed var(--axis)}.bo-sec-cta::before{display:none}
 .bo-page-foot a{text-underline-offset:3px}
+
+/* ===== Menu mobile (drawer): só sobre / materiais / colaboradores ===== */
+.bo-drawer{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:4px}
+.bo-drawer li{margin:0;padding:0}
+.bo-drawer a{display:block;padding:14px 16px;border-left:2px solid var(--line);color:var(--txt);font-size:18px;text-decoration:none!important;border-radius:0 8px 8px 0;transition:background .2s ease,border-color .2s ease,color .2s ease}
+.bo-drawer a:hover,.bo-drawer a:focus-visible{background:var(--card);border-left-color:var(--ac);color:var(--ac)}
+.bo-drawer a[aria-current="page"]{border-left-color:var(--ac);color:var(--ac);background:var(--card)}
+
+/* tabelas largas rolam dentro do card em vez de serem cortadas (celulares) */
+.bo-doc .content table{display:block;max-width:100%;overflow-x:auto;-webkit-overflow-scrolling:touch}
+.bo-doc .content th,.bo-doc .content td{min-width:7.5rem;vertical-align:top}
+
+/* ===== Crédito da página: autoria e datas ===== */
+.bo-credits{margin-top:32px;padding:16px 20px;border:1px dashed var(--axis);border-radius:10px;background:transparent;font-size:13px;color:var(--mute)}
+.bo-credits-cmd{font-size:12px;color:var(--ac);margin-bottom:10px}
+.bo-credits-row{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px}
+.bo-credits-by{display:flex;flex-wrap:wrap;align-items:center;gap:8px 12px}
+.bo-credits-label{color:var(--mute)}
+.bo-credits-list{list-style:none;margin:0!important;padding:0!important;display:flex;flex-wrap:wrap;gap:8px}
+.bo-credits-list li{margin:0!important;padding:0!important}
+.bo-credits-list li::marker{content:none}
+.bo-credits-person{display:inline-flex;align-items:center;gap:8px;padding:3px 12px 3px 3px;border:1px solid var(--line);border-radius:999px;background:var(--card);color:var(--txt)!important;text-decoration:none!important;transition:border-color .2s ease,transform .2s ease}
+.bo-credits-person.sem-foto,.bo-credits-person:not(:has(img)){padding-left:12px}
+.bo-credits-person img{width:24px;height:24px;margin:0;border-radius:50%;object-fit:cover;background:var(--line)}
+a.bo-credits-person:hover,a.bo-credits-person:focus-visible{border-color:var(--ac);color:var(--ac)!important}
+a.bo-credits-person:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.bo-credits-dates{color:var(--txt)}
+.bo-credits-dates .bo-credits-label{margin-right:2px}
+.bo-credits-sep{margin:0 6px;color:var(--axis)}
+@media (max-width:640px){.bo-credits{padding:14px 16px}.bo-credits-sep{display:none}.bo-credits-dates time{display:inline-block;margin-right:12px}}

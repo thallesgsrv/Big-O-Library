@@ -41,6 +41,8 @@
           </div>
         </div>
 
+        {{ partial "bo-credits.html" . }}
+
         <div class="bo-page-foot">
           {{- /* Se o parent é um período/optativa, voltar para Materiais; senão voltar para o parent */ -}}
           {{- if .Parent -}}
@@ -51,6 +53,7 @@
               <a href="{{ $parent.RelPermalink }}">← {{ $parent.Title }}</a>
             {{- end -}}
           {{- end -}}
+          <a href="{{ "contribuir/" | relURL }}">$ como contribuir</a>
           {{ if and site.Params.editURL.enable .File }}
             <a href="{{ site.Params.editURL.base }}/{{ .File.Path }}" target="_blank" rel="noopener">$ editar esta página</a>
           {{ end }}

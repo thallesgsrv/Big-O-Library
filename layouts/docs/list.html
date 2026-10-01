@@ -37,7 +37,9 @@
             <p class="bo-per-soon">Disciplinas em breve.</p>
           {{ end }}
 
-          <p class="bo-page-foot"><a href="{{ "docs/" | relURL }}">← Materiais</a></p>
+          {{ partial "bo-credits.html" . }}
+
+          <p class="bo-page-foot"><a href="{{ "docs/" | relURL }}">← Materiais</a> <a href="{{ "contribuir/" | relURL }}">$ como contribuir</a></p>
         </div>
         {{ partial "components/last-updated.html" . }}
         {{- if (site.Params.page.displayPagination | default true) -}}

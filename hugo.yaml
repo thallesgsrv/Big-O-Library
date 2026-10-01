@@ -5,6 +5,9 @@ defaultContentLanguage: pt-br
 
 theme: hextra
 
+# usa o histórico do Git para a data de "atualizado em" de cada página (o workflow já faz checkout completo)
+enableGitInfo: true
+
 menu:
   main:
     - name: sobre
@@ -53,6 +56,8 @@ params:
     displayPoweredBy: false
 
 markup:
+  highlight:
+    noClasses: false   # usa as cores de sintaxe do tema (claro/escuro) em vez de cores fixas escuras
   goldmark:
     renderer:
       unsafe: true

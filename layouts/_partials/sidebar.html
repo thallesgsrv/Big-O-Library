@@ -1,0 +1,22 @@
+{{- /* Menu mobile (drawer aberto pelo botão ☰ do header).
+       Mostra somente os itens de texto do menu principal (sobre, materiais, colaboradores), sem árvore de páginas,
+       busca, tema ou links externos — esses ficam no próprio header. No desktop o drawer fica escondido.
+       As classes do <aside> são as que o menu.js do tema usa para abrir/fechar; não remova. */ -}}
+{{- $ctx := .context | default . -}}
+{{- $cur := $ctx.RelPermalink -}}
+<aside class="hextra-sidebar-container hx:flex hx:flex-col hx:print:hidden hx:max-md:[transform:translate3d(0,-100%,0)] hx:md:hidden">
+  <nav class="hextra-scrollbar hx:overflow-y-auto hx:overflow-x-hidden hx:p-4 hx:grow" aria-label="Menu principal">
+    <ul class="bo-drawer">
+      {{- range site.Menus.main -}}
+        {{- if and (not .Params.type) (not .Params.icon) -}}
+          {{- $link := .URL -}}
+          {{- with .PageRef -}}{{- if hasPrefix . "/" -}}{{- $link = relLangURL (strings.TrimPrefix "/" .) -}}{{- end -}}{{- end -}}
+          {{- /* "sobre" (home) só fica ativo na própria home; os demais, em toda a seção */ -}}
+          {{- $home := relLangURL "" -}}
+          {{- $active := cond (eq $link $home) (eq $cur $home) (hasPrefix $cur $link) -}}
+          <li><a href="{{ $link | safeURL }}"{{ if $active }} aria-current="page"{{ end }}>{{ or (T .Identifier) .Name | safeHTML }}</a></li>
+        {{- end -}}
+      {{- end -}}
+    </ul>
+  </nav>
+</aside>

@@ -4,6 +4,9 @@ weight: 1
 description: Técnicas avançadas de projeto e análise de algoritmos.
 aliases:
   - /docs/optativas/algoritmos-avançados/
+autores:
+  - thallesgsrv
+date: 2026-09-30
 ---
 
 A disciplina de Algoritmos Avançados explora técnicas sofisticadas de projeto e análise de algoritmos, incluindo grafos, dinâmica e outros tópicos de complexidade computacional.

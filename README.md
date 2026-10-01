@@ -37,6 +37,8 @@ O projeto está no início. Os materiais serão listados aqui à medida que fore
 
 Contribuições são bem-vindas. Se você já cursou alguma disciplina e quer compartilhar material, abra uma [issue](https://github.com/thallesgsrv/Big-O-Library/issues) ou envie um [Pull Request](https://github.com/thallesgsrv/Big-O-Library/pulls).
 
+Para escrever ou editar uma disciplina, siga o [guia de escrita dos materiais](https://thallesgsrv.github.io/Big-O-Library/contribuir/) (também em [CONTRIBUTING.md](CONTRIBUTING.md)). Há um modelo pronto (`hugo new --kind disciplina`) e um validador (`python3 scripts/validar-conteudo.py`).
+
 ## Avisos
 
 Este projeto é um material complementar produzido por estudantes e não substitui o conteúdo oficial, as aulas ou as orientações dos professores.

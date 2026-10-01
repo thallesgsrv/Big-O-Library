@@ -1,0 +1,41 @@
+{{- /* Crédito da página: quem escreveu + data de publicação/atualização.
+       Vem do front matter (autores: [usuario-github, ...] e date: AAAA-MM-DD); a data de atualização
+       vem do Git (enableGitInfo) ou de 'lastmod'. Só aparece se a página tiver autores ou data explícita. */ -}}
+{{- $autores := slice -}}
+{{- with .Params.autores -}}
+  {{- if reflect.IsSlice . -}}{{- $autores = . -}}{{- else -}}{{- $autores = slice . -}}{{- end -}}
+{{- end -}}
+{{- $pub := .Date -}}
+{{- $upd := .Lastmod -}}
+{{- $temData := and (isset .Params "date") (not $pub.IsZero) -}}
+{{- if or $autores $temData -}}
+<footer class="bo-credits" aria-label="Autoria e datas">
+  <div class="bo-credits-cmd">$ git log --format=autoria</div>
+  <div class="bo-credits-row">
+    {{- if $autores }}
+    <div class="bo-credits-by">
+      <span class="bo-credits-label">escrito por</span>
+      <ul class="bo-credits-list">
+        {{- range $autores -}}
+          {{- $a := printf "%v" . | strings.TrimPrefix "@" -}}
+          {{- if findRE `^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$` $a -}}
+            <li><a class="bo-credits-person" href="https://github.com/{{ $a }}" target="_blank" rel="noopener"><img src="https://github.com/{{ $a }}.png?size=48" alt="" width="24" height="24" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('sem-foto');this.remove()"><span>@{{ $a }}</span></a></li>
+          {{- else -}}
+            <li><span class="bo-credits-person"><span>{{ $a }}</span></span></li>
+          {{- end -}}
+        {{- end -}}
+      </ul>
+    </div>
+    {{- end }}
+    {{- if $temData }}
+    <div class="bo-credits-dates">
+      <span class="bo-credits-label">publicado em</span> <time datetime="{{ $pub.Format "2006-01-02" }}">{{ time.Format ":date_long" $pub }}</time>
+      {{- if and (not $upd.IsZero) ($upd.After $pub) (ne ($upd.Format "2006-01-02") ($pub.Format "2006-01-02")) }}
+      <span class="bo-credits-sep" aria-hidden="true">·</span>
+      <span class="bo-credits-label">atualizado em</span> <time datetime="{{ $upd.Format "2006-01-02" }}">{{ time.Format ":date_long" $upd }}</time>
+      {{- end }}
+    </div>
+    {{- end }}
+  </div>
+</footer>
+{{- end -}}
