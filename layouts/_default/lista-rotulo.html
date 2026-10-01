@@ -1,0 +1,53 @@
+{{- /* Cópia do layout de lista, com o título dos cards configurável. Uso no _index.md: layout: lista-rotulo + rotulo: Algoritmos */ -}}
+{{ define "main" }}
+  <div class="hx:mx-auto hx:flex hextra-max-page-width">
+    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+    {{ partial "toc.html" . }}
+    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+      <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
+        {{ partial "custom/page-begin.html" . }}
+        {{ partial "breadcrumb.html" (dict "page" . "enable" true) }}
+        <div class="content">
+          {{ if .Title }}
+            <div class="hx:flex hx:flex-col hx:sm:flex-row hx:items-start hx:sm:items-center hx:sm:justify-between hx:gap-4 hx:mb-4">
+              <h1 class="hx:mb-0">{{ .Title }}</h1>
+              {{ partial "components/page-context-menu" . }}
+            </div>
+          {{ end }}
+          {{ partial "custom/content-begin.html" . }}
+          {{ .Content }}
+          {{ partial "custom/content-end.html" . }}
+
+          {{ $kids := .Pages.ByWeight }}
+          {{ $rotulo := .Params.rotulo | default "Disciplinas" }}
+          <h2 id="disciplinas">{{ $rotulo }}</h2>
+          {{ if $kids }}
+            <ul class="bo-optlist">
+              {{ range $kids }}
+                <li>
+                  <a class="bo-card" href="{{ .RelPermalink }}">
+                    <div class="bo-bar"></div>
+                    <div class="bo-t">{{ .Title }}</div>
+                    <div class="bo-d">{{ with .Params.description }}{{ . }}{{ else }}Ver materiais{{ end }}</div>
+                  </a>
+                </li>
+              {{ end }}
+            </ul>
+          {{ else }}
+            <p class="bo-per-soon">{{ $rotulo }} em breve.</p>
+          {{ end }}
+
+          {{ partial "bo-credits.html" . }}
+
+          <p class="bo-page-foot"><a href="{{ "docs/" | relURL }}">← Materiais</a></p>
+        </div>
+        {{ partial "components/last-updated.html" . }}
+        {{- if (site.Params.page.displayPagination | default true) -}}
+          {{- partial "components/pager.html" . -}}
+        {{- end -}}
+        {{ partial "components/comments.html" . }}
+        {{ partial "custom/page-end.html" . }}
+      </main>
+    </article>
+  </div>
+{{ end }}
