@@ -4,13 +4,13 @@
 <div class="bo-wrap">
   <section class="bo-hero">
     <div class="bo-hero-text">
-      <div class="bo-prompt">~/big-o-library $ ls sobre/</div>
+      <div class="bo-prompt" aria-hidden="true">~/big-o-library $ ls sobre/</div>
       <div class="bo-hero-logo">{{ partial "bo-logo.html" (dict "size" "min(14cqi, 88px)") }}</div>
       <h1 class="bo-h1">O acervo acadêmico da <em>Ciência da Computação</em></h1>
       <p class="bo-lead">Materiais, referências e conteúdos de apoio organizados por disciplina e período. Quanto mais você avança, mais o custo cresce.</p>
       <div class="bo-btns">
-        <a class="bo-b1" href="{{ "docs/" | relURL }}">./materiais.sh</a>
-        <a class="bo-b2" href="https://github.com/thallesgsrv/Big-O-Library">contribuir</a>
+        <a class="bo-b1" href="{{ "docs/" | relURL }}" aria-label="Ver materiais">./materiais.sh</a>
+        <a class="bo-b2" href="{{ "contribuir/" | relURL }}">contribuir</a>
       </div>
     </div>
   </section>
@@ -22,18 +22,18 @@
   </div>
 
   <div class="bo-row bo-r1">
-    <div class="bo-card bo-text"><div class="bo-cmd">$ cat sobre.md</div><h2>Sobre o projeto</h2>
+    <div class="bo-card bo-text"><div class="bo-cmd" aria-hidden="true">$ cat sobre.md</div><h2>Sobre o projeto</h2>
       <p>O <b>Big-O-Library</b> não é apenas um lugar para reunir material. A proposta é ensinar o conteúdo das disciplinas de outra forma, de maneira mais didática, e ao mesmo tempo juntar em um só lugar o que costuma ficar espalhado entre arquivos, anotações, grupos e diferentes fontes.</p>
       <p>A ideia surgiu a partir da forma como o professor <a href="https://github.com/joaoarthurbm">João Arthur</a> organizou e disponibilizou o material de sua disciplina. O objetivo é levar esse modelo para as demais disciplinas do curso.</p></div>
-    <div class="bo-card bo-text"><div class="bo-cmd">$ cat recomendacoes.md</div><h2>Recomendações</h2>
+    <div class="bo-card bo-text"><div class="bo-cmd" aria-hidden="true">$ cat recomendacoes.md</div><h2>Recomendações</h2>
       <p>Se algo não fizer sentido na primeira leitura, releia quantas vezes for preciso. Nada escrito por outra pessoa é impossível de entender, e o resultado depende do quanto você está disposto a se dedicar.</p>
       <p>Sobre dedicação, vale assistir a <a href="https://youtu.be/TRPBY_lxJfE">Você tem brio?</a>, de Clóvis de Barros Filho.</p></div>
   </div>
   <div class="bo-row bo-r2">
-    <div class="bo-card bo-text"><div class="bo-cmd">$ cat contribuicao.md</div><h2>Contribuição</h2>
+    <div class="bo-card bo-text"><div class="bo-cmd" aria-hidden="true">$ cat contribuicao.md</div><h2>Contribuição</h2>
       <p>Contribuições são bem-vindas. Se você já cursou alguma disciplina e quer compartilhar material, abra uma <a href="https://github.com/thallesgsrv/Big-O-Library/issues">issue</a> ou envie um <a href="https://github.com/thallesgsrv/Big-O-Library/pulls">Pull Request</a>.</p>
       <p>Não sabe por onde começar? O <a href="{{ "contribuir/" | relURL }}">guia de escrita dos materiais</a> mostra a estrutura, os padrões e um modelo pronto.</p></div>
-    <div class="bo-card bo-text"><div class="bo-cmd">$ cat avisos.md</div><h2>Avisos</h2>
+    <div class="bo-card bo-text"><div class="bo-cmd" aria-hidden="true">$ cat avisos.md</div><h2>Avisos</h2>
       <p>Este projeto é um material complementar produzido por estudantes e não substitui o conteúdo oficial, as aulas ou as orientações dos professores. Materiais de terceiros são referenciados e vinculados à fonte original, respeitando suas licenças e direitos autorais.</p></div>
   </div>
 </div>

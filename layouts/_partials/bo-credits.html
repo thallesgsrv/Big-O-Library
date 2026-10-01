@@ -10,7 +10,7 @@
 {{- $temData := and (isset .Params "date") (not $pub.IsZero) -}}
 {{- if or $autores $temData -}}
 <footer class="bo-credits" aria-label="Autoria e datas">
-  <div class="bo-credits-cmd">$ git log --format=autoria</div>
+  <div class="bo-credits-cmd" aria-hidden="true">$ git log --format=autoria</div>
   <div class="bo-credits-row">
     {{- if $autores }}
     <div class="bo-credits-by">

@@ -1,4 +1,5 @@
 baseURL: https://thallesgsrv.github.io/Big-O-Library/
+languageCode: pt-BR
 title: Big-O-Library
 locale: pt-BR
 defaultContentLanguage: pt-br

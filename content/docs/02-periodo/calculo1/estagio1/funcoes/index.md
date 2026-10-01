@@ -45,8 +45,6 @@ Matematicamente:
 f : A \rightarrow B
 \]
 
-Isso significa que a função relaciona elementos do conjunto $A$ com elementos do conjunto $B$.
- 
 Isso significa que a função relaciona elementos do conjunto \(A\) com elementos do conjunto \(B\).
 
 O ponto mais importante é:

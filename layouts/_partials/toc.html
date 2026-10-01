@@ -4,7 +4,6 @@
 {{- $onThisPage := (T "onThisPage") | default "Sumário"}}
 {{- $tags := (T "tags") | default "Tags"}}
 {{- $editThisPage := (T "editThisPage") | default "Edit this page"}}
-{{- $backToTop := (T "backToTop") | default "Scroll to top" -}}
 {{- $tableOfContents := (T "tableOfContents") | default "Table of contents" -}}
 {{- $page := . -}}
 {{- $headingData := partial "utils/headings.html" $page -}}
@@ -22,14 +21,14 @@
         {{- end -}}
       {{- end -}}
 
-      {{- $borderClass := "hx:mt-8 hx:border-t hx:bg-white hx:pt-8 hx:shadow-[0_-12px_16px_white] hx:dark:bg-dark hx:dark:shadow-[0_-12px_16px_#111]" -}}
+      {{- $borderClass := "hx:mt-8 hx:border-t hx:bg-transparent hx:pt-8 hx:shadow-none hx:dark:bg-transparent" -}}
 
       {{- if not $headings -}}
-        {{- $borderClass = "" -}}
+        {{- $borderClass = "hx:mt-0 hx:border-t hx:bg-transparent hx:pt-4 hx:shadow-none hx:dark:bg-transparent" -}}
       {{- end -}}
 
       {{/* TOC bottom part */}}
-      <div class="{{ $borderClass }} hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400">
+      <div class="{{ $borderClass }} hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400" >
         {{- if and site.Params.toc.displayTags .Params.tags -}}
           <div class="hx:flex hx:items-start hx:gap-x-2 hx:font-medium hx:text-xs">
             <div class="hx:text-gray-500 hx:dark:text-gray-400 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50">{{ $tags }}</div>
@@ -52,17 +51,8 @@
               {{- $editURL = urls.JoinPath $editURL $sourceDir $path -}}
             {{- end -}}
           {{- end -}}
-          <a class="hx:inline-block hx:rounded-sm hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50 hx:hextra-focus-visible-inset" href="{{ $editURL }}" target="_blank" rel="noreferrer">{{ $editThisPage }}</a>
+          <a class="hx:inline-block hx:whitespace-nowrap hx:rounded-sm hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50 hx:hextra-focus-visible-inset" href="{{ $editURL }}" target="_blank" rel="noreferrer">{{ $editThisPage }}</a>
         {{- end -}}
-        {{/* Scroll To Top */}}
-        <button id="backToTop" tabindex="-1" class="hx:cursor-pointer hx:transition-all hx:duration-75 hx:opacity-0 hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50">
-          <span>
-            {{- $backToTop -}}
-          </span>
-          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5" stroke="currentColor" aria-hidden="true" focusable="false" class="hx:inline hx:ltr:ml-1 hx:rtl:mr-1 hx:h-3.5 hx:w-3.5 hx:rounded-full hx:border hx:border-gray-500 hx:hover:border-gray-900 hx:dark:border-gray-400 hx:dark:hover:border-gray-100 hx:contrast-more:border-gray-800 hx:contrast-more:dark:border-gray-50">
-            <path stroke-linecap="round" stroke-linejoin="round" d="M4.5 15.75l7.5-7.5 7.5 7.5" />
-          </svg>
-        </button>
       </div>
     </div>
   {{ end -}}

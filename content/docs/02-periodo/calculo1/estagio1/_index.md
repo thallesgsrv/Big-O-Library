@@ -1,6 +1,7 @@
 ---
 title: Funções e limites
 weight: 1
+rotulo: Tópicos
 description: Introdução ao estudo de funções, domínio, imagem, continuidade e limites laterais.
 autores:
   - thallesgsrv
@@ -24,7 +25,7 @@ Neste estágio vamos construir essa ideia aos poucos. Comece pelos tópicos abai
 - **Limite:** mostra o que acontece perto de um ponto.
 - **Continuidade:** ausência de ruptura, salto ou buraco.
 
-## Listas de Exercicios
+## Listas de exercícios
 
-- [Lista 1](https://1drv.ms/b/c/975ec841994373bd/IQBaXjSrZWcoT7vvw1QUPg9mAfWveNG3TNDBKZ0gKLligDE?e=4h7oHI)
-- [Lista 2](https://1drv.ms/b/c/975ec841994373bd/IQBAcKaregNgTZbl72o2FbLcAY2t5worOQoB8F3iepQTQlc?e=0OkyI8)
+- [Lista 1: funções e domínio (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQBaXjSrZWcoT7vvw1QUPg9mAfWveNG3TNDBKZ0gKLligDE?e=4h7oHI)
+- [Lista 2: limites e técnicas (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQBAcKaregNgTZbl72o2FbLcAY2t5worOQoB8F3iepQTQlc?e=0OkyI8)

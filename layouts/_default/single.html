@@ -9,7 +9,7 @@
         <div class="bo-page">
           {{/* hero */}}
           <header class="bo-page-hero">
-            <div class="bo-prompt">~/big-o-library $ cat {{ with .File }}{{ .ContentBaseName }}{{ else }}{{ $.Title | urlize }}{{ end }}.md</div>
+            <div class="bo-prompt" aria-hidden="true">~/big-o-library $ cat {{ with .File }}{{ .ContentBaseName }}{{ else }}{{ $.Title | urlize }}{{ end }}.md</div>
             {{ if .Params.hero }}
               <img class="bo-page-hero-image" src="{{ .Params.hero | relURL }}" alt="{{ .Title }}" />
             {{ end }}
