@@ -7,6 +7,8 @@ autores:
 date: {{ now.Format "2006-01-02" }}
 ---
 
+<!-- Modelo sugerido: remova, renomeie ou acrescente seções conforme a disciplina. Só o cabeçalho acima é obrigatório. -->
+
 Um parágrafo de abertura: o que a disciplina estuda e para que serve.
 
 ## Objetivos

@@ -12,7 +12,7 @@ Cada disciplina é **um arquivo markdown**. O site lê esse arquivo, monta a pá
 O fluxo é sempre o mesmo:
 
 1. Escolha o período (ou `optativas`) e crie a pasta da disciplina.
-2. Escreva o `index.md` seguindo o modelo abaixo.
+2. Escreva o `index.md`, usando o modelo abaixo como ponto de partida (o conteúdo é livre, veja [A estrutura da página](#a-estrutura-da-página)).
 3. Confira como ficou, abra um Pull Request e pronto.
 
 Sem Git instalado? Dá para fazer tudo pelo editor do próprio GitHub (botão **Add file → Create new file**) ou abrir uma [issue](https://github.com/thallesgsrv/Big-O-Library/issues) com o conteúdo, e alguém transforma em página.
@@ -79,24 +79,31 @@ escrito por  (foto) @thallesgsrv      publicado em 29 de setembro de 2026 · atu
 
 ## A estrutura da página
 
-Toda disciplina segue as mesmas seções, nesta ordem. O site transforma cada título `##` em um card com o prompt `$ cat nome-da-secao.md`.
+**Não existe um modelo fixo.** Cada disciplina é ensinada de um jeito, então cada página pode ter as seções que fizerem sentido para ela: cronograma, avaliações, projetos, resumo por unidade, ferramentas, o que for útil. Só o [cabeçalho](#o-cabeçalho-do-arquivo) é obrigatório; o corpo do markdown é livre.
 
-1. **Parágrafo de abertura**, sem título, logo depois do cabeçalho.
-2. `## Objetivos`: lista do que a pessoa deve saber ao final.
-3. `## Conteúdo previsto`: lista de tópicos da ementa.
-4. `## Materiais`: o coração da página, detalhado na próxima seção.
-5. `## Contribuição`: sempre por último; ela ganha destaque visual no site.
+O que o site faz sozinho com o seu texto:
 
-Pontos importantes:
+- O **parágrafo de abertura** (sem título, logo depois do cabeçalho) aparece como introdução.
+- Cada título `##` vira um card com o prompt `$ cat nome-da-secao.md`.
+- Uma seção chamada `## Contribuição` ganha destaque visual. É opcional; use se quiser convidar outras pessoas a completar a página.
+
+Para quem prefere um roteiro, estas são as seções que as primeiras disciplinas usam. Escolha, troque, reordene ou acrescente à vontade:
+
+1. `## Objetivos`: o que a pessoa deve saber ao final.
+2. `## Conteúdo previsto`: tópicos da ementa.
+3. `## Materiais`: links e arquivos, agrupados como na próxima seção.
+4. `## Contribuição`: convite para colaborar.
+
+Pontos que valem para qualquer estrutura:
 
 - Use `##` para as seções e `###` para subdivisões. Não use `#` (o título da página já é o `title`).
 - Tudo que fica entre dois `##` vai para dentro do mesmo card.
-- Objetivos e conteúdo previsto devem vir da **ementa oficial** da disciplina. Se não tiver certeza, deixe a seção de fora em vez de inventar.
+- Se incluir objetivos ou conteúdo previsto, baseie-se na **ementa oficial**. Se não tiver certeza, deixe de fora em vez de inventar.
 - Título de seção curto e sem pontuação: ele vira o nome do "arquivo" no prompt.
 
 ## Como listar os materiais
 
-Dentro de `## Materiais`, agrupe por tipo usando `###`. Use só os grupos que tiverem conteúdo:
+Se a sua página tiver uma seção de materiais, uma sugestão é agrupar por tipo usando `###`, só com os grupos que tiverem conteúdo (os nomes abaixo são sugestões, adapte à disciplina):
 
 | Grupo | O que entra |
 |---|---|
@@ -174,7 +181,7 @@ Descreva a imagem no texto alternativo (entre `[ ]`), mantenha imagens abaixo de
 
 ## Modelo para copiar
 
-Crie `content/docs/NN-periodo/nome-da-disciplina/index.md` com este conteúdo e troque o que estiver entre colchetes:
+Crie `content/docs/NN-periodo/nome-da-disciplina/index.md` com este conteúdo e troque o que estiver entre colchetes. É só um ponto de partida: remova, renomeie ou acrescente seções conforme a disciplina.
 
 ```markdown
 ---
@@ -216,19 +223,16 @@ Com o Hugo instalado, o comando `hugo new --kind disciplina docs/01-periodo/nome
 ```bash
 git clone --recurse-submodules https://github.com/thallesgsrv/Big-O-Library.git
 cd Big-O-Library
-python3 scripts/validar-conteudo.py   # confere os padrões deste guia
-hugo server                           # abre o site em http://localhost:1313/Big-O-Library/
+hugo server    # abre o site em http://localhost:1313/Big-O-Library/
 ```
 
-O `validar-conteudo.py` avisa sobre cabeçalho incompleto (inclusive autores e data), `weight` repetido, nomes de pasta fora do padrão e seções faltando. Os mesmos testes rodam automaticamente em cada Pull Request.
 
 ## Checklist antes de enviar
 
 - [ ] A pasta está no período certo, com nome em minúsculas, sem acento e sem espaço.
 - [ ] O arquivo tem `title`, `weight`, `description`, `autores` (com o seu usuário) e `date`.
-- [ ] As seções seguem a ordem: Objetivos, Conteúdo previsto, Materiais, Contribuição.
+- [ ] As seções fazem sentido para a disciplina (o modelo é só um ponto de partida).
 - [ ] Cada material tem link e fonte; conteúdo de terceiros aponta para o original.
-- [ ] Rodei o `validar-conteudo.py` (ou abri o PR e conferi o resultado).
 - [ ] Olhei a página no `hugo server`, no computador e no celular.
 
 ## Dúvidas

@@ -19,16 +19,19 @@ menu:
     - name: colaboradores
       pageRef: /colaboradores
       weight: 3
-    - name: Buscar
+    - name: como contribuir
+      pageRef: /contribuir
       weight: 4
+    - name: Buscar
+      weight: 5
       params:
         type: search
     - name: Tema
-      weight: 5
+      weight: 6
       params:
         type: theme-toggle
     - name: GitHub
-      weight: 6
+      weight: 7
       url: https://github.com/thallesgsrv/Big-O-Library
       params:
         icon: github
