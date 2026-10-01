@@ -4,11 +4,14 @@
 {{- $n := replaceRE `.*/0([1-9])-periodo/.*` "$1" .RelPermalink -}}
 {{- $pc := "var(--ac)" -}}
 {{- $badge := "" -}}
+{{- $pageClass := "bo-page bo-page-doc" -}}
 {{- if eq (len $n) 1 -}}
   {{- $pc = printf "var(--p%s)" $n -}}
   {{- $badge = printf "%s · %sº período" (index $cx (sub (int $n) 1)) $n -}}
+  {{- $pageClass = printf "%s bo-page-p%s" $pageClass $n -}}
 {{- else if in .RelPermalink "optativas" -}}
   {{- $badge = "O(∞) · optativa" -}}
+  {{- $pageClass = printf "%s bo-page-opt" $pageClass -}}
 {{- end -}}
 
 <div class="hx:mx-auto hx:flex hextra-max-page-width">
@@ -19,7 +22,7 @@
     <main id="content" class="hx:w-full hx:min-w-0 hx:px-6 hx:pt-6 hx:md:px-12">
       {{ partial "custom/page-begin.html" . }}
 
-      <div class="bo-page bo-page-doc" style="--pc:{{ $pc | safeCSS }}">
+      <div class="{{ $pageClass }}">
         <header class="bo-page-hero">
           <nav class="bo-crumbs" aria-label="Breadcrumb">
             <a href="{{ .Site.Home.RelPermalink }}">~/big-o-library</a>
