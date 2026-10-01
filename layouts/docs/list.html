@@ -2,6 +2,19 @@
        Ordem pensada para acessibilidade: título → resumo → CARDS → texto de apoio, para quem usa
        leitor de tela, teclado ou celular chegar à navegação sem atravessar o texto longo. */ -}}
 {{ define "main" }}
+  {{- $cx := partial "bo-cx.html" . -}}
+  {{- $n := replaceRE `.*/0([1-9])-periodo/.*` "$1" .RelPermalink -}}
+  {{- $pc := "var(--ac)" -}}
+  {{- $badge := "" -}}
+  {{- $pageClass := "bo-page bo-page-doc" -}}
+  {{- if eq (len $n) 1 -}}
+    {{- $pc = printf "var(--p%s)" $n -}}
+    {{- $badge = printf "%s · %sº período" (index $cx (sub (int $n) 1)) $n -}}
+    {{- $pageClass = printf "%s bo-page-p%s" $pageClass $n -}}
+  {{- else if in .RelPermalink "optativas" -}}
+    {{- $badge = "O(∞) · optativa" -}}
+    {{- $pageClass = printf "%s bo-page-opt" $pageClass -}}
+  {{- end -}}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">
     {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
     {{ partial "toc.html" . }}
@@ -9,7 +22,7 @@
       <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
         {{ partial "custom/page-begin.html" . }}
 
-        <div class="bo-page bo-page-doc bo-doc">
+        <div class="{{ $pageClass }} bo-doc">
           <header class="bo-page-hero">
             <nav class="bo-crumbs" aria-label="Breadcrumb">
               <a href="{{ .Site.Home.RelPermalink }}">~/big-o-library</a>
@@ -22,6 +35,7 @@
             {{ if .Title }}
               <h1 class="bo-page-title">{{ .Title }}</h1>
             {{ end }}
+            {{ with $badge }}<span class="bo-badge">{{ . }}</span>{{ end }}
             {{ with .Params.description }}<p class="bo-page-summary">{{ . }}</p>{{ end }}
           </header>
 
