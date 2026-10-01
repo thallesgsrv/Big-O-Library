@@ -24,17 +24,26 @@
           <nav class="bo-crumbs" aria-label="Breadcrumb">
             <a href="{{ .Site.Home.RelPermalink }}">~/big-o-library</a>
             {{- range .Ancestors.Reverse -}}
-              {{- if not .IsHome -}}<span>/</span><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{- end -}}
+              {{- if not .IsHome -}}<span aria-hidden="true">/</span><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{- end -}}
             {{- end }}
-            <span class="bo-crumb-cmd">$ cat {{ with .File }}{{ .ContentBaseName }}{{ else }}{{ .Title | urlize }}{{ end }}.md</span>
+            <span class="bo-crumb-cmd" aria-hidden="true">$ cat {{ with .File }}{{ .ContentBaseName }}{{ else }}{{ .Title | urlize }}{{ end }}.md</span>
+            <span class="hx:sr-only" aria-current="page">{{ .Title }}</span>
           </nav>
           <h1 class="bo-page-title">{{ .Title }}</h1>
           {{ with $badge }}<span class="bo-badge">{{ . }}</span>{{ end }}
           {{ with .Params.summary }}<p class="bo-page-summary">{{ . }}</p>{{ end }}
         </header>
 
+        {{/* sumário recolhível, só abaixo de 1280 px (acima disso o toc.html lateral assume) */}}
+        {{ if and (.Params.toc | default true) .TableOfContents }}
+        <details class="bo-toc-m">
+          <summary>Sumário desta página</summary>
+          {{ .TableOfContents | replaceRE `<nav id="TableOfContents">` `<nav id="TableOfContents" aria-label="Nesta página">` | safeHTML }}
+        </details>
+        {{ end }}
+
         <div class="bo-doc">
-          <div class="content">
+          <div class="content" data-bo-fold>
             {{ partial "custom/content-begin.html" . }}
             {{ .Content }}
             {{ partial "custom/content-end.html" . }}
@@ -59,27 +68,6 @@
   </article>
 </div>
 
-{{/* agrupa cada seção (## título) em um card com o prompt "$ cat secao.md" */}}
-<script>
-(function () {
-  var c = document.querySelector('.bo-doc .content');
-  if (!c) return;
-  var sec = null;
-  Array.prototype.slice.call(c.children).forEach(function (el) {
-    if (el.tagName === 'H2') {
-      sec = document.createElement('section');
-      sec.className = 'bo-sec';
-      var cmd = document.createElement('div');
-      cmd.className = 'bo-cmd';
-      cmd.textContent = '$ cat ' + (el.id || el.textContent.trim().toLowerCase().replace(/\s+/g, '-')) + '.md';
-      if (/^contribui/.test(el.id)) sec.className += ' bo-sec-cta';
-      c.insertBefore(sec, el);
-      sec.appendChild(cmd);
-      sec.appendChild(el);
-    } else if (sec) {
-      sec.appendChild(el);
-    }
-  });
-})();
-</script>
+{{/* cada seção (## título) vira um card recolhível; ver partials/bo-recolher.html */}}
+{{ partial "bo-recolher.html" . }}
 {{ end }}

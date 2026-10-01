@@ -1,8 +1,7 @@
 ---
 title: Cálculo Diferencial e Integral 1
-weight: 1
+weight: 11
 description: Funções, limites, derivadas e integrais
-layout: lista-rotulo
 rotulo: Estágios
 autores:
   - thallesgsrv
@@ -36,7 +35,7 @@ Esses temas não são independentes: cada novo conceito depende do anterior, e p
 
 ### Livro recomendado
 
-- [Stewart, James — Cálculo, Volume 1](https://1drv.ms/b/c/975ec841994373bd/IQBy9SspAh0rSKKKYzu2OuaOAUx94NbYuNxNkKfWfsoMd5o?e=uX0Ssr)
+- [Stewart, James — Cálculo, Volume 1 (Editora Cengage)](https://www.cengage.com)
 
 ## Dica final
 

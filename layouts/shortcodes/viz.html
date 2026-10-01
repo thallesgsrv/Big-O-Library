@@ -3,7 +3,7 @@
 {{- $css := resources.Get "viz/viz.css" | resources.Fingerprint -}}
 {{- $js := resources.Get "viz/viz.js" | resources.Fingerprint -}}
 <link rel="stylesheet" href="{{ $css.RelPermalink }}">
-<script src="{{ $js.RelPermalink }}" defer onerror="document.querySelectorAll('.viz').forEach(function(e){e.textContent='Falha ao carregar '+document.currentScript.src})"></script>
+<script src="{{ $js.RelPermalink }}" defer onerror="document.querySelectorAll('.viz').forEach(function(e){e.textContent='Não foi possível carregar a visualização.'})"></script>
 {{- .Page.Store.Set "viz-assets" true -}}
 {{- end -}}
 <div class="viz" data-algo="{{ .Get "algoritmo" }}"><noscript>Ative o JavaScript para ver a visualização.</noscript></div>
