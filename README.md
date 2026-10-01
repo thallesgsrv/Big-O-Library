@@ -2,7 +2,7 @@
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="assets/images/bigo-library-dark.svg">
     <source media="(prefers-color-scheme: light)" srcset="assets/images/bigo-library-light.svg">
-    <img src="assets/images/bigo-library-light.svg" alt="Big-O-Library" width="300">
+    <img src="assets/images/bigo-library-light.svg" alt="o(library)" width="360">
   </picture>
 </p>
 
@@ -37,9 +37,7 @@ O projeto está no início. Os materiais serão listados aqui à medida que fore
 
 Contribuições são bem-vindas. Se você já cursou alguma disciplina e quer compartilhar material, abra uma [issue](https://github.com/thallesgsrv/Big-O-Library/issues) ou envie um [Pull Request](https://github.com/thallesgsrv/Big-O-Library/pulls).
 
-O [guia de escrita](https://thallesgsrv.github.io/Big-O-Library/contribuir/) explica o cabeçalho obrigatório e os recursos disponíveis. O restante do markdown é livre: cada disciplina pode ter a estrutura que fizer mais sentido.
-
-Para escrever ou editar uma disciplina, siga o [guia de escrita dos materiais](https://thallesgsrv.github.io/Big-O-Library/contribuir/) (também em [CONTRIBUTING.md](CONTRIBUTING.md)). Há um modelo pronto (`hugo new --kind disciplina`) e um validador (`python3 scripts/validar-conteudo.py`).
+Para escrever ou editar uma disciplina, siga o [guia de escrita dos materiais](https://thallesgsrv.github.io/Big-O-Library/contribuir/) (também em [CONTRIBUTING.md](CONTRIBUTING.md)). Só o cabeçalho é obrigatório; o restante do markdown é livre, e cada disciplina pode ter a estrutura que fizer mais sentido. Há um modelo pronto (`hugo new --kind disciplina`) e um validador (`python3 scripts/validar-conteudo.py`).
 
 ## Avisos
 
