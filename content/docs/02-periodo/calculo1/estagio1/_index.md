@@ -1,5 +1,5 @@
 ---
-title: Funções e limites
+title: Estágio 1 - Funções e limites
 weight: 1
 rotulo: Tópicos
 description: Introdução ao estudo de funções, domínio, imagem, continuidade e limites laterais.
