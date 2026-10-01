@@ -2,12 +2,14 @@
 title: Álgebra Linear 1
 weight: 1
 description: Sistemas de equações, espaços e transformações lineares.
+layout: lista-rotulo
+rotulo: Conteúdos
 autores:
     - MateusSRocha
 date: 2026-09-30
 ---
 
-A disciplina de Álgebra Linear estuda matrizes, sistemas lineares e espaços vetoriais, chegando às transformações lineares entre eles (núcleo, imagem, autovalores e diagonalização) e desenvolvendo o raciocínio lógico-algébrico e a escrita matemática formal.
+Estuda matrizes, sistemas lineares e espaços vetoriais, chegando às transformações lineares entre eles (núcleo, imagem, autovalores e diagonalização)
 
 ## Objetivos
 
