@@ -1,0 +1,9 @@
+{{- /* Uso: {{< viz algoritmo="dijkstra" >}} */ -}}
+{{- if not (.Page.Store.Get "viz-assets") -}}
+{{- $css := resources.Get "viz/viz.css" | resources.Fingerprint -}}
+{{- $js := resources.Get "viz/viz.js" | resources.Fingerprint -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+<script src="{{ $js.RelPermalink }}" defer onerror="document.querySelectorAll('.viz').forEach(function(e){e.textContent='Falha ao carregar '+document.currentScript.src})"></script>
+{{- .Page.Store.Set "viz-assets" true -}}
+{{- end -}}
+<div class="viz" data-algo="{{ .Get "algoritmo" }}"><noscript>Ative o JavaScript para ver a visualização.</noscript></div>

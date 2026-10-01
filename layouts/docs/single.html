@@ -44,14 +44,8 @@
         {{ partial "bo-credits.html" . }}
 
         <div class="bo-page-foot">
-          {{- /* Se o parent é um período/optativa, voltar para Materiais; senão voltar para o parent */ -}}
           {{- if .Parent -}}
-            {{- $parent := .Parent -}}
-            {{- if or (in $parent.RelPermalink "01-periodo/") (in $parent.RelPermalink "02-periodo/") (in $parent.RelPermalink "03-periodo/") (in $parent.RelPermalink "04-periodo/") (in $parent.RelPermalink "05-periodo/") (in $parent.RelPermalink "06-periodo/") (in $parent.RelPermalink "07-periodo/") (in $parent.RelPermalink "08-periodo/") (in $parent.RelPermalink "09-periodo/") (in $parent.RelPermalink "optativas/") -}}
-              <a href="{{ "docs/" | relURL }}">← Materiais</a>
-            {{- else -}}
-              <a href="{{ $parent.RelPermalink }}">← {{ $parent.Title }}</a>
-            {{- end -}}
+            <a href="{{ .Parent.RelPermalink }}">← {{ .Parent.Title }}</a>
           {{- end -}}
           {{ if and site.Params.editURL.enable .File }}
             <a href="{{ site.Params.editURL.base }}/{{ .File.Path }}" target="_blank" rel="noopener">$ editar esta página</a>

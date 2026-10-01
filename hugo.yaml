@@ -5,8 +5,15 @@ defaultContentLanguage: pt-br
 
 theme: hextra
 
-# usa o histórico do Git para a data de "atualizado em" de cada página (o workflow já faz checkout completo)
 enableGitInfo: true
+
+services:
+  googleAnalytics:
+    id: G-PJVWNC1DHT
+
+privacy:
+  googleAnalytics:
+    respectDoNotTrack: true
 
 menu:
   main:
@@ -37,14 +44,7 @@ menu:
         icon: github
 
 params:
-  navbar:
-    displayTitle: true
-    displayLogo: true
-    logo:
-      path: images/icon-light.svg
-      dark: images/icon-dark.svg
-      width: 28
-      height: 28
+  description: O acervo acadêmico da Ciência da Computação. Materiais, referências e conteúdos de apoio organizados por disciplina e período.
   theme:
     default: system
     displayToggle: true
@@ -60,7 +60,7 @@ params:
 
 markup:
   highlight:
-    noClasses: false   # usa as cores de sintaxe do tema (claro/escuro) em vez de cores fixas escuras
+    noClasses: false
   goldmark:
     renderer:
       unsafe: true

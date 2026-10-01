@@ -1,11 +1,22 @@
 ---
-title: Como escrever os materiais
+title: Como contribuir com os materiais
 type: docs
 description: Guia para criar e editar as páginas de disciplina da Big-O-Library.
 summary: Padrões, estrutura de pastas e exemplos para quem quer adicionar ou melhorar uma disciplina.
 ---
 
 Cada disciplina é **um arquivo markdown**. O site lê esse arquivo, monta a página sozinho e coloca a disciplina na lista do período. Este guia explica a estrutura, o formato e o que revisamos antes de aceitar uma contribuição.
+
+## Começo rápido
+
+1. [Abra o editor do GitHub com o modelo já preenchido](https://github.com/thallesgsrv/Big-O-Library/new/main?filename=content%2Fdocs%2F01-periodo%2Fnome-da-disciplina%2Findex.md&value=---%0Atitle%3A%20Nome%20da%20disciplina%0Aweight%3A%201%0Adescription%3A%20Uma%20frase%20curta%20sobre%20a%20disciplina.%0Aautores%3A%0A%20%20-%20seu-usuario-github%0Adate%3A%202026-10-01%0A---%0A%0APar%C3%A1grafo%20de%20abertura%3A%20o%20que%20a%20disciplina%20estuda%20e%20para%20que%20serve.%0A%0A%23%23%20Materiais%0A%0A%23%23%23%20Livros%20e%20apostilas%0A%0A-%20%5BT%C3%ADtulo%5D%28https%3A%2F%2Fexemplo.com%29%20%E2%80%94%20Autor%20%28ano%29%0A) (precisa de conta no GitHub; ela é gratuita).
+2. Troque o nome da pasta no topo (`01-periodo/nome-da-disciplina`) e preencha o texto.
+3. Clique em **Commit changes** e depois em **Propose changes** para abrir o Pull Request.
+
+Quer ver o resultado final antes? Abra a página de [Programação 1](../docs/01-periodo/prog1/): ela é o exemplo de referência.
+
+> [!IMPORTANT]
+> Os três erros mais comuns: usar uma `date` no futuro (a página não é publicada), repetir o mesmo `weight` no período e criar subpáginas dentro de um `index.md` (use `_index.md`).
 
 ## Visão geral
 
@@ -234,6 +245,12 @@ hugo server    # abre o site em http://localhost:1313/Big-O-Library/
 - [ ] As seções fazem sentido para a disciplina (o modelo é só um ponto de partida).
 - [ ] Cada material tem link e fonte; conteúdo de terceiros aponta para o original.
 - [ ] Olhei a página no `hugo server`, no computador e no celular.
+
+## Licença e conduta
+
+- O repositório usa a licença [MIT](https://github.com/thallesgsrv/Big-O-Library/blob/main/LICENSE). Ao enviar material próprio, você concorda em publicá-lo sob essa mesma licença.
+- Não envie conteúdo de terceiros sem permissão (provas de professores, livros completos, PDFs pagos). Linke a fonte original.
+- Seja respeitoso nas issues e nos Pull Requests. Veja o [Código de Conduta](https://github.com/thallesgsrv/Big-O-Library/blob/main/CODE_OF_CONDUCT.md).
 
 ## Dúvidas
 
