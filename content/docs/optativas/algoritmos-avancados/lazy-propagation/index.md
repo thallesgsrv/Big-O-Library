@@ -112,12 +112,6 @@ A consulta pede só a folha `[3]`, então o nó `[2,3]` é apenas parcial. Para 
 O vetor vira `[5,3,11,9,5,10,4,1]`, e `9 + 5 + 10 + 4 = 28`.
 {{< /details >}}
 
-## Materiais
-
-### Livros e apostilas
-
-- [Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/) — Cormen et al. (2022)
-
 ## Contribuição
 
 Se você tiver materiais úteis deste algoritmo, pode colaborar com a biblioteca e ajudar a enriquecer esta seção.

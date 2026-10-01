@@ -104,12 +104,6 @@ C→F custa 2, F→E custa 9, total 11. A alternativa C→D→E custa 17.
 Em vez de atualizar a prioridade, inserimos uma nova entrada. A entrada antiga é descartada ao ser extraída (`if u in visitado: continue`).
 {{< /details >}}
 
-## Materiais
-
-### Livros e apostilas
-
-- [Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/) — Cormen et al. (2022)
-
 ## Contribuição
 
 Se você tiver materiais úteis deste algoritmo, pode colaborar com a biblioteca e ajudar a enriquecer esta seção.

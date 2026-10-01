@@ -69,12 +69,6 @@ Menor caminho em grafos **sem pesos**, componentes conexos e problemas de "míni
 E fica no nível 2 (A→F→E). A árvore é formada pelas arestas verdes na animação.
 {{< /details >}}
 
-## Materiais
-
-### Livros e apostilas
-
-- [Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/) — Cormen et al. (2022)
-
 ## Contribuição
 
 Se você tiver materiais úteis deste algoritmo, pode colaborar com a biblioteca e ajudar a enriquecer esta seção.

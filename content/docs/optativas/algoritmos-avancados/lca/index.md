@@ -95,12 +95,6 @@ Distância entre dois nós (`prof[u] + prof[v] - 2·prof[lca]`), caminhos em ár
 O LCA é `B` (profundidade 1): `4 + 3 - 2·1 = 5` arestas.
 {{< /details >}}
 
-## Materiais
-
-### Livros e apostilas
-
-- [Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/) — Cormen et al. (2022)
-
 ## Contribuição
 
 Se você tiver materiais úteis deste algoritmo, pode colaborar com a biblioteca e ajudar a enriquecer esta seção.

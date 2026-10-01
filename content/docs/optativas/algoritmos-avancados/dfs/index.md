@@ -61,12 +61,6 @@ Detectar ciclos, ordenação topológica, componentes fortemente conexos (Tarjan
 Siga a tabela "Tempo de descoberta" até o fim da animação. A ordem depende da ordem das arestas na lista de adjacência.
 {{< /details >}}
 
-## Materiais
-
-### Livros e apostilas
-
-- [Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/) — Cormen et al. (2022)
-
 ## Contribuição
 
 Se você tiver materiais úteis deste algoritmo, pode colaborar com a biblioteca e ajudar a enriquecer esta seção.

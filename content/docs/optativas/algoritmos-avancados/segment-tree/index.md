@@ -121,12 +121,6 @@ Os blocos verdes: `[2,3]`, `[4,5]` e as folhas `[6]`, somando 14 + 9 + 4 = 27. C
 Troque `+` por `min` na combinação dos filhos e devolva `infinito` (em vez de 0) quando o nó está fora do intervalo.
 {{< /details >}}
 
-## Materiais
-
-### Livros e apostilas
-
-- [Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/) — Cormen et al. (2022)
-
 ## Contribuição
 
 Se você tiver materiais úteis deste algoritmo, pode colaborar com a biblioteca e ajudar a enriquecer esta seção.
