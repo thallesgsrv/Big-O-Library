@@ -1,0 +1,14 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 80" width="520" height="160" role="img" aria-label="Union-Find example">
+  <style>text{font-family:Inter,Arial;font-size:12px}</style>
+  <g>
+    <rect x="10" y="10" width="60" height="24" fill="#FDE2E2" stroke="#333"/>
+    <text x="40" y="27" text-anchor="middle">A (root)</text>
+    <rect x="90" y="10" width="60" height="24" fill="#FDE2E2" stroke="#333"/>
+    <text x="120" y="27" text-anchor="middle">B</text>
+    <rect x="170" y="10" width="60" height="24" fill="#FDE2E2" stroke="#333"/>
+    <text x="200" y="27" text-anchor="middle">C</text>
+    <line x1="120" y1="34" x2="120" y2="44" stroke="#333"/>
+    <line x1="120" y1="44" x2="40" y2="44" stroke="#333"/>
+    <text x="10" y="70">Exemplo: `B` aponta para `A` (root), `C` aponta para `B`</text>
+  </g>
+</svg>

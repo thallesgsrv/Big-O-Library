@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120" width="520" height="240" role="img" aria-label="Kruskal example">
+  <style>text{font-family:Inter,Arial;font-size:12px}</style>
+  <circle cx="40" cy="30" r="10" fill="#E6F9D6" stroke="#333"/><text x="40" y="34" text-anchor="middle">1</text>
+  <circle cx="120" cy="30" r="10" fill="#E6F9D6" stroke="#333"/><text x="120" y="34" text-anchor="middle">2</text>
+  <circle cx="200" cy="30" r="10" fill="#E6F9D6" stroke="#333"/><text x="200" y="34" text-anchor="middle">3</text>
+  <line x1="52" y1="30" x2="108" y2="30" stroke="#666" stroke-width="2"/><text x="80" y="22">1</text>
+  <line x1="132" y1="30" x2="188" y2="30" stroke="#666" stroke-width="2"/><text x="160" y="22">2</text>
+  <line x1="52" y1="30" x2="188" y2="30" stroke="#999" stroke-width="1" stroke-dasharray="4 3"/><text x="120" y="50">3 (mais pesado)</text>
+  <text x="10" y="110">Kruskal escolhe arestas de menor para maior evitando ciclos</text>
+</svg>

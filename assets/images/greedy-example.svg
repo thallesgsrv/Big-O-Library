@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 320 120" width="640" height="240" role="img" aria-label="Greedy example">
+  <style>text{font-family:Inter,Arial;font-size:12px}</style>
+  <rect x="10" y="30" width="60" height="24" fill="#EAF7FF" stroke="#333"/><text x="40" y="46" text-anchor="middle">I1 (end=2)</text>
+  <rect x="80" y="30" width="60" height="24" fill="#EAF7FF" stroke="#333"/><text x="110" y="46" text-anchor="middle">I2 (end=3)</text>
+  <rect x="150" y="30" width="60" height="24" fill="#EAF7FF" stroke="#333"/><text x="180" y="46" text-anchor="middle">I3 (end=5)</text>
+  <rect x="220" y="30" width="60" height="24" fill="#EAF7FF" stroke="#333"/><text x="250" y="46" text-anchor="middle">I4 (end=7)</text>
+  <text x="10" y="100">Exemplo: ordenar por fim e selecionar não conflituosos (activity selection)</text>
+</svg>

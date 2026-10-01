@@ -1,0 +1,8 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 360 140" width="720" height="280" role="img" aria-label="DP table example">
+  <style>text{font-family:Inter,Arial;font-size:12px}</style>
+  <rect x="20" y="40" width="40" height="24" fill="#F3F4F6" stroke="#333"/><text x="40" y="56" text-anchor="middle">dp[0]=0</text>
+  <rect x="70" y="40" width="40" height="24" fill="#F3F4F6" stroke="#333"/><text x="90" y="56" text-anchor="middle">dp[1]=1</text>
+  <rect x="120" y="40" width="40" height="24" fill="#F3F4F6" stroke="#333"/><text x="140" y="56" text-anchor="middle">dp[2]=1</text>
+  <rect x="170" y="40" width="40" height="24" fill="#F3F4F6" stroke="#333"/><text x="190" y="56" text-anchor="middle">dp[3]=2</text>
+  <text x="10" y="110">Exemplo: tabela DP preenchida bottom-up (Fibonacci)</text>
+</svg>

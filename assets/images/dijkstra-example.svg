@@ -1,0 +1,16 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 260 120" width="520" height="240" role="img" aria-label="Dijkstra example">
+  <style>text{font-family:Inter,Arial;font-size:12px}</style>
+  <circle cx="30" cy="60" r="12" fill="#FFF2CC" stroke="#333"/><text x="30" y="64" text-anchor="middle">S</text>
+  <circle cx="110" cy="30" r="12" fill="#FFF2CC" stroke="#333"/><text x="110" y="34" text-anchor="middle">A</text>
+  <circle cx="110" cy="90" r="12" fill="#FFF2CC" stroke="#333"/><text x="110" y="94" text-anchor="middle">B</text>
+  <circle cx="190" cy="60" r="12" fill="#FFF2CC" stroke="#333"/><text x="190" y="64" text-anchor="middle">T</text>
+  <line x1="42" y1="60" x2="98" y2="36" stroke="#666" stroke-width="2"/>
+  <text x="65" y="46">3</text>
+  <line x1="42" y1="60" x2="98" y2="84" stroke="#666" stroke-width="2"/>
+  <text x="65" y="80">1</text>
+  <line x1="122" y1="36" x2="178" y2="54" stroke="#666" stroke-width="2"/>
+  <text x="150" y="46">2</text>
+  <line x1="122" y1="84" x2="178" y2="64" stroke="#666" stroke-width="2"/>
+  <text x="150" y="80">4</text>
+  <text x="10" y="112">Exemplo: pesos nas arestas; Dijkstra relaxa menores distâncias primeiro</text>
+</svg>
