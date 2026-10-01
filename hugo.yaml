@@ -48,6 +48,10 @@ params:
   theme:
     default: system
     displayToggle: true
+  math:
+    engine: katex
+    katex:
+      base: "https://cdn.jsdelivr.net/npm/katex@0.18/dist"
   search:
     enable: true
     type: flexsearch
@@ -72,4 +76,5 @@ markup:
             - ['\[', '\]']
             - ['$$', '$$']
           inline:
+            - ['$', '$']
             - ['\(', '\)']
