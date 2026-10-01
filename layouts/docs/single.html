@@ -53,7 +53,6 @@
               <a href="{{ $parent.RelPermalink }}">← {{ $parent.Title }}</a>
             {{- end -}}
           {{- end -}}
-          <a href="{{ "contribuir/" | relURL }}">$ como contribuir</a>
           {{ if and site.Params.editURL.enable .File }}
             <a href="{{ site.Params.editURL.base }}/{{ .File.Path }}" target="_blank" rel="noopener">$ editar esta página</a>
           {{ end }}
