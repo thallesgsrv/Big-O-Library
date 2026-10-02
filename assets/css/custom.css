@@ -278,6 +278,10 @@ html.dark{ --p9:#FF4D4D; }
 .bo-page .content pre{overflow-x:auto;-webkit-overflow-scrolling:touch;line-height:1.6;tab-size:2}
 .bo-page .content img,
 .bo-page .content svg{max-width:100%;height:auto}
+.bo-page .content .katex svg{
+  max-width:none;
+  height:inherit;
+}
 .bo-page .content :not(pre)>code{overflow-wrap:anywhere}
 .bo-page .content figure{margin:1.25rem 0}
 .bo-page .content figcaption{font-size:14px;line-height:1.6;color:var(--mute);margin-top:.5rem}
