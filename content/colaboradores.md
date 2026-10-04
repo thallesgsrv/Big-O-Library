@@ -1,14 +1,14 @@
 ---
 title: Colaboradores
+layout: colaboradores
+summary: Quem já contribuiu com o acervo. Cada card leva ao perfil no GitHub.
 hideEdit: true
 ---
 
-<div class="bo-colaboradores-page">
 <div id="bo-contributors" class="bo-people" aria-live="polite" aria-busy="true">
   <span class="bo-small">Carregando colaboradores...</span>
 </div>
 <p class="bo-small">Lista gerada a partir dos <a href="https://github.com/thallesgsrv/Big-O-Library/graphs/contributors" target="_blank" rel="noopener">contribuidores do repositório</a>.</p>
-</div>
 
 <script>
 (function () {

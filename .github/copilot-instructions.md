@@ -1,11 +1,11 @@
 # Copilot instructions for Big-O-Library
 
 - This repo is a Hugo static site, not an application backend. Most changes are content authoring, navigation structure, and theme-level styling for a university materials library.
-- Primary site config is `hugo.yaml`; it wires the `hextra` theme, default language (`pt-BR`), search, menu entries, and GitHub Pages deployment settings.
+- Primary site config is `hugo.yaml`; it wires the `hextra` theme, default language (`pt-BR`), search, menu entries and math rendering. Deployment is in `.github/workflows/hugo.yml`.
 - Content lives under `content/` and drives navigation through the folder structure plus front matter. Section landing pages use `_index.md`; individual pages often use `index.md` inside a discipline folder.
 - Examples of the expected structure: `content/docs/_index.md`, `content/docs/01-periodo/_index.md`, and `content/docs/01-periodo/prog1/index.md`. Preserve the period > discipline > material hierarchy.
 - Use `title` and `weight` in front matter to control page titles and ordering; the site is organized around academic periods and disciplines rather than arbitrary article collections.
-- The homepage is customized in `content/index.md` with `layout: hextra-home`; keep the landing-page branding and callouts consistent with the project’s academic identity.
+- The homepage is `layouts/index.html` (content in `content/_index.md` is only front matter); the Materiais page uses `layouts/_default/materiais.html` and Colaboradores uses `layouts/_default/colaboradores.html`. Keep the branding consistent with the project’s academic identity.
 - Global visual tweaks belong in `assets/css/custom.css`; keep overrides minimal and theme-aware instead of rewriting the theme.
 - Generated output is in `public/`; do not edit it directly. Treat it as build output, not source.
 - Local development command: `hugo server -D --disableFastRender --port 1313` from the repo root. This renders the site for preview and hot reloads content changes.
