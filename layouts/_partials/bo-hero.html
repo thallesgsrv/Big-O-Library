@@ -1,0 +1,17 @@
+{{- /* Cabeçalho de página: breadcrumb (~/big-o-library / ... $ cat arquivo.md), título, selo e texto de apoio.
+       Args (dict): page = página; badge = texto do selo (opcional); lead = parágrafo abaixo do título (opcional).
+       Usado por _default/single.html e docs/list.html. */ -}}
+{{- $p := .page -}}
+<header class="bo-page-hero">
+  <nav class="bo-crumbs" aria-label="Breadcrumb">
+    <a href="{{ $p.Site.Home.RelPermalink }}">~/big-o-library</a>
+    {{- range $p.Ancestors.Reverse -}}
+      {{- if not .IsHome -}}<span aria-hidden="true">/</span><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{- end -}}
+    {{- end }}
+    <span class="bo-crumb-cmd" aria-hidden="true">$ cat {{ with $p.File }}{{ .ContentBaseName }}{{ else }}{{ $p.Title | urlize }}{{ end }}.md</span>
+    <span class="hx:sr-only" aria-current="page">{{ $p.Title }}</span>
+  </nav>
+  {{ if $p.Title }}<h1 class="bo-page-title">{{ $p.Title }}</h1>{{ end }}
+  {{ with .badge }}<span class="bo-badge">{{ . }}</span>{{ end }}
+  {{ with .lead }}<p class="bo-page-summary">{{ . }}</p>{{ end }}
+</header>

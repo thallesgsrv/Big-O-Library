@@ -73,6 +73,7 @@ date: 2026-09-29
 | `autores` | sim | Lista de usuários do GitHub de quem escreveu a página, sem o `@`. Aparece no fim da página, com foto e link para o perfil. |
 | `date` | sim | Data em que a página foi criada, no formato `AAAA-MM-DD`. Nunca use uma data futura: o Hugo não publica páginas com data no futuro. |
 | `summary` | não | Texto um pouco maior, exibido logo abaixo do título da página. |
+| `rotulo` | não | Só em páginas que têm subpáginas (por exemplo, uma disciplina com estágios): título da lista de cards. Padrão: `Disciplinas`. |
 
 ### Autoria e datas
 

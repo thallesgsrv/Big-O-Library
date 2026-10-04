@@ -91,8 +91,6 @@ a{color:var(--ac)}a:hover{color:var(--ac-h)}
 .bo-btns{display:flex;gap:16px;flex-wrap:wrap;margin-top:8px}
 .bo-b1{background:var(--btn);color:var(--btn-t)!important;text-decoration:none!important;font-weight:500;font-size:15px;padding:14px 24px;border-radius:6px}
 .bo-b2{border:1px solid var(--line);color:var(--txt)!important;text-decoration:none!important;font-size:15px;padding:14px 24px;border-radius:6px}
-.bo-chart{flex:0 1 520px;background:var(--card);border:1px solid var(--line);border-radius:12px;padding:24px}
-.bo-chart svg{width:100%;height:auto;display:block}
 .bo-card{background:var(--card);border:1px solid var(--line);border-radius:10px;padding:22px;display:flex;flex-direction:column;gap:12px;color:inherit;text-decoration:none!important}
 a.bo-card:hover{border-color:var(--ac)}
 .bo-grid3{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:20px}
@@ -108,7 +106,6 @@ a.bo-card:hover{border-color:var(--ac)}
 .bo-text b{color:var(--txt)}
 @media (max-width:640px){
   .bo-hero{gap:32px;padding:40px 0 40px}
-  .bo-chart{padding:16px}
   .bo-b1,.bo-b2{flex:1 1 auto;text-align:center}
 }
 
@@ -151,9 +148,7 @@ a.bo-card:hover{border-color:var(--ac)}
 .bo-page-p9{--pc:var(--p9)}
 .bo-page-opt{--pc:var(--ac)}
 .bo-page-hero{display:flex;flex-direction:column;align-items:flex-start;gap:16px;padding:32px 0 28px}
-.bo-page-hero-image{max-width:100%;border-radius:10px;border:1px solid var(--line)}
 .bo-page-title{margin:0;font:600 clamp(32px,6vw,52px)/1.1 Fraunces,Georgia,serif;letter-spacing:-.8px;color:var(--txt)}
-.bo-page-meta{margin:0;font-size:13px;color:var(--mute)}
 .bo-page-summary{margin:0;max-width:60ch;font-size:16px;line-height:1.7;color:var(--body)}
 .bo-crumbs{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem;font-size:13px;color:var(--mute)}
 .bo-crumbs a{color:var(--mute);text-decoration:none;text-transform:lowercase}
@@ -298,7 +293,7 @@ html.dark{ --p9:#FF4D4D; }
   .bo-credits-person{min-height:36px}
 }
 @media (max-width:640px){
-  .bo-crumbs,.bo-page-foot,.bo-credits,.bo-small,.bo-footer,.bo-page-meta{font-size:14px}
+  .bo-crumbs,.bo-page-foot,.bo-credits,.bo-small,.bo-footer{font-size:14px}
   .bo-cmd,.bo-credits-cmd{font-size:13px}
   .bo-person-count small{font-size:.75rem}   
 }

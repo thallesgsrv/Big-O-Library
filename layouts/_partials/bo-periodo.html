@@ -1,0 +1,16 @@
+{{- /* Contexto de período de uma página, deduzido da URL (01-periodo → 1º período; optativas).
+       Retorna um dict: "badge" (texto do selo, vazio fora de período/optativas) e "class" (classes do contêiner).
+       Usado por docs/single.html e docs/list.html. */ -}}
+{{- $n := replaceRE `.*/0([1-9])-periodo/.*` "$1" .RelPermalink -}}
+{{- $badge := "" -}}
+{{- $class := "bo-page bo-page-doc" -}}
+{{- if eq (len $n) 1 -}}
+  {{- $badge = printf "%s · %sº período" (index (partial "bo-cx.html" .) (sub (int $n) 1)) $n -}}
+  {{- $class = printf "%s bo-page-p%s" $class $n -}}
+{{- else if in .RelPermalink "optativas" -}}
+  {{- $badge = "O(∞) · optativa" -}}
+  {{- $class = printf "%s bo-page-opt" $class -}}
+{{- else if in .RelPermalink "bash-shell-linux" -}}
+  {{- $badge = "$ shell · extra" -}}
+{{- end -}}
+{{- return (dict "badge" $badge "class" $class) -}}
