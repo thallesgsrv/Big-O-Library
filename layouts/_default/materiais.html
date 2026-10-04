@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{- $cx := partial "bo-cx.html" . -}}
 {{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
-{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+{{ partial "sidebar.html" (dict "context" .) }}
 <div class="bo-wrap">
   <div class="bo-mhead">
     <div class="bo-prompt" aria-hidden="true">~/big-o-library $ ls materiais/</div>
@@ -30,6 +30,22 @@
         <span class="bo-per-o" aria-hidden="true">O(∞)</span>
         <span class="bo-per-l"></span>
         <span class="bo-per-n">optativas <span class="bo-per-go" aria-hidden="true">→</span></span>
+      </a>
+    {{- end -}}
+    {{- /* Bash, Shell e Linux: card extra, fora da sequência de períodos */ -}}
+    {{- with site.GetPage "/docs/bash-shell-linux" -}}
+      <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}" aria-label="Bash, Shell e Linux">
+        <span class="bo-per-o" aria-hidden="true">$ _</span>
+        <span class="bo-per-l"></span>
+        <span class="bo-per-n">bash / linux <span class="bo-per-go" aria-hidden="true">→</span></span>
+      </a>
+    {{- end -}}
+    {{- /* Git e GitHub: card extra, fora da sequência de períodos */ -}}
+    {{- with site.GetPage "/docs/git-github" -}}
+      <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}" aria-label="Git e GitHub">
+        <span class="bo-per-o" aria-hidden="true">git</span>
+        <span class="bo-per-l"></span>
+        <span class="bo-per-n">git / github <span class="bo-per-go" aria-hidden="true">→</span></span>
       </a>
     {{- end -}}
   </div>

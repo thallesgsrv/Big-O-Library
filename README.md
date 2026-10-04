@@ -31,7 +31,33 @@ Sobre dedicação, vale assistir a [Você tem brio?](https://youtu.be/TRPBY_lxJf
 
 ## Conteúdo
 
-O projeto está no início. Os materiais serão listados aqui à medida que forem adicionados.
+Os materiais ficam no [site](https://thallesgsrv.github.io/Big-O-Library/docs/), organizados por período (1º ao 9º) e por optativas. Já há disciplinas dos primeiros períodos e, nas optativas, Algoritmos Avançados com visualizações interativas (BFS, DFS, Dijkstra, Segment Tree, Lazy Propagation e LCA). A lista completa e atualizada está sempre no site.
+
+## Rodando localmente
+
+Requisitos: [Git](https://git-scm.com/) e [Hugo **extended**](https://gohugo.io/installation/) 0.146.0 ou mais novo (o site é gerado com a 0.167.0).
+
+```bash
+git clone --recurse-submodules https://github.com/thallesgsrv/Big-O-Library.git
+cd Big-O-Library
+hugo server
+```
+
+O tema (Hextra) é um submódulo: se você clonou sem `--recurse-submodules`, rode `git submodule update --init --recursive`. O Git precisa estar no PATH, porque o site usa as datas do histórico. No Windows, instale o Hugo com `winget install Hugo.Hugo.Extended`.
+
+## Estrutura do repositório
+
+```text
+content/docs/        materiais: NN-periodo/disciplina/ e optativas/
+content/contribuir.md  guia de escrita (publicado no site)
+layouts/             templates do site (páginas, cards, parciais bo-*)
+assets/css/          estilo do projeto (custom.css)
+assets/viz/          motor das animações de algoritmos (viz.js / viz.css)
+archetypes/          modelo para novas disciplinas
+themes/hextra/       tema (submódulo)
+```
+
+Para criar uma animação de algoritmo, veja o [guia de animações](GUIA-ANIMACOES.md).
 
 ## Contribuição
 

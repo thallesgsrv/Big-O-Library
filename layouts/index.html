@@ -1,6 +1,6 @@
 {{ define "main" }}
 {{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
-{{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+{{ partial "sidebar.html" (dict "context" .) }}
 <div class="bo-wrap">
   <section class="bo-hero">
     <div class="bo-hero-text">
