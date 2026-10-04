@@ -12,5 +12,7 @@
   {{- $class = printf "%s bo-page-opt" $class -}}
 {{- else if in .RelPermalink "bash-shell-linux" -}}
   {{- $badge = "$ shell · extra" -}}
+{{- else if in .RelPermalink "git-github" -}}
+  {{- $badge = "git · extra" -}}
 {{- end -}}
 {{- return (dict "badge" $badge "class" $class) -}}

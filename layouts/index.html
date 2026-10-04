@@ -1,7 +1,7 @@
 {{ define "main" }}
 {{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
 {{ partial "sidebar.html" (dict "context" .) }}
-<div class="bo-wrap">
+<div class="bo-wrap" id="content">
   <section class="bo-hero">
     <div class="bo-hero-text">
       <div class="bo-prompt" aria-hidden="true">~/big-o-library $ ls sobre/</div>

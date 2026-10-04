@@ -91,34 +91,6 @@
     yield snap(0, 'Pilha vazia. Fim da busca em profundidade.', { done: true });
   }
 
-  function* lcs(X, Y) {
-    const m = X.length, n = Y.length;
-    const t = Array.from({length: m + 1}, (_, i) => Array.from({length: n + 1}, (_, j) => (i && j) ? null : 0));
-    const snap = (line, msg, x = {}) => ({ line, msg, t: t.map(r => [...r]), path: [], ...x });
-    yield snap(0, 'Linha 0 e coluna 0 valem 0: comparar com a string vazia dá LCS vazio.');
-    for (let i = 1; i <= m; i++) for (let j = 1; j <= n; j++) {
-      if (X[i-1] === Y[j-1]) {
-        yield snap(3, `${X[i-1]} = ${Y[j-1]}: letras iguais.`, { cur: [i, j] });
-        t[i][j] = t[i-1][j-1] + 1;
-        yield snap(4, `c[${i}][${j}] = diagonal + 1 = ${t[i][j]}.`, { cur: [i, j] });
-      } else {
-        yield snap(3, `${X[i-1]} ≠ ${Y[j-1]}: letras diferentes.`, { cur: [i, j] });
-        t[i][j] = Math.max(t[i-1][j], t[i][j-1]);
-        yield snap(5, `c[${i}][${j}] = max(cima, esquerda) = ${t[i][j]}.`, { cur: [i, j] });
-      }
-    }
-    let i = m, j = n, out = ''; const path = [[i, j]];
-    yield snap(6, 'Reconstrução: parte de c[m][n] e volta até a borda.', { path: path.map(p => [...p]) });
-    while (i && j) {
-      if (X[i-1] === Y[j-1]) { out = X[i-1] + out; i--; j--; }
-      else if (t[i-1][j] >= t[i][j-1]) i--; else j--;
-      path.push([i, j]);
-      yield snap(6, `Letras coletadas: ${out || '(nenhuma)'}`, { path: path.map(p => [...p]) });
-    }
-    yield snap(6, `LCS = ${out} (tamanho ${t[m][n]}).`, { path: path.map(p => [...p]) });
-  }
-
-
   const LCAG = {
     nodes: [{id:'A',x:280,y:24},{id:'B',x:170,y:76},{id:'C',x:400,y:76},{id:'D',x:100,y:128},{id:'E',x:240,y:128},
             {id:'F',x:60,y:180},{id:'G',x:150,y:180},{id:'J',x:240,y:180},{id:'H',x:30,y:232},{id:'I',x:100,y:232}],
@@ -265,12 +237,6 @@
       code: [[0,'tempo ← 0; DFS(origem)'],[0,'DFS(u):'],[1,'descoberta[u] ← ++tempo'],
         [1,'para cada vizinho v de u:'],[2,'se v ainda não foi visitado:'],[3,'DFS(v)'],[1,'u terminou: volta']]
     },
-    lcs: {
-      kind: 'table', X: 'ABCBDAB', Y: 'BDCABA', run: () => lcs('ABCBDAB', 'BDCABA'),
-      code: [[0,'c[i][0] ← 0; c[0][j] ← 0'],[0,'para i de 1 até m:'],[1,'para j de 1 até n:'],
-        [2,'se X[i] = Y[j]:'],[3,'c[i][j] ← c[i-1][j-1] + 1'],[2,'senão: c[i][j] ← max(c[i-1][j], c[i][j-1])'],
-        [0,'reconstrução: volte de c[m][n] até a borda']]
-    },
     segtree: {
       kind: 'segtree', run: segtree,
       code: [[0,'árvore[i] guarda a soma do intervalo [l, r]'],[0,'build: se l = r: árvore[i] ← a[l]'],
@@ -300,7 +266,7 @@
     if (!A) { el.textContent = 'Algoritmo não encontrado: ' + el.dataset.algo; return; }
     const steps = [...A.run()], g = A.graph;
     let i = 0, timer = null;
-    el.innerHTML = `<div class="viz-top"><div class="tb"></div><svg viewBox="0 0 560 300" role="img" aria-label="Grafo"></svg>
+    el.innerHTML = `<div class="viz-top"><svg viewBox="0 0 560 300" role="img" aria-label="Grafo"></svg>
       <div class="viz-side"><div><b class="t1"></b><div class="pq"></div></div>
       <div><b class="t2"></b><div class="dd"></div></div></div></div>
       <div class="msg" aria-live="polite"></div>
@@ -311,7 +277,7 @@
     const $ = s => el.querySelector(s), lis = el.querySelectorAll('.code li');
     const pos = g ? Object.fromEntries(g.nodes.map(n => [n.id, n])) : {};
 
-    function draw() { const s = steps[i]; A.kind === 'table' ? drawTable(s) : A.kind === 'segtree' ? drawSeg(s) : drawGraph(s); common(s); }
+    function draw() { const s = steps[i]; A.kind === 'segtree' ? drawSeg(s) : drawGraph(s); common(s); }
     function drawSeg(s) {
       const X = i => 40 + ((s.L[i] + s.R[i]) / 2 + 0.5) * 60, Y = i => 36 + (31 - Math.clz32(i)) * 66;
       let h = '';
@@ -325,14 +291,6 @@
       $('svg').innerHTML = h;
       $('.t1').textContent = 'Operação'; $('.pq').innerHTML = `<span class="chip">${s.op}</span>`;
       $('.t2').textContent = 'Resultado'; $('.dd').innerHTML = `<span class="chip">${s.res}</span>`;
-    }
-    function drawTable(s) {
-      const pa = new Set(s.path.map(p => p.join()));
-      $('svg').style.display = 'none'; $('.viz-side').style.display = 'none';
-      let h = '<table><tr><th></th><th></th>' + [...A.Y].map(c => `<th>${c}</th>`).join('') + '</tr>';
-      s.t.forEach((row, r) => { h += `<tr><th>${r ? A.X[r-1] : ''}</th>` + row.map((v, c) =>
-        `<td class="${s.cur && s.cur[0] === r && s.cur[1] === c ? 'cur' : ''} ${pa.has(r + ',' + c) ? 'path' : ''}">${v == null ? '' : v}</td>`).join('') + '</tr>'; });
-      $('.tb').innerHTML = h + '</table>';
     }
     function drawGraph(s) {
       let h = ''; $('.t1').textContent = A.t1; $('.t2').textContent = A.t2;
