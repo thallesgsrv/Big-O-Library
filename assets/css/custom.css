@@ -232,7 +232,7 @@ a.bo-credits-person:focus-visible{outline:2px solid var(--ac);outline-offset:2px
 .bo-credits-sep{margin:0 6px;color:var(--axis)}
 @media (max-width:640px){.bo-credits{padding:14px 16px}.bo-credits-sep{display:none}.bo-credits-dates time{display:inline-block;margin-right:12px}}
 
-/* Leitura em celular e desktop: blocos de código, links longos, imagens e âncoras */
+
 html{scroll-padding-top:5rem;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .bo-doc .content img{max-width:100%;height:auto}
 .bo-doc .content pre{overflow-x:auto;-webkit-overflow-scrolling:touch;line-height:1.6;tab-size:2}
