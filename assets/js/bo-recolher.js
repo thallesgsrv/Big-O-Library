@@ -1,0 +1,73 @@
+/* assets/js/bo-recolher.js
+   Transforma cada seção "##" de um bloco [data-bo-fold] em <details>/<summary> nativo.
+   Sem JavaScript, o texto continua todo visível. Carregado por _partials/bo-recolher.html. */
+(function () {
+  var CTA = /^contribui/; // ids de seção que ganham destaque (bo-sec-cta)
+  var roots = document.querySelectorAll('[data-bo-fold]');
+  if (!roots.length) return;
+  var all = [];
+
+  roots.forEach(function (root) {
+    var body = null;
+    Array.prototype.slice.call(root.children).forEach(function (el) {
+      if (el.tagName === 'H2') {
+        var d = document.createElement('details');
+        d.className = 'bo-sec' + (CTA.test(el.id) ? ' bo-sec-cta' : '');
+        if (all.length === 0) d.open = true;
+
+        var s = document.createElement('summary');
+        var cmd = document.createElement('span');
+        cmd.className = 'bo-cmd';
+        cmd.setAttribute('aria-hidden', 'true');
+        cmd.textContent = '$ cat ' + (el.id || el.textContent.trim().toLowerCase().replace(/\s+/g, '-')) + '.md';
+
+        root.insertBefore(d, el);
+        s.appendChild(cmd);
+        s.appendChild(el);
+        d.appendChild(s);
+        body = document.createElement('div');
+        body.className = 'bo-sec-body';
+        d.appendChild(body);
+        all.push(d);
+      } else if (body) {
+        body.appendChild(el);
+      }
+    });
+  });
+  if (!all.length) return;
+
+  function reveal() {
+    if (!location.hash) return;
+    var t;
+    try { t = document.getElementById(decodeURIComponent(location.hash.slice(1))); } catch (e) { return; }
+    var d = t && t.closest('details.bo-sec');
+    if (d && !d.open) { d.open = true; t.scrollIntoView(); }
+  }
+  reveal();
+  window.addEventListener('hashchange', reveal);
+
+  var was = [];
+  window.addEventListener('beforeprint', function () {
+    was = all.map(function (d) { return d.open; });
+    all.forEach(function (d) { d.open = true; });
+  });
+  window.addEventListener('afterprint', function () {
+    all.forEach(function (d, i) { d.open = was[i]; });
+  });
+
+  function marcarRolagem(root) {
+    root.querySelectorAll('.katex-display').forEach(function (m) {
+      if (m.scrollWidth > m.clientWidth + 1) {
+        m.tabIndex = 0;
+        m.setAttribute('role', 'group');
+        m.setAttribute('aria-label', 'Equação, role na horizontal para ver tudo');
+      }
+    });
+  }
+  all.forEach(function (d) {
+    d.addEventListener('toggle', function () { if (d.open) marcarRolagem(d); });
+  });
+  window.addEventListener('load', function () {
+    all.forEach(function (d) { if (d.open) marcarRolagem(d); });
+  });
+})();
