@@ -20,3 +20,20 @@
     </ul>
   </nav>
 </aside>
+{{- /* Acessibilidade: o drawer fechado só sai da tela por transform, então seus links continuavam
+       na ordem de Tab e no leitor de tela. Enquanto estiver fechado (classe do tema com translate -100%),
+       recebe `inert`. Falha segura: se o tema mudar o mecanismo, o clique no ☰ remove o `inert`. */ -}}
+<script>
+(function () {
+  var a = document.querySelector('.hextra-sidebar-container');
+  if (!a) return;
+  function sync() {
+    if (a.className.indexOf('translate3d(0,-100%,0)') > -1) a.setAttribute('inert', '');
+    else a.removeAttribute('inert');
+  }
+  sync();
+  new MutationObserver(sync).observe(a, { attributes: true, attributeFilter: ['class'] });
+  var b = document.querySelector('.hextra-hamburger-menu');
+  if (b) b.addEventListener('click', function () { a.removeAttribute('inert'); });
+})();
+</script>

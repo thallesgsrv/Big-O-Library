@@ -13,7 +13,7 @@
       {{ partial "custom/page-begin.html" . }}
 
       <div class="{{ $p.class }}">
-        {{ partial "bo-hero.html" (dict "page" . "badge" $p.badge "lead" .Params.summary) }}
+        {{ partial "bo-hero.html" (dict "page" . "badge" $p.badge "lead" (.Params.summary | default .Params.description)) }}
 
         {{/* sumário recolhível, só abaixo de 1280 px (acima disso o toc.html lateral assume) */}}
         {{ if and (ne .Params.toc false) .Fragments.Headings }}
@@ -38,7 +38,7 @@
             <a href="{{ .Parent.RelPermalink }}">← {{ .Parent.Title }}</a>
           {{- end -}}
           {{ if and site.Params.editURL.enable .File (not .Params.hideEdit) }}
-            <a href="{{ site.Params.editURL.base }}/{{ .File.Path }}" target="_blank" rel="noopener">$ editar esta página</a>
+            <a href="{{ partial "bo-edit-url.html" . }}" target="_blank" rel="noopener">$ editar esta página</a>
           {{ end }}
         </div>
       </div>

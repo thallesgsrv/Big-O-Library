@@ -1,16 +1,28 @@
 {{- /* Cabeçalho de página: breadcrumb (~/big-o-library / ... $ cat arquivo.md), título, selo e texto de apoio.
        Args (dict): page = página; badge = texto do selo (opcional); lead = parágrafo abaixo do título (opcional).
-       Usado por _default/single.html e docs/list.html. */ -}}
+       Usado por bo-pagina.html (single) e docs/list.html.
+       O breadcrumb é uma lista ordenada (<ol>) e emite JSON-LD BreadcrumbList para os buscadores.
+       CSS: .bo-crumbs-list (assets/css/bo-extras.css). */ -}}
 {{- $p := .page -}}
+{{- $items := slice (dict "@type" "ListItem" "position" 1 "name" "Big-O-Library" "item" $p.Site.Home.Permalink) -}}
 <header class="bo-page-hero">
   <nav class="bo-crumbs" aria-label="Breadcrumb">
-    <a href="{{ $p.Site.Home.RelPermalink }}">~/big-o-library</a>
-    {{- range $p.Ancestors.Reverse -}}
-      {{- if not .IsHome -}}<span aria-hidden="true">/</span><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{- end -}}
-    {{- end }}
-    <span class="bo-crumb-cmd" aria-hidden="true">$ cat {{ with $p.File }}{{ .ContentBaseName }}{{ else }}{{ $p.Title | urlize }}{{ end }}.md</span>
-    <span class="hx:sr-only" aria-current="page">{{ $p.Title }}</span>
+    <ol class="bo-crumbs-list">
+      <li><a href="{{ $p.Site.Home.RelPermalink }}">~/big-o-library</a></li>
+      {{- range $p.Ancestors.Reverse -}}
+        {{- if not .IsHome -}}
+          {{- $items = $items | append (dict "@type" "ListItem" "position" (add (len $items) 1) "name" .Title "item" .Permalink) -}}
+          <li><span aria-hidden="true">/</span><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+        {{- end -}}
+      {{- end }}
+      <li>
+        <span class="bo-crumb-cmd" aria-hidden="true">$ cat {{ with $p.File }}{{ .ContentBaseName }}{{ else }}{{ $p.Title | urlize }}{{ end }}.md</span>
+        <span class="hx:sr-only" aria-current="page">{{ $p.Title }}</span>
+      </li>
+    </ol>
   </nav>
+  {{- $items = $items | append (dict "@type" "ListItem" "position" (add (len $items) 1) "name" $p.Title "item" $p.Permalink) }}
+  <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items | jsonify | safeJS }}</script>
   {{ if $p.Title }}<h1 class="bo-page-title">{{ $p.Title }}</h1>{{ end }}
   {{ with .badge }}<span class="bo-badge">{{ . }}</span>{{ end }}
   {{ with .lead }}<p class="bo-page-summary">{{ . }}</p>{{ end }}

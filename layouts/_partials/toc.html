@@ -3,8 +3,8 @@
 {{- $toc := ne .Params.toc false -}}
 {{- $onThisPage := (T "onThisPage") | default "Sumário"}}
 {{- $tags := (T "tags") | default "Tags"}}
-{{- $editThisPage := (T "editThisPage") | default "Edit this page"}}
-{{- $tableOfContents := (T "tableOfContents") | default "Table of contents" -}}
+{{- $editThisPage := (T "editThisPage") | default "Editar esta página"}}
+{{- $tableOfContents := (T "tableOfContents") | default "Sumário" -}}
 {{- $page := . -}}
 {{- $headingData := partial "utils/headings.html" $page -}}
 {{- $headings := index $headingData "headings" -}}
@@ -38,19 +38,7 @@
           </div>
         {{- end -}}
         {{- if and site.Params.editURL.enable (ne .Params.hideEdit true) -}}
-          {{- $editURL := site.Params.editURL.base | default "" -}}
-          {{- with .Params.editURL -}}
-            {{/* if `editURL` is set in the front matter */}}
-            {{- $editURL = . -}}
-          {{- else -}}
-            {{- with .File -}}
-              {{/* `.FileInfo.Meta.SourceRoot` is a Hugo internal field, e.g. `/path/to/repo/content/en/` */}}
-              {{- $sourceDir := replace (strings.TrimPrefix .FileInfo.Meta.BaseDir .FileInfo.Meta.SourceRoot) "\\" "/" -}}
-              {{- $sourceDir = strings.TrimPrefix "/content" $sourceDir -}}
-              {{- $path := replace .Path "\\" "/" -}}
-              {{- $editURL = urls.JoinPath $editURL $sourceDir $path -}}
-            {{- end -}}
-          {{- end -}}
+          {{- $editURL := partial "bo-edit-url.html" . -}}
           <a class="hx:inline-block hx:whitespace-nowrap hx:rounded-sm hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50 hx:hextra-focus-visible-inset" href="{{ $editURL }}" target="_blank" rel="noreferrer">{{ $editThisPage }}</a>
         {{- end -}}
       </div>

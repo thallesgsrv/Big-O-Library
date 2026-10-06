@@ -27,5 +27,5 @@ Neste estágio vamos construir essa ideia aos poucos. Comece pelos tópicos abai
 
 ## Listas de exercícios
 
-- [Lista 1: funções e domínio (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQBaXjSrZWcoT7vvw1QUPg9mAfWveNG3TNDBKZ0gKLligDE?e=4h7oHI)
+- [Lista 1: limites e técnicas (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQBaXjSrZWcoT7vvw1QUPg9mAfWveNG3TNDBKZ0gKLligDE?e=4h7oHI)
 - [Lista 2: limites e técnicas (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQBAcKaregNgTZbl72o2FbLcAY2t5worOQoB8F3iepQTQlc?e=0OkyI8)
