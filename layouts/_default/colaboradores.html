@@ -4,11 +4,10 @@
 {{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
 {{ partial "sidebar.html" (dict "context" .) }}
 <div class="bo-wrap" id="content">
-  <div class="bo-mhead">
-    <div class="bo-prompt" aria-hidden="true">~/big-o-library $ cat colaboradores.md</div>
-    <h1 class="bo-h1 bo-h1-big">{{ .Title }}</h1>
-    {{ with .Params.summary }}<p class="bo-lead">{{ . }}</p>{{ end }}
-  </div>
+  {{ partial "bo-mhead.html" (dict
+      "prompt" "~/big-o-library $ cat colaboradores.md"
+      "title" .Title
+      "lead" (.Params.summary | default .Params.description)) }}
   {{ .Content }}
 </div>
 {{ end }}

@@ -1,6 +1,5 @@
 {{- /* Layout de lista de seções. O título dos cards é configurável pelo front matter (rotulo: Estágios; padrão: Disciplinas).
-       Ordem pensada para acessibilidade: título → resumo → CARDS → texto de apoio, para quem usa
-       leitor de tela, teclado ou celular chegar à navegação sem atravessar o texto longo. */ -}}
+       Ordem: título → resumo → texto de apoio (seções recolhíveis) → CARDS. */ -}}
 {{ define "main" }}
   {{- $p := partial "bo-periodo.html" . -}}
   {{- $badge := $p.badge -}}
@@ -13,12 +12,12 @@
         {{ partial "custom/page-begin.html" . }}
 
         <div class="{{ $pageClass }} bo-doc">
-          {{ partial "bo-hero.html" (dict "page" . "badge" $badge "lead" .Params.description) }}
+          {{ partial "bo-hero.html" (dict "page" . "badge" $badge "lead" (.Params.description | default .Params.summary)) }}
 
           <div class="content">
             {{ partial "custom/content-begin.html" . }}
 
-            {{/* cada "##" do texto vira uma seção recolhível; os cards acima ficam sempre abertos */}}
+            {{/* cada "##" do texto vira uma seção recolhível; os cards abaixo ficam sempre abertos */}}
             <div class="bo-fold" data-bo-fold>
               {{ .Content }}
             </div>
@@ -45,11 +44,13 @@
 
             {{ partial "bo-credits.html" . }}
 
-            {{ if .Parent }}
-              <p class="bo-page-foot"><a href="{{ .Parent.RelPermalink }}">← {{ .Parent.Title }}</a></p>
-            {{ else }}
-              <p class="bo-page-foot"><a href="{{ "docs/" | relURL }}">← Materiais</a></p>
-            {{ end }}
+            <div class="bo-page-foot">
+              {{ if .Parent }}
+                <a href="{{ .Parent.RelPermalink }}">← {{ .Parent.Title }}</a>
+              {{ else }}
+                <a href="{{ "docs/" | relURL }}">← Materiais</a>
+              {{ end }}
+            </div>
           </div>
         </div>
 

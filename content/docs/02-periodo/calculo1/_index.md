@@ -8,6 +8,8 @@ autores:
 date: 2026-09-29
 ---
 
+## Sobre
+
 A disciplina de Cálculo Diferencial e Integral 1 costuma assustar muita gente no início, mas ela não é um monstro tão grande quanto parece. O que torna a matéria desafiadora não é a quantidade de conteúdo, e sim a necessidade de pensar com rigor: interpretar funções, entender limites, construir raciocínio visual e conectar cada ideia com a seguinte.
 
 A boa notícia é que, quando você entende a lógica por trás dos conceitos, a disciplina deixa de ser “lista de fórmulas” e passa a ser uma ferramenta poderosa para modelar fenômenos, variações e medidas. Isso vale tanto para matemática pura quanto para aplicações em física, engenharia, computação e muitas outras áreas.

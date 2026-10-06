@@ -3,50 +3,36 @@
 {{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
 {{ partial "sidebar.html" (dict "context" .) }}
 <div class="bo-wrap" id="content">
-  <div class="bo-mhead">
-    <div class="bo-prompt" aria-hidden="true">~/big-o-library $ ls materiais/</div>
-    <h1 class="bo-h1 bo-h1-big">Materiais</h1>
-    <p class="bo-lead">Conteúdos organizados por disciplina e período. A cor é o custo: quanto mais você avança, mais quente fica.</p>
-  </div>
+  {{ partial "bo-mhead.html" (dict
+      "prompt" "~/big-o-library $ ls materiais/"
+      "title" "Materiais"
+      "lead" "Conteúdos organizados por disciplina e período. A cor é o custo: quanto mais você avança, mais quente fica.") }}
 
   <div class="bo-lsh" aria-hidden="true">$ ls -l periodos/ <span>&nbsp;&nbsp; # a cor é o custo</span></div>
   <div class="bo-pgrid">
     {{- /* o número do período vem do nome da pasta (01-periodo → 1), não de um contador */ -}}
     {{- range .Pages.ByWeight -}}
-      {{- $num := replaceRE `^.*/0?([1-9])-periodo/?$` "$1" .RelPermalink -}}
-      {{- if and (ne .Section "optativas") (eq (len $num) 1) -}}
-        {{- $n := int $num -}}
+      {{- $url := .RelPermalink -}}
+      {{- with findRESubmatch `/0?([1-9])-periodo/?$` $url 1 -}}
+        {{- $n := int (index (index . 0) 1) -}}
         {{- /* o card inteiro é o link; as disciplinas só aparecem na página do período */ -}}
-        <a class="bo-per" style="--c:var(--p{{ $n }})" href="{{ .RelPermalink }}" aria-label="{{ $n }}º período, complexidade {{ index $cx (sub $n 1) }}">
+        <a class="bo-per" style="--c:var(--p{{ $n }})" href="{{ $url }}" aria-label="{{ $n }}º período, complexidade {{ index $cx (sub $n 1) }}">
           <span class="bo-per-o" aria-hidden="true">{{ index $cx (sub $n 1) }}</span>
           <span class="bo-per-l"></span>
           <span class="bo-per-n">{{ $n }}º período <span class="bo-per-go" aria-hidden="true">→</span></span>
         </a>
       {{- end -}}
     {{- end -}}
-    {{- /* Optativas: mesmo card e mesmo tamanho dos períodos, no final da grade */ -}}
-    {{- with site.GetPage "/docs/optativas" -}}
-      <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}" aria-label="optativas, complexidade O infinito">
-        <span class="bo-per-o" aria-hidden="true">O(∞)</span>
-        <span class="bo-per-l"></span>
-        <span class="bo-per-n">optativas <span class="bo-per-go" aria-hidden="true">→</span></span>
-      </a>
-    {{- end -}}
-    {{- /* Bash, Shell e Linux: card extra, fora da sequência de períodos */ -}}
-    {{- with site.GetPage "/docs/bash-shell-linux" -}}
-      <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}" aria-label="Bash, Shell e Linux">
-        <span class="bo-per-o" aria-hidden="true">$ _</span>
-        <span class="bo-per-l"></span>
-        <span class="bo-per-n">bash / linux <span class="bo-per-go" aria-hidden="true">→</span></span>
-      </a>
-    {{- end -}}
-    {{- /* Git e GitHub: card extra, fora da sequência de períodos */ -}}
-    {{- with site.GetPage "/docs/git-github" -}}
-      <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}" aria-label="Git e GitHub">
-        <span class="bo-per-o" aria-hidden="true">git</span>
-        <span class="bo-per-l"></span>
-        <span class="bo-per-n">git / github <span class="bo-per-go" aria-hidden="true">→</span></span>
-      </a>
+    {{- /* Extras (optativas, bash, git...): vêm de data/extras.yaml, mesmo card dos períodos, no final da grade */ -}}
+    {{- range hugo.Data.extras -}}
+      {{- $e := . -}}
+      {{- with site.GetPage (printf "/docs/%s" $e.slug) -}}
+        <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}" aria-label="{{ $e.aria }}">
+          <span class="bo-per-o" aria-hidden="true">{{ $e.simbolo }}</span>
+          <span class="bo-per-l"></span>
+          <span class="bo-per-n">{{ $e.rotulo }} <span class="bo-per-go" aria-hidden="true">→</span></span>
+        </a>
+      {{- end -}}
     {{- end -}}
   </div>
 </div>
