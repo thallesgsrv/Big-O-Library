@@ -1,6 +1,18 @@
-{{- /* Fontes carregadas por <link> (em vez de @import no CSS, que bloqueia a renderização) */ -}}
+{{- /* Fontes: por padrão vêm do Google Fonts via <link> (não bloqueia a renderização, ao contrário de @import).
+       Para auto-hospedar (mais rápido e sem enviar o IP do visitante ao Google — LGPD):
+         1) python3 scripts/baixar_fontes.py   (gera static/fonts/ e _partials/fontes.html)
+         2) hugo.yaml → params.fontesLocais: true */ -}}
+{{- if site.Params.fontesLocais -}}
+  {{ partial "fontes.html" . }}
+{{- else -}}
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+{{- end }}
+{{- /* Ícone da aba (favicon). Arquivos em static/. O SVG é o principal; o .ico é fallback para navegadores antigos. */ -}}
+<link rel="icon" href="{{ "favicon.ico" | relURL }}" sizes="48x48">
+<link rel="icon" href="{{ "favicon.svg" | relURL }}" type="image/svg+xml" sizes="any">
+<link rel="apple-touch-icon" href="{{ "apple-touch-icon.png" | relURL }}">
+<meta name="color-scheme" content="light dark">
 <meta name="theme-color" content="#FAF8F3" media="(prefers-color-scheme: light)">
 <meta name="theme-color" content="#0B0F14" media="(prefers-color-scheme: dark)">

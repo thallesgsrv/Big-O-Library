@@ -1,0 +1,7 @@
+{{- /* Cabeçalho das páginas "soltas" (materiais, colaboradores).
+       Args (dict): prompt = linha de comando decorativa; title = h1; lead = parágrafo (opcional). */ -}}
+<div class="bo-mhead">
+  <div class="bo-prompt" aria-hidden="true">{{ .prompt }}</div>
+  <h1 class="bo-h1 bo-h1-big">{{ .title }}</h1>
+  {{ with .lead }}<p class="bo-lead">{{ . }}</p>{{ end }}
+</div>

@@ -1,9 +1,10 @@
+{{- $repo := site.Params.repo | default "https://github.com/thallesgsrv/Big-O-Library" -}}
 <footer class="bo-footer">
   <div class="bo-wrap bo-footer-in">
     <div class="bo-footer-col">
       {{ partial "bo-logo.html" (dict "size" "32px") }}
       <div>Feito por estudantes, para estudantes.</div>
     </div>
-    <div>abra uma <a href="https://github.com/thallesgsrv/Big-O-Library/issues">issue</a> ou um <a href="https://github.com/thallesgsrv/Big-O-Library/pulls">pull request</a></div>
+    <div>abra uma <a href="{{ $repo }}/issues">issue</a> ou um <a href="{{ $repo }}/pulls">pull request</a> · <a href="{{ $repo }}">código-fonte</a> · <a href="{{ $repo }}/blob/main/LICENSE">licença</a></div>
   </div>
 </footer>

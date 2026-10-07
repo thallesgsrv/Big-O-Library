@@ -232,7 +232,7 @@ a.bo-credits-person:focus-visible{outline:2px solid var(--ac);outline-offset:2px
 .bo-credits-sep{margin:0 6px;color:var(--axis)}
 @media (max-width:640px){.bo-credits{padding:14px 16px}.bo-credits-sep{display:none}.bo-credits-dates time{display:inline-block;margin-right:12px}}
 
-/* Leitura em celular e desktop: blocos de código, links longos, imagens e âncoras */
+
 html{scroll-padding-top:5rem;-webkit-text-size-adjust:100%;text-size-adjust:100%}
 .bo-doc .content img{max-width:100%;height:auto}
 .bo-doc .content pre{overflow-x:auto;-webkit-overflow-scrolling:touch;line-height:1.6;tab-size:2}
@@ -336,3 +336,28 @@ details.bo-sec>summary:focus-visible{outline:2px solid var(--ac);outline-offset:
   details.bo-sec>summary{padding:14px}
   .bo-sec-body{padding:0 14px 18px}
 }
+
+.bo-crumbs-list{display:flex;flex-wrap:wrap;align-items:baseline;gap:.4rem;list-style:none;margin:0!important;padding:0!important}
+.bo-crumbs-list>li{display:inline-flex;align-items:baseline;gap:.4rem;margin:0!important;padding:0!important}
+.bo-crumbs-list>li::marker{content:none}
+
+@media print{
+  html,body,html.dark body{background:#fff!important;color:#000!important}
+  html.dark{--bg:#fff;--card:#fff;--line:#ccc;--txt:#000;--body:#222;--mute:#444;--ac:#8a3f00;--axis:#999;
+    --p1:#15803D;--p2:#2F7D1E;--p3:#4D7C0F;--p4:#A16207;--p5:#B45309;--p6:#C2410C;--p7:#BA3412;--p8:#B91C1C;--p9:#991B1B}
+  .hextra-nav-container,.hextra-sidebar-container,.hextra-toc,.bo-toc-m,.bo-footer,.bo-btns,.bo-page-foot,.bo-per-go{display:none!important}
+  .bo-sec,.bo-card,.bo-credits{box-shadow:none!important;transform:none!important}
+  details.bo-sec>summary::after{display:none}
+  .bo-doc .content pre{white-space:pre-wrap;overflow:visible;break-inside:avoid}
+  .bo-doc .content table,.bo-doc .content img,.katex-display{break-inside:avoid}
+  .bo-doc .content a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;color:#444;overflow-wrap:anywhere}
+}
+
+.bo-grid3 a.bo-card{border-color:var(--ac)}
+.bo-link{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;
+  background:var(--btn);color:var(--btn-t);font-size:13px;font-weight:500;line-height:1;
+  padding:9px 14px;border-radius:6px;transition:filter .2s ease}
+.bo-link span{display:inline-block;transition:transform .25s ease}
+a.bo-card:hover .bo-link{filter:brightness(1.06)}
+@media (hover:hover){a.bo-card:hover .bo-link span{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.bo-link,.bo-link span{transition:none!important;transform:none!important}}
