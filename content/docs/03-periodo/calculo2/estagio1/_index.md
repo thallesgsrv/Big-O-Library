@@ -1,13 +1,7 @@
 ---
-<<<<<<< HEAD
 title: Estágio 1
 weight: 1
 description: Técnicas de Integração, Integrais Impróprias, Testes de Comparação 
-=======
-title: Cálculo 2
-weight: 2
-description: Continuação de Cálculo 1
->>>>>>> main
 autores:
   - hilbertmgomes
 date: 2026-10-07
