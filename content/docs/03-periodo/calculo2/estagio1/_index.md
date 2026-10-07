@@ -1,71 +1,70 @@
 ---
 title: Estágio 1
 weight: 1
-description: Técnicas de Integração, Integrais Impróprias, Testes de Comparação 
+description: Técnicas de Integração, Integrais Impróprias, Testes de Comparação
 autores:
   - hilbertmgomes
 date: 2026-10-07
 ---
 
-
 ## Técnicas de Integração
 
 ### Resumo sobre Integrais
 
-De uma forma resumida: seja f = f(x) uma função qualquer, a integral indefinida representa o conjunto de todas as funções cuja a derivada seja igual a f, também chamadas de **primitivas** de f. A integral indefinida com base em f é representada por:
+De forma resumida: seja $f = f(x)$ uma função qualquer. A integral indefinida representa o conjunto de todas as funções cuja derivada é igual a $f$, também chamadas de **primitivas** de $f$. A integral indefinida de $f$ é representada por:
 
-                                                          $\int f(x) dx$
-
-Em que:
-- A função f, nesse caso, é chamado de **integrando**;
-- dx é chamado de **diferencial** da função f. Não precisamos entrar em detalhes sobre o diferencial por enquanto, apenas lembre-se que
-o diferencial serve para indicar qual a variável do integrando, por exemplo: se a nossa função f fosse definida como f = f(y) ao invés de f = f(x), o diferencial seria
-dy ao invés de dx.
-
-Conforme dito anteriormente, uma integral indefinida representa um conjunto de funções cuja derivada é igual ao integrando. Assim, representamos esse conjunto de funções como, para o mesmo f definido anteriormente, sendo g = g(x) outra função:
-
-                                                            g(x) + C
+$$\int f(x)\,dx$$
 
 Em que:
-- A função f é a derivada da função g;
-- C é um número constante qualquer pertencente ao conjunto dos números reais. Entraremos em detalhes sobre essa constante adiante.
 
-#### Vamos a um exemplo:
+- A função $f$, nesse caso, é chamada de **integrando**;
+- $dx$ é chamado de **diferencial**. Não precisamos entrar em detalhes sobre o diferencial por enquanto; apenas lembre-se de que ele indica qual é a variável do integrando. Por exemplo: se a função fosse definida como $f = f(y)$ em vez de $f = f(x)$, o diferencial seria $dy$ em vez de $dx$.
 
-Queremos calcular seguinte integral indefinida:
+Conforme dito, uma integral indefinida representa um conjunto de funções cuja derivada é igual ao integrando. Assim, para o mesmo $f$ definido anteriormente, sendo $g = g(x)$ outra função, representamos esse conjunto como:
 
-                                                          $\int x dx$
+$$g(x) + C$$
 
-Resgatando um pouco dos conhecimentos sobre derivadas, sabemos que a derivada de x² é 2x, que é bem próximo do x que queremos. Além disso, sabemos que a derivada de um número constante multiplicado por uma função, sempre será igual a multiplicação desse número constante vezes a derivada da função, ou seja, para qualquer f = f(x), e para qualquer k pertencente aos reais:
+Em que:
 
-                                                        [k * f(x)]' = k * f(x)'
+- A função $f$ é a derivada da função $g$, isto é, $g'(x) = f(x)$;
+- $C$ é uma constante qualquer pertencente ao conjunto dos números reais. Entraremos em detalhes sobre essa constante adiante.
 
-Assim, como x² é uma função qualquer, substituímos f(x) por x² na expressão:
+#### Vamos a um exemplo
 
-                                                        (k * x²)' = k * (x²)' 
+Queremos calcular a seguinte integral indefinida:
 
-Conforme relembrado anteriormente, a derivada de x² é 2x. Logo, temos:
+$$\int x\,dx$$
 
-                                                        (k * x²)' = k * 2x
+Resgatando um pouco dos conhecimentos sobre derivadas, sabemos que a derivada de $x^2$ é $2x$, que é bem próxima do $x$ que queremos. Além disso, sabemos que a derivada de uma constante multiplicada por uma função é a constante multiplicada pela derivada da função, ou seja, para qualquer $f = f(x)$ e para qualquer $k \in \mathbb{R}$:
 
-Como k pode ser qualquer número real, vamos escolher um k que nos ajude a chegar na derivada que queremos, que é x. Assim, escolhemos 1/2, pois 1/2 * 2x é x:
+$$[k \cdot f(x)]' = k \cdot f'(x)$$
 
-                                                        (1/2 * x²)' = 1/2 * 2x
+Como $x^2$ é uma função qualquer, substituímos $f(x)$ por $x^2$ na expressão:
 
-                                                        (x²/2)' = x
+$$(k \cdot x^2)' = k \cdot (x^2)'$$
 
-Assim, encontramos que x²/2 é uma função cuja derivada é x. Mas ainda não chegamos à resposta final, pois a integral indefinida requer uma resposta que represente um conjunto de funções. Resgatando novamente os conhecimentos sobre derivada, sabemos que a derivada de qualquer número real é 0. Assim, como a derivada da soma de duas funções é igual a soma das derivadas de cada uma das funções, percebe-se que, sendo C um número real qualquer:
+Como a derivada de $x^2$ é $2x$, temos:
 
-                                                        (x²/2 + C) = (x²/2)' + (C)' = x + 0 = x
+$$(k \cdot x^2)' = k \cdot 2x$$
 
-Note que, existem infinitas possibilidades de números que podem ocupar a posição do C, o que implica que existem infinitas funções cuja a derivada é x, todas seguindo o formato x²/2 + C. Portanto, temos o nosso conjunto de funções cuja a derivada é x, exigida pela integral indefinida inicial:
+Como $k$ pode ser qualquer número real, vamos escolher um $k$ que nos leve à derivada que queremos, que é $x$. Escolhemos $k = \frac{1}{2}$, pois $\frac{1}{2} \cdot 2x = x$:
 
-                                                        $\int x dx$ = x²/2 + C
+$$\left(\frac{1}{2} \cdot x^2\right)' = \frac{1}{2} \cdot 2x$$
 
-*Observação: Não incluir o "+ C" na função final resultante de qualquer integral indefinida implica que o C é 0, que é apenas uma das funções cuja derivada é o integrando. Em integrais indefinidas, deve-se representar todas as soluções possíveis para a integral, assim, não esqueça de incluir o "+ C"!*  
+$$\left(\frac{x^2}{2}\right)' = x$$
 
+Assim, encontramos que $\frac{x^2}{2}$ é uma função cuja derivada é $x$. Mas ainda não chegamos à resposta final, pois a integral indefinida requer uma resposta que represente um conjunto de funções. Resgatando novamente os conhecimentos sobre derivadas, sabemos que a derivada de qualquer constante real é $0$. Como a derivada de uma soma é a soma das derivadas, percebe-se que, sendo $C$ um número real qualquer:
+
+$$\left(\frac{x^2}{2} + C\right)' = \left(\frac{x^2}{2}\right)' + (C)' = x + 0 = x$$
+
+Note que existem infinitas possibilidades para o valor de $C$, o que implica que existem infinitas funções cuja derivada é $x$, todas no formato $\frac{x^2}{2} + C$. Portanto, o conjunto de funções cuja derivada é $x$, exigido pela integral indefinida inicial, é:
+
+$$\int x\,dx = \frac{x^2}{2} + C$$
+
+*Observação: não incluir o "$+ C$" no resultado de uma integral indefinida equivale a assumir $C = 0$, que é apenas uma das funções cuja derivada é o integrando. Em integrais indefinidas, deve-se representar todas as soluções possíveis; portanto, não esqueça de incluir o "$+ C$"!*
 
 ## Antes de Começar
 
-Antes de começar a estudar a disciplina, recomenda-se que os seguintes conteúdos estejam bem 
+Antes de começar a estudar a disciplina, recomenda-se que os seguintes conteúdos estejam bem consolidados:
 
+- (liste aqui os pré-requisitos)
