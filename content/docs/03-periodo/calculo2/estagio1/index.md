@@ -71,7 +71,6 @@ Note que, existem infinitas possibilidades de números que podem ocupar a posiç
 *Observação: Não incluir o "+ C" na função final resultante de qualquer integral indefinida implica que o C é 0, que é apenas uma das funções cuja derivada é o integrando. Em integrais indefinidas, deve-se representar todas as soluções possíveis para a integral, assim, não esqueça de incluir o "+ C"!*  
 
 
-## Antes de Começar
+## Método da Substituição
 
-Antes de começar a estudar a disciplina, recomenda-se que os seguintes conteúdos estejam bem 
 
