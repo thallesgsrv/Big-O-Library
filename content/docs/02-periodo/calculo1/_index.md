@@ -2,12 +2,13 @@
 title: Cálculo Diferencial e Integral 1
 weight: 1
 description: Funções, limites, derivadas e integrais
-layout: lista-rotulo
 rotulo: Estágios
 autores:
   - thallesgsrv
 date: 2026-09-29
 ---
+
+## Sobre
 
 A disciplina de Cálculo Diferencial e Integral 1 costuma assustar muita gente no início, mas ela não é um monstro tão grande quanto parece. O que torna a matéria desafiadora não é a quantidade de conteúdo, e sim a necessidade de pensar com rigor: interpretar funções, entender limites, construir raciocínio visual e conectar cada ideia com a seguinte.
 
@@ -36,7 +37,7 @@ Esses temas não são independentes: cada novo conceito depende do anterior, e p
 
 ### Livro recomendado
 
-- [Stewart, James — Cálculo, Volume 1](https://1drv.ms/b/c/975ec841994373bd/IQBy9SspAh0rSKKKYzu2OuaOAUx94NbYuNxNkKfWfsoMd5o?e=uX0Ssr)
+- [Stewart, James — Cálculo, Volume 1](https://1drv.ms/b/c/975ec841994373bd/IQBy9SspAh0rSKKKYzu2OuaOAUx94NbYuNxNkKfWfsoMd5o?e=Jh47mP) 
 
 ## Dica final
 

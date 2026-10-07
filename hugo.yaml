@@ -6,6 +6,8 @@ defaultContentLanguage: pt-br
 theme: hextra
 
 enableGitInfo: true
+enableRobotsTXT: true
+
 
 services:
   googleAnalytics:
@@ -45,13 +47,15 @@ menu:
 
 params:
   description: O acervo acadêmico da Ciência da Computação. Materiais, referências e conteúdos de apoio organizados por disciplina e período.
+  repo: https://github.com/thallesgsrv/Big-O-Library
+  images:
+    - images/og.png
+  fontesLocais: true
   theme:
     default: system
     displayToggle: true
   math:
     engine: katex
-    katex:
-      base: "https://cdn.jsdelivr.net/npm/katex@0.18/dist"
   search:
     enable: true
     type: flexsearch

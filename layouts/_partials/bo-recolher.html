@@ -1,0 +1,10 @@
+{{- /* Carrega assets/js/bo-recolher.js, que transforma cada seção "##" de um bloco marcado com
+       data-bo-fold em <details>/<summary> nativo. Sem JavaScript, o texto continua todo visível.
+       Uso: {{ partial "bo-recolher.html" . }} no fim do "main". O script é externo, minificado,
+       com fingerprint (cache longo) e defer. */ -}}
+{{- with resources.Get "js/bo-recolher.js" -}}
+  {{- $js := . | resources.Minify | resources.Fingerprint -}}
+  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+{{- else -}}
+  {{- errorf "bo-recolher: assets/js/bo-recolher.js não encontrado" -}}
+{{- end -}}

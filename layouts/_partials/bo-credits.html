@@ -10,7 +10,7 @@
 {{- $temData := and (isset .Params "date") (not $pub.IsZero) -}}
 {{- if or $autores $temData -}}
 <footer class="bo-credits" aria-label="Autoria e datas">
-  <div class="bo-credits-cmd">$ git log --format=autoria</div>
+  <div class="bo-credits-cmd" aria-hidden="true">$ git log --format=autoria</div>
   <div class="bo-credits-row">
     {{- if $autores }}
     <div class="bo-credits-by">
@@ -19,7 +19,7 @@
         {{- range $autores -}}
           {{- $a := printf "%v" . | strings.TrimPrefix "@" -}}
           {{- if findRE `^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$` $a -}}
-            <li><a class="bo-credits-person" href="https://github.com/{{ $a }}" target="_blank" rel="noopener"><img src="https://github.com/{{ $a }}.png?size=48" alt="" width="24" height="24" loading="lazy" decoding="async" onerror="this.parentNode.classList.add('sem-foto');this.remove()"><span>@{{ $a }}</span></a></li>
+            <li><a class="bo-credits-person" href="https://github.com/{{ $a }}" target="_blank" rel="noopener"><img src="https://avatars.githubusercontent.com/{{ $a }}?s=48" alt="" width="24" height="24" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('sem-foto');this.remove()"><span>@{{ $a }}</span></a></li>
           {{- else -}}
             <li><span class="bo-credits-person"><span>{{ $a }}</span></span></li>
           {{- end -}}

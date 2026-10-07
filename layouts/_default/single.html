@@ -1,44 +1,4 @@
-{{ define "main" }}
-  <div class="hx:mx-auto hx:flex hextra-max-page-width">
-    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" true) }}
-    {{ partial "toc.html" . }}
-    <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
-      <main id="content" class="hx:w-full hx:min-w-0 hx:px-6 hx:pt-6 hx:md:px-12">
-        {{ partial "custom/page-begin.html" . }}
-
-        <div class="bo-page">
-          {{/* hero */}}
-          <header class="bo-page-hero">
-            <div class="bo-prompt">~/big-o-library $ cat {{ with .File }}{{ .ContentBaseName }}{{ else }}{{ $.Title | urlize }}{{ end }}.md</div>
-            {{ if .Params.hero }}
-              <img class="bo-page-hero-image" src="{{ .Params.hero | relURL }}" alt="{{ .Title }}" />
-            {{ end }}
-            {{ if .Title }}
-              <h1 class="bo-page-title">{{ .Title }}</h1>
-            {{ end }}
-            {{ if not .Date.IsZero }}
-              <p class="bo-page-meta">{{ .Date.Format "02 Jan 2006" }} · {{ .ReadingTime }} min de leitura</p>
-            {{ end }}
-            {{ if .Params.summary }}
-              <p class="bo-page-summary">{{ .Params.summary }}</p>
-            {{ end }}
-          </header>
-
-          <div class="bo-content-card">
-            <div class="content">
-              {{ partial "custom/content-begin.html" . }}
-
-              {{ .Content }}
-
-              {{ partial "custom/content-end.html" . }}
-            </div>
-          </div>
-        </div>
-
-        <div class="hx:mt-12"></div>
-        {{ partial "components/comments.html" . }}
-        {{ partial "custom/page-end.html" . }}
-      </main>
-    </article>
-  </div>
-{{ end }}
+{{- /* Wrapper fino: o corpo está em _partials/bo-pagina.html.
+       Existe também em docs/single.html porque o Hugo prefere o docs/single.html do tema Hextra
+       ao _default/single.html do projeto; sem este arquivo, as páginas de docs perdem o layout do projeto. */ -}}
+{{ define "main" }}{{ partial "bo-pagina.html" . }}{{ end }}

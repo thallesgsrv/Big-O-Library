@@ -1,34 +1,31 @@
+{{- /* Layout de lista de seções. O título dos cards é configurável pelo front matter (rotulo: Estágios; padrão: Disciplinas).
+       Ordem: título → resumo → texto de apoio (seções recolhíveis) → CARDS. */ -}}
 {{ define "main" }}
+  {{- $p := partial "bo-periodo.html" . -}}
+  {{- $badge := $p.badge -}}
+  {{- $pageClass := $p.class -}}
   <div class="hx:mx-auto hx:flex hextra-max-page-width">
-    {{/* sem sidebar no desktop (a navegação é feita pelas páginas de Materiais); no mobile o drawer do ☰ continua existindo */}}
-    {{ partial "sidebar.html" (dict "context" . "disableSidebar" true "displayPlaceholder" false) }}
+    {{ partial "sidebar.html" (dict "context" .) }}
     {{ partial "toc.html" . }}
     <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
       <main id="content" class="hx:w-full hx:min-w-0 hextra-max-content-width hx:px-6 hx:pt-4 hx:md:px-12">
         {{ partial "custom/page-begin.html" . }}
 
-        <div class="bo-page bo-page-doc">
-          <header class="bo-page-hero">
-            <nav class="bo-crumbs" aria-label="Breadcrumb">
-              <a href="{{ .Site.Home.RelPermalink }}">~/big-o-library</a>
-              {{- range .Ancestors.Reverse -}}
-                {{- if not .IsHome -}}<span>/</span><a href="{{ .RelPermalink }}">{{ .Title }}</a>{{- end -}}
-              {{- end }}
-              <span class="bo-crumb-cmd">$ cat {{ with .File }}{{ .ContentBaseName }}{{ else }}{{ .Title | urlize }}{{ end }}.md</span>
-            </nav>
-            {{ if .Title }}
-              <h1 class="bo-page-title">{{ .Title }}</h1>
-            {{ end }}
-          </header>
+        <div class="{{ $pageClass }} bo-doc">
+          {{ partial "bo-hero.html" (dict "page" . "badge" $badge "lead" (.Params.description | default .Params.summary)) }}
 
           <div class="content">
             {{ partial "custom/content-begin.html" . }}
-            {{ .Content }}
+
+            {{/* cada "##" do texto vira uma seção recolhível; os cards abaixo ficam sempre abertos */}}
+            <div class="bo-fold" data-bo-fold>
+              {{ .Content }}
+            </div>
             {{ partial "custom/content-end.html" . }}
 
-            {{- /* lista automática das disciplinas (substitui as listas "## Disciplinas" escritas à mão) */ -}}
             {{ $kids := .Pages.ByWeight }}
-            <h2 id="disciplinas">Disciplinas</h2>
+            {{ $rotulo := .Params.rotulo | default "Disciplinas" }}
+            <h2 id="{{ $rotulo | urlize }}">{{ $rotulo }}</h2>
             {{ if $kids }}
               <ul class="bo-optlist">
                 {{ range $kids }}
@@ -42,12 +39,18 @@
                 {{ end }}
               </ul>
             {{ else }}
-              <p class="bo-per-soon">Disciplinas em breve.</p>
+              <p class="bo-per-soon">{{ $rotulo }} em breve.</p>
             {{ end }}
 
             {{ partial "bo-credits.html" . }}
 
-            <p class="bo-page-foot"><a href="{{ "docs/" | relURL }}">← Materiais</a></p>
+            <div class="bo-page-foot">
+              {{ if .Parent }}
+                <a href="{{ .Parent.RelPermalink }}">← {{ .Parent.Title }}</a>
+              {{ else }}
+                <a href="{{ "docs/" | relURL }}">← Materiais</a>
+              {{ end }}
+            </div>
           </div>
         </div>
 
@@ -60,4 +63,5 @@
       </main>
     </article>
   </div>
+  {{ partial "bo-recolher.html" . }}
 {{ end }}

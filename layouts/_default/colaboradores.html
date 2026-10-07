@@ -1,0 +1,13 @@
+{{- /* Página de colaboradores: mesma largura da página de Materiais (.bo-wrap), sem coluna de sumário.
+       A lista é montada no navegador pelo script que está em content/colaboradores.md. */ -}}
+{{ define "main" }}
+{{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
+{{ partial "sidebar.html" (dict "context" .) }}
+<div class="bo-wrap" id="content">
+  {{ partial "bo-mhead.html" (dict
+      "prompt" "~/big-o-library $ cat colaboradores.md"
+      "title" .Title
+      "lead" (.Params.summary | default .Params.description)) }}
+  {{ .Content }}
+</div>
+{{ end }}

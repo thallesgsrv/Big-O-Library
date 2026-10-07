@@ -1,0 +1,16 @@
+- slug: optativas
+  simbolo: "O(∞)"
+  rotulo: "optativas"
+  selo: "O(∞) · optativa"
+  classe: "bo-page-opt"
+  aria: "optativas, complexidade O infinito"
+- slug: bash-shell-linux
+  simbolo: "$ _"
+  rotulo: "bash / linux"
+  selo: "$ shell · extra"
+  aria: "Bash, Shell e Linux"
+- slug: git-github
+  simbolo: "git"
+  rotulo: "git / github"
+  selo: "git · extra"
+  aria: "Git e GitHub"

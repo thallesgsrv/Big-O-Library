@@ -2,7 +2,6 @@
 title: Algoritmos Avançados
 weight: 1
 description: Técnicas para resolver problemas difíceis com eficiência.
-layout: lista-rotulo
 rotulo: Algoritmos
 autores:
   - thallesgsrv

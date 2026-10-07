@@ -1,0 +1,52 @@
+{{- /* Corpo único das páginas de conteúdo (docs, contribuir, colaboradores...).
+       Selo/cor do período vêm de bo-periodo.html; o cabeçalho, de bo-hero.html;
+       cada "##" do texto vira seção recolhível (bo-recolher.html).
+       Chamado por _default/single.html e docs/single.html. */ -}}
+{{- $p := partial "bo-periodo.html" . -}}
+
+<div class="hx:mx-auto hx:flex hextra-max-page-width">
+  {{/* sidebar desativada no desktop; no mobile continua sendo o menu do hambúrguer */}}
+  {{ partial "sidebar.html" (dict "context" .) }}
+  {{- if and (ne .Params.toc false) .Fragments.Headings }}{{ partial "toc.html" . }}{{ end }}
+  <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
+    <main id="content" class="hx:w-full hx:min-w-0 hx:px-6 hx:pt-6 hx:md:px-12">
+      {{ partial "custom/page-begin.html" . }}
+
+      <div class="{{ $p.class }}">
+        {{ partial "bo-hero.html" (dict "page" . "badge" $p.badge "lead" (.Params.summary | default .Params.description)) }}
+
+        {{/* sumário recolhível, só abaixo de 1280 px (acima disso o toc.html lateral assume) */}}
+        {{ if and (ne .Params.toc false) .Fragments.Headings }}
+        <details class="bo-toc-m">
+          <summary>Sumário desta página</summary>
+          {{ .TableOfContents | replaceRE `<nav id="TableOfContents">` `<nav id="TableOfContents" aria-label="Nesta página">` | safeHTML }}
+        </details>
+        {{ end }}
+
+        <div class="bo-doc">
+          <div class="content" data-bo-fold>
+            {{ partial "custom/content-begin.html" . }}
+            {{ .Content }}
+            {{ partial "custom/content-end.html" . }}
+          </div>
+        </div>
+
+        {{ partial "bo-credits.html" . }}
+
+        <div class="bo-page-foot">
+          {{- if .Parent -}}
+            <a href="{{ .Parent.RelPermalink }}">← {{ .Parent.Title }}</a>
+          {{- end -}}
+          {{ if and site.Params.editURL.enable .File (not .Params.hideEdit) }}
+            <a href="{{ partial "bo-edit-url.html" . }}" target="_blank" rel="noopener">$ editar esta página</a>
+          {{ end }}
+        </div>
+      </div>
+
+      {{ partial "components/comments.html" . }}
+      {{ partial "custom/page-end.html" . }}
+    </main>
+  </article>
+</div>
+
+{{ partial "bo-recolher.html" . }}

@@ -1,0 +1,21 @@
+{{- /* Contexto de período de uma página, deduzido da URL (01-periodo → 1º período) ou de data/extras.yaml
+       (optativas, bash-shell-linux, git-github...).
+       Retorna um dict: "badge" (texto do selo, vazio fora de período/extras) e "class" (classes do contêiner).
+       Usado por bo-pagina.html (docs/single.html) e docs/list.html. */ -}}
+{{- $url := .RelPermalink -}}
+{{- $badge := "" -}}
+{{- $class := "bo-page bo-page-doc" -}}
+{{- $m := findRESubmatch `/0([1-9])-periodo(?:/|$)` $url 1 -}}
+{{- if $m -}}
+  {{- $n := int (index (index $m 0) 1) -}}
+  {{- $badge = printf "%s · %dº período" (index (partial "bo-cx.html" .) (sub $n 1)) $n -}}
+  {{- $class = printf "%s bo-page-p%d" $class $n -}}
+{{- else -}}
+  {{- range hugo.Data.extras -}}
+    {{- if and (not $badge) (in $url (printf "/%s/" .slug)) -}}
+      {{- $badge = .selo -}}
+      {{- if .classe }}{{ $class = printf "%s %s" $class .classe }}{{ end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return (dict "badge" $badge "class" $class) -}}
