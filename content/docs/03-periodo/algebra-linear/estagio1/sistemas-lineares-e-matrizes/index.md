@@ -71,3 +71,49 @@ $$
  a_{m1} & a_{m2} & \cdots & a_{mn} & b_m
  \end{bmatrix}
  $$
+
+ Exemplo 1:
+
+ Considere o conjunto de equações:
+
+$$ \star = \begin{cases}
+2x + 3y = 1 \\
+3x + 4y = 0
+\end{cases}
+$$
+
+Note que:
+
+- (\(star\)) é um sistema de equações lineares com duas equações e duas variáveis (\(x\) e \(y\)).
+- A é a matriz dos coeficients:
+$$
+A = \begin{bmatrix}
+2 & 3 \\
+3 & 4
+\end{bmatrix}
+$$
+- X é o vetor das variáveis:
+$$
+X = \begin{bmatrix}
+x \\
+y
+\end{bmatrix}
+$$
+- B é o vetor dos termos constantes:
+$$
+B = \begin{bmatrix}
+1 \\
+0
+\end{bmatrix}
+$$
+- (\([A : B]\)) é a matriz ampliada do sistema (\(\star\)):
+$$
+[A : B] = \begin{bmatrix}
+2 & 3 & 1 \\
+3 & 4 & 0
+\end{bmatrix}
+$$
+
+- O par (\(-4, 3\)) é uma solução do sistema (\(\star\)), pois substituindo \(x = -4\) e \(y = 3\) nas equações, ambas se tornam verdadeiras:
+1. Para a primeira equação: \(2(-4) + 3(3) = -8 + 9 = 1\) (verdadeira)
+2. Para a segunda equação: \(3(-4) + 4(3) = -12 + 12 = 0\) (verdadeira)
