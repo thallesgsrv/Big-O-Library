@@ -2,7 +2,7 @@
 title: Álgebra Linear 1
 weight: 1
 description: Sistemas de equações, espaços e transformações lineares.
-rotulo: Conteúdos
+rotulo: Estágios
 autores:
     - MateusSRocha
 date: 2026-09-30

@@ -265,9 +265,9 @@ $$
 
 > [!NOTE]
 > Propriedades: Sejam \(A\), \(B\) e \(C\) matrizes de mesma ordem. Então:
-> - \(A + B = B + A\) (comutativa)
-> - \(A + (B + C) = (A + B) + C\) (associativa)
-> - \(A + 0 = 0 + A = A\) (elemento neutro)
+> 1. \(A + B = B + A\) (comutativa)
+> 2. \(A + (B + C) = (A + B) + C\) (associativa)
+> 3. \(A + 0 = 0 + A = A\) (elemento neutro)
 
 ## Multiplicação por Escalar
 Seja \(A = [a_{ij}]_{m \times n}\) uma matriz e \(k\) um número real. A multiplicação de \(A\) por \(k\) é a matriz \(B = kA\) obtida multiplicando-se cada elemento de \(A\) por \(k\), ou seja, \(b_{ij} = k \cdot a_{ij}\).
@@ -300,10 +300,10 @@ $$
 
 > [!NOTE]
 > Propriedades: Sejam \(A\), \(B\) matrizes de mesma ordem e \(k\), \(l\) números reais. Então:
-> - \(k(A + B) = kA + kB\) (distributiva)
-> - \((k + l)A = kA + lA\) (distributiva)
-> - \(0 \cdot A = 0\) (elemento nulo)
-> - \(k(lA) = (kl)A\) (associativa)
+> 1. \(k(A + B) = kA + kB\) (distributiva)
+> 2. \((k + l)A = kA + lA\) (distributiva)
+> 3. \(0 \cdot A = 0\) (elemento nulo)
+> 4. \(k(lA) = (kl)A\) (associativa)
 
 ## Transposição de Matrizes
 
@@ -357,18 +357,18 @@ $$
 
 > [!NOTE]
 > Propriedades: Sejam \(A\) e \(B\) matrizes de mesma ordem (\(m \times n\)) e \(k\) um número real. Então:
-> - \((A + B)^T = A^T + B^T\)
-> - \((kA)^T = kA^T\)
-> - \((A^T)^T = A\)
-> - \(A\) é simétrica se, e somente se, \(A = A^T\)
+> 1. \((A + B)^T = A^T + B^T\)
+> 2. \((kA)^T = kA^T\)
+> 3. \((A^T)^T = A\)
+> 4. \(A\) é simétrica se, e somente se, \(A = A^T\)
 
 ## Produto de Matrizes
 
 Sejam \(A = [a_{ij}]_{m \times n}\) e \(B = [b_{ij}]_{r \times s}\) duas matrizes. O produto \(AB\) é definido multiplicando cada linha de \(A\) por cada coluna de \(B\). Veremos exemplos de como fazer isso mais adiante.
 > [!WARNING]
-> O produto \(AB\) só é definido se o número de colunas de \(A\) for igual ao número de linhas de \(B\), ou seja, se \(n = r\).
-> Se \(A = [a_{ij}]_{m \times n}\) e \(B = [b_{ij}]_{r \times s}\), então \(AB = [c_{ij}]_{m \times s}\).
-> O elemento \(c_{ij}\) da matriz \(AB\) é obtido multiplicando-se os elementos da linha \(i\) de \(A\) pelos elementos da coluna \(j\) de \(B\) e somando-se os produtos obtidos.
+> 1. O produto \(AB\) só é definido se o número de colunas de \(A\) for igual ao número de linhas de \(B\), ou seja, se \(n = r\).
+> 2. Se \(A = [a_{ij}]_{m \times n}\) e \(B = [b_{ij}]_{r \times s}\), então \(AB = [c_{ij}]_{m \times s}\).
+> 3. O elemento \(c_{ij}\) da matriz \(AB\) é obtido multiplicando-se os elementos da linha \(i\) de \(A\) pelos elementos da coluna \(j\) de \(B\) e somando-se os produtos obtidos.
 
 Pense da seguinte forma:
 Sejam a matrizes:
@@ -432,15 +432,15 @@ $$
 
 > [!NOTE]
 > Propriedades: Sejam \(A\), \(B\) e \(C\) matrizes de mesma ordem. Então:
-> - \(IA = AI = A\) (I é matriz identidade que vimos anteriormente. I deve ter mesma ordem de \(A\))
-> - \(A \cdot (B + C) = A \cdot B + A \cdot C\) (distributiva a direita)
-> - \((A + B) \cdot C = A \cdot C + B \cdot C\) (distributiva a esquerda)
-> - \((AB)C = A(BC)\) (associativa)
-> - \((AB)^T = B^T A^T\)
-> - 0_{m \times n} \cdot A = A \cdot 0 = 0 (0 é matriz nula de mesma ordem de \(A\))
+> 1. \(IA = AI = A\) (I é matriz identidade que vimos anteriormente. I deve ter mesma ordem de \(A\))
+> 2. \(A \cdot (B + C) = A \cdot B + A \cdot C\) (distributiva a direita)
+> 3. \((A + B) \cdot C = A \cdot C + B \cdot C\) (distributiva a esquerda)
+> 4. \((AB)C = A(BC)\) (associativa)
+> 5. \((AB)^T = B^T A^T\)
+> 6. 0_{m \times n} \cdot A = A \cdot 0 = 0 (0 é matriz nula de mesma ordem de \(A\))
 
 > [!WARNING]
-> - \(AB \neq BA\) (Nem sempre, o produto de matrizes não é comutativo)
+> \(AB \neq BA\) (Nem sempre, o produto de matrizes não é comutativo)
 
 ## Exercícios
 
