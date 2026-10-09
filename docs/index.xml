@@ -5858,10 +5858,27 @@ data-copied-label="Copiado!"
 &lt;/div&gt;
 &lt;p&gt;Com o Hugo instalado, o comando &lt;code&gt;hugo new --kind disciplina docs/01-periodo/nome-da-disciplina/index.md&lt;/code&gt; já cria o arquivo com esse modelo.&lt;/p&gt;
 &lt;h2 data-hextra-search-id="testando-no-seu-computador"&gt;Testando no seu computador&lt;span class="hx:absolute hx:-mt-20" id="testando-no-seu-computador"&gt;&lt;/span&gt;
-&lt;a href="#testando-no-seu-computador" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
-&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/thallesgsrv/Big-O-Library.git
+&lt;a href="#testando-no-seu-computador" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Antes de abrir o Pull Request, confira como a página ficou. Você precisa de três coisas:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Git&lt;/strong&gt;, instalado e no PATH. Use &lt;code&gt;git clone&lt;/code&gt;: baixar o ZIP do GitHub não funciona, porque o site lê as datas de atualização do histórico do Git.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Hugo extended&lt;/strong&gt; 0.167.0 ou mais novo. Confira com &lt;code&gt;hugo version&lt;/code&gt;: a linha precisa conter &lt;code&gt;+extended&lt;/code&gt;.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Internet&lt;/strong&gt; no primeiro build. O Hugo baixa a busca (FlexSearch) e as fórmulas (KaTeX) de &lt;code&gt;cdn.jsdelivr.net&lt;/code&gt; e guarda em cache.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Não precisa de Node, Go nem de submódulos: o tema já vem dentro do repositório.&lt;/p&gt;
+&lt;p&gt;&lt;strong&gt;Linux (Debian/Ubuntu)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 1) Git e Hugo extended (em ARM, troque amd64 por arm64)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt update &lt;span class="o"&gt;&amp;amp;&amp;amp;&lt;/span&gt; sudo apt install -y git curl
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;curl -LO https://github.com/gohugoio/hugo/releases/download/v0.167.0/hugo_extended_0.167.0_linux-amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;sudo apt install -y ./hugo_extended_0.167.0_linux-amd64.deb
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo version &lt;span class="c1"&gt;# deve mostrar v0.167.0 ... +extended&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 2) Baixe o projeto&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/thallesgsrv/Big-O-Library.git
 &lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; Big-O-Library
-&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo server &lt;span class="c1"&gt;# abre o site em http://localhost:1313/Big-O-Library/&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c1"&gt;# 3) Suba o servidor local&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo server&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
 &lt;button
 class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
 title="Copiar código"
@@ -5873,6 +5890,70 @@ data-copied-label="Copiado!"
 &lt;/button&gt;
 &lt;/div&gt;
 &lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;macOS&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-bash" data-lang="bash"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;brew install git hugo
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;git clone https://github.com/thallesgsrv/Big-O-Library.git
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd&lt;/span&gt; Big-O-Library
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;hugo server&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copiar código"
+aria-label="Copiar código"
+data-copied-label="Copiado!"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;&lt;strong&gt;Windows (PowerShell)&lt;/strong&gt;&lt;/p&gt;
+&lt;div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code"&gt;
+&lt;div&gt;&lt;div class="highlight"&gt;&lt;pre tabindex="0" class="chroma"&gt;&lt;code class="language-powershell" data-lang="powershell"&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;winget&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Git&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="py"&gt;Git&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;winget&lt;/span&gt; &lt;span class="n"&gt;install&lt;/span&gt; &lt;span class="n"&gt;Hugo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="py"&gt;Hugo&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="py"&gt;Extended&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="c"&gt;# feche e abra o terminal para o PATH atualizar, depois:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;git&lt;/span&gt; &lt;span class="n"&gt;clone&lt;/span&gt; &lt;span class="n"&gt;https&lt;/span&gt;&lt;span class="err"&gt;:&lt;/span&gt;&lt;span class="p"&gt;//&lt;/span&gt;&lt;span class="n"&gt;github&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="n"&gt;com&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="n"&gt;thallesgsrv&lt;/span&gt;&lt;span class="p"&gt;/&lt;/span&gt;&lt;span class="nb"&gt;Big-O&lt;/span&gt;&lt;span class="n"&gt;-Library&lt;/span&gt;&lt;span class="p"&gt;.&lt;/span&gt;&lt;span class="py"&gt;git&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="nb"&gt;cd Big-O&lt;/span&gt;&lt;span class="n"&gt;-Library&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class="line"&gt;&lt;span class="cl"&gt;&lt;span class="n"&gt;hugo&lt;/span&gt; &lt;span class="n"&gt;server&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;&lt;div class="hextra-code-copy-btn-container hx:opacity-0 hx:transition hx:group-hover/code:opacity-100 hx:flex hx:gap-1 hx:absolute hx:m-[11px] hx:right-0 hx:top-0"&gt;
+&lt;button
+class="hextra-code-copy-btn hx:group/copybtn hx:cursor-pointer hx:transition-all hx:active:opacity-50 hx:bg-primary-700/5 hx:border hx:border-black/5 hx:text-gray-600 hx:hover:text-gray-900 hx:rounded-md hx:p-1.5 hx:dark:bg-primary-300/10 hx:dark:border-white/10 hx:dark:text-gray-400 hx:dark:hover:text-gray-50"
+title="Copiar código"
+aria-label="Copiar código"
+data-copied-label="Copiado!"
+&gt;
+&lt;div class="hextra-copy-icon hx:group-[.copied]/copybtn:hidden hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;div class="hextra-success-icon hx:hidden hx:group-[.copied]/copybtn:block hx:pointer-events-none hx:h-4 hx:w-4"&gt;&lt;/div&gt;
+&lt;/button&gt;
+&lt;/div&gt;
+&lt;/div&gt;
+&lt;p&gt;Abra &lt;strong&gt;http://localhost:1313/Big-O-Library/&lt;/strong&gt; no navegador (o &lt;code&gt;/Big-O-Library/&lt;/code&gt; no final é necessário). O site recarrega sozinho quando você salva o arquivo; para parar, use &lt;code&gt;Ctrl+C&lt;/code&gt;. Teste também no celular, ou reduza a largura da janela.&lt;/p&gt;
+&lt;p&gt;Se der erro:&lt;/p&gt;
+&lt;table&gt;
+&lt;thead&gt;
+&lt;tr&gt;
+&lt;th&gt;Erro ou sintoma&lt;/th&gt;
+&lt;th&gt;O que fazer&lt;/th&gt;
+&lt;/tr&gt;
+&lt;/thead&gt;
+&lt;tbody&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;hugo: command not found&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Instale o Hugo e abra um terminal novo.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;failed to load Git data: not a git repository&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Você baixou o ZIP. Use &lt;code&gt;git clone&lt;/code&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;Could not retrieve ... cdn.jsdelivr.net&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;Sem internet ou domínio bloqueado. Conecte-se e rode &lt;code&gt;hugo server&lt;/code&gt; de novo.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;Sua página não aparece&lt;/td&gt;
+&lt;td&gt;Confira a &lt;code&gt;date&lt;/code&gt; (se for futura, use &lt;code&gt;hugo server -F&lt;/code&gt; para ver), o &lt;code&gt;weight&lt;/code&gt; repetido e se não há subpáginas dentro de um &lt;code&gt;index.md&lt;/code&gt;.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
 &lt;h2 data-hextra-search-id="checklist-antes-de-enviar"&gt;Checklist antes de enviar&lt;span class="hx:absolute hx:-mt-20" id="checklist-antes-de-enviar"&gt;&lt;/span&gt;
 &lt;a href="#checklist-antes-de-enviar" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
 &lt;li&gt;&lt;input disabled="" type="checkbox"&gt; A pasta está no período certo, com nome em minúsculas, sem acento e sem espaço.&lt;/li&gt;
