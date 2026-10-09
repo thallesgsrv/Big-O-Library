@@ -1,0 +1,22 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Big-O-Library – Cálculo Diferencial e Integral 1</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/calculo1/</link><description>Recent content in Cálculo Diferencial e Integral 1 on Big-O-Library</description><generator>Hugo -- gohugo.io</generator><language>pt-BR</language><lastBuildDate>Tue, 29 Sep 2026 00:00:00 +0000</lastBuildDate><atom:link href="https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/calculo1/index.xml" rel="self" type="application/rss+xml"/><item><title>Estágio 1 - Funções e limites</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/calculo1/estagio1/</link><pubDate>Thu, 01 Oct 2026 00:00:00 +0000</pubDate><guid>https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/calculo1/estagio1/</guid><description>
+&lt;h2 data-hextra-search-id="o-que-você-precisa-entender"&gt;O que você precisa entender&lt;span class="hx:absolute hx:-mt-20" id="o-que-você-precisa-entender"&gt;&lt;/span&gt;
+&lt;a href="#o-que-voc%c3%aa-precisa-entender" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Antes de falar em derivadas e integrais, precisamos aprender a observar o comportamento de uma função.&lt;/p&gt;
+&lt;p&gt;Neste estágio vamos construir essa ideia aos poucos. Comece pelos tópicos abaixo:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Funções:&lt;/strong&gt; entrada e saída, domínio, imagem e comportamento (veja a página abaixo).&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Limites e continuidade:&lt;/strong&gt; limites laterais, técnicas de cálculo e continuidade (veja a página abaixo).&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="resumo-rápido"&gt;Resumo rápido&lt;span class="hx:absolute hx:-mt-20" id="resumo-rápido"&gt;&lt;/span&gt;
+&lt;a href="#resumo-r%c3%a1pido" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Função:&lt;/strong&gt; recebe entrada e entrega saída.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Domínio:&lt;/strong&gt; valores que podem entrar.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Imagem:&lt;/strong&gt; valores que podem sair.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Gráfico:&lt;/strong&gt; ajuda a interpretar o comportamento.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Limite:&lt;/strong&gt; mostra o que acontece perto de um ponto.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Continuidade:&lt;/strong&gt; ausência de ruptura, salto ou buraco.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="listas-de-exercícios"&gt;Listas de exercícios&lt;span class="hx:absolute hx:-mt-20" id="listas-de-exercícios"&gt;&lt;/span&gt;
+&lt;a href="#listas-de-exerc%c3%adcios" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://1drv.ms/b/c/975ec841994373bd/IQBaXjSrZWcoT7vvw1QUPg9mAfWveNG3TNDBKZ0gKLligDE?e=4h7oHI" target="_blank" rel="noopener"&gt;Lista 1: limites e técnicas (PDF)&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://1drv.ms/b/c/975ec841994373bd/IQBAcKaregNgTZbl72o2FbLcAY2t5worOQoB8F3iepQTQlc?e=0OkyI8" target="_blank" rel="noopener"&gt;Lista 2: limites e técnicas (PDF)&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description></item></channel></rss>

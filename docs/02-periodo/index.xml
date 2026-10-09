@@ -1,0 +1,92 @@
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Big-O-Library – 2º período</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/</link><description>Recent content in 2º período on Big-O-Library</description><generator>Hugo -- gohugo.io</generator><language>pt-BR</language><atom:link href="https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/index.xml" rel="self" type="application/rss+xml"/><item><title>Cálculo Diferencial e Integral 1</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/calculo1/</link><pubDate>Tue, 29 Sep 2026 00:00:00 +0000</pubDate><guid>https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/calculo1/</guid><description>
+&lt;h2 data-hextra-search-id="sobre"&gt;Sobre&lt;span class="hx:absolute hx:-mt-20" id="sobre"&gt;&lt;/span&gt;
+&lt;a href="#sobre" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A disciplina de Cálculo Diferencial e Integral 1 costuma assustar muita gente no início, mas ela não é um monstro tão grande quanto parece. O que torna a matéria desafiadora não é a quantidade de conteúdo, e sim a necessidade de pensar com rigor: interpretar funções, entender limites, construir raciocínio visual e conectar cada ideia com a seguinte.&lt;/p&gt;
+&lt;p&gt;A boa notícia é que, quando você entende a lógica por trás dos conceitos, a disciplina deixa de ser “lista de fórmulas” e passa a ser uma ferramenta poderosa para modelar fenômenos, variações e medidas. Isso vale tanto para matemática pura quanto para aplicações em física, engenharia, computação e muitas outras áreas.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="por-onde-começar"&gt;Por onde começar&lt;span class="hx:absolute hx:-mt-20" id="por-onde-começar"&gt;&lt;/span&gt;
+&lt;a href="#por-onde-come%c3%a7ar" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Cálculo 1 normalmente se organiza em quatro pilares:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Funções: domínio, imagem, gráficos, crescimento e comportamento.&lt;/li&gt;
+&lt;li&gt;Limites: ideia de aproximação e continuidade.&lt;/li&gt;
+&lt;li&gt;Derivadas: taxa de variação, inclinação da reta tangente, otimização.&lt;/li&gt;
+&lt;li&gt;Integrais: acumulação, área e antiderivadas.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Esses temas não são independentes: cada novo conceito depende do anterior, e por isso a disciplina exige consistência no estudo.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="como-estudar-sem-se-perder"&gt;Como estudar sem se perder&lt;span class="hx:absolute hx:-mt-20" id="como-estudar-sem-se-perder"&gt;&lt;/span&gt;
+&lt;a href="#como-estudar-sem-se-perder" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ol&gt;
+&lt;li&gt;Entenda a ideia antes da fórmula.&lt;/li&gt;
+&lt;li&gt;Resolva muitos exercícios de interpretação de gráfico.&lt;/li&gt;
+&lt;li&gt;Revise constantemente as regras de derivação e limites.&lt;/li&gt;
+&lt;li&gt;Não pule passos: em Cálculo, a lógica da resolução é tão importante quanto o resultado.&lt;/li&gt;
+&lt;li&gt;Treine a visualização: gráficos são essenciais para entender o comportamento de funções.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;h2 data-hextra-search-id="materiais"&gt;Materiais&lt;span class="hx:absolute hx:-mt-20" id="materiais"&gt;&lt;/span&gt;
+&lt;a href="#materiais" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;h3 data-hextra-search-id="livro-recomendado"&gt;Livro recomendado&lt;span class="hx:absolute hx:-mt-20" id="livro-recomendado"&gt;&lt;/span&gt;
+&lt;a href="#livro-recomendado" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h3&gt;&lt;ul&gt;
+&lt;li&gt;&lt;a href="https://1drv.ms/b/c/975ec841994373bd/IQBy9SspAh0rSKKKYzu2OuaOAUx94NbYuNxNkKfWfsoMd5o?e=Jh47mP" target="_blank" rel="noopener"&gt;Stewart, James — Cálculo, Volume 1&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="dica-final"&gt;Dica final&lt;span class="hx:absolute hx:-mt-20" id="dica-final"&gt;&lt;/span&gt;
+&lt;a href="#dica-final" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A chave para Cálculo não é decorar fórmulas, e sim desenvolver a habilidade de enxergar padrões. Quando você começa a perceber como as funções mudam, como os limites descrevem comportamento local e como a derivada mede variação, a disciplina deixa de ser intimidante e passa a fazer sentido.&lt;/p&gt;
+&lt;p&gt;Se você tiver materiais, listas, exercícios ou resumos dessa disciplina, pode colaborar com a biblioteca e ajudar outras pessoas a aprender melhor.&lt;/p&gt;</description></item><item><title>Programação 2</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/prog2/</link><pubDate>Wed, 30 Sep 2026 00:00:00 +0000</pubDate><guid>https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/prog2/</guid><description>
+&lt;h2 data-hextra-search-id="sobre-a-disciplina"&gt;Sobre a disciplina&lt;span class="hx:absolute hx:-mt-20" id="sobre-a-disciplina"&gt;&lt;/span&gt;
+&lt;a href="#sobre-a-disciplina" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;A disciplina de Programação 2 (P2) aprofunda os conceitos de programação, introduzindo
+estruturas de dados mais complexas e boas práticas de desenvolvimento. Esta página dá destaque à base teórica: classes e objetos, relações entre classes, estruturas de dados,
+padrões de design, herança e polimorfismo. Se você está interessado na parte prática desta
+disciplina, você pode acessar a página de &lt;a href="https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/lab-prog2/"&gt;Laboratório de Programação 2&lt;/a&gt;, com exercícios e projetos para aplicar os conceitos aprendidos.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="caixa-de-conhecimentos"&gt;Caixa de Conhecimentos&lt;span class="hx:absolute hx:-mt-20" id="caixa-de-conhecimentos"&gt;&lt;/span&gt;
+&lt;a href="#caixa-de-conhecimentos" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;O que você aprende ao longo do semestre é cobrado em todas as avaliações, da primeira à última. Parece óbvio, mas um conceito mal compreendido no começo vira uma bola de neve de dúvidas, e isso costuma atrapalhar em provas futuras.
+Por isso, em vez de seguir a divisão da disciplina em estágios, organizamos o material por conteúdo. Dessa forma você pode estudar na ordem que precisar: seguindo a disciplina, revisando um assunto específico ou voltando a algo que deixou para trás.&lt;/p&gt;
+&lt;div
+data-alert="tip" class="hextra-alert"
+&gt;
+&lt;p class="hextra-alert-title"&gt;&lt;svg height=16px class="hextra-alert-icon" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="2" stroke="currentColor" aria-hidden="true"&gt;&lt;path stroke-linecap="round" stroke-linejoin="round" d="M9.663 17h4.673M12 3v1m6.364 1.636l-.707.707M21 12h-1M4 12H3m3.343-5.657l-.707-.707m2.828 9.9a5 5 0 117.072 0l-.548.547A3.374 3.374 0 0014 18.469V19a2 2 0 11-4 0v-.531c0-.895-.356-1.754-.988-2.386l-.548-.547z"/&gt;&lt;/svg&gt;&lt;span class="hextra-alert-title-text"&gt;Tip&lt;/span&gt;
+&lt;/p&gt;
+&lt;div class="hextra-alert-content"&gt;&lt;p&gt;Se um conteúdo não estiver fazendo sentido, vale retroceder um ou dois passos da lista: o problema costuma estar na base.&lt;/p&gt;&lt;/div&gt;
+&lt;/div&gt;
+&lt;h2 data-hextra-search-id="objetivos"&gt;Objetivos&lt;span class="hx:absolute hx:-mt-20" id="objetivos"&gt;&lt;/span&gt;
+&lt;a href="#objetivos" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;aprimorar habilidades de programação&lt;/li&gt;
+&lt;li&gt;compreender programação orientada a objetos&lt;/li&gt;
+&lt;li&gt;trabalhar com estruturas de dados avançadas&lt;/li&gt;
+&lt;li&gt;aplicar boas práticas de desenvolvimento&lt;/li&gt;
+&lt;li&gt;desenvolver projetos de maior complexidade&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="conteúdo-previsto"&gt;Conteúdo previsto&lt;span class="hx:absolute hx:-mt-20" id="conteúdo-previsto"&gt;&lt;/span&gt;
+&lt;a href="#conte%c3%bado-previsto" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;orientação a objetos&lt;/li&gt;
+&lt;li&gt;classes e objetos&lt;/li&gt;
+&lt;li&gt;relações entre classes&lt;/li&gt;
+&lt;li&gt;herança e polimorfismo&lt;/li&gt;
+&lt;li&gt;estruturas de dados avançadas&lt;/li&gt;
+&lt;li&gt;padrões de design&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="materiais"&gt;Materiais&lt;span class="hx:absolute hx:-mt-20" id="materiais"&gt;&lt;/span&gt;
+&lt;a href="#materiais" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Os materiais desta seção podem ser organizados em listas, referências, exercícios e conteúdos complementares conforme forem adicionados.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="contribuição"&gt;Contribuição&lt;span class="hx:absolute hx:-mt-20" id="contribuição"&gt;&lt;/span&gt;
+&lt;a href="#contribui%c3%a7%c3%a3o" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Se você tiver materiais úteis desta disciplina, pode colaborar com a biblioteca e ajudar a enriquecer esta seção.&lt;/p&gt;</description></item><item><title>Laboratório de Programação 2</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/lab-prog2/</link><pubDate>Thu, 08 Oct 2026 00:00:00 +0000</pubDate><guid>https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/lab-prog2/</guid><description>
+&lt;h2 data-hextra-search-id="sobre-a-disciplina"&gt;Sobre a disciplina&lt;span class="hx:absolute hx:-mt-20" id="sobre-a-disciplina"&gt;&lt;/span&gt;
+&lt;a href="#sobre-a-disciplina" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;No Laboratório de Programação 2 (LP2) colocamos em prática os conceitos vistos em P2. A dinâmica da disciplina é simples: você recebe um modelo de negócio e precisa entregar um
+sistema orientado a objetos em pleno funcionamento, testado e e documentários. Se você está interessado na base teórica desta disciplina, você pode acessar a página de &lt;a href="https://thallesgsrv.github.io/Big-O-Library/docs/02-periodo/prog2/"&gt;Programação 2&lt;/a&gt;.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="aprendendo-uma-nova-linguagem"&gt;Aprendendo uma nova linguagem&lt;span class="hx:absolute hx:-mt-20" id="aprendendo-uma-nova-linguagem"&gt;&lt;/span&gt;
+&lt;a href="#aprendendo-uma-nova-linguagem" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Programação 2 e Laboratório de Programação 2 assumem que você já domina o que viu em programação 1. Se você acredita que sua base de conhecimento está um pouco fraca, busque revisar: funções (parâmetros e retorno), listas e dicionários, laços e condicionais.&lt;/p&gt;
+&lt;p&gt;Java não é um monstro de 7 cabeças, como você já deve ter ouvido falar. A base lógica que você aprendeu anteriomente continua valendo e aprender Java, ou qualquer outra linguagem, nada mais é do que descobrir como dizer em uma linguagem o que você já sabe dizer em outra.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="objetivos"&gt;Objetivos&lt;span class="hx:absolute hx:-mt-20" id="objetivos"&gt;&lt;/span&gt;
+&lt;a href="#objetivos" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;aprimorar habilidades de programação&lt;/li&gt;
+&lt;li&gt;compreender programação orientada a objetos&lt;/li&gt;
+&lt;li&gt;trabalhar com estruturas de dados avançadas&lt;/li&gt;
+&lt;li&gt;aplicar boas práticas de desenvolvimento&lt;/li&gt;
+&lt;li&gt;desenvolver projetos de maior complexidade&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="conteúdo-previsto"&gt;Conteúdo previsto&lt;span class="hx:absolute hx:-mt-20" id="conteúdo-previsto"&gt;&lt;/span&gt;
+&lt;a href="#conte%c3%bado-previsto" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
+&lt;li&gt;orientação a objetos&lt;/li&gt;
+&lt;li&gt;classes e objetos&lt;/li&gt;
+&lt;li&gt;relações entre classes&lt;/li&gt;
+&lt;li&gt;herança e polimorfismo&lt;/li&gt;
+&lt;li&gt;estruturas de dados avançadas&lt;/li&gt;
+&lt;li&gt;padrões de design&lt;/li&gt;
+&lt;/ul&gt;
+&lt;h2 data-hextra-search-id="materiais"&gt;Materiais&lt;span class="hx:absolute hx:-mt-20" id="materiais"&gt;&lt;/span&gt;
+&lt;a href="#materiais" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Os materiais desta seção podem ser organizados em listas, referências, exercícios e conteúdos complementares conforme forem adicionados.&lt;/p&gt;
+&lt;h2 data-hextra-search-id="contribuição"&gt;Contribuição&lt;span class="hx:absolute hx:-mt-20" id="contribuição"&gt;&lt;/span&gt;
+&lt;a href="#contribui%c3%a7%c3%a3o" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Se você tiver materiais úteis desta disciplina, pode colaborar com a biblioteca e ajudar a enriquecer esta seção.&lt;/p&gt;</description></item></channel></rss>
