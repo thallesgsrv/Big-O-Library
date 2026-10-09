@@ -17,6 +17,26 @@ Toda foto tem `line` (linha do pseudocódigo a destacar) e `msg` (frase que expl
 | --- | --- | --- |
 | *(grafo, padrão)* | grafos, árvores comuns | `dist`, `prev`, `vis` (Set), `pq` (lista de textos), `u`, `v` |
 | `segtree` | árvores de segmentos | `L`, `R`, `sum`, `lz`, `cur`, `take`, `chg`, `op`, `res` |
+| `array` | algoritmos de ordenação (vetores) | `a`, `sorted`, `cur`, `cmp`, `fade`, `rng`, `mid`, `ptr`, `float`, `rows`, `p1`, `p2` |
+
+### Desenho `array` (ordenação)
+
+Mostra o vetor `a` como barras. Todos os campos abaixo são opcionais, exceto `a` (use `null` para um "buraco"):
+
+| campo | o que faz |
+| --- | --- |
+| `sorted` (Set de índices) | barras verdes: já estão no lugar certo |
+| `cur` (Set) | barras azuis: elemento em foco (chave, pivô, menor até agora) |
+| `cmp` (Set) | barras laranja: sendo comparadas ou trocadas |
+| `fade` (Set) | barras esmaecidas: já usadas |
+| `rng: [l, r]` | esmaece tudo fora do intervalo (merge e quick) |
+| `mid` | linha tracejada entre `mid` e `mid + 1` (merge) |
+| `ptr: { i: 2, j: 5 }` | rótulos azuis sob as barras; índice `null`, negativo ou fora do vetor é ignorado |
+| `float: { idx, val }` | barra "levantada" (a chave do insertion sort) |
+| `rows: [{ name, vals, hi, ix }]` | linhas de células abaixo do vetor (aux, cont, saída); `hi` = Set de células destacadas, `ix: true` mostra os índices |
+| `p1`, `p2` (listas de textos) | chips dos painéis laterais (títulos em `t1` e `t2`) |
+
+O vetor de cada passo precisa ser uma cópia (`[...a]`). A altura do desenho se ajusta ao maior número de `rows` entre todos os passos. Exemplos: `selection`, `merge` e `radix` em `viz.js`.
 
 Grafos: nós e arestas ficam em `GRAFO`/`LCAG`; opções da entrada: `nw: true` (esconde pesos), `nomin: true` (não destaca o 1º chip do painel), `t1`/`t2` (títulos dos painéis).
 
