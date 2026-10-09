@@ -86,6 +86,7 @@ A matriz \(B\) é quadrada de ordem \(2\).
 Dizemos que \(A\) é uma matriz nula se todos os elementos da matriz forem iguais a zero. Neste caso, escrevemos \(A = 0\).
 
 Exemplo 3:
+
 $$
 0_{3 \times 5} = \begin{bmatrix}
 0 & 0 & 0 & 0 & 0 \\
@@ -99,6 +100,7 @@ $$
 Dizemos que \(A\) é uma matriz coluna se \(n = 1\). Neste caso, a matriz tem apenas uma coluna.
 
 Exemplo 4:
+
 $$
 A = \begin{bmatrix}
 1 \\
@@ -111,7 +113,8 @@ $$
 
 Dizemos que \(A\) é uma matriz linha se \(m = 1\). Neste caso, a matriz tem apenas uma linha.
 
-Exemplo 4:
+Exemplo 5:
+
 $$
 A = \begin{bmatrix}
 1 & 2 & 3
@@ -122,7 +125,7 @@ $$
 
 Dizemos que \(A\) é uma matriz diagonal se \(A\) for quadrada e todos os elementos fora da diagonal principal forem iguais a zero.
 
-Exemplo 5:
+Exemplo 6:
 
 $$
 A = \begin{bmatrix}
@@ -144,10 +147,11 @@ $$
 A matriz \(B\) é diagonal de ordem \(2\).
 
 ### Matriz Identidade
+
 Dizemos que \(A\) é uma matriz identidade se \(A\) for diagonal e todos os elementos da diagonal principal forem iguais a \(1\).
 Notação: A matriz identidade de ordem \(n\) é denotada por \(I_n\).
 
-Exemplo 6:
+Exemplo 7:
 
 $$ 
 I = \begin{bmatrix}
@@ -177,9 +181,10 @@ $$
 A matriz \(I\) é identidade de ordem \(3\).
 
 ### Matriz Triangular Superior
+
 Dizemos que \(A\) é uma matriz triangular superior se \(A\) for quadrada e todos os elementos abaixo da diagonal principal forem iguais a zero.
 
-Exemplo 7:
+Exemplo 8:
 
 $$
 A = \begin{bmatrix}
@@ -192,9 +197,10 @@ $$
 A matriz \(A\) é triangular superior de ordem \(3\).
 
 ### Matriz Triangular Inferior
+
 Dizemos que \(A\) é uma matriz triangular inferior se \(A\) for quadrada e todos os elementos acima da diagonal principal forem iguais a zero.
 
-Exemplo 8:
+Exemplo 9:
 
 $$
 A = \begin{bmatrix}
@@ -206,11 +212,11 @@ $$
 
 A matriz \(A\) é triangular inferior de ordem \(3\).
 
-## Matriz Simétrica
+### Matriz Simétrica
 
 Dizemos que \(A\) é uma matriz simétrica se \(A\) for quadrada e \(A = A^T\), ou seja, se a matriz for igual à sua transposta. Explicaremos a transposta de matrizes mais adiante. Em outras palavras, a matriz é simétrica se os elementos que estão em posições simétricas em relação à diagonal principal forem iguais. Por exemplo, \(a_{12} = a_{21}\), \(a_{13} = a_{31}\), \(a_{23} = a_{32}\), e assim por diante.
 
-Exemplo 9:
+Exemplo 10:
 
 $$
 A = \begin{bmatrix}
@@ -225,9 +231,10 @@ A matriz \(A\) é simétrica de ordem \(3\), pois \(a_{12} = a_{21} = 2\), \(a_{
 ## Operações com Matrizes
 
 ## Adição de Matrizes
+
 A adição de matrizes de mesma ordem é feita somando-se os elementos correspondentes, isso é, somando-se os elementos que ocupam a mesma posição em cada matriz.
 
-Exemplo 10:
+Exemplo 11:
 
 Sejam as matrizes
 
@@ -270,9 +277,10 @@ $$
 > 3. \(A + 0 = 0 + A = A\) (elemento neutro)
 
 ## Multiplicação por Escalar
+
 Seja \(A = [a_{ij}]_{m \times n}\) uma matriz e \(k\) um número real. A multiplicação de \(A\) por \(k\) é a matriz \(B = kA\) obtida multiplicando-se cada elemento de \(A\) por \(k\), ou seja, \(b_{ij} = k \cdot a_{ij}\).
 
-Exemplo 11:
+Exemplo 12:
 
 Seja a matriz 
 
@@ -310,7 +318,7 @@ $$
 Seja \(A = [a_{ij}]_{m \times n}\) uma matriz. A transposta de \(A\), denotada por \(A^T\), é a matriz obtida trocando-se as linhas por colunas, ou seja, \(A^T = [a_{ji}]_{n \times m}\).
 Em outras palavras, a primeira coluna de \(A\) se torna a primeira linha de \(A^T\), a segunda coluna de \(A\) se torna a segunda linha de \(A^T\), e assim por diante.
 
-Exemplo 12:
+Exemplo 13:
 
 Seja a matriz
 
@@ -365,13 +373,15 @@ $$
 ## Produto de Matrizes
 
 Sejam \(A = [a_{ij}]_{m \times n}\) e \(B = [b_{ij}]_{r \times s}\) duas matrizes. O produto \(AB\) é definido multiplicando cada linha de \(A\) por cada coluna de \(B\). Veremos exemplos de como fazer isso mais adiante.
+
 > [!WARNING]
 > 1. O produto \(AB\) só é definido se o número de colunas de \(A\) for igual ao número de linhas de \(B\), ou seja, se \(n = r\).
 > 2. Se \(A = [a_{ij}]_{m \times n}\) e \(B = [b_{ij}]_{r \times s}\), então \(AB = [c_{ij}]_{m \times s}\).
 > 3. O elemento \(c_{ij}\) da matriz \(AB\) é obtido multiplicando-se os elementos da linha \(i\) de \(A\) pelos elementos da coluna \(j\) de \(B\) e somando-se os produtos obtidos.
 
 Pense da seguinte forma:
-Sejam a matrizes:
+Sejam as matrizes:
+
 $$
 A =
 \begin{bmatrix}
@@ -387,7 +397,7 @@ i & j
 \end{bmatrix}_{2 \times 2}
 $$
 
-Vemos que o numero de colunas de \(A\) é igual ao número de linhas de \(B\), portanto o produto \(AB\) está definido. A matriz \(AB\) terá 3 linhas e 2 colunas, ou seja, será uma matriz \(3 \times 2\). Logo:
+Vemos que o número de colunas de \(A\) é igual ao número de linhas de \(B\), portanto o produto \(AB\) está definido. A matriz \(AB\) terá 3 linhas e 2 colunas, ou seja, será uma matriz \(3 \times 2\). Logo:
 
 $$
 AB = \begin{bmatrix}
@@ -399,9 +409,10 @@ $$
 
 Multiplicamos a primeira linha de \(A \to [a, b]\) pela primeira coluna de \(B \to [g, i]\) e somamos os produtos obtidos: \(ag + bi\). Repetimos o processo para cada linha de \(A\) e cada coluna de \(B\).
 
-Exemplo 13:
+Exemplo 14:
 
 Sejam as matrizes
+
 $$
 A = \begin{bmatrix}
 2 & 1 \\
@@ -437,7 +448,7 @@ $$
 > 3. \((A + B) \cdot C = A \cdot C + B \cdot C\) (distributiva a esquerda)
 > 4. \((AB)C = A(BC)\) (associativa)
 > 5. \((AB)^T = B^T A^T\)
-> 6. 0_{m \times n} \cdot A = A \cdot 0 = 0 (0 é matriz nula de mesma ordem de \(A\))
+> 6. \(0_{m \times n} \cdot A = A \cdot 0 = 0\) (0 é matriz nula de mesma ordem de \(A\))
 
 > [!WARNING]
 > \(AB \neq BA\) (Nem sempre, o produto de matrizes não é comutativo)
@@ -470,6 +481,7 @@ Note que:
 - \(a_{21} = 2 = b_{21}\)
 - \(a_{22} = 2^2 = 4 = b_{22}\)
 - \(a_{23} = 5 = b_{23}\)
+
 Portanto \(A = B\).
 {{< /details >}}
 
@@ -534,12 +546,10 @@ $$
 0 & 6 & 1 \\
 9 & 12 & -8 \\
 12 & 62 & -3 \\
-0 & 8 & -2
+3 & 8 & -2
 \end{bmatrix}_{4 \times 3}
 $$
-
-
-
+{{< /details >}}
 
 ## Contribuição
 
