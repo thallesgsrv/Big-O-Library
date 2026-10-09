@@ -22,6 +22,24 @@ static long fatorial(int n) {
 }
 ```
 
+### Como esse código funciona
+
+A função resolve um problema grande usando a resposta de um problema um pouco menor: o fatorial de `n` é `n` vezes o fatorial de `n - 1`. A linha `if (n <= 1) return 1;` é o **ponto de parada**. Sem ela, a função chamaria a si mesma para sempre.
+
+Acompanhe `fatorial(3)`:
+
+```text
+fatorial(3) precisa de  3 * fatorial(2)
+  fatorial(2) precisa de  2 * fatorial(1)
+    fatorial(1) devolve 1            <- ponto de parada
+  fatorial(2) devolve 2 * 1 = 2
+fatorial(3) devolve 3 * 2 = 6
+```
+
+As chamadas vão descendo até o ponto de parada e as respostas voltam subindo. Para `n`, são `n` chamadas.
+
+### A relação de recorrência
+
 Chamar `fatorial(n)` custa uma multiplicação mais o custo de chamar `fatorial(n - 1)`. Escrevendo \(T(n)\) para o custo com entrada de tamanho \(n\):
 
 $$
@@ -103,7 +121,21 @@ static int fib(int n) {
 }
 ```
 
-\(T(n) = T(n-1) + T(n-2) + c\). Cada chamada gera duas, e a árvore tem altura próxima de \(n\). Isso dá algo na casa de \(2^n\) chamadas, ou seja, exponencial. Por isso `fib(50)` demora minutos e `fib(100)` nunca termina.
+Aqui cada chamada dispara **duas** outras, uma para `n - 1` e outra para `n - 2`. Veja `fib(4)`:
+
+```text
+                 fib(4)
+               /        \
+          fib(3)        fib(2)
+          /    \        /    \
+     fib(2)  fib(1)  fib(1) fib(0)
+     /    \
+ fib(1) fib(0)
+```
+
+Repare que `fib(2)` é calculado duas vezes, `fib(1)` três. A função refaz o mesmo trabalho várias vezes, e isso só piora quando `n` cresce.
+
+\(T(n) = T(n-1) + T(n-2) + c\). Como cada chamada gera duas, a árvore tem altura próxima de \(n\). Isso dá algo na casa de \(2^n\) chamadas, ou seja, exponencial. Por isso `fib(50)` demora minutos e `fib(100)` nunca termina.
 
 ## Um atalho: Teorema Mestre
 

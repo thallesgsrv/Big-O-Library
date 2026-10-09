@@ -63,48 +63,85 @@ A linha tracejada separa as duas metades que estão sendo juntas, e a linha **au
 
 ## Implementação
 
+O código tem **duas funções**, e cada uma faz um trabalho diferente:
+
+- `mergeSort` é a que **divide**: parte o array ao meio e chama a si mesma para cada metade.
+- `merge` é a que **junta**: pega duas metades já ordenadas e as une, como na tabela de cima.
+
 ```java
-static void merge(int[] v, int left, int right) {
-    int rightHelper = right - left;
-    int[] helper = new int[rightHelper+1];
-    for(int i = 0; i <= rightHelper; i++) {
-        helper[i] = v[left + i];
+static void mergeSort(int[] v, int inicio, int fim) {
+    // Caso base: com 0 ou 1 elemento já está ordenado, não há o que fazer.
+    if (inicio >= fim) {
+        return;
     }
-    int middleHelper = rightHelper/ 2;
-    int i = 0;
-    int j = middleHelper +1;
-    int k = left;
-    
-    while (i <= middleHelper && j <= rightHelper) {
-        if(helper[i] <= helper[j]) {
-            v[k] = helper[i];
+
+    int meio = (inicio + fim) / 2;
+
+    mergeSort(v, inicio, meio);      // ordena a metade da esquerda
+    mergeSort(v, meio + 1, fim);     // ordena a metade da direita
+    merge(v, inicio, meio, fim);     // junta as duas metades já ordenadas
+}
+
+static void merge(int[] v, int inicio, int meio, int fim) {
+    // 1. Tira uma cópia do trecho que vamos juntar.
+    int tamanho = fim - inicio + 1;
+    int[] copia = new int[tamanho];
+    for (int x = 0; x < tamanho; x++) {
+        copia[x] = v[inicio + x];
+    }
+
+    // 2. Coloca um "dedo" no começo de cada metade da cópia.
+    int i = 0;                       // dedo da esquerda
+    int comecoDireita = meio - inicio + 1;
+    int j = comecoDireita;           // dedo da direita
+    int k = inicio;                  // posição de v onde vamos escrever
+
+    // 3. Enquanto as duas metades ainda têm elementos, copia o menor.
+    while (i < comecoDireita && j < tamanho) {
+        if (copia[i] <= copia[j]) {
+            v[k] = copia[i];
             i++;
         } else {
-            v[k] = helper[j];
+            v[k] = copia[j];
             j++;
         }
         k++;
     }
-    while (i <= middleHelper) {
-        v[k] = helper[i];
+
+    // 4. Copia o que sobrou da outra.
+    while (i < comecoDireita) {
+        v[k] = copia[i];
         i++;
         k++;
     }
 }
-
-static void mergeSort(int[] v, int left, int right) {
-    if (left >= right) {
-        return;
-    } else {
-        int middle = (right + left) / 2;
-        mergeSort(v, left, middle);
-        mergeSort(v, middle+1, right);
-        merge(v, left, right);
-    }
-}
 ```
 
-A chamada inicial é `mergeSort(v, 0, v.length - 1)`. A condição `left >= right` é o caso base: com zero ou um elemento, não há nada a fazer.
+A chamada inicial é `mergeSort(v, 0, v.length - 1)`: do primeiro ao último índice.
+
+### Lendo o `mergeSort`
+
+O `inicio` e o `fim` dizem **qual pedaço** do array estamos ordenando. O `meio` é o ponto onde cortamos. A função não ordena nada sozinha: ela só corta, pede para si mesma resolver cada metade e, no fim, chama o `merge`.
+
+Acompanhe com `[7, 3, 9, 1]` (índices 0 a 3):
+
+1. `mergeSort(0, 3)`: o meio é 1. Chama a metade `0..1` e depois a `2..3`.
+2. `mergeSort(0, 1)`: o meio é 0. Chama `0..0` e `1..1`. Os dois têm um elemento só, então voltam na hora (caso base). Agora o `merge` junta `[7]` e `[3]` e o trecho vira `[3, 7]`.
+3. `mergeSort(2, 3)`: do mesmo jeito, junta `[9]` e `[1]` e vira `[1, 9]`.
+4. De volta ao `mergeSort(0, 3)`: o `merge` junta `[3, 7]` e `[1, 9]` e o resultado final é `[1, 3, 7, 9]`.
+
+O ponto que costuma confundir: quando `mergeSort` chama a si mesma, a de cima **espera** a de baixo terminar. Só depois que as duas metades voltam é que o `merge` roda.
+
+### Lendo o `merge`
+
+Quando o `merge` é chamado, as duas metades de `v[inicio..fim]` já estão ordenadas (as chamadas de cima garantiram isso). O trabalho é só intercalá-las.
+
+- **Passo 1, a cópia.** Vamos escrever de volta em `v`, então primeiro guardamos o trecho em `copia` para não perder valores.
+- **Passo 2, os dedos.** `i` aponta para o início da metade esquerda da cópia, `j` para o início da direita e `k` é o lugar de `v` onde o próximo elemento vai ser escrito. O `comecoDireita` marca onde a metade direita começa dentro da cópia.
+- **Passo 3, o laço principal.** Em cada volta comparamos `copia[i]` com `copia[j]`, escrevemos o menor em `v[k]` e avançamos o dedo daquele lado (e o `k`, sempre).
+- **Passo 4, as sobras.** Quando um lado acaba, o outro ainda pode ter elementos, e todos eles são maiores que o que já foi escrito. Basta copiá-los em ordem.
+
+Exemplo: juntando `[2, 8, 9]` e `[1, 3, 10]`, a `copia` é `[2, 8, 9, 1, 3, 10]` e `comecoDireita` vale 3. O dedo `i` começa na posição 0 (valor 2) e o `j` na posição 3 (valor 1). Como 1 é menor, ele vai primeiro para `v`, e assim por diante, igual à tabela lá em cima.
 
 ## Análise
 
@@ -126,7 +163,7 @@ E isso vale para **todos os casos**. O merge sort não liga se o array estava or
 
 É **estável**. No `merge`, quando os dois elementos são iguais, o `<=` faz a gente pegar o da esquerda primeiro, preservando a ordem original.
 
-**Não é in-place.** O `merge` precisa de um array auxiliar de até \(n\) posições, então o gasto extra de memória é \(O(n)\). Esse é o preço pela garantia de \(n \log n\).
+**Não é in-place.** O `merge` precisa de um array auxiliar de até \(n\) posições (a `copia`), então o gasto extra de memória é \(O(n)\). Esse é o preço pela garantia de \(n \log n\).
 
 ## Exercício
 
@@ -139,6 +176,7 @@ Quando os dois elementos fossem iguais, o `else` copiaria o da direita primeiro,
 ## Resumo
 
 - Divide o array ao meio, ordena cada metade recursivamente e junta as duas.
+- Duas funções: `mergeSort` divide e `merge` junta.
 - Juntar duas sequências ordenadas é \(\Theta(n)\).
 - \(\Theta(n \log n)\) em todos os casos.
 - Estável, mas usa \(O(n)\) de memória auxiliar.

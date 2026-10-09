@@ -39,19 +39,30 @@ Veja o "buraco" aberto quando a chave sai do vetor: os maiores deslizam uma casa
 
 ```java
 static void insertionSort(int[] v) {
+    // O índice 0 já é a parte ordenada; começamos a pegar "cartas" do índice 1.
     for (int i = 1; i < v.length; i++) {
-        int chave = v[i];
-        int j = i - 1;
+        int chave = v[i];   // a carta que vamos encaixar
+        int j = i - 1;      // olha a carta imediatamente à esquerda
+
+        // Enquanto a carta da esquerda for maior que a chave, ela anda uma casa para a direita.
         while (j >= 0 && v[j] > chave) {
             v[j + 1] = v[j];
             j--;
         }
+
+        // Achamos o buraco certo: a chave cai nele.
         v[j + 1] = chave;
     }
 }
 ```
 
-O `while` anda para trás enquanto o elemento da esquerda for maior que a chave, copiando cada um uma casa para a frente. Quando para (ou porque achou um elemento menor ou igual, ou porque chegou ao começo), a posição `j + 1` é o buraco certo para a chave.
+### Lendo o código
+
+- O `for` de fora escolhe a próxima chave. Tudo à esquerda dela já está ordenado.
+- O `while` anda para trás enquanto o elemento da esquerda for maior que a chave, copiando cada um uma casa para a frente. A condição `j >= 0` evita sair do começo do array.
+- Quando o `while` para (porque achou um elemento menor ou igual, ou porque chegou ao começo), a posição `j + 1` é o buraco certo para a chave.
+
+Exemplo com a chave `1` em `[2, 4, 5, 6, 1, 3]`: `j` começa em 3 (o 6). Como 6 > 1, o 6 vai para a posição 4; depois o 5 vai para a 3, o 4 para a 2 e o 2 para a 1. Aí `j` chega a -1 e o `1` cai na posição 0.
 
 ## Análise
 

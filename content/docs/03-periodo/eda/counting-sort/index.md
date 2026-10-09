@@ -34,7 +34,7 @@ O truque é transformar as contagens em **somas acumuladas**. Cada posição pas
 | Contagem | 1 | 2 | 0 | 2 | 3 |
 | Acumulada | 1 | 3 | 3 | 5 | 8 |
 
-Ler isso: existem 3 elementos \(\le 1\), então o último "1" deve ficar na posição 2 (a de índice 2, a terceira). Existem 8 elementos \(\le 4\), então o último "4" vai para o índice 7.
+Ler isso: existem 3 elementos \(\le 1\), então o último "1" deve ficar no índice 2 (a terceira posição). Existem 8 elementos \(\le 4\), então o último "4" vai para o índice 7.
 
 Agora percorremos a entrada **do fim para o começo**. Para cada elemento, decrementamos a acumulada do seu valor e usamos o resultado como posição de destino:
 
@@ -62,21 +62,22 @@ Use ▶ para executar sozinho ou ▶| para avançar um passo por vez (◀ volta)
 Repare que em nenhum momento dois elementos do vetor são comparados. As linhas **cont** e **saída** fazem todo o trabalho.
 
 ## Implementação
+
 ```java
 static int[] countingSort(int[] v, int k) {
-    // 1. Vetor para contar as ocorrências de cada valor (0 até k)
+    // 1. Conta quantas vezes cada valor (de 0 até k) aparece.
     int[] contagem = new int[k + 1];
 
     for (int numero : v) {
         contagem[numero]++;
     }
 
-    // 2. Soma acumulada: calcula quantos elementos são <= cada valor
+    // 2. Soma acumulada: contagem[x] passa a ser "quantos elementos são <= x".
     for (int i = 1; i <= k; i++) {
         contagem[i] += contagem[i - 1];
     }
 
-    // 3. Distribui os elementos nas posições corretas
+    // 3. Distribui os elementos nas posições corretas, de trás para frente.
     int[] saida = new int[v.length];
 
     for (int i = v.length - 1; i >= 0; i--) {
@@ -90,9 +91,14 @@ static int[] countingSort(int[] v, int k) {
     return saida;
 }
 ```
-```
 
 São três laços, um depois do outro: contar, acumular e distribuir.
+
+### Lendo o código
+
+- **Laço 1.** O array `contagem` tem uma casa para cada valor possível. Quando lemos o número `4`, somamos 1 em `contagem[4]`. O valor do elemento serve de **endereço** da casa, e é por isso que não precisamos comparar nada.
+- **Laço 2.** Cada casa soma a anterior. Depois disso, `contagem[x]` diz quantos elementos são menores ou iguais a `x`, ou seja, **onde termina o grupo do valor `x`** na saída.
+- **Laço 3.** Para cada número (do último ao primeiro), `contagem[numero] - 1` é a última vaga livre do grupo dele. Colocamos o número ali e diminuímos a contagem, para o próximo igual a ele cair na vaga logo antes.
 
 ## Análise
 
