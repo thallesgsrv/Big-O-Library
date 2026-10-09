@@ -1,7 +1,7 @@
 /* Tokens: claro (padrão) e escuro (html.dark, classe do Hextra) */
 :root{
   --bg:#FAF8F3;--card:#FFFFFF;--line:#E3DDCF;--txt:#1C1B18;--body:#4A463F;--mute:#6B675E;
-  --ac:#B45309;--ac-h:#92400E;--btn:#FFB000;--btn-t:#1C1B18;--axis:#B9B2A2;
+  --ac:#B45309;--ac-h:#92400E;--btn:#B45309;--btn-t:#FFFFFF;--axis:#B9B2A2;
   --c1:#16A34A;--c2:#65A30D;--c3:#CA8A04;--c4:#EA580C;--c5:#DC2626;
   --primary-hue:30deg;--primary-saturation:90%;--primary-lightness:37%;
   --pc:var(--ac);
@@ -353,11 +353,7 @@ details.bo-sec>summary:focus-visible{outline:2px solid var(--ac);outline-offset:
   .bo-doc .content a[href^="http"]::after{content:" (" attr(href) ")";font-size:.85em;color:#444;overflow-wrap:anywhere}
 }
 
-.bo-grid3 a.bo-card{border-color:var(--ac)}
-.bo-link{margin-top:auto;align-self:flex-start;display:inline-flex;align-items:center;gap:8px;
-  background:var(--btn);color:var(--btn-t);font-size:13px;font-weight:500;line-height:1;
-  padding:9px 14px;border-radius:6px;transition:filter .2s ease}
-.bo-link span{display:inline-block;transition:transform .25s ease}
-a.bo-card:hover .bo-link{filter:brightness(1.06)}
-@media (hover:hover){a.bo-card:hover .bo-link span{transform:translateX(4px)}}
-@media (prefers-reduced-motion:reduce){.bo-link,.bo-link span{transition:none!important;transform:none!important}}
+.bo-t-link{display:flex;align-items:center;justify-content:space-between;gap:12px}
+.bo-go{color:var(--ac);display:inline-block;transition:transform .25s ease}
+@media (hover:hover){a.bo-card:hover .bo-go{transform:translateX(4px)}}
+@media (prefers-reduced-motion:reduce){.bo-go{transition:none!important;transform:none!important}}

@@ -233,12 +233,61 @@ Com o Hugo instalado, o comando `hugo new --kind disciplina docs/01-periodo/nome
 
 ## Testando no seu computador
 
+Antes de abrir o Pull Request, confira como a página ficou. Você precisa de três coisas:
+
+- **Git**, instalado e no PATH. Use `git clone`: baixar o ZIP do GitHub não funciona, porque o site lê as datas de atualização do histórico do Git.
+- **Hugo extended** 0.167.0 ou mais novo. Confira com `hugo version`: a linha precisa conter `+extended`.
+- **Internet** no primeiro build. O Hugo baixa a busca (FlexSearch) e as fórmulas (KaTeX) de `cdn.jsdelivr.net` e guarda em cache.
+
+Não precisa de Node, Go nem de submódulos: o tema já vem dentro do repositório.
+
+**Linux (Debian/Ubuntu)**
+
 ```bash
+# 1) Git e Hugo extended (em ARM, troque amd64 por arm64)
+sudo apt update && sudo apt install -y git curl
+curl -LO https://github.com/gohugoio/hugo/releases/download/v0.167.0/hugo_extended_0.167.0_linux-amd64.deb
+sudo apt install -y ./hugo_extended_0.167.0_linux-amd64.deb
+hugo version        # deve mostrar v0.167.0 ... +extended
+
+# 2) Baixe o projeto
 git clone https://github.com/thallesgsrv/Big-O-Library.git
 cd Big-O-Library
-hugo server    # abre o site em http://localhost:1313/Big-O-Library/
+
+# 3) Suba o servidor local
+hugo server
 ```
 
+**macOS**
+
+```bash
+brew install git hugo
+git clone https://github.com/thallesgsrv/Big-O-Library.git
+cd Big-O-Library
+hugo server
+```
+
+**Windows (PowerShell)**
+
+```powershell
+winget install Git.Git
+winget install Hugo.Hugo.Extended
+# feche e abra o terminal para o PATH atualizar, depois:
+git clone https://github.com/thallesgsrv/Big-O-Library.git
+cd Big-O-Library
+hugo server
+```
+
+Abra **http://localhost:1313/Big-O-Library/** no navegador (o `/Big-O-Library/` no final é necessário). O site recarrega sozinho quando você salva o arquivo; para parar, use `Ctrl+C`. Teste também no celular, ou reduza a largura da janela.
+
+Se der erro:
+
+| Erro ou sintoma | O que fazer |
+|---|---|
+| `hugo: command not found` | Instale o Hugo e abra um terminal novo. |
+| `failed to load Git data: not a git repository` | Você baixou o ZIP. Use `git clone`. |
+| `Could not retrieve ... cdn.jsdelivr.net` | Sem internet ou domínio bloqueado. Conecte-se e rode `hugo server` de novo. |
+| Sua página não aparece | Confira a `date` (se for futura, use `hugo server -F` para ver), o `weight` repetido e se não há subpáginas dentro de um `index.md`. |
 
 ## Checklist antes de enviar
 
