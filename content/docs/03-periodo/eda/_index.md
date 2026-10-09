@@ -40,7 +40,7 @@ Depois de ler os tópicos, esta tabela serve de resumo. \(n\) é o tamanho do ar
 ### Links úteis
 
 - [Estruturas de Dados e Algoritmos](https://joaoarthurbm.github.io/eda/conteudo/) — João Arthur Brunet, Computação @ UFCG (2019). Material que serviu de referência para a ordem e a abordagem destas páginas.
-- [Introduction to Algorithms](https://1drv.ms/b/c/975ec841994373bd/IQA8-Pue8tG1TLd983UvujbkAe-BVfQG2JOPC9MZGLWf-fY?e=k0B4Hr) — Cormen et al.
+- [Introduction to Algorithms](https://1drv.ms/b/c/975ec841994373bd/IQA8-Pue8tG1TLd983UvujbkAe-BVfQG2JOPC9MZGLWf-fY?e=Xyd8CS) — Cormen et al.
 
 ## Contribuição
 
