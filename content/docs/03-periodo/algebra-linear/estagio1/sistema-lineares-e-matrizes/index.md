@@ -7,6 +7,8 @@ autores:
 date: 2026-10-01
 ---
 
+## 1. Relembrando Conceitos
+
 Um sistema de equações lineares é um conjunto de equações lineares que envolvem as mesmas variáveis. A solução de um sistema de equações lineares é o conjunto de valores das variáveis que satisfazem todas as equações simultaneamente. Forma:
 
 $$
@@ -21,21 +23,17 @@ $$
 Onde \(a_{ij}\) são os coeficientes das variáveis \(x_j\), \(b_i\) são os termos constantes, \(m\) é o número de equações e \(n\) é o número de variáveis.
 
 > [!NOTE]
-> 1. Uma solução do sistema ((\star)) é um conjunto de valores para \(x_1, x_2, \ldots, x_n\) que satisfaz todas as equações simultaneamente, ou seja, substituindo esses valores nas equações, todas as equações se tornam verdadeiras.
-> Também podemos escrever uma solução do sistema na forma de um vetor coluna:
+> **Solução do sistema.** Uma solução do sistema ($\star$) é um conjunto de valores para $x_1, x_2, \ldots, x_n$ que satisfaz todas as equações simultaneamente, ou seja, substituindo esses valores nas equações, todas as equações se tornam verdadeiras. Também podemos escrever uma solução do sistema na forma de um vetor coluna:
+>
 > $$
-> \vec{x} = \begin{bmatrix}
-> x_1 \\
-> x_2 \\
-> \vdots \\
-> x_n
-> \end{bmatrix}
-> $$
-> 
-> 2. Dois sistemas de equações lineares são equivalentes se tiverem o mesmo conjunto de soluções. Isso significa que qualquer solução de um sistema também é uma solução do outro sistema, e vice-versa.
+ X = \begin{bmatrix} x_1 \\ x_2 \\ \vdots \\ x_n \end{bmatrix}
+ $$
+>
+> **Sistemas equivalentes.** Dois sistemas de equações lineares são equivalentes se tiverem o mesmo conjunto de soluções. Isso significa que qualquer solução de um sistema também é uma solução do outro sistema, e vice-versa.
 
-### Sistemas e Matrizes
-Podemos representar o sistema (\star) na forma matricial como \(AX = B\), onde:
+## 2. Sistemas e Matrizes
+Podemos representar o sistema \(\star\) na forma matricial como \(AX = B\), onde:
+
 $$
 \begin{bmatrix}
  a_{11} & a_{12} & \cdots & a_{1n} \\
@@ -49,8 +47,7 @@ $$
  x_2 \\
  \vdots \\
  x_n
- \end{bmatrix}
- =
+ \end{bmatrix} =
  \begin{bmatrix}
  b_1 \\
  b_2 \\
@@ -84,7 +81,7 @@ $$
 
 Note que:
 
-- (\(star\)) é um sistema de equações lineares com duas equações e duas variáveis (\(x\) e \(y\)).
+- (\(\star\)) é um sistema de equações lineares com duas equações e duas variáveis (\(x\) e \(y\)).
 - A é a matriz dos coeficients:
 $$
 A = \begin{bmatrix}

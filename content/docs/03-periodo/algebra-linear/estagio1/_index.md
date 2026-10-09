@@ -1,7 +1,7 @@
 ---
 title: Estágio 1 - Matrizes e Sistemas Lineares
 weight: 1
-rotulo: Contúdos
+rotulo: Conteúdos
 description: Introdução ao estudo de matrizes, operações com matrizes e sistemas lineares.
 autores:
   - MateusSRocha
