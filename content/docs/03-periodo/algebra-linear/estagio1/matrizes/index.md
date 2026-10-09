@@ -7,6 +7,8 @@ autores:
 date: 2026-10-01
 ---
 
+## Sobre
+
 Uma matriz é um conjunto de números reais, dispostos em linhas e colunas, numa certa ordem, e colocados entre colchetes (ou parênteses).
 
 ## Forma
@@ -230,7 +232,7 @@ A matriz \(A\) é simétrica de ordem \(3\), pois \(a_{12} = a_{21} = 2\), \(a_{
 
 ## Operações com Matrizes
 
-## Adição de Matrizes
+### Adição de Matrizes
 
 A adição de matrizes de mesma ordem é feita somando-se os elementos correspondentes, isso é, somando-se os elementos que ocupam a mesma posição em cada matriz.
 
@@ -272,11 +274,11 @@ $$
 
 > [!NOTE]
 > Propriedades: Sejam \(A\), \(B\) e \(C\) matrizes de mesma ordem. Então:
-> 1. \(A + B = B + A\) (comutativa)
-> 2. \(A + (B + C) = (A + B) + C\) (associativa)
-> 3. \(A + 0 = 0 + A = A\) (elemento neutro)
+> - \(A + B = B + A\) (comutativa)
+> - \(A + (B + C) = (A + B) + C\) (associativa)
+> - \(A + 0 = 0 + A = A\) (elemento neutro)
 
-## Multiplicação por Escalar
+### Multiplicação por Escalar
 
 Seja \(A = [a_{ij}]_{m \times n}\) uma matriz e \(k\) um número real. A multiplicação de \(A\) por \(k\) é a matriz \(B = kA\) obtida multiplicando-se cada elemento de \(A\) por \(k\), ou seja, \(b_{ij} = k \cdot a_{ij}\).
 
@@ -308,12 +310,12 @@ $$
 
 > [!NOTE]
 > Propriedades: Sejam \(A\), \(B\) matrizes de mesma ordem e \(k\), \(l\) números reais. Então:
-> 1. \(k(A + B) = kA + kB\) (distributiva)
-> 2. \((k + l)A = kA + lA\) (distributiva)
-> 3. \(0 \cdot A = 0\) (elemento nulo)
-> 4. \(k(lA) = (kl)A\) (associativa)
+> - \(k(A + B) = kA + kB\) (distributiva)
+> - \((k + l)A = kA + lA\) (distributiva)
+> - \(0 \cdot A = 0\) (elemento nulo)
+> - \(k(lA) = (kl)A\) (associativa)
 
-## Transposição de Matrizes
+### Transposição de Matrizes
 
 Seja \(A = [a_{ij}]_{m \times n}\) uma matriz. A transposta de \(A\), denotada por \(A^T\), é a matriz obtida trocando-se as linhas por colunas, ou seja, \(A^T = [a_{ji}]_{n \times m}\).
 Em outras palavras, a primeira coluna de \(A\) se torna a primeira linha de \(A^T\), a segunda coluna de \(A\) se torna a segunda linha de \(A^T\), e assim por diante.
@@ -365,19 +367,19 @@ $$
 
 > [!NOTE]
 > Propriedades: Sejam \(A\) e \(B\) matrizes de mesma ordem (\(m \times n\)) e \(k\) um número real. Então:
-> 1. \((A + B)^T = A^T + B^T\)
-> 2. \((kA)^T = kA^T\)
-> 3. \((A^T)^T = A\)
-> 4. \(A\) é simétrica se, e somente se, \(A = A^T\)
+> - \((A + B)^T = A^T + B^T\)
+> - \((kA)^T = kA^T\)
+> - \((A^T)^T = A\)
+> - \(A\) é simétrica se, e somente se, \(A = A^T\)
 
-## Produto de Matrizes
+### Produto de Matrizes
 
 Sejam \(A = [a_{ij}]_{m \times n}\) e \(B = [b_{ij}]_{r \times s}\) duas matrizes. O produto \(AB\) é definido multiplicando cada linha de \(A\) por cada coluna de \(B\). Veremos exemplos de como fazer isso mais adiante.
 
 > [!WARNING]
-> 1. O produto \(AB\) só é definido se o número de colunas de \(A\) for igual ao número de linhas de \(B\), ou seja, se \(n = r\).
-> 2. Se \(A = [a_{ij}]_{m \times n}\) e \(B = [b_{ij}]_{r \times s}\), então \(AB = [c_{ij}]_{m \times s}\).
-> 3. O elemento \(c_{ij}\) da matriz \(AB\) é obtido multiplicando-se os elementos da linha \(i\) de \(A\) pelos elementos da coluna \(j\) de \(B\) e somando-se os produtos obtidos.
+> - O produto \(AB\) só é definido se o número de colunas de \(A\) for igual ao número de linhas de \(B\), ou seja, se \(n = r\).
+> - Se \(A = [a_{ij}]_{m \times n}\) e \(B = [b_{ij}]_{r \times s}\), então \(AB = [c_{ij}]_{m \times s}\).
+> - O elemento \(c_{ij}\) da matriz \(AB\) é obtido multiplicando-se os elementos da linha \(i\) de \(A\) pelos elementos da coluna \(j\) de \(B\) e somando-se os produtos obtidos.
 
 Pense da seguinte forma:
 Sejam as matrizes:
@@ -443,17 +445,19 @@ $$
 
 > [!NOTE]
 > Propriedades: Sejam \(A\), \(B\) e \(C\) matrizes de mesma ordem. Então:
-> 1. \(IA = AI = A\) (I é matriz identidade que vimos anteriormente. I deve ter mesma ordem de \(A\))
-> 2. \(A \cdot (B + C) = A \cdot B + A \cdot C\) (distributiva a direita)
-> 3. \((A + B) \cdot C = A \cdot C + B \cdot C\) (distributiva a esquerda)
-> 4. \((AB)C = A(BC)\) (associativa)
-> 5. \((AB)^T = B^T A^T\)
-> 6. \(0_{m \times n} \cdot A = A \cdot 0 = 0\) (0 é matriz nula de mesma ordem de \(A\))
+> - \(IA = AI = A\) (I é matriz identidade que vimos anteriormente. I deve ter mesma ordem de \(A\))
+>  \(A \cdot (B + C) = A \cdot B + A \cdot C\) (distributiva a direita)
+> _ \((A + B) \cdot C = A \cdot C + B \cdot C\) (distributiva a esquerda)
+> _ \((AB)C = A(BC)\) (associativa)
+> _ \((AB)^T = B^T A^T\)
+> _ \(0_{m \times n} \cdot A = A \cdot 0 = 0\) (0 é matriz nula de mesma ordem de \(A\))
 
 > [!WARNING]
 > \(AB \neq BA\) (Nem sempre, o produto de matrizes não é comutativo)
 
-## Exercícios
+## Exercícios propostos
+
+### Exercício 1
 
 Sejam as matrizes:
 
@@ -485,6 +489,8 @@ Note que:
 Portanto \(A = B\).
 {{< /details >}}
 
+### Exercício 2
+
 Seja:
 
 $$
@@ -500,6 +506,8 @@ Quais os tipos de matrizes que \(A\) representa?
 {{< details title="Gabarito" >}}
 A matriz \(A\) é simétrica, pois \(a_{ij} = a_{ji}\) para todos \(i\) e \(j\). Além disso, \(A\) é uma matriz quadrada de ordem 3.
 {{< /details >}}
+
+### Exercício 3
 
 Sejam as matrizes:
 
@@ -533,15 +541,13 @@ $$
 \begin{bmatrix}
 0 & 6 & 1 \\
 3 & 8 & -2
-\end{bmatrix}
-=
+\end{bmatrix} =
 \begin{bmatrix}
 1 \cdot 0 + 0 \cdot 3 & 1 \cdot 6 + 0 \cdot 8 & 1 \cdot 1 + 0 \cdot (-2) \\
 -2 \cdot 0 + 3 \cdot 3 & -2 \cdot 6 + 3 \cdot 8 & -2 \cdot 1 + 3 \cdot (-2) \\
 5 \cdot 0 + 4 \cdot 3 & 5 \cdot 6 + 4 \cdot 8 & 5 \cdot 1 + 4 \cdot (-2) \\
 0 \cdot 0 + 1 \cdot 3 & 0 \cdot 6 + 1 \cdot 8 & 0 \cdot 1 + 1 \cdot (-2)
-\end{bmatrix}
-=
+\end{bmatrix} =
 \begin{bmatrix}
 0 & 6 & 1 \\
 9 & 12 & -8 \\
@@ -550,7 +556,3 @@ $$
 \end{bmatrix}_{4 \times 3}
 $$
 {{< /details >}}
-
-## Contribuição
-
-Se você tiver materiais úteis deste algoritmo, pode colaborar com a biblioteca e ajudar a enriquecer esta seção.
