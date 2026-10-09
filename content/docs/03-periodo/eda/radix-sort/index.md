@@ -41,7 +41,6 @@ Observe a linha de dígitos: ela muda a cada passada, e os números que empatam 
 ## Implementação
 
 ```java
-```java
 import java.util.Arrays;
 
 static void radixSort(int[] v) {
@@ -81,7 +80,6 @@ static void countingPorDigito(int[] v, int exp) {
     // 4. Copia o resultado de volta para o vetor original
     System.arraycopy(auxiliar, 0, v, 0, v.length);
 }
-```
 ```
 
 A expressão `(x / exp) % 10` extrai o dígito: dividir por `exp` joga fora os dígitos à direita e `% 10` fica só com o último. Para `x = 531` e `exp = 10`, temos `531 / 10 = 53` e `53 % 10 = 3`.
