@@ -1,8 +1,8 @@
 <p align="center">
   <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="assets/images/bigo-library-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="assets/images/bigo-library-light.svg">
-    <img src="assets/images/bigo-library-light.svg" alt="o(library)" width="360">
+    <source media="(prefers-color-scheme: dark)" srcset="themes/big-o-library/assets/images/bigo-library-dark.svg">
+    <source media="(prefers-color-scheme: light)" srcset="themes/big-o-library/assets/images/bigo-library-light.svg">
+    <img src="themes/big-o-library/assets/images/bigo-library-light.svg" alt="o(library)" width="360">
   </picture>
 </p>
 
