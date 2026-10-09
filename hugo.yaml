@@ -3,7 +3,7 @@ title: Big-O-Library
 locale: pt-BR
 defaultContentLanguage: pt-br
 
-theme: hextra
+theme: big-o-library
 
 enableGitInfo: true
 enableRobotsTXT: true

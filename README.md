@@ -35,9 +35,10 @@ Os materiais ficam no [site](https://thallesgsrv.github.io/Big-O-Library/docs/),
 
 ## Rodando localmente
 
-Requisitos: [Git](https://git-scm.com/) e [Hugo **extended**](https://gohugo.io/installation/) 0.146.0 ou mais novo (o site é gerado com a 0.167.0).
+Requisitos: [Git](https://git-scm.com/) e [Hugo **extended**](https://gohugo.io/installation/) 0.167 ou mais novo (o site é gerado com a 0.167.0).
 
 ```bash
+
 git clone --recurse-submodules https://github.com/thallesgsrv/Big-O-Library.git
 cd Big-O-Library
 hugo server

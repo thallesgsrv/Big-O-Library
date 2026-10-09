@@ -1,0 +1,2 @@
+Hextra (https://github.com/imfing/hextra) no commit 03cb9491209c0ae9ff4da9c3ba3c5e63a8fd45f1
+Base: Hextra (https://github.com/imfing/hextra), licença MIT em themes/big-o-library/LICENSE. As mudanças do projeto estão misturadas aos arquivos.

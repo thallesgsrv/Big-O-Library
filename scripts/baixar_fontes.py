@@ -10,8 +10,8 @@ PRELOAD = lambda fam, style, weight: (fam == "IBM Plex Mono" and weight == "400"
 UA = "Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/124.0 Safari/537.36"
 
 root = pathlib.Path(__file__).resolve().parent.parent
-fonts_dir = root / "static" / "fonts"
-partial = root / "layouts" / "_partials" / "fontes.html"
+fonts_dir = root / "themes" / "big-o-library" / "static" / "fonts"
+partial = root / "themes" / "big-o-library" / "layouts" / "_partials" / "fontes.html"
 
 def get(url):
     return urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": UA}), timeout=30).read()
@@ -46,7 +46,7 @@ def main():
     partial.parent.mkdir(parents=True, exist_ok=True)
     partial.write_text("{{- /* GERADO por scripts/baixar_fontes.py — não edite à mão. */ -}}\n"
                        + "\n".join(preloads) + "\n<style>\n" + "\n".join(faces) + "\n</style>\n", encoding="utf-8")
-    print("\nOK:", partial.relative_to(root), "+", len(cache), "arquivos em static/fonts/")
+    print("\nOK:", partial.relative_to(root), "+", len(cache), "arquivos em themes/big-o-library/static/fonts/")
     print("Agora ative em hugo.yaml:  params.fontesLocais: true")
 
 if __name__ == "__main__":

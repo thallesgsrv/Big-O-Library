@@ -1,0 +1,3 @@
+name = "Big-O-Library"
+description = "Camada visual do Big-O-Library: layouts, estilos, animações e textos que sobrescrevem o tema Hextra."
+min_version = "0.146.0"

@@ -234,7 +234,7 @@ Com o Hugo instalado, o comando `hugo new --kind disciplina docs/01-periodo/nome
 ## Testando no seu computador
 
 ```bash
-git clone --recurse-submodules https://github.com/thallesgsrv/Big-O-Library.git
+git clone https://github.com/thallesgsrv/Big-O-Library.git
 cd Big-O-Library
 hugo server    # abre o site em http://localhost:1313/Big-O-Library/
 ```
@@ -252,7 +252,7 @@ hugo server    # abre o site em http://localhost:1313/Big-O-Library/
 
 - O repositório usa a licença [MIT](https://github.com/thallesgsrv/Big-O-Library/blob/main/LICENSE). Ao enviar material próprio, você concorda em publicá-lo sob essa mesma licença.
 - Não envie conteúdo de terceiros sem permissão (provas de professores, livros completos, PDFs pagos). Linke a fonte original.
-- Seja respeitoso nas issues e nos Pull Requests. Veja o [Código de Conduta](https://github.com/thallesgsrv/Big-O-Library/blob/main/CODE_OF_CONDUCT.md).
+- Seja respeitoso nas issues e nos Pull Requests. Veja o [Código de Conduta](https://github.com/thallesgsrv/Big-O-Library/blob/main/.github/CODE_OF_CONDUCT.md).
 
 ## Dúvidas
 

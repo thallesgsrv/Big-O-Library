@@ -1,0 +1,99 @@
+{{- /* Mermaid */ -}}
+
+{{- $mermaidBase := "" -}}
+{{- $useDefaultCdn := true -}}
+{{- with site.Params.mermaid.base -}}
+  {{- $mermaidBase = . -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- $mermaidJsAsset := "" -}}
+{{- with site.Params.mermaid.js -}}
+  {{- $mermaidJsAsset = . -}}
+{{- end -}}
+
+{{- /* If only js is set without base, use local asset loading */ -}}
+{{- if and $useDefaultCdn (ne $mermaidJsAsset "") -}}
+  {{- $useDefaultCdn = false -}}
+{{- end -}}
+
+{{- /* Set default CDN base if needed */ -}}
+{{- if $useDefaultCdn -}}
+  {{- $mermaidBase = "https://cdn.jsdelivr.net/npm/mermaid@latest/dist" -}}
+{{- end -}}
+
+{{- $isRemoteBase := or (strings.HasPrefix $mermaidBase "http://") (strings.HasPrefix $mermaidBase "https://") -}}
+{{- $minSuffix := cond hugo.IsProduction ".min" "" -}}
+
+{{- /* JS retrieval: get raw JS from either local asset or remote, then process */ -}}
+{{- if $isRemoteBase -}}
+  {{- $jsPath := cond (ne $mermaidJsAsset "") $mermaidJsAsset (printf "mermaid%s.js" $minSuffix) -}}
+  {{- $mermaidJsUrl := urls.JoinPath $mermaidBase $jsPath -}}
+  {{- with try (resources.GetRemote $mermaidJsUrl) -}}
+    {{- with .Err -}}
+      {{- errorf "Could not retrieve Mermaid js file from %s. Reason: %s." $mermaidJsUrl . -}}
+    {{- else with .Value -}}
+      {{- with resources.Copy (printf "js/mermaid%s.js" $minSuffix) . -}}
+        {{- $mermaidJs := . | fingerprint -}}
+        <script defer src="{{ $mermaidJs.RelPermalink }}" integrity="{{ $mermaidJs.Data.Integrity }}" crossorigin="anonymous"></script>
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- else if $mermaidJsAsset -}}
+  {{- with resources.Get $mermaidJsAsset -}}
+    {{- $mermaidJs := . | fingerprint -}}
+    <script defer src="{{ $mermaidJs.RelPermalink }}" integrity="{{ $mermaidJs.Data.Integrity }}" crossorigin="anonymous"></script>
+  {{- else -}}
+    {{- errorf "Mermaid js asset not found at %q" $mermaidJsAsset -}}
+  {{- end -}}
+{{- end -}}
+
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+    // Store original mermaid code for each diagram
+    document.querySelectorAll(".mermaid").forEach((el) => {
+      el.dataset.original = el.innerHTML;
+    });
+
+    // Disable auto-start before mermaid's own load handler runs
+    mermaid.initialize({ startOnLoad: false });
+
+    // Render only visible diagrams; hidden ones render truncated
+    let queue = Promise.resolve();
+    const renderVisible = () => {
+      queue = queue.then(() => {
+        const theme = document.documentElement.classList.contains("dark") ? "dark" : "default";
+        mermaid.initialize({ startOnLoad: false, theme: theme });
+        const nodes = Array.from(document.querySelectorAll(".mermaid:not([data-processed])")).filter((el) => el.offsetParent !== null);
+        if (nodes.length) return mermaid.run({ nodes }).catch(console.error);
+      });
+    };
+
+    renderVisible();
+
+    // Render diagrams when revealed (e.g. tab switch, details toggle)
+    const observer = new IntersectionObserver((entries) => {
+      if (entries.some((e) => e.isIntersecting && !e.target.dataset.processed)) {
+        renderVisible();
+      }
+    });
+    document.querySelectorAll(".mermaid").forEach((el) => observer.observe(el));
+
+    // Re-render diagrams on theme change
+    let timeout;
+    new MutationObserver(() => {
+      clearTimeout(timeout);
+      timeout = setTimeout(() => {
+        document.querySelectorAll(".mermaid[data-processed]").forEach((el) => {
+          el.innerHTML = el.dataset.original;
+          el.removeAttribute("data-processed");
+        });
+        renderVisible();
+      }, 150);
+    }).observe(document.documentElement, {
+      attributes: true,
+      attributeFilter: ["class"],
+    });
+  });
+</script>
