@@ -2,7 +2,7 @@
 {{- $cx := partial "bo-cx.html" . -}}
 {{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
 {{ partial "sidebar.html" (dict "context" .) }}
-<div class="bo-wrap" id="content">
+<main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
       "prompt" "~/big-o-library $ ls materiais/"
       "title" "Materiais"
@@ -35,5 +35,5 @@
       {{- end -}}
     {{- end -}}
   </div>
-</div>
+</main>
 {{ end }}

@@ -2,7 +2,7 @@
 {{- $repo := site.Params.repo | default "https://github.com/thallesgsrv/Big-O-Library" -}}
 {{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
 {{ partial "sidebar.html" (dict "context" .) }}
-<div class="bo-wrap" id="content">
+<main class="bo-wrap" id="content">
   <section class="bo-hero">
     <div class="bo-hero-text">
       <div class="bo-prompt" aria-hidden="true">~/big-o-library $ ls sobre/</div>
@@ -37,5 +37,5 @@
     <div class="bo-card bo-text"><div class="bo-cmd" aria-hidden="true">$ cat avisos.md</div><h2>Avisos</h2>
       <p>Este projeto é um material complementar produzido por estudantes e não substitui o conteúdo oficial, as aulas ou as orientações dos professores. Materiais de terceiros são referenciados e vinculados à fonte original, respeitando suas licenças e direitos autorais.</p></div>
   </div>
-</div>
+</main>
 {{ end }}

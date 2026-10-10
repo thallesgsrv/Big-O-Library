@@ -1,4 +1,4 @@
-.viz{--bd:rgba(127,127,127,.4);--bg:rgba(127,127,127,.08);--cur:#1c7ed6;--ok:#2f9e44;--hot:#e8590c;
+.viz{--bd:rgba(127,127,127,.4);--bg:rgba(127,127,127,.08);--cur:#1c7ed6;--ok:#2f9e44;--hot:#c2410c;
  border:1px solid var(--bd);border-radius:10px;padding:12px;margin:1.2rem 0;font-size:.9rem;max-width:100%;overflow:hidden}
 .viz *{box-sizing:border-box}
 .viz-top{display:flex;gap:12px;flex-wrap:wrap;align-items:flex-start;min-width:0}

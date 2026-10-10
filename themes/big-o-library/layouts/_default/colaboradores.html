@@ -3,11 +3,11 @@
 {{ define "main" }}
 {{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
 {{ partial "sidebar.html" (dict "context" .) }}
-<div class="bo-wrap" id="content">
+<main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
       "prompt" "~/big-o-library $ cat colaboradores.md"
       "title" .Title
       "lead" (.Params.summary | default .Params.description)) }}
   {{ .Content }}
-</div>
+</main>
 {{ end }}

@@ -357,3 +357,11 @@ details.bo-sec>summary:focus-visible{outline:2px solid var(--ac);outline-offset:
 .bo-go{color:var(--ac);display:inline-block;transition:transform .25s ease}
 @media (hover:hover){a.bo-card:hover .bo-go{transform:translateX(4px)}}
 @media (prefers-reduced-motion:reduce){.bo-go{transition:none!important;transform:none!important}}
+
+
+main p a,main li a,main td a,main blockquote a{text-decoration:underline;text-decoration-thickness:1px;text-underline-offset:.2em}
+main p a:hover,main li a:hover,main td a:hover{text-decoration-thickness:2px}
+
+
+.bo-404{min-height:60vh;display:flex;flex-direction:column;justify-content:center;gap:18px;padding-top:64px;padding-bottom:64px}
+main .bo-small a{text-decoration:underline;text-underline-offset:.2em}

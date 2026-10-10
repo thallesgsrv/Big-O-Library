@@ -21,6 +21,8 @@
         cmd.setAttribute('aria-hidden', 'true');
         cmd.textContent = '$ cat ' + (el.id || el.textContent).trim().toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-+|-+$/g, '') + '.md';
 
+        el.querySelectorAll('a.subheading-anchor').forEach(function (a) { a.remove(); });
+
         root.insertBefore(d, el);
         s.appendChild(cmd);
         s.appendChild(el);
@@ -56,6 +58,12 @@
   });
 
   function marcarRolagem(root) {
+    root.querySelectorAll('table').forEach(function (t) {
+      if (t.scrollWidth > t.clientWidth + 1) {
+        t.tabIndex = 0;
+        t.setAttribute('aria-label', t.getAttribute('aria-label') || 'Tabela, role na horizontal para ver tudo');
+      }
+    });
     root.querySelectorAll('.katex-display').forEach(function (m) {
       if (m.scrollWidth > m.clientWidth + 1) {
         m.tabIndex = 0;

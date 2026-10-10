@@ -19,7 +19,7 @@
   /* KeywordReserved */ .chroma .kr { color: #ff7b72 }
   /* KeywordType */ .chroma .kt { color: #ff7b72 }
   /* Name */ .chroma .n {  }
-  /* NameAttribute */ .chroma .na {  }
+  /* NameAttribute */ .chroma .na { color: #79c0ff }
   /* NameBuiltin */ .chroma .nb {  }
   /* NameBuiltinPseudo */ .chroma .bp {  }
   /* NameClass */ .chroma .nc { color: #f0883e; font-weight: bold }
@@ -85,5 +85,11 @@
   /* GenericTraceback */ .chroma .gt { color: #ff7b72 }
   /* GenericUnderline */ .chroma .gl { text-decoration: underline }
   /* TextWhitespace */ .chroma .w { color: #6e7681 }
+  /* leak-fix */ .chroma .nb { color: #79c0ff }
+  /* leak-fix */ .chroma .bp { color: #ffa657 }
+  /* leak-fix */ .chroma .vc { color: #ffa657 }
+  /* leak-fix */ .chroma .vg { color: #ffa657 }
+  /* leak-fix */ .chroma .vi { color: #ffa657 }
+  /* leak-fix */ .chroma .ge { color: #c9d1d9 }
 }
 
