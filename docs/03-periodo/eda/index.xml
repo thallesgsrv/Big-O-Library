@@ -655,7 +655,7 @@ data-copied-label="Copiado!"
 &lt;/ul&gt;
 &lt;h2 data-hextra-search-id="para-estudar-mais"&gt;Para estudar mais&lt;span class="hx:absolute hx:-mt-20" id="para-estudar-mais"&gt;&lt;/span&gt;
 &lt;a href="#para-estudar-mais" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://joaoarthurbm.github.io/eda/posts/selection-sort" target="_blank" rel="noopener"&gt;Selection Sort&lt;/a&gt; — João Arthur Brunet (2019)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://joaoarthurbm.github.io/eda/posts/selection-sort" target="_blank" rel="noopener"&gt;Selection Sort&lt;/a&gt; — João Arthur Brunet (2019)&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Insertion sort</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/03-periodo/eda/insertion-sort/</link><pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate><guid>https://thallesgsrv.github.io/Big-O-Library/docs/03-periodo/eda/insertion-sort/</guid><description>
 &lt;h2 data-hextra-search-id="sobre"&gt;Sobre&lt;span class="hx:absolute hx:-mt-20" id="sobre"&gt;&lt;/span&gt;
 &lt;a href="#sobre" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Se você já organizou cartas de baralho na mão, já usou o insertion sort sem saber. Pega uma carta nova e encaixa no lugar certo entre as que você já tem ordenadas.&lt;/p&gt;
@@ -773,7 +773,7 @@ data-copied-label="Copiado!"
 &lt;/ul&gt;
 &lt;h2 data-hextra-search-id="para-estudar-mais"&gt;Para estudar mais&lt;span class="hx:absolute hx:-mt-20" id="para-estudar-mais"&gt;&lt;/span&gt;
 &lt;a href="#para-estudar-mais" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://joaoarthurbm.github.io/eda/posts/insertion-sort" target="_blank" rel="noopener"&gt;Insertion Sort&lt;/a&gt; — João Arthur Brunet (2019)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://joaoarthurbm.github.io/eda/posts/insertion-sort" target="_blank" rel="noopener"&gt;Insertion Sort&lt;/a&gt; — João Arthur Brunet (2019)&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Merge sort</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/03-periodo/eda/merge-sort/</link><pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate><guid>https://thallesgsrv.github.io/Big-O-Library/docs/03-periodo/eda/merge-sort/</guid><description>
 &lt;h2 data-hextra-search-id="sobre"&gt;Sobre&lt;span class="hx:absolute hx:-mt-20" id="sobre"&gt;&lt;/span&gt;
 &lt;a href="#sobre" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Ordenar um array de um milhão de elementos é difícil. Ordenar dois arrays de meio milhão cada é mais fácil. Ordenar arrays de um elemento é trivial, porque já estão ordenados. O merge sort aposta nisso: quebra o problema até ficar trivial e depois junta as respostas.&lt;/p&gt;
@@ -980,7 +980,7 @@ T(n) = \Theta(n \log n)
 &lt;/ul&gt;
 &lt;h2 data-hextra-search-id="para-estudar-mais"&gt;Para estudar mais&lt;span class="hx:absolute hx:-mt-20" id="para-estudar-mais"&gt;&lt;/span&gt;
 &lt;a href="#para-estudar-mais" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://joaoarthurbm.github.io/eda/posts/merge-sort" target="_blank" rel="noopener"&gt;Merge Sort&lt;/a&gt; — João Arthur Brunet (2019)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://joaoarthurbm.github.io/eda/posts/merge-sort" target="_blank" rel="noopener"&gt;Merge Sort&lt;/a&gt; — João Arthur Brunet (2019)&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Quick sort</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/03-periodo/eda/quick-sort/</link><pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate><guid>https://thallesgsrv.github.io/Big-O-Library/docs/03-periodo/eda/quick-sort/</guid><description>
 &lt;h2 data-hextra-search-id="sobre"&gt;Sobre&lt;span class="hx:absolute hx:-mt-20" id="sobre"&gt;&lt;/span&gt;
 &lt;a href="#sobre" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;O quick sort também é divisão e conquista, mas com uma inversão em relação ao merge sort. No merge sort, a divisão é boba (corta ao meio) e o trabalho está em juntar. No quick sort, o trabalho está em dividir, e juntar não custa nada.&lt;/p&gt;
@@ -1189,8 +1189,8 @@ data-copied-label="Copiado!"
 &lt;/ul&gt;
 &lt;h2 data-hextra-search-id="para-estudar-mais"&gt;Para estudar mais&lt;span class="hx:absolute hx:-mt-20" id="para-estudar-mais"&gt;&lt;/span&gt;
 &lt;a href="#para-estudar-mais" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://joaoarthurbm.github.io/eda/posts/quick-sort" target="_blank" rel="noopener"&gt;Quick Sort&lt;/a&gt; — João Arthur Brunet (2019)&lt;/li&gt;
-&lt;li&gt;&lt;a href="http://joaoarthurbm.github.io/eda/posts/particionamento-hoare" target="_blank" rel="noopener"&gt;Particionamento Hoare&lt;/a&gt; — outra estratégia de particionamento, em geral mais eficiente que a de Lomuto&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://joaoarthurbm.github.io/eda/posts/quick-sort" target="_blank" rel="noopener"&gt;Quick Sort&lt;/a&gt; — João Arthur Brunet (2019)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://joaoarthurbm.github.io/eda/posts/particionamento-hoare" target="_blank" rel="noopener"&gt;Particionamento Hoare&lt;/a&gt; — outra estratégia de particionamento, em geral mais eficiente que a de Lomuto&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Counting sort</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/03-periodo/eda/counting-sort/</link><pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate><guid>https://thallesgsrv.github.io/Big-O-Library/docs/03-periodo/eda/counting-sort/</guid><description>
 &lt;h2 data-hextra-search-id="sobre"&gt;Sobre&lt;span class="hx:absolute hx:-mt-20" id="sobre"&gt;&lt;/span&gt;
 &lt;a href="#sobre" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;Existe um limite teórico: qualquer algoritmo que ordena &lt;strong&gt;comparando&lt;/strong&gt; elementos precisa de &lt;span class="katex"&gt;&lt;span class="katex-mathml"&gt;&lt;math xmlns="http://www.w3.org/1998/Math/MathML"&gt;&lt;semantics&gt;&lt;mrow&gt;&lt;mi mathvariant="normal"&gt;Ω&lt;/mi&gt;&lt;mo stretchy="false"&gt;(&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mi&gt;log&lt;/mi&gt;&lt;mo&gt;⁡&lt;/mo&gt;&lt;mi&gt;n&lt;/mi&gt;&lt;mo stretchy="false"&gt;)&lt;/mo&gt;&lt;/mrow&gt;&lt;annotation encoding="application/x-tex"&gt;\Omega(n \log n)&lt;/annotation&gt;&lt;/semantics&gt;&lt;/math&gt;&lt;/span&gt;&lt;span class="katex-html" aria-hidden="true"&gt;&lt;span class="base"&gt;&lt;span class="strut" style="height:1em;vertical-align:-0.25em;"&gt;&lt;/span&gt;&lt;span class="mord"&gt;Ω&lt;/span&gt;&lt;span class="mopen"&gt;(&lt;/span&gt;&lt;span class="mord mathnormal"&gt;n&lt;/span&gt;&lt;span class="mspace" style="margin-right:0.1667em;"&gt;&lt;/span&gt;&lt;span class="mop"&gt;lo&lt;span style="margin-right:0.01389em;"&gt;g&lt;/span&gt;&lt;/span&gt;&lt;span class="mspace" style="margin-right:0.1667em;"&gt;&lt;/span&gt;&lt;span class="mord mathnormal"&gt;n&lt;/span&gt;&lt;span class="mclose"&gt;)&lt;/span&gt;&lt;/span&gt;&lt;/span&gt;&lt;/span&gt; comparações no pior caso. Merge sort e quick sort estão perto desse piso. Para furar o piso, só parando de comparar. O counting sort faz isso.&lt;/p&gt;
@@ -1395,7 +1395,7 @@ data-copied-label="Copiado!"
 &lt;/ul&gt;
 &lt;h2 data-hextra-search-id="para-estudar-mais"&gt;Para estudar mais&lt;span class="hx:absolute hx:-mt-20" id="para-estudar-mais"&gt;&lt;/span&gt;
 &lt;a href="#para-estudar-mais" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://joaoarthurbm.github.io/eda/posts/ordenacao-linear" target="_blank" rel="noopener"&gt;Ordenação Linear (Counting Sort)&lt;/a&gt; — João Arthur Brunet (2019)&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear" target="_blank" rel="noopener"&gt;Ordenação Linear (Counting Sort)&lt;/a&gt; — João Arthur Brunet (2019)&lt;/li&gt;
 &lt;/ul&gt;</description></item><item><title>Radix sort</title><link>https://thallesgsrv.github.io/Big-O-Library/docs/03-periodo/eda/radix-sort/</link><pubDate>Fri, 09 Oct 2026 00:00:00 +0000</pubDate><guid>https://thallesgsrv.github.io/Big-O-Library/docs/03-periodo/eda/radix-sort/</guid><description>
 &lt;h2 data-hextra-search-id="sobre"&gt;Sobre&lt;span class="hx:absolute hx:-mt-20" id="sobre"&gt;&lt;/span&gt;
 &lt;a href="#sobre" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;p&gt;O counting sort sofre quando os valores são grandes. Ordenar números de até 6 dígitos exigiria um array de contagem de um milhão de posições. O radix sort contorna isso olhando &lt;strong&gt;um dígito de cada vez&lt;/strong&gt;: em vez de um intervalo gigante, usa vários intervalos minúsculos (0 a 9).&lt;/p&gt;
@@ -1524,6 +1524,6 @@ T(n) = d \cdot \Theta(n + b) = \Theta(d\,(n + b))
 &lt;/ul&gt;
 &lt;h2 data-hextra-search-id="para-estudar-mais"&gt;Para estudar mais&lt;span class="hx:absolute hx:-mt-20" id="para-estudar-mais"&gt;&lt;/span&gt;
 &lt;a href="#para-estudar-mais" class="subheading-anchor" aria-label="Link permanente para esta seção"&gt;&lt;/a&gt;&lt;/h2&gt;&lt;ul&gt;
-&lt;li&gt;&lt;a href="http://joaoarthurbm.github.io/eda/posts/ordenacao-linear" target="_blank" rel="noopener"&gt;Ordenação Linear&lt;/a&gt; — João Arthur Brunet (2019). O material trata do counting sort; o radix sort é uma extensão dele.&lt;/li&gt;
+&lt;li&gt;&lt;a href="https://joaoarthurbm.github.io/eda/posts/ordenacao-linear" target="_blank" rel="noopener"&gt;Ordenação Linear&lt;/a&gt; — João Arthur Brunet (2019). O material trata do counting sort; o radix sort é uma extensão dele.&lt;/li&gt;
 &lt;li&gt;&lt;a href="https://mitpress.mit.edu/9780262046305/" target="_blank" rel="noopener"&gt;Introduction to Algorithms&lt;/a&gt; — Cormen et al. (2022), capítulo sobre ordenação em tempo linear&lt;/li&gt;
 &lt;/ul&gt;</description></item></channel></rss>
