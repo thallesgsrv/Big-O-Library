@@ -60,9 +60,13 @@ params:
     displayToggle: true
   math:
     engine: katex
+    katex:
+      css: css/vendor/katex.min.css
   search:
     enable: true
     type: flexsearch
+    flexsearch:
+      js: js/vendor/flexsearch.bundle.min.js
   editURL:
     enable: true
     base: https://github.com/thallesgsrv/Big-O-Library/edit/main/content

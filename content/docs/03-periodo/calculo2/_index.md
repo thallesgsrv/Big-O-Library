@@ -1,6 +1,6 @@
 ---
 title: Cálculo 2
-weight: 2
+weight: 3
 description: Continuação de Cálculo 1
 autores:
   - hilbertmgomes

@@ -41,9 +41,8 @@ Os materiais ficam no [site](https://thallesgsrv.github.io/Big-O-Library/docs/),
 |---|---|---|
 | [Git](https://git-scm.com/) | qualquer recente | Precisa estar no PATH. O site lê as datas de atualização do histórico do Git, então **use `git clone`**: baixar o ZIP do GitHub não funciona (o build falha com `failed to load Git data`). |
 | [Hugo **extended**](https://gohugo.io/installation/) | 0.165.0 ou mais novo | É a versão usada no site. O tema exige no mínimo a 0.146.0. Confira com `hugo version`: a linha precisa conter `+extended`. |
-| Internet | no primeiro build | O Hugo baixa o FlexSearch (busca) e o KaTeX (fórmulas) de `cdn.jsdelivr.net` e guarda em cache. Se esse domínio estiver bloqueado na sua rede, o build para com `Could not retrieve ... file from https://cdn.jsdelivr.net`. |
 
-Não é preciso Node, Go nem submódulos do Git: o tema está dentro do repositório, em `themes/big-o-library/`.
+Não é preciso Node, Go, submódulos do Git nem internet para compilar: o tema, a busca (FlexSearch) e as fórmulas (KaTeX) estão dentro do repositório, em `themes/big-o-library/`.
 
 ### Passo a passo
 
@@ -98,7 +97,6 @@ hugo new --kind disciplina docs/01-periodo/nome-da-disciplina/index.md
 |---|---|
 | `hugo: command not found` | Hugo não instalado ou terminal aberto antes da instalação. Instale e abra um terminal novo. |
 | `failed to load Git data: not a git repository` | Você baixou o ZIP. Use `git clone`. |
-| `Could not retrieve ... https://cdn.jsdelivr.net/...` | Sem internet ou domínio bloqueado. Conecte-se e rode `hugo server` de novo. |
 | Erro de versão ou de recurso do Hugo | Versão antiga ou sem `+extended`. Atualize e confira com `hugo version`. |
 | Sua página não aparece | `date` no futuro (use `hugo server -F` para ver mesmo assim), `weight` repetido no período, ou subpáginas dentro de um `index.md` (use `_index.md`). |
 | Site com fontes diferentes das do site publicado | Opcional: `python3 scripts/baixar_fontes.py` baixa as fontes (precisa de Python 3 e internet). Não é necessário para contribuir. |

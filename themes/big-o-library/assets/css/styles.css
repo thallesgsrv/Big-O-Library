@@ -1,4 +1,12 @@
-@import "tailwindcss" prefix(hx);
+@import "tailwindcss" prefix(hx) source(none);
+
+@source "../../layouts";
+@source "../../assets/js";
+@source "../../assets/viz";
+@source "../../../../content";
+
+
+@source inline("hx:{ltr:pl,rtl:pr}-{4,8,12,16,20}");
 
 @custom-variant dark (&:where(.dark, .dark *));
 
@@ -96,9 +104,7 @@ body {
 @import "./components/navbar.css";
 @import "./components/scrollbar.css";
 @import "./components/code-copy.css";
-@import "./components/hextra/feature-grid.css";
 @import "./components/jupyter.css";
 @import "./components/badge.css";
 @import "./components/toc.css";
-@import "./components/archives.css";
 @import "./components/gallery.css";

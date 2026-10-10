@@ -1,6 +1,6 @@
 ---
 title: Programação 2
-weight: 2
+weight: 1
 description: Orientação a objetos e estruturas de dados.
 autores:
   - thallesgsrv

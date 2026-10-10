@@ -233,13 +233,12 @@ Com o Hugo instalado, o comando `hugo new --kind disciplina docs/01-periodo/nome
 
 ## Testando no seu computador
 
-Antes de abrir o Pull Request, confira como a página ficou. Você precisa de três coisas:
+Antes de abrir o Pull Request, confira como a página ficou. Você precisa de duas coisas:
 
 - **Git**, instalado e no PATH. Use `git clone`: baixar o ZIP do GitHub não funciona, porque o site lê as datas de atualização do histórico do Git.
 - **Hugo extended** 0.165.0 ou mais novo. Confira com `hugo version`: a linha precisa conter `+extended`.
-- **Internet** no primeiro build. O Hugo baixa a busca (FlexSearch) e as fórmulas (KaTeX) de `cdn.jsdelivr.net` e guarda em cache.
 
-Não precisa de Node, Go nem de submódulos: o tema já vem dentro do repositório.
+Não precisa de Node, Go, submódulos nem de internet para compilar: o tema, a busca e as fórmulas já vêm dentro do repositório.
 
 **Linux (Debian/Ubuntu)**
 
@@ -286,7 +285,6 @@ Se der erro:
 |---|---|
 | `hugo: command not found` | Instale o Hugo e abra um terminal novo. |
 | `failed to load Git data: not a git repository` | Você baixou o ZIP. Use `git clone`. |
-| `Could not retrieve ... cdn.jsdelivr.net` | Sem internet ou domínio bloqueado. Conecte-se e rode `hugo server` de novo. |
 | Sua página não aparece | Confira a `date` (se for futura, use `hugo server -F` para ver), o `weight` repetido e se não há subpáginas dentro de um `index.md`. |
 
 ## Checklist antes de enviar

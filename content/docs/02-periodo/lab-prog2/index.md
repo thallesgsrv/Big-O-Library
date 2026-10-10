@@ -1,6 +1,6 @@
 ---
 title: Laboratório de Programação 2
-weight: 3
+weight: 2
 description: Orientação a objetos e estruturas de dados.
 autores:
   - MateusSRocha

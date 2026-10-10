@@ -1,0 +1,12 @@
+{
+  "name": "big-o-library",
+  "private": true,
+  "description": "Só para recompilar o CSS do tema (passo de mantenedor). Para escrever conteúdo e rodar o site basta o Hugo.",
+  "scripts": {
+    "build:css": "tailwindcss -i themes/big-o-library/assets/css/styles.css -o themes/big-o-library/assets/css/compiled/main.css --minify"
+  },
+  "devDependencies": {
+    "@tailwindcss/cli": "4.3.0",
+    "tailwindcss": "4.3.0"
+  }
+}

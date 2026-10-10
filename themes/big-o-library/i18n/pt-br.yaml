@@ -1,6 +1,5 @@
 # Textos da interface em português do Brasil
-
-# Rótulos de acessibilidade (leitores de tela)
+close: "Fechar"
 closeBanner: "Fechar banner"
 imageGallery: "Galeria de imagens"
 menu: "Menu"
@@ -44,3 +43,9 @@ searchPlaceholder: "Buscar..."
 system: "Sistema"
 tags: "Tags"
 viewAsMarkdown: "Ver como Markdown"
+
+note: "Nota"
+tip: "Dica"
+important: "Importante"
+warning: "Atenção"
+caution: "Cuidado"

@@ -1,6 +1,6 @@
 ---
 title: Estruturas de Dados e Algoritmos
-weight: 3
+weight: 1
 description: Análise assintótica e algoritmos
 rotulo: Conteúdos
 autores:
