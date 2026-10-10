@@ -27,5 +27,5 @@ hugo --gc --minify
 cd public
 touch .nojekyll
 git add --all
-git commit -m "$MESSAGE" || { echo "Nada mudou, nada a publicar."; exit 0; }
+git commit -m "$MESSAGE" || echo "Nenhuma mudança nova; verificando se há commits para enviar."
 git push origin gh-pages
