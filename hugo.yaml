@@ -8,6 +8,10 @@ theme: big-o-library
 enableGitInfo: true
 enableRobotsTXT: true
 
+disableKinds:
+  - taxonomy
+  - term
+
 
 services:
   googleAnalytics:
