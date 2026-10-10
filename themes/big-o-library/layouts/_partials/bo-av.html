@@ -1,0 +1,3 @@
+{{- /* Medalhão do sábio: iniciais por baixo, foto por cima (se falhar, a foto some e ficam as iniciais).
+       Espera: dict "img" <url ou ""> "ini" <iniciais>. A cor vem de --c do elemento pai. */ -}}
+<span class="bo-av" aria-hidden="true"><span>{{ upper .ini }}</span>{{ with .img }}<img src="{{ . }}" alt="" width="240" height="240" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">{{ end }}</span>

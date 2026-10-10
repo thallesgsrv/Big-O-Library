@@ -2,22 +2,26 @@
 #  CONSELHO DOS SÁBIOS
 #  Professores que contribuíram com materiais (sem commit no repositório).
 #
-#  Para adicionar alguém, copie um bloco abaixo e preencha. Só "nome" e "frase"
-#  são obrigatórios.
+#  Para adicionar alguém, copie um bloco abaixo e preencha. Só "nome" é
+#  obrigatório; o resto é opcional.
 #
-#  nome        Nome como deve aparecer no card
+#  nome        Nome como deve aparecer
 #  titulo      Título de honra (ex.: "Mestre das Recorrências")
 #  disciplina  Disciplina que leciona / contribuiu
-#  periodo     1 a 9 (define a cor do card). Optativa/outro: deixe 0 ou apague
+#  periodo     1 a 9. Aparece no card e define a ordem da página (1º período
+#              primeiro). Optativa/outro: 0 ou apague a linha (vai para o fim)
 #  classe      Classe Big-O do sábio, só pela brincadeira: O(1), O(log n), O(n),
 #              O(n log n), O(n²), O(2ⁿ), O(n!) ...
-#  frase       A frase marcante
+#  frase       A frase marcante. Sem frase? Apague a linha: o card mostra
+#              "frase a caminho" e a mesa não sorteia essa pessoa.
+#  cor         (opcional) 1 a 9: escolhe a cor do card na paleta do site
+#              (1 = verde ... 9 = vermelho). Sem isso, as cores se alternam.
 #  foto        Nome do arquivo dentro de static/images/conselho/  (ex.: ada.jpg)
 #              Sem foto + com github → usa o avatar do GitHub.
 #              Sem foto + sem github → mostra as iniciais.
 #  github      Só o usuário (ex.: joaoarthurbm). Pode apagar a linha se não tiver.
 #  materiais   Lista curta do que a pessoa contribuiu
-#  exemplo     true = exibe a etiqueta "exemplo". APAGUE ao colocar dados reais.
+#  exemplo     true = exibe a etiqueta "exemplo". Apague ao colocar dados reais.
 # ─────────────────────────────────────────────────────────────────────────────
 professores:
   - nome: Prof. João Arthur
@@ -32,13 +36,14 @@ professores:
   - nome: Prof. Rodrigo Cohen
     titulo: Senhor dos Limites, Derivadas e Integrais
     disciplina: Cálculo 1 e Cálculo 2
+    foto: rodrigo-cohen.jpg
     periodo: 2
     classe: O(log n)
     frase: "Tá ligado, velho?"
     materiais: [Material de aula]
 
   - nome: Prof. Tiago Massoni
-    titulo: Mestre da Matématica Discreta
+    titulo: Mestre da Matemática Discreta
     disciplina: Fundamentos Matemáticos para Ciência da Computação 2
     periodo: 2
     classe: O(log n)

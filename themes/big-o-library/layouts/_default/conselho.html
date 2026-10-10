@@ -1,10 +1,53 @@
-{{- /* Conselho dos Sábios: cards dos professores que contribuíram com materiais (sem commit).
-       Dados: data/conselho.yaml  |  Fotos: static/images/conselho/
-       Foto: arquivo local > avatar do GitHub > monograma com as iniciais.
-       Cor do card = período (--p1..--p9). CSS: .bo-sage* em assets/css/custom.css */ -}}
+{{- /* Conselho dos Sábios: professores que contribuíram com materiais (sem commit).
+       Dados: data/conselho.yaml | Fotos: static/images/conselho/ | CSS: .bo-stage*, .bo-sage* em custom.css
+       Estrutura: "mesa" (palco com a frase em destaque + assentos) e a grade de cards.
+       Foto: arquivo local > avatar do GitHub > iniciais. Cor: cada card ganha a sua (paleta --p1..--p9). */ -}}
 {{ define "main" }}
 {{ partial "sidebar.html" (dict "context" .) }}
-{{- $sages := hugo.Data.conselho.professores | default slice -}}
+
+{{- /* 1) ordem: por período (1..9); sem período/optativa por último; dentro do mesmo período, a ordem do arquivo */ -}}
+{{- $raw := hugo.Data.conselho.professores | default slice -}}
+{{- $sorted := slice -}}
+{{- range $want := slice 1 2 3 4 5 6 7 8 9 0 -}}
+  {{- range $raw -}}
+    {{- $pp := int (.periodo | default 0) -}}
+    {{- if or (lt $pp 1) (gt $pp 9) }}{{ $pp = 0 }}{{ end -}}
+    {{- if eq $pp $want }}{{ $sorted = $sorted | append . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* 2) normaliza: slug, cor, foto, iniciais, "frase pendente" */ -}}
+{{- $pal := slice 1 4 7 2 5 8 3 6 9 -}}
+{{- $list := slice -}}
+{{- range $i, $p := $sorted -}}
+  {{- $slug := replace ($p.nome | urlize) "." "" -}}
+  {{- $per := int ($p.periodo | default 0) -}}
+  {{- if or (lt $per 1) (gt $per 9) }}{{ $per = 0 }}{{ end -}}
+
+  {{- $n := index $pal (mod $i 9) -}}
+  {{- with $p.cor }}{{ if and (ge (int .) 1) (le (int .) 9) }}{{ $n = int . }}{{ end }}{{ end -}}
+
+  {{- $img := "" -}}
+  {{- with $p.foto -}}
+    {{- if fileExists (printf "static/images/conselho/%s" .) }}{{ $img = printf "images/conselho/%s" . | relURL }}{{ end -}}
+  {{- end -}}
+  {{- if and (not $img) $p.github }}{{ $img = printf "https://avatars.githubusercontent.com/%s?s=240" $p.github }}{{ end -}}
+
+  {{- $clean := replaceRE `^(Prof|Dr)[a\.]*\s+` "" $p.nome -}}
+  {{- $w := split $clean " " -}}
+  {{- $ini := substr (index $w 0) 0 1 -}}
+  {{- if gt (len $w) 1 }}{{ $ini = printf "%s%s" $ini (substr (index $w (sub (len $w) 1)) 0 1) }}{{ end -}}
+
+  {{- $f := trim ($p.frase | default "") " " -}}
+  {{- $pend := or (eq $f "") (eq $f "Sem frase marcante ainda") -}}
+
+  {{- $list = $list | append (dict "p" $p "i" $i "slug" $slug "n" $n "c" (printf "var(--p%d)" $n) "per" $per "img" $img "ini" $ini "pend" $pend "frase" $f) -}}
+{{- end -}}
+
+{{- /* 3) primeiro sábio com frase = o que começa em cena */ -}}
+{{- $first := 0 -}}{{- $found := false -}}
+{{- range $list }}{{ if and (not .pend) (not $found) }}{{ $first = .i }}{{ $found = true }}{{ end }}{{ end -}}
+
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
       "prompt" "~/big-o-library $ cat conselho-dos-sabios.md"
@@ -13,71 +56,71 @@
 
   {{ with .Content }}<div class="bo-sage-intro">{{ . }}</div>{{ end }}
 
-  {{- if $sages }}
+  {{- if $list }}
   <script>document.documentElement.classList.add("bo-js")</script>
 
-  {{- /* sábio sorteado: monta a lista de frases para o script */ -}}
-  {{- $quotes := slice -}}
-  {{- range $sages -}}
-    {{- $quotes = $quotes | append (dict "nome" .nome "frase" .frase "id" (replace (.nome | urlize) "." "")) -}}
-  {{- end }}
-
-  <section class="bo-fortune" aria-labelledby="bo-fortune-h">
-    <div class="bo-fortune-bar">
-      <span id="bo-fortune-h" class="bo-fortune-cmd" aria-hidden="true">$ fortune --sabios</span>
-      <button type="button" class="bo-fortune-btn" id="bo-fortune-next" aria-label="Sortear outra frase">outra ↻</button>
+  {{- /* ── A MESA: palco com a frase em destaque + assentos ── */}}
+  <section class="bo-stage" aria-label="A mesa do conselho" style="--c: {{ (index $list $first).c | safeCSS }}">
+    <div class="bo-stage-bar">
+      <span class="bo-stage-cmd" aria-hidden="true">$ fortune --sabios</span>
+      {{- if $found }}<button type="button" class="bo-stage-btn" id="bo-stage-next">sortear ↻</button>{{ end }}
     </div>
-    <blockquote class="bo-fortune-q" aria-live="polite">
-      <p id="bo-fortune-text">{{ (index $sages 0).frase }}</p>
-      <footer><a id="bo-fortune-who" href="#sabio-{{ (replace ((index $sages 0).nome | urlize) "." "") }}">{{ (index $sages 0).nome }}</a></footer>
-    </blockquote>
+
+    <div class="bo-stage-body" aria-live="polite">
+      {{- range $list }}
+      <div class="bo-slide{{ if eq .i $first }} is-on{{ end }}" data-i="{{ .i }}" data-c="var(--p{{ .n }})" style="--c: {{ .c | safeCSS }}"{{ if ne .i $first }} aria-hidden="true"{{ end }}>
+        {{- if .pend }}
+        <div class="bo-slide-q is-pend"><p>// frase marcante a caminho</p></div>
+        {{- else }}
+        <blockquote class="bo-slide-q"><p>{{ .frase }}</p></blockquote>
+        {{- end }}
+        <div class="bo-slide-who">
+          {{ partial "bo-av.html" (dict "img" .img "ini" .ini) }}
+          <div class="bo-slide-id">
+            <p class="bo-slide-name">{{ .p.nome }}</p>
+            {{ with .p.titulo }}<p class="bo-slide-title">{{ . }}</p>{{ end }}
+          </div>
+          <a class="bo-slide-go" href="#sabio-{{ .slug }}">ver card <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+      {{- end }}
+    </div>
+
+    <ul class="bo-seats" aria-label="Escolher sábio">
+      {{- range $list }}
+      <li><button type="button" class="bo-seat{{ if .pend }} is-pend{{ end }}" data-i="{{ .i }}" style="--c: {{ .c | safeCSS }}" aria-pressed="{{ if eq .i $first }}true{{ else }}false{{ end }}" aria-label="{{ .p.nome }}{{ if .pend }} (frase a caminho){{ end }}" title="{{ .p.nome }}">
+        {{ partial "bo-av.html" (dict "img" .img "ini" .ini) }}
+      </button></li>
+      {{- end }}
+    </ul>
   </section>
 
+  {{- /* ── OS CARDS ── */}}
   <ol class="bo-council" aria-label="Professores do Conselho dos Sábios">
-    {{- range $i, $p := $sages }}
-      {{- $slug := replace ($p.nome | urlize) "." "" -}}
-      {{- $per := int ($p.periodo | default 0) -}}
-      {{- $color := "var(--ac)" -}}
-      {{- if and (gt $per 0) (le $per 9) }}{{ $color = printf "var(--p%d)" $per }}{{ end -}}
-
-      {{- /* foto: local > avatar do GitHub > nenhuma (monograma) */ -}}
-      {{- $img := "" -}}
-      {{- with $p.foto -}}
-        {{- if fileExists (printf "static/images/conselho/%s" .) -}}
-          {{- $img = printf "images/conselho/%s" . | relURL -}}
-        {{- end -}}
-      {{- end -}}
-      {{- if and (not $img) $p.github }}{{ $img = printf "https://github.com/%s.png?size=480" $p.github }}{{ end -}}
-
-      {{- /* iniciais: ignora "Prof./Profa./Dr./Dra." */ -}}
-      {{- $clean := replaceRE `^(Prof|Dr)[a\.]*\s+` "" $p.nome -}}
-      {{- $w := split $clean " " -}}
-      {{- $ini := substr (index $w 0) 0 1 -}}
-      {{- if gt (len $w) 1 }}{{ $ini = printf "%s%s" $ini (substr (index $w (sub (len $w) 1)) 0 1) }}{{ end }}
-
-    <li class="bo-sage" id="sabio-{{ $slug }}" style="--c: {{ $color | safeCSS }}; --k: {{ mod $i 3 }}">
+    {{- range $list }}
+    {{- $p := .p }}
+    <li class="bo-sage" id="sabio-{{ .slug }}" style="--c: {{ .c | safeCSS }}; --k: {{ mod .i 3 }}">
       <article class="bo-sage-card">
         <header class="bo-sage-top">
-          <span class="bo-sage-per">{{ if gt $per 0 }}{{ $per }}º período{{ else }}optativa{{ end }}</span>
+          <span class="bo-sage-class" title="Classe de complexidade">{{ $p.classe | default "O(1)" }}</span>
           {{ if $p.exemplo }}<span class="bo-sage-demo" title="Dados de exemplo: troque em data/conselho.yaml">exemplo</span>{{ end }}
-          <span class="bo-sage-num" aria-hidden="true">#{{ printf "%02d" (add $i 1) }}</span>
+          <span class="bo-sage-per">{{ if gt .per 0 }}{{ .per }}º período{{ else }}optativa{{ end }}</span>
         </header>
 
-        <figure class="bo-sage-photo">
-          <span class="bo-sage-mono" aria-hidden="true">{{ upper $ini }}</span>
-          {{ with $img }}<img src="{{ . }}" alt="Foto de {{ $p.nome }}" width="480" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">{{ end }}
-          <span class="bo-sage-class" aria-label="Classe de complexidade">{{ $p.classe | default "O(1)" }}</span>
-        </figure>
+        {{- if .pend }}
+        <div class="bo-sage-quote is-pend"><p>// frase marcante a caminho</p></div>
+        {{- else }}
+        <blockquote class="bo-sage-quote"><p>{{ .frase }}</p></blockquote>
+        {{- end }}
 
-        <div class="bo-sage-id">
-          <h2 class="bo-sage-name">{{ $p.nome }}</h2>
-          {{ with $p.titulo }}<p class="bo-sage-title">{{ . }}</p>{{ end }}
-          {{ with $p.disciplina }}<p class="bo-sage-disc">{{ . }}</p>{{ end }}
+        <div class="bo-sage-person">
+          {{ partial "bo-av.html" (dict "img" .img "ini" .ini) }}
+          <div class="bo-sage-id">
+            <h2 class="bo-sage-name">{{ $p.nome }}</h2>
+            {{ with $p.titulo }}<p class="bo-sage-title">{{ . }}</p>{{ end }}
+            {{ with $p.disciplina }}<p class="bo-sage-disc">{{ . }}</p>{{ end }}
+          </div>
         </div>
-
-        <blockquote class="bo-sage-quote">
-          <p>{{ $p.frase }}</p>
-        </blockquote>
 
         <footer class="bo-sage-foot">
           {{- with $p.materiais }}
@@ -100,40 +143,47 @@
     {{- end }}
   </ol>
 
-  <script type="application/json" id="bo-fortune-data">{{ $quotes | jsonify | safeJS }}</script>
   <script>
   (function () {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ── $ fortune: sorteia e "digita" a frase ── */
-    var data = [];
-    try { data = JSON.parse(document.getElementById("bo-fortune-data").textContent); } catch (e) {}
-    var text = document.getElementById("bo-fortune-text");
-    var who = document.getElementById("bo-fortune-who");
-    var btn = document.getElementById("bo-fortune-next");
-    var last = -1, timer = null;
+    /* ── a mesa: troca de sábio ── */
+    var stage = document.querySelector(".bo-stage");
+    if (stage) {
+      var slides = [].slice.call(stage.querySelectorAll(".bo-slide"));
+      var seats = [].slice.call(stage.querySelectorAll(".bo-seat"));
+      var btn = document.getElementById("bo-stage-next");
+      var cur = 0;
+      slides.forEach(function (s, i) { if (s.classList.contains("is-on")) cur = i; });
 
-    function show(i) {
-      var d = data[i]; if (!d) return;
-      clearInterval(timer);
-      who.textContent = d.nome;
-      who.setAttribute("href", "#sabio-" + d.id);
-      if (reduce) { text.textContent = d.frase; return; }
-      var n = 0; text.textContent = "";
-      timer = setInterval(function () {
-        n += 2; text.textContent = d.frase.slice(0, n);
-        if (n >= d.frase.length) clearInterval(timer);
-      }, 16);
+      var go = function (i) {
+        if (i === cur || !slides[i]) return;
+        slides[cur].classList.remove("is-on"); slides[cur].setAttribute("aria-hidden", "true");
+        seats[cur].setAttribute("aria-pressed", "false");
+        slides[i].classList.add("is-on"); slides[i].removeAttribute("aria-hidden");
+        seats[i].setAttribute("aria-pressed", "true");
+        stage.style.setProperty("--c", slides[i].getAttribute("data-c"));
+        cur = i;
+      };
+      var pick = function () {
+        var ok = [];
+        seats.forEach(function (s, i) { if (i !== cur && !s.classList.contains("is-pend")) ok.push(i); });
+        if (ok.length) go(ok[Math.floor(Math.random() * ok.length)]);
+      };
+      seats.forEach(function (s, i) {
+        s.addEventListener("click", function () { go(i); });
+        s.addEventListener("keydown", function (e) {
+          var d = e.key === "ArrowRight" ? 1 : e.key === "ArrowLeft" ? -1 : 0;
+          if (!d) return;
+          e.preventDefault();
+          var j = (i + d + seats.length) % seats.length; seats[j].focus(); go(j);
+        });
+      });
+      if (btn) btn.addEventListener("click", pick);
+      pick(); /* começa com um sábio aleatório */
     }
-    function next() {
-      if (data.length < 2) { show(0); return; }
-      var i; do { i = Math.floor(Math.random() * data.length); } while (i === last);
-      last = i; show(i);
-    }
-    if (btn) btn.addEventListener("click", next);
-    if (data.length) { last = Math.floor(Math.random() * data.length); show(last); }
 
-    /* ── aparecer ao rolar ── */
+    /* ── cards: aparecer ao rolar ── */
     var items = document.querySelectorAll(".bo-sage");
     if ("IntersectionObserver" in window && !reduce) {
       var io = new IntersectionObserver(function (es) {
@@ -142,7 +192,7 @@
       items.forEach(function (el) { io.observe(el); });
     } else { items.forEach(function (el) { el.classList.add("in"); }); }
 
-    /* ── tilt 3D (só mouse; desligado com reduced-motion) ── */
+    /* ── cards: inclinação 3D (só mouse; desligada com reduced-motion) ── */
     if (!reduce && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
       document.querySelectorAll(".bo-sage-card").forEach(function (card) {
         card.addEventListener("pointermove", function (e) {
