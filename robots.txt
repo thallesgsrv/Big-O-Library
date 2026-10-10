@@ -1,1 +1,4 @@
 User-agent: *
+Allow: /
+
+Sitemap: https://thallesgsrv.github.io/Big-O-Library/sitemap.xml
