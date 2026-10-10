@@ -72,8 +72,6 @@
   {{- $engine := site.Params.math.engine | default "katex" -}}
   {{ if and (.Page.Store.Get "hasMath") (eq $engine "katex") -}}
     {{ partialCached "scripts/katex.html" . -}}
-  {{ else if and (.Page.Store.Get "hasMath") (eq $engine "mathjax") -}}
-    {{ partialCached "scripts/mathjax.html" . -}}
   {{ end -}}
 
   {{ partial "utils/page-width-override.html" . }}

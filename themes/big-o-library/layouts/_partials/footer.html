@@ -5,6 +5,6 @@
       {{ partial "bo-logo.html" (dict "size" "32px") }}
       <div>Feito por estudantes, para estudantes.</div>
     </div>
-    <div>abra uma <a href="{{ $repo }}/issues">issue</a> ou um <a href="{{ $repo }}/pulls">pull request</a> · <a href="{{ $repo }}">código-fonte</a> · <a href="{{ $repo }}/blob/main/LICENSE">licença</a></div>
+    <div>abra uma <a href="{{ $repo }}/issues">issue</a> ou um <a href="{{ $repo }}/pulls">pull request</a> · <a href="{{ $repo }}">código-fonte</a> · <a href="{{ $repo }}/blob/main/LICENSE">licença</a>{{ if and hugo.IsProduction site.Config.Services.GoogleAnalytics.ID }} · <a href="#bo-consent" data-bo-cookies-open>cookies</a>{{ end }}</div>
   </div>
 </footer>

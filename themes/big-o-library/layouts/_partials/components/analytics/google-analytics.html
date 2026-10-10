@@ -1,13 +1,23 @@
+{{- /* Google Analytics com consentimento (LGPD): o gtag.js só é baixado depois que a pessoa aceita
+       no banner (bo-consent.html). A escolha fica em localStorage["bo-cookies"] = "sim" | "nao".
+       Respeita Do Not Track: com DNT ligado nada é carregado e o banner nem aparece. */ -}}
 {{- with site.Config.Services.GoogleAnalytics.ID }}
-<!-- Global site tag (gtag.js) - Google Analytics -->
-<script async src="https://www.googletagmanager.com/gtag/js?id={{ . }}"></script>
 <script>
   window.dataLayer = window.dataLayer || [];
-  function gtag() {
-    dataLayer.push(arguments);
-  }
-  gtag("js", new Date());
-
-  gtag("config", "{{ . }}");
+  function gtag() { dataLayer.push(arguments); }
+  window.boLoadGA = function () {
+    if (window.boGAOn) return;
+    window.boGAOn = true;
+    var s = document.createElement("script");
+    s.async = true;
+    s.src = "https://www.googletagmanager.com/gtag/js?id={{ . }}";
+    document.head.appendChild(s);
+    gtag("js", new Date());
+    gtag("config", "{{ . }}", { anonymize_ip: true });
+  };
+  window.boDNT = navigator.doNotTrack === "1" || window.doNotTrack === "1";
+  try {
+    if (!window.boDNT && localStorage.getItem("bo-cookies") === "sim") window.boLoadGA();
+  } catch (e) {}
 </script>
 {{ end -}}

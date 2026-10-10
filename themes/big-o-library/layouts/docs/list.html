@@ -58,7 +58,6 @@
         {{- if (site.Params.page.displayPagination | default true) -}}
           {{- partial "components/pager.html" . -}}
         {{- end -}}
-        {{ partial "components/comments.html" . }}
         {{ partial "custom/page-end.html" . }}
       </main>
     </article>

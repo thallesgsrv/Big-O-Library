@@ -45,10 +45,6 @@
   {{- end -}}
 {{- end -}}
 
-{{- if $enableImageZoom -}}
-  {{- .Page.Store.Set "hasImageZoom" true -}}
-{{- end -}}
-
 {{- with .Title -}}
   <figure>
     <img src="{{ $dest | safeURL }}" title="{{ . }}" alt="{{ $alt }}" {{ $attributes | safeHTMLAttr }}{{ if $enableImageZoom }} data-zoomable{{ end }}{{ if $lazyLoading }} loading="lazy"{{ end }} />

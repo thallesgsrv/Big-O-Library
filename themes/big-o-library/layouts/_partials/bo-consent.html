@@ -1,0 +1,32 @@
+{{- /* Banner de cookies (só em produção e só se houver Google Analytics configurado). */ -}}
+{{- if and hugo.IsProduction site.Config.Services.GoogleAnalytics.ID }}
+<div class="bo-consent" id="bo-consent" role="region" aria-label="Aviso de cookies" hidden>
+  <p class="bo-consent-txt">$ analytics --ask<br>Usamos o Google Analytics só para saber quais materiais são mais acessados. Ele só liga se você aceitar, e você pode mudar de ideia no rodapé.</p>
+  <div class="bo-consent-btns">
+    <button type="button" class="bo-consent-btn" data-bo-consent="nao">recusar</button>
+    <button type="button" class="bo-consent-btn bo-consent-yes" data-bo-consent="sim">aceitar</button>
+  </div>
+</div>
+<script>
+(function () {
+  var box = document.getElementById("bo-consent");
+  if (!box || window.boDNT) return;
+  function get() { try { return localStorage.getItem("bo-cookies"); } catch (e) { return null; } }
+  function set(v) { try { localStorage.setItem("bo-cookies", v); } catch (e) {} }
+  function show() { box.hidden = false; }
+  if (!get()) show();
+  box.addEventListener("click", function (e) {
+    var b = e.target.closest("[data-bo-consent]");
+    if (!b) return;
+    var v = b.getAttribute("data-bo-consent");
+    set(v);
+    box.hidden = true;
+    if (v === "sim" && window.boLoadGA) window.boLoadGA();
+    if (v === "nao") { try { window["ga-disable-{{ site.Config.Services.GoogleAnalytics.ID }}"] = true; } catch (e) {} }
+  });
+  document.addEventListener("click", function (e) {
+    if (e.target.closest("[data-bo-cookies-open]")) { e.preventDefault(); show(); box.querySelector("button").focus(); }
+  });
+})();
+</script>
+{{- end }}
