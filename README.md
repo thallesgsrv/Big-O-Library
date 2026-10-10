@@ -40,7 +40,7 @@ Os materiais ficam no [site](https://thallesgsrv.github.io/Big-O-Library/docs/),
 | Ferramenta | Versão | Observação |
 |---|---|---|
 | [Git](https://git-scm.com/) | qualquer recente | Precisa estar no PATH. O site lê as datas de atualização do histórico do Git, então **use `git clone`**: baixar o ZIP do GitHub não funciona (o build falha com `failed to load Git data`). |
-| [Hugo **extended**](https://gohugo.io/installation/) | 0.167.0 ou mais novo | É a versão usada no site. O tema exige no mínimo a 0.146.0. Confira com `hugo version`: a linha precisa conter `+extended`. |
+| [Hugo **extended**](https://gohugo.io/installation/) | 0.165.0 ou mais novo | É a versão usada no site. O tema exige no mínimo a 0.146.0. Confira com `hugo version`: a linha precisa conter `+extended`. |
 | Internet | no primeiro build | O Hugo baixa o FlexSearch (busca) e o KaTeX (fórmulas) de `cdn.jsdelivr.net` e guarda em cache. Se esse domínio estiver bloqueado na sua rede, o build para com `Could not retrieve ... file from https://cdn.jsdelivr.net`. |
 
 Não é preciso Node, Go nem submódulos do Git: o tema está dentro do repositório, em `themes/big-o-library/`.
@@ -52,9 +52,9 @@ Não é preciso Node, Go nem submódulos do Git: o tema está dentro do reposit�
 ```bash
 # 1) Git e Hugo extended (em ARM, troque amd64 por arm64)
 sudo apt update && sudo apt install -y git curl
-curl -LO https://github.com/gohugoio/hugo/releases/download/v0.167.0/hugo_extended_0.167.0_linux-amd64.deb
-sudo apt install -y ./hugo_extended_0.167.0_linux-amd64.deb
-hugo version        # deve mostrar v0.167.0 ... +extended
+curl -LO https://github.com/gohugoio/hugo/releases/download/v0.165.0/hugo_extended_0.165.0_linux-amd64.deb
+sudo apt install -y ./hugo_extended_0.165.0_linux-amd64.deb
+hugo version        # deve mostrar v0.165.0 ... +extended
 
 # 2) Baixe o projeto
 git clone https://github.com/thallesgsrv/Big-O-Library.git

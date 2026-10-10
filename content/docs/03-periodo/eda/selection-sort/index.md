@@ -99,4 +99,4 @@ O mesmo número. As comparações são sempre \(n(n-1)/2\), qualquer que seja a 
 
 ## Para estudar mais
 
-- [Selection Sort](http://joaoarthurbm.github.io/eda/posts/selection-sort) — João Arthur Brunet (2019)
+- [Selection Sort](https://joaoarthurbm.github.io/eda/posts/selection-sort) — João Arthur Brunet (2019)

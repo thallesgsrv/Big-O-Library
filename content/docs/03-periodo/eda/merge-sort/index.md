@@ -183,4 +183,4 @@ Quando os dois elementos fossem iguais, o `else` copiaria o da direita primeiro,
 
 ## Para estudar mais
 
-- [Merge Sort](http://joaoarthurbm.github.io/eda/posts/merge-sort) — João Arthur Brunet (2019)
+- [Merge Sort](https://joaoarthurbm.github.io/eda/posts/merge-sort) — João Arthur Brunet (2019)

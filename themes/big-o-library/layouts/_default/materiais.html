@@ -24,7 +24,7 @@
       {{- end -}}
     {{- end -}}
     {{- /* Extras (optativas, bash, git...): vêm de data/extras.yaml, mesmo card dos períodos, no final da grade */ -}}
-    {{- range hugo.Data.extras -}}
+    {{- range (partial "utils/hugo-compat/site-data.html" .).extras -}}
       {{- $e := . -}}
       {{- with site.GetPage (printf "/docs/%s" $e.slug) -}}
         <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}" aria-label="{{ $e.aria }}">

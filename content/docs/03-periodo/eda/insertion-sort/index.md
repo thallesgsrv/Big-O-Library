@@ -106,4 +106,4 @@ Chave 2: o 3 desliza (1 deslocamento). Chave 1: o 3 e o 2 deslizam (2 deslocamen
 
 ## Para estudar mais
 
-- [Insertion Sort](http://joaoarthurbm.github.io/eda/posts/insertion-sort) — João Arthur Brunet (2019)
+- [Insertion Sort](https://joaoarthurbm.github.io/eda/posts/insertion-sort) — João Arthur Brunet (2019)

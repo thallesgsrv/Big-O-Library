@@ -47,14 +47,14 @@
         {{- else with .Value -}}
           {{- with resources.Copy "js/flexsearch.js" . -}}
             {{- $flexSearchJs := . | fingerprint -}}
-            <script defer src="{{ $flexSearchJs.RelPermalink }}" integrity="{{ $flexSearchJs.Data.Integrity }}" crossorigin="anonymous"></script>
+            <script defer src="{{ $flexSearchJs.RelPermalink }}"></script>
           {{- end -}}
         {{- end -}}
       {{- end -}}
     {{- else if $flexSearchJsAsset -}}
       {{- with resources.Get $flexSearchJsAsset -}}
         {{- $flexSearchJs := . | fingerprint -}}
-        <script defer src="{{ $flexSearchJs.RelPermalink }}" integrity="{{ $flexSearchJs.Data.Integrity }}" crossorigin="anonymous"></script>
+        <script defer src="{{ $flexSearchJs.RelPermalink }}"></script>
       {{- else -}}
         {{- errorf "FlexSearch js asset not found at %q" $flexSearchJsAsset -}}
       {{- end -}}
@@ -62,8 +62,8 @@
       {{- errorf "FlexSearch local loading requires params.search.flexsearch.js when using non-remote base %q" $flexSearchBase -}}
     {{- end -}}
 
-    <script defer src="{{ $jsSearch.RelPermalink }}" integrity="{{ $jsSearch.Data.Integrity }}"></script>
-    <script defer src="{{ $jsDialog.RelPermalink }}" integrity="{{ $jsDialog.Data.Integrity }}"></script>
+    <script defer src="{{ $jsSearch.RelPermalink }}"></script>
+    <script defer src="{{ $jsDialog.RelPermalink }}"></script>
   {{- else -}}
     {{- warnf `search type "%s" is not supported` $searchType -}}
   {{- end -}}

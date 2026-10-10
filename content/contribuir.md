@@ -236,7 +236,7 @@ Com o Hugo instalado, o comando `hugo new --kind disciplina docs/01-periodo/nome
 Antes de abrir o Pull Request, confira como a página ficou. Você precisa de três coisas:
 
 - **Git**, instalado e no PATH. Use `git clone`: baixar o ZIP do GitHub não funciona, porque o site lê as datas de atualização do histórico do Git.
-- **Hugo extended** 0.167.0 ou mais novo. Confira com `hugo version`: a linha precisa conter `+extended`.
+- **Hugo extended** 0.165.0 ou mais novo. Confira com `hugo version`: a linha precisa conter `+extended`.
 - **Internet** no primeiro build. O Hugo baixa a busca (FlexSearch) e as fórmulas (KaTeX) de `cdn.jsdelivr.net` e guarda em cache.
 
 Não precisa de Node, Go nem de submódulos: o tema já vem dentro do repositório.
@@ -246,9 +246,9 @@ Não precisa de Node, Go nem de submódulos: o tema já vem dentro do repositór
 ```bash
 # 1) Git e Hugo extended (em ARM, troque amd64 por arm64)
 sudo apt update && sudo apt install -y git curl
-curl -LO https://github.com/gohugoio/hugo/releases/download/v0.167.0/hugo_extended_0.167.0_linux-amd64.deb
-sudo apt install -y ./hugo_extended_0.167.0_linux-amd64.deb
-hugo version        # deve mostrar v0.167.0 ... +extended
+curl -LO https://github.com/gohugoio/hugo/releases/download/v0.165.0/hugo_extended_0.165.0_linux-amd64.deb
+sudo apt install -y ./hugo_extended_0.165.0_linux-amd64.deb
+hugo version        # deve mostrar v0.165.0 ... +extended
 
 # 2) Baixe o projeto
 git clone https://github.com/thallesgsrv/Big-O-Library.git

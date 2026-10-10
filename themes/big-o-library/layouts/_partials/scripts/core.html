@@ -1,10 +1,15 @@
-{{- $scriptsBody := slice }}
+{{- /* Scripts do núcleo (menu, tema, abas, sidebar...), unidos em um único js/main.js.
+       Cada arquivo roda isolado (IIFE + try/catch): se um deles falhar numa página,
+       os demais continuam funcionando. Antes, um erro em qualquer arquivo
+       interrompia todos os que vinham depois na concatenação. */ -}}
+{{- $parts := slice -}}
 {{- range resources.Match "js/core/*.js" -}}
-  {{ $scriptsBody = $scriptsBody | append (resources.ExecuteAsTemplate .Name $ .) }}
+  {{- $res := resources.ExecuteAsTemplate .Name $ . -}}
+  {{- $parts = $parts | append (printf "(function(){try{\n%s\n}catch(err){console.error('[big-o-library] erro em %s:',err)}})();" $res.Content .Name) -}}
 {{- end -}}
 
-{{- $scripts := $scriptsBody | resources.Concat "js/main.js" -}}
+{{- $scripts := resources.FromString "js/main.js" (delimit $parts "\n") -}}
 {{- if hugo.IsProduction -}}
   {{- $scripts = $scripts | minify | fingerprint -}}
 {{- end -}}
-<script defer src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>
+<script defer src="{{ $scripts.RelPermalink }}"></script>

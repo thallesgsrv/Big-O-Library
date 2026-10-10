@@ -174,5 +174,5 @@ Fim: troca `v[1]` com o pivô, resultado \([1, 3, 4, 6, 7]\). O pivô 3 ficou na
 
 ## Para estudar mais
 
-- [Quick Sort](http://joaoarthurbm.github.io/eda/posts/quick-sort) — João Arthur Brunet (2019)
-- [Particionamento Hoare](http://joaoarthurbm.github.io/eda/posts/particionamento-hoare) — outra estratégia de particionamento, em geral mais eficiente que a de Lomuto
+- [Quick Sort](https://joaoarthurbm.github.io/eda/posts/quick-sort) — João Arthur Brunet (2019)
+- [Particionamento Hoare](https://joaoarthurbm.github.io/eda/posts/particionamento-hoare) — outra estratégia de particionamento, em geral mais eficiente que a de Lomuto

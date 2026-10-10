@@ -141,4 +141,4 @@ Isso diz, por exemplo, que o último 3 vai para o índice 6 (a acumulada do 3 é
 
 ## Para estudar mais
 
-- [Ordenação Linear (Counting Sort)](http://joaoarthurbm.github.io/eda/posts/ordenacao-linear) — João Arthur Brunet (2019)
+- [Ordenação Linear (Counting Sort)](https://joaoarthurbm.github.io/eda/posts/ordenacao-linear) — João Arthur Brunet (2019)

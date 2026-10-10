@@ -126,5 +126,5 @@ Quantas passadas o radix sort faz para ordenar \([1200, 35, 7, 98765]\)?
 
 ## Para estudar mais
 
-- [Ordenação Linear](http://joaoarthurbm.github.io/eda/posts/ordenacao-linear) — João Arthur Brunet (2019). O material trata do counting sort; o radix sort é uma extensão dele.
+- [Ordenação Linear](https://joaoarthurbm.github.io/eda/posts/ordenacao-linear) — João Arthur Brunet (2019). O material trata do counting sort; o radix sort é uma extensão dele.
 - [Introduction to Algorithms](https://mitpress.mit.edu/9780262046305/) — Cormen et al. (2022), capítulo sobre ordenação em tempo linear

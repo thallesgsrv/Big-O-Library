@@ -4,7 +4,7 @@
        com fingerprint (cache longo) e defer. */ -}}
 {{- with resources.Get "js/bo-recolher.js" -}}
   {{- $js := . | resources.Minify | resources.Fingerprint -}}
-  <script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer></script>
+  <script src="{{ $js.RelPermalink }}" defer></script>
 {{- else -}}
   {{- errorf "bo-recolher: assets/js/bo-recolher.js não encontrado" -}}
 {{- end -}}

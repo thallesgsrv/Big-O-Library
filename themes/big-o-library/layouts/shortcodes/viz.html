@@ -4,11 +4,11 @@
 {{- if not (.Page.Store.Get "viz-assets") -}}
 {{- with resources.Get "viz/viz.css" -}}
 {{- $css := . | resources.Minify | resources.Fingerprint -}}
-<link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
 {{- else -}}{{- errorf "viz: assets/viz/viz.css não encontrado" -}}{{- end -}}
 {{- with resources.Get "viz/viz.js" -}}
 {{- $js := . | resources.Minify | resources.Fingerprint -}}
-<script src="{{ $js.RelPermalink }}" integrity="{{ $js.Data.Integrity }}" defer onerror="document.querySelectorAll('.viz').forEach(function(e){e.textContent='Não foi possível carregar a visualização.'})"></script>
+<script src="{{ $js.RelPermalink }}" defer onerror="document.querySelectorAll('.viz').forEach(function(e){e.textContent='Não foi possível carregar a visualização.'})"></script>
 {{- else -}}{{- errorf "viz: assets/viz/viz.js não encontrado" -}}{{- end -}}
 {{- .Page.Store.Set "viz-assets" true -}}
 {{- end -}}

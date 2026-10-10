@@ -1,16 +1,22 @@
-// Hamburger menu for mobile navigation
-
+// Menu hambúrguer (navegação lateral no celular).
+// Roda no "DOMContentLoaded" e é tolerante a páginas sem barra lateral.
 document.addEventListener('DOMContentLoaded', function () {
   const menu = document.querySelector('.hextra-hamburger-menu');
   const sidebarContainer = document.querySelector('.hextra-sidebar-container');
-  const mobileQuery = window.matchMedia('(max-width: 767px)');
+  if (!menu || !sidebarContainer) return;
 
+  const icon = menu.querySelector('svg');
+  const mobileQuery = window.matchMedia('(max-width: 767px)');
+  const CLOSED = 'hx:max-md:[transform:translate3d(0,-100%,0)]';
+  const OPEN = 'hx:max-md:[transform:translate3d(0,0,0)]';
+
+  // Fonte única da verdade: o atributo aria-expanded do botão.
   function isMenuOpen() {
-    return menu.querySelector('svg').classList.contains('open');
+    return menu.getAttribute('aria-expanded') === 'true';
   }
 
-  // On mobile, the sidebar is off-screen so hide it from assistive tech
-  function syncAriaHidden() {
+  // No celular, a barra lateral fechada fica fora da tela: esconde-a de leitores de tela.
+  function syncAria() {
     if (mobileQuery.matches) {
       sidebarContainer.setAttribute('aria-hidden', isMenuOpen() ? 'false' : 'true');
     } else {
@@ -18,69 +24,71 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Set initial state
-  syncAriaHidden();
-  mobileQuery.addEventListener('change', syncAriaHidden);
+  function setOpen(open, options) {
+    const focusOnOpen = !options || options.focusOnOpen !== false;
+    if (open === isMenuOpen()) return;
 
-  function toggleMenu(options = {}) {
-    const { focusOnOpen = true } = options;
+    menu.setAttribute('aria-expanded', open ? 'true' : 'false');
+    if (icon) icon.classList.toggle('open', open);
 
-    // Toggle the hamburger menu
-    menu.querySelector('svg').classList.toggle('open');
+    sidebarContainer.classList.remove(open ? CLOSED : OPEN);
+    sidebarContainer.classList.add(open ? OPEN : CLOSED);
 
-    // When the menu is open, we want to show the navigation sidebar
-    sidebarContainer.classList.toggle('hx:max-md:[transform:translate3d(0,-100%,0)]');
-    sidebarContainer.classList.toggle('hx:max-md:[transform:translate3d(0,0,0)]');
+    // Menu aberto: trava a rolagem do fundo (só no celular).
+    document.body.classList.toggle('hx:overflow-hidden', open);
+    document.body.classList.toggle('hx:md:overflow-auto', open);
 
-    // When the menu is open, we want to prevent the body from scrolling
-    document.body.classList.toggle('hx:overflow-hidden');
-    document.body.classList.toggle('hx:md:overflow-auto');
+    syncAria();
 
-    // Sync aria-expanded and aria-hidden
-    const isOpen = isMenuOpen();
-    menu.setAttribute('aria-expanded', isOpen ? 'true' : 'false');
-    syncAriaHidden();
-
-    // Move focus into sidebar when opening, restore when closing
-    if (isOpen) {
+    if (open) {
       if (focusOnOpen) {
-        const firstFocusable = sidebarContainer.querySelector('a, button, input, [tabindex="0"]');
-        if (firstFocusable) firstFocusable.focus();
+        const first = sidebarContainer.querySelector('a, button, input, [tabindex="0"]');
+        if (first) first.focus();
       }
     } else {
       menu.focus();
     }
   }
 
-  menu.addEventListener('click', (e) => {
+  // Estado inicial consistente (fechado), mesmo que o HTML venha com a classe trocada.
+  menu.setAttribute('aria-expanded', 'false');
+  if (icon) icon.classList.remove('open');
+  sidebarContainer.classList.remove(OPEN);
+  sidebarContainer.classList.add(CLOSED);
+  syncAria();
+
+  menu.addEventListener('click', function (e) {
     e.preventDefault();
-    // Pointer-initiated clicks on mobile should not force focus into the search input,
-    // which opens the software keyboard immediately.
-    toggleMenu({ focusOnOpen: e.detail === 0 });
+    // Toque/clique com ponteiro não deve mandar o foco para o campo de busca
+    // (abriria o teclado do celular). Só move o foco quando acionado pelo teclado.
+    setOpen(!isMenuOpen(), { focusOnOpen: e.detail === 0 });
   });
 
-  // Close menu on Escape key (mobile only)
-  document.addEventListener('keydown', (e) => {
+  document.addEventListener('keydown', function (e) {
     if (e.key !== 'Escape') return;
-    if (document.getElementById('hextra-search-dialog')?.open) return;
-    if (mobileQuery.matches && isMenuOpen()) {
-      toggleMenu();
-    }
+    const dialog = document.getElementById('hextra-search-dialog');
+    if (dialog && dialog.open) return;
+    if (mobileQuery.matches && isMenuOpen()) setOpen(false);
   });
 
-  // Select all anchor tags in the sidebar container
-  const sidebarLinks = sidebarContainer.querySelectorAll('a');
+  // Ao ampliar a tela para o layout de desktop, fecha o menu e libera a rolagem.
+  function onBreakpointChange() {
+    if (!mobileQuery.matches && isMenuOpen()) {
+      setOpen(false, { focusOnOpen: false });
+    } else {
+      syncAria();
+    }
+  }
+  if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onBreakpointChange);
+  else if (mobileQuery.addListener) mobileQuery.addListener(onBreakpointChange);
 
-  // Add click event listener to each anchor tag
-  sidebarLinks.forEach(link => {
-    link.addEventListener('click', (e) => {
-      // Check if the href attribute contains a hash symbol (links to a heading)
-      if (link.getAttribute('href') && link.getAttribute('href').startsWith('#')) {
-        // Only dismiss overlay on mobile view
-        if (window.innerWidth < 768) {
-          toggleMenu();
-        }
-      }
-    });
+  // Fecha o menu ao tocar em um link da barra lateral que aponta para âncora da mesma página.
+  sidebarContainer.addEventListener('click', function (e) {
+    const link = e.target.closest && e.target.closest('a');
+    if (!link) return;
+    const href = link.getAttribute('href');
+    if (href && href.charAt(0) === '#' && mobileQuery.matches && isMenuOpen()) {
+      setOpen(false, { focusOnOpen: false });
+    }
   });
 });

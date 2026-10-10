@@ -11,7 +11,7 @@
   {{- $badge = printf "%s · %dº período" (index (partial "bo-cx.html" .) (sub $n 1)) $n -}}
   {{- $class = printf "%s bo-page-p%d" $class $n -}}
 {{- else -}}
-  {{- range hugo.Data.extras -}}
+  {{- range (partial "utils/hugo-compat/site-data.html" .).extras -}}
     {{- if and (not $badge) (in $url (printf "/%s/" .slug)) -}}
       {{- $badge = .selo -}}
       {{- if .classe }}{{ $class = printf "%s %s" $class .classe }}{{ end -}}

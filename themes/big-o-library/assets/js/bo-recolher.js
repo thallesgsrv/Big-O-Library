@@ -2,7 +2,7 @@
    Transforma cada seção "##" de um bloco [data-bo-fold] em <details>/<summary> nativo.
    Sem JavaScript, o texto continua todo visível. Carregado por _partials/bo-recolher.html. */
 (function () {
-  var CTA = /^contribui/; // ids de seção que ganham destaque (bo-sec-cta)
+  var CTA = /^contribui/;
   var roots = document.querySelectorAll('[data-bo-fold]');
   if (!roots.length) return;
   var all = [];
@@ -19,7 +19,7 @@
         var cmd = document.createElement('span');
         cmd.className = 'bo-cmd';
         cmd.setAttribute('aria-hidden', 'true');
-        cmd.textContent = '$ cat ' + (el.id || el.textContent.trim().toLowerCase().replace(/\s+/g, '-')) + '.md';
+        cmd.textContent = '$ cat ' + (el.id || el.textContent).trim().toLowerCase().replace(/[^\p{L}\p{N}]+/gu, '-').replace(/^-+|-+$/g, '') + '.md';
 
         root.insertBefore(d, el);
         s.appendChild(cmd);

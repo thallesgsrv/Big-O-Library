@@ -35,8 +35,8 @@
   {{- /* Production build */ -}}
   {{- if hugo.IsProduction }}
     {{- $styles := slice $variablesCss $mainCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
-    <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" integrity="{{ $styles.Data.Integrity }}" />
-    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" integrity="{{ $styles.Data.Integrity }}" />
+    <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" />
+    <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
 
   {{- /* Theme development mode (non-production + theme environment) */ -}}
   {{- else if eq hugo.Environment "theme" }}
@@ -65,7 +65,7 @@
   {{- if hugo.IsProduction -}}
   {{- $scripts = $scripts | minify | fingerprint -}}
   {{- end -}}
-  <script src="{{ $scripts.RelPermalink }}" integrity="{{ $scripts.Data.Integrity }}"></script>
+  <script src="{{ $scripts.RelPermalink }}"></script>
 
   <!-- Math engine -->
   {{ $noop := .WordCount -}}

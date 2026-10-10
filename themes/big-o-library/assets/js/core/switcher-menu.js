@@ -50,3 +50,8 @@ function resizeMenu(switcher) {
 
   optionsElement.style.transform = `translate3d(${translate.x}px, ${translate.y}px, 0)`;
 }
+
+// Cada arquivo de core/ roda isolado; o seletor de idiomas (lang.js) usa estas funções.
+window.toggleMenu = toggleMenu;
+window.resizeMenu = resizeMenu;
+window.computeMenuTranslation = computeMenuTranslation;
