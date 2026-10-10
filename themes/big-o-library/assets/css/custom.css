@@ -391,3 +391,94 @@ main p a:hover,main li a:hover,main td a:hover{text-decoration-thickness:2px}
 
 .bo-404{min-height:60vh;display:flex;flex-direction:column;justify-content:center;gap:18px;padding-top:64px;padding-bottom:64px}
 main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
+
+/* ═══ Conselho dos Sábios ═══ */
+.bo-sage-intro{max-width:720px;margin:-16px 0 24px;color:var(--body)}
+
+/* $ fortune */
+.bo-fortune{margin:0 0 44px;border:1px dashed var(--line);border-radius:12px;background:var(--card);overflow:hidden}
+.bo-fortune-bar{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:10px 16px;border-bottom:1px dashed var(--line);font-size:13px}
+.bo-fortune-cmd{color:var(--ac)}
+.bo-fortune-btn{font:inherit;font-size:13px;color:var(--txt);background:transparent;border:1px solid var(--line);border-radius:6px;padding:5px 12px;cursor:pointer;transition:border-color .2s ease,color .2s ease,background-color .2s ease}
+.bo-fortune-btn:hover{border-color:var(--ac);color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,transparent)}
+.bo-fortune-btn:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.bo-fortune-q{margin:0;padding:24px clamp(16px,3vw,32px) 22px;min-height:9.5rem;display:flex;flex-direction:column;justify-content:center;gap:12px}
+.bo-fortune-q p{margin:0;font:italic 500 clamp(19px,2.6vw,26px)/1.45 Fraunces,Georgia,serif;color:var(--txt);max-width:60ch}
+.bo-fortune-q p::after{content:"▍";margin-left:2px;color:var(--ac);animation:blink 1s steps(1) infinite}
+.bo-fortune-q footer{font-size:13px}
+.bo-fortune-q footer a{color:var(--mute);text-decoration:none}
+.bo-fortune-q footer a::before{content:"— ";color:var(--ac)}
+.bo-fortune-q footer a:hover{color:var(--ac)}
+
+/* grade */
+.bo-council{list-style:none;margin:0 0 4rem;padding:0;display:grid;grid-template-columns:repeat(auto-fill,minmax(min(300px,100%),1fr));gap:28px;align-items:stretch}
+.bo-sage{margin:0!important;padding:0!important;display:flex;perspective:1000px;scroll-margin-top:96px}
+.bo-sage::marker{content:none}
+.bo-js .bo-sage{opacity:0;transform:translateY(22px);transition:opacity .6s ease,transform .6s cubic-bezier(.2,.7,.3,1);transition-delay:calc(var(--k,0)*90ms)}
+.bo-js .bo-sage.in{opacity:1;transform:none}
+
+/* card */
+.bo-sage-card{--rx:0deg;--ry:0deg;--gx:50%;--gy:0%;position:relative;flex:1;display:flex;flex-direction:column;gap:16px;padding:18px;
+  background:linear-gradient(180deg,color-mix(in srgb,var(--c) 10%,var(--card)),var(--card) 46%);
+  border:1px solid color-mix(in srgb,var(--c) 28%,var(--line));border-radius:14px;overflow:hidden;
+  transform:rotateX(var(--rx)) rotateY(var(--ry));transform-style:preserve-3d;
+  transition:transform .18s ease-out,border-color .2s ease,box-shadow .3s ease;will-change:transform}
+.bo-sage-card::before{content:"";position:absolute;left:0;right:0;top:0;height:3px;background:var(--c)}
+.bo-sage-card::after{content:"";position:absolute;inset:0;pointer-events:none;opacity:0;transition:opacity .3s ease;
+  background:radial-gradient(420px circle at var(--gx) var(--gy),color-mix(in srgb,var(--c) 22%,transparent),transparent 60%)}
+@media (hover:hover){
+  .bo-sage-card:hover{border-color:var(--c);box-shadow:0 22px 38px -20px color-mix(in srgb,var(--c) 70%,transparent),0 2px 8px rgba(0,0,0,.06)}
+  .bo-sage-card:hover::after{opacity:1}
+  .bo-sage-card:hover .bo-sage-photo img{filter:none;transform:scale(1.05)}
+}
+.bo-sage:target .bo-sage-card{animation:bo-sage-ping 1.4s ease-out 1}
+@keyframes bo-sage-ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 70%,transparent)}100%{box-shadow:0 0 0 18px transparent}}
+
+/* topo */
+.bo-sage-top{display:flex;align-items:center;gap:8px;font-size:12px}
+.bo-sage-per{color:var(--c);font-weight:500;letter-spacing:.2px}
+.bo-sage-num{margin-left:auto;color:var(--mute)}
+.bo-sage-demo{padding:1px 7px;border:1px dashed var(--mute);border-radius:99px;color:var(--mute);font-size:11px;text-transform:uppercase;letter-spacing:.6px}
+
+/* foto */
+.bo-sage-photo{position:relative;margin:0;aspect-ratio:4/5;border-radius:10px;overflow:hidden;
+  background:repeating-linear-gradient(135deg,color-mix(in srgb,var(--c) 14%,var(--bg)) 0 10px,color-mix(in srgb,var(--c) 8%,var(--bg)) 10px 20px);
+  border:1px solid color-mix(in srgb,var(--c) 50%,var(--line))}
+.bo-sage-photo img{position:absolute;inset:0;width:100%;height:100%;margin:0;object-fit:cover;filter:grayscale(.4) contrast(1.04);transition:filter .45s ease,transform .7s cubic-bezier(.2,.7,.3,1)}
+.bo-sage-mono{position:absolute;inset:0;display:grid;place-items:center;font:600 clamp(64px,9vw,92px)/1 Fraunces,Georgia,serif;color:var(--c);opacity:.7;letter-spacing:-2px}
+.bo-sage-class{position:absolute;left:10px;bottom:10px;padding:4px 10px;border-radius:6px;font-size:13px;font-weight:500;
+  background:color-mix(in srgb,var(--bg) 88%,transparent);color:var(--c);border:1px solid color-mix(in srgb,var(--c) 60%,transparent);backdrop-filter:blur(6px)}
+
+/* identidade */
+.bo-sage-id{display:flex;flex-direction:column;gap:4px}
+.bo-sage-name{margin:0;font:600 23px/1.2 Fraunces,Georgia,serif;letter-spacing:-.3px;color:var(--txt)}
+.bo-sage-title{margin:0;font-size:13px;color:var(--c);font-weight:500}
+.bo-sage-title::before{content:"> ";opacity:.7}
+.bo-sage-disc{margin:0;font-size:13px;color:var(--mute)}
+
+/* frase marcante */
+.bo-sage-quote{position:relative;flex:1;margin:0;padding:18px 16px 16px 18px;border-left:3px solid var(--c);border-radius:0 10px 10px 0;
+  background:color-mix(in srgb,var(--c) 8%,transparent)}
+.bo-sage-quote::before{content:"\201C";position:absolute;top:-8px;right:12px;font:700 76px/1 Fraunces,Georgia,serif;color:var(--c);opacity:.22;pointer-events:none}
+.bo-sage-quote p{position:relative;margin:0;font:italic 500 18px/1.5 Fraunces,Georgia,serif;color:var(--txt)}
+
+/* rodapé */
+.bo-sage-foot{display:flex;flex-direction:column;align-items:flex-start;gap:12px;padding-top:2px}
+.bo-sage-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px}
+.bo-sage-tags li{margin:0;padding:2px 9px;border-radius:99px;font-size:12px;color:var(--body);border:1px solid var(--line);background:var(--card)}
+.bo-sage-gh{display:inline-flex;align-items:center;gap:8px;max-width:100%;padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;color:var(--txt)!important;text-decoration:none!important;transition:border-color .2s ease,color .2s ease,background-color .2s ease}
+.bo-sage-gh span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bo-sage-gh:hover{border-color:var(--c);color:var(--c)!important;background:color-mix(in srgb,var(--c) 10%,transparent)}
+.bo-sage-gh:focus-visible{outline:2px solid var(--c);outline-offset:2px}
+.bo-sage-nogh{font-size:12.5px;color:var(--mute);padding:7px 0}
+.bo-sage-nogh::before{content:"// ";color:var(--c)}
+
+@media (max-width:640px){
+  .bo-council{gap:20px}
+  .bo-fortune-q{min-height:11rem}
+}
+@media (prefers-reduced-motion:reduce){
+  .bo-js .bo-sage{opacity:1;transform:none;transition:none}
+  .bo-sage-card,.bo-sage-photo img{transition:none!important;transform:none!important}
+  .bo-sage:target .bo-sage-card,.bo-fortune-q p::after{animation:none!important}
+}

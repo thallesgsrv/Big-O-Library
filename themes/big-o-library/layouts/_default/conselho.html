@@ -1,0 +1,167 @@
+{{- /* Conselho dos Sábios: cards dos professores que contribuíram com materiais (sem commit).
+       Dados: data/conselho.yaml  |  Fotos: static/images/conselho/
+       Foto: arquivo local > avatar do GitHub > monograma com as iniciais.
+       Cor do card = período (--p1..--p9). CSS: .bo-sage* em assets/css/custom.css */ -}}
+{{ define "main" }}
+{{ partial "sidebar.html" (dict "context" .) }}
+{{- $sages := hugo.Data.conselho.professores | default slice -}}
+<main class="bo-wrap" id="content">
+  {{ partial "bo-mhead.html" (dict
+      "prompt" "~/big-o-library $ cat conselho-dos-sabios.md"
+      "title" .Title
+      "lead" (.Params.summary | default .Params.description)) }}
+
+  {{ with .Content }}<div class="bo-sage-intro">{{ . }}</div>{{ end }}
+
+  {{- if $sages }}
+  <script>document.documentElement.classList.add("bo-js")</script>
+
+  {{- /* sábio sorteado: monta a lista de frases para o script */ -}}
+  {{- $quotes := slice -}}
+  {{- range $sages -}}
+    {{- $quotes = $quotes | append (dict "nome" .nome "frase" .frase "id" (replace (.nome | urlize) "." "")) -}}
+  {{- end }}
+
+  <section class="bo-fortune" aria-labelledby="bo-fortune-h">
+    <div class="bo-fortune-bar">
+      <span id="bo-fortune-h" class="bo-fortune-cmd" aria-hidden="true">$ fortune --sabios</span>
+      <button type="button" class="bo-fortune-btn" id="bo-fortune-next" aria-label="Sortear outra frase">outra ↻</button>
+    </div>
+    <blockquote class="bo-fortune-q" aria-live="polite">
+      <p id="bo-fortune-text">{{ (index $sages 0).frase }}</p>
+      <footer><a id="bo-fortune-who" href="#sabio-{{ (replace ((index $sages 0).nome | urlize) "." "") }}">{{ (index $sages 0).nome }}</a></footer>
+    </blockquote>
+  </section>
+
+  <ol class="bo-council" aria-label="Professores do Conselho dos Sábios">
+    {{- range $i, $p := $sages }}
+      {{- $slug := replace ($p.nome | urlize) "." "" -}}
+      {{- $per := int ($p.periodo | default 0) -}}
+      {{- $color := "var(--ac)" -}}
+      {{- if and (gt $per 0) (le $per 9) }}{{ $color = printf "var(--p%d)" $per }}{{ end -}}
+
+      {{- /* foto: local > avatar do GitHub > nenhuma (monograma) */ -}}
+      {{- $img := "" -}}
+      {{- with $p.foto -}}
+        {{- if fileExists (printf "static/images/conselho/%s" .) -}}
+          {{- $img = printf "images/conselho/%s" . | relURL -}}
+        {{- end -}}
+      {{- end -}}
+      {{- if and (not $img) $p.github }}{{ $img = printf "https://github.com/%s.png?size=480" $p.github }}{{ end -}}
+
+      {{- /* iniciais: ignora "Prof./Profa./Dr./Dra." */ -}}
+      {{- $clean := replaceRE `^(Prof|Dr)[a\.]*\s+` "" $p.nome -}}
+      {{- $w := split $clean " " -}}
+      {{- $ini := substr (index $w 0) 0 1 -}}
+      {{- if gt (len $w) 1 }}{{ $ini = printf "%s%s" $ini (substr (index $w (sub (len $w) 1)) 0 1) }}{{ end }}
+
+    <li class="bo-sage" id="sabio-{{ $slug }}" style="--c: {{ $color | safeCSS }}; --k: {{ mod $i 3 }}">
+      <article class="bo-sage-card">
+        <header class="bo-sage-top">
+          <span class="bo-sage-per">{{ if gt $per 0 }}{{ $per }}º período{{ else }}optativa{{ end }}</span>
+          {{ if $p.exemplo }}<span class="bo-sage-demo" title="Dados de exemplo: troque em data/conselho.yaml">exemplo</span>{{ end }}
+          <span class="bo-sage-num" aria-hidden="true">#{{ printf "%02d" (add $i 1) }}</span>
+        </header>
+
+        <figure class="bo-sage-photo">
+          <span class="bo-sage-mono" aria-hidden="true">{{ upper $ini }}</span>
+          {{ with $img }}<img src="{{ . }}" alt="Foto de {{ $p.nome }}" width="480" height="600" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">{{ end }}
+          <span class="bo-sage-class" aria-label="Classe de complexidade">{{ $p.classe | default "O(1)" }}</span>
+        </figure>
+
+        <div class="bo-sage-id">
+          <h2 class="bo-sage-name">{{ $p.nome }}</h2>
+          {{ with $p.titulo }}<p class="bo-sage-title">{{ . }}</p>{{ end }}
+          {{ with $p.disciplina }}<p class="bo-sage-disc">{{ . }}</p>{{ end }}
+        </div>
+
+        <blockquote class="bo-sage-quote">
+          <p>{{ $p.frase }}</p>
+        </blockquote>
+
+        <footer class="bo-sage-foot">
+          {{- with $p.materiais }}
+          <ul class="bo-sage-tags" aria-label="Contribuições">
+            {{- range . }}<li>{{ . }}</li>{{ end }}
+          </ul>
+          {{- end }}
+          {{- if $p.github }}
+          <a class="bo-sage-gh" href="https://github.com/{{ $p.github }}" target="_blank" rel="noopener">
+            <svg viewBox="0 0 16 16" width="15" height="15" aria-hidden="true" fill="currentColor"><path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47 7.59.4.07.55-.17.55-.38 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09-.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01 1.08.58 1.23.82.72 1.21 1.87.87 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0 .67-.21 2.2.82a7.6 7.6 0 0 1 4 0c1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.01 8.01 0 0 0 16 8c0-4.42-3.58-8-8-8z"/></svg>
+            <span>@{{ $p.github }}</span>
+            <span aria-hidden="true">↗</span>
+          </a>
+          {{- else }}
+          <span class="bo-sage-nogh">sem GitHub · contribuiu com material</span>
+          {{- end }}
+        </footer>
+      </article>
+    </li>
+    {{- end }}
+  </ol>
+
+  <script type="application/json" id="bo-fortune-data">{{ $quotes | jsonify | safeJS }}</script>
+  <script>
+  (function () {
+    var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+    /* ── $ fortune: sorteia e "digita" a frase ── */
+    var data = [];
+    try { data = JSON.parse(document.getElementById("bo-fortune-data").textContent); } catch (e) {}
+    var text = document.getElementById("bo-fortune-text");
+    var who = document.getElementById("bo-fortune-who");
+    var btn = document.getElementById("bo-fortune-next");
+    var last = -1, timer = null;
+
+    function show(i) {
+      var d = data[i]; if (!d) return;
+      clearInterval(timer);
+      who.textContent = d.nome;
+      who.setAttribute("href", "#sabio-" + d.id);
+      if (reduce) { text.textContent = d.frase; return; }
+      var n = 0; text.textContent = "";
+      timer = setInterval(function () {
+        n += 2; text.textContent = d.frase.slice(0, n);
+        if (n >= d.frase.length) clearInterval(timer);
+      }, 16);
+    }
+    function next() {
+      if (data.length < 2) { show(0); return; }
+      var i; do { i = Math.floor(Math.random() * data.length); } while (i === last);
+      last = i; show(i);
+    }
+    if (btn) btn.addEventListener("click", next);
+    if (data.length) { last = Math.floor(Math.random() * data.length); show(last); }
+
+    /* ── aparecer ao rolar ── */
+    var items = document.querySelectorAll(".bo-sage");
+    if ("IntersectionObserver" in window && !reduce) {
+      var io = new IntersectionObserver(function (es) {
+        es.forEach(function (e) { if (e.isIntersecting) { e.target.classList.add("in"); io.unobserve(e.target); } });
+      }, { rootMargin: "0px 0px -8% 0px", threshold: 0.08 });
+      items.forEach(function (el) { io.observe(el); });
+    } else { items.forEach(function (el) { el.classList.add("in"); }); }
+
+    /* ── tilt 3D (só mouse; desligado com reduced-motion) ── */
+    if (!reduce && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
+      document.querySelectorAll(".bo-sage-card").forEach(function (card) {
+        card.addEventListener("pointermove", function (e) {
+          var r = card.getBoundingClientRect();
+          var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
+          card.style.setProperty("--ry", ((px - 0.5) * 9).toFixed(2) + "deg");
+          card.style.setProperty("--rx", ((0.5 - py) * 7).toFixed(2) + "deg");
+          card.style.setProperty("--gx", (px * 100).toFixed(1) + "%");
+          card.style.setProperty("--gy", (py * 100).toFixed(1) + "%");
+        });
+        card.addEventListener("pointerleave", function () {
+          card.style.setProperty("--rx", "0deg"); card.style.setProperty("--ry", "0deg");
+        });
+      });
+    }
+  })();
+  </script>
+  {{- else }}
+  <p class="bo-small">Nenhum sábio cadastrado ainda. Edite <code>data/conselho.yaml</code>.</p>
+  {{- end }}
+</main>
+{{ end }}

@@ -8,6 +8,7 @@ hideEdit: true
 <div id="bo-contributors" class="bo-people" aria-live="polite" aria-busy="true">
   <span class="bo-small">Carregando colaboradores...</span>
 </div>
+<p class="bo-small">Contribuiu com material, mas não com commit? Conheça o <a href="{{< relref "conselho" >}}">Conselho dos Sábios</a>.</p>
 <p class="bo-small">Lista gerada a partir dos <a href="https://github.com/thallesgsrv/Big-O-Library/graphs/contributors" target="_blank" rel="noopener">contribuidores do repositório</a>.</p>
 
 <script>
