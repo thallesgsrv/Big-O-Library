@@ -1,12 +1,23 @@
 ---
 title: Estágio 1 - Matrizes e Sistemas Lineares
 weight: 1
-rotulo: Contúdos
+rotulo: Conteúdos
 description: Introdução ao estudo de matrizes, operações com matrizes e sistemas lineares.
 autores:
   - MateusSRocha
 date: 2026-10-07
 ---
+
+## Bagagem esperada
+
+Este estágio trata de matrizes, então o pré-requisito é pequeno:
+
+- **Operações com números reais:** soma, produto, potências e sinais. Cada elemento de uma matriz é um número, e quase todo erro em exercício de matriz vem de um erro de conta.
+- **Propriedades das operações:** comutatividade, associatividade e distributividade. Elas ajudam a notar que a multiplicação de matrizes **não** é comutativa, ou seja, $AB \neq BA$ em geral.
+- **Notação com índices:** ler $a_{ij}$ como "linha $i$, coluna $j$". Também ajuda conhecer o somatório $\sum$, porque cada elemento de $AB$ é uma soma de produtos.
+- **Símbolos básicos:** $\forall$, $\in$ e a ideia de igualdade entre objetos, usados na definição de matrizes iguais.
+
+Não é preciso ter visto matrizes antes: o estágio começa da definição.
 
 ## Listas de exercícios
 
