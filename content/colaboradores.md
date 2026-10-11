@@ -8,6 +8,7 @@ hideEdit: true
 <div id="bo-contributors" class="bo-people" aria-live="polite" aria-busy="true">
   <span class="bo-small">Carregando colaboradores...</span>
 </div>
+<noscript><p class="bo-small">Ative o JavaScript para ver a lista aqui, ou acesse <a href="https://github.com/thallesgsrv/Big-O-Library/graphs/contributors" target="_blank" rel="noopener">os contribuidores no GitHub</a>.</p></noscript>
 <p class="bo-small">Contribuiu com material, mas não com commit? Conheça o <a href="{{< relref "conselho" >}}">Conselho dos Sábios</a>.</p>
 <p class="bo-small">Lista gerada a partir dos <a href="https://github.com/thallesgsrv/Big-O-Library/graphs/contributors" target="_blank" rel="noopener">contribuidores do repositório</a>.</p>
 
@@ -47,7 +48,6 @@ hideEdit: true
     container.setAttribute("aria-busy", "false");
   }
 
-  // cache de sessão: evita estourar o limite da API anônima (60 req/h por IP)
   try {
     var c = JSON.parse(sessionStorage.getItem(CACHE_KEY) || "null");
     if (c && Date.now() - c.t < CACHE_MS) { render(c.d); return; }

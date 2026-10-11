@@ -9,7 +9,7 @@
     hx:p-1 hx:text-current
     hx:transition-colors hx:cursor-pointer hx:hextra-focus-visible
     hx:md:justify-start hx:md:gap-2 hx:md:p-0 hx:md:px-3 hx:md:py-2
-    hx:md:w-48 hx:md:text-sm hx:md:leading-tight
+    hx:md:w-44 hx:md:text-sm hx:md:leading-tight hx:md:whitespace-nowrap
     hx:md:bg-black/5 hx:md:dark:bg-gray-50/10
     hx:md:text-gray-500 hx:md:hover:text-gray-900
     hx:md:dark:text-gray-400 hx:md:dark:hover:text-gray-50;
@@ -21,11 +21,11 @@
 }
 
 .hextra-search-trigger-label {
-  @apply hx:hidden hx:md:inline hx:grow hx:text-start;
+  @apply hx:hidden hx:md:inline hx:grow hx:text-start hx:truncate;
 }
 
 .hextra-search-trigger-kbd {
-  @apply hx:hidden hx:md:inline-flex hx:items-center hx:gap-0.5 hx:select-none
+  @apply hx:hidden hx:md:inline-flex hx:shrink-0 hx:whitespace-nowrap hx:items-center hx:gap-0.5 hx:select-none
     hx:rounded-sm hx:border hx:border-gray-200 hx:dark:border-gray-100/20
     hx:bg-white hx:dark:bg-dark/50 hx:px-1.5 hx:font-mono hx:text-[10px] hx:font-medium hx:text-gray-500;
 }
@@ -152,6 +152,16 @@
     hx:hover:text-gray-900 hx:dark:hover:text-gray-100
     hx:hover:border-gray-300 hx:dark:hover:border-gray-100/30
     hx:hextra-focus-visible;
+}
+
+/* Dica abaixo do campo: pode quebrar linha, então a mensagem inteira aparece no celular.
+   Some assim que a pessoa começa a digitar. */
+.hextra-search-hint {
+  @apply hx:m-0 hx:px-4 hx:py-2 hx:text-xs hx:leading-4 hx:text-gray-500 hx:dark:text-gray-400;
+}
+
+.hextra-search:has(.hextra-search-input:not(:placeholder-shown)) .hextra-search-hint {
+  display: none;
 }
 
 /* Results viewport: animates height smoothly as results change. */

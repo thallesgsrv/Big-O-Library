@@ -1,6 +1,7 @@
 {{- if (site.Params.search.enable | default true) -}}
   {{- $placeholder := (T "searchPlaceholder") | default "Search..." -}}
   {{- $searchResults := (T "searchResults") | default "Search results" -}}
+  {{- $hint := (T "searchHint") | default "" -}}
   {{- $noResults := (T "noResultsFound") | default "No results found." -}}
   <dialog
     id="hextra-search-dialog"
@@ -31,6 +32,9 @@
           aria-label="{{ $closeLabel }}"
         >ESC</button>
       </div>
+      {{- if $hint }}
+      <p class="hextra-search-hint">{{ $hint }}</p>
+      {{- end }}
       <div class="hextra-search-results-viewport" data-search-viewport>
         <div class="hextra-search-results-inner hextra-scrollbar" data-search-inner>
           <ul

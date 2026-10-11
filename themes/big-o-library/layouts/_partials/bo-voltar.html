@@ -1,0 +1,6 @@
+{{- /* Rodapé de voltar (mesmo .bo-page-foot das páginas de docs): "← Título da página pai".
+       Sem pai (ex.: /lab/ direto na raiz), volta para a home. Usado nas páginas do lab. */ -}}
+{{- $up := .Parent | default site.Home -}}
+<div class="bo-page-foot">
+  <a href="{{ $up.RelPermalink }}">← {{ if $up.IsHome }}início{{ else }}{{ $up.Title }}{{ end }}</a>
+</div>

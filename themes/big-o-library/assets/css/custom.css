@@ -567,8 +567,10 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 /* mapa */
 .bo-m{margin-bottom:72px}
 .bo-m-tools{display:flex;gap:16px 28px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.bo-m-sel{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--mute)}
-.bo-m-sel select{max-width:min(78vw,380px);padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--txt);font:inherit;font-size:14px}
+.bo-m-sel{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;min-width:0;max-width:100%;font-size:14px;color:var(--mute)}
+.bo-m-sel select{flex:1 1 220px;min-width:0;width:100%;max-width:380px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--txt);font:inherit;font-size:14px;text-overflow:ellipsis}
+@media (max-width:560px){.bo-m-sel{flex-direction:column;align-items:stretch}.bo-m-sel select{max-width:100%;flex:none}}
+.bo-mhead>.bo-crumbs{margin-bottom:.9rem}
 .bo-m-leg{display:flex;align-items:center;gap:6px}
 .bo-m-leg i{display:inline-block;width:18px;height:10px;border-radius:3px;border:1px solid var(--mute)}
 .bo-m-lg-ghost{border-style:dashed!important}
@@ -627,7 +629,8 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-term-line.is-err{color:var(--p8)}
 .bo-term-line.is-quote{font-size:15px;color:var(--txt);font-style:italic}
 .bo-term-line.is-man{font-size:12.5px;color:var(--txt)}
-.bo-term-opt .bo-term-t{white-space:pre}
+.bo-term-opt .bo-term-t{white-space:pre-wrap;overflow-wrap:anywhere}
+.bo-term-opt .hextra-search-excerpt{-webkit-line-clamp:4;line-clamp:4}
 
 /* sábios nas páginas */
 .bo-credits-person.is-sabio{padding:3px 12px 3px 3px;border-color:color-mix(in srgb,var(--c) 55%,var(--line))}

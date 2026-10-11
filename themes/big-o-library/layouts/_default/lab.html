@@ -4,6 +4,7 @@
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
       "prompt" "~/big-o-library $ ls lab/"
+      "crumbs" (slice)
       "title" .Title
       "lead" (.Params.summary | default .Params.description)) }}
 
@@ -22,5 +23,6 @@
     </a>
     {{- end }}
   </div>
+  {{ partial "bo-voltar.html" . }}
 </main>
 {{ end }}

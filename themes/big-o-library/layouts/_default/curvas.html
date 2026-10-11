@@ -5,6 +5,7 @@
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
       "prompt" "~/big-o-library $ ./curvas --n 20"
+      "crumbs" (slice (dict "url" ("lab/" | relURL) "label" "lab"))
       "title" .Title
       "lead" (.Params.summary | default .Params.description)) }}
 
@@ -114,5 +115,6 @@
     update();
   })();
   </script>
+  {{ partial "bo-voltar.html" . }}
 </main>
 {{ end }}
