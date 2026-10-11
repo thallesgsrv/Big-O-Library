@@ -30,22 +30,14 @@
 
   {{- $mainCss := resources.Get "css/compiled/main.css" -}}
   {{- $customCss := resources.Get "css/custom.css" -}}
-  {{- $variablesCss := resources.Get "css/variables.css" | resources.ExecuteAsTemplate "css/variables.css" . -}}
+  {{- $variablesCss := resources.Get "css/variables.css" -}}
 
-  {{- /* Production build */ -}}
   {{- if hugo.IsProduction }}
     {{- $styles := slice $variablesCss $mainCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
     <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" />
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
 
-  {{- /* Theme development mode (non-production + theme environment) */ -}}
-  {{- else if eq hugo.Environment "theme" }}
-    {{- $devStyles := resources.Get "css/styles.css" | postCSS (dict "inlineImports" true) }}
-    <link href="{{ $devStyles.RelPermalink }}" rel="stylesheet" />
-    <link href="{{ $variablesCss.RelPermalink }}" rel="stylesheet" />
-    <link href="{{ $customCss.RelPermalink }}" rel="stylesheet" />
-
-  {{- /* User local development */ -}}
+  {{- /* Desenvolvimento local: arquivos separados, sem minificar */ -}}
   {{- else }}
     {{- $styles := resources.Get "css/compiled/main.css" -}}
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
@@ -67,13 +59,20 @@
   {{- end -}}
   <script src="{{ $scripts.RelPermalink }}"></script>
 
-  <!-- Math engine -->
+  {{- /* .WordCount força a renderização do conteúdo, que é quando o hook de passthrough marca "hasMath". */ -}}
   {{ $noop := .WordCount -}}
-  {{- $engine := site.Params.math.engine | default "katex" -}}
-  {{ if and (.Page.Store.Get "hasMath") (eq $engine "katex") -}}
+  {{ if .Page.Store.Get "hasMath" -}}
     {{ partialCached "scripts/katex.html" . -}}
   {{ end -}}
 
-  {{ partial "utils/page-width-override.html" . }}
-  {{ partial "custom/head-end.html" . -}}
+  {{- /* Fontes: com params.fontesLocais vêm de static/fonts/ (gerado por scripts/baixar_fontes.py);
+         sem ele, do Google Fonts. */ -}}
+  {{- if site.Params.fontesLocais }}
+  {{ partial "fontes.html" . }}
+  {{- else }}
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,600;1,9..144,500&family=IBM+Plex+Mono:wght@400;500;600&display=swap">
+  {{- end }}
+  <meta name="bo-tree" content="{{ partialCached "bo-tree.html" . }}">
 </head>

@@ -7,15 +7,3 @@
     backface-visibility: hidden;
   }
 }
-
-.hextra-sidebar-container {
-  li > .hextra-sidebar-children {
-    @apply hx:h-0;
-  }
-  li.open > .hextra-sidebar-children {
-    @apply hx:h-auto hx:pt-1;
-  }
-  li.open > .hextra-sidebar-item > .hextra-sidebar-collapsible-button > svg > path {
-    @apply hx:rotate-90;
-  }
-}

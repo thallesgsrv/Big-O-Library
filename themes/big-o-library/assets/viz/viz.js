@@ -217,7 +217,7 @@
     yield* query(3, 6);
   }
 
-  /* ---------- Ordenação: desenho de vetores (kind: 'array') ---------- */
+  /* Ordenação: desenho de vetores (kind: 'array') */
   const faixa = (x, y) => (x > y ? 'vazio' : x === y ? `[${x}]` : `[${x}..${y}]`);
 
   function* selection() {

@@ -239,7 +239,7 @@ Com o Hugo instalado, o comando `hugo new --kind disciplina docs/01-periodo/nome
 Antes de abrir o Pull Request, confira como a página ficou. Você precisa de duas coisas:
 
 - **Git**, instalado e no PATH. Use `git clone`: baixar o ZIP do GitHub não funciona, porque o site lê as datas de atualização do histórico do Git.
-- **Hugo extended** 0.165.0 ou mais novo. Confira com `hugo version`: a linha precisa conter `+extended`.
+- **Hugo extended** 0.165.0 (outras versões podem quebrar as fórmulas). Confira com `hugo version`: a linha precisa conter `+extended`.
 
 Não precisa de Node, Go, submódulos nem de internet para compilar: o tema, a busca e as fórmulas já vêm dentro do repositório.
 
@@ -263,7 +263,8 @@ hugo server
 **macOS**
 
 ```bash
-brew install git hugo
+brew install git
+# Hugo 0.165.0: baixe em github.com/gohugoio/hugo/releases/tag/v0.165.0
 git clone https://github.com/thallesgsrv/Big-O-Library.git
 cd Big-O-Library
 hugo server
@@ -273,7 +274,7 @@ hugo server
 
 ```powershell
 winget install Git.Git
-winget install Hugo.Hugo.Extended
+winget install Hugo.Hugo.Extended --version 0.165.0
 # feche e abra o terminal para o PATH atualizar, depois:
 git clone https://github.com/thallesgsrv/Big-O-Library.git
 cd Big-O-Library

@@ -18,5 +18,4 @@
   <div class="bo-crumb-cmd" aria-hidden="true">$ {{ .cmd }}</div>
 </nav>
 {{- $items = $items | append (dict "@type" "ListItem" "position" (add (len $items) 1) "name" $p.Title "item" $p.Permalink) }}
-<script>(function(){var n=document.currentScript.previousElementSibling,l=n&&n.querySelector('.bo-crumbs-list');if(!l)return;function u(){var o=l.scrollWidth>l.clientWidth+1;n.toggleAttribute('data-more-l',o&&l.scrollLeft>1);n.toggleAttribute('data-more-r',o&&l.scrollLeft+l.clientWidth<l.scrollWidth-1)}function f(){l.scrollLeft=l.scrollWidth;u()}f();l.addEventListener('scroll',u,{passive:true});addEventListener('resize',u);addEventListener('load',f);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(f)})()</script>
 <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items | jsonify | safeJS }}</script>

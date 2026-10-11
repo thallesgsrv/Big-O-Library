@@ -5,10 +5,10 @@ Assim o `hugo` compila sem internet e sem depender do jsdelivr. Só precisa
 rodar de novo para atualizar versão. Usa apenas a biblioteca padrão do Python
 e o registro do npm (tarballs oficiais dos pacotes).
 
-Atenção ao KaTeX: o CSS tem que ser da mesma linha do KaTeX embutido no Hugo.
-  Hugo < 0.166.0   ->  KaTeX 0.16.x   (é o caso do Hugo 0.165.0 do site)
+O CSS do KaTeX tem que ser da mesma linha do KaTeX embutido no Hugo:
+  Hugo < 0.166.0   ->  KaTeX 0.16.x   (Hugo 0.165.0, versão fixada no projeto)
   Hugo >= 0.166.0  ->  KaTeX 0.18.x
-Ao subir a versão do Hugo, troque KATEX_VERSION aqui e rode o script.
+Ao atualizar o Hugo, troque KATEX_VERSION aqui, rode o script e atualize o CI.
 """
 import io
 import json

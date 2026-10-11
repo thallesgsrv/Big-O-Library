@@ -23,7 +23,7 @@
   function preloadIndex() {
     if (indexPromise) return indexPromise;
     const attempt = (async () => {
-      const tokenize = '{{- site.Params.search.flexsearch.tokenize | default  "forward" -}}';
+      const tokenize = 'forward';
 
       // https://github.com/TryGhost/Ghost/pull/21148
       const regex = new RegExp(
@@ -150,8 +150,8 @@
    * @returns {Array<{id: string, route: string, title: string, breadcrumbs: string[], matches: Array<{id: string, route: string, title: string, content: string}>}>}
    */
   function performSearch(query) {
-    const maxPageResults = parseInt('{{- site.Params.search.flexsearch.maxPageResults | default 20 -}}', 10);
-    const maxSectionResults = parseInt('{{- site.Params.search.flexsearch.maxSectionResults | default 10 -}}', 10);
+    const maxPageResults = 20;
+    const maxSectionResults = 10;
     const pageResults = pageIndex.search(query, maxPageResults, { enrich: true, suggest: true })[0]?.result || [];
 
     const groups = [];

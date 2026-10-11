@@ -57,9 +57,10 @@
   {{ with .Content }}<div class="bo-sage-intro">{{ . }}</div>{{ end }}
 
   {{- if $list }}
+  {{- /* Inline de propósito: precisa rodar antes da primeira pintura para os cards não piscarem. */}}
   <script>document.documentElement.classList.add("bo-js")</script>
 
-  {{- /* ── A MESA: palco com a frase em destaque + assentos ── */}}
+  {{- /* A mesa: palco com a frase em destaque + assentos */}}
   <section class="bo-stage" aria-label="A mesa do conselho" style="--c: {{ (index $list $first).c | safeCSS }}">
     <div class="bo-stage-bar">
       <span class="bo-stage-cmd" aria-hidden="true">$ fortune --sabios</span>
@@ -95,7 +96,7 @@
     </ul>
   </section>
 
-  {{- /* ── OS CARDS ── */}}
+  {{- /* Os cards */}}
   <ol class="bo-council" aria-label="Professores do Conselho dos Sábios">
     {{- range $list }}
     {{- $p := .p }}
@@ -155,7 +156,7 @@
   (function () {
     var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
-    /* ── a mesa: troca de sábio ── */
+    /* A mesa: troca de sábio */
     var stage = document.querySelector(".bo-stage");
     if (stage) {
       var slides = [].slice.call(stage.querySelectorAll(".bo-slide"));
@@ -191,7 +192,7 @@
       pick(); /* começa com um sábio aleatório */
     }
 
-    /* ── cards: aparecer ao rolar ── */
+    /* Cards: aparecer ao rolar */
     var items = document.querySelectorAll(".bo-sage");
     if ("IntersectionObserver" in window && !reduce) {
       var io = new IntersectionObserver(function (es) {
@@ -200,7 +201,7 @@
       items.forEach(function (el) { io.observe(el); });
     } else { items.forEach(function (el) { el.classList.add("in"); }); }
 
-    /* ── cards: inclinação 3D (só mouse; desligada com reduced-motion) ── */
+    /* Cards: inclinação 3d (só mouse; desligada com reduced-motion) */
     if (!reduce && window.matchMedia("(hover: hover) and (pointer: fine)").matches) {
       document.querySelectorAll(".bo-sage-card").forEach(function (card) {
         card.addEventListener("pointermove", function (e) {

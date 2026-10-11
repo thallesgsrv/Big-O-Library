@@ -1,20 +1,24 @@
 document.addEventListener("DOMContentLoaded", function () {
   scrollToActiveItem();
-  enableCollapsibles();
+  syncInertWithDrawer();
 });
 
-function enableCollapsibles() {
-  const buttons = document.querySelectorAll(".hextra-sidebar-collapsible-button");
-  buttons.forEach(function (button) {
-    button.addEventListener("click", function (e) {
-      e.preventDefault();
-      const list = button.closest('li');
-      if (list) {
-        list.classList.toggle("open");
-        button.setAttribute('aria-expanded', list.classList.contains('open') ? 'true' : 'false');
-      }
-    });
-  });
+// O menu lateral fechado (mobile) só sai da tela por transform, então seus links continuariam
+// na ordem de Tab e no leitor de tela. Enquanto estiver fechado, recebe `inert`.
+// Se o mecanismo de abertura mudar, o clique no botão do menu ainda remove o `inert`.
+function syncInertWithDrawer() {
+  const drawer = document.querySelector(".hextra-sidebar-container");
+  if (!drawer) return;
+
+  function sync() {
+    if (drawer.className.indexOf("translate3d(0,-100%,0)") > -1) drawer.setAttribute("inert", "");
+    else drawer.removeAttribute("inert");
+  }
+  sync();
+  new MutationObserver(sync).observe(drawer, { attributes: true, attributeFilter: ["class"] });
+
+  const button = document.querySelector(".hextra-hamburger-menu");
+  if (button) button.addEventListener("click", function () { drawer.removeAttribute("inert"); });
 }
 
 function scrollToActiveItem() {

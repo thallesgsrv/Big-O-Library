@@ -1,4 +1,9 @@
 #!/usr/bin/env python3
+"""Baixa as fontes do Google Fonts para static/fonts/ e gera _partials/fontes.html.
+
+Opcional: o site já usa as fontes locais (params.fontesLocais em hugo.yaml).
+Só precisa rodar de novo para trocar as famílias ou pesos em CSS_URL.
+"""
 import re, sys, pathlib, urllib.request
 
 CSS_URL = ("https://fonts.googleapis.com/css2?"

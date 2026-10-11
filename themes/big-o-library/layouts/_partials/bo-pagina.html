@@ -10,7 +10,6 @@
   {{- if and (ne .Params.toc false) .Fragments.Headings }}{{ partial "toc.html" . }}{{ end }}
   <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
     <main id="content" class="hx:w-full hx:min-w-0 hx:px-6 hx:pt-6 hx:md:px-12">
-      {{ partial "custom/page-begin.html" . }}
 
       <div class="{{ $p.class }}">
         {{ partial "bo-hero.html" (dict "page" . "badge" $p.badge "lead" (.Params.summary | default .Params.description)) }}
@@ -25,9 +24,7 @@
 
         <div class="bo-doc">
           <div class="content" data-bo-fold>
-            {{ partial "custom/content-begin.html" . }}
             {{ .Content }}
-            {{ partial "custom/content-end.html" . }}
           </div>
         </div>
 
@@ -43,7 +40,6 @@
         </div>
       </div>
 
-      {{ partial "custom/page-end.html" . }}
     </main>
   </article>
 </div>

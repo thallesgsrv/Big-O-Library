@@ -1,3 +1,2 @@
-# Mark generated files so they are collapsed by default in GitHub diffs
+# Arquivo gerado: recolhido por padrão nos diffs do GitHub
 assets/css/compiled/main.css linguist-generated=true
-docs/hugo_stats.json linguist-generated=true

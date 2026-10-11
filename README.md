@@ -40,7 +40,7 @@ Os materiais ficam no [site](https://thallesgsrv.github.io/Big-O-Library/docs/),
 | Ferramenta | Versão | Observação |
 |---|---|---|
 | [Git](https://git-scm.com/) | qualquer recente | Precisa estar no PATH. O site lê as datas de atualização do histórico do Git, então **use `git clone`**: baixar o ZIP do GitHub não funciona (o build falha com `failed to load Git data`). |
-| [Hugo **extended**](https://gohugo.io/installation/) | 0.165.0 ou mais novo | É a versão usada no site. O tema exige no mínimo a 0.146.0. Confira com `hugo version`: a linha precisa conter `+extended`. |
+| [Hugo **extended**](https://gohugo.io/installation/) | **0.165.0** | Versão usada no site e no CI. A partir da 0.166 o Hugo gera marcação das fórmulas (KaTeX 0.18) incompatível com o CSS do repositório (KaTeX 0.16), então use exatamente esta. Confira com `hugo version`: a linha precisa conter `+extended`. |
 
 Não é preciso Node, Go, submódulos do Git nem internet para compilar: o tema, a busca (FlexSearch) e as fórmulas (KaTeX) estão dentro do repositório, em `themes/big-o-library/`.
 
@@ -63,10 +63,10 @@ cd Big-O-Library
 hugo server
 ```
 
-**macOS**
+**macOS** (o `brew install hugo` instala a versão mais recente; baixe a 0.165.0 em [Releases](https://github.com/gohugoio/hugo/releases/tag/v0.165.0), arquivo `hugo_extended_0.165.0_darwin-universal.tar.gz`, e coloque o binário no PATH)
 
 ```bash
-brew install git hugo
+brew install git
 git clone https://github.com/thallesgsrv/Big-O-Library.git
 cd Big-O-Library
 hugo server
@@ -76,7 +76,7 @@ hugo server
 
 ```powershell
 winget install Git.Git
-winget install Hugo.Hugo.Extended
+winget install Hugo.Hugo.Extended --version 0.165.0
 # feche e abra o terminal para o PATH atualizar, depois:
 git clone https://github.com/thallesgsrv/Big-O-Library.git
 cd Big-O-Library
@@ -97,7 +97,7 @@ hugo new --kind disciplina docs/01-periodo/nome-da-disciplina/index.md
 |---|---|
 | `hugo: command not found` | Hugo não instalado ou terminal aberto antes da instalação. Instale e abra um terminal novo. |
 | `failed to load Git data: not a git repository` | Você baixou o ZIP. Use `git clone`. |
-| Erro de versão ou de recurso do Hugo | Versão antiga ou sem `+extended`. Atualize e confira com `hugo version`. |
+| Erro de versão ou de recurso do Hugo, ou fórmulas sem estilo | Versão diferente da 0.165.0 ou sem `+extended`. Instale a versão indicada e confira com `hugo version`. |
 | Sua página não aparece | `date` no futuro (use `hugo server -F` para ver mesmo assim), `weight` repetido no período, ou subpáginas dentro de um `index.md` (use `_index.md`). |
 | Site com fontes diferentes das do site publicado | Opcional: `python3 scripts/baixar_fontes.py` baixa as fontes (precisa de Python 3 e internet). Não é necessário para contribuir. |
 
@@ -120,7 +120,7 @@ Para criar uma animação de algoritmo, veja o [guia de animações](.github/GUI
 
 ## Publicação
 
-O site publicado vem da branch `gh-pages`. Não há GitHub Actions: quem tem permissão de escrita no repositório gera e envia o site com o script da raiz:
+O site publicado vem da branch `gh-pages`. O workflow `.github/workflows/build.yml` só compila o site em cada push e Pull Request, para checar se o build passa; ele não publica. Quem tem permissão de escrita no repositório gera e envia o site com o script da raiz:
 
 ```bash
 git checkout main && git pull

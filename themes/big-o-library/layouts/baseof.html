@@ -1,12 +1,10 @@
 <!DOCTYPE html>
-<html lang="{{ .Site.Language.Lang }}" dir="{{ partial "utils/hugo-compat/language-direction.html" .Site.Language | default `ltr` }}">
+<html lang="{{ .Site.Language.Lang }}" dir="{{ .Site.Language.Direction | default `ltr` }}">
   {{- partial "head.html" . -}}
   <body>
     {{- partial "navbar.html" . -}}
     {{- block "main" . }}{{ end -}}
-    {{- if or (eq .Site.Params.footer.enable nil) (.Site.Params.footer.enable) }}
-      {{ partial "footer.html" . }}
-    {{ end }}
+    {{ partial "footer.html" . }}
     {{ partial "components/search-dialog.html" . }}
     {{ partial "bo-consent.html" . }}
     {{ partial "scripts.html" . }}

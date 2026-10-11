@@ -518,7 +518,7 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
   .bo-sage:target .bo-sage-card{animation:none!important}
 }
 
-/* ───────── Laboratório (/lab): hub, jogo, mapa, curvas ───────── */
+/* Laboratório (/lab): hub, jogo, mapa, curvas */
 .bo-lab-d{font-size:13px;line-height:1.6;color:var(--body)}
 .bo-lab:hover{border-color:var(--c);transform:translateY(-3px);box-shadow:0 12px 24px -14px color-mix(in srgb,var(--c) 60%,transparent)}
 .bo-lab:hover .bo-per-l{width:64px}.bo-lab:hover .bo-per-go{transform:translateX(4px);color:var(--c)}
