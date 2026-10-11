@@ -9,6 +9,8 @@ autores:
 date: 2026-09-30
 ---
 
+## Sobre
+
 Estuda matrizes, sistemas lineares e espaços vetoriais, chegando às transformações lineares entre eles (núcleo, imagem, autovalores e diagonalização)
 
 ## Objetivos
