@@ -1,0 +1,22 @@
+{{- /* Breadcrumb padrão do site: caminho (~/big-o-library / ...) + linha de comando do que "roda" nessa pasta.
+       Args (dict): page = página atual; cmd = comando exibido depois do "$" (ex.: "cat git.md", "ls lab/").
+       O caminho é uma lista ordenada (<ol>) e emite JSON-LD BreadcrumbList para os buscadores.
+       Usado por bo-hero.html (docs) e bo-mhead.html (páginas soltas e lab). CSS: .bo-crumbs* em custom.css. */ -}}
+{{- $p := .page -}}
+{{- $items := slice (dict "@type" "ListItem" "position" 1 "name" "Big-O-Library" "item" $p.Site.Home.Permalink) -}}
+<nav class="bo-crumbs" aria-label="Breadcrumb">
+  <ol class="bo-crumbs-list">
+    <li><a href="{{ $p.Site.Home.RelPermalink }}">~/big-o-library</a></li>
+    {{- range $p.Ancestors.Reverse -}}
+      {{- if not .IsHome -}}
+        {{- $items = $items | append (dict "@type" "ListItem" "position" (add (len $items) 1) "name" .Title "item" .Permalink) -}}
+        <li><span aria-hidden="true">/</span><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
+      {{- end -}}
+    {{- end }}
+  </ol>
+  <span class="hx:sr-only" aria-current="page">{{ $p.Title }}</span>
+  <div class="bo-crumb-cmd" aria-hidden="true">$ {{ .cmd }}</div>
+</nav>
+{{- $items = $items | append (dict "@type" "ListItem" "position" (add (len $items) 1) "name" $p.Title "item" $p.Permalink) }}
+<script>(function(){var n=document.currentScript.previousElementSibling,l=n&&n.querySelector('.bo-crumbs-list');if(!l)return;function u(){var o=l.scrollWidth>l.clientWidth+1;n.toggleAttribute('data-more-l',o&&l.scrollLeft>1);n.toggleAttribute('data-more-r',o&&l.scrollLeft+l.clientWidth<l.scrollWidth-1)}function f(){l.scrollLeft=l.scrollWidth;u()}f();l.addEventListener('scroll',u,{passive:true});addEventListener('resize',u);addEventListener('load',f);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(f)})()</script>
+<script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items | jsonify | safeJS }}</script>

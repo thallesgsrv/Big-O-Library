@@ -4,8 +4,7 @@
 {{ partial "sidebar.html" (dict "context" .) }}
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
-      "prompt" "~/big-o-library $ ./curvas --n 20"
-      "crumbs" (slice (dict "url" ("lab/" | relURL) "label" "lab"))
+      "page" . "cmd" "./curvas --n 20"
       "title" .Title
       "lead" (.Params.summary | default .Params.description)) }}
 
@@ -82,7 +81,7 @@
       var dpr = window.devicePixelRatio || 1, w = cv.parentNode.clientWidth, h = Math.max(260, Math.min(380, Math.round(w * 0.5)));
       cv.width = w * dpr; cv.height = h * dpr; cv.style.width = w + "px"; cv.style.height = h + "px";
       var g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
-      var L = 46, R = 14, T = 12, B = 28, pw = w - L - R, ph = h - T - B;
+      var L = 46, R = 22, T = 12, B = 28, pw = w - L - R, ph = h - T - B;
       var X = function (n) { return L + (n - 1) / (XMAX - 1) * pw; }, Y = function (lg) { return T + ph - Math.min(lg, YMAX) / YMAX * ph; };
       var line = css("--line"), mute = css("--mute"), ns = +nsSel.value * 1e-9;
       g.font = "11px 'IBM Plex Mono', monospace"; g.textBaseline = "middle";
@@ -90,7 +89,7 @@
       for (var e = 0; e <= YMAX; e += 6) { var y = Y(e); g.beginPath(); g.moveTo(L, y); g.lineTo(L + pw, y); g.stroke(); g.textAlign = "right"; g.fillText(e === 0 ? "1" : "10" + String(e).split("").map(function (c) { return sup[+c]; }).join(""), L - 6, y); }
       g.textAlign = "center"; g.textBaseline = "top";
       for (var x = 10; x <= XMAX; x += 10) g.fillText(String(x), X(x), T + ph + 8);
-      g.fillText("n", L + pw / 2, T + ph + 8 + 0);
+      g.textAlign = "right"; g.fillText("n", L - 8, T + ph + 8);
       /* referências de tempo */
       [["1 s", 1], ["1 ano", SEC_YEAR], ["universo", UNIVERSO * SEC_YEAR]].forEach(function (r) {
         var lg = Math.log10(r[1] / ns); if (lg < 0 || lg > YMAX) return;

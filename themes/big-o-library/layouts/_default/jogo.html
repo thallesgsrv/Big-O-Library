@@ -10,8 +10,7 @@
 {{- $cfg := hugo.Data.jogo | default dict -}}
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
-      "prompt" "~/big-o-library $ ./complexidade"
-      "crumbs" (slice (dict "url" ("lab/" | relURL) "label" "lab"))
+      "page" . "cmd" "./complexidade"
       "title" .Title
       "lead" (.Params.summary | default .Params.description)) }}
 
@@ -54,7 +53,7 @@
 
     function start() {
       var n = Math.min(RODADAS, TRECHOS.length);
-      /* sorteio com variedade: embaralha e pega n, garantindo que nenhuma classe domine */
+      /* sorteia n trechos aleatórios do acervo */
       rounds = shuffle(TRECHOS).slice(0, n);
       cur = 0; acertos = 0; jogadas = []; travado = false;
       question();
@@ -68,7 +67,7 @@
       root.innerHTML =
         '<div class="bo-g-top"><span class="bo-g-cmd" aria-hidden="true">$ ./complexidade --rodada ' + (cur + 1) + '/' + rounds.length + '</span>' +
         '<span class="bo-g-score">acertos: ' + acertos + '</span></div>' +
-        '<div class="bo-g-bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + rounds.length + '" aria-valuenow="' + cur + '"><i style="width:' + (cur / rounds.length * 100) + '%"></i></div>' +
+        '<div class="bo-g-bar" role="progressbar" aria-label="Progresso do jogo" aria-valuemin="0" aria-valuemax="' + rounds.length + '" aria-valuenow="' + cur + '" aria-valuetext="rodada ' + (cur + 1) + ' de ' + rounds.length + '"><i style="width:' + (cur / rounds.length * 100) + '%"></i></div>' +
         '<pre class="bo-g-code" tabindex="0"><code>' + esc(t.codigo.replace(/\s+$/, "")) + '</code></pre>' +
         '<p class="bo-g-q">Qual a complexidade de tempo, no pior caso, em função de <em>n</em>? <span class="bo-g-keys">(teclas 1–4)</span></p>' +
         '<div class="bo-g-opts" role="group" aria-label="Alternativas">' +

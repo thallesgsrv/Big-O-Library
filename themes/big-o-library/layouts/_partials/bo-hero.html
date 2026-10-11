@@ -1,27 +1,11 @@
 {{- /* Cabeçalho de página: breadcrumb (~/big-o-library / ... $ cat arquivo.md), título, selo e texto de apoio.
        Args (dict): page = página; badge = texto do selo (opcional); lead = parágrafo abaixo do título (opcional).
-       Usado por bo-pagina.html (single) e docs/list.html.
-       O breadcrumb é uma lista ordenada (<ol>) e emite JSON-LD BreadcrumbList para os buscadores.
-       CSS: .bo-crumbs-list (assets/css/custom.css). */ -}}
+       Usado por bo-pagina.html (single) e docs/list.html. O breadcrumb vem de bo-crumbs.html. */ -}}
 {{- $p := .page -}}
-{{- $items := slice (dict "@type" "ListItem" "position" 1 "name" "Big-O-Library" "item" $p.Site.Home.Permalink) -}}
+{{- $nome := $p.Title | urlize -}}
+{{- with $p.File }}{{ $nome = .ContentBaseName }}{{ end -}}
 <header class="bo-page-hero">
-  <nav class="bo-crumbs" aria-label="Breadcrumb">
-    <ol class="bo-crumbs-list">
-      <li><a href="{{ $p.Site.Home.RelPermalink }}">~/big-o-library</a></li>
-      {{- range $p.Ancestors.Reverse -}}
-        {{- if not .IsHome -}}
-          {{- $items = $items | append (dict "@type" "ListItem" "position" (add (len $items) 1) "name" .Title "item" .Permalink) -}}
-          <li><span aria-hidden="true">/</span><a href="{{ .RelPermalink }}">{{ .Title }}</a></li>
-        {{- end -}}
-      {{- end }}
-    </ol>
-    <span class="hx:sr-only" aria-current="page">{{ $p.Title }}</span>
-    <div class="bo-crumb-cmd" aria-hidden="true">$ cat {{ with $p.File }}{{ .ContentBaseName }}{{ else }}{{ $p.Title | urlize }}{{ end }}.md</div>
-  </nav>
-  {{- $items = $items | append (dict "@type" "ListItem" "position" (add (len $items) 1) "name" $p.Title "item" $p.Permalink) }}
-  <script>(function(){var n=document.currentScript.previousElementSibling,l=n&&n.querySelector('.bo-crumbs-list');if(!l)return;function u(){var o=l.scrollWidth>l.clientWidth+1;n.toggleAttribute('data-more-l',o&&l.scrollLeft>1);n.toggleAttribute('data-more-r',o&&l.scrollLeft+l.clientWidth<l.scrollWidth-1)}function f(){l.scrollLeft=l.scrollWidth;u()}f();l.addEventListener('scroll',u,{passive:true});addEventListener('resize',u);addEventListener('load',f);if(document.fonts&&document.fonts.ready)document.fonts.ready.then(f)})()</script>
-  <script type="application/ld+json">{{ dict "@context" "https://schema.org" "@type" "BreadcrumbList" "itemListElement" $items | jsonify | safeJS }}</script>
+  {{ partial "bo-crumbs.html" (dict "page" $p "cmd" (printf "cat %s.md" $nome)) }}
   {{ if $p.Title }}<h1 class="bo-page-title">{{ $p.Title }}</h1>{{ end }}
   {{ with .badge }}<span class="bo-badge">{{ . }}</span>{{ end }}
   {{ with .lead }}<p class="bo-page-summary">{{ . }}</p>{{ end }}

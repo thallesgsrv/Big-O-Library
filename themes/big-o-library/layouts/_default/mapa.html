@@ -19,8 +19,7 @@
 {{- end -}}
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
-      "prompt" "~/big-o-library $ ./mapa --prerequisitos"
-      "crumbs" (slice (dict "url" ("lab/" | relURL) "label" "lab"))
+      "page" . "cmd" "./mapa --prerequisitos"
       "title" .Title
       "lead" (.Params.summary | default .Params.description)) }}
 
@@ -31,6 +30,7 @@
       <span class="bo-small bo-m-leg"><i class="bo-m-lg-solid"></i> tem material &nbsp; <i class="bo-m-lg-ghost"></i> pré-requisito sem material ainda</span>
     </div>
     <div class="bo-m-scroll" id="bo-m-scroll" tabindex="0" aria-label="Grafo de disciplinas (role para os lados no celular)"><svg id="bo-m-svg" role="group" aria-label="Disciplinas e pré-requisitos"></svg></div>
+    <p class="bo-small bo-m-hint" id="bo-m-hint" hidden>← arraste o grafo para os lados →</p>
     <div class="bo-m-panel" id="bo-m-panel" aria-live="polite"></div>
   </div>
 
@@ -168,6 +168,11 @@
     /* começa com a disciplina que mais depende de outras (mostra o grafo funcionando) */
     var start = list.filter(function (n) { return !n.ghost; }).sort(function (a, b) { return Object.keys(closure(b.slug, up)).length - Object.keys(closure(a.slug, up)).length; })[0];
     choose(start.slug);
+
+    /* avisa que o grafo rola para os lados quando ele não cabe na tela */
+    var hint = document.getElementById("bo-m-hint"), box = document.getElementById("bo-m-scroll");
+    var checkScroll = function () { hint.hidden = box.scrollWidth <= box.clientWidth; };
+    checkScroll(); window.addEventListener("resize", checkScroll);
   })();
   </script>
   {{ partial "bo-voltar.html" . }}

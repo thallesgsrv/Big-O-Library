@@ -5,7 +5,7 @@
 {{ partial "sidebar.html" (dict "context" .) }}
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
-      "prompt" "~/big-o-library $ cat colaboradores.md"
+      "page" . "cmd" "cat colaboradores.md"
       "title" .Title
       "lead" (.Params.summary | default .Params.description)) }}
   {{ .Content }}

@@ -4,7 +4,7 @@
 {{ partial "sidebar.html" (dict "context" .) }}
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
-      "prompt" "~/big-o-library $ ls materiais/"
+      "page" . "cmd" "ls materiais/"
       "title" "Materiais"
       "lead" "Conteúdos organizados por disciplina e período. A cor é o custo: quanto mais você avança, mais quente fica.") }}
 
@@ -16,7 +16,7 @@
       {{- with findRESubmatch `/0?([1-9])-periodo/?$` $url 1 -}}
         {{- $n := int (index (index . 0) 1) -}}
         {{- /* o card inteiro é o link; as disciplinas só aparecem na página do período */ -}}
-        <a class="bo-per" style="--c:var(--p{{ $n }})" href="{{ $url }}" aria-label="{{ $n }}º período, complexidade {{ index $cx (sub $n 1) }}">
+        <a class="bo-per" style="--c:var(--p{{ $n }})" href="{{ $url }}" aria-label="{{ index $cx (sub $n 1) }} {{ $n }}º período">
           <span class="bo-per-o" aria-hidden="true">{{ index $cx (sub $n 1) }}</span>
           <span class="bo-per-l"></span>
           <span class="bo-per-n">{{ $n }}º período <span class="bo-per-go" aria-hidden="true">→</span></span>
@@ -27,7 +27,7 @@
     {{- range (partial "utils/hugo-compat/site-data.html" .).extras -}}
       {{- $e := . -}}
       {{- with site.GetPage (printf "/docs/%s" $e.slug) -}}
-        <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}" aria-label="{{ $e.aria }}">
+        <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}">
           <span class="bo-per-o" aria-hidden="true">{{ $e.simbolo }}</span>
           <span class="bo-per-l"></span>
           <span class="bo-per-n">{{ $e.rotulo }} <span class="bo-per-go" aria-hidden="true">→</span></span>

@@ -1,18 +1,8 @@
-{{- /* Cabeçalho das páginas "soltas" (materiais, colaboradores).
-       Args (dict): prompt = linha de comando decorativa; title = h1; lead = parágrafo (opcional);
-       crumbs = lista de {url, label} entre a home e a página (opcional) — gera o mesmo breadcrumb de voltar das páginas de docs. */ -}}
+{{- /* Cabeçalho das páginas "soltas" (materiais, colaboradores, conselho e lab).
+       Args (dict): page = página atual; cmd = comando exibido no breadcrumb (ex.: "ls lab/");
+       title = h1; lead = parágrafo (opcional). O breadcrumb é o mesmo das páginas de docs (bo-crumbs.html). */ -}}
 <div class="bo-mhead">
-  {{- if isset . "crumbs" }}
-  <nav class="bo-crumbs" aria-label="Breadcrumb">
-    <ol class="bo-crumbs-list">
-      <li><a href="{{ site.Home.RelPermalink }}">~/big-o-library</a></li>
-      {{- range .crumbs }}
-      <li><span aria-hidden="true">/</span><a href="{{ .url }}">{{ .label }}</a></li>
-      {{- end }}
-    </ol>
-  </nav>
-  {{- end }}
-  <div class="bo-prompt" aria-hidden="true">{{ .prompt }}</div>
+  {{ partial "bo-crumbs.html" (dict "page" .page "cmd" .cmd) }}
   <h1 class="bo-h1 bo-h1-big">{{ .title }}</h1>
   {{ with .lead }}<p class="bo-lead">{{ . }}</p>{{ end }}
 </div>

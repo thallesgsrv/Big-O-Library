@@ -3,8 +3,7 @@
 {{ partial "sidebar.html" (dict "context" .) }}
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
-      "prompt" "~/big-o-library $ ls lab/"
-      "crumbs" (slice)
+      "page" . "cmd" "ls lab/"
       "title" .Title
       "lead" (.Params.summary | default .Params.description)) }}
 

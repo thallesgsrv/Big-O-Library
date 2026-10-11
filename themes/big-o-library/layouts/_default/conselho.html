@@ -50,7 +50,7 @@
 
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
-      "prompt" "~/big-o-library $ cat conselho-dos-sabios.md"
+      "page" . "cmd" "cat conselho-dos-sabios.md"
       "title" .Title
       "lead" (.Params.summary | default .Params.description)) }}
 
