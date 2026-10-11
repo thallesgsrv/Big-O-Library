@@ -1,11 +1,11 @@
 {{- /* /lab/complexidade: jogo "Qual a complexidade?".
        Trechos: data/jogo.yaml | Sábios: data/conselho.yaml (via bo-sabios) | CSS: .bo-g* e .bo-rs* em custom.css
-       No fim, a classe em que a pessoa mais acertou aponta para o sábio do Conselho com a mesma classe (ou a mais próxima). */ -}}
+       No fim, mostra a classe em que a pessoa mais acertou e uma frase de um sábio do Conselho sorteado (sem relação com a classe: o Conselho não é um ranking). */ -}}
 {{ define "main" }}
 {{ partial "sidebar.html" (dict "context" .) }}
 {{- $sab := slice -}}
 {{- range partial "bo-sabios.html" . -}}
-  {{- $sab = $sab | append (dict "nome" .nome "titulo" .titulo "classe" .classe "frase" .frase "pend" .pend "slug" .slug "img" .img "ini" .ini "n" .n) -}}
+  {{- $sab = $sab | append (dict "nome" .nome "titulo" .titulo "frase" .frase "pend" .pend "slug" .slug "img" .img "ini" .ini "n" .n) -}}
 {{- end -}}
 {{- $cfg := hugo.Data.jogo | default dict -}}
 <main class="bo-wrap" id="content">
@@ -37,7 +37,7 @@
       4: "Dividir e conquistar é o seu jeito. Quebra, resolve, junta.",
       5: "Laço dentro de laço não te assusta. (Talvez devesse, só um pouquinho.)",
       7: "Você enxerga a árvore de chamadas explodindo antes de ela explodir.",
-      8: "O pior caso em pessoa. A boa notícia: daqui só se pode melhorar."
+      8: "Você vê possibilidades por todo lado. Respire, releia o código com calma e jogue de novo."
     };
 
     var root = document.getElementById("bo-game");
@@ -99,16 +99,9 @@
       nb.focus({ preventScroll: false });
     }
 
-    function pickSage(alvo) {
-      var best = null, bd = 99, cand = [];
-      SAGES.forEach(function (s) {
-        var i = idxOf(s.classe);
-        if (i < 0) return;
-        var d = Math.abs(i - alvo);
-        if (d < bd) { bd = d; cand = [s]; } else if (d === bd) cand.push(s);
-      });
-      if (cand.length) best = cand[Math.floor(Math.random() * cand.length)];
-      return best ? { s: best, d: bd } : null;
+    function pickSage() {
+      var ok = SAGES.filter(function (s) { return !s.pend && s.frase; });
+      return ok.length ? ok[Math.floor(Math.random() * ok.length)] : null;
     }
 
     function finish() {
@@ -121,7 +114,7 @@
       });
       if (acertos === 0) alvo = CLS.length - 1;
       var perfil = PERFIL[alvo] || "Uma classe só sua.";
-      var sg = pickSage(alvo);
+      var s = pickSage();
       var pips = Object.keys(stat).sort(function (a, b) { return a - b; }).map(function (k) {
         return '<li style="--c:var(--p' + (+k + 1) + ')"><span class="bo-rs-k">' + esc(CLS[k]) + '</span><span class="bo-rs-p" aria-label="' + stat[k].filter(Boolean).length + ' de ' + stat[k].length + '">' +
           stat[k].map(function (o) { return o ? '●' : '○'; }).join("") + '</span></li>';
@@ -129,14 +122,12 @@
 
       var card = "";
       var share = 'Fiz o "Qual a complexidade?" do Big-O-Library: ' + acertos + '/' + rounds.length + ' · minha classe: ' + CLS[alvo];
-      if (sg) {
-        var s = sg.s;
-        share += ' · sábio: ' + s.nome;
-        card = '<a class="bo-rs-sage" style="--c:var(--p' + s.n + ')" href="' + CONSELHO + '#sabio-' + esc(s.slug) + '">' +
+      if (s) {
+        card = '<p class="bo-small bo-rs-note">Uma frase do Conselho dos Sábios para a próxima rodada:</p>' +
+          '<a class="bo-rs-sage" style="--c:var(--p' + s.n + ')" href="' + CONSELHO + '#sabio-' + esc(s.slug) + '">' +
           '<span class="bo-av" aria-hidden="true"><span>' + esc(s.ini) + '</span>' + (s.img ? '<img src="' + esc(s.img) + '" alt="" width="240" height="240" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '</span>' +
-          '<span class="bo-rs-who"><span class="bo-rs-name">' + esc(s.nome) + '</span>' + (s.titulo ? '<span class="bo-rs-title">' + esc(s.titulo) + '</span>' : '') +
-          '<span class="bo-rs-q">' + (s.pend ? '// frase a caminho' : '“' + esc(s.frase) + '”') + '</span></span><span class="bo-rs-go" aria-hidden="true">ver card →</span></a>' +
-          (sg.d ? '<p class="bo-small bo-rs-note">O Conselho ainda não tem ninguém em ' + esc(CLS[alvo]) + '. O mais próximo é ' + esc(s.classe) + '.</p>' : '');
+          '<span class="bo-rs-who"><span class="bo-rs-q">“' + esc(s.frase) + '”</span><span class="bo-rs-name">' + esc(s.nome) + '</span>' + (s.titulo ? '<span class="bo-rs-title">' + esc(s.titulo) + '</span>' : '') +
+          '</span><span class="bo-rs-go" aria-hidden="true">ver card →</span></a>';
       }
       share += ' ' + SITE + 'lab/complexidade/';
 
@@ -165,7 +156,7 @@
 
     root.innerHTML =
       '<div class="bo-g-intro"><p class="bo-g-cmd" aria-hidden="true">$ ./complexidade --ajuda</p>' +
-      '<p>Você vai ver ' + Math.min(RODADAS, TRECHOS.length) + ' trechos de código. Para cada um, escolha a classe de <strong>tempo no pior caso</strong>. Depois de cada resposta, uma explicação curta. No fim, descobrimos em que classe você mais acertou e qual sábio do Conselho combina com ela.</p>' +
+      '<p>Você vai ver ' + Math.min(RODADAS, TRECHOS.length) + ' trechos de código. Para cada um, escolha a classe de <strong>tempo no pior caso</strong>. Depois de cada resposta, uma explicação curta. No fim, mostramos a classe em que você mais acertou e uma frase do Conselho dos Sábios.</p>' +
       '<div class="bo-btns"><button type="button" class="bo-b1" id="bo-g-go">começar →</button></div></div>';
     document.getElementById("bo-g-go").addEventListener("click", start);
   })();

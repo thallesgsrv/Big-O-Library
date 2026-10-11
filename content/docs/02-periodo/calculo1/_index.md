@@ -5,6 +5,8 @@ description: Funções, limites, derivadas e integrais
 rotulo: Estágios
 autores:
   - thallesgsrv
+baseadoEm:
+  - rodrigocohen
 date: 2026-09-29
 ---
 

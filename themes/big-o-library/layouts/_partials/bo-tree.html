@@ -8,7 +8,7 @@
 {{- end -}}
 {{- $sab := slice -}}
 {{- range partial "bo-sabios.html" . -}}
-  {{- $sab = $sab | append (dict "n" .nome "t" .titulo "c" .classe "f" (cond .pend "" .frase) "s" .slug) -}}
+  {{- $sab = $sab | append (dict "n" .nome "t" .titulo "c" .disc "f" (cond .pend "" .frase) "s" .slug) -}}
 {{- end -}}
 {{- $d := dict "base" site.Home.RelPermalink "pages" $pages "sabios" $sab "conselho" ("conselho/" | relURL) "lab" ("lab/" | relURL) -}}
 {{- $res := resources.FromString "bo-tree.json" ($d | jsonify) | fingerprint -}}

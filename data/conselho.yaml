@@ -10,10 +10,8 @@
 #  disciplina  Disciplina que leciona / contribuiu
 #  periodo     1 a 9. Aparece no card e define a ordem da página (1º período
 #              primeiro). Optativa/outro: 0 ou apague a linha (vai para o fim)
-#  classe      Classe Big-O do sábio, só pela brincadeira: O(1), O(log n), O(n),
-#              O(n log n), O(n²), O(2ⁿ), O(n!) ...
-#  frase       A frase marcante. Sem frase? Apague a linha: o card mostra
-#              "frase a caminho" e a mesa não sorteia essa pessoa.
+#  frase       A frase marcante. Sem frase? Apague a linha: o card simplesmente
+#              não mostra a citação e a mesa não sorteia essa pessoa.
 #  cor         (opcional) 1 a 9: escolhe a cor do card na paleta do site
 #              (1 = verde ... 9 = vermelho). Sem isso, as cores se alternam.
 #  foto        Nome do arquivo dentro de static/images/conselho/  (ex.: ada.jpg)
@@ -24,7 +22,9 @@
 #              É a chave que liga o sábio às páginas: coloque o github (ou o id) em
 #              `autores:` (escreveu) ou `baseadoEm:` (a página se baseia no material dele)
 #              no front matter, e o card passa a listar essas páginas sozinho.
-#  materiais   Lista curta do que a pessoa contribuiu
+#  materiais   (opcional) Contribuições que ainda não são páginas do acervo. Quando
+#              `autores:`/`baseadoEm:` já apontam para a pessoa, o card lista as
+#              páginas sozinho e este campo é desnecessário.
 #  exemplo     true = exibe a etiqueta "exemplo". Apague ao colocar dados reais.
 # ─────────────────────────────────────────────────────────────────────────────
 professores:
@@ -32,10 +32,8 @@ professores:
     titulo: Guardião dos Algoritmos
     disciplina: Estruturas de Dados
     periodo: 3
-    classe: O(n log n)
     frase: "Você tem brio?"
     github: joaoarthurbm
-    materiais: [Material de aula]
 
   - nome: Prof. Rodrigo Cohen
     titulo: Senhor dos Limites, Derivadas e Integrais
@@ -43,43 +41,30 @@ professores:
     id: rodrigocohen
     foto: rodrigo-cohen.jpg
     periodo: 2
-    classe: O(log n)
     frase: "Tá ligado, velho?"
-    materiais: [Material de aula]
 
   - nome: Prof. Tiago Massoni
     titulo: Mestre da Matemática Discreta
     disciplina: Fundamentos Matemáticos para Ciência da Computação 2
     periodo: 2
-    classe: O(log n)
-    frase: "Sem frase marcante ainda"
     github: tiagomassoni
-    materiais: [Material de aula]
 
   - nome: Prof. Dalton Serey
     titulo: Mestre das Primeiras Linhas
     disciplina: Programação 1
     periodo: 1
-    classe: O(1)
     frase: "Ever Dream This Man."
     github: daltonserey
-    materiais: [Material de aula]
 
   - nome: Prof. Salatiel Dantas
     titulo: Mestre da Lógica
     disciplina: Lógica para Computação
     periodo: 3
-    classe: O(n log n)
     id: salatiel
     foto: salatiel.jpg
-    frase: "Sem frase marcante ainda"
-    materiais: [Material de aula]
 
   - nome: Prof. Fabricio Costa
     titulo: Guardião dos Algoritmos
     disciplina: Laboratório de Estruturas de Dados
     periodo: 3
-    classe: O(n log n)
-    frase: "Sem frase marcante ainda"
     github: fabriciocostadias
-    materiais: [Material de aula]

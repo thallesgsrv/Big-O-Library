@@ -4,8 +4,6 @@ weight: 3
 description: Relações de recorrência, árvore de recursão e o custo de busca binária, merge sort e outros.
 autores:
   - thallesgsrv
-baseadoEm:
-  - joaoarthurbm
 date: 2026-10-09
 ---
 

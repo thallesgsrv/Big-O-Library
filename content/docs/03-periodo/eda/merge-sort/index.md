@@ -4,8 +4,6 @@ weight: 6
 description: Ordenação por divisão e conquista com custo n log n garantido.
 autores:
   - thallesgsrv
-baseadoEm:
-  - joaoarthurbm
 date: 2026-10-09
 ---
 

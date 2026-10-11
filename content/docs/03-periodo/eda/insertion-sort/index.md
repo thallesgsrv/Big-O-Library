@@ -4,8 +4,6 @@ weight: 5
 description: Ordenação por inserção, como organizar cartas na mão. Ótimo em arrays quase ordenados.
 autores:
   - thallesgsrv
-baseadoEm:
-  - joaoarthurbm
 date: 2026-10-09
 ---
 

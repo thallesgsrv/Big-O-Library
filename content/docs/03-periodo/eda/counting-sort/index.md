@@ -4,8 +4,6 @@ weight: 8
 description: Ordenação linear sem comparações, contando quantas vezes cada valor aparece.
 autores:
   - thallesgsrv
-baseadoEm:
-  - joaoarthurbm
 date: 2026-10-09
 ---
 

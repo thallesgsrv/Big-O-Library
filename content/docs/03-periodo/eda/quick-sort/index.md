@@ -4,8 +4,6 @@ weight: 7
 description: Particionamento, escolha de pivô e por que o pior caso quadrático é raro.
 autores:
   - thallesgsrv
-baseadoEm:
-  - joaoarthurbm
 date: 2026-10-09
 ---
 ## Sobre

@@ -4,8 +4,6 @@ weight: 9
 description: Ordena números dígito por dígito, usando o counting sort como peça interna.
 autores:
   - thallesgsrv
-baseadoEm:
-  - joaoarthurbm
 date: 2026-10-09
 ---
 ## Sobre

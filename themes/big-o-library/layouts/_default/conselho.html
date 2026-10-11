@@ -44,9 +44,11 @@
   {{- $list = $list | append (dict "p" $p "i" $i "slug" $slug "n" $n "c" (printf "var(--p%d)" $n) "per" $per "img" $img "ini" $ini "pend" $pend "frase" $f) -}}
 {{- end -}}
 
-{{- /* 3) primeiro sábio com frase = o que começa em cena */ -}}
-{{- $first := 0 -}}{{- $found := false -}}
-{{- range $list }}{{ if and (not .pend) (not $found) }}{{ $first = .i }}{{ $found = true }}{{ end }}{{ end -}}
+{{- /* 3) a mesa só mostra quem tem frase (card sem frase não vira "vaga" no palco) */ -}}
+{{- $quoted := slice -}}
+{{- range $list }}{{ if not .pend }}{{ $quoted = $quoted | append . }}{{ end }}{{ end -}}
+{{- $first := 0 -}}
+{{- with $quoted }}{{ $first = (index . 0).i }}{{ end -}}
 
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
@@ -61,20 +63,17 @@
   <script>document.documentElement.classList.add("bo-js")</script>
 
   {{- /* A mesa: palco com a frase em destaque + assentos */}}
-  <section class="bo-stage" aria-label="A mesa do conselho" style="--c: {{ (index $list $first).c | safeCSS }}">
+  {{- if $quoted }}
+  <section class="bo-stage" aria-label="A mesa do conselho" style="--c: {{ (index $quoted 0).c | safeCSS }}">
     <div class="bo-stage-bar">
       <span class="bo-stage-cmd" aria-hidden="true">$ fortune --sabios</span>
-      {{- if $found }}<button type="button" class="bo-stage-btn" id="bo-stage-next">sortear ↻</button>{{ end }}
+      {{- if gt (len $quoted) 1 }}<button type="button" class="bo-stage-btn" id="bo-stage-next">sortear ↻</button>{{ end }}
     </div>
 
     <div class="bo-stage-body" aria-live="polite">
-      {{- range $list }}
+      {{- range $quoted }}
       <div class="bo-slide{{ if eq .i $first }} is-on{{ end }}" data-i="{{ .i }}" data-c="var(--p{{ .n }})" style="--c: {{ .c | safeCSS }}"{{ if ne .i $first }} aria-hidden="true"{{ end }}>
-        {{- if .pend }}
-        <div class="bo-slide-q is-pend"><p>// frase marcante a caminho</p></div>
-        {{- else }}
         <blockquote class="bo-slide-q"><p>{{ .frase }}</p></blockquote>
-        {{- end }}
         <div class="bo-slide-who">
           {{ partial "bo-av.html" (dict "img" .img "ini" .ini) }}
           <div class="bo-slide-id">
@@ -88,31 +87,26 @@
     </div>
 
     <ul class="bo-seats" aria-label="Escolher sábio">
-      {{- range $list }}
-      <li><button type="button" class="bo-seat{{ if .pend }} is-pend{{ end }}" data-i="{{ .i }}" style="--c: {{ .c | safeCSS }}" aria-pressed="{{ if eq .i $first }}true{{ else }}false{{ end }}" aria-label="{{ .p.nome }}{{ if .pend }} (frase a caminho){{ end }}" title="{{ .p.nome }}">
+      {{- range $quoted }}
+      <li><button type="button" class="bo-seat" data-i="{{ .i }}" style="--c: {{ .c | safeCSS }}" aria-pressed="{{ if eq .i $first }}true{{ else }}false{{ end }}" aria-label="{{ .p.nome }}" title="{{ .p.nome }}">
         {{ partial "bo-av.html" (dict "img" .img "ini" .ini) }}
       </button></li>
       {{- end }}
     </ul>
   </section>
+  {{- end }}
 
   {{- /* Os cards */}}
   <ol class="bo-council" aria-label="Professores do Conselho dos Sábios">
     {{- range $list }}
     {{- $p := .p }}
+    {{- $mats := partial "bo-materiais-de.html" (lower (printf "%v" (or $p.id $p.github ""))) }}
     <li class="bo-sage" id="sabio-{{ .slug }}" style="--c: {{ .c | safeCSS }}; --k: {{ mod .i 3 }}">
       <article class="bo-sage-card">
         <header class="bo-sage-top">
-          <span class="bo-sage-class" title="Classe de complexidade">{{ $p.classe | default "O(1)" }}</span>
-          {{ if $p.exemplo }}<span class="bo-sage-demo" title="Dados de exemplo: troque em data/conselho.yaml">exemplo</span>{{ end }}
           <span class="bo-sage-per">{{ if gt .per 0 }}{{ .per }}º período{{ else }}optativa{{ end }}</span>
+          {{ if $p.exemplo }}<span class="bo-sage-demo" title="Dados de exemplo: troque em data/conselho.yaml">exemplo</span>{{ end }}
         </header>
-
-        {{- if .pend }}
-        <div class="bo-sage-quote is-pend"><p>// frase marcante a caminho</p></div>
-        {{- else }}
-        <blockquote class="bo-sage-quote"><p>{{ .frase }}</p></blockquote>
-        {{- end }}
 
         <div class="bo-sage-person">
           {{ partial "bo-av.html" (dict "img" .img "ini" .ini) }}
@@ -123,12 +117,15 @@
           </div>
         </div>
 
+        {{- if not .pend }}
+        <blockquote class="bo-sage-quote"><p>{{ .frase }}</p></blockquote>
+        {{- end }}
+
         <footer class="bo-sage-foot">
-          {{- $mats := partial "bo-materiais-de.html" (lower (printf "%v" (or $p.id $p.github ""))) -}}
           {{- if $mats }}
           <ul class="bo-sage-list" aria-label="Materiais no acervo">
             {{- range first 3 $mats }}<li><a href="{{ .url }}">{{ .titulo }}</a></li>{{ end }}
-            {{- if gt (len $mats) 3 }}<li>+{{ sub (len $mats) 3 }} materiais</li>{{ end }}
+            {{- if gt (len $mats) 3 }}<li class="bo-sage-more">+{{ sub (len $mats) 3 }} no acervo</li>{{ end }}
           </ul>
           {{- else if $p.materiais }}
           <ul class="bo-sage-list" aria-label="Contribuições">
@@ -172,7 +169,7 @@
       };
       var pick = function () {
         var ok = [];
-        seats.forEach(function (s, i) { if (i !== cur && !s.classList.contains("is-pend")) ok.push(i); });
+        seats.forEach(function (s, i) { if (i !== cur) ok.push(i); });
         if (ok.length) go(ok[Math.floor(Math.random() * ok.length)]);
       };
       seats.forEach(function (s, i) {
@@ -203,8 +200,8 @@
         card.addEventListener("pointermove", function (e) {
           var r = card.getBoundingClientRect();
           var px = (e.clientX - r.left) / r.width, py = (e.clientY - r.top) / r.height;
-          card.style.setProperty("--ry", ((px - 0.5) * 9).toFixed(2) + "deg");
-          card.style.setProperty("--rx", ((0.5 - py) * 7).toFixed(2) + "deg");
+          card.style.setProperty("--ry", ((px - 0.5) * 5).toFixed(2) + "deg");
+          card.style.setProperty("--rx", ((0.5 - py) * 4).toFixed(2) + "deg");
           card.style.setProperty("--gx", (px * 100).toFixed(1) + "%");
           card.style.setProperty("--gy", (py * 100).toFixed(1) + "%");
         });

@@ -1,9 +1,11 @@
 ---
-title: Cálculo 2
+title: Cálculo Diferencial e Integral 2
 weight: 3
 description: Continuação de Cálculo 1
 autores:
   - hilbertmgomes
+baseadoEm:
+  - rodrigocohen
 prereq: [calculo1]
 date: 2026-10-01
 ---

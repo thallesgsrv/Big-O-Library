@@ -419,7 +419,6 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-slide.is-on{opacity:1;visibility:visible;transform:none;transition-delay:0s}
 .bo-slide-q{margin:0}
 .bo-slide-q p{margin:0;max-width:30ch;font:italic 500 clamp(25px,3.9vw,44px)/1.28 Fraunces,Georgia,serif;letter-spacing:-.4px;color:var(--txt);text-wrap:balance}
-.bo-slide-q.is-pend p{font:400 clamp(15px,2vw,18px)/1.5 inherit;font-family:inherit;font-style:normal;letter-spacing:0;color:var(--mute)}
 .bo-slide-who{display:flex;align-items:center;gap:14px;flex-wrap:wrap}
 .bo-slide-who .bo-av{--s:68px}
 .bo-slide-id{min-width:0}
@@ -467,37 +466,48 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 @keyframes bo-sage-ping{0%{box-shadow:0 0 0 0 color-mix(in srgb,var(--c) 70%,transparent)}100%{box-shadow:0 0 0 18px transparent}}
 
 .bo-sage-top{display:flex;align-items:center;gap:8px;font-size:12px}
-.bo-sage-class{padding:3px 9px;border-radius:6px;font-weight:500;color:var(--ct);border:1px solid color-mix(in srgb,var(--c) 55%,transparent);background:color-mix(in srgb,var(--c) 10%,transparent)}
-.bo-sage-per{margin-left:auto;color:var(--mute)}
-.bo-sage-demo{padding:1px 7px;border:1px dashed var(--mute);border-radius:99px;color:var(--mute);font-size:11px;text-transform:uppercase;letter-spacing:.6px}
+.bo-sage-per{padding:3px 10px;border-radius:99px;font-weight:500;color:var(--ct);border:1px solid color-mix(in srgb,var(--c) 45%,transparent);background:color-mix(in srgb,var(--c) 10%,transparent)}
+.bo-sage-demo{margin-left:auto;padding:1px 7px;border:1px dashed var(--mute);border-radius:99px;color:var(--mute);font-size:11px;text-transform:uppercase;letter-spacing:.6px}
 
-/* a frase: protagonista do card */
-.bo-sage-quote{position:relative;margin:0}
-.bo-sage-quote::before{content:"\201C";display:block;height:30px;font:700 68px/1 Fraunces,Georgia,serif;color:var(--c);opacity:.6}
-.bo-sage-quote p{margin:0;font:italic 500 22px/1.36 Fraunces,Georgia,serif;letter-spacing:-.2px;color:var(--txt);text-wrap:pretty}
-.bo-sage-quote.is-pend::before{content:none}
-.bo-sage-quote.is-pend p{font-family:inherit;font-style:normal;font-size:14px;line-height:1.5;letter-spacing:0;color:var(--mute)}
-
-.bo-sage-person{display:flex;align-items:flex-start;gap:14px;padding-top:16px;border-top:1px dashed color-mix(in srgb,var(--c) 38%,var(--line))}
-.bo-sage-id{min-width:0;display:flex;flex-direction:column;gap:3px;min-height:108px}
+/* a pessoa: protagonista do card */
+.bo-sage-person{display:flex;align-items:flex-start;gap:16px;min-width:0}
+.bo-sage-person .bo-av{--s:72px}
+.bo-sage-id{min-width:0;display:flex;flex-direction:column;gap:3px;padding-top:4px}
 .bo-sage-name{margin:0;font:600 20px/1.2 Fraunces,Georgia,serif;letter-spacing:-.2px;color:var(--txt)}
-.bo-sage-title{margin:0;font-size:13px;color:var(--ct)}
+.bo-sage-title{margin:0;font-size:13px;line-height:1.4;color:var(--ct)}
 .bo-sage-title::before{content:"> ";opacity:.7}
-.bo-sage-disc{margin:0;font-size:13px;color:var(--mute)}
+.bo-sage-disc{margin:2px 0 0;font-size:13px;line-height:1.4;color:var(--mute)}
 
-.bo-sage-foot{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:12px;margin-top:auto}
-.bo-sage-gh{display:inline-flex;align-items:center;gap:8px;max-width:100%;padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;color:var(--txt)!important;text-decoration:none!important;transition:border-color .2s ease,color .2s ease,background-color .2s ease}
+/* a frase: opcional, discreta */
+.bo-sage-quote{position:relative;margin:0;padding:2px 0 2px 16px;border-left:3px solid color-mix(in srgb,var(--c) 70%,transparent)}
+.bo-sage-quote p{margin:0;font:italic 500 19px/1.4 Fraunces,Georgia,serif;letter-spacing:-.1px;color:var(--txt);text-wrap:pretty}
+
+/* rodapé: materiais reais do acervo + GitHub */
+.bo-sage-foot{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:12px;margin-top:auto;min-width:0}
+.bo-sage-foot:empty{display:none}
+.bo-sage-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:3px;max-width:100%;font-size:13px;line-height:1.5;color:var(--mute)}
+.bo-sage-list li{margin:0;padding-left:1.2rem;position:relative;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bo-sage-list li::marker{content:none}
+.bo-sage-list li::before{content:">";position:absolute;left:0;color:var(--ct);opacity:.8}
+.bo-sage-list li.bo-sage-more::before{content:none}
+.bo-sage-list li.bo-sage-more{padding-left:0}
+.bo-sage-list a{color:var(--body);text-decoration:none}
+.bo-sage-list a:hover,.bo-sage-list a:focus-visible{color:var(--ct);text-decoration:underline;text-underline-offset:3px}
+.bo-sage-gh{display:inline-flex;align-items:center;gap:8px;max-width:100%;min-height:36px;box-sizing:border-box;padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;color:var(--txt)!important;text-decoration:none!important;transition:border-color .2s ease,color .2s ease,background-color .2s ease}
 .bo-sage-gh span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
-.bo-sage-gh{min-height:36px;box-sizing:border-box}
 .bo-sage-gh:hover{border-color:var(--c);color:var(--ct)!important;background:color-mix(in srgb,var(--c) 10%,transparent)}
 .bo-sage-gh:focus-visible{outline:2px solid var(--c);outline-offset:2px}
 
-/* padronização: cards da mesma linha dividem as faixas (topo, frase, pessoa, rodapé) */
+/* padronização: cards da mesma linha dividem as faixas (topo, pessoa, frase, rodapé), mesmo quando algum não tem frase ou materiais */
 @supports (grid-template-rows: subgrid) {
   .bo-council{row-gap:0;margin-bottom:calc(4rem - 28px)}
   .bo-sage{display:grid;grid-template-rows:subgrid;grid-row:span 4;margin-bottom:28px!important}
-  .bo-sage-card{display:grid;grid-template-rows:subgrid;grid-row:1/-1;gap:16px 0}
-  .bo-sage-foot{margin-top:0}
+  .bo-sage-card{display:grid;grid-template-rows:subgrid;grid-row:1/-1;gap:16px 0;align-content:start}
+  .bo-sage-top{grid-row:1}
+  .bo-sage-person{grid-row:2}
+  .bo-sage-quote{grid-row:3}
+  .bo-sage-foot{grid-row:4;margin-top:0}
+  .bo-sage-foot:empty{display:block}
 }
 
 @media (max-width:640px){
@@ -551,9 +561,9 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-rs-sage{display:flex;align-items:center;gap:16px;padding:16px;margin-bottom:8px;border:1px solid var(--line);border-radius:10px;color:inherit;text-decoration:none!important;transition:border-color .2s ease,transform .2s ease}
 .bo-rs-sage:hover{border-color:var(--c);transform:translateY(-2px)}
 .bo-rs-who{display:flex;flex-direction:column;gap:3px;min-width:0;flex:1}
-.bo-rs-name{font:600 18px/1.2 Fraunces,Georgia,serif;color:var(--txt)}
+.bo-rs-name{font:600 14px/1.2 Fraunces,Georgia,serif;color:var(--txt);margin-top:4px}
 .bo-rs-title{font-size:13px;color:var(--mute)}
-.bo-rs-q{font-size:14px;color:var(--body);line-height:1.5}
+.bo-rs-q{font:italic 500 17px/1.4 Fraunces,Georgia,serif;color:var(--txt)}
 .bo-rs-go{font-size:13px;color:var(--c);white-space:nowrap}
 .bo-rs-note{margin:0 0 14px}
 .bo-rs-pips{list-style:none;margin:16px 0 22px;padding:0;display:flex;flex-wrap:wrap;gap:8px 20px}
@@ -634,9 +644,6 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-credits-person.is-sabio{padding:3px 12px 3px 3px;border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
 .bo-credits-person.is-sabio .bo-av{--s:24px;border-width:1px}
 .bo-credits-person.is-sabio .bo-av>span{font-size:9px}
-.bo-sage-mats li a{color:inherit;text-decoration:none}
-.bo-sage-mats li:hover{border-color:var(--c)}.bo-sage-mats li:hover a{color:var(--c)}
-.bo-sage-mats small{margin-left:6px;font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:.04em}
 @media (prefers-reduced-motion:reduce){.bo-g-opt,.bo-g-bar i,.bo-lab,.bo-rs-sage,.bo-m-node,.bo-m-edge{transition:none!important}.bo-g-opt:hover,.bo-lab:hover,.bo-rs-sage:hover{transform:none}}
 
 /* ===== Melhorias de usabilidade ===== */
@@ -673,13 +680,18 @@ body:has(.bo-consent:not([hidden])) .bo-top{bottom:max(150px,calc(env(safe-area-
 .bo-doc .content .bo-sec ol>li::before{content:counter(n) ".";font-weight:600}
 /* Conselho no celular: cards mais compactos */
 @media (max-width:639px){
-  .bo-sage-card{padding:16px;gap:12px}
-  .bo-sage-quote.is-pend{display:none}
-  .bo-sage-quote::before{height:20px;font-size:48px}
-  .bo-sage-quote p{font-size:18px}
-  .bo-sage-person{padding-top:12px}
-  .bo-sage-id{min-height:0}
+  .bo-sage-card{padding:16px;gap:12px 0}
+  .bo-sage-person{gap:14px}
+  .bo-sage-person .bo-av{--s:60px}
   .bo-sage-name{font-size:18px}
+  .bo-sage-quote p{font-size:17px}
+  /* 1 coluna: não há linha vizinha para alinhar, então o card só empilha o que tem */
+  .bo-council{margin-bottom:4rem}
+  .bo-sage{display:flex;grid-row:auto;margin-bottom:0!important}
+  .bo-sage-card{display:flex;grid-row:auto;gap:14px}
+  .bo-sage-top,.bo-sage-person,.bo-sage-quote,.bo-sage-foot{grid-row:auto}
+  .bo-sage-foot:empty{display:none}
+  .bo-council{row-gap:20px}
 }
 
 /* Voltar ao topo some enquanto o menu (hambúrguer) está aberto */
@@ -691,10 +703,3 @@ body.hx\:overflow-hidden .bo-top{display:none}
 /* Áreas de toque do rodapé */
 .bo-footer a,.bo-page-foot a{display:inline-block;padding-block:8px}
 .bo-pgrid+.bo-lsh{margin-top:36px}
-/* Conselho: contribuições em lista curta, no mesmo estilo "> " do site */
-.bo-sage-foot{gap:10px}
-.bo-sage-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:1.5;color:var(--mute)}
-.bo-sage-list li{margin:0;padding-left:1.2rem;position:relative}
-.bo-sage-list li::before{content:">";position:absolute;left:0;color:var(--ct);opacity:.8}
-.bo-sage-list a{color:var(--body);text-decoration:none}
-.bo-sage-list a:hover,.bo-sage-list a:focus-visible{color:var(--ct);text-decoration:underline;text-underline-offset:3px}
