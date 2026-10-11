@@ -5,6 +5,7 @@ description: Sistemas de equações, espaços e transformações lineares.
 rotulo: Estágios
 autores:
     - MateusSRocha
+    - thallesgsrv
 date: 2026-09-30
 ---
 

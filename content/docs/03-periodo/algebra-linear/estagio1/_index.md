@@ -5,6 +5,7 @@ rotulo: Conteúdos
 description: Introdução ao estudo de matrizes, operações com matrizes e sistemas lineares.
 autores:
   - MateusSRocha
+  - thallesgsrv
 date: 2026-10-07
 ---
 

@@ -1,6 +1,6 @@
 ---
 title: Sistemas Lineares e Matrizes
-weight: 2
+weight: 3
 description: Sistemas de equações lineares e sua representação por matrizes.
 autores:
   - MateusSRocha
