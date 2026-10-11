@@ -5627,6 +5627,16 @@ data-copied-label="Copiado!"
 &lt;td&gt;Texto um pouco maior, exibido logo abaixo do título da página.&lt;/td&gt;
 &lt;/tr&gt;
 &lt;tr&gt;
+&lt;td&gt;&lt;code&gt;prereq&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;não&lt;/td&gt;
+&lt;td&gt;Só em disciplinas: lista das pastas das disciplinas que vêm antes (ex.: &lt;code&gt;prereq: [prog2, lab-prog2]&lt;/code&gt;). Alimenta o &lt;a href="../lab/mapa/"&gt;mapa de pré-requisitos&lt;/a&gt;. Se a disciplina citada ainda não tem página, ela aparece no mapa pontilhada, como convite para alguém escrevê-la.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
+&lt;td&gt;&lt;code&gt;baseadoEm&lt;/code&gt;&lt;/td&gt;
+&lt;td&gt;não&lt;/td&gt;
+&lt;td&gt;Lista de sábios do &lt;a href="../conselho/"&gt;Conselho&lt;/a&gt; (pelo &lt;code&gt;id&lt;/code&gt; ou &lt;code&gt;github&lt;/code&gt; dele em &lt;code&gt;data/conselho.yaml&lt;/code&gt;) em cujo material esta página se baseia. Aparece nos créditos e no card do sábio.&lt;/td&gt;
+&lt;/tr&gt;
+&lt;tr&gt;
 &lt;td&gt;&lt;code&gt;rotulo&lt;/code&gt;&lt;/td&gt;
 &lt;td&gt;não&lt;/td&gt;
 &lt;td&gt;Só em páginas que têm subpáginas (por exemplo, uma disciplina com estágios): título da lista de cards. Padrão: &lt;code&gt;Disciplinas&lt;/code&gt;.&lt;/td&gt;
@@ -5653,6 +5663,7 @@ data-copied-label="Copiado!"
 &lt;li&gt;Os autores vêm do campo &lt;code&gt;autores&lt;/code&gt;. Se você &lt;strong&gt;acrescentar ou melhorar&lt;/strong&gt; materiais de uma disciplina que já existe, adicione o seu usuário do GitHub na lista (sem remover os anteriores).&lt;/li&gt;
 &lt;li&gt;O &amp;ldquo;publicado em&amp;rdquo; vem do campo &lt;code&gt;date&lt;/code&gt;; ele não muda quando a página é editada.&lt;/li&gt;
 &lt;li&gt;O &amp;ldquo;atualizado em&amp;rdquo; é automático: o site lê a data do último commit que mexeu no arquivo. Só aparece se for diferente da data de publicação.&lt;/li&gt;
+&lt;li&gt;Se um usuário em &lt;code&gt;autores&lt;/code&gt; (ou em &lt;code&gt;baseadoEm&lt;/code&gt;) for um &lt;strong&gt;sábio do Conselho&lt;/strong&gt;, o crédito mostra o nome dele com a foto e leva ao card, e o card passa a listar a página sozinho. Quem não tem GitHub usa o &lt;code&gt;id&lt;/code&gt; definido em &lt;code&gt;data/conselho.yaml&lt;/code&gt;.&lt;/li&gt;
 &lt;li&gt;Quem não tem conta no GitHub pode escrever o nome em vez do usuário (por exemplo &lt;code&gt;&amp;quot;Maria Silva&amp;quot;&lt;/code&gt;); nesse caso ele aparece sem foto e sem link.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;h2 data-hextra-search-id="a-estrutura-da-página"&gt;A estrutura da página&lt;span class="hx:absolute hx:-mt-20" id="a-estrutura-da-página"&gt;&lt;/span&gt;
