@@ -3,7 +3,7 @@
 Obrigado por querer ajudar! Cada disciplina da Big-O-Library é **um arquivo markdown** em `content/docs/`.
 
 **Guia completo (estrutura, padrões, exemplos e modelo):**
-👉 https://thallesgsrv.github.io/Big-O-Library/contribuir/ (fonte: [`content/contribuir.md`](../content/contribuir.md))
+https://thallesgsrv.github.io/Big-O-Library/contribuir/ (fonte: [`content/contribuir.md`](../content/contribuir.md))
 
 ## Resumo rápido
 

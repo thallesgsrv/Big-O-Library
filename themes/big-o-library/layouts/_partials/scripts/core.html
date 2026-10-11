@@ -1,7 +1,4 @@
-{{- /* Scripts do núcleo (menu, tema, abas, sidebar...), unidos em um único js/main.js.
-       Cada arquivo roda isolado (IIFE + try/catch): se um deles falhar numa página,
-       os demais continuam funcionando. Antes, um erro em qualquer arquivo
-       interrompia todos os que vinham depois na concatenação. */ -}}
+{{- /* Scripts do núcleo (menu, tema, sidebar, busca...) unidos em js/main.js. Cada arquivo roda isolado (IIFE + try/catch), então um erro não derruba os demais. */ -}}
 {{- $parts := slice -}}
 {{- range resources.Match "js/core/*.js" -}}
   {{- $res := resources.ExecuteAsTemplate .Name $ . -}}

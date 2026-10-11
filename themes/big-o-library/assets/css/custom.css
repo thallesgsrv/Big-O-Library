@@ -389,7 +389,7 @@ main p a,main li a,main td a,main blockquote a{text-decoration:underline;text-de
 main p a:hover,main li a:hover,main td a:hover{text-decoration-thickness:2px}
 
 
-.bo-404{min-height:60vh;display:flex;flex-direction:column;justify-content:center;gap:18px;padding-top:64px;padding-bottom:64px}
+.bo-404{min-height:60vh;min-height:60svh;display:flex;flex-direction:column;justify-content:center;gap:18px;padding-top:64px;padding-bottom:64px}
 main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 
 /*  Conselho dos Sábios  */
@@ -568,7 +568,7 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-m{margin-bottom:72px}
 .bo-m-tools{display:flex;gap:16px 28px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
 .bo-m-sel{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;min-width:0;max-width:100%;font-size:14px;color:var(--mute)}
-.bo-m-sel select{flex:1 1 220px;min-width:0;width:100%;max-width:380px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--txt);font:inherit;font-size:14px;text-overflow:ellipsis}
+.bo-m-sel select{flex:1 1 220px;min-width:0;width:100%;max-width:380px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--txt);font:inherit;font-size:16px;text-overflow:ellipsis}
 @media (max-width:560px){.bo-m-sel{flex-direction:column;align-items:stretch}.bo-m-sel select{max-width:100%;flex:none}}
 .bo-mhead>.bo-crumbs{margin-bottom:.9rem}
 .bo-m-leg{display:flex;align-items:center;gap:6px}
@@ -611,7 +611,7 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-cv-n input{flex:1;min-width:140px;accent-color:var(--ac)}
 .bo-cv-n output{color:var(--ac);font-weight:600}
 .bo-cv-t{display:flex;align-items:center;gap:10px;font-size:14px;color:var(--mute)}
-.bo-cv-t select{padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--txt);font:inherit;font-size:14px}
+.bo-cv-t select{padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--txt);font:inherit;font-size:16px}
 .bo-cv-plot{border:1px solid var(--line);border-radius:10px;background:var(--card);padding:8px}
 .bo-cv-plot canvas{display:block;width:100%}
 .bo-cv-note{margin:8px 0 18px}

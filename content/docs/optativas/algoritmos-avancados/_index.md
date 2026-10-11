@@ -5,7 +5,6 @@ description: Técnicas para resolver problemas difíceis com eficiência.
 rotulo: Algoritmos
 autores:
   - thallesgsrv
-prereq: [eda]
 date: 2026-09-29
 ---
 
