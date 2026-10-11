@@ -77,7 +77,13 @@
     // Delegate result clicks so we can close the dialog on navigation.
     resultsEl.addEventListener('click', (e) => {
       const anchor = e.target.closest('a[role="option"]');
-      if (anchor) closeDialog();
+      if (!anchor) return;
+      if (anchor.dataset.boAct && window.boTerminal) {
+        e.preventDefault();
+        window.boTerminal.act(anchor.dataset.boAct);
+        return;
+      }
+      closeDialog();
     });
 
     // Hover updates selection like a standard command palette.
@@ -331,6 +337,12 @@
       }, 250);
       return;
     }
+    if (window.boTerminal && window.boTerminal.match(query)) {
+      const items = await window.boTerminal.run(query);
+      if (input.value.trim() !== query) return;
+      renderTerminal(items);
+      return;
+    }
     if (!window.hextraSearch) return;
     let results;
     try {
@@ -403,6 +415,20 @@
       part.textContent = parts[i];
       container.appendChild(part);
     }
+  }
+
+  // Saída do terminal (comandos digitados na busca): linhas de texto e opções navegáveis.
+  function renderTerminal(items) {
+    cancelCollapse();
+    clearResults();
+    if (innerEl) innerEl.scrollTop = 0;
+    if (emptyEl) emptyEl.hidden = true;
+    window.boTerminal.render(items, resultsEl);
+    const first = resultsEl.querySelector('a[role="option"]');
+    if (first) first.setAttribute('aria-selected', 'true');
+    setActiveDescendant(first && first.id);
+    if (statusEl) statusEl.textContent = '';
+    setViewportExpanded(true);
   }
 
   function renderResults(results, query) {

@@ -5,10 +5,17 @@
 {{- with .Params.autores -}}
   {{- if reflect.IsSlice . -}}{{- $autores = . -}}{{- else -}}{{- $autores = slice . -}}{{- end -}}
 {{- end -}}
+{{- $base := slice -}}
+{{- with .Params.baseadoem -}}
+  {{- if reflect.IsSlice . -}}{{- $base = . -}}{{- else -}}{{- $base = slice . -}}{{- end -}}
+{{- end -}}
+{{- /* sábios do Conselho (data/conselho.yaml) reconhecidos pelo id/github: o crédito leva ao card deles */ -}}
+{{- $sabios := dict -}}
+{{- range partial "bo-sabios.html" . }}{{ if .key }}{{ $sabios = merge $sabios (dict .key .) }}{{ end }}{{ end -}}
 {{- $pub := .Date -}}
 {{- $upd := .Lastmod -}}
 {{- $temData := and (isset .Params "date") (not $pub.IsZero) -}}
-{{- if or $autores $temData -}}
+{{- if or $autores $base $temData -}}
 <footer class="bo-credits" aria-label="Autoria e datas">
   <div class="bo-credits-cmd" aria-hidden="true">$ git log --format=autoria</div>
   <div class="bo-credits-row">
@@ -18,8 +25,27 @@
       <ul class="bo-credits-list">
         {{- range $autores -}}
           {{- $a := printf "%v" . | strings.TrimPrefix "@" -}}
-          {{- if findRE `^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$` $a -}}
+          {{- $sab := index $sabios (lower $a) -}}
+          {{- if $sab -}}
+            <li><a class="bo-credits-person is-sabio" style="--c:var(--p{{ $sab.n }})" href="{{ printf "%s#sabio-%s" ("conselho/" | relURL) $sab.slug | safeURL }}" title="Conselho dos Sábios">{{ partial "bo-av.html" (dict "img" $sab.img "ini" $sab.ini) }}<span>{{ $sab.nome }}</span></a></li>
+          {{- else if findRE `^[A-Za-z0-9](?:[A-Za-z0-9-]{0,37}[A-Za-z0-9])?$` $a -}}
             <li><a class="bo-credits-person" href="https://github.com/{{ $a }}" target="_blank" rel="noopener"><img src="https://avatars.githubusercontent.com/{{ $a }}?s=48" alt="" width="24" height="24" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.parentNode.classList.add('sem-foto');this.remove()"><span>@{{ $a }}</span></a></li>
+          {{- else -}}
+            <li><span class="bo-credits-person"><span>{{ $a }}</span></span></li>
+          {{- end -}}
+        {{- end -}}
+      </ul>
+    </div>
+    {{- end }}
+    {{- if $base }}
+    <div class="bo-credits-by">
+      <span class="bo-credits-label">baseado no material de</span>
+      <ul class="bo-credits-list">
+        {{- range $base -}}
+          {{- $a := printf "%v" . | strings.TrimPrefix "@" -}}
+          {{- $sab := index $sabios (lower $a) -}}
+          {{- if $sab -}}
+            <li><a class="bo-credits-person is-sabio" style="--c:var(--p{{ $sab.n }})" href="{{ printf "%s#sabio-%s" ("conselho/" | relURL) $sab.slug | safeURL }}" title="Conselho dos Sábios">{{ partial "bo-av.html" (dict "img" $sab.img "ini" $sab.ini) }}<span>{{ $sab.nome }}</span></a></li>
           {{- else -}}
             <li><span class="bo-credits-person"><span>{{ $a }}</span></span></li>
           {{- end -}}

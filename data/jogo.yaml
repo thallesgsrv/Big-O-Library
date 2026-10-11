@@ -1,0 +1,186 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  JOGO "QUAL A COMPLEXIDADE?"  (/lab/complexidade)
+#  Cada rodada sorteia trechos daqui. Para acrescentar um, copie um bloco:
+#
+#  classe   Resposta certa. Use exatamente uma destas:
+#           O(1), O(log n), O(n), O(n log n), O(n²), O(2ⁿ), O(n!)
+#  codigo   O trecho (Python). n é sempre o tamanho da entrada.
+#  porque   Uma ou duas frases que ensinam, no tom do site (sem "é óbvio").
+#
+#  Dica: bons trechos têm uma pegadinha (um laço que parece aninhado mas não
+#  é, uma divisão por 2, uma recursão que ramifica).
+# ─────────────────────────────────────────────────────────────────────────────
+rodadas: 10
+trechos:
+  - classe: O(1)
+    codigo: |
+      def primeiro(v):
+          return v[0]
+    porque: "Acessar uma posição de lista custa o mesmo com 10 ou com 10 milhões de itens. Não há laço."
+
+  - classe: O(1)
+    codigo: |
+      def tem_desconto(preco, cupom):
+          if cupom == "BIGO":
+              return preco * 0.9
+          return preco
+    porque: "Uma comparação e uma conta. O tamanho da entrada nem aparece no código."
+
+  - classe: O(1)
+    codigo: |
+      def nota(alunos, nome):
+          return alunos[nome]   # alunos é um dict
+    porque: "Dicionário usa tabela de hash: a busca por chave é O(1) em média, não importa quantos alunos existam."
+
+  - classe: O(log n)
+    codigo: |
+      def passos(n):
+          c = 0
+          while n > 1:
+              n //= 2
+              c += 1
+          return c
+    porque: "n cai pela metade a cada volta. Dividir ao meio até chegar em 1 leva log₂ n passos."
+
+  - classe: O(log n)
+    codigo: |
+      def busca(v, x):          # v está ordenado
+          lo, hi = 0, len(v) - 1
+          while lo <= hi:
+              mid = (lo + hi) // 2
+              if v[mid] == x: return mid
+              if v[mid] < x: lo = mid + 1
+              else: hi = mid - 1
+          return -1
+    porque: "Busca binária: cada comparação descarta metade do que sobrou."
+
+  - classe: O(log n)
+    codigo: |
+      def potencias(n):
+          i = 1
+          while i < n:
+              i *= 2
+    porque: "O contador dobra a cada volta, então chega em n depois de log₂ n voltas. É a divisão ao meio, só que de ponta-cabeça."
+
+  - classe: O(n)
+    codigo: |
+      def soma(v):
+          total = 0
+          for x in v:
+              total += x
+          return total
+    porque: "Um laço que visita cada elemento uma vez. Dobrou a lista, dobrou o tempo."
+
+  - classe: O(n)
+    codigo: |
+      def tem(v, x):
+          return x in v     # v é uma lista
+    porque: "Parece uma linha só, mas o operador in numa lista percorre elemento por elemento. No pior caso, a lista inteira."
+
+  - classe: O(n)
+    codigo: |
+      def minmax(v):
+          menor = min(v)
+          maior = max(v)
+          return menor, maior
+    porque: "Dois laços, um depois do outro: n + n = 2n. Constante some na notação, sobra O(n)."
+
+  - classe: O(n)
+    codigo: |
+      def fatorial(n):
+          if n <= 1:
+              return 1
+          return n * fatorial(n - 1)
+    porque: "Uma chamada recursiva só, descendo de n até 1. São n chamadas, cada uma com trabalho constante."
+
+  - classe: O(n log n)
+    codigo: |
+      def f(n):
+          for i in range(n):
+              j = n
+              while j > 1:
+                  j //= 2
+    porque: "O laço de fora roda n vezes e, dentro dele, o while divide ao meio (log n). Quando um custa log n e o outro n, multiplique."
+
+  - classe: O(n log n)
+    codigo: |
+      def ordena(v):
+          if len(v) <= 1:
+              return v
+          m = len(v) // 2
+          return junta(ordena(v[:m]), ordena(v[m:]))   # junta é linear
+    porque: "Merge sort: a lista é cortada ao meio (log n níveis) e cada nível gasta n para juntar."
+
+  - classe: O(n log n)
+    codigo: |
+      def ranking(notas):
+          notas.sort()
+          return notas[::-1]
+    porque: "A ordenação padrão do Python custa n log n. O resto é linear e é engolido por ela."
+
+  - classe: O(n²)
+    codigo: |
+      def pares(v):
+          for a in v:
+              for b in v:
+                  print(a, b)
+    porque: "Para cada um dos n elementos, outro laço de n. São n × n = n² pares impressos."
+
+  - classe: O(n²)
+    codigo: |
+      def bubble(v):
+          n = len(v)
+          for i in range(n):
+              for j in range(n - i - 1):
+                  if v[j] > v[j + 1]:
+                      v[j], v[j + 1] = v[j + 1], v[j]
+    porque: "O laço de dentro encurta a cada volta (n-1, n-2, ... 1), e essa soma dá n(n-1)/2, que continua sendo n²."
+
+  - classe: O(n²)
+    codigo: |
+      def repetido(v):
+          for i in range(len(v)):
+              for j in range(i + 1, len(v)):
+                  if v[i] == v[j]:
+                      return True
+          return False
+    porque: "Compara todos os pares (i, j). Começar j em i+1 corta pela metade, mas metade de n² ainda é n²."
+
+  - classe: O(2ⁿ)
+    codigo: |
+      def fib(n):
+          if n < 2:
+              return n
+          return fib(n - 1) + fib(n - 2)
+    porque: "Cada chamada gera duas, e quase não há reaproveitamento. A árvore de chamadas dobra de tamanho a cada nível."
+
+  - classe: O(2ⁿ)
+    codigo: |
+      def subconjuntos(v, i=0, atual=()):
+          if i == len(v):
+              print(atual)
+              return
+          subconjuntos(v, i + 1, atual)              # sem v[i]
+          subconjuntos(v, i + 1, atual + (v[i],))    # com v[i]
+    porque: "Cada elemento tem duas escolhas: entra ou não entra. n elementos, 2 × 2 × ... × 2 = 2ⁿ subconjuntos."
+
+  - classe: O(n!)
+    codigo: |
+      def permutacoes(v, k=0):
+          if k == len(v):
+              print(v)
+              return
+          for i in range(k, len(v)):
+              v[k], v[i] = v[i], v[k]
+              permutacoes(v, k + 1)
+              v[k], v[i] = v[i], v[k]
+    porque: "n escolhas para a primeira posição, n-1 para a segunda, e assim por diante: n × (n-1) × ... × 1 = n!."
+
+  - classe: O(n!)
+    codigo: |
+      def melhor_rota(cidades):
+          melhor = float("inf")
+          for ordem in todas_as_ordens(cidades):
+              melhor = min(melhor, custo(ordem))
+          return melhor
+    porque: "Força bruta no caixeiro-viajante: testa todas as ordens possíveis de visita. São n! ordens."

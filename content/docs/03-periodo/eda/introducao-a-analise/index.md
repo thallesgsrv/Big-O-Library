@@ -4,6 +4,8 @@ weight: 1
 description: Como comparar algoritmos contando operações em vez de cronometrar.
 autores:
   - thallesgsrv
+baseadoEm:
+  - joaoarthurbm
 date: 2026-10-09
 ---
 

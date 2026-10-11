@@ -4,6 +4,8 @@ weight: 2
 description: As notações O, Ω e Θ e as principais classes de crescimento.
 autores:
   - thallesgsrv
+baseadoEm:
+  - joaoarthurbm
 date: 2026-10-09
 ---
 

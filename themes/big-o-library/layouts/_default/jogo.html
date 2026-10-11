@@ -1,0 +1,174 @@
+{{- /* /lab/complexidade: jogo "Qual a complexidade?".
+       Trechos: data/jogo.yaml | Sábios: data/conselho.yaml (via bo-sabios) | CSS: .bo-g* e .bo-rs* em custom.css
+       No fim, a classe em que a pessoa mais acertou aponta para o sábio do Conselho com a mesma classe (ou a mais próxima). */ -}}
+{{ define "main" }}
+{{ partial "sidebar.html" (dict "context" .) }}
+{{- $sab := slice -}}
+{{- range partial "bo-sabios.html" . -}}
+  {{- $sab = $sab | append (dict "nome" .nome "titulo" .titulo "classe" .classe "frase" .frase "pend" .pend "slug" .slug "img" .img "ini" .ini "n" .n) -}}
+{{- end -}}
+{{- $cfg := hugo.Data.jogo | default dict -}}
+<main class="bo-wrap" id="content">
+  {{ partial "bo-mhead.html" (dict
+      "prompt" "~/big-o-library $ ./complexidade"
+      "title" .Title
+      "lead" (.Params.summary | default .Params.description)) }}
+
+  <section class="bo-game" id="bo-game" aria-label="Jogo: qual a complexidade?">
+    <noscript><p class="bo-small">Este jogo precisa de JavaScript ligado.</p></noscript>
+  </section>
+
+  <script>
+  (function () {
+    var TRECHOS = {{ $cfg.trechos | default slice }};
+    var RODADAS = {{ $cfg.rodadas | default 10 }};
+    var SAGES = {{ $sab }};
+    var CONSELHO = {{ "conselho/" | relURL }};
+    var SITE = {{ .Site.Home.Permalink }};
+
+    var CLS = ["O(1)", "O(log n)", "O(√n)", "O(n)", "O(n log n)", "O(n²)", "O(n³)", "O(2ⁿ)", "O(n!)"];
+    var normC = function (s) { return String(s).toLowerCase().replace(/\s+/g, "").replace(/\^2/g, "²").replace(/\^3/g, "³").replace(/2\^n/g, "2ⁿ"); };
+    var CLSN = CLS.map(normC);
+    var idxOf = function (s) { return CLSN.indexOf(normC(s)); };
+    var PERFIL = {
+      0: "Direto ao ponto: onde os outros veem trabalho, você enxerga custo constante.",
+      1: "Você pensa em cortar o problema ao meio. Quase um instinto de busca binária.",
+      3: "Linear: você percorre cada coisa uma vez, sem pressa e sem desperdício.",
+      4: "Dividir e conquistar é o seu jeito. Quebra, resolve, junta.",
+      5: "Laço dentro de laço não te assusta. (Talvez devesse, só um pouquinho.)",
+      7: "Você enxerga a árvore de chamadas explodindo antes de ela explodir.",
+      8: "O pior caso em pessoa. A boa notícia: daqui só se pode melhorar."
+    };
+
+    var root = document.getElementById("bo-game");
+    if (!root || !TRECHOS.length) return;
+    document.documentElement.classList.add("bo-js");
+
+    var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    var shuffle = function (a) { a = a.slice(); for (var i = a.length - 1; i > 0; i--) { var j = Math.floor(Math.random() * (i + 1)); var t = a[i]; a[i] = a[j]; a[j] = t; } return a; };
+    var pool = []; TRECHOS.forEach(function (t) { if (pool.indexOf(t.classe) < 0) pool.push(t.classe); });
+    pool.sort(function (a, b) { return idxOf(a) - idxOf(b); });
+
+    var rounds, cur, acertos, jogadas, travado;
+
+    function start() {
+      var n = Math.min(RODADAS, TRECHOS.length);
+      /* sorteio com variedade: embaralha e pega n, garantindo que nenhuma classe domine */
+      rounds = shuffle(TRECHOS).slice(0, n);
+      cur = 0; acertos = 0; jogadas = []; travado = false;
+      question();
+    }
+
+    function question() {
+      var t = rounds[cur];
+      var wrong = shuffle(pool.filter(function (c) { return c !== t.classe; })).slice(0, 3);
+      var opts = wrong.concat(t.classe).sort(function (a, b) { return idxOf(a) - idxOf(b); });
+      travado = false;
+      root.innerHTML =
+        '<div class="bo-g-top"><span class="bo-g-cmd" aria-hidden="true">$ ./complexidade --rodada ' + (cur + 1) + '/' + rounds.length + '</span>' +
+        '<span class="bo-g-score">acertos: ' + acertos + '</span></div>' +
+        '<div class="bo-g-bar" role="progressbar" aria-valuemin="0" aria-valuemax="' + rounds.length + '" aria-valuenow="' + cur + '"><i style="width:' + (cur / rounds.length * 100) + '%"></i></div>' +
+        '<pre class="bo-g-code" tabindex="0"><code>' + esc(t.codigo.replace(/\s+$/, "")) + '</code></pre>' +
+        '<p class="bo-g-q">Qual a complexidade de tempo, no pior caso, em função de <em>n</em>? <span class="bo-g-keys">(teclas 1–4)</span></p>' +
+        '<div class="bo-g-opts" role="group" aria-label="Alternativas">' +
+        opts.map(function (c, i) { return '<button type="button" class="bo-g-opt" data-c="' + esc(c) + '"><kbd>' + (i + 1) + '</kbd><span>' + esc(c) + '</span></button>'; }).join("") +
+        '</div><div class="bo-g-fb" id="bo-g-fb" hidden></div>';
+      [].forEach.call(root.querySelectorAll(".bo-g-opt"), function (b) { b.addEventListener("click", function () { answer(b.getAttribute("data-c")); }); });
+    }
+
+    function answer(c) {
+      if (travado) return;
+      travado = true;
+      var t = rounds[cur], ok = c === t.classe;
+      if (ok) acertos++;
+      jogadas.push({ c: t.classe, ok: ok });
+      [].forEach.call(root.querySelectorAll(".bo-g-opt"), function (b) {
+        var v = b.getAttribute("data-c");
+        b.disabled = true;
+        if (v === t.classe) { b.classList.add("is-ok"); b.style.setProperty("--c", "var(--p" + (idxOf(v) + 1) + ")"); }
+        else if (v === c) b.classList.add("is-bad");
+      });
+      var fb = document.getElementById("bo-g-fb");
+      var ultimo = cur === rounds.length - 1;
+      fb.hidden = false;
+      fb.className = "bo-g-fb " + (ok ? "is-ok" : "is-bad");
+      fb.innerHTML = '<p class="bo-g-verd">' + (ok ? "// certo" : "// errou: era " + esc(t.classe)) + '</p><p>' + esc(t.porque) + '</p>' +
+        '<button type="button" class="bo-b1 bo-g-next" id="bo-g-next">' + (ultimo ? "ver resultado" : "próxima") + ' →</button>';
+      var nb = document.getElementById("bo-g-next");
+      nb.addEventListener("click", function () { cur++; if (cur < rounds.length) question(); else finish(); });
+      nb.focus({ preventScroll: false });
+    }
+
+    function pickSage(alvo) {
+      var best = null, bd = 99, cand = [];
+      SAGES.forEach(function (s) {
+        var i = idxOf(s.classe);
+        if (i < 0) return;
+        var d = Math.abs(i - alvo);
+        if (d < bd) { bd = d; cand = [s]; } else if (d === bd) cand.push(s);
+      });
+      if (cand.length) best = cand[Math.floor(Math.random() * cand.length)];
+      return best ? { s: best, d: bd } : null;
+    }
+
+    function finish() {
+      var stat = {};
+      jogadas.forEach(function (j) { var k = idxOf(j.c); (stat[k] = stat[k] || []).push(j.ok); });
+      var alvo = -1, bestC = -1, bestR = -1;
+      Object.keys(stat).forEach(function (k) {
+        var ok = stat[k].filter(Boolean).length, r = ok / stat[k].length, ki = +k;
+        if (ok > bestC || (ok === bestC && (r > bestR || (r === bestR && ki > alvo)))) { bestC = ok; bestR = r; alvo = ki; }
+      });
+      if (acertos === 0) alvo = CLS.length - 1;
+      var perfil = PERFIL[alvo] || "Uma classe só sua.";
+      var sg = pickSage(alvo);
+      var pips = Object.keys(stat).sort(function (a, b) { return a - b; }).map(function (k) {
+        return '<li style="--c:var(--p' + (+k + 1) + ')"><span class="bo-rs-k">' + esc(CLS[k]) + '</span><span class="bo-rs-p" aria-label="' + stat[k].filter(Boolean).length + ' de ' + stat[k].length + '">' +
+          stat[k].map(function (o) { return o ? '●' : '○'; }).join("") + '</span></li>';
+      }).join("");
+
+      var card = "";
+      var share = 'Fiz o "Qual a complexidade?" do Big-O-Library: ' + acertos + '/' + rounds.length + ' · minha classe: ' + CLS[alvo];
+      if (sg) {
+        var s = sg.s;
+        share += ' · sábio: ' + s.nome;
+        card = '<a class="bo-rs-sage" style="--c:var(--p' + s.n + ')" href="' + CONSELHO + '#sabio-' + esc(s.slug) + '">' +
+          '<span class="bo-av" aria-hidden="true"><span>' + esc(s.ini) + '</span>' + (s.img ? '<img src="' + esc(s.img) + '" alt="" width="240" height="240" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '</span>' +
+          '<span class="bo-rs-who"><span class="bo-rs-name">' + esc(s.nome) + '</span>' + (s.titulo ? '<span class="bo-rs-title">' + esc(s.titulo) + '</span>' : '') +
+          '<span class="bo-rs-q">' + (s.pend ? '// frase a caminho' : '“' + esc(s.frase) + '”') + '</span></span><span class="bo-rs-go" aria-hidden="true">ver card →</span></a>' +
+          (sg.d ? '<p class="bo-small bo-rs-note">O Conselho ainda não tem ninguém em ' + esc(CLS[alvo]) + '. O mais próximo é ' + esc(s.classe) + '.</p>' : '');
+      }
+      share += ' ' + SITE + 'lab/complexidade/';
+
+      root.innerHTML =
+        '<div class="bo-g-top"><span class="bo-g-cmd" aria-hidden="true">$ ./complexidade --resultado</span><span class="bo-g-score">' + acertos + '/' + rounds.length + '</span></div>' +
+        '<div class="bo-rs" style="--c:var(--p' + (alvo + 1) + ')"><p class="bo-rs-o" aria-hidden="true">' + esc(CLS[alvo]) + '</p>' +
+        '<h2 class="bo-rs-h">Sua classe: ' + esc(CLS[alvo]) + '</h2><p class="bo-rs-t">' + esc(perfil) + '</p>' + card +
+        '<ul class="bo-rs-pips" aria-label="Acertos por classe">' + pips + '</ul>' +
+        '<div class="bo-btns"><button type="button" class="bo-b1" id="bo-g-again">jogar de novo ↻</button><button type="button" class="bo-b2" id="bo-g-copy">copiar resultado</button></div>' +
+        '<p class="bo-small" id="bo-g-copied" aria-live="polite"></p></div>';
+      document.getElementById("bo-g-again").addEventListener("click", start);
+      document.getElementById("bo-g-copy").addEventListener("click", function () {
+        var done = function (m) { document.getElementById("bo-g-copied").textContent = m; };
+        if (navigator.clipboard && navigator.clipboard.writeText) navigator.clipboard.writeText(share).then(function () { done("copiado."); }, function () { done(share); });
+        else done(share);
+      });
+    }
+
+    document.addEventListener("keydown", function (e) {
+      if (travado || e.ctrlKey || e.metaKey || e.altKey) return;
+      var i = parseInt(e.key, 10);
+      if (!(i >= 1 && i <= 4)) return;
+      var b = root.querySelectorAll(".bo-g-opt")[i - 1];
+      if (b && !/INPUT|TEXTAREA|SELECT/.test((document.activeElement || {}).tagName || "")) b.click();
+    });
+
+    root.innerHTML =
+      '<div class="bo-g-intro"><p class="bo-g-cmd" aria-hidden="true">$ ./complexidade --ajuda</p>' +
+      '<p>Você vai ver ' + Math.min(RODADAS, TRECHOS.length) + ' trechos de código. Para cada um, escolha a classe de <strong>tempo no pior caso</strong>. Depois de cada resposta, uma explicação curta. No fim, descobrimos em que classe você mais acertou e qual sábio do Conselho combina com ela.</p>' +
+      '<div class="bo-btns"><button type="button" class="bo-b1" id="bo-g-go">começar →</button></div></div>';
+    document.getElementById("bo-g-go").addEventListener("click", start);
+  })();
+  </script>
+</main>
+{{ end }}

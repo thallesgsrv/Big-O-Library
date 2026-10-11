@@ -1,0 +1,173 @@
+{{- /* /lab/mapa: o curso como grafo. Cada disciplina do acervo vira um nó; as arestas vêm do `prereq:` do front matter
+       (lista de pastas, ex.: prereq: [prog2, lab-prog2]). Pré-requisito sem página vira nó pontilhado ("sem material ainda").
+       Layout e interação em JS (SVG). CSS: .bo-m* em custom.css */ -}}
+{{ define "main" }}
+{{ partial "sidebar.html" (dict "context" .) }}
+{{- $nodes := slice -}}
+{{- range sort site.Pages "Path" -}}
+  {{- $pg := . -}}
+  {{- with findRESubmatch `^/docs/(?:0?([1-9])-periodo|(optativas))/([^/]+)$` $pg.Path 1 -}}
+    {{- $g := index . 0 -}}
+    {{- $pre := slice -}}
+    {{- with $pg.Params.prereq -}}
+      {{- if reflect.IsSlice . }}{{ range . }}{{ $pre = $pre | append (printf "%v" .) }}{{ end }}{{ else }}{{ $pre = slice (printf "%v" .) }}{{ end -}}
+    {{- end -}}
+    {{- $per := 0 -}}
+    {{- if index $g 1 }}{{ $per = int (index $g 1) }}{{ end -}}
+    {{- $nodes = $nodes | append (dict "slug" (index $g 3) "title" $pg.Title "url" $pg.RelPermalink "per" $per "desc" ($pg.Description | default "") "pre" $pre "w" $pg.Weight) -}}
+  {{- end -}}
+{{- end -}}
+<main class="bo-wrap" id="content">
+  {{ partial "bo-mhead.html" (dict
+      "prompt" "~/big-o-library $ ./mapa --prerequisitos"
+      "title" .Title
+      "lead" (.Params.summary | default .Params.description)) }}
+
+  <div class="bo-m" id="bo-m">
+    <noscript><p class="bo-small">O mapa precisa de JavaScript ligado.</p></noscript>
+    <div class="bo-m-tools">
+      <label class="bo-m-sel"><span>quero chegar em</span><select id="bo-m-sel" aria-label="Escolher disciplina"></select></label>
+      <span class="bo-small bo-m-leg"><i class="bo-m-lg-solid"></i> tem material &nbsp; <i class="bo-m-lg-ghost"></i> pré-requisito sem material ainda</span>
+    </div>
+    <div class="bo-m-scroll" id="bo-m-scroll" tabindex="0" aria-label="Grafo de disciplinas (role para os lados no celular)"><svg id="bo-m-svg" role="group" aria-label="Disciplinas e pré-requisitos"></svg></div>
+    <div class="bo-m-panel" id="bo-m-panel" aria-live="polite"></div>
+  </div>
+
+  <script>
+  (function () {
+    var RAW = {{ $nodes }};
+    var CONTRIBUIR = {{ "contribuir/" | relURL }};
+    var root = document.getElementById("bo-m");
+    var svg = document.getElementById("bo-m-svg");
+    var panel = document.getElementById("bo-m-panel");
+    var sel = document.getElementById("bo-m-sel");
+    if (!root || !RAW.length) { if (root) root.insertAdjacentHTML("beforeend", '<p class="bo-small">Nenhuma disciplina com material ainda.</p>'); return; }
+    var NS = "http://www.w3.org/2000/svg";
+    var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
+    var human = function (slug) { var t = slug.replace(/-/g, " "); return t.charAt(0).toUpperCase() + t.slice(1); };
+
+    /* nós + fantasmas */
+    var by = {}, list = [];
+    RAW.forEach(function (n) { n.ghost = false; by[n.slug] = n; list.push(n); });
+    RAW.forEach(function (n) {
+      n.pre.forEach(function (s) {
+        if (!by[s]) { by[s] = { slug: s, title: human(s), url: "", per: Math.max(1, (n.per || 9) - 1), desc: "", pre: [], ghost: true }; list.push(by[s]); }
+        else if (by[s].ghost) by[s].per = Math.min(by[s].per, Math.max(1, (n.per || 9) - 1));
+      });
+    });
+    var kids = {};
+    list.forEach(function (n) { n.pre.forEach(function (s) { (kids[s] = kids[s] || []).push(n.slug); }); });
+    var up = function (s) { return by[s].pre; }, down = function (s) { return kids[s] || []; };
+    var closure = function (slug, next) {
+      var seen = {}, st = next(slug).slice();
+      while (st.length) { var s = st.pop(); if (seen[s]) continue; seen[s] = 1; next(s).forEach(function (x) { st.push(x); }); }
+      return seen;
+    };
+
+    /* colunas: 1..9 e "optativas" (per 0) */
+    var cols = [];
+    list.forEach(function (n) { var k = n.per || 99; if (cols.indexOf(k) < 0) cols.push(k); });
+    cols.sort(function (a, b) { return a - b; });
+    var W = 196, H = 60, GX = 84, GY = 18, PAD = 22, HEAD = 36;
+    var pos = {};
+    cols.forEach(function (k, ci) {
+      var inCol = list.filter(function (n) { return (n.per || 99) === k; });
+      inCol.forEach(function (n) {
+        var ys = n.pre.filter(function (s) { return pos[s]; }).map(function (s) { return pos[s].row; });
+        n._bar = ys.length ? ys.reduce(function (a, b) { return a + b; }, 0) / ys.length : 999;
+      });
+      inCol.sort(function (a, b) { return a._bar - b._bar; });
+      inCol.forEach(function (n, r) { pos[n.slug] = { col: ci, row: r, x: PAD + ci * (W + GX), y: PAD + HEAD + r * (H + GY) }; });
+    });
+    var maxRows = 0; cols.forEach(function (k) { maxRows = Math.max(maxRows, list.filter(function (n) { return (n.per || 99) === k; }).length); });
+    var VW = PAD * 2 + cols.length * W + (cols.length - 1) * GX, VH = PAD * 2 + HEAD + maxRows * (H + GY) - GY;
+    svg.setAttribute("viewBox", "0 0 " + VW + " " + VH);
+    svg.setAttribute("width", VW); svg.setAttribute("height", VH);
+
+    var el = function (name, attrs, parent) { var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
+    var colColor = function (k) { return k === 99 ? "var(--ac)" : "var(--p" + k + ")"; };
+
+    cols.forEach(function (k, ci) {
+      var t = el("text", { x: PAD + ci * (W + GX), y: PAD + 8, "class": "bo-m-colh", fill: colColor(k) }, svg);
+      t.textContent = k === 99 ? "optativas" : k + "º período";
+    });
+    var gE = el("g", { "class": "bo-m-edges" }, svg), gN = el("g", { "class": "bo-m-nodes" }, svg);
+    var edges = [];
+    list.forEach(function (n) {
+      n.pre.forEach(function (s) {
+        var a = pos[s], b = pos[n.slug];
+        var x1 = a.x + W, y1 = a.y + H / 2, x2 = b.x, y2 = b.y + H / 2, dx = Math.max(30, (x2 - x1) / 2);
+        var p = el("path", { d: "M" + x1 + "," + y1 + " C" + (x1 + dx) + "," + y1 + " " + (x2 - dx) + "," + y2 + " " + x2 + "," + y2, "class": "bo-m-edge" }, gE);
+        edges.push({ el: p, from: s, to: n.slug });
+      });
+    });
+    var nodeEls = {};
+    var wrap = function (s) {
+      var w = s.split(" "), lines = [""], max = 24;
+      w.forEach(function (x) { var l = lines[lines.length - 1]; if ((l + " " + x).trim().length <= max || !l) lines[lines.length - 1] = (l + " " + x).trim(); else lines.push(x); });
+      if (lines.length > 2) { lines = lines.slice(0, 2); lines[1] = lines[1].slice(0, max - 1) + "…"; }
+      return lines;
+    };
+    list.forEach(function (n) {
+      var p = pos[n.slug];
+      var g = el("g", { "class": "bo-m-node" + (n.ghost ? " is-ghost" : ""), transform: "translate(" + p.x + "," + p.y + ")", tabindex: 0, role: "button", "aria-pressed": "false", "aria-label": n.title + (n.ghost ? " (ainda sem material)" : ""), style: "--c:" + colColor(n.per || 99) }, gN);
+      el("rect", { width: W, height: H, rx: 9 }, g);
+      el("rect", { width: 5, height: H, rx: 2, "class": "bo-m-tick" }, g);
+      var ls = wrap(n.title);
+      var t = el("text", { x: 18, y: ls.length === 1 ? H / 2 + 5 : H / 2 - 6 }, g);
+      ls.forEach(function (l, i) { var s = el("tspan", { x: 18, dy: i ? 17 : 0 }, t); s.textContent = l; });
+      g.addEventListener("click", function () { choose(n.slug); });
+      g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(n.slug); } });
+      nodeEls[n.slug] = g;
+    });
+
+    var ordered = list.slice().sort(function (a, b) { return ((a.per || 99) - (b.per || 99)) || a.title.localeCompare(b.title, "pt-BR"); });
+    sel.innerHTML = ordered.map(function (n) { return '<option value="' + esc(n.slug) + '">' + (n.per ? n.per + "º · " : "opt · ") + esc(n.title) + (n.ghost ? " (sem material)" : "") + "</option>"; }).join("");
+    sel.addEventListener("change", function () { choose(sel.value); });
+
+    var perLabel = function (n) { return n.per ? n.per + "º período" : "optativa"; };
+    var item = function (n) { return n.ghost ? '<li class="is-ghost"><span>' + esc(n.title) + '</span> <small>sem material ainda</small></li>' : '<li><a href="' + esc(n.url) + '">' + esc(n.title) + '</a></li>'; };
+
+    function choose(slug) {
+      var n = by[slug], anc = closure(slug, up), desc = closure(slug, down);
+      svg.classList.add("has-sel");
+      Object.keys(nodeEls).forEach(function (s) {
+        var g = nodeEls[s];
+        g.classList.toggle("is-sel", s === slug);
+        g.classList.toggle("is-anc", !!anc[s]);
+        g.classList.toggle("is-desc", !!desc[s]);
+        g.setAttribute("aria-pressed", s === slug ? "true" : "false");
+      });
+      edges.forEach(function (e) {
+        var a = (anc[e.from] || e.from === slug) && (anc[e.to] || e.to === slug);
+        var d = (desc[e.to] || e.to === slug) && (desc[e.from] || e.from === slug);
+        e.el.classList.toggle("is-anc", !!a);
+        e.el.classList.toggle("is-desc", !!d && !a);
+      });
+      sel.value = slug;
+      var need = Object.keys(anc).map(function (s) { return by[s]; }).sort(function (a, b) { return ((a.per || 99) - (b.per || 99)) || a.title.localeCompare(b.title, "pt-BR"); });
+      var give = Object.keys(desc).map(function (s) { return by[s]; }).sort(function (a, b) { return ((a.per || 99) - (b.per || 99)) || a.title.localeCompare(b.title, "pt-BR"); });
+      var groups = [], last = null;
+      need.forEach(function (x) { var l = perLabel(x); if (!last || last.l !== l) { last = { l: l, a: [] }; groups.push(last); } last.a.push(x); });
+      panel.style.setProperty("--c", colColor(n.per || 99));
+      panel.innerHTML =
+        '<p class="bo-m-cmd" aria-hidden="true">$ ./mapa --ate ' + esc(slug) + '</p>' +
+        '<h2 class="bo-m-h">' + esc(n.title) + ' <small>' + perLabel(n) + '</small></h2>' +
+        (n.desc ? '<p class="bo-m-d">' + esc(n.desc) + '</p>' : '') +
+        '<div class="bo-m-cols"><div><h3>Antes dela, nesta ordem</h3>' +
+        (need.length ? '<ol class="bo-m-ord">' + groups.map(function (g) { return '<li><span class="bo-m-per">' + g.l + '</span><ul>' + g.a.map(item).join("") + '</ul></li>'; }).join("") + '</ol>'
+                     : '<p class="bo-small">Sem pré-requisitos cadastrados: dá para começar por aqui.</p>') +
+        '</div><div><h3>O que ela libera</h3>' + (give.length ? '<ul class="bo-m-lib">' + give.map(item).join("") + '</ul>' : '<p class="bo-small">Nada depende dela (ainda).</p>') + '</div></div>' +
+        '<div class="bo-btns">' + (n.ghost ? '<a class="bo-b2" href="' + CONTRIBUIR + '">escrever o material desta disciplina</a>' : '<a class="bo-b1" href="' + esc(n.url) + '">abrir material →</a>') + '</div>';
+      /* leva o nó escolhido para dentro da área visível do scroll horizontal */
+      var sc = document.getElementById("bo-m-scroll"), p = pos[slug];
+      if (sc && sc.scrollWidth > sc.clientWidth) sc.scrollTo({ left: Math.max(0, p.x - 24), behavior: "smooth" });
+    }
+
+    /* começa com a disciplina que mais depende de outras (mostra o grafo funcionando) */
+    var start = list.filter(function (n) { return !n.ghost; }).sort(function (a, b) { return Object.keys(closure(b.slug, up)).length - Object.keys(closure(a.slug, up)).length; })[0];
+    choose(start.slug);
+  })();
+  </script>
+</main>
+{{ end }}

@@ -123,10 +123,18 @@
         </div>
 
         <footer class="bo-sage-foot">
-          {{- with $p.materiais }}
+          {{- $mats := partial "bo-materiais-de.html" (lower (printf "%v" (or $p.id $p.github ""))) -}}
+          {{- if $mats }}
+          <ul class="bo-sage-tags bo-sage-mats" aria-label="Materiais no acervo">
+            {{- range first 4 $mats }}<li><a href="{{ .url }}">{{ .titulo }}</a>{{ if eq .papel "base" }}<small title="O material desta página se baseia no dele">base</small>{{ end }}</li>{{ end }}
+            {{- if gt (len $mats) 4 }}<li class="bo-sage-more">+{{ sub (len $mats) 4 }}</li>{{ end }}
+          </ul>
+          {{- else }}
+            {{- with $p.materiais }}
           <ul class="bo-sage-tags" aria-label="Contribuições">
             {{- range . }}<li>{{ . }}</li>{{ end }}
           </ul>
+            {{- end }}
           {{- end }}
           {{- if $p.github }}
           <a class="bo-sage-gh" href="https://github.com/{{ $p.github }}" target="_blank" rel="noopener">

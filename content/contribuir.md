@@ -74,6 +74,8 @@ date: 2026-09-29
 | `autores` | sim | Lista de usuários do GitHub de quem escreveu a página, sem o `@`. Aparece no fim da página, com foto e link para o perfil. |
 | `date` | sim | Data em que a página foi criada, no formato `AAAA-MM-DD`. Nunca use uma data futura: o Hugo não publica páginas com data no futuro. |
 | `summary` | não | Texto um pouco maior, exibido logo abaixo do título da página. |
+| `prereq` | não | Só em disciplinas: lista das pastas das disciplinas que vêm antes (ex.: `prereq: [prog2, lab-prog2]`). Alimenta o [mapa de pré-requisitos](../lab/mapa/). Se a disciplina citada ainda não tem página, ela aparece no mapa pontilhada, como convite para alguém escrevê-la. |
+| `baseadoEm` | não | Lista de sábios do [Conselho](../conselho/) (pelo `id` ou `github` dele em `data/conselho.yaml`) em cujo material esta página se baseia. Aparece nos créditos e no card do sábio. |
 | `rotulo` | não | Só em páginas que têm subpáginas (por exemplo, uma disciplina com estágios): título da lista de cards. Padrão: `Disciplinas`. |
 
 ### Autoria e datas
@@ -88,6 +90,7 @@ escrito por  (foto) @thallesgsrv      publicado em 29 de setembro de 2026 · atu
 - Os autores vêm do campo `autores`. Se você **acrescentar ou melhorar** materiais de uma disciplina que já existe, adicione o seu usuário do GitHub na lista (sem remover os anteriores).
 - O "publicado em" vem do campo `date`; ele não muda quando a página é editada.
 - O "atualizado em" é automático: o site lê a data do último commit que mexeu no arquivo. Só aparece se for diferente da data de publicação.
+- Se um usuário em `autores` (ou em `baseadoEm`) for um **sábio do Conselho**, o crédito mostra o nome dele com a foto e leva ao card, e o card passa a listar a página sozinho. Quem não tem GitHub usa o `id` definido em `data/conselho.yaml`.
 - Quem não tem conta no GitHub pode escrever o nome em vez do usuário (por exemplo `"Maria Silva"`); nesse caso ele aparece sem foto e sem link.
 
 ## A estrutura da página

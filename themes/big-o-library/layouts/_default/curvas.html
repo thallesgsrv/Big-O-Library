@@ -1,0 +1,118 @@
+{{- /* /lab/curvas: curvas de crescimento. Arraste o n e veja operações e tempo real por classe.
+       Canvas 2D, eixo y em escala logarítmica. CSS: .bo-cv* em custom.css */ -}}
+{{ define "main" }}
+{{ partial "sidebar.html" (dict "context" .) }}
+<main class="bo-wrap" id="content">
+  {{ partial "bo-mhead.html" (dict
+      "prompt" "~/big-o-library $ ./curvas --n 20"
+      "title" .Title
+      "lead" (.Params.summary | default .Params.description)) }}
+
+  <div class="bo-cv" id="bo-cv">
+    <noscript><p class="bo-small">As curvas precisam de JavaScript ligado.</p></noscript>
+    <div class="bo-cv-ctl">
+      <label class="bo-cv-n"><span>n = <output id="bo-cv-nv">20</output></span><input type="range" id="bo-cv-n" min="1" max="60" value="20" aria-label="Tamanho da entrada, n"></label>
+      <label class="bo-cv-t"><span>cada operação leva</span>
+        <select id="bo-cv-ns" aria-label="Tempo por operação">
+          <option value="1">1 ns (código compilado)</option>
+          <option value="100">100 ns (Python, por exemplo)</option>
+          <option value="1000">1 µs (bem devagar)</option>
+        </select>
+      </label>
+    </div>
+    <div class="bo-cv-plot"><canvas id="bo-cv-c" role="img" aria-label="Gráfico em escala logarítmica do número de operações por classe de complexidade, para n de 1 a 60"></canvas></div>
+    <p class="bo-small bo-cv-note">eixo vertical em escala logarítmica: cada linha de grade é 10⁶ vezes a anterior. Linhas tracejadas: 1 segundo, 1 ano e a idade do universo.</p>
+    <table class="bo-cv-tab" id="bo-cv-tab"><caption class="hx:sr-only">Operações e tempo estimado por classe</caption>
+      <thead><tr><th scope="col">classe</th><th scope="col">operações</th><th scope="col">tempo</th></tr></thead><tbody></tbody></table>
+  </div>
+
+  <script>
+  (function () {
+    var box = document.getElementById("bo-cv"), cv = document.getElementById("bo-cv-c");
+    if (!box || !cv) return;
+    var nIn = document.getElementById("bo-cv-n"), nOut = document.getElementById("bo-cv-nv"), nsSel = document.getElementById("bo-cv-ns");
+    var tbody = box.querySelector("tbody");
+    var XMAX = 60, YMAX = 30, SEC_YEAR = 31557600, UNIVERSO = 13.8e9;
+    var CL = [
+      { k: "O(1)",       p: 1, f: function () { return 1; } },
+      { k: "O(log n)",   p: 2, f: function (n) { return Math.log2(Math.max(n, 1)) || 1; } },
+      { k: "O(n)",       p: 4, f: function (n) { return n; } },
+      { k: "O(n log n)", p: 5, f: function (n) { return n * (Math.log2(Math.max(n, 1)) || 1); } },
+      { k: "O(n²)",      p: 6, f: function (n) { return n * n; } },
+      { k: "O(n³)",      p: 7, f: function (n) { return n * n * n; } },
+      { k: "O(2ⁿ)",      p: 8, f: function (n) { return Math.pow(2, n); } },
+      { k: "O(n!)",      p: 9, f: function (n) { var r = 1; for (var i = 2; i <= n; i++) r *= i; return r; } }
+    ];
+    var fmt = function (x, d) { return x.toLocaleString("pt-BR", { maximumFractionDigits: d == null ? 1 : d }); };
+    var sup = "⁰¹²³⁴⁵⁶⁷⁸⁹";
+    var ops = function (x) {
+      if (x < 1e6) return fmt(x, x < 10 ? 1 : 0);
+      var e = Math.floor(Math.log10(x)), m = x / Math.pow(10, e);
+      return fmt(m, 1) + " × 10" + String(e).split("").map(function (c) { return sup[+c]; }).join("");
+    };
+    var dur = function (s) {
+      var y = s / SEC_YEAR;
+      if (y > UNIVERSO) return "mais que a idade do universo";
+      if (s < 1e-6) return fmt(s * 1e9, s * 1e9 < 10 ? 1 : 0) + " ns";
+      if (s < 1e-3) return fmt(s * 1e6) + " µs";
+      if (s < 1) return fmt(s * 1e3) + " ms";
+      if (s < 60) return fmt(s) + " s";
+      if (s < 3600) return fmt(s / 60) + " min";
+      if (s < 86400) return fmt(s / 3600) + " h";
+      if (s < SEC_YEAR) return fmt(s / 86400, 0) + " dias";
+      if (y < 1000) return fmt(y, y < 10 ? 1 : 0) + " anos";
+      if (y < 1e6) return fmt(y / 1e3, 0) + " mil anos";
+      if (y < 1e9) return fmt(y / 1e6, 0) + " milhões de anos";
+      return fmt(y / 1e9, 1) + " bilhões de anos";
+    };
+    var css = function (v) { return getComputedStyle(document.documentElement).getPropertyValue(v).trim() || "#888"; };
+
+    function table() {
+      var n = +nIn.value, ns = +nsSel.value * 1e-9, rows = "";
+      CL.forEach(function (c) {
+        var o = c.f(n), s = o * ns, mag = Math.min(100, Math.max(2, Math.log10(Math.max(o, 1)) / YMAX * 100));
+        var hot = s / SEC_YEAR > 1 ? " is-hot" : "";
+        rows += '<tr class="' + hot + '" style="--c:var(--p' + c.p + ');--w:' + mag + '%"><th scope="row">' + c.k + '</th><td><span class="bo-cv-bar" aria-hidden="true"></span>' + ops(o) + '</td><td class="bo-cv-time">' + dur(s) + '</td></tr>';
+      });
+      tbody.innerHTML = rows;
+    }
+
+    function draw() {
+      var dpr = window.devicePixelRatio || 1, w = cv.parentNode.clientWidth, h = Math.max(260, Math.min(380, Math.round(w * 0.5)));
+      cv.width = w * dpr; cv.height = h * dpr; cv.style.width = w + "px"; cv.style.height = h + "px";
+      var g = cv.getContext("2d"); g.setTransform(dpr, 0, 0, dpr, 0, 0); g.clearRect(0, 0, w, h);
+      var L = 46, R = 14, T = 12, B = 28, pw = w - L - R, ph = h - T - B;
+      var X = function (n) { return L + (n - 1) / (XMAX - 1) * pw; }, Y = function (lg) { return T + ph - Math.min(lg, YMAX) / YMAX * ph; };
+      var line = css("--line"), mute = css("--mute"), ns = +nsSel.value * 1e-9;
+      g.font = "11px 'IBM Plex Mono', monospace"; g.textBaseline = "middle";
+      g.strokeStyle = line; g.fillStyle = mute; g.lineWidth = 1;
+      for (var e = 0; e <= YMAX; e += 6) { var y = Y(e); g.beginPath(); g.moveTo(L, y); g.lineTo(L + pw, y); g.stroke(); g.textAlign = "right"; g.fillText(e === 0 ? "1" : "10" + String(e).split("").map(function (c) { return sup[+c]; }).join(""), L - 6, y); }
+      g.textAlign = "center"; g.textBaseline = "top";
+      for (var x = 10; x <= XMAX; x += 10) g.fillText(String(x), X(x), T + ph + 8);
+      g.fillText("n", L + pw / 2, T + ph + 8 + 0);
+      /* referências de tempo */
+      [["1 s", 1], ["1 ano", SEC_YEAR], ["universo", UNIVERSO * SEC_YEAR]].forEach(function (r) {
+        var lg = Math.log10(r[1] / ns); if (lg < 0 || lg > YMAX) return;
+        g.setLineDash([4, 4]); g.strokeStyle = mute; g.globalAlpha = 0.7; g.beginPath(); g.moveTo(L, Y(lg)); g.lineTo(L + pw, Y(lg)); g.stroke();
+        g.setLineDash([]); g.globalAlpha = 1; g.textAlign = "left"; g.textBaseline = "bottom"; g.fillStyle = mute; g.fillText(r[0], L + 4, Y(lg) - 2);
+      });
+      /* curvas */
+      CL.forEach(function (c) {
+        g.strokeStyle = css("--p" + c.p); g.lineWidth = 2; g.beginPath();
+        for (var n = 1; n <= XMAX; n++) { var lg = Math.log10(Math.max(c.f(n), 1)); var px = X(n), py = Y(lg); if (n === 1) g.moveTo(px, py); else g.lineTo(px, py); if (lg >= YMAX) break; }
+        g.stroke();
+      });
+      /* marcador do n escolhido */
+      var n0 = +nIn.value; g.strokeStyle = css("--ac"); g.lineWidth = 1.5; g.setLineDash([2, 3]); g.beginPath(); g.moveTo(X(n0), T); g.lineTo(X(n0), T + ph); g.stroke(); g.setLineDash([]);
+      CL.forEach(function (c) { var lg = Math.log10(Math.max(c.f(n0), 1)); g.fillStyle = css("--p" + c.p); g.beginPath(); g.arc(X(n0), Y(lg), 4, 0, 6.2832); g.fill(); });
+    }
+
+    function update() { nOut.textContent = nIn.value; table(); draw(); }
+    nIn.addEventListener("input", update); nsSel.addEventListener("change", update);
+    window.addEventListener("resize", draw);
+    new MutationObserver(draw).observe(document.documentElement, { attributes: true, attributeFilter: ["class"] });
+    update();
+  })();
+  </script>
+</main>
+{{ end }}

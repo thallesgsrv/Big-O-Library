@@ -4,6 +4,7 @@ weight: 3
 description: Continuação de Cálculo 1
 autores:
   - hilbertmgomes
+prereq: [calculo1]
 date: 2026-10-01
 ---
 

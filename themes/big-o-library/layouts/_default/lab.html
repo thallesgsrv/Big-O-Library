@@ -1,0 +1,26 @@
+{{- /* /lab: porta de entrada dos três brinquedos (jogo, mapa, curvas). Mesmo cartão dos períodos em materiais. */ -}}
+{{ define "main" }}
+{{ partial "sidebar.html" (dict "context" .) }}
+<main class="bo-wrap" id="content">
+  {{ partial "bo-mhead.html" (dict
+      "prompt" "~/big-o-library $ ls lab/"
+      "title" .Title
+      "lead" (.Params.summary | default .Params.description)) }}
+
+  <div class="bo-lsh" aria-hidden="true">$ ls -l lab/ <span>&nbsp;&nbsp; # também funciona no Ctrl+K: lab, jogo, mapa, curvas</span></div>
+  <div class="bo-pgrid">
+    {{- $cards := slice
+      (dict "slug" "complexidade" "o" "O(?)" "c" "var(--p5)" "n" "Qual a complexidade?" "d" "10 trechos de código. Descubra a classe Big-O e qual sábio do Conselho é a sua cara.")
+      (dict "slug" "mapa" "o" "DAG" "c" "var(--p2)" "n" "Mapa de pré-requisitos" "d" "O curso como grafo: clique numa disciplina e veja o caminho até ela.")
+      (dict "slug" "curvas" "o" "f(n)" "c" "var(--p8)" "n" "Curvas de crescimento" "d" "Arraste o n. Veja n! virar séculos enquanto log n continua pestanejando.") -}}
+    {{- range $cards }}
+    <a class="bo-per bo-lab" style="--c:{{ .c | safeCSS }}" href="{{ printf "lab/%s/" .slug | relURL }}">
+      <span class="bo-per-o" aria-hidden="true">{{ .o }}</span>
+      <span class="bo-per-l"></span>
+      <span class="bo-per-n">{{ .n }} <span class="bo-per-go" aria-hidden="true">→</span></span>
+      <span class="bo-lab-d">{{ .d }}</span>
+    </a>
+    {{- end }}
+  </div>
+</main>
+{{ end }}

@@ -1,0 +1,15 @@
+{{- /* Árvore leve do acervo para o terminal do Ctrl+K (cd, ls, cat, tree, man, fortune, sabios).
+       Publica um JSON pequeno e fingerprintado; o JS só baixa quando alguém digita um comando. Retorna a URL. */ -}}
+{{- $pages := slice -}}
+{{- range sort site.Pages "Path" -}}
+  {{- if and (hasPrefix .Path "/docs/") (in (slice "page" "section") .Kind) -}}
+    {{- $pages = $pages | append (dict "u" .RelPermalink "t" .LinkTitle "p" (strings.TrimPrefix "/docs/" .Path) "d" (.Description | default "") "s" (eq .Kind "section")) -}}
+  {{- end -}}
+{{- end -}}
+{{- $sab := slice -}}
+{{- range partial "bo-sabios.html" . -}}
+  {{- $sab = $sab | append (dict "n" .nome "t" .titulo "c" .classe "f" (cond .pend "" .frase) "s" .slug) -}}
+{{- end -}}
+{{- $d := dict "base" site.Home.RelPermalink "pages" $pages "sabios" $sab "conselho" ("conselho/" | relURL) "lab" ("lab/" | relURL) -}}
+{{- $res := resources.FromString "bo-tree.json" ($d | jsonify) | fingerprint -}}
+{{- return $res.RelPermalink -}}

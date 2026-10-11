@@ -1,0 +1,35 @@
+{{- /* Lista normalizada dos sábios (data/conselho.yaml), na mesma ordem da página do Conselho.
+       Usada pelo jogo, pelo terminal (Ctrl+K), pelos créditos das páginas e pelos cards.
+       Cada item: nome, titulo, disc, classe, frase, pend, per, slug, img, ini, n (cor 1-9), key (id/github em minúsculas), p (bruto). */ -}}
+{{- $raw := hugo.Data.conselho.professores | default slice -}}
+{{- $sorted := slice -}}
+{{- range $want := slice 1 2 3 4 5 6 7 8 9 0 -}}
+  {{- range $raw -}}
+    {{- $pp := int (.periodo | default 0) -}}
+    {{- if or (lt $pp 1) (gt $pp 9) }}{{ $pp = 0 }}{{ end -}}
+    {{- if eq $pp $want }}{{ $sorted = $sorted | append . }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- $pal := slice 1 4 7 2 5 8 3 6 9 -}}
+{{- $list := slice -}}
+{{- range $i, $p := $sorted -}}
+  {{- $slug := replace ($p.nome | urlize) "." "" -}}
+  {{- $per := int ($p.periodo | default 0) -}}
+  {{- if or (lt $per 1) (gt $per 9) }}{{ $per = 0 }}{{ end -}}
+  {{- $n := index $pal (mod $i 9) -}}
+  {{- with $p.cor }}{{ if and (ge (int .) 1) (le (int .) 9) }}{{ $n = int . }}{{ end }}{{ end -}}
+  {{- $img := "" -}}
+  {{- with $p.foto -}}
+    {{- if fileExists (printf "static/images/conselho/%s" .) }}{{ $img = printf "images/conselho/%s" . | relURL }}{{ end -}}
+  {{- end -}}
+  {{- if and (not $img) $p.github }}{{ $img = printf "https://avatars.githubusercontent.com/%s?s=240" $p.github }}{{ end -}}
+  {{- $clean := replaceRE `^(Prof|Dr)[a\.]*\s+` "" $p.nome -}}
+  {{- $w := split $clean " " -}}
+  {{- $ini := substr (index $w 0) 0 1 -}}
+  {{- if gt (len $w) 1 }}{{ $ini = printf "%s%s" $ini (substr (index $w (sub (len $w) 1)) 0 1) }}{{ end -}}
+  {{- $f := trim ($p.frase | default "") " " -}}
+  {{- $pend := or (eq $f "") (eq $f "Sem frase marcante ainda") -}}
+  {{- $key := lower (printf "%v" (or $p.id $p.github "")) -}}
+  {{- $list = $list | append (dict "nome" $p.nome "titulo" ($p.titulo | default "") "disc" ($p.disciplina | default "") "classe" ($p.classe | default "O(1)") "frase" $f "pend" $pend "per" $per "slug" $slug "img" $img "ini" (upper $ini) "n" $n "key" $key "p" $p) -}}
+{{- end -}}
+{{- return $list -}}

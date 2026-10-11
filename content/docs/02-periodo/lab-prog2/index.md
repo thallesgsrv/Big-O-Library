@@ -4,6 +4,7 @@ weight: 2
 description: Orientação a objetos e estruturas de dados.
 autores:
   - MateusSRocha
+prereq: [prog1]
 date: 2026-10-08
 ---
 

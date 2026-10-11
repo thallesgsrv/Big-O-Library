@@ -4,6 +4,8 @@ weight: 4
 description: Ordenação por seleção do menor elemento. Simples, quadrática e sempre igual.
 autores:
   - thallesgsrv
+baseadoEm:
+  - joaoarthurbm
 date: 2026-10-09
 ---
 

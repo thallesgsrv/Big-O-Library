@@ -1,0 +1,21 @@
+{{- /* Páginas do acervo ligadas a um sábio (cruza `autores` e `baseadoEm` do front matter com o id/github dele).
+       Arg: a chave do sábio (minúscula). Retorna lista de dicts: titulo, url, papel ("autor" ou "base"). */ -}}
+{{- $key := . -}}
+{{- $out := slice -}}
+{{- if $key -}}
+  {{- range sort (where site.Pages "Section" "docs") "Path" -}}
+    {{- if in (slice "page" "section") .Kind -}}
+      {{- if ne .Path "/docs" -}}
+        {{- $papel := "" -}}
+        {{- range (cond (reflect.IsSlice .Params.baseadoem) .Params.baseadoem (slice .Params.baseadoem)) -}}
+          {{- if eq (lower (strings.TrimPrefix "@" (printf "%v" .))) $key }}{{ $papel = "base" }}{{ end -}}
+        {{- end -}}
+        {{- range (cond (reflect.IsSlice .Params.autores) .Params.autores (slice .Params.autores)) -}}
+          {{- if eq (lower (strings.TrimPrefix "@" (printf "%v" .))) $key }}{{ $papel = "autor" }}{{ end -}}
+        {{- end -}}
+        {{- if $papel }}{{ $out = $out | append (dict "titulo" .LinkTitle "url" .RelPermalink "papel" $papel) }}{{ end -}}
+      {{- end -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+{{- return $out -}}

@@ -2,6 +2,7 @@
 title: "{{ replace .File.ContentBaseName "-" " " | title }}"
 weight: 1
 description: Uma frase curta (até ~90 caracteres) sobre a disciplina.
+prereq: []   # pastas das disciplinas que vêm antes, ex.: [prog2, lab-prog2] (alimenta o mapa em /lab/mapa)
 autores:
   - seu-usuario-github
 date: {{ now.Format "2006-01-02" }}

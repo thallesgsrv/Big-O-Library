@@ -5,6 +5,7 @@ description: Orientação a objetos e estruturas de dados.
 autores:
   - thallesgsrv
   - MateusSRocha
+prereq: [prog1]
 date: 2026-09-30
 ---
 

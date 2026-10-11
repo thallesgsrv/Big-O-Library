@@ -5,6 +5,9 @@ description: Análise assintótica e algoritmos
 rotulo: Conteúdos
 autores:
   - thallesgsrv
+prereq: [prog2, lab-prog2]
+baseadoEm:
+  - joaoarthurbm
 date: 2026-10-09
 ---
 

@@ -20,6 +20,10 @@
 #              Sem foto + com github → usa o avatar do GitHub.
 #              Sem foto + sem github → mostra as iniciais.
 #  github      Só o usuário (ex.: joaoarthurbm). Pode apagar a linha se não tiver.
+#  id          Para quem não tem GitHub: um apelido curto, sem espaços (ex.: salatiel).
+#              É a chave que liga o sábio às páginas: coloque o github (ou o id) em
+#              `autores:` (escreveu) ou `baseadoEm:` (a página se baseia no material dele)
+#              no front matter, e o card passa a listar essas páginas sozinho.
 #  materiais   Lista curta do que a pessoa contribuiu
 #  exemplo     true = exibe a etiqueta "exemplo". Apague ao colocar dados reais.
 # ─────────────────────────────────────────────────────────────────────────────
@@ -36,6 +40,7 @@ professores:
   - nome: Prof. Rodrigo Cohen
     titulo: Senhor dos Limites, Derivadas e Integrais
     disciplina: Cálculo 1 e Cálculo 2
+    id: rodrigocohen
     foto: rodrigo-cohen.jpg
     periodo: 2
     classe: O(log n)
@@ -65,6 +70,7 @@ professores:
     disciplina: Lógica para Computação
     periodo: 3
     classe: O(n log n)
+    id: salatiel
     foto: salatiel.png
     frase: "Sem frase marcante ainda"
     materiais: [Material de aula]
