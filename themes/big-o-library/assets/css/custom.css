@@ -486,15 +486,11 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-sage-disc{margin:0;font-size:13px;color:var(--mute)}
 
 .bo-sage-foot{display:flex;flex-direction:column;align-items:flex-start;justify-content:flex-end;gap:12px;margin-top:auto}
-.bo-sage-tags{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:6px;min-height:24px;align-content:flex-start}
-.bo-sage-tags li{margin:0;padding:2px 9px;border-radius:99px;font-size:12px;color:var(--body);border:1px solid var(--line);background:var(--card)}
-.bo-sage-gh,.bo-sage-nogh{min-height:36px;box-sizing:border-box}
 .bo-sage-gh{display:inline-flex;align-items:center;gap:8px;max-width:100%;padding:7px 12px;border:1px solid var(--line);border-radius:8px;font-size:13px;color:var(--txt)!important;text-decoration:none!important;transition:border-color .2s ease,color .2s ease,background-color .2s ease}
 .bo-sage-gh span:nth-child(2){overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bo-sage-gh{min-height:36px;box-sizing:border-box}
 .bo-sage-gh:hover{border-color:var(--c);color:var(--ct)!important;background:color-mix(in srgb,var(--c) 10%,transparent)}
 .bo-sage-gh:focus-visible{outline:2px solid var(--c);outline-offset:2px}
-.bo-sage-nogh{display:flex;align-items:center;gap:.6ch;font-size:12.5px;color:var(--mute)}
-.bo-sage-nogh::before{content:"//";color:var(--ct)}
 
 /* padronização: cards da mesma linha dividem as faixas (topo, frase, pessoa, rodapé) */
 @supports (grid-template-rows: subgrid) {
@@ -641,5 +637,64 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-sage-mats li a{color:inherit;text-decoration:none}
 .bo-sage-mats li:hover{border-color:var(--c)}.bo-sage-mats li:hover a{color:var(--c)}
 .bo-sage-mats small{margin-left:6px;font-size:10px;color:var(--mute);text-transform:uppercase;letter-spacing:.04em}
-.bo-sage-more{color:var(--mute)!important}
 @media (prefers-reduced-motion:reduce){.bo-g-opt,.bo-g-bar i,.bo-lab,.bo-rs-sage,.bo-m-node,.bo-m-edge{transition:none!important}.bo-g-opt:hover,.bo-lab:hover,.bo-rs-sage:hover{transform:none}}
+
+/* ===== Melhorias de usabilidade ===== */
+/* Banner de cookies compacto: ocupa pouco espaço, sobretudo no celular */
+.bo-consent{padding:10px 12px;gap:8px 12px;font-size:12px;line-height:1.45;max-width:640px}
+.bo-consent-txt{flex:1 1 240px}
+.bo-consent-btns{width:100%;margin-left:0;justify-content:flex-end}
+.bo-consent-btn{min-height:36px;padding:0 14px}
+@media (min-width:640px){.bo-consent-btns{width:auto;margin-left:auto}}
+@media (max-width:639px){.bo-consent-btns{display:grid;grid-template-columns:1fr 1fr}.bo-consent-btn{min-height:42px}}
+/* Progresso de leitura */
+.bo-prog{position:fixed;top:0;left:0;right:0;height:3px;z-index:70;background:var(--ac);transform:scaleX(0);transform-origin:0 50%;pointer-events:none;will-change:transform}
+/* Voltar ao topo (acima do banner de cookies, fora do alcance do polegar só o necessário) */
+.bo-top{position:fixed;z-index:55;right:max(14px,env(safe-area-inset-right));bottom:max(76px,calc(env(safe-area-inset-bottom) + 76px));width:44px;height:44px;border-radius:999px;border:1px solid var(--line);background:var(--card);color:var(--ac);font:600 18px/1 inherit;cursor:pointer;box-shadow:0 8px 20px -10px rgba(0,0,0,.4);transition:transform .15s,border-color .15s}
+.bo-top[hidden]{display:none}
+.bo-top:hover,.bo-top:focus-visible{border-color:var(--ac);transform:translateY(-2px);outline:none}
+.bo-top:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+/* Anterior / próximo */
+.bo-pager{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin:40px 0 8px}
+.bo-pager-a{display:flex;flex-direction:column;gap:4px;padding:14px 16px;border:1px solid var(--line);border-radius:10px;background:var(--card);text-decoration:none!important;color:var(--txt);min-height:64px;transition:border-color .15s,transform .15s}
+.bo-pager-a span{font-size:12px;color:var(--ac)}
+.bo-pager-a strong{font-weight:600;line-height:1.3}
+.bo-pager-n{text-align:right;grid-column:2}
+.bo-pager-a:hover,.bo-pager-a:focus-visible{border-color:var(--ac);transform:translateY(-2px)}
+@media (max-width:560px){.bo-pager{grid-template-columns:1fr}.bo-pager-n{grid-column:1;text-align:left}}
+@media (prefers-reduced-motion:reduce){.bo-top,.bo-pager-a{transition:none!important;transform:none!important}}
+@media print{.bo-prog,.bo-top,.bo-pager,.bo-consent{display:none!important}}
+body:has(.bo-consent:not([hidden])) .bo-top{bottom:max(150px,calc(env(safe-area-inset-bottom) + 150px))}
+@media (min-width:640px){body:has(.bo-consent:not([hidden])) .bo-top{bottom:max(76px,calc(env(safe-area-inset-bottom) + 76px))}}
+
+/* Listas numeradas nas seções: número em vez do ">" duplicado */
+.bo-doc .content .bo-sec ol{list-style:none;counter-reset:n;margin:0!important;padding:0!important;display:flex;flex-direction:column;gap:.7rem}
+.bo-doc .content .bo-sec ol>li{counter-increment:n;padding-left:1.8rem}
+.bo-doc .content .bo-sec ol>li::before{content:counter(n) ".";font-weight:600}
+/* Conselho no celular: cards mais compactos */
+@media (max-width:639px){
+  .bo-sage-card{padding:16px;gap:12px}
+  .bo-sage-quote.is-pend{display:none}
+  .bo-sage-quote::before{height:20px;font-size:48px}
+  .bo-sage-quote p{font-size:18px}
+  .bo-sage-person{padding-top:12px}
+  .bo-sage-id{min-height:0}
+  .bo-sage-name{font-size:18px}
+}
+
+/* Voltar ao topo some enquanto o menu (hambúrguer) está aberto */
+body.hx\:overflow-hidden .bo-top{display:none}
+
+/* Materiais: contagem e "em breve" */
+.bo-per-c{font-size:12.5px;color:var(--mute)}
+.bo-per.is-soon{opacity:.6}
+/* Áreas de toque do rodapé */
+.bo-footer a,.bo-page-foot a{display:inline-block;padding-block:8px}
+.bo-pgrid+.bo-lsh{margin-top:36px}
+/* Conselho: contribuições em lista curta, no mesmo estilo "> " do site */
+.bo-sage-foot{gap:10px}
+.bo-sage-list{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:2px;font-size:13px;line-height:1.5;color:var(--mute)}
+.bo-sage-list li{margin:0;padding-left:1.2rem;position:relative}
+.bo-sage-list li::before{content:">";position:absolute;left:0;color:var(--ct);opacity:.8}
+.bo-sage-list a{color:var(--body);text-decoration:none}
+.bo-sage-list a:hover,.bo-sage-list a:focus-visible{color:var(--ct);text-decoration:underline;text-underline-offset:3px}

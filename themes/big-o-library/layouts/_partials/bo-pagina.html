@@ -30,6 +30,25 @@
 
         {{ partial "bo-credits.html" . }}
 
+        {{- /* Anterior/próximo na ordem do front matter (weight) — só em materiais (docs). */ -}}
+        {{- /* Só dentro de uma disciplina (ex.: período/disciplina/tópico): guias soltos como Git e Bash e disciplinas de página única ficam sem navegação. */ -}}
+        {{- if and .IsPage (eq .Section "docs") .Parent (ge (len .Ancestors) 4) }}
+          {{- $irmas := .Parent.RegularPages.ByWeight }}
+          {{- $prev := false }}{{ $next := false }}
+          {{- range $i, $p := $irmas }}
+            {{- if eq $p.RelPermalink $.RelPermalink }}
+              {{- if gt $i 0 }}{{ $prev = index $irmas (sub $i 1) }}{{ end }}
+              {{- if lt (add $i 1) (len $irmas) }}{{ $next = index $irmas (add $i 1) }}{{ end }}
+            {{- end }}
+          {{- end }}
+          {{- if or $prev $next }}
+        <nav class="bo-pager" aria-label="Navegação entre materiais">
+          {{- with $prev }}<a class="bo-pager-a" rel="prev" href="{{ .RelPermalink }}"><span>← anterior</span><strong>{{ .Title }}</strong></a>{{ else }}<span></span>{{ end -}}
+          {{- with $next }}<a class="bo-pager-a bo-pager-n" rel="next" href="{{ .RelPermalink }}"><span>próximo →</span><strong>{{ .Title }}</strong></a>{{ end -}}
+        </nav>
+          {{- end }}
+        {{- end }}
+
         <div class="bo-page-foot">
           {{- if .Parent -}}
             <a href="{{ .Parent.RelPermalink }}">← {{ .Parent.Title }}</a>

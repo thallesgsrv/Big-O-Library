@@ -12,25 +12,34 @@
   <div class="bo-pgrid">
     {{- /* o número do período vem do nome da pasta (01-periodo → 1), não de um contador */ -}}
     {{- range .Pages.ByWeight -}}
+      {{- $pg := . -}}
       {{- $url := .RelPermalink -}}
       {{- with findRESubmatch `/0?([1-9])-periodo/?$` $url 1 -}}
         {{- $n := int (index (index . 0) 1) -}}
         {{- /* o card inteiro é o link; as disciplinas só aparecem na página do período */ -}}
-        <a class="bo-per" style="--c:var(--p{{ $n }})" href="{{ $url }}" aria-label="{{ index $cx (sub $n 1) }} {{ $n }}º período">
+        {{- $k := len $pg.RegularPagesRecursive -}}
+        <a class="bo-per{{ if not $k }} is-soon{{ end }}" style="--c:var(--p{{ $n }})" href="{{ $url }}" aria-label="{{ index $cx (sub $n 1) }} {{ $n }}º período">
           <span class="bo-per-o" aria-hidden="true">{{ index $cx (sub $n 1) }}</span>
           <span class="bo-per-l"></span>
           <span class="bo-per-n">{{ $n }}º período <span class="bo-per-go" aria-hidden="true">→</span></span>
+          <span class="bo-per-c">{{ if $k }}{{ $k }} {{ if eq $k 1 }}material{{ else }}materiais{{ end }}{{ else }}em breve{{ end }}</span>
         </a>
       {{- end -}}
     {{- end -}}
-    {{- /* Extras (optativas, bash, git...): vêm de data/extras.yaml, mesmo card dos períodos, no final da grade */ -}}
+  </div>
+
+  <div class="bo-lsh" aria-hidden="true">$ ls extras/ <span>&nbsp;&nbsp; # optativas e guias</span></div>
+  <div class="bo-pgrid">
+    {{- /* Extras (optativas, bash, git...): vêm de data/extras.yaml, mesmo card dos períodos */ -}}
     {{- range hugo.Data.extras -}}
       {{- $e := . -}}
       {{- with site.GetPage (printf "/docs/%s" $e.slug) -}}
+        {{- $k := cond .IsPage 1 (len .RegularPagesRecursive) -}}
         <a class="bo-per" style="--c:var(--ac)" href="{{ .RelPermalink }}">
           <span class="bo-per-o" aria-hidden="true">{{ $e.simbolo }}</span>
           <span class="bo-per-l"></span>
           <span class="bo-per-n">{{ $e.rotulo }} <span class="bo-per-go" aria-hidden="true">→</span></span>
+          <span class="bo-per-c">{{ $k }} {{ if eq $k 1 }}material{{ else }}materiais{{ end }}</span>
         </a>
       {{- end -}}
     {{- end -}}

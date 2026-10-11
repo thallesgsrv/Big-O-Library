@@ -126,16 +126,14 @@
         <footer class="bo-sage-foot">
           {{- $mats := partial "bo-materiais-de.html" (lower (printf "%v" (or $p.id $p.github ""))) -}}
           {{- if $mats }}
-          <ul class="bo-sage-tags bo-sage-mats" aria-label="Materiais no acervo">
-            {{- range first 4 $mats }}<li><a href="{{ .url }}">{{ .titulo }}</a>{{ if eq .papel "base" }}<small title="O material desta página se baseia no dele">base</small>{{ end }}</li>{{ end }}
-            {{- if gt (len $mats) 4 }}<li class="bo-sage-more">+{{ sub (len $mats) 4 }}</li>{{ end }}
+          <ul class="bo-sage-list" aria-label="Materiais no acervo">
+            {{- range first 3 $mats }}<li><a href="{{ .url }}">{{ .titulo }}</a></li>{{ end }}
+            {{- if gt (len $mats) 3 }}<li>+{{ sub (len $mats) 3 }} materiais</li>{{ end }}
           </ul>
-          {{- else }}
-            {{- with $p.materiais }}
-          <ul class="bo-sage-tags" aria-label="Contribuições">
-            {{- range . }}<li>{{ . }}</li>{{ end }}
+          {{- else if $p.materiais }}
+          <ul class="bo-sage-list" aria-label="Contribuições">
+            {{- range $p.materiais }}<li>{{ . }}</li>{{ end }}
           </ul>
-            {{- end }}
           {{- end }}
           {{- if $p.github }}
           <a class="bo-sage-gh" href="https://github.com/{{ $p.github }}" target="_blank" rel="noopener">
@@ -143,8 +141,6 @@
             <span>@{{ $p.github }}</span>
             <span aria-hidden="true">↗</span>
           </a>
-          {{- else }}
-          <span class="bo-sage-nogh">sem GitHub · contribuiu com material</span>
           {{- end }}
         </footer>
       </article>
