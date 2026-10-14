@@ -129,6 +129,42 @@ Como \(\int_1^\infty\frac{dx}{x}\) **diverge**, a integral dada também **diverg
 | \(e^{-kx}\) com \(k > 0\) | converge |
 | \(\dfrac{\ln x}{x^p}\) com \(p > 1\) | converge (o log perde para qualquer potência) |
 
+## Extra 1: comparação perto de uma assíntota vertical
+
+Os testes valem também para integrais do **Tipo 2** (função que explode em um extremo). Se \(f,g\) são contínuas em \((a,b]\), com \(0\le f\le g\) e a singularidade em \(a\):
+
+- se \(\int_a^b g\) converge, então \(\int_a^b f\) converge;
+- se \(\int_a^b f\) diverge, então \(\int_a^b g\) diverge.
+
+A "régua" aqui é a integral que você já conhece:
+
+$$
+\int_0^1\frac{dx}{x^p}\ \text{converge}\iff p<1\qquad(\text{ao contrário do Tipo 1, onde convergia para } p>1)
+$$
+
+> [!TIP]
+> **Memória:** perto de \(0\), \(x^{-p}\) com \(p\) pequeno é "fraco" e integra; no infinito, \(x^{-p}\) precisa de \(p\) grande. Os dois lados da fronteira \(p=1\) trocam de papel.
+
+**Exemplo A.** \(\displaystyle\int_0^1\frac{e^{-x}}{\sqrt x}\,dx\). Como \(e^{-x}\le1\), temos \(\dfrac{e^{-x}}{\sqrt x}\le\dfrac1{\sqrt x}\), e \(\int_0^1x^{-1/2}dx\) converge (\(p=\tfrac12<1\)). **Converge.**
+
+**Exemplo B.** \(\displaystyle\int_0^1\frac{dx}{x+x^2}\). Em \((0,1]\), \(x+x^2\le2x\), logo \(\dfrac1{x+x^2}\ge\dfrac1{2x}\), e \(\int_0^1\frac{dx}{2x}\) diverge. **Diverge.**
+
+**Exemplo C (limite).** \(\displaystyle\int_0^1\frac{\operatorname{sen}x}{x^{3/2}}\,dx\). Comparando com \(g(x)=x^{-1/2}\):
+$$
+\lim_{x\to0^+}\frac{\operatorname{sen}x/x^{3/2}}{x^{-1/2}}=\lim_{x\to0^+}\frac{\operatorname{sen}x}{x}=1\in(0,\infty)
+$$
+Como \(\int_0^1x^{-1/2}dx\) converge, a nossa também **converge**.
+
+## Extra 2: integrando que troca de sinal (convergência absoluta)
+
+Os testes acima exigem \(f\ge0\). Se \(f\) oscila (muda de sinal), use:
+
+> **Se \(\int\lvert f\rvert\) converge, então \(\int f\) converge.**
+
+(A recíproca é falsa.) Procedimento: limite \(\lvert f\rvert\) por algo conhecido e use comparação.
+
+**Exemplo D.** \(\displaystyle\int_1^{\infty}\frac{\operatorname{sen}x}{x^2}\,dx\). Como \(\lvert\operatorname{sen}x\rvert\le1\), \(\left\lvert\dfrac{\operatorname{sen}x}{x^2}\right\rvert\le\dfrac1{x^2}\), e \(\int_1^\infty x^{-2}dx\) converge. Logo a integral original **converge** (absolutamente).
+
 ## Exercícios propostos
 
 **Exercício 1.** Estude a convergência de \(\displaystyle\int_1^{+\infty}\frac{x+1}{x^3+x}\,dx\).
@@ -177,4 +213,16 @@ $$
 $$
 
 e \(\int_e^\infty\frac{dx}{x}\) diverge. Pela comparação (menor diverge, maior diverge), a integral **diverge**.
+{{< /details >}}
+
+**Exercício extra 1.** Estude \(\displaystyle\int_0^1\frac{dx}{\sqrt{x+x^3}}\).
+
+{{< details title="Gabarito" >}}
+Como \(x+x^3\ge x\), \(\dfrac1{\sqrt{x+x^3}}\le\dfrac1{\sqrt x}\), e \(\int_0^1x^{-1/2}dx\) converge. **Converge.**
+{{< /details >}}
+
+**Exercício extra 2.** Estude \(\displaystyle\int_1^\infty\frac{\cos x}{x^{3/2}}\,dx\).
+
+{{< details title="Gabarito" >}}
+\(\left\lvert\dfrac{\cos x}{x^{3/2}}\right\rvert\le x^{-3/2}\), e \(\int_1^\infty x^{-3/2}dx\) converge (\(p=\tfrac32>1\)). Converge absolutamente, logo converge.
 {{< /details >}}

@@ -8,6 +8,7 @@ autores:
 prereq: [prog2, lab-prog2]
 baseadoEm:
   - joaoarthurbm
+  - fabriciocostadias
 date: 2026-10-09
 ---
 

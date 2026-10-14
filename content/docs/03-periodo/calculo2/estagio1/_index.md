@@ -52,3 +52,7 @@ Siga a ordem dos tópicos: *Substituição trigonométrica* usa as integrais de 
 ## Contribuição
 
 Se você tiver materiais úteis desta disciplina (listas, provas, resumos), pode colaborar com a biblioteca e ajudar a enriquecer esta página.
+
+## Para fechar o estágio
+
+Depois de todos os tópicos, passe pela página **Estratégia geral e ferramentas extras**: ela ensina a *escolher* a técnica certa e traz problemas misturados, que é como a prova cobra.

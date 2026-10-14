@@ -1,8 +1,8 @@
 ---
-title: Estágio 1 - Funções e limites
+title: Estágio 1 - Funções, limites e continuidade
 weight: 1
 rotulo: Tópicos
-description: Introdução ao estudo de funções, domínio, imagem, continuidade e limites laterais.
+description: Funções, limites (laterais, infinitos, no infinito), assíntotas e continuidade.
 autores:
   - thallesgsrv
 date: 2026-10-01
@@ -13,8 +13,12 @@ Antes de falar em derivadas e integrais, precisamos aprender a observar o compor
 
 Neste estágio vamos construir essa ideia aos poucos. Comece pelos tópicos abaixo:
 
-- **Funções:** entrada e saída, domínio, imagem e comportamento (veja a página abaixo).
-- **Limites e continuidade:** limites laterais, técnicas de cálculo e continuidade (veja a página abaixo).
+- **Funções:** entrada e saída, domínio, imagem, injetora/bijetora, composição, inversa e ciclo trigonométrico.
+- **Limites:** ideia de aproximação, laterais, propriedades, técnicas para $\frac00$, trigonométricos e confronto.
+- **Limites infinitos e assíntotas:** quando a função explode e quando $x\to\infty$.
+- **Continuidade:** gráfico sem "pulos", tipos de descontinuidade e Teorema do Valor Intermediário.
+
+Siga a ordem: cada página usa a anterior.
 
 ## Resumo rápido
 
@@ -24,6 +28,7 @@ Neste estágio vamos construir essa ideia aos poucos. Comece pelos tópicos abai
 - **Gráfico:** ajuda a interpretar o comportamento.
 - **Limite:** mostra o que acontece perto de um ponto.
 - **Continuidade:** ausência de ruptura, salto ou buraco.
+- **Assíntota:** reta que o gráfico persegue (vertical quando $f\to\infty$; horizontal quando $x\to\infty$).
 
 ## Listas de exercícios
 
