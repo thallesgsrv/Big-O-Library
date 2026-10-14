@@ -4,6 +4,7 @@ weight: 3
 description: Continuação de Cálculo 1
 autores:
   - hilbertmgomes
+  - thallesgsrv
 baseadoEm:
   - rodrigocohen
 prereq: [calculo1]

@@ -6,9 +6,6 @@ summary: Integração por partes, trigonometria, frações parciais e integrais 
 rotulo: Tópicos
 autores:
   - hilbertmgomes
-  - thallesgsrv
-baseadoEm:
-  - rodrigocohen
 date: 2026-10-01
 ---
 
