@@ -1,83 +1,236 @@
 ---
 title: Integrais impróprias
-weight: 6
+weight: 5
 description: Integrais com limites infinitos ou assíntotas verticais, definidas por limites.
 autores:
   - thallesgsrv
 date: 2026-10-14
 ---
 
-Integrais impróprias aparecem quando o intervalo é infinito ou quando a função "explode" em algum ponto. Elas são definidas por limite e podem convergir ou divergir.
+## Como funciona?
 
-## Tipo 1: limite infinito de integração
+Até aqui, toda integral \(\int_a^b f(x)\,dx\) tinha um intervalo finito e uma função bem-comportada. Integrais **impróprias** quebram uma dessas duas regras: o intervalo é infinito, ou a função "explode" em algum ponto. A pergunta passa a ser: *a área, apesar de ilimitada, tem um valor finito?*
 
-- \(\displaystyle\int_a^{+\infty} f\,dx = \lim_{b\to+\infty}\int_a^b f\,dx\).
-- \(\displaystyle\int_{-\infty}^b f\,dx = \lim_{a\to-\infty}\int_a^b f\,dx\).
-- \(\displaystyle\int_{-\infty}^{+\infty} f\,dx = \int_{-\infty}^{c} f\,dx + \int_c^{+\infty} f\,dx\), para qualquer \(c\). **As duas** precisam convergir.
+## Sobre
 
-## Tipo 2: assíntota vertical
+Uma função \(f : [a,b] \to \mathbb{R}\) é integrável (no sentido usual) se:
 
-- \(f\) explode em \(b\): \(\displaystyle\int_a^b f\,dx = \lim_{c\to b^-}\int_a^c f\,dx\).
-- \(f\) explode em \(a\): \(\displaystyle\int_a^b f\,dx = \lim_{c\to a^+}\int_c^b f\,dx\).
-- \(f\) explode em um ponto \(c\) **dentro** do intervalo: separe em duas integrais, uma de cada lado de \(c\).
+- é **contínua**, ou
+- tem **número finito de descontinuidades** e é **limitada**.
 
-> [!IMPORTANT]
-> A integral **converge** quando o limite existe (e esse limite é o valor). Ela **diverge** quando o limite não existe ou é infinito.
+Quando isso falha, a integral é imprópria. E elas aparecem na prática: o campo magnético de um fio infinitamente longo, em Física, é calculado com uma integral de \(-\infty\) a \(+\infty\).
 
-## Exemplos
+Pense em duas áreas:
+
+- A região sob \(f(x) = \dfrac{\ln x}{x^2}\) sobre \([1, 5]\), \([1, 10]\), \([1, 1000]\)... cada intervalo dá uma área finita. E se o intervalo for \([1, +\infty)\)?
+- A região sob \(f(x) = \dfrac{1}{\sqrt{x}}\) sobre \([1, 2]\), \([\tfrac12, 2]\), \([\tfrac1{100}, 2]\)... E se o intervalo for \((0, 2]\), onde \(f\) vai para o infinito em \(x = 0\)?
+
+A resposta é sempre a mesma ideia: **calcule com um limite finito e depois deixe esse limite ir ao problema.**
+
+## Tipo 1: limites de integração infinitos
+
+- Se \(f\) é contínua em \([a, +\infty)\):
+
+$$
+\int_a^{+\infty} f(x)\,dx := \lim_{b\to+\infty}\int_a^b f(x)\,dx
+$$
+
+- Se \(f\) é contínua em \((-\infty, b]\):
+
+$$
+\int_{-\infty}^b f(x)\,dx := \lim_{a\to-\infty}\int_a^b f(x)\,dx
+$$
+
+- Se \(f\) é contínua em \((-\infty, +\infty)\), quebre em um ponto \(c\) qualquer:
+
+$$
+\int_{-\infty}^{+\infty} f(x)\,dx = \int_{-\infty}^c f(x)\,dx + \int_c^{+\infty} f(x)\,dx
+$$
+
+e cada pedaço é um limite separado.
+
+## Tipo 2: assíntotas verticais
+
+- Se \(f\) é contínua em \([a, b)\) e descontínua em \(b\):
+
+$$
+\int_a^b f(x)\,dx = \lim_{c\to b^-}\int_a^c f(x)\,dx
+$$
+
+- Se \(f\) é contínua em \((a, b]\) e descontínua em \(a\):
+
+$$
+\int_a^b f(x)\,dx = \lim_{c\to a^+}\int_c^b f(x)\,dx
+$$
+
+- Se \(f\) é descontínua em um ponto interno \(c\), com \(a < c < b\):
+
+$$
+\int_a^b f(x)\,dx = \int_a^c f(x)\,dx + \int_c^b f(x)\,dx
+$$
+
+desde que **as duas** integrais à direita estejam bem definidas.
+
+## Converge ou diverge?
+
+Em todos os casos:
+
+- se o limite **existe** (é um número real), dizemos que a integral **converge** e o limite é o valor da integral;
+- se o limite **não existe** (ou é \(\pm\infty\)), dizemos que a integral **diverge**.
+
+## Receita
+
+1. Identifique o problema: limite infinito ou ponto onde \(f\) explode (e onde fica ele).
+2. Se o problema está no meio, quebre a integral nesse ponto.
+3. Troque o ponto problemático por uma letra (\(b\) ou \(c\)).
+4. Calcule a integral normalmente (as técnicas das páginas anteriores entram aqui).
+5. Tome o limite.
+
+## Exemplos: limites infinitos
 
 **Exemplo 1.** \(\displaystyle\int_1^{+\infty}\frac{\ln x}{x^2}\,dx\)
 
-{{< details title="Resolução" >}}
-Por partes (\(u=\ln x\), \(dv=dx/x^2\)): \(\displaystyle\int\frac{\ln x}{x^2}dx = -\frac{\ln x + 1}{x}\). Então
+Primeiro uma primitiva, por partes com \(u = \ln x\) e \(dv = x^{-2}\,dx\):
 
-\[
-\int_1^b = 1 - \frac{\ln b + 1}{b} \;\xrightarrow{b\to\infty}\; 1,
-\]
+$$
+\int\frac{\ln x}{x^2}\,dx = -\frac{\ln x}{x} + \int\frac{1}{x^2}\,dx = -\frac{\ln x}{x} - \frac1x + C
+$$
 
-pois \(\dfrac{\ln b}{b}\to 0\) e \(\dfrac1b\to0\). **Converge, e o valor é 1.**
-{{< /details >}}
+Agora o limite:
+
+$$
+\lim_{b\to\infty}\left[-\frac{\ln x}{x} - \frac1x\right]_1^b = \lim_{b\to\infty}\left(-\frac{\ln b + 1}{b} + 1\right) = 1
+$$
+
+pois \(\dfrac{\ln b + 1}{b} \to 0\) (L'Hôpital). A integral **converge** para \(1\).
 
 **Exemplo 2.** \(\displaystyle\int_{-\infty}^{+\infty}\frac{dx}{1+x^2}\)
 
-{{< details title="Resolução" >}}
-A primitiva é \(\operatorname{arctg} x\). Separando em \(c=0\): \(\int_0^{+\infty} = \tfrac{\pi}{2}\) e \(\int_{-\infty}^0 = \tfrac{\pi}{2}\). **Converge, e o valor é \(\pi\).**
+Quebre em \(c = 0\):
+
+$$
+\int_{-\infty}^0\frac{dx}{1+x^2} + \int_0^{+\infty}\frac{dx}{1+x^2} = \lim_{a\to-\infty}\big[\operatorname{arctg}x\big]_a^0 + \lim_{b\to\infty}\big[\operatorname{arctg}x\big]_0^b
+$$
+
+$$
+= \left(0 - \left(-\frac\pi2\right)\right) + \left(\frac\pi2 - 0\right) = \pi
+$$
+
+**Converge** para \(\pi\). Uma região infinita, com área finita.
+
+**Exemplo 3 (a integral que decide tudo).** \(\displaystyle\int_1^{+\infty}\frac{dx}{x^p}\), com \(p\) real
+
+- Se \(p = 1\): \(\displaystyle\lim_{b\to\infty}\big[\ln x\big]_1^b = \lim_{b\to\infty}\ln b = +\infty\). **Diverge.**
+- Se \(p \neq 1\): \(\displaystyle\lim_{b\to\infty}\left[\frac{x^{1-p}}{1-p}\right]_1^b = \lim_{b\to\infty}\frac{b^{1-p} - 1}{1-p}\).
+  - Se \(p > 1\), então \(b^{1-p} \to 0\) e o valor é \(\dfrac{1}{p-1}\). **Converge.**
+  - Se \(p < 1\), então \(b^{1-p} \to \infty\). **Diverge.**
+
+$$
+\int_1^{+\infty}\frac{dx}{x^p}\ \begin{cases}\text{converge para } \dfrac{1}{p-1}, & p > 1\\[2mm] \text{diverge}, & p \le 1\end{cases}
+$$
+
+> [!IMPORTANT]
+> Guarde este resultado. É a "régua" com a qual a página de *Testes de comparação* compara tudo o resto. Note que \(\dfrac1x\) diverge e \(\dfrac1{x^2}\) converge: o expoente **1** é a fronteira.
+
+## Exemplos: assíntotas verticais
+
+**Exemplo 4.** \(\displaystyle\int_0^2\frac{dx}{\sqrt x}\)
+
+A função explode em \(x = 0\), o extremo esquerdo:
+
+$$
+\lim_{c\to0^+}\int_c^2 x^{-1/2}\,dx = \lim_{c\to0^+}\Big[2\sqrt x\Big]_c^2 = \lim_{c\to0^+}\big(2\sqrt2 - 2\sqrt c\big) = 2\sqrt2
+$$
+
+**Converge** para \(2\sqrt2\).
+
+**Exemplo 5.** \(\displaystyle\int_0^1\frac{dx}{1-x}\)
+
+A função explode em \(x = 1\), o extremo direito:
+
+$$
+\lim_{c\to1^-}\int_0^c\frac{dx}{1-x} = \lim_{c\to1^-}\Big[-\ln\lvert1-x\rvert\Big]_0^c = \lim_{c\to1^-}\big(-\ln(1-c)\big) = +\infty
+$$
+
+**Diverge.**
+
+**Exemplo 6 (descontinuidade no meio).** \(\displaystyle\int_0^3\frac{dx}{(x-1)^{2/3}}\)
+
+A função explode em \(x = 1\), que está dentro de \([0, 3]\). **Quebre** nesse ponto:
+
+$$
+\int_0^1\frac{dx}{(x-1)^{2/3}} + \int_1^3\frac{dx}{(x-1)^{2/3}}
+$$
+
+Uma primitiva é \(3(x-1)^{1/3}\). Primeira parte:
+
+$$
+\lim_{c\to1^-}\Big[3(x-1)^{1/3}\Big]_0^c = 0 - 3(-1)^{1/3} = 3
+$$
+
+Segunda parte:
+
+$$
+\lim_{c\to1^+}\Big[3(x-1)^{1/3}\Big]_c^3 = 3\cdot2^{1/3} - 0 = 3\sqrt[3]{2}
+$$
+
+As duas convergem, então a integral **converge** para \(3 + 3\sqrt[3]{2}\).
+
+> [!WARNING]
+> Esquecer a descontinuidade no meio é o erro mais perigoso. Considere \(\displaystyle\int_{-1}^1\frac{dx}{x^2}\). Se você aplicar \(\big[-\tfrac1x\big]_{-1}^1\) às cegas, obtém \(-2\), um número *negativo* para a integral de uma função positiva! O certo é quebrar em \(x = 0\): cada metade diverge, então a integral **diverge**.
+
+Em geral, para \(\displaystyle\int_0^1\frac{dx}{x^p}\): **converge** se \(p < 1\) e **diverge** se \(p \ge 1\). É o espelho do Exemplo 3.
+
+## E o que faz a integral não convergir?
+
+Em termos de área: ou a função **não cai rápido o bastante** quando \(x\to\infty\) (como \(\frac1x\)), ou ela **explode rápido demais** perto da assíntota (como \(\frac{1}{1-x}\)). Quando ela cai ou explode "devagar", a área acumulada é finita.
+
+## Exercícios propostos
+
+**Exercício 1.** Calcule \(\displaystyle\int_0^{+\infty}e^{-x}\,dx\).
+
+{{< details title="Gabarito" >}}
+$$
+\lim_{b\to\infty}\Big[-e^{-x}\Big]_0^b = \lim_{b\to\infty}\big(1 - e^{-b}\big) = 1
+$$
+
+Converge para \(1\).
 {{< /details >}}
 
-**Exemplo 3 (a integral de referência).** \(\displaystyle\int_1^{+\infty}\frac{dx}{x^p}\), para \(p\in\mathbb{R}\)
+**Exercício 2.** A integral \(\displaystyle\int_1^{+\infty}\frac{dx}{\sqrt x}\) converge?
 
-{{< details title="Resolução" >}}
-- Se \(p\neq1\): \(\displaystyle\int_1^b x^{-p}dx = \frac{b^{1-p}-1}{1-p}\). Se \(p>1\), \(b^{1-p}\to0\) e o valor é \(\dfrac{1}{p-1}\) (converge). Se \(p<1\), \(b^{1-p}\to\infty\) (diverge).
-- Se \(p=1\): \(\int_1^b\dfrac{dx}{x} = \ln b\to\infty\) (diverge).
-
-**Conclusão: \(\int_1^{+\infty}\dfrac{dx}{x^p}\) converge se e somente se \(p>1\).**
+{{< details title="Gabarito" >}}
+É o Exemplo 3 com \(p = \tfrac12 < 1\). Diretamente: \(\lim_{b\to\infty}\big[2\sqrt x\big]_1^b = +\infty\). **Diverge.**
 {{< /details >}}
 
-> [!TIP]
-> Decore o resultado do Exemplo 3: ele é a base de todas as comparações do estágio.
+**Exercício 3.** Calcule \(\displaystyle\int_0^1\ln x\,dx\).
 
-**Exemplo 4.** \(\displaystyle\int_0^1\frac{dx}{1-x}\)
+{{< details title="Gabarito" >}}
+A função explode em \(x = 0\). Por partes, \(\int\ln x\,dx = x\ln x - x\):
 
-{{< details title="Resolução" >}}
-O integrando explode em \(x=1\). \(\displaystyle\int_0^c\frac{dx}{1-x} = -\ln(1-c)\to+\infty\) quando \(c\to1^-\). **Diverge.**
+$$
+\lim_{c\to0^+}\Big[x\ln x - x\Big]_c^1 = (0 - 1) - \lim_{c\to0^+}(c\ln c - c) = -1
+$$
+
+pois \(c\ln c \to 0\) quando \(c \to 0^+\) (L'Hôpital em \(\frac{\ln c}{1/c}\)). Converge para \(-1\).
 {{< /details >}}
 
-**Exemplo 5.** \(\displaystyle\int_0^3\frac{dx}{(x-1)^{2/3}}\)
+**Exercício 4.** Calcule \(\displaystyle\int_{-\infty}^0 e^{x}\,dx\).
 
-{{< details title="Resolução" >}}
-Explode em \(x=1\), que está dentro do intervalo. Separe em \(\int_0^1+\int_1^3\). A primitiva é \(3(x-1)^{1/3}\).
-
-- \(\int_0^1 = 3\big(0-(-1)\big) = 3\).
-- \(\int_1^3 = 3\sqrt[3]{2}\).
-
-As duas convergem, então o total é \(3 + 3\sqrt[3]{2}\).
+{{< details title="Gabarito" >}}
+$$
+\lim_{a\to-\infty}\Big[e^x\Big]_a^0 = 1 - \lim_{a\to-\infty}e^a = 1
+$$
 {{< /details >}}
 
-**Exemplo 6.** Qual é a área sob \(f(x) = \dfrac{1}{\sqrt x}\) em \((0,2]\)?
+**Exercício 5.** Estude a convergência de \(\displaystyle\int_2^{+\infty}\frac{dx}{x\ln x}\).
 
-{{< details title="Resolução" >}}
-A primitiva é \(2\sqrt x\). \(\displaystyle\int_c^2 = 2\sqrt2 - 2\sqrt c\to 2\sqrt2\) quando \(c\to0^+\). **Converge: a área é \(2\sqrt2\).**
+{{< details title="Gabarito" >}}
+Com \(u = \ln x\), uma primitiva é \(\ln\lvert\ln x\rvert\).
+
+$$
+\lim_{b\to\infty}\Big[\ln(\ln x)\Big]_2^b = +\infty
+$$
+
+**Diverge**, apesar de \(\frac{1}{x\ln x}\) cair um pouco mais rápido que \(\frac1x\).
 {{< /details >}}
-
-> [!NOTE]
-> Intuição: a integral não converge quando a função "não encolhe rápido o bastante" no infinito, ou "explode rápido demais" perto da assíntota.
