@@ -7,6 +7,7 @@ autores:
   - thallesgsrv
 baseadoEm:
   - salatiel
+  - tiagomassoni
 prereq: [fmcc2]
 date: 2026-10-15
 ---
