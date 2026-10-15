@@ -1,5 +1,5 @@
 ---
-tittle: Lógica para computação
+title: Lógica para Computação
 weight: 2
 description: Lógica 
 autores:
