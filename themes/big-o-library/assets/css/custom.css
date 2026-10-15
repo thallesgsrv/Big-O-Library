@@ -574,9 +574,6 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 @media (max-width:560px){.bo-m-sel{flex-direction:column;align-items:stretch}.bo-m-sel select{max-width:100%;flex:none}}
 .bo-mhead>.bo-crumbs{margin-bottom:.9rem}
 .bo-m-hint{margin:6px 0 0;text-align:center}
-.bo-m-leg{display:flex;align-items:center;gap:6px}
-.bo-m-leg i{display:inline-block;width:18px;height:10px;border-radius:3px;border:1px solid var(--mute)}
-.bo-m-lg-ghost{border-style:dashed!important}
 .bo-m-scroll{overflow-x:auto;padding-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
 .bo-m-scroll svg{display:block;max-width:none}
 .bo-m-colh{font:600 12px 'IBM Plex Mono',monospace;letter-spacing:.04em;text-transform:lowercase}
@@ -586,7 +583,7 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-m-node{cursor:pointer;outline:none;transition:opacity .2s ease}
 .bo-m-node rect:first-child{fill:var(--bg);stroke:var(--line);stroke-width:1.5;transition:stroke .2s ease,fill .2s ease}
 .bo-m-node .bo-m-tick{fill:var(--c);stroke:none}
-.bo-m-node text{font:500 13px 'IBM Plex Mono',monospace;fill:var(--txt);pointer-events:none}
+.bo-m-node text{font:500 12px 'IBM Plex Mono',monospace;fill:var(--txt);pointer-events:none}
 .bo-m-node:hover rect:first-child,.bo-m-node:focus-visible rect:first-child{stroke:var(--c)}
 .bo-m-node.is-ghost rect:first-child{stroke-dasharray:5 4}
 .bo-m-node.is-ghost text{fill:var(--mute)}
@@ -595,17 +592,33 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-m-node.is-desc rect:first-child{stroke:var(--mute);stroke-dasharray:3 3}
 .has-sel .bo-m-node:not(.is-sel):not(.is-anc):not(.is-desc){opacity:.28}
 .has-sel .bo-m-edge:not(.is-anc):not(.is-desc){opacity:.12}
-.bo-m-panel{--c:var(--ac);margin-top:20px;padding:22px;border:1px solid var(--line);border-left:4px solid var(--c);border-radius:10px;background:var(--card)}
-.bo-m-cmd{margin:0 0 6px;font-size:13px;color:var(--ac)}
-.bo-m-h{margin:0 0 6px;font:600 24px/1.25 Fraunces,Georgia,serif;color:var(--txt)}
-.bo-m-h small{font:400 13px 'IBM Plex Mono',monospace;color:var(--c);margin-left:8px}
-.bo-m-d{margin:0 0 16px;color:var(--body);line-height:1.7}
-.bo-m-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:20px 32px;margin-bottom:18px}
-.bo-m-cols h3{margin:0 0 8px;font:600 13px 'IBM Plex Mono',monospace;color:var(--mute);text-transform:lowercase}
-.bo-m-ord,.bo-m-lib,.bo-m-ord ul{list-style:none;margin:0;padding:0}
-.bo-m-ord>li{margin:0 0 10px}.bo-m-per{display:block;font-size:12px;color:var(--ac)}
-.bo-m-ord li li,.bo-m-lib li{margin:2px 0;font-size:14px;line-height:1.5}
-.bo-m-ord .is-ghost span,.bo-m-lib .is-ghost span{color:var(--mute)}.bo-m-ord small,.bo-m-lib small{color:var(--mute);font-size:11px}
+.bo-m-panel{--c:var(--ac);margin-top:20px;border:1px solid var(--line);border-radius:12px;background:var(--card);overflow:hidden;box-shadow:0 1px 0 color-mix(in srgb,var(--c) 30%,transparent)}
+.bo-m-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--c) 7%,var(--bg))}
+.bo-m-dots{display:inline-flex;gap:6px}.bo-m-dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
+.bo-m-dots i:first-child{background:var(--c)}
+.bo-m-cmd{font:500 13px 'IBM Plex Mono',monospace;color:var(--ac);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bo-m-body{padding:22px 22px 24px}
+.bo-m-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:6px}
+.bo-m-h{margin:0;font:600 26px/1.2 Fraunces,Georgia,serif;color:var(--txt)}
+.bo-m-badge{font:500 12px 'IBM Plex Mono',monospace;color:var(--c);border:1px solid var(--c);border-radius:999px;padding:3px 10px;background:color-mix(in srgb,var(--c) 10%,transparent);white-space:nowrap}
+.bo-m-d{margin:0 0 20px;color:var(--body);line-height:1.7}
+.bo-m-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:20px}
+.bo-m-box{padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
+.bo-m-box h3{margin:0 0 14px;font:600 12px 'IBM Plex Mono',monospace;color:var(--mute);letter-spacing:.06em;text-transform:uppercase}
+.bo-m-ord,.bo-m-chips{list-style:none;margin:0;padding:0}
+.bo-m-ord{position:relative}
+.bo-m-ord>li{position:relative;margin:0;padding:0 0 16px 22px;border-left:2px solid var(--line);margin-left:5px}
+.bo-m-ord>li:last-child{padding-bottom:0;border-left-color:transparent}
+.bo-m-ord>li::before{content:"";position:absolute;left:-7px;top:2px;width:12px;height:12px;border-radius:50%;background:var(--c);box-shadow:0 0 0 3px var(--bg)}
+.bo-m-per{display:block;margin-bottom:6px;font:600 12px 'IBM Plex Mono',monospace;color:var(--c)}
+.bo-m-chips{display:flex;flex-wrap:wrap;gap:6px}
+.bo-m-chip{display:inline-flex;align-items:baseline;flex-wrap:wrap;gap:2px 8px;padding:6px 11px;border:1px solid var(--line);border-radius:7px;background:var(--card);color:var(--txt)!important;font-size:14px;line-height:1.4;text-decoration:none!important;transition:border-color .2s ease,transform .2s ease}
+a.bo-m-chip:hover,a.bo-m-chip:focus-visible{border-color:var(--ac);transform:translateY(-1px);outline:none}
+.bo-m-lib .bo-m-chip::before{content:"→";color:var(--ac);font-family:'IBM Plex Mono',monospace}
+.bo-m-chip.is-ghost{border-style:dashed;background:transparent;color:var(--mute)!important}
+.bo-m-chip small{color:var(--mute);font:400 11px 'IBM Plex Mono',monospace}
+.bo-m-empty{margin:0;padding:10px 12px;border:1px dashed var(--line);border-radius:7px;color:var(--mute);font-size:14px}
+@media (max-width:560px){.bo-m-body{padding:18px 16px 20px}.bo-m-h{font-size:22px}}
 
 /* curvas */
 .bo-cv{margin-bottom:72px;max-width:980px}
@@ -639,7 +652,7 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-credits-person.is-sabio{padding:3px 12px 3px 3px;border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
 .bo-credits-person.is-sabio .bo-av{--s:24px;border-width:1px}
 .bo-credits-person.is-sabio .bo-av>span{font-size:9px}
-@media (prefers-reduced-motion:reduce){.bo-g-opt,.bo-g-bar i,.bo-lab,.bo-rs-sage,.bo-m-node,.bo-m-edge{transition:none!important}.bo-g-opt:hover,.bo-lab:hover,.bo-rs-sage:hover{transform:none}}
+@media (prefers-reduced-motion:reduce){.bo-g-opt,.bo-g-bar i,.bo-lab,.bo-rs-sage,.bo-m-node,.bo-m-edge,.bo-m-chip{transition:none!important}.bo-g-opt:hover,.bo-lab:hover,.bo-rs-sage:hover{transform:none}}
 
 /* ===== Melhorias de usabilidade ===== */
 /* Banner de cookies compacto: ocupa pouco espaço, sobretudo no celular */
