@@ -1,11 +1,12 @@
 ---
 title: Álgebra Linear 1
-weight: 2
+weight: 4
 description: Sistemas de equações, espaços e transformações lineares.
 rotulo: Estágios
 autores:
     - MateusSRocha
     - thallesgsrv
+prereq: [fmcc2]
 date: 2026-09-30
 ---
 

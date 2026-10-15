@@ -9,6 +9,8 @@ autores:
 date: 2026-10-01
 ---
 
+## Sobre
+
 Este estágio cobre as **técnicas de integração** (por partes, trigonométricas, substituição trigonométrica e frações parciais) e as **integrais impróprias**. A ideia central é uma só: quando a integral não é imediata, a gente *transforma* ela em outra mais simples.
 
 ## Como estudar
@@ -52,6 +54,16 @@ Siga a ordem dos tópicos: *Substituição trigonométrica* usa as integrais de 
 ## Contribuição
 
 Se você tiver materiais úteis desta disciplina (listas, provas, resumos), pode colaborar com a biblioteca e ajudar a enriquecer esta página.
+
+## Listas de exercícios
+
+- [Lista 1: Substituição (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQDyQFdio-uiTpgwGrnEtS-aAcGW8lInHO2OctUId1IWhHg?e=2CIfPp)
+- [Lista 2: Partes (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQAVIogb912IR6weqtsjJ1D1ARlXXfBIUXXx0f5sB5ZuuMo?e=AsLbBc)
+- [Lista 3: Técnicas de Integração (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQCrWXjb2LvgTZs1Geg2Gy67ATygntpzpxGWZLNAcNdkPF8?e=Qa0uGL)
+- [Lista 4: Impróprias (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQCuYAYu_lmcTYq-GbgWirP2AQjFO2o4ONHRv1orNgcf8Gk?e=iRbMsJ)
+
+## Provas Anteriores
+
 
 ## Para fechar o estágio
 
