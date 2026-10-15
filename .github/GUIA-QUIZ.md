@@ -77,7 +77,7 @@ Exemplo de alternativa com duas linhas:
 
 - **O erro tem que ensinar.** Use como alternativas erradas os enganos mais comuns (a recíproca em vez da contrapositiva, esquecer de trocar `∧` por `∨` no De Morgan). A explicação vale mais que o certo/errado.
 - **Quatro alternativas no máximo** para respostas de uma linha. Passou disso, vira lista longa.
-- **Perguntas de construir** (montar uma tabela, desenhar uma árvore) continuam como exercício com `{{< details title="Gabarito" >}}`. O quiz serve para escolher, classificar e conferir.
+- **Perguntas de construir** (montar uma tabela, desenhar uma árvore) continuam como exercício com `{{< details title="Gabarito" >}}`, que já começa **fechado** por padrão. O quiz serve para escolher, classificar e conferir.
 - **Letra acentuada não vai dentro de `$...$`.** O KaTeX recusa e o build falha (`Accented Unicode text character`). Deixe o texto fora das fórmulas: `$p$ é verdadeira`, e não `$p é verdadeira$`. Se precisar de texto dentro, use `\text{é}`.
 - **Não coloque texto solto entre as `{{< questao >}}`**: tudo que for conteúdo vai dentro de uma pergunta (no enunciado).
 

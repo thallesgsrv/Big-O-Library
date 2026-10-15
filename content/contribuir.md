@@ -117,6 +117,24 @@ Pontos que valem para qualquer estrutura:
 - Se incluir objetivos ou conteúdo previsto, baseie-se na **ementa oficial**. Se não tiver certeza, deixe de fora em vez de inventar.
 - Título de seção curto e sem pontuação: ele vira o nome do "arquivo" no prompt.
 
+## Disciplinas com tópicos e estágios
+
+Quando uma disciplina é grande demais para uma página só, divida em **tópicos**, um por pasta:
+
+```text
+content/docs/03-periodo/eda/
+├── _index.md                    ← página da disciplina (cabeçalho + abertura)
+├── introducao-a-analise/
+│   └── index.md                 ← um tópico = uma página completa
+└── merge-sort/
+    └── index.md
+```
+
+- A disciplina usa `_index.md`; cada tópico usa `index.md`. O `weight` de cada tópico define a ordem e não pode se repetir dentro da disciplina.
+- Se a disciplina se organiza por provas ou unidades, crie uma pasta por **estágio** (`estagio1`, `estagio2`…) com o próprio `_index.md`. Use `rotulo` no cabeçalho para trocar o título da lista de cards (por exemplo, `rotulo: Tópicos`).
+- Cada tópico é uma página independente: tem o próprio `title`, `description`, `autores` e `date`.
+- Tópicos de ensino funcionam melhor com: explicação intuitiva primeiro, fórmula depois, exemplo resolvido, **exercícios com gabarito fechado** e, se couber, um quiz ou uma animação.
+
 ## Como listar os materiais
 
 Se a sua página tiver uma seção de materiais, uma sugestão é agrupar por tipo usando `###`, só com os grupos que tiverem conteúdo (os nomes abaixo são sugestões, adapte à disciplina):
@@ -177,13 +195,55 @@ $$
 
 Os tipos aceitos são `NOTE`, `TIP`, `IMPORTANT`, `WARNING` e `CAUTION`.
 
-**Gabarito escondido**, para exercícios que a pessoa pode tentar antes de ver a resposta:
+**Gabarito escondido**, para exercícios que a pessoa pode tentar antes de ver a resposta. O bloco já **começa fechado** (a pessoa clica para abrir), então não precisa configurar nada:
 
 ```markdown
 {{</* details title="Gabarito" */>}}
 A resposta é O(n log n).
 {{</* /details */>}}
 ```
+
+- Escreva sempre `title="Gabarito"` (ou `title="Resolução"`, se tiver o passo a passo). Dentro do bloco vale tudo: fórmulas, código, listas e imagens.
+- Um gabarito por exercício, logo abaixo do enunciado. Não junte todos os gabaritos no fim da página.
+- Não use `closed="false"`: ele abre o bloco e entrega a resposta antes de a pessoa tentar. Só faz sentido em material que **não** é exercício.
+- Quando o exercício for de escolher, classificar ou conferir, prefira o **quiz interativo** (logo abaixo), que corrige na hora.
+
+**Quiz interativo**, para perguntas de múltipla escolha com correção na hora, explicação e placar. Escreva as perguntas em markdown e o site cuida do resto:
+
+```markdown
+{{</* quiz titulo="Classifique as complexidades" */>}}
+
+{{</* questao */>}}
+Qual é a complexidade da busca binária?
+
+- [ ] \(O(n)\)
+- [x] \(O(\log n)\)
+- [ ] \(O(n \log n)\)
+---
+A cada passo o intervalo cai pela metade, então são \(\log n\) passos.
+{{</* /questao */>}}
+
+{{</* /quiz */>}}
+```
+
+Regras rápidas:
+
+- A alternativa certa é `- [x]`; as erradas são `- [ ]` (com o espaço dentro dos colchetes).
+- A linha `---` depois das alternativas separa a **explicação**, que aparece depois da resposta. Ela é opcional, mas é o que mais ensina.
+- Duas ou mais alternativas com `[x]` viram "marque todas".
+- Com uma única `questao` dentro do `quiz`, ele vira questão avulsa (sem placar nem resultado).
+- Use como alternativas erradas os enganos mais comuns, e não respostas absurdas.
+- Perguntas de **construir** (montar uma tabela, desenhar uma árvore) continuam como exercício com `Gabarito`.
+
+Todos os parâmetros (`modo`, `embaralhar`, `fixa`…), as dicas e a lista de erros de build estão no [guia de quiz](https://github.com/thallesgsrv/Big-O-Library/blob/main/.github/GUIA-QUIZ.md).
+
+**Animação de algoritmo**, para páginas de ordenação, grafos e árvores. Se o algoritmo já existe no site, basta uma linha na página:
+
+```markdown
+{{</* viz algoritmo="merge" */>}}
+```
+
+Os algoritmos disponíveis hoje são `selection`, `insertion`, `merge`, `quick`, `counting`, `radix`, `bfs`, `dfs`, `dijkstra`, `segtree`, `lazy` e `lca`. Para animar um algoritmo novo, é preciso registrá-lo em `viz.js`; o passo a passo está no [guia de animações](https://github.com/thallesgsrv/Big-O-Library/blob/main/.github/GUIA-ANIMACOES.md).
 
 **Imagens e arquivos** ficam na mesma pasta do `index.md` e são referenciados só pelo nome:
 
@@ -297,6 +357,10 @@ Se der erro:
 - [ ] O arquivo tem `title`, `weight`, `description`, `autores` (com o seu usuário) e `date`.
 - [ ] As seções fazem sentido para a disciplina (o modelo é só um ponto de partida).
 - [ ] Cada material tem link e fonte; conteúdo de terceiros aponta para o original.
+- [ ] Todo exercício tem o gabarito dentro de `details`, que já começa fechado (e não ficou solto no texto).
+- [ ] As fórmulas usam `\( \)` ou `$$ $$`, nunca `$...$`, e renderizam no `hugo server`.
+- [ ] Se há quiz: cada pergunta tem uma única `[x]` (ou várias de propósito) e uma explicação.
+- [ ] Se há animação: o nome em `viz algoritmo="..."` existe em `viz.js`.
 - [ ] Olhei a página no `hugo server`, no computador e no celular.
 
 ## Licença e conduta

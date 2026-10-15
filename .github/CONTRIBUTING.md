@@ -15,6 +15,8 @@ https://thallesgsrv.github.io/Big-O-Library/contribuir/ (fonte: [`content/contri
 
 Material de terceiros: linke a fonte original, não copie o conteúdo.
 
+Exercícios: coloque o gabarito em `{{< details title="Gabarito" >}}...{{< /details >}}`. Ele já começa fechado, para a pessoa tentar antes de ver a resposta.
+
 Quer criar a animação de um algoritmo? Veja o [guia de animações](GUIA-ANIMACOES.md).
 
 Quer colocar um quiz interativo em uma página (com modelo para copiar)? Veja o [guia de quiz](GUIA-QUIZ.md).
