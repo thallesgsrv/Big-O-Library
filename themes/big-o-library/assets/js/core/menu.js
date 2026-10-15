@@ -15,13 +15,10 @@ document.addEventListener('DOMContentLoaded', function () {
     return menu.getAttribute('aria-expanded') === 'true';
   }
 
-  // No celular, a barra lateral fechada fica fora da tela: esconde-a de leitores de tela.
-  function syncAria() {
-    if (mobileQuery.matches) {
-      sidebarContainer.setAttribute('aria-hidden', isMenuOpen() ? 'false' : 'true');
-    } else {
-      sidebarContainer.removeAttribute('aria-hidden');
-    }
+  // No celular, a barra lateral fechada só sai da tela por transform: `inert` a tira
+  // da ordem de Tab e dos leitores de tela.
+  function syncInert() {
+    sidebarContainer.inert = mobileQuery.matches && !isMenuOpen();
   }
 
   function setOpen(open, options) {
@@ -38,7 +35,7 @@ document.addEventListener('DOMContentLoaded', function () {
     document.body.classList.toggle('hx:overflow-hidden', open);
     document.body.classList.toggle('hx:md:overflow-auto', open);
 
-    syncAria();
+    syncInert();
 
     if (open) {
       if (focusOnOpen) {
@@ -55,7 +52,7 @@ document.addEventListener('DOMContentLoaded', function () {
   if (icon) icon.classList.remove('open');
   sidebarContainer.classList.remove(OPEN);
   sidebarContainer.classList.add(CLOSED);
-  syncAria();
+  syncInert();
 
   menu.addEventListener('click', function (e) {
     e.preventDefault();
@@ -76,7 +73,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (!mobileQuery.matches && isMenuOpen()) {
       setOpen(false, { focusOnOpen: false });
     } else {
-      syncAria();
+      syncInert();
     }
   }
   if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onBreakpointChange);

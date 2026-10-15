@@ -1,8 +1,7 @@
 ---
-title: Introdução a Computação
+title: Introdução à Computação
 weight: 3
-description:
 autores:
-    - thallesgsrv
+  - thallesgsrv
 date: 2026-10-15
 ---
