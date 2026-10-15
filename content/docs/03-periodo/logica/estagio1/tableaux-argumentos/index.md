@@ -137,32 +137,50 @@ Para o terceiro, a negação da conclusão dá $P,\ Q,\ \neg R$; a premissa $P\t
 
 ## Exercícios
 
-**Exercício 1.** Teste: $p\to q,\ \neg q\models\neg p$.
+**Exercício 1.** Teste cada argumento com tableaux (negue a conclusão e procure ramos abertos) e responda: válido ou inválido? Os itens (a) a (d) estão no quiz; o exercício 2, mais abaixo, você resolve no caderno.
 
-{{< details title="Gabarito" >}}
+{{< quiz titulo="argumentos com tableaux" >}}
+
+{{< questao >}}
+**(a)** $p\to q,\ \neg q\models\neg p$
+
+- [x] Válido
+- [ ] Inválido
+---
 Negando a conclusão: $\neg\neg p=p$. Em $p\to q$: $\neg p$ fecha com $p$; $q$ fecha com $\neg q$. **Válido** ("modus tollens").
-{{< /details >}}
+{{< /questao >}}
 
-**Exercício 2.** Teste: $p\to q,\ q\models p$.
+{{< questao >}}
+**(b)** $p\to q,\ q\models p$
 
-{{< details title="Gabarito" >}}
-Negando a conclusão: $\neg p$. Em $p\to q$: ramo $\neg p$ aberto. **Inválido.** Contra-exemplo: $p=F,q=V$. É o erro de "afirmar o consequente".
-{{< /details >}}
+- [ ] Válido
+- [x] Inválido
+---
+Negando a conclusão: $\neg p$. Em $p\to q$: o ramo $\neg p$ fica aberto. **Inválido.** Contra-exemplo: $p=F,q=V$. É o erro de "afirmar o consequente".
+{{< /questao >}}
 
-**Exercício 3.** Teste: $p\lor q,\ \neg p\models q$.
+{{< questao >}}
+**(c)** $p\lor q,\ \neg p\models q$
 
-{{< details title="Gabarito" >}}
-Negando: $\neg q$. Em $p\lor q$: ramo $p$ fecha com $\neg p$; ramo $q$ fecha com $\neg q$. **Válido** (silogismo disjuntivo).
-{{< /details >}}
+- [x] Válido
+- [ ] Inválido
+---
+Negando: $\neg q$. Em $p\lor q$: o ramo $p$ fecha com $\neg p$; o ramo $q$ fecha com $\neg q$. **Válido** (silogismo disjuntivo).
+{{< /questao >}}
 
-**Exercício 4.** Teste: $p\to q,\ r\to q\models(p\lor r)\to q$.
+{{< questao >}}
+**(d)** Traduza e teste: "Se chove, a rua molha. A rua molhou. Logo, choveu."
+
+- [ ] Válido
+- [x] Inválido
+---
+Traduzido: $c\to m,\ m\models c$. É o mesmo do item (b): **inválido** (a rua pode ter molhado por outro motivo).
+{{< /questao >}}
+
+{{< /quiz >}}
+
+**Exercício 2.** Teste: $p\to q,\ r\to q\models(p\lor r)\to q$.
 
 {{< details title="Gabarito" >}}
 Negando: $\neg((p\lor r)\to q)$ vira $p\lor r,\ \neg q$. Em $p\to q$: $\neg p$ ou $q$ (fecha). Com $\neg p$, usando $r\to q$: $\neg r$ ou $q$ (fecha). No ramo $\neg p,\neg r$, a fórmula $p\lor r$ ramifica em $p$ (fecha com $\neg p$) e $r$ (fecha com $\neg r$). **Válido.**
-{{< /details >}}
-
-**Exercício 5.** Traduza e teste: "Se chove, a rua molha. A rua molhou. Logo, choveu."
-
-{{< details title="Gabarito" >}}
-$c\to m,\ m\models c$. É o mesmo do exercício 2: **inválido** (a rua pode ter molhado por outro motivo).
 {{< /details >}}

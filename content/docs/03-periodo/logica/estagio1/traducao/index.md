@@ -205,20 +205,20 @@ Chave desliga $\to$ rede falha. (Suficiente $=$ antecedente.)
 $(A\to B\land C)\to D$. Como $\land$ tem precedência sobre $\to$, $A\to B\land C$ é $A\to(B\land C)$.
 {{< /details >}}
 
-**Exercício 6.** Considere $p$: ursos-cinzentos são vistos; $q$: caminhar na trilha é seguro; $r$: bagas maduras. Traduza:
-(a) As bagas estão maduras, mas os ursos não são vistos.
-(b) Não vemos ursos e a trilha é segura, mas as bagas estão maduras.
-(c) Se as bagas estão maduras, caminhar é seguro se, e somente se, não há ursos.
-(d) Não é seguro caminhar, mas não há ursos e as bagas estão maduras.
-(e) Para caminhar com segurança, é necessário, mas não suficiente, que não haja bagas maduras e que não haja ursos.
+**Exercício 6.** Considere $p$: ursos-cinzentos são vistos; $q$: caminhar na trilha é seguro; $r$: bagas maduras. Traduza:\
+(a) As bagas estão maduras, mas os ursos não são vistos.\
+(b) Não vemos ursos e a trilha é segura, mas as bagas estão maduras.\
+(c) Se as bagas estão maduras, caminhar é seguro se, e somente se, não há ursos.\
+(d) Não é seguro caminhar, mas não há ursos e as bagas estão maduras.\
+(e) Para caminhar com segurança, é necessário, mas não suficiente, que não haja bagas maduras e que não haja ursos.\
 (f) Caminhar não é seguro sempre que ursos são vistos e bagas estão maduras.
 
 {{< details title="Gabarito" >}}
-(a) $r\land\neg p$
-(b) $\neg p\land q\land r$
-(c) $r\to(q\leftrightarrow\neg p)$
-(d) $\neg q\land\neg p\land r$
-(e) $\big(q\to(\neg r\land\neg p)\big)\land\neg\big((\neg r\land\neg p)\to q\big)$. A primeira parte é a necessidade; a segunda nega a suficiência.
+(a) $r\land\neg p$\
+(b) $\neg p\land q\land r$\
+(c) $r\to(q\leftrightarrow\neg p)$\
+(d) $\neg q\land\neg p\land r$\
+(e) $\big(q\to(\neg r\land\neg p)\big)\land\neg\big((\neg r\land\neg p)\to q\big)$. A primeira parte é a necessidade; a segunda nega a suficiência.\
 (f) $(p\land r)\to\neg q$
 {{< /details >}}
 

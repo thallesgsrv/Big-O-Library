@@ -1,0 +1,66 @@
+{{- /* Uma questão dentro de {{< quiz >}}. Guia: .github/GUIA-QUIZ.md
+
+   Formato do corpo (tudo em Markdown):
+
+     Enunciado, em quantas linhas quiser (aceita $fórmulas$, código, listas).
+
+     - [ ] alternativa errada
+     - [x] alternativa certa
+     - [ ] outra errada
+           linha extra da mesma alternativa (vira quebra de linha)
+     ---
+     Explicação mostrada depois da resposta (opcional, também em Markdown).
+
+   Uma alternativa [x]  -> clicou, respondeu.
+   Duas ou mais [x]     -> "marque todas": a pessoa seleciona e clica em "verificar".
+   Parâmetro opcional:  fixa="true"  mantém a ordem das alternativas mesmo com embaralhar. */ -}}
+{{- $raw := replace (.InnerDeindent | default "") "\r\n" "\n" -}}
+{{- $stem := "" -}}{{- $exp := "" -}}{{- $opts := slice -}}
+{{- $mode := "stem" -}}{{- $cur := "" -}}{{- $curOk := false -}}{{- $has := false -}}
+{{- range split $raw "\n" -}}
+  {{- $l := . -}}{{- $t := trim $l " \t" -}}
+  {{- if eq $mode "exp" -}}
+    {{- $exp = printf "%s%s\n" $exp $l -}}
+  {{- else if eq $t "---" -}}
+    {{- if $has }}{{ $opts = $opts | append (dict "ok" $curOk "txt" $cur) }}{{ $has = false }}{{ end -}}
+    {{- $mode = "exp" -}}
+  {{- else if findRE `^[-*]\s\[[ xX]\](\s|$)` $t -}}
+    {{- if $has }}{{ $opts = $opts | append (dict "ok" $curOk "txt" $cur) }}{{ end -}}
+    {{- $has = true -}}{{- $mode = "opt" -}}
+    {{- $curOk = gt (len (findRE `^[-*]\s\[[xX]\]` $t)) 0 -}}
+    {{- $cur = trim (replaceRE `^[-*]\s\[[ xX]\]` "" $t) " " -}}
+  {{- else if eq $mode "opt" -}}
+    {{- if $t }}{{ $cur = cond (eq $cur "") $t (printf "%s  \n%s" $cur $t) }}{{ end -}}
+  {{- else -}}
+    {{- $stem = printf "%s%s\n" $stem $l -}}
+  {{- end -}}
+{{- end -}}
+{{- if $has }}{{ $opts = $opts | append (dict "ok" $curOk "txt" $cur) }}{{ end -}}
+
+{{- /* validação: falha o build com a posição exata, em vez de publicar quiz quebrado */ -}}
+{{- if lt (len $opts) 2 -}}{{- errorf "questao: precisa de pelo menos 2 alternativas no formato '- [ ] texto' (%s)" .Position -}}{{- end -}}
+{{- $nok := 0 -}}{{- $long := false -}}
+{{- range $opts }}{{ if .ok }}{{ $nok = add $nok 1 }}{{ end }}{{ if gt (len .txt) 16 }}{{ $long = true }}{{ end }}{{ end -}}
+{{- if gt (len $opts) 4 }}{{ $long = true }}{{ end -}}
+{{- if eq $nok 0 -}}{{- errorf "questao: marque a alternativa certa com '- [x]' (%s)" .Position -}}{{- end -}}
+{{- if lt (len (trim $stem " \n")) 1 -}}{{- errorf "questao: falta o enunciado antes das alternativas (%s)" .Position -}}{{- end -}}
+{{- $letras := slice "A" "B" "C" "D" "E" "F" "G" "H" "I" "J" -}}
+<article class="bo-qz-q" data-multi="{{ cond (gt $nok 1) "1" "0" }}"{{ if eq (.Get "fixa") "true" }} data-fixa="1"{{ end }}>
+  <p class="bo-qz-n" aria-hidden="true"></p>
+  <div class="bo-qz-stem" tabindex="-1">{{ trim $stem " \n" | $.Page.RenderString (dict "display" "block") }}</div>
+  <div class="bo-qz-opts{{ if $long }} is-wide{{ end }}" role="group">
+    {{- range $i, $o := $opts }}
+    <button type="button" class="bo-qz-opt" data-ok="{{ cond $o.ok "1" "0" }}"><kbd>{{ index $letras $i }}</kbd><span class="bo-qz-t">{{ $o.txt | $.Page.RenderString (dict "display" "inline") }}</span></button>
+    {{- end }}
+  </div>
+  {{- if gt $nok 1 }}
+  <p class="bo-qz-hint">Há mais de uma correta: marque todas e clique em verificar.</p>
+  <div class="bo-qz-act"><button type="button" class="bo-b1 bo-qz-check">verificar</button></div>
+  {{- end }}
+  <div class="bo-qz-fb" role="status" hidden>
+    <p class="bo-qz-verd"></p>
+    {{- with trim $exp " \n" }}
+    <div class="bo-qz-exp">{{ . | $.Page.RenderString (dict "display" "block") }}</div>
+    {{- end }}
+  </div>
+</article>

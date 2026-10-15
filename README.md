@@ -117,6 +117,7 @@ deploy.sh                          publica o site na branch gh-pages (só manten
 ```
 
 Para criar uma animação de algoritmo, veja o [guia de animações](.github/GUIA-ANIMACOES.md).
+Para colocar um quiz interativo em qualquer página, veja o [guia de quiz](.github/GUIA-QUIZ.md).
 
 ## Publicação
 

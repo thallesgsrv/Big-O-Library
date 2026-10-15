@@ -1,0 +1,47 @@
+{{- /* Quiz interativo para qualquer página. Guia completo: .github/GUIA-QUIZ.md
+
+   Uso:
+     {{< quiz titulo="Classifique as fórmulas" >}}
+       {{< questao >}} ... {{< /questao >}}
+       {{< questao >}} ... {{< /questao >}}
+     {{< /quiz >}}
+
+   Parâmetros (todos opcionais):
+     titulo      nome mostrado no topo (padrão: "quiz")
+     modo        "um-por-vez" (padrão: uma questão por vez, com barra de progresso)
+                 ou "lista" (todas as questões na página, cada uma independente)
+     embaralhar  "true" embaralha a ordem das alternativas a cada tentativa
+     conselho    "false" tira a frase do Conselho dos Sábios da tela de resultado
+   Com uma única {{< questao >}} o quiz vira "questão avulsa": sem barra, placar nem resultado.
+
+   As questões são escritas em Markdown (com fórmulas $...$) e renderizadas no build:
+   o JavaScript só alterna o que aparece. CSS/JS: assets/quiz/. Classes: .bo-qz* */ -}}
+{{- $titulo := .Get "titulo" | default "quiz" -}}
+{{- $modo := cond (eq (.Get "modo") "lista") "lista" "um-por-vez" -}}
+{{- $emb := cond (eq (.Get "embaralhar") "true") "1" "0" -}}
+{{- /* quiz com uma só questão vira "questão avulsa": sem resultado, logo sem frase do Conselho */ -}}
+{{- $nq := len (findRE `class="bo-qz-q"` (string .Inner)) -}}
+{{- $cons := and (ne (.Get "conselho") "false") (gt $nq 1) -}}
+{{- if not (.Page.Store.Get "quiz-assets") -}}
+{{- with resources.Get "quiz/quiz.css" -}}
+{{- $css := . | resources.Minify | resources.Fingerprint -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+{{- else -}}{{- errorf "quiz: assets/quiz/quiz.css não encontrado" -}}{{- end -}}
+{{- with resources.Get "quiz/quiz.js" -}}
+{{- $js := . | resources.Minify | resources.Fingerprint -}}
+<script src="{{ $js.RelPermalink }}" defer></script>
+{{- else -}}{{- errorf "quiz: assets/quiz/quiz.js não encontrado" -}}{{- end -}}
+{{- .Page.Store.Set "quiz-assets" true -}}
+{{- end -}}
+{{- $sab := slice -}}
+{{- if $cons -}}
+  {{- range partial "bo-sabios.html" .Page -}}
+    {{- if and (not .pend) .frase -}}
+      {{- $sab = $sab | append (dict "nome" .nome "titulo" .titulo "frase" .frase "slug" .slug "img" .img "ini" .ini "n" .n) -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+<section class="bo-qz" data-modo="{{ $modo }}" data-emb="{{ $emb }}" data-titulo="{{ $titulo }}"{{ if $sab }} data-conselho="{{ "conselho/" | relURL }}" data-sages="{{ $sab | jsonify }}"{{ end }} aria-label="Quiz: {{ $titulo }}">
+  <noscript><p class="bo-small">Este quiz precisa de JavaScript. Sem ele, a alternativa correta aparece marcada com ✓.</p></noscript>
+  <div class="bo-qz-body">{{ .Inner }}</div>
+</section>

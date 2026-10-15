@@ -161,32 +161,65 @@ Executar o código **é** deduzir. Por isso lógica é a base de verificação d
 
 ## Exercícios
 
-**Exercício 1.** Quais são proposições? (a) "$7$ é primo." (b) "Feche a porta." (c) "Todo número par é divisível por 3." (d) "Que horas são?"
+**Exercício 1.** Quais destas frases são proposições? (Pode haver mais de uma.)
 
-{{< details title="Gabarito" >}}
-(a) e (c). Note que (c) é **falsa**, mas continua sendo proposição: basta poder ser julgada V ou F. (b) é ordem e (d) é pergunta.
-{{< /details >}}
+{{< quiz titulo="proposições" >}}
+{{< questao >}}
+Marque **todas** as frases que são proposições.
+
+- [x] "$7$ é primo."
+- [ ] "Feche a porta."
+- [x] "Todo número par é divisível por 3."
+- [ ] "Que horas são?"
+---
+São proposições "$7$ é primo" e "todo número par é divisível por 3". Note que a segunda é **falsa**, mas continua sendo proposição: basta poder ser julgada V ou F. "Feche a porta" é uma ordem e "Que horas são?" é uma pergunta.
+{{< /questao >}}
+{{< /quiz >}}
 
 **Exercício 2.** Ache as premissas e a conclusão: *"Todo mamífero respira. Logo a baleia respira, já que baleias são mamíferos."*
 
 {{< details title="Gabarito" >}}
-Premissas: todo mamífero respira; baleias são mamíferos. Conclusão: a baleia respira (marcada por "logo").
+Premissas: todo mamífero respira; baleias são mamíferos.\
+Conclusão: a baleia respira (marcada por "logo").
 {{< /details >}}
 
 **Exercício 3.** "Todo gato é mamífero. Miau é gato. Logo, Miau é mamífero." É válido? É correto?
 
-{{< details title="Gabarito" >}}
-Válido (a forma garante) e correto (as premissas são verdadeiras).
-{{< /details >}}
+{{< quiz titulo="válido e correto" >}}
+{{< questao fixa="true" >}}
+Sobre o argumento "Todo gato é mamífero. Miau é gato. Logo, Miau é mamífero.":
+
+- [x] Válido e correto
+- [ ] Válido, mas não correto
+- [ ] Inválido, mas com conclusão verdadeira
+- [ ] Inválido e incorreto
+---
+**Válido** porque a forma garante a conclusão, e **correto** porque as premissas são, de fato, verdadeiras.
+{{< /questao >}}
+{{< /quiz >}}
 
 **Exercício 4.** "Todo estudante de computação ama café. Ana ama café. Logo, Ana é estudante de computação." É válido?
 
-{{< details title="Gabarito" >}}
-**Inválido.** Ana pode amar café sem estudar computação. As premissas podem ser V com a conclusão F.
-{{< /details >}}
+{{< quiz titulo="válido ou inválido" >}}
+{{< questao >}}
+O argumento "Todo estudante de computação ama café. Ana ama café. Logo, Ana é estudante de computação." é:
+
+- [ ] Válido
+- [x] Inválido
+---
+**Inválido.** Ana pode amar café sem estudar computação: as premissas podem ser V com a conclusão F.
+{{< /questao >}}
+{{< /quiz >}}
 
 **Exercício 5.** Dedutivo ou indutivo? "Todos os cisnes que vi são brancos; logo todos os cisnes são brancos."
 
-{{< details title="Gabarito" >}}
-Indutivo: a conclusão diz mais do que as premissas (e foi derrubada na prática: existem cisnes negros).
-{{< /details >}}
+{{< quiz titulo="dedutivo ou indutivo" >}}
+{{< questao >}}
+O raciocínio "Todos os cisnes que vi são brancos; logo todos os cisnes são brancos." é:
+
+- [ ] Dedutivo
+- [x] Indutivo
+---
+Indutivo: a conclusão diz mais do que as premissas. E foi derrubada na prática: existem cisnes negros.
+{{< /questao >}}
+{{< /quiz >}}

@@ -1,0 +1,73 @@
+/* Quiz interativo ({{< quiz >}} / {{< questao >}}). Mesmo visual do jogo em /lab/complexidade.
+   Usa os tokens do site (--card, --line, --txt, --body, --mute, --ac, --p1..--p9). Prefixo: .bo-qz */
+.bo-qz{margin:1.75rem 0;padding:20px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--card) 55%,transparent)}
+.bo-qz-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
+.bo-qz-cmd{font-size:13px;color:var(--ac);overflow-wrap:anywhere}
+.bo-qz-score{font-size:13px;color:var(--mute)}
+.bo-qz-bar{height:4px;border-radius:2px;background:var(--line);overflow:hidden;margin-bottom:18px}
+.bo-qz-bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .35s ease}
+
+/* questão avulsa (quiz com uma só questão) */
+.bo-qz.is-solo .bo-qz-bar,.bo-qz.is-solo .bo-qz-n,.bo-qz.is-solo .bo-qz-score{display:none}
+.bo-qz.is-solo .bo-qz-top{margin-bottom:14px}
+.bo-qz-next.bo-b2{padding:12px 20px;font-size:14px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--txt)}
+
+/* questão */
+.bo-qz-q{margin:0}
+.bo-qz.is-on.is-lista .bo-qz-q+.bo-qz-q{margin-top:28px;padding-top:24px;border-top:1px dashed var(--line)}
+.bo-qz-n{margin:0 0 6px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
+.bo-qz.is-single .bo-qz-n{display:none}
+.bo-qz-stem{margin:0 0 16px;color:var(--txt);line-height:1.7;outline:none}
+.bo-qz-stem>*:first-child{margin-top:0}.bo-qz-stem>*:last-child{margin-bottom:0}
+.bo-qz-stem p{margin:0 0 .6em;color:var(--txt)}
+.bo-qz-stem pre{margin:.75em 0}
+
+/* alternativas */
+.bo-qz-opts{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:12px}
+.bo-qz-opts.is-wide{grid-template-columns:1fr}
+.bo-qz-opt{--c:var(--ac);display:flex;align-items:flex-start;gap:12px;width:100%;padding:13px 16px;border:1px solid var(--line);border-radius:8px;background:var(--card);color:var(--txt);font:400 15px/1.6 'IBM Plex Mono',monospace;cursor:pointer;text-align:left;transition:border-color .2s ease,transform .15s ease,background-color .2s ease}
+.bo-qz-opt kbd{flex:none;margin-top:3px;font:400 11px 'IBM Plex Mono',monospace;color:var(--mute);border:1px solid var(--line);border-radius:4px;padding:1px 6px;line-height:1.5}
+.bo-qz-t{flex:1;min-width:0;overflow-wrap:anywhere;overflow-x:auto;scrollbar-width:thin}
+.bo-qz-opt:hover:not(:disabled){border-color:var(--ac);transform:translateY(-2px)}
+.bo-qz-opt:focus-visible,.bo-qz-fb:focus-visible{outline:2px solid var(--ac);outline-offset:2px}
+.bo-qz-opt:disabled{cursor:default;opacity:.55}
+.bo-qz-opt.is-sel{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 12%,var(--card))}
+.bo-qz-opt.is-sel kbd{border-color:var(--ac);color:var(--ac)}
+.bo-qz-opt.is-ok{opacity:1;border-color:var(--p1);background:color-mix(in srgb,var(--p1) 14%,var(--card))}
+.bo-qz-opt.is-ok kbd{border-color:var(--p1);color:var(--p1)}
+.bo-qz-opt.is-bad{opacity:1;border-color:var(--p9);background:color-mix(in srgb,var(--p9) 12%,var(--card))}
+.bo-qz-opt.is-bad .bo-qz-t{text-decoration:line-through;text-decoration-thickness:1px}
+.bo-qz-opt.is-miss{opacity:1;border-style:dashed;border-color:var(--p1)}
+.bo-qz-hint{margin:12px 0 0;font-size:13px;color:var(--mute)}
+.bo-qz-q[data-done] .bo-qz-hint,.bo-qz-q[data-done] .bo-qz-act{display:none}
+.bo-qz-act{margin-top:14px}
+.bo-qz-check,.bo-qz-next{display:inline-block;border:0;cursor:pointer;font-family:inherit}
+.bo-qz-check:disabled{opacity:.5;cursor:default;filter:none}
+
+/* resposta */
+.bo-qz-fb{margin-top:18px;padding:16px 20px;border:1px solid var(--line);border-left:4px solid var(--ac);border-radius:8px;background:var(--card)}
+.bo-qz-fb.is-ok{border-left-color:var(--p1)}.bo-qz-fb.is-bad{border-left-color:var(--p9)}
+.bo-qz-fb[hidden]{display:none}
+.bo-qz-fb p{margin:0 0 12px;line-height:1.7;color:var(--body)}
+.bo-qz-fb .bo-qz-verd{font-size:14px;font-weight:500;color:var(--txt)}
+.bo-qz-exp{line-height:1.7;color:var(--body)}
+.bo-qz-exp>*:last-child{margin-bottom:0}
+.bo-qz-exp p{margin:0 0 .7em}
+.bo-qz-fb .bo-qz-next{margin-top:6px}
+
+/* resultado (reaproveita .bo-rs* do jogo) */
+.bo-qz-result{margin-top:22px}
+.bo-qz-result[hidden]{display:none}
+.bo-qz.is-single .bo-qz-result{margin-top:0}
+
+/* sem JavaScript: tudo visível, correta marcada */
+.bo-qz:not(.is-on) .bo-qz-q+.bo-qz-q{margin-top:24px}
+.bo-qz:not(.is-on) .bo-qz-opt{cursor:default}
+.bo-qz:not(.is-on) .bo-qz-opt[data-ok="1"]{border-color:var(--p1)}
+.bo-qz:not(.is-on) .bo-qz-opt[data-ok="1"]::after{content:"✓";color:var(--p1);margin-left:auto}
+.bo-qz:not(.is-on) .bo-qz-fb[hidden]{display:block}
+.bo-qz:not(.is-on) .bo-qz-hint,.bo-qz:not(.is-on) .bo-qz-act{display:none}
+
+@media (max-width:560px){.bo-qz{padding:14px}.bo-qz-opts{grid-template-columns:1fr}}
+@media (prefers-reduced-motion:reduce){.bo-qz-opt,.bo-qz-bar i{transition:none!important}.bo-qz-opt:hover{transform:none}}
+@media print{.bo-qz-q{display:block!important}.bo-qz-fb[hidden]{display:block}.bo-qz-opt[data-ok="1"]::after{content:"✓"}.bo-qz-top,.bo-qz-bar,.bo-qz-act,.bo-qz-hint{display:none}}

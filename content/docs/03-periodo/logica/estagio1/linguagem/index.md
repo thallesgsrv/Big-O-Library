@@ -150,21 +150,46 @@ Curiosidade: essa condição pode ser **simplificada** para $p\lor q$, isto é, 
 
 **Exercício 1.** $(P\land\to Q)$ é fórmula bem formada?
 
-{{< details title="Gabarito" >}}
+{{< quiz titulo="fórmula bem formada" >}}
+{{< questao >}}
+A expressão $(P\land\to Q)$ é uma fórmula bem formada?
+
+- [ ] Sim
+- [x] Não
+---
 Não: falta uma fórmula antes da seta (dois conectivos seguidos, $\land\to$).
-{{< /details >}}
+{{< /questao >}}
+{{< /quiz >}}
 
 **Exercício 2.** Coloque os parênteses completos em $p\land q\to r\lor s$.
 
-{{< details title="Gabarito" >}}
-$\land$ e $\lor$ agarram primeiro: $(p\land q)\to(r\lor s)$.
-{{< /details >}}
+{{< quiz titulo="parênteses completos" >}}
+{{< questao >}}
+Com todos os parênteses, $p\land q\to r\lor s$ fica:
+
+- [ ] $p\land(q\to r)\lor s$
+- [x] $(p\land q)\to(r\lor s)$
+- [ ] $((p\land q)\to r)\lor s$
+- [ ] $p\land((q\to r)\lor s)$
+---
+$\land$ e $\lor$ agarram primeiro; o $\to$ fica por último e liga os dois blocos.
+{{< /questao >}}
+{{< /quiz >}}
 
 **Exercício 3.** Coloque os parênteses completos em $\neg p\lor q\to r$.
 
-{{< details title="Gabarito" >}}
-$((\neg p)\lor q)\to r$. O $\neg$ só atinge o $p$.
-{{< /details >}}
+{{< quiz titulo="parênteses completos" >}}
+{{< questao >}}
+Com todos os parênteses, $\neg p\lor q\to r$ fica:
+
+- [ ] $\neg(p\lor q)\to r$
+- [x] $((\neg p)\lor q)\to r$
+- [ ] $(\neg p)\lor(q\to r)$
+- [ ] $\neg(p\lor(q\to r))$
+---
+O $\neg$ só atinge o $p$; depois vem o $\lor$; e o $\to$ fica por último.
+{{< /questao >}}
+{{< /quiz >}}
 
 **Exercício 4.** Traduza `if (a > 0 && !(b > 0))`.
 

@@ -246,35 +246,151 @@ A tabela tem $2^n$ linhas. Com 20 letras já são mais de **1 milhão** de linha
 
 ## Exercícios
 
-**Exercício 1.** Classifique (tautologia, contradição, contingência):
-(a) $(p\to q)\to(q\to p)$ (b) $(p\land\neg p)\to q$ (c) $p\to q\to p\land q$ (d) $p\to\neg\neg p$ (e) $\neg(p\lor q\to p)$ (f) $\neg(p\to p\lor q)$ (g) $((p\to q)\land(r\to q))\to(p\lor r\to q)$
+**Exercício 1.** Classifique cada fórmula como tautologia, contradição ou contingência. Responda direto na tela: depois de cada resposta aparece a explicação.
+
+{{< quiz titulo="classificar fórmulas" >}}
+
+{{< questao >}}
+**(a)** $(p\to q)\to(q\to p)$ é...
+
+- [ ] Tautologia
+- [ ] Contradição
+- [x] Contingência
+---
+Falsa em $p=F,q=V$ (aí $p\to q$ é V e $q\to p$ é F); verdadeira em $p=q=V$. Tem V e F na última coluna.
+{{< /questao >}}
+
+{{< questao >}}
+**(b)** $(p\land\neg p)\to q$ é...
+
+- [x] Tautologia
+- [ ] Contradição
+- [ ] Contingência
+---
+O antecedente $p\land\neg p$ é sempre F, então a implicação é sempre V.
+{{< /questao >}}
+
+{{< questao >}}
+**(c)** $p\to q\to p\land q$ é...
+
+- [x] Tautologia
+- [ ] Contradição
+- [ ] Contingência
+---
+Com a precedência usual, é $p\to(q\to p\land q)$: se $p$ e $q$ são V, $p\land q$ também é, e a implicação interna nunca falha.
+{{< /questao >}}
+
+{{< questao >}}
+**(d)** $p\to\neg\neg p$ é...
+
+- [x] Tautologia
+- [ ] Contradição
+- [ ] Contingência
+---
+Dupla negação: $\neg\neg p\equiv p$, então a fórmula é $p\to p$.
+{{< /questao >}}
+
+{{< questao >}}
+**(e)** $\neg(p\lor q\to p)$ é...
+
+- [ ] Tautologia
+- [ ] Contradição
+- [x] Contingência
+---
+$p\lor q\to p\equiv q\to p$, cuja negação é $q\land\neg p$. Ela é V só em $p=F,q=V$: tem V e F.
+{{< /questao >}}
+
+{{< questao >}}
+**(f)** $\neg(p\to p\lor q)$ é...
+
+- [ ] Tautologia
+- [x] Contradição
+- [ ] Contingência
+---
+$p\to p\lor q$ é tautologia, então a sua negação nunca é V.
+{{< /questao >}}
+
+{{< questao >}}
+**(g)** $((p\to q)\land(r\to q))\to(p\lor r\to q)$ é...
+
+- [x] Tautologia
+- [ ] Contradição
+- [ ] Contingência
+---
+Pela tabela de equivalências, $(p\to q)\land(r\to q)\equiv(p\lor r)\to q$. A fórmula fica "$X\to X$", sempre V.
+{{< /questao >}}
+
+{{< /quiz >}}
+
+**Exercício 2.** Prove ou refute cada consequência lógica (procure um contra-exemplo).
+
+{{< quiz titulo="consequência lógica" >}}
+
+{{< questao >}}
+**(a)** $\neg q\to\neg p\ \models\ p\to q$
+
+- [x] Vale
+- [ ] Não vale
+---
+É a contrapositiva: $\neg q\to\neg p\equiv p\to q$.
+{{< /questao >}}
+
+{{< questao >}}
+**(b)** $\neg p\to\neg q\ \models\ p\to q$
+
+- [ ] Vale
+- [x] Não vale
+---
+Contra-exemplo: $p=V,q=F$. A premissa é $F\to V=V$, mas a conclusão é $V\to F=F$.
+{{< /questao >}}
+
+{{< questao >}}
+**(c)** $p\to q\ \models\ p\to q\lor r$
+
+- [x] Vale
+- [ ] Não vale
+---
+Se $q$ é V, então $q\lor r$ também é V.
+{{< /questao >}}
+
+{{< questao >}}
+**(d)** $p\to q\ \models\ p\to q\land r$
+
+- [ ] Vale
+- [x] Não vale
+---
+Contra-exemplo: $p=V,q=V,r=F$. A premissa é V, mas a conclusão é $V\to(V\land F)=F$.
+{{< /questao >}}
+
+{{< questao >}}
+**(e)** $\neg(p\land q)\ \models\ \neg p\land\neg q$
+
+- [ ] Vale
+- [x] Não vale
+---
+Contra-exemplo: $p=V,q=F$. A premissa é $\neg(F)=V$, mas a conclusão é $F\land V=F$. (De Morgan troca o conectivo: $\neg(p\land q)\equiv\neg p\lor\neg q$.)
+{{< /questao >}}
+
+{{< questao >}}
+**(f)** $\neg(p\lor q)\ \models\ \neg p\lor\neg q$
+
+- [x] Vale
+- [ ] Não vale
+---
+$\neg(p\lor q)\equiv\neg p\land\neg q$, e uma conjunção sempre implica a disjunção dos mesmos lados.
+{{< /questao >}}
+
+{{< /quiz >}}
+
+**Exercício 3.** Verifique cada consequência:\
+(A) $p\land q\models p$\
+(B) $p\lor q\models p$\
+(C) $\neg q,\ p\lor q\models p$
 
 {{< details title="Gabarito" >}}
-(a) **Contingência.** Falsa em $p=F,q=V$; verdadeira em $p=q=V$.
-(b) **Tautologia.** O antecedente $p\land\neg p$ é sempre F, então a implicação é sempre V.
-(c) **Tautologia.** É $p\to(q\to p\land q)$: se $p$ e $q$ são V, $p\land q$ também é.
-(d) **Tautologia** (dupla negação).
-(e) **Contingência.** $p\lor q\to p\equiv q\to p$, cuja negação é $q\land\neg p$ (V só em $p=F,q=V$).
-(f) **Contradição.** $p\to p\lor q$ é tautologia, então a negação nunca é V.
-(g) **Tautologia.**
-{{< /details >}}
-
-**Exercício 2.** Prove ou refute as consequências lógicas:
-(a) $\neg q\to\neg p\models p\to q$ (b) $\neg p\to\neg q\models p\to q$ (c) $p\to q\models p\to q\lor r$ (d) $p\to q\models p\to q\land r$ (e) $\neg(p\land q)\models\neg p\land\neg q$ (f) $\neg(p\lor q)\models\neg p\lor\neg q$
-
-{{< details title="Gabarito" >}}
-(a) **Vale.** É a contrapositiva ($\neg q\to\neg p\equiv p\to q$).
-(b) **Não vale.** Contra-exemplo: $p=V,q=F$ (premissa $F\to V=V$; conclusão $V\to F=F$).
-(c) **Vale.** Se $q$ é V, $q\lor r$ também é.
-(d) **Não vale.** Contra-exemplo: $p=V,q=V,r=F$ (premissa V; conclusão $V\to(V\land F)=F$).
-(e) **Não vale.** Contra-exemplo: $p=V,q=F$ (premissa $\neg(F)=V$; conclusão $F\land V=F$).
-(f) **Vale.** $\neg(p\lor q)\equiv\neg p\land\neg q$, que implica $\neg p\lor\neg q$.
-{{< /details >}}
-
-**Exercício 3.** Verifique: (A) $p\land q\models p$ (B) $p\lor q\models p$ (C) $\neg q,\ p\lor q\models p$
-
-{{< details title="Gabarito" >}}
-(A) **Vale** (se os dois são V, $p$ é V). (B) **Não vale**: $p=F,q=V$. (C) **Vale**: com $q$ falso, $p\lor q$ só é V se $p$ for V (silogismo disjuntivo).
+(A) **Vale** (se os dois são V, $p$ é V).\
+(B) **Não vale**: $p=F,q=V$.\
+(C) **Vale**: com $q$ falso, $p\lor q$ só é V se $p$ for V (silogismo disjuntivo).
 {{< /details >}}
 
 **Exercício 4.** Monte a tabela de $p\to(q\to p)$ e classifique.
@@ -289,3 +405,71 @@ A tabela tem $2^n$ linhas. Com 20 letras já são mais de **1 milhão** de linha
 
 Coluna toda V: **tautologia**.
 {{< /details >}}
+
+### Mais treino
+
+Aqui pode haver **mais de uma** alternativa certa: marque todas e clique em *verificar*.
+
+{{< quiz titulo="mais treino" modo="lista" embaralhar="true" >}}
+
+{{< questao fixa="true" >}}
+A coluna final da tabela de uma fórmula com $p$ e $q$ é V, F, F, V:
+
+| $p$ | $q$ | fórmula |
+| --- | --- | --- |
+| V | V | V |
+| V | F | F |
+| F | V | F |
+| F | F | V |
+
+Qual fórmula tem essa coluna?
+
+- [x] $p\leftrightarrow q$
+      (V quando os dois têm o mesmo valor)
+- [ ] $p\oplus q$
+      (V quando os dois têm valores diferentes)
+- [ ] $p\to q$
+      (F só quando $p$ é V e $q$ é F)
+- [ ] $p\land q$
+      (V só quando os dois são V)
+---
+Os dois extremos (VV e FF) dão V: os valores são iguais. Isso é o $\leftrightarrow$. O $\oplus$ daria exatamente a coluna oposta (F, V, V, F).
+{{< /questao >}}
+
+{{< questao >}}
+Marque **todas** as fórmulas que são tautologias.
+
+- [x] $p\lor\neg p$
+- [ ] $p\land\neg p$
+- [x] $p\to p$
+- [ ] $p\to\neg p$
+- [x] $(p\land q)\to p$
+---
+$p\lor\neg p$ (terceiro excluído), $p\to p$ e $(p\land q)\to p$ são sempre V. Já $p\land\neg p$ é contradição, e $p\to\neg p$ é contingência (equivale a $\neg p$: F com $p=V$, V com $p=F$).
+{{< /questao >}}
+
+{{< questao >}}
+Marque **todas** as fórmulas equivalentes a $p\to q$.
+
+- [x] $\neg p\lor q$
+- [x] $\neg q\to\neg p$
+- [ ] $q\to p$
+- [ ] $p\land\neg q$
+- [x] $\neg(p\land\neg q)$
+---
+$\neg p\lor q$ é "elimina a seta"; $\neg q\to\neg p$ é a contrapositiva; $\neg(p\land\neg q)$ vira $\neg p\lor q$ por De Morgan. Já $q\to p$ é a **recíproca** (não é equivalente) e $p\land\neg q$ é a **negação** de $p\to q$.
+{{< /questao >}}
+
+{{< questao >}}
+Marque **todas** as interpretações que são **modelo** de $(p\lor q)\land\neg r$.
+
+- [x] $p=V,\ q=F,\ r=F$
+- [x] $p=F,\ q=V,\ r=F$
+- [ ] $p=V,\ q=V,\ r=V$
+- [ ] $p=F,\ q=F,\ r=F$
+- [x] $p=V,\ q=V,\ r=F$
+---
+$\neg r$ exige $r=F$, e $p\lor q$ exige pelo menos um V. Por isso $p=q=F$ falha no $\lor$, e $r=V$ falha no $\neg r$.
+{{< /questao >}}
+
+{{< /quiz >}}
