@@ -37,8 +37,14 @@ disciplinas:
   - id: fmcc1
   - id: introducao-a-computacao
   - id: lab-p1
+    nome: Laboratório de Programação 1
+    periodo: 1
+    prereq: []
   - id: prog1
   - id: direito
+    nome: Direito e Cidadania
+    periodo: 1
+    prereq: []
 
   # 2º período
   - id: fmcc2
@@ -46,10 +52,15 @@ disciplinas:
   - id: calculo1
     prereq: [introducao-a-computacao]
   - id: lab-prog2
-    prereq: [prog1]
+    nome: Laboratório de Programação 2
+    periodo: 2
+    prereq: [prog1, lab-p1]
   - id: prog2
-    prereq: [prog1]
+    prereq: [prog1, lab-p1]
   - id: economia
+    nome: Economia
+    periodo: 2
+    prereq: []
 
   # 3º período
   - id: logica
