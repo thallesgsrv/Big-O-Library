@@ -47,6 +47,9 @@
               {{ else }}
                 <a href="{{ "docs/" | relURL }}">← Materiais</a>
               {{ end }}
+              {{ if and site.Params.editURL.enable .File (not .Params.hideEdit) }}
+                <a href="{{ partial "bo-edit-url.html" . }}" target="_blank" rel="noopener">$ editar esta página</a>
+              {{ end }}
             </div>
           </div>
         </div>

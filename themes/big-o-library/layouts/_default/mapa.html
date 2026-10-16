@@ -68,9 +68,6 @@
 
   <div class="bo-m" id="bo-m">
     <noscript><p class="bo-small">O mapa precisa de JavaScript ligado.</p></noscript>
-    <div class="bo-m-tools">
-      <label class="bo-m-sel"><span>quero chegar em</span><select id="bo-m-sel" aria-label="Escolher disciplina"></select></label>
-    </div>
     <div class="bo-m-scroll" id="bo-m-scroll" tabindex="0" aria-label="Grafo de disciplinas (role para os lados no celular)"><svg id="bo-m-svg" role="group" aria-label="Disciplinas e pré-requisitos"></svg></div>
     <p class="bo-small bo-m-hint" id="bo-m-hint" hidden>← arraste o grafo para os lados →</p>
     <div class="bo-m-panel" id="bo-m-panel" aria-live="polite"></div>
@@ -83,7 +80,6 @@
     var root = document.getElementById("bo-m");
     var svg = document.getElementById("bo-m-svg");
     var panel = document.getElementById("bo-m-panel");
-    var sel = document.getElementById("bo-m-sel");
     if (!root || !RAW.length) { if (root) root.insertAdjacentHTML("beforeend", '<p class="bo-small">Nenhuma disciplina com material ainda.</p>'); return; }
     var NS = "http://www.w3.org/2000/svg";
     var esc = function (s) { return String(s).replace(/[&<>"]/g, function (c) { return { "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;" }[c]; }); };
@@ -187,10 +183,6 @@
     };
     fit(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 
-    var ordered = list.slice().sort(function (a, b) { return ((a.per || 99) - (b.per || 99)) || a.title.localeCompare(b.title, "pt-BR"); });
-    sel.innerHTML = ordered.map(function (n) { return '<option value="' + esc(n.slug) + '">' + (n.per ? n.per + "º · " : "opt · ") + esc(n.title) + (n.ghost ? " (sem material)" : "") + "</option>"; }).join("");
-    sel.addEventListener("change", function () { choose(sel.value); });
-
     var perLabel = function (n) { return n.per ? n.per + "º período" : "optativa"; };
     var chip = function (n) { return n.ghost ? '<li><span class="bo-m-chip is-ghost">' + esc(n.title) + '<small>sem material</small></span></li>' : !n.url ? '<li><span class="bo-m-chip">' + esc(n.title) + '</span></li>' : '<li><a class="bo-m-chip" href="' + esc(n.url) + '">' + esc(n.title) + '</a></li>'; };
 
@@ -210,7 +202,6 @@
         e.el.classList.toggle("is-anc", !!a);
         e.el.classList.toggle("is-desc", !!d && !a);
       });
-      sel.value = slug;
       var need = Object.keys(anc).map(function (s) { return by[s]; }).sort(function (a, b) { return ((a.per || 99) - (b.per || 99)) || a.title.localeCompare(b.title, "pt-BR"); });
       var give = Object.keys(desc).map(function (s) { return by[s]; }).sort(function (a, b) { return ((a.per || 99) - (b.per || 99)) || a.title.localeCompare(b.title, "pt-BR"); });
       var groups = [], last = null;

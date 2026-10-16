@@ -18,20 +18,6 @@
           </ul>
         {{- end -}}
       {{- end -}}
-
-      {{- $borderClass := "hx:mt-8 hx:border-t hx:bg-transparent hx:pt-8 hx:shadow-none hx:dark:bg-transparent" -}}
-
-      {{- if not $headings -}}
-        {{- $borderClass = "hx:mt-0 hx:border-t hx:bg-transparent hx:pt-4 hx:shadow-none hx:dark:bg-transparent" -}}
-      {{- end -}}
-
-      {{/* TOC bottom part */}}
-      <div class="{{ $borderClass }} hx:sticky hx:bottom-0 hx:flex hx:flex-col hx:items-start hx:gap-2 hx:pb-8 hx:border-gray-200 hx:dark:border-neutral-800 hx:contrast-more:border-t hx:contrast-more:border-neutral-400 hx:contrast-more:shadow-none hx:contrast-more:dark:border-neutral-400" >
-        {{- if and site.Params.editURL.enable (ne .Params.hideEdit true) -}}
-          {{- $editURL := partial "bo-edit-url.html" . -}}
-          <a class="hx:inline-block hx:whitespace-nowrap hx:rounded-sm hx:text-xs hx:font-medium hx:text-gray-500 hx:hover:text-gray-900 hx:dark:text-gray-400 hx:dark:hover:text-gray-100 hx:contrast-more:text-gray-800 hx:contrast-more:dark:text-gray-50 hx:hextra-focus-visible-inset" href="{{ $editURL }}" target="_blank" rel="noreferrer">{{ $editThisPage }}</a>
-        {{- end -}}
-      </div>
     </div>
   {{ end -}}
 </nav>

@@ -568,10 +568,6 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 
 /* mapa */
 .bo-m{margin-bottom:72px}
-.bo-m-tools{display:flex;gap:16px 28px;flex-wrap:wrap;align-items:center;margin-bottom:14px}
-.bo-m-sel{display:flex;flex-wrap:wrap;align-items:center;gap:6px 10px;min-width:0;max-width:100%;font-size:14px;color:var(--mute)}
-.bo-m-sel select{flex:1 1 220px;min-width:0;width:100%;max-width:380px;padding:8px 10px;border:1px solid var(--line);border-radius:6px;background:var(--card);color:var(--txt);font:inherit;font-size:16px;text-overflow:ellipsis}
-@media (max-width:560px){.bo-m-sel{flex-direction:column;align-items:stretch}.bo-m-sel select{max-width:100%;flex:none}}
 .bo-mhead>.bo-crumbs{margin-bottom:.9rem}
 .bo-m-hint{margin:6px 0 0;text-align:center}
 .bo-m-scroll{overflow-x:auto;padding-bottom:8px;border:1px solid var(--line);border-radius:10px;background:var(--card)}
