@@ -7,7 +7,6 @@ autores:
   - thallesgsrv
 baseadoEm:
   - rodrigocohen
-prereq: [calculo1]
 date: 2026-10-01
 ---
 

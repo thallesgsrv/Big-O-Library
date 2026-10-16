@@ -106,11 +106,16 @@ hugo new --kind disciplina docs/01-periodo/nome-da-disciplina/index.md
 ```text
 content/docs/                      materiais: NN-periodo/disciplina/ e optativas/
 content/contribuir.md              guia de escrita (publicado no site)
+content/lab/                       laboratório: jogo de complexidade, mapa de pré-requisitos e curvas
+data/disciplinas.yaml              disciplinas e pré-requisitos do mapa (com ou sem pasta)
+data/conselho.yaml                 Conselho dos Sábios
+data/jogo.yaml                     trechos do jogo "Qual a complexidade?"
 themes/big-o-library/layouts/      templates do site (páginas, cards, parciais bo-*)
 themes/big-o-library/assets/css/   estilo do projeto (custom.css)
 themes/big-o-library/assets/viz/   motor das animações de algoritmos (viz.js / viz.css)
 themes/big-o-library/archetypes/   modelo para novas disciplinas
-scripts/                           utilitários (baixar_fontes.py)
+scripts/                           utilitários (baixar_fontes.py, baixar_vendor.py)
+package.json                       só para recompilar o CSS do tema (mantenedores); contribuir não precisa de Node
 hugo.yaml                          configuração do Hugo
 deploy.sh                          publica o site na branch gh-pages (só mantenedores)
 .github/                           CONTRIBUTING, código de conduta e guia de animações

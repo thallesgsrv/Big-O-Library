@@ -4,7 +4,6 @@ weight: 1
 description: Algoritmos
 autores:
   - thallesgsrv
-prereq: [prog2, lab-prog2]
 baseadoEm:
   - joaoarthurbm
   - fabriciocostadias

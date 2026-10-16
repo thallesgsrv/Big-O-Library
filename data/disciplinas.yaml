@@ -1,0 +1,139 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  MAPA DE PRÉ-REQUISITOS  (/lab/mapa)
+#  Cada bloco abaixo é uma disciplina do curso (um nó do grafo). Não precisa
+#  existir pasta/página para ela: sem página, o nó aparece normal no grafo,
+#  só que sem link para material (é uma disciplina só para o mapa).
+#
+#  id          Nome curto, sem espaços nem acentos. Se a disciplina tem página
+#              em content/docs/, use exatamente o nome da pasta dela (ex.: eda,
+#              lab-prog2): o nó passa a abrir o material e usa o título e a
+#              descrição da página. É também o nome usado em `prereq` das outras.
+#  nome        Nome que aparece no nó. Obrigatório só quando NÃO existe pasta
+#              (com pasta, vale o título da página; se escrever aqui, este vence).
+#  periodo     1 a 9. Optativa: 0 (ou apague a linha). Com pasta em
+#              docs/NN-periodo/ ou docs/optativas/, o período vem de lá e esta
+#              linha é opcional.
+#  prereq      Lista de `id` das disciplinas que vêm antes. Vazio ou apagado =
+#              sem pré-requisito.
+#  descricao   (opcional) Frase mostrada no painel quando não há página.
+#
+#  Exemplo de disciplina SEM pasta:
+#    - id: calculo-vetorial
+#      nome: Cálculo Vetorial
+#      periodo: 4
+#      prereq: [calculo2, algebra-linear]
+#
+#  Um `prereq:` escrito no front matter de uma página ainda funciona, mas só
+#  quando a disciplina não está listada aqui. Este arquivo tem prioridade.
+#  O build avisa no terminal se algum `prereq` apontar para um id que não existe.
+# ─────────────────────────────────────────────────────────────────────────────
+disciplinas:
+  # Grade "Ciência da Computação - Novo" (NEPE). Disciplinas com pasta em content/docs/
+  # usam o nome da pasta como id. Linhas "prereq: []" = ainda não preenchido (os pré-requisitos
+  # do NEPE só aparecem ao passar o mouse na disciplina).
+  # As "Optativa" genéricas da grade ficam de fora: optativas reais entram com periodo: 0.
+
+  # 1º período
+  - id: fmcc1
+  - id: introducao-a-computacao
+  - id: lab-p1
+  - id: prog1
+  - id: direito
+
+  # 2º período
+  - id: fmcc2
+    prereq: [fmcc1]
+  - id: calculo1
+    prereq: [introducao-a-computacao]
+  - id: lab-prog2
+    prereq: [prog1]
+  - id: prog2
+    prereq: [prog1]
+  - id: economia
+
+  # 3º período
+  - id: logica
+    prereq: [fmcc2]
+  - id: calculo2
+    prereq: [calculo1]
+  - id: leda
+    prereq: [prog2, lab-prog2]
+  - id: eda
+    prereq: [prog2, lab-prog2]
+  - id: algebra-linear
+    prereq: [fmcc2]
+
+  # 4º período
+  - id: teoria-da-computacao
+    nome: Teoria da Computação
+    periodo: 4
+  - id: introducao-a-probabilidade
+    nome: Introdução à Probabilidade
+    periodo: 4
+  - id: oac
+    nome: Organização e Arquitetura de Computadores
+    periodo: 4
+  - id: banco-de-dados-1
+    nome: Banco de Dados 1
+    periodo: 4
+  - id: teoria-dos-grafos
+    nome: Teoria dos Grafos
+    periodo: 4
+  - id: plp
+    nome: Paradigmas de Linguagens de Programação
+    periodo: 4
+
+  # 5º período
+  - id: inteligencia-artificial
+    nome: Inteligência Artificial
+    periodo: 5
+  - id: estatistica-aplicada
+    nome: Estatística Aplicada
+    periodo: 5
+  - id: sistemas-operacionais
+    nome: Sistemas Operacionais
+    periodo: 5
+  - id: projeto-de-software
+    nome: Projeto de Software
+    periodo: 5
+  - id: engenharia-de-software
+    nome: Engenharia de Software
+    periodo: 5
+  - id: redes-de-computadores
+    nome: Redes de Computadores
+    periodo: 5
+
+  # 6º período
+  - id: programacao-concorrente
+    nome: Programação Concorrente
+    periodo: 6
+  - id: analise-de-sistemas
+    nome: Análise de Sistemas
+    periodo: 6
+  - id: ata
+    nome: Análise e Técnicas de Algoritmos
+    periodo: 6
+
+  # 7º período
+  - id: compiladores
+    nome: Compiladores
+    periodo: 7
+  - id: metodologia-cientifica
+    nome: Metodologia Científica
+    periodo: 7
+
+  # 8º período
+  - id: lingua-portuguesa
+    nome: Língua Portuguesa
+    periodo: 8
+  - id: projeto-em-computacao-1
+    nome: Projeto em Computação 1
+    periodo: 8
+
+  # 9º período
+  - id: tcc
+    nome: Trabalho de Conclusão de Curso
+    periodo: 9
+  - id: projeto-em-computacao-2
+    nome: Projeto em Computação 2
+    periodo: 9

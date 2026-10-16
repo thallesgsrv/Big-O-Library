@@ -7,7 +7,6 @@ autores:
   - thallesgsrv
 baseadoEm:
   - rodrigocohen
-prereq: [introducao-a-computacao]
 date: 2026-09-29
 ---
 

@@ -1,0 +1,17 @@
+{{- /* Sumário recolhível (abaixo de 1280 px). Mesmo markup do .TableOfContents do Hugo (níveis 2 e 3), mas com as
+       fórmulas dos títulos renderizadas (ver bo-math-titulo.html). Chamado por bo-pagina.html. */ -}}
+{{- $headings := index (partial "utils/headings.html" .) "headings" -}}
+<nav id="TableOfContents" aria-label="Nesta página">
+  {{- range $headings -}}
+    {{- with .Headings -}}<ul>{{ template "bo-toc-li" . }}</ul>{{- end -}}
+  {{- end -}}
+</nav>
+{{- define "bo-toc-li" -}}
+  {{- range . -}}
+    {{- if and .Title (le (int .Level) 3) -}}
+      <li><a href="#{{ anchorize .ID }}">{{ partial "bo-math-titulo.html" .Title }}</a>
+      {{- with .Headings }}{{ $f := where . "Level" "le" 3 }}{{ with $f }}<ul>{{ template "bo-toc-li" . }}</ul>{{ end }}{{ end -}}
+      </li>
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

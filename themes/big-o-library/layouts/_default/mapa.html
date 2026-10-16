@@ -1,20 +1,63 @@
-{{- /* /lab/mapa: o curso como grafo. Cada disciplina do acervo vira um nó; as arestas vêm do `prereq:` do front matter
-       (lista de pastas, ex.: prereq: [prog2, lab-prog2]). Pré-requisito sem página vira nó pontilhado ("sem material ainda").
-       Layout e interação em JS (SVG). CSS: .bo-m* em custom.css */ -}}
+{{- /* /lab/mapa: o curso como grafo. A fonte é data/disciplinas.yaml (id, nome, periodo, prereq): cada entrada vira um nó,
+       com ou sem pasta em content/docs/. Se existe a pasta (docs/NN-periodo/<id> ou docs/optativas/<id>), o nó abre a página
+       e usa o título/descrição dela. Sem pasta, o nó é normal, só sem link. Pontilhado só para `prereq` com id inexistente (provável erro de digitação). Disciplinas com pasta que não estão
+       no YAML também entram (com `prereq:` do front matter, se houver). Layout e interação em JS (SVG). CSS: .bo-m* em custom.css */ -}}
 {{ define "main" }}
 {{ partial "sidebar.html" (dict "context" .) }}
+{{- /* 1) o YAML, indexado por id */ -}}
+{{- $yml := dict -}}
+{{- with hugo.Data.disciplinas -}}
+  {{- range .disciplinas -}}
+    {{- $d := . -}}
+    {{- with .id }}{{ $yml = merge $yml (dict (printf "%v" .) $d) }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+{{- /* 2) as páginas reais */ -}}
 {{- $nodes := slice -}}
+{{- $seen := dict -}}
 {{- range sort site.Pages "Path" -}}
   {{- $pg := . -}}
   {{- with findRESubmatch `^/docs/(?:0?([1-9])-periodo|(optativas))/([^/]+)$` $pg.Path 1 -}}
     {{- $g := index . 0 -}}
+    {{- $slug := index $g 3 -}}
+    {{- $e := index $yml $slug -}}
+    {{- $raw := $pg.Params.prereq -}}
+    {{- if $e }}{{ $raw = $e.prereq }}{{ end -}}
     {{- $pre := slice -}}
-    {{- with $pg.Params.prereq -}}
+    {{- with $raw -}}
       {{- if reflect.IsSlice . }}{{ range . }}{{ $pre = $pre | append (printf "%v" .) }}{{ end }}{{ else }}{{ $pre = slice (printf "%v" .) }}{{ end -}}
     {{- end -}}
     {{- $per := 0 -}}
     {{- if index $g 1 }}{{ $per = int (index $g 1) }}{{ end -}}
-    {{- $nodes = $nodes | append (dict "slug" (index $g 3) "title" $pg.Title "url" $pg.RelPermalink "per" $per "desc" ($pg.Description | default "") "pre" $pre "w" $pg.Weight) -}}
+    {{- $title := $pg.Title -}}
+    {{- $desc := $pg.Description | default "" -}}
+    {{- if $e }}
+      {{- with $e.nome }}{{ $title = . }}{{ end -}}
+      {{- with $e.descricao }}{{ $desc = . }}{{ end -}}
+    {{- end -}}
+    {{- $nodes = $nodes | append (dict "slug" $slug "title" $title "url" $pg.RelPermalink "per" $per "desc" $desc "pre" $pre "w" $pg.Weight "ghost" false) -}}
+    {{- $seen = merge $seen (dict $slug true) -}}
+  {{- end -}}
+{{- end -}}
+{{- /* 3) entradas do YAML sem pasta: nós normais, só que sem link (url vazia) */ -}}
+{{- range hugo.Data.disciplinas.disciplinas -}}
+  {{- $id := printf "%v" .id -}}
+  {{- if and .id (not (index $seen $id)) -}}
+    {{- $pre := slice -}}
+    {{- range .prereq }}{{ $pre = $pre | append (printf "%v" .) }}{{ end -}}
+    {{- $nome := .nome | default (humanize (replace $id "-" " ")) -}}
+    {{- if not .nome }}{{ warnf "mapa: a disciplina %q (data/disciplinas.yaml) não tem pasta nem `nome`; usando %q." $id $nome }}{{ end -}}
+    {{- if not .periodo }}{{ if ne (printf "%v" .periodo) "0" }}{{ warnf "mapa: a disciplina %q (data/disciplinas.yaml) não tem pasta nem `periodo`; vai para optativas." $id }}{{ end }}{{ end -}}
+    {{- $nodes = $nodes | append (dict "slug" $id "title" $nome "url" "" "per" (int .periodo) "desc" (.descricao | default "") "pre" $pre "w" 0 "ghost" false) -}}
+    {{- $seen = merge $seen (dict $id true) -}}
+  {{- end -}}
+{{- end -}}
+{{- /* 4) avisos: pré-requisito que não existe em lugar nenhum (provável erro de digitação) */ -}}
+{{- range $nodes -}}
+  {{- $n := . -}}
+  {{- range .pre -}}
+    {{- if not (index $seen .) }}{{ warnf "mapa: %q tem pré-requisito %q, que não existe em data/disciplinas.yaml nem em content/docs/. Ele vai aparecer pontilhado; confira o id." $n.slug . }}{{ end -}}
+    {{- if eq . $n.slug }}{{ warnf "mapa: %q lista a si mesma como pré-requisito." $n.slug }}{{ end -}}
   {{- end -}}
 {{- end -}}
 <main class="bo-wrap" id="content">
@@ -48,7 +91,7 @@
 
     /* nós + fantasmas */
     var by = {}, list = [];
-    RAW.forEach(function (n) { n.ghost = false; by[n.slug] = n; list.push(n); });
+    RAW.forEach(function (n) { n.ghost = !!n.ghost; by[n.slug] = n; list.push(n); });
     RAW.forEach(function (n) {
       n.pre.forEach(function (s) {
         if (!by[s]) { by[s] = { slug: s, title: human(s), url: "", per: Math.max(1, (n.per || 9) - 1), desc: "", pre: [], ghost: true }; list.push(by[s]); }
@@ -149,7 +192,7 @@
     sel.addEventListener("change", function () { choose(sel.value); });
 
     var perLabel = function (n) { return n.per ? n.per + "º período" : "optativa"; };
-    var chip = function (n) { return n.ghost ? '<li><span class="bo-m-chip is-ghost">' + esc(n.title) + '<small>sem material</small></span></li>' : '<li><a class="bo-m-chip" href="' + esc(n.url) + '">' + esc(n.title) + '</a></li>'; };
+    var chip = function (n) { return n.ghost ? '<li><span class="bo-m-chip is-ghost">' + esc(n.title) + '<small>sem material</small></span></li>' : !n.url ? '<li><span class="bo-m-chip">' + esc(n.title) + '</span></li>' : '<li><a class="bo-m-chip" href="' + esc(n.url) + '">' + esc(n.title) + '</a></li>'; };
 
     function choose(slug) {
       var n = by[slug], anc = closure(slug, up), desc = closure(slug, down);
@@ -185,14 +228,14 @@
         '</section><section class="bo-m-box"><h3>O que ela libera</h3>' +
         (give.length ? '<ul class="bo-m-chips bo-m-lib">' + give.map(chip).join("") + '</ul>' : '<p class="bo-m-empty">Nada depende dela (ainda).</p>') +
         '</section></div>' +
-        '<div class="bo-btns">' + (n.ghost ? '<a class="bo-b2" href="' + CONTRIBUIR + '">escrever o material desta disciplina</a>' : '<a class="bo-b1" href="' + esc(n.url) + '">abrir material →</a>') + '</div></div>';
+        '<div class="bo-btns">' + (n.ghost ? '<a class="bo-b2" href="' + CONTRIBUIR + '">escrever o material desta disciplina</a>' : n.url ? '<a class="bo-b1" href="' + esc(n.url) + '">abrir material →</a>' : '') + '</div></div>';
       /* leva o nó escolhido para dentro da área visível do scroll horizontal */
       var sc = document.getElementById("bo-m-scroll"), p = pos[slug];
       if (sc && sc.scrollWidth > sc.clientWidth) sc.scrollTo({ left: Math.max(0, p.x - 24), behavior: "smooth" });
     }
 
     /* começa com a disciplina que mais depende de outras (mostra o grafo funcionando) */
-    var start = list.filter(function (n) { return !n.ghost; }).sort(function (a, b) { return Object.keys(closure(b.slug, up)).length - Object.keys(closure(a.slug, up)).length; })[0];
+    var start = list.filter(function (n) { return !n.ghost; }).sort(function (a, b) { return Object.keys(closure(b.slug, up)).length - Object.keys(closure(a.slug, up)).length; })[0] || list[0];
     choose(start.slug);
 
     /* avisa que o grafo rola para os lados quando ele não cabe na tela */

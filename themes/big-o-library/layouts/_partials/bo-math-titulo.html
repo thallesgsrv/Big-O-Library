@@ -1,0 +1,20 @@
+{{- /* Texto de título com fórmulas `$...$` já renderizadas (KaTeX), para o sumário (TOC).
+       O .TableOfContents e o .Fragments entregam o título cru ("Exemplo 1: $\int x\,dx$"); aqui as fórmulas viram HTML.
+       Se o número de delimitadores for ímpar (ex.: "R$ 5"), devolve o texto como está. Entrada: string do título. */ -}}
+{{- $s := . | safeHTML | plainify | htmlUnescape -}}
+{{- /* `\( ... \)` vale como `$ ... $` (os dois delimitadores existem no hugo.yaml) */ -}}
+{{- $s = replace (replace $s "\\(" "$") "\\)" "$" -}}
+{{- $parts := split $s "$" -}}
+{{- if or (lt (len $parts) 3) (eq (mod (len $parts) 2) 0) -}}
+  {{- $s -}}
+{{- else -}}
+  {{- range $i, $t := $parts -}}
+    {{- if eq (mod $i 2) 1 -}}
+      {{- with try (transform.ToMath $t (dict "output" "html" "displayMode" false)) -}}
+        {{- if .Err }}{{ printf "$%s$" $t }}{{ else }}{{ .Value }}{{ end -}}
+      {{- end -}}
+    {{- else -}}
+      {{- $t -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

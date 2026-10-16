@@ -74,7 +74,7 @@ date: 2026-09-29
 | `autores` | sim | Lista de usuários do GitHub de quem escreveu a página, sem o `@`. Aparece no fim da página, com foto e link para o perfil. |
 | `date` | sim | Data em que a página foi criada, no formato `AAAA-MM-DD`. Nunca use uma data futura: o Hugo não publica páginas com data no futuro. |
 | `summary` | não | Texto um pouco maior, exibido logo abaixo do título da página. |
-| `prereq` | não | Só em disciplinas: lista das pastas das disciplinas que vêm antes (ex.: `prereq: [prog2, lab-prog2]`). Alimenta o [mapa de pré-requisitos](../lab/mapa/). Se a disciplina citada ainda não tem página, ela aparece no mapa pontilhada, como convite para alguém escrevê-la. |
+| `prereq` | não | **Não vai mais aqui.** Os pré-requisitos ficam em `data/disciplinas.yaml` (veja "Mapa de pré-requisitos" abaixo). Um `prereq:` no front matter só vale se a disciplina não estiver listada no YAML. |
 | `baseadoEm` | não | Lista de sábios do [Conselho](../conselho/) (pelo `id` ou `github` dele em `data/conselho.yaml`) em cujo material esta página se baseia. Aparece nos créditos e no card do sábio. |
 | `rotulo` | não | Só em páginas que têm subpáginas (por exemplo, uma disciplina com estágios): título da lista de cards. Padrão: `Disciplinas`. |
 
@@ -134,6 +134,26 @@ content/docs/03-periodo/eda/
 - Se a disciplina se organiza por provas ou unidades, crie uma pasta por **estágio** (`estagio1`, `estagio2`…) com o próprio `_index.md`. Use `rotulo` no cabeçalho para trocar o título da lista de cards (por exemplo, `rotulo: Tópicos`).
 - Cada tópico é uma página independente: tem o próprio `title`, `description`, `autores` e `date`.
 - Tópicos de ensino funcionam melhor com: explicação intuitiva primeiro, fórmula depois, exemplo resolvido, **exercícios com gabarito fechado** e, se couber, um quiz ou uma animação.
+
+## Mapa de pré-requisitos
+
+O [mapa de pré-requisitos](../lab/mapa/) não lê as pastas: ele lê o arquivo **`data/disciplinas.yaml`**, no mesmo estilo do `data/conselho.yaml`. Cada bloco é uma disciplina do curso, **com ou sem pasta** em `content/docs/`.
+
+```yaml
+disciplinas:
+  - id: eda                    # igual ao nome da pasta (docs/03-periodo/eda)
+    prereq: [prog2, lab-prog2] # ids das disciplinas que vêm antes
+
+  - id: calculo-vetorial       # sem pasta: precisa de nome e período
+    nome: Cálculo Vetorial
+    periodo: 4
+    prereq: [calculo2, algebra-linear]
+```
+
+- **Com pasta**: basta o `id` (o nome da pasta). O título, a descrição, o período e o link vêm da página.
+- **Sem pasta**: informe `nome` e `periodo`. O nó aparece normal no grafo, só que sem link para material, e não é preciso criar arquivo nenhum. Se um dia a pasta for criada, é só usar o mesmo `id` e o nó passa a abrir a página.
+- `prereq` é uma lista de `id`. Sem pré-requisito, deixe vazio ou apague a linha. Optativa: `periodo: 0`.
+- Se um `prereq` apontar para um `id` que não existe, o `hugo server` avisa no terminal e o nó aparece pontilhado (geralmente é erro de digitação).
 
 ## Como listar os materiais
 

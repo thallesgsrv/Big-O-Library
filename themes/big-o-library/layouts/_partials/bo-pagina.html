@@ -18,7 +18,7 @@
         {{ if and (ne .Params.toc false) .Fragments.Headings }}
         <details class="bo-toc-m">
           <summary>Sumário desta página</summary>
-          {{ .TableOfContents | replaceRE `<nav id="TableOfContents">` `<nav id="TableOfContents" aria-label="Nesta página">` | safeHTML }}
+          {{ partial "bo-toc-mobile.html" . }}
         </details>
         {{ end }}
 
