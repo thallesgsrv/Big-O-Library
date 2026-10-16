@@ -228,7 +228,7 @@
         '</section><section class="bo-m-box"><h3>O que ela libera</h3>' +
         (give.length ? '<ul class="bo-m-chips bo-m-lib">' + give.map(chip).join("") + '</ul>' : '<p class="bo-m-empty">Nada depende dela (ainda).</p>') +
         '</section></div>' +
-        '<div class="bo-btns">' + (n.ghost ? '<a class="bo-b2" href="' + CONTRIBUIR + '">escrever o material desta disciplina</a>' : n.url ? '<a class="bo-b1" href="' + esc(n.url) + '">abrir material →</a>' : '') + '</div></div>';
+        '<div class="bo-btns">' + (n.ghost ? '<a class="bo-b2" href="' + CONTRIBUIR + '">escrever o material desta disciplina</a>' : n.url ? '<a class="bo-b1" href="' + esc(n.url) + '">abrir material →</a>' : '<p class="bo-m-empty">Disciplina só no mapa: não há material dela no site.</p>') + '</div></div>';
       /* leva o nó escolhido para dentro da área visível do scroll horizontal */
       var sc = document.getElementById("bo-m-scroll"), p = pos[slug];
       if (sc && sc.scrollWidth > sc.clientWidth) sc.scrollTo({ left: Math.max(0, p.x - 24), behavior: "smooth" });
