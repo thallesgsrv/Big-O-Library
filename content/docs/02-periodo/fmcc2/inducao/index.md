@@ -1,7 +1,7 @@
 ---
 title: Indução matemática
 weight: 2
-description: Como provar que algo vale para todos os números naturais: base, hipótese e passo.
+description: Como provar que algo vale para todos os números naturais, base, hipótese e passo.
 autores:
   - thallesgsrv
 date: 2026-10-16
