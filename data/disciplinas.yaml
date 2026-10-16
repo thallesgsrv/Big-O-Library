@@ -68,6 +68,8 @@ disciplinas:
   - id: calculo2
     prereq: [calculo1]
   - id: leda
+    nome: Laboratório de Estruturas de Dados
+    periodo: 3
     prereq: [prog2, lab-prog2]
   - id: eda
     prereq: [prog2, lab-prog2]
