@@ -12,8 +12,7 @@ date: 2026-09-30
 
 A disciplina de Programação 2 (P2) aprofunda os conceitos de programação, introduzindo
 estruturas de dados mais complexas e boas práticas de desenvolvimento. Esta página dá destaque à base teórica: classes e objetos, relações entre classes, estruturas de dados,
-padrões de design, herança e polimorfismo. Se você está interessado na parte prática desta
-disciplina, você pode acessar a página de [Laboratório de Programação 2](../lab-prog2/index.md), com exercícios e projetos para aplicar os conceitos aprendidos.
+padrões de design, herança e polimorfismo.
 
 ## Caixa de Conhecimentos
 
