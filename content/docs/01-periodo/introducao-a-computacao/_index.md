@@ -12,9 +12,8 @@ rotulo: Conteúdos
 
 Visão geral do curso de Ciência da Computação e de como um sistema de computação é construído, do bit ao hardware e ao software.
 
-## Conteúdo previsto
+## Conteúdo
 
-- visão geral do curso, aplicações do computador e evolução histórica
 - a informação e sua representação
 - sistemas de numeração
 - circuitos digitais: álgebra de Boole, portas lógicas e circuitos combinacionais

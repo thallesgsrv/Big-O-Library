@@ -34,11 +34,11 @@ Sem Git instalado? Dá para fazer tudo pelo editor do próprio GitHub (botão **
 ```text
 content/docs/
 ├── 01-periodo/                  ← um período = pasta "NN-periodo" (01 a 09)
-│   ├── _index.md                ← página do período (já existe, não mexa)
+│   ├── _index.md                ← página do período (nos períodos 1 a 3 já existe; no primeiro material de outro período, crie com `title: 4º período` e `weight: 4`)
 │   └── prog1/                   ← uma disciplina = uma pasta
 │       └── index.md             ← o conteúdo da disciplina
 ├── 02-periodo/
-│   └── prog2/index.md
+│   └── fmcc2/_index.md
 └── optativas/
     └── algoritmos-avancados/    ← disciplina com subpáginas usa _index.md
         ├── _index.md

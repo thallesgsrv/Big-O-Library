@@ -12,17 +12,13 @@ rotulo: Conteúdos
 
 ## Sobre
 
-Aprofunda o raciocínio formal: como provar que algo é verdadeiro, como a indução e a recursão se relacionam e como a teoria dos números sustenta hash, criptografia e correção de erros.
+Aprofunda o raciocínio formal: como provar que algo é verdadeiro, como funciona a indução e como a teoria dos números sustenta hash e criptografia.
 
-## Conteúdo previsto
+## Conteúdo
 
 - técnicas de demonstração matemática
-- indução e recursividade
-- aritmética modular, divisibilidade, inteiros e números primos
-- aplicações da teoria dos números
-- grupos, anéis, corpos e polinômios
-- detecção e correção de erros
-- funções geradoras
+- indução matemática
+- divisibilidade e aritmética modular
 
 ## Como estudar
 

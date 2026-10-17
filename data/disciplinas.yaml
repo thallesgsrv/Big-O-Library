@@ -6,7 +6,7 @@
 #
 #  id          Nome curto, sem espaços nem acentos. Se a disciplina tem página
 #              em content/docs/, use exatamente o nome da pasta dela (ex.: eda,
-#              lab-prog2): o nó passa a abrir o material e usa o título e a
+#              calculo1): o nó passa a abrir o material e usa o título e a
 #              descrição da página. É também o nome usado em `prereq` das outras.
 #  nome        Nome que aparece no nó. Obrigatório só quando NÃO existe pasta
 #              (com pasta, vale o título da página; se escrever aqui, este vence).
@@ -28,9 +28,6 @@
 #  O build avisa no terminal se algum `prereq` apontar para um id que não existe.
 # ─────────────────────────────────────────────────────────────────────────────
 disciplinas:
-  # Grade "Ciência da Computação - Novo" (NEPE). Disciplinas com pasta em content/docs/
-  # usam o nome da pasta como id. Linhas "prereq: []" = ainda não preenchido (os pré-requisitos
-  # do NEPE só aparecem ao passar o mouse na disciplina).
   # As "Optativa" genéricas da grade ficam de fora: optativas reais entram com periodo: 0.
 
   # 1º período
@@ -56,6 +53,9 @@ disciplinas:
     periodo: 2
     prereq: [prog1, lab-p1]
   - id: prog2
+    nome: Programação 2
+    periodo: 2
+    descricao: Orientação a objetos e estruturas de dados.
     prereq: [prog1, lab-p1]
   - id: economia
     nome: Economia

@@ -31,7 +31,7 @@ Sobre dedicação, vale assistir a [Você tem brio?](https://youtu.be/TRPBY_lxJf
 
 ## Conteúdo
 
-Os materiais ficam no [site](https://thallesgsrv.github.io/Big-O-Library/docs/), organizados por período (1º ao 9º) e por optativas. Já há disciplinas dos primeiros períodos e, nas optativas, Algoritmos Avançados com visualizações interativas (BFS, DFS, Dijkstra, Segment Tree, Lazy Propagation e LCA). A lista completa e atualizada está sempre no site.
+Os materiais ficam no [site](https://thallesgsrv.github.io/Big-O-Library/docs/), organizados por período e por optativas. Por enquanto há disciplinas do 1º ao 3º período e, nas optativas, Algoritmos Avançados com visualizações interativas (BFS, DFS, Dijkstra, Segment Tree, Lazy Propagation e LCA). A lista completa e atualizada está sempre no site.
 
 ## Rodando localmente
 
@@ -118,7 +118,7 @@ scripts/                           utilitários (baixar_fontes.py, baixar_vendor
 package.json                       só para recompilar o CSS do tema (mantenedores); contribuir não precisa de Node
 hugo.yaml                          configuração do Hugo
 deploy.sh                          publica o site na branch gh-pages (só mantenedores)
-.github/                           CONTRIBUTING, código de conduta e guia de animações
+.github/                           CONTRIBUTING, código de conduta e guias (animações e quiz)
 ```
 
 Para criar uma animação de algoritmo, veja o [guia de animações](.github/GUIA-ANIMACOES.md).
