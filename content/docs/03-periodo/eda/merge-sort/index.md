@@ -139,7 +139,7 @@ Quando o `merge` é chamado, as duas metades de `v[inicio..fim]` já estão orde
 - **Passo 1, a cópia.** Vamos escrever de volta em `v`, então primeiro guardamos o trecho em `copia` para não perder valores.
 - **Passo 2, os dedos.** `i` aponta para o início da metade esquerda da cópia, `j` para o início da direita e `k` é o lugar de `v` onde o próximo elemento vai ser escrito. O `comecoDireita` marca onde a metade direita começa dentro da cópia.
 - **Passo 3, o laço principal.** Em cada volta comparamos `copia[i]` com `copia[j]`, escrevemos o menor em `v[k]` e avançamos o dedo daquele lado (e o `k`, sempre).
-- **Passo 4, as sobras.** Quando um lado acaba, o outro ainda pode ter elementos, e todos eles são maiores que o que já foi escrito. Basta copiá-los em ordem.
+- **Passo 4, as sobras.** Quando um lado acaba, o outro ainda pode ter elementos, e todos eles são maiores que o que já foi escrito. Basta copiá-los em ordem. Repare que o código só copia as sobras da **esquerda**: se sobrar algo da direita, esses elementos já estão no lugar certo dentro de `v` (o trecho da direita nunca foi sobrescrito antes da hora), então não precisa copiar de novo.
 
 Exemplo: juntando `[2, 8, 9]` e `[1, 3, 10]`, a `copia` é `[2, 8, 9, 1, 3, 10]` e `comecoDireita` vale 3. O dedo `i` começa na posição 0 (valor 2) e o `j` na posição 3 (valor 1). Como 1 é menor, ele vai primeiro para `v`, e assim por diante, igual à tabela lá em cima.
 

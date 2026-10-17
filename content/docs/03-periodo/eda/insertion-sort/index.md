@@ -87,7 +87,7 @@ O insertion sort é **estável**, desde que o `while` use `>` e não `>=`. Com `
 Para entradas grandes e aleatórias, \(n^2\) perde feio para merge sort e quick sort. Mas o insertion sort tem duas virtudes:
 
 - **Arrays quase ordenados.** Se cada elemento está a poucas posições do lugar final, o `while` roda pouco e o algoritmo se aproxima de \(\Theta(n)\).
-- **Arrays pequenos.** A constante é baixa e o código é simples. Por isso implementações de ordenação de bibliotecas reais costumam usar insertion sort para os pedaços pequenos dentro de um algoritmo mais sofisticado (o Timsort, usado em Python e Java, é assim).
+- **Arrays pequenos.** A constante é baixa e o código é simples. Por isso implementações de ordenação de bibliotecas reais costumam usar insertion sort para os pedaços pequenos dentro de um algoritmo mais sofisticado (o Timsort, usado pelo `sorted` do Python e pelo `Arrays.sort` de objetos em Java, é assim).
 
 ## Exercício
 

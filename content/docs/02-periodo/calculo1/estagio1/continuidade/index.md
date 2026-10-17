@@ -11,6 +11,8 @@ date: 2026-10-01
 
 Uma função é **contínua** quando seu gráfico pode ser traçado sem levantar o lápis. Se há um **buraco**, um **salto** ou uma **explosão** (assíntota), há descontinuidade.
 
+Um exemplo do dia a dia: se o custo de produzir um item muda de forma suave com a quantidade, a função é contínua. Se, a partir de certa quantidade, é preciso abrir um novo turno e o custo "salta", a função deixa de ser contínua nesse ponto.
+
 ## 2. Definição
 
 $f$ é contínua em $x=a$ quando:

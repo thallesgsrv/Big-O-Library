@@ -150,7 +150,7 @@ $$
 
 ## Por que \(AB \neq BA\)?
 
-Com números, \(3 \cdot 5 = 5 \cdot 3\). Com matrizes isso **falha**. Uma imagem ajuda: pense em \(B\) como a ação "trocar as duas colunas de lugar". Fazer \(AB\) é aplicar essa troca depois de \(A\); fazer \(BA\) é aplicar antes. Em geral o resultado muda.
+Com números, \(3 \cdot 5 = 5 \cdot 3\). Com matrizes isso **falha**. Uma imagem ajuda: a matriz \(B\) abaixo é uma "embaralhadora". Multiplicar por ela **à direita** troca as colunas de \(A\); multiplicar **à esquerda** troca as linhas. Como são efeitos diferentes, o resultado muda.
 
 Exemplo 6:
 

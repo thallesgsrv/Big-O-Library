@@ -95,7 +95,7 @@ Expandindo e comparando coeficientes de \(x^3, x^2, x, 1\):
 - \(x\): \(4A + C = 0\)
 - constante: \(4B + D = -3\)
 
-Das duas primeiras e da terceira: \(A = C = 0\). Depois \(D = -B\) e \(4B - B = -3\), logo \(B = -1\) e \(D = 1\).
+Da primeira e da terceira equações: \(A = C = 0\). Depois \(D = -B\) e \(4B - B = -3\), logo \(B = -1\) e \(D = 1\).
 
 $$
 \int\left(\frac{-1}{x^2+1} + \frac{1}{x^2+4}\right)dx = -\operatorname{arctg} x + \frac12\operatorname{arctg}\frac{x}{2} + C

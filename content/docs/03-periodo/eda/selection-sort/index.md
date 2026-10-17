@@ -15,14 +15,14 @@ O selection sort é o jeito mais direto de ordenar: ache o menor elemento, coloq
 
 Imagine uma fila de pessoas que você quer organizar por altura. Você olha a fila inteira, escolhe a mais baixa e manda ela para o começo. Depois ignora essa pessoa, olha o resto, escolhe a mais baixa de novo e manda para a segunda posição. Em cada rodada, o pedaço já arrumado cresce em um.
 
-Vamos ordenar \([29, 10, 14, 37, 13]\). A barra `|` separa a parte já ordenada da que ainda falta.
+Vamos ordenar \([29, 10, 14, 37, 13]\). A barra `|` separa a parte já ordenada da que ainda falta. Os números entre parênteses são **índices** (contando do 0, como no código).
 
 | Rodada | Menor do que falta | Array depois da troca |
 |---|---|---|
-| 1 | 10 (posição 1) | `10 \| 29 14 37 13` |
-| 2 | 13 (posição 4) | `10 13 \| 14 37 29` |
-| 3 | 14 (posição 2) | `10 13 14 \| 37 29` |
-| 4 | 29 (posição 4) | `10 13 14 29 \| 37` |
+| 1 | 10 (índice 1) | `10 \| 29 14 37 13` |
+| 2 | 13 (índice 4) | `10 13 \| 14 37 29` |
+| 3 | 14 (índice 2) | `10 13 14 \| 37 29` |
+| 4 | 29 (índice 4) | `10 13 14 29 \| 37` |
 
 Na rodada 3 o menor já estava no lugar, então a troca não mudou nada. Depois da rodada 4, o último elemento só pode ser o maior, não precisa de rodada própria.
 

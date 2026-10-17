@@ -92,7 +92,7 @@ A segunda cláusula é válida ($q$ e $\neg q$), mas a **primeira não** ($\{p,\
 $$
 \neg(T\lor E)\lor T\ \Rightarrow\ (\neg T\land\neg E)\lor T\ \Rightarrow\ (\neg T\lor T)\land(\neg E\lor T)
 $$
-Cláusulas: $\{t,\neg t\}$ (válida) e $\{t,\neg e\}$ (**não** válida). **Não é válida.** Contra-exemplo: $T=F,E=V$ (executa, mas não passa nos testes).
+Cláusulas: $\{T,\neg T\}$ (válida) e $\{T,\neg E\}$ (**não** válida). **Não é válida.** Contra-exemplo: $T=F,E=V$ (executa, mas não passa nos testes).
 
 **Exemplo 3.** $\neg(p\to\neg(q\land(\neg p\to q)))$.
 

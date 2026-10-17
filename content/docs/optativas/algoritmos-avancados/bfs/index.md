@@ -1,6 +1,6 @@
 ---
 title: Busca em Largura (BFS)
-weight: 2
+weight: 1
 description: Explora o grafo por camadas e acha o menor caminho em número de arestas.
 autores:
   - thallesgsrv

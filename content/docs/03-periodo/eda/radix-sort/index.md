@@ -6,6 +6,7 @@ autores:
   - thallesgsrv
 date: 2026-10-09
 ---
+
 ## Sobre
 
 O counting sort sofre quando os valores são grandes. Ordenar números de até 6 dígitos exigiria um array de contagem de um milhão de posições. O radix sort contorna isso olhando **um dígito de cada vez**: em vez de um intervalo gigante, usa vários intervalos minúsculos (0 a 9).
@@ -22,7 +23,7 @@ Para \([531, 82, 405, 217, 90, 346]\):
 | 2 | dezenas | 4**0**5, 2**1**7, 5**3**1, 3**4**6, **8**2, **9**0 |
 | 3 | centenas | 82, 90, 217, 346, 405, 531 |
 
-Na passada 2, os números sem dezena, como 82 e 90, entram com dígito \(8\) e \(9\) de dezena, e o 405 entra com \(0\). Na passada 3, 82 e 90 têm centena \(0\).
+Número que não tem aquele dígito entra com \(0\) à esquerda. Na passada 2, o 405 tem dezena \(0\). Na passada 3, o 82 e o 90 não têm centena, então entram como 082 e 090, com centena \(0\).
 
 ## Por que funciona (e onde a estabilidade entra)
 
@@ -100,7 +101,7 @@ Um cuidado: \(d\) não é de graça. O número de dígitos de \(m\) em base \(b\
 
 ## Estabilidade e memória
 
-É **estável**, herdando isso do counting sort interno. Não é in-place: precisa do array `saida` de tamanho \(n\), então usa \(O(n + b)\) de memória extra.
+É **estável**, herdando isso do counting sort interno. Não é in-place: precisa do array `auxiliar` de tamanho \(n\), então usa \(O(n + b)\) de memória extra.
 
 ## Limitações
 

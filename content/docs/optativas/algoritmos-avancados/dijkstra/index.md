@@ -1,6 +1,6 @@
 ---
 title: Algoritmo de Dijkstra
-weight: 1
+weight: 3
 description: Menor caminho a partir de uma origem em grafos com pesos não negativos.
 autores:
   - thallesgsrv

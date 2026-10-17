@@ -18,7 +18,7 @@ Cálculo 2 dá continuidade a Cálculo 1, aprofundando o estudo de integrais e s
 
 - [Livro: George B. Thomas, Volume 1](https://1drv.ms/b/c/975ec841994373bd/IQA8MT_1sCkHQo_5g_n7o7vfAUja4t0PPYS07y3467l5Q1o?e=eLSJzg)
 - [Livro: George B. Thomas, Volume 2](https://1drv.ms/b/c/975ec841994373bd/IQAf7rpIH4PNTpSyH-SJgRUOAZL_E-ef89MidWj-mTikbBs?e=HJZb0U)
-- [Livro: James Stewart, Volume 2](https://1drv.ms/b/c/975ec841994373bd/IQAf7rpIH4PNTpSyH-SJgRUOAZL_E-ef89MidWj-mTikbBs?e=HJZb0U)
+- [Livro: James Stewart, Volume 2](https://1drv.ms/b/c/975ec841994373bd/IQB4NhjxrB4rSrZ4DvYvG9WDAdY8z3Cjuab_ZTf9HyW0b3k?e=uohXb8)
 
 ### Estágio 1
 

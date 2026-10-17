@@ -6,6 +6,7 @@ autores:
   - thallesgsrv
 date: 2026-10-09
 ---
+
 ## Sobre
 
 O quick sort também é divisão e conquista, mas com uma inversão em relação ao merge sort. No merge sort, a divisão é boba (corta ao meio) e o trabalho está em juntar. No quick sort, o trabalho está em dividir, e juntar não custa nada.
@@ -44,21 +45,19 @@ Veja com \([8, 3, 6, 2, 9, 1, 5]\), pivô \(= 5\):
 O 5 está na posição 3, com \([3, 2, 1]\) à esquerda e \([9, 6, 8]\) à direita. A partir daí, ninguém mais precisa mexer no 5.
 
 ```java
-static int particiona(int[] v, int left, int right) {
-    int range = right - left + 1;
-    int rand = (int)(Math.random() * range) + left;	
-    swap(v,left,rand);
-    int pivot = v[left];
-    int i = left;
-    
-    for(int j = left + 1; j <= right; j++) {
-        if(v[j] <= pivot) {
+static int particiona(int[] v, int esq, int dir) {
+    int pivo = v[dir];     // o pivô é o último elemento
+    int i = esq - 1;       // fim da região "menores ou iguais ao pivô"
+
+    for (int j = esq; j < dir; j++) {
+        if (v[j] <= pivo) {
             i++;
-            swap(v,i,j);
+            troca(v, i, j);
         }
     }
-    swap(v, left, i);
-    return i;
+
+    troca(v, i + 1, dir);  // coloca o pivô logo depois da região
+    return i + 1;          // posição final do pivô
 }
 ```
 
@@ -73,18 +72,18 @@ O **i** marca o fim da região dos menores ou iguais ao pivô e o **j** varre o 
 ## O quick sort
 
 ```java
-static void quick(int[] v, int left, int right) {
-    if (left < right) {
-        int ipivot = particiona(v, left, right);
-        quick(v, left, ipivot-1);
-        quick(v, ipivot+1, right);
+static void quickSort(int[] v, int esq, int dir) {
+    if (esq < dir) {
+        int p = particiona(v, esq, dir);
+        quickSort(v, esq, p - 1);
+        quickSort(v, p + 1, dir);
     }
 }
 
-static void swap(int[] v, int i, int j) {
-    int aux = v[i];
-    v[i] = v[j];
-    v[j] = aux;
+static void troca(int[] v, int a, int b) {
+    int tmp = v[a];
+    v[a] = v[b];
+    v[b] = tmp;
 }
 ```
 
@@ -130,8 +129,8 @@ O pior caso nasceu de um hábito: sempre pegar o último elemento. Duas correç�
 ```java
 static int particionaAleatorio(int[] v, int esq, int dir) {
     int r = esq + (int) (Math.random() * (dir - esq + 1));
-    troca(v, r, dir);
-    return particiona(v, esq, dir);
+    troca(v, r, dir);                 // leva o sorteado para o fim...
+    return particiona(v, esq, dir);   // ...e segue o algoritmo normal
 }
 ```
 

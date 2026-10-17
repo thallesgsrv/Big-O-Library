@@ -51,9 +51,9 @@ Todas as técnicas terminam caindo numa destas integrais básicas:
 
 Siga a ordem dos tópicos: *Substituição trigonométrica* usa as integrais de *Integrais trigonométricas*, e *Testes de comparação* usa o resultado de *Integrais impróprias*.
 
-## Contribuição
+## Para fechar o estágio
 
-Se você tiver materiais úteis desta disciplina (listas, provas, resumos), pode colaborar com a biblioteca e ajudar a enriquecer esta página.
+Depois de todos os tópicos, passe pela página **Estratégia geral e ferramentas extras**: ela ensina a *escolher* a técnica certa e traz problemas misturados, que é como a prova cobra.
 
 ## Listas de exercícios
 
@@ -62,9 +62,6 @@ Se você tiver materiais úteis desta disciplina (listas, provas, resumos), pode
 - [Lista 3: Técnicas de Integração (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQCrWXjb2LvgTZs1Geg2Gy67ATygntpzpxGWZLNAcNdkPF8?e=Qa0uGL)
 - [Lista 4: Impróprias (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQCuYAYu_lmcTYq-GbgWirP2AQjFO2o4ONHRv1orNgcf8Gk?e=iRbMsJ)
 
-## Provas Anteriores
+## Contribuição
 
-
-## Para fechar o estágio
-
-Depois de todos os tópicos, passe pela página **Estratégia geral e ferramentas extras**: ela ensina a *escolher* a técnica certa e traz problemas misturados, que é como a prova cobra.
+Se você tiver materiais úteis desta disciplina (listas, provas, resumos), pode colaborar com a biblioteca e ajudar a enriquecer esta página.

@@ -29,9 +29,9 @@ Os **exercícios** de cada unidade são disponibilizados pelos professores na VM
 
 ### Atenção às restrições dos exercícios
 
-Em algumas unidades, os professores **proíbem funções e recursos prontos do Python** (como fatiamento, `split`, `sum`, `max`, `sorted` e outros), porque o objetivo é você aprender a construir a solução. Os exemplos desta página evitam esses recursos de propósito. Antes de entregar qualquer exercício, **leia o enunciado e veja o que é permitido naquela unidade**.
+Em algumas unidades, os professores **proíbem funções e recursos prontos do Python** (como fatiamento, `split`, `sum`, `max`, `sorted` e outros), porque o objetivo é você aprender a construir a solução. Os exemplos desta página evitam a maioria desses recursos de propósito (usamos só o básico, como `len` e `range`; quando aparece algo como `in`, avisamos). Antes de entregar qualquer exercício, **leia o enunciado e veja o que é permitido naquela unidade**.
 
-## Ever Dream This Man?
+## Como resolver problemas: o método de Pólya
 
 Programar é, antes de tudo, resolver problemas. O livro *How to Solve It*, de George Pólya (há exemplares na biblioteca), é uma recomendação do professor Dalton Serey, e as etapas abaixo vêm dele:
 
@@ -110,7 +110,7 @@ Com `total = 3725`: `3725 // 3600` dá 1 hora, sobram `3725 % 3600 = 125` segund
 
 Textos do prof. Dalton Serey: [Números e variáveis](https://daltonserey.github.io/curso-p1/1.1-numeros-e-variaveis/), [Textos e Strings](https://daltonserey.github.io/curso-p1/1.3-textos-e-strings/), [Conversões de Tipos](https://daltonserey.github.io/curso-p1/1.4-conversoes-de-tipos/), [Saída de Dados](https://daltonserey.github.io/curso-p1/2.2-saida-de-dados/) e [Entrada de Dados](https://daltonserey.github.io/curso-p1/2.3-entrada-de-dados/).
 
-## Unidade 02: decisões, strings,  e índices
+## Unidade 02: decisões, strings e índices
 
 **O que você vai aprender:** fazer o programa seguir caminhos diferentes conforme uma condição, e olhar **dentro** de um texto: descobrir seu tamanho com `len` e acessar cada letra por **índice**.
 
@@ -156,7 +156,7 @@ Os parênteses importam: `and` é avaliado antes de `or`, e eles deixam claro o 
 - **`texto[i]`** devolve o caractere na posição `i`.
 - **Índice negativo** conta de trás para frente: `texto[-1]` é o último caractere, `texto[-2]` o penúltimo.
 - O último índice válido é sempre **`len(texto) - 1`**.
-- **`in`** testa se um trecho aparece no texto: `"nan" in "banana"` é `True`(Normalmente o uso é restrito!).
+- **`in`** testa se um trecho aparece no texto: `"nan" in "banana"` é `True`. (Atenção: em alguns exercícios o `in` em texto é proibido. Veja o enunciado.)
 
 Uma imagem mental que ajuda:
 

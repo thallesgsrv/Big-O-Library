@@ -39,10 +39,6 @@ Por isso, em vez de seguir a divisão da disciplina em estágios, organizamos o 
 - estruturas de dados avançadas
 - padrões de design
 
-## Materiais
-
-Os materiais desta seção podem ser organizados em listas, referências, exercícios e conteúdos complementares conforme forem adicionados.
-
 ## Contribuição
 
 Se você tiver materiais úteis desta disciplina, pode colaborar com a biblioteca e ajudar a enriquecer esta seção.

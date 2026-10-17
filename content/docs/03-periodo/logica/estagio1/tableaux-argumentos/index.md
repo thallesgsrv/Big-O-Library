@@ -76,7 +76,7 @@ Em vez de empilhar várias fórmulas por nó, podemos escrever **uma fórmula po
                  9. i ✗ (contradiz 4)
 ```
 
-Todos os ramos fecham: **argumento válido.** Em português: sem importar Swing, mas usando Swing, o programa não compilaria, e ele compilou. Logo a biblioteca foi importada.
+Todos os ramos fecham: **argumento válido.** Em português: usar Swing sem importar a biblioteca impede a compilação, e o programa compilou usando Swing. Logo a biblioteca foi importada.
 
 ## 4. Exemplos
 
@@ -127,7 +127,7 @@ A cadeia em português: inteligente $\Rightarrow$ fã de tênis $\Rightarrow$ at
 Para o terceiro, a negação da conclusão dá $P,\ Q,\ \neg R$; a premissa $P\to(Q\to R)$ ramifica em $\neg P$ (fecha), e $(Q\to R)$ ramifica em $\neg Q$ (fecha) e $R$ (fecha). Tudo fecha.
 
 > [!NOTE]
-> Existe uma ferramenta online que desenha esses tableaux para você conferir seu trabalho: *mylogichub.com/semantic-tableaux-generator*. Use para **conferir**, mas faça primeiro no papel!
+> Existem geradores online de tableaux (busque por "semantic tableaux generator") que desenham a árvore para você conferir seu trabalho. Use para **conferir**, mas faça primeiro no papel!
 
 ## Resumo
 

@@ -1,6 +1,6 @@
 ---
 title: Propagação Preguiçosa (Lazy Propagation)
-weight: 7
+weight: 5
 description: Atualizações em intervalo na árvore de segmentos em O(log n), adiando o trabalho.
 autores:
   - thallesgsrv

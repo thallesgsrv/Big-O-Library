@@ -135,7 +135,7 @@ Aqui cada chamada dispara **duas** outras, uma para `n - 1` e outra para `n - 2`
 
 Repare que `fib(2)` é calculado duas vezes, `fib(1)` três. A função refaz o mesmo trabalho várias vezes, e isso só piora quando `n` cresce.
 
-\(T(n) = T(n-1) + T(n-2) + c\). Como cada chamada gera duas, a árvore tem altura próxima de \(n\). Isso dá algo na casa de \(2^n\) chamadas, ou seja, exponencial. Por isso `fib(50)` demora minutos e `fib(100)` nunca termina.
+\(T(n) = T(n-1) + T(n-2) + c\). Como cada chamada gera duas, a árvore tem altura próxima de \(n\). O número de chamadas cresce como \(\varphi^n\) (com \(\varphi \approx 1{,}618\)), que é **exponencial** e fica limitado por \(2^n\). Na prática, `fib(50)` já demora dezenas de segundos e `fib(100)` não termina em tempo útil.
 
 ## Um atalho: Teorema Mestre
 

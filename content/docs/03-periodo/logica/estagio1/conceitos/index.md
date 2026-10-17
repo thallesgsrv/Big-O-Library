@@ -110,7 +110,7 @@ Daí a distinção:
 
 **Exemplos:**
 
-- Quick Sort é mais eficiente que Bubble Sort; Busca Binária é mais eficiente que Quick Sort; **logo**, Busca Binária é mais eficiente que Bubble Sort. **Válido** (o "mais eficiente que" encadeia). Se as premissas são verdadeiras, também é correto.
+- Merge Sort é mais eficiente que Bubble Sort; Bubble Sort é mais eficiente que Bogosort; **logo**, Merge Sort é mais eficiente que Bogosort. **Válido** (o "mais eficiente que" encadeia) e, como as premissas são verdadeiras, também **correto**.
 - "Todo programador é nerd. Nerds odeiam videogames. Logo, programadores odeiam videogames." **Válido**, mas **não correto** (premissas falsas).
 - "Se choveu, a rua está molhada. A rua está molhada. Logo, choveu." **Inválido!** A rua pode estar molhada por outro motivo (um caminhão-pipa, por exemplo). Esse erro é tão comum que tem nome: *afirmar o consequente*.
 

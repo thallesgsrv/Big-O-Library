@@ -71,19 +71,21 @@ f(1)=-3,\quad f(2)=0,\quad f(3)=5
 
 Agora, em vez de olhar apenas para os números, vamos colocar esses pontos no plano cartesiano.
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 430" width="100%" role="img" aria-label="Gráfico da função f(x)=x²-4" preserveAspectRatio="xMidYMid meet" style="max-width:100%;height:auto;display:block;">
-<line x1="60" y1="210" x2="660" y2="210" stroke="currentColor" stroke-width="2"></line>
-<line x1="350" y1="30" x2="350" y2="390" stroke="currentColor" stroke-width="2"></line>
-<path d="M90 350 C 160 120 540 120 610 350" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-<circle cx="90" cy="350" r="5" fill="currentColor"></circle>
-<circle cx="176" cy="260" r="5" fill="currentColor"></circle>
-<circle cx="263" cy="220" r="5" fill="currentColor"></circle>
-<circle cx="350" cy="210" r="6" fill="currentColor"></circle>
-<circle cx="437" cy="220" r="5" fill="currentColor"></circle>
-<circle cx="524" cy="260" r="5" fill="currentColor"></circle>
-<circle cx="610" cy="350" r="5" fill="currentColor"></circle>
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 330" width="100%" role="img" aria-label="Gráfico da função f(x)=x²-4: parábola com vértice em (0, -4) cruzando o eixo x em -2 e 2" preserveAspectRatio="xMidYMid meet" style="max-width:100%;height:auto;display:block;">
+<line x1="60" y1="170" x2="660" y2="170" stroke="currentColor" stroke-width="2"></line>
+<line x1="350" y1="10" x2="350" y2="315" stroke="currentColor" stroke-width="2"></line>
+<path d="M89 20 Q 350 560 611 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
+<circle cx="89" cy="20" r="5" fill="currentColor"></circle>
+<circle cx="176" cy="170" r="5" fill="currentColor"></circle>
+<circle cx="263" cy="260" r="5" fill="currentColor"></circle>
+<circle cx="350" cy="290" r="6" fill="currentColor"></circle>
+<circle cx="437" cy="260" r="5" fill="currentColor"></circle>
+<circle cx="524" cy="170" r="5" fill="currentColor"></circle>
+<circle cx="611" cy="20" r="5" fill="currentColor"></circle>
+<text x="362" y="310" font-size="15" fill="currentColor">(0, -4)</text>
+<text x="82" y="160" font-size="15" fill="currentColor">(-2, 0)</text>
+<text x="540" y="160" font-size="15" fill="currentColor">(2, 0)</text>
 </svg>
-<p style="font-size:0.95rem;margin-top:0.5rem">Legenda: eixo horizontal = x; eixo vertical = y; ponto mínimo = (0, -4); pontos marcados = (-2,0), (2,0).</p>
 
 Legenda do gráfico:
 

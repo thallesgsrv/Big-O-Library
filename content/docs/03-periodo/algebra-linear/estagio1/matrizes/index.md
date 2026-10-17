@@ -9,7 +9,7 @@ date: 2026-10-01
 
 ## Sobre
 
-Uma matriz é um conjunto de números reais, dispostos em linhas e colunas, numa certa ordem, e colocados entre colchetes (ou parênteses).
+Uma matriz é uma tabela de números reais, dispostos em linhas e colunas, numa certa ordem, e colocada entre colchetes (ou parênteses).
 
 ## Forma
 
@@ -444,16 +444,16 @@ AB = \begin{bmatrix}
 $$
 
 > [!NOTE]
-> Propriedades: Sejam \(A\), \(B\) e \(C\) matrizes de mesma ordem. Então:
-> - \(IA = AI = A\) (I é matriz identidade que vimos anteriormente. I deve ter mesma ordem de \(A\))
->  \(A \cdot (B + C) = A \cdot B + A \cdot C\) (distributiva a direita)
-> _ \((A + B) \cdot C = A \cdot C + B \cdot C\) (distributiva a esquerda)
-> _ \((AB)C = A(BC)\) (associativa)
-> _ \((AB)^T = B^T A^T\)
-> _ \(0_{m \times n} \cdot A = A \cdot 0 = 0\) (0 é matriz nula de mesma ordem de \(A\))
+> Propriedades (sempre que os produtos e somas estiverem definidos, isto é, com as ordens compatíveis):
+> - \(IA = AI = A\) (\(I\) é a matriz identidade, com a mesma ordem de \(A\))
+> - \(A \cdot (B + C) = A \cdot B + A \cdot C\) (distributiva à direita)
+> - \((A + B) \cdot C = A \cdot C + B \cdot C\) (distributiva à esquerda)
+> - \((AB)C = A(BC)\) (associativa)
+> - \((AB)^T = B^T A^T\) (a ordem **inverte**)
+> - \(0 \cdot A = A \cdot 0 = 0\) (\(0\) é a matriz nula com a ordem adequada)
 
 > [!WARNING]
-> \(AB \neq BA\) (Nem sempre, o produto de matrizes não é comutativo)
+> Em geral, \(AB \neq BA\): o produto de matrizes **não é comutativo**. Às vezes vale a igualdade, mas não dá para contar com isso.
 
 ## Exercícios propostos
 

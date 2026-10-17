@@ -1,6 +1,6 @@
 ---
 title: Lógica para Computação
-weight: 4
+weight: 5
 description: Raciocínio, lógica proposicional, tabela-verdade, tableaux semântico e forma normal conjuntiva.
 rotulo: Estágios
 autores:

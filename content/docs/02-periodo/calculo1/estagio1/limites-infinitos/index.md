@@ -16,7 +16,7 @@ O símbolo $\infty$ **não é um número**: é uma forma de dizer "cresce sem pa
 | **Limite infinito** | o **valor da função** $f(x)$ | $\lim_{x\to2^+}\dfrac1{x-2}=+\infty$ |
 | **Limite no infinito** | o **valor de $x$** | $\lim_{x\to+\infty}\dfrac1x=0$ |
 
-Cada tipo gera um tipo de **assíntota**: reta que o gráfico "persegue" sem tocar (no sentido de se aproximar indefinidamente).
+Cada tipo gera um tipo de **assíntota**: uma reta da qual o gráfico se aproxima indefinidamente. (A vertical nunca é cruzada, mas o gráfico pode cruzar uma assíntota horizontal em pontos intermediários.)
 
 ## 2. Limites infinitos e assíntotas verticais
 
@@ -76,7 +76,7 @@ $\dfrac\infty\infty$, $\infty-\infty$, $0\cdot\infty$ **não** têm resposta fix
 $$
 \ln x\ \ll\ x^p\ \ll\ e^x
 $$
-(logaritmo cresce mais devagar que potência, que cresce mais devagar que exponencial). Por isso $\dfrac{x^2}{e^x}\to0$. (Mais uma ferramenta, a **regra de L'Hôpital**, vem no Estágio 2.)
+(logaritmo cresce mais devagar que potência, que cresce mais devagar que exponencial). Por isso $\dfrac{x^2}{e^x}\to0$. (Mais uma ferramenta, a **regra de L'Hôpital**, vem no Estágio 3.)
 
 ## 5. Como ler assíntotas de um gráfico
 

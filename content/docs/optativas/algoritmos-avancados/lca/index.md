@@ -1,6 +1,6 @@
 ---
 title: Menor Ancestral Comum (LCA)
-weight: 4
+weight: 6
 description: Ancestral comum mais profundo de dois nós de uma árvore, com binary lifting.
 autores:
   - thallesgsrv

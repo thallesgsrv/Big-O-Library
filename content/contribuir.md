@@ -194,7 +194,7 @@ Além do markdown comum (negrito, listas, links, tabelas), estes recursos funcio
 
 **Código**, com a linguagem indicada depois dos três acentos graves (` ```python `, ` ```java `, ` ```c `…), para ganhar destaque de sintaxe.
 
-**Fórmulas**, em LaTeX. Atenção ao delimitador: o cifrão simples (`$...$`) **não** funciona.
+**Fórmulas**, em LaTeX. Use `\( ... \)` para fórmulas no meio do texto e `$$ ... $$` para fórmulas em bloco. (O `$...$` também é aceito, mas cuidado: um cifrão solto no texto, como em "R$ 10", pode ser lido como início de fórmula.)
 
 ```markdown
 Inline: a busca binária custa \(O(\log n)\).
@@ -316,60 +316,17 @@ Com o Hugo instalado, o comando `hugo new --kind disciplina docs/01-periodo/nome
 
 ## Testando no seu computador
 
-Antes de abrir o Pull Request, confira como a página ficou. Você precisa de duas coisas:
+Antes de abrir o Pull Request, confira como a página ficou. Você precisa de **Git** (use `git clone`; o ZIP do GitHub não funciona, porque o site lê as datas do histórico) e do **Hugo extended 0.165.0** (outras versões podem quebrar as fórmulas; confira com `hugo version`, que precisa mostrar `+extended`). Não precisa de Node, Go nem de internet.
 
-- **Git**, instalado e no PATH. Use `git clone`: baixar o ZIP do GitHub não funciona, porque o site lê as datas de atualização do histórico do Git.
-- **Hugo extended** 0.165.0 (outras versões podem quebrar as fórmulas). Confira com `hugo version`: a linha precisa conter `+extended`.
-
-Não precisa de Node, Go, submódulos nem de internet para compilar: o tema, a busca e as fórmulas já vêm dentro do repositório.
-
-**Linux (Debian/Ubuntu)**
+O passo a passo de instalação para Linux, macOS e Windows, e a tabela de erros comuns, estão no [README do repositório](https://github.com/thallesgsrv/Big-O-Library#rodando-localmente). Com tudo instalado, basta:
 
 ```bash
-# 1) Git e Hugo extended (em ARM, troque amd64 por arm64)
-sudo apt update && sudo apt install -y git curl
-curl -LO https://github.com/gohugoio/hugo/releases/download/v0.165.0/hugo_extended_0.165.0_linux-amd64.deb
-sudo apt install -y ./hugo_extended_0.165.0_linux-amd64.deb
-hugo version        # deve mostrar v0.165.0 ... +extended
-
-# 2) Baixe o projeto
-git clone https://github.com/thallesgsrv/Big-O-Library.git
-cd Big-O-Library
-
-# 3) Suba o servidor local
-hugo server
-```
-
-**macOS**
-
-```bash
-brew install git
-# Hugo 0.165.0: baixe em github.com/gohugoio/hugo/releases/tag/v0.165.0
 git clone https://github.com/thallesgsrv/Big-O-Library.git
 cd Big-O-Library
 hugo server
 ```
 
-**Windows (PowerShell)**
-
-```powershell
-winget install Git.Git
-winget install Hugo.Hugo.Extended --version 0.165.0
-# feche e abra o terminal para o PATH atualizar, depois:
-git clone https://github.com/thallesgsrv/Big-O-Library.git
-cd Big-O-Library
-hugo server
-```
-
-Abra **http://localhost:1313/Big-O-Library/** no navegador (o `/Big-O-Library/` no final é necessário). O site recarrega sozinho quando você salva o arquivo; para parar, use `Ctrl+C`. Teste também no celular, ou reduza a largura da janela.
-
-Se der erro:
-
-| Erro ou sintoma | O que fazer |
-|---|---|
-| `hugo: command not found` | Instale o Hugo e abra um terminal novo. |
-| `failed to load Git data: not a git repository` | Você baixou o ZIP. Use `git clone`. |
-| Sua página não aparece | Confira a `date` (se for futura, use `hugo server -F` para ver), o `weight` repetido e se não há subpáginas dentro de um `index.md`. |
+Abra **http://localhost:1313/Big-O-Library/** (o `/Big-O-Library/` no final é necessário). O site recarrega sozinho quando você salva o arquivo. Teste também no celular, ou reduza a largura da janela.
 
 ## Checklist antes de enviar
 
@@ -378,7 +335,7 @@ Se der erro:
 - [ ] As seções fazem sentido para a disciplina (o modelo é só um ponto de partida).
 - [ ] Cada material tem link e fonte; conteúdo de terceiros aponta para o original.
 - [ ] Todo exercício tem o gabarito dentro de `details`, que já começa fechado (e não ficou solto no texto).
-- [ ] As fórmulas usam `\( \)` ou `$$ $$`, nunca `$...$`, e renderizam no `hugo server`.
+- [ ] As fórmulas usam `\( \)` ou `$$ $$` e renderizam no `hugo server` (sem cifrões soltos no texto).
 - [ ] Se há quiz: cada pergunta tem uma única `[x]` (ou várias de propósito) e uma explicação.
 - [ ] Se há animação: o nome em `viz algoritmo="..."` existe em `viz.js`.
 - [ ] Olhei a página no `hugo server`, no computador e no celular.

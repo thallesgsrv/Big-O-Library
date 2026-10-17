@@ -1,5 +1,5 @@
 ---
-title: Limites e Continuidade
+title: Limites
 weight: 2
 description: Ideia de limite, limites laterais, propriedades, técnicas para 0/0, limites trigonométricos e teorema do confronto.
 autores:
@@ -506,97 +506,75 @@ Pelo teorema do confronto:
 
 Esse exemplo mostra uma ideia muito importante: mesmo quando a função oscila, se ela estiver presa entre duas funções que vão para o mesmo valor, então ela também vai para esse valor.
 
-## 14. Contextualização: o que isso significa no mundo real?
-
-Imagine uma fábrica que mede o custo de produção de um item em função da quantidade produzida.
-
-Se o custo muda de forma suave, a função é contínua. Mas se, em certo ponto, o custo “salta” por causa de um novo turno ou de uma mudança de capacidade, então a função deixa de ser contínua.
-
-Outro exemplo é a temperatura de um sistema: em alguns pontos, a temperatura pode variar de forma contínua; em outros, pode haver uma mudança brusca por causa de uma reação ou de uma troca de fase.
-
-Esse tipo de raciocínio é importante porque o Cálculo não é apenas manipular símbolos: ele descreve como fenômenos reais mudam e quando essa mudança deixa de ser suave.
-
-## 15. Resumo rápido
+## 14. Resumo rápido
 
 - **Limite** descreve para onde $f(x)$ vai quando $x\to a$, não onde $f$ está em $a$.
 - **Bilateral existe** $\iff$ os dois laterais existem e são iguais.
 - **Sempre** tente substituir primeiro. Se der $\frac00$: fatore, racionalize ou use $\frac{\operatorname{sen}u}{u}\to1$.
 - **Confronto:** se $f$ está presa entre duas funções que vão ao mesmo $L$, ela vai a $L$.
 
-## 16. Exercícios de fixação
+## 15. Exercícios de fixação
 
-**Exercício 1.** Domínio de $f(x)=\dfrac1{x-3}$.
-
-{{< details title="Gabarito" >}}
-$x\ne3$, ou seja, $D=\mathbb R\setminus\{3\}$.
-{{< /details >}}
-
-**Exercício 2.** Calcule $f(2)$ para $f(x)=x^2+1$.
-
-{{< details title="Gabarito" >}}
-$f(2)=4+1=5$.
-{{< /details >}}
-
-**Exercício 3.** Para $f(x)=\dfrac1{x-2}$, quais valores de $x$ são usados em $x\to2^-$ e em $x\to2^+$?
+**Exercício 1.** Para $f(x)=\dfrac1{x-2}$, quais valores de $x$ são usados em $x\to2^-$ e em $x\to2^+$?
 
 {{< details title="Gabarito" >}}
 $x\to2^-$: valores menores que $2$ ($1{,}9;\ 1{,}99;\ldots$). $x\to2^+$: valores maiores que $2$ ($2{,}1;\ 2{,}01;\ldots$).
 {{< /details >}}
 
-**Exercício 4.** Calcule $\displaystyle\lim_{x\to2^-}\frac1{x-2}$ e $\displaystyle\lim_{x\to2^+}\frac1{x-2}$.
+**Exercício 2.** Calcule $\displaystyle\lim_{x\to2^-}\frac1{x-2}$ e $\displaystyle\lim_{x\to2^+}\frac1{x-2}$.
 
 {{< details title="Gabarito" >}}
 Pela esquerda, $x-2$ é um número negativo minúsculo, então o quociente vai a $-\infty$. Pela direita, $x-2$ é positivo minúsculo e o quociente vai a $+\infty$.
 {{< /details >}}
 
-**Exercício 5.** $\displaystyle\lim_{x\to0}\frac{\operatorname{sen}(3x)}{x}$.
+**Exercício 3.** $\displaystyle\lim_{x\to0}\frac{\operatorname{sen}(3x)}{x}$.
 
 {{< details title="Gabarito" >}}
 $3\cdot\dfrac{\operatorname{sen}3x}{3x}\to3\cdot1=3$.
 {{< /details >}}
 
-**Exercício 6.** $\displaystyle\lim_{x\to0}\frac{\sqrt{x+4}-2}{x}$.
+**Exercício 4.** $\displaystyle\lim_{x\to0}\frac{\sqrt{x+4}-2}{x}$.
 
 {{< details title="Gabarito" >}}
 Conjugado: $\dfrac{(x+4)-4}{x(\sqrt{x+4}+2)}=\dfrac1{\sqrt{x+4}+2}\to\dfrac14$.
 {{< /details >}}
 
-**Exercício 7.** Use o confronto para mostrar que $\displaystyle\lim_{x\to0}x\operatorname{sen}\frac1x=0$.
+**Exercício 5.** Use o confronto para mostrar que $\displaystyle\lim_{x\to0}x\operatorname{sen}\frac1x=0$.
 
 {{< details title="Gabarito" >}}
 $-1\le\operatorname{sen}\frac1x\le1\Rightarrow-\lvert x\rvert\le x\operatorname{sen}\frac1x\le\lvert x\rvert$. Os dois extremos vão a $0$, logo o limite é $0$.
 {{< /details >}}
 
-**Exercício 8.** $\displaystyle\lim_{x\to4}\frac{x^2-16}{x-4}$.
+**Exercício 6.** $\displaystyle\lim_{x\to4}\frac{x^2-16}{x-4}$.
 
 {{< details title="Gabarito" >}}
 $\frac00$. Fatorando, $\dfrac{(x-4)(x+4)}{x-4}=x+4\to8$.
 {{< /details >}}
 
-**Exercício 9.** $\displaystyle\lim_{x\to-2}\frac{x^2+x-2}{x+2}$.
+**Exercício 7.** $\displaystyle\lim_{x\to-2}\frac{x^2+x-2}{x+2}$.
 
 {{< details title="Gabarito" >}}
 $x^2+x-2=(x+2)(x-1)$, então o limite é $x-1\to-3$.
 {{< /details >}}
 
-**Exercício 10.** Calcule os limites laterais em $0$ de $\dfrac{\lvert x\rvert}{x}$ e conclua se o limite existe.
+**Exercício 8.** Calcule os limites laterais em $0$ de $\dfrac{\lvert x\rvert}{x}$ e conclua se o limite existe.
 
 {{< details title="Gabarito" >}}
 Direita: $1$. Esquerda: $-1$. São diferentes, então o limite **não existe**.
 {{< /details >}}
 
-**Exercício 11.** $\displaystyle\lim_{x\to0}\frac{\operatorname{tg}2x}{x}$.
+**Exercício 9.** $\displaystyle\lim_{x\to0}\frac{\operatorname{tg}2x}{x}$.
 
 {{< details title="Gabarito" >}}
 $\dfrac{\operatorname{sen}2x}{x\cos2x}=2\cdot\dfrac{\operatorname{sen}2x}{2x}\cdot\dfrac1{\cos2x}\to2$.
 {{< /details >}}
 
-**Exercício 12.** $\displaystyle\lim_{x\to0}\frac{\operatorname{sen}4x}{\operatorname{sen}x}$.
+**Exercício 10.** $\displaystyle\lim_{x\to0}\frac{\operatorname{sen}4x}{\operatorname{sen}x}$.
 
 {{< details title="Gabarito" >}}
 $\dfrac{\operatorname{sen}4x}{4x}\cdot\dfrac{x}{\operatorname{sen}x}\cdot4\to4$.
 {{< /details >}}
 
 > [!NOTE]
-> A continuidade (que antes ficava no fim desta página) agora tem página própria, junto com limites infinitos e assíntotas. Siga para as próximas páginas do estágio.
+> A continuidade e os limites infinitos têm página própria. Siga para as próximas páginas do estágio.
 

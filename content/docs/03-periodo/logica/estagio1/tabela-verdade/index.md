@@ -195,7 +195,7 @@ $$
 \varphi_1,\ldots,\varphi_n\models\psi\iff\ \models\ \varphi_1\to(\varphi_2\to(\cdots(\varphi_n\to\psi)\cdots))
 $$
 
-O argumento é válido **se, e somente se, essa fórmula é uma tautologia**. (Ex.: o argumento do Swing vira $((s\land\neg i\to\neg c)\land c\land s)\to i$.) Assim, toda a questão de validade de argumentos cai em **"essa fórmula é tautologia?"**.
+O argumento é válido **se, e somente se, essa fórmula é uma tautologia**. Também vale a versão com conjunção, $(\varphi_1\land\cdots\land\varphi_n)\to\psi$, que é equivalente. (Ex.: o argumento do Swing vira $((s\land\neg i\to\neg c)\land c\land s)\to i$.) Assim, toda a questão de validade de argumentos cai em **"essa fórmula é tautologia?"**.
 
 ## 9. Equivalência
 

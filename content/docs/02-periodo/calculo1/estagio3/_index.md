@@ -1,5 +1,5 @@
 ---
-title: Estágio 3 - Integrais
+title: Estágio 3 - Aplicações da derivada e integrais
 weight: 3
 rotulo: Tópicos
 description: L'Hôpital, gráficos, otimização, primitivas, integral definida, Teorema Fundamental do Cálculo e método da substituição.
@@ -14,7 +14,7 @@ Derivar e integrar são **operações inversas**, como multiplicar e dividir:
 - **Derivada:** dada a posição, descubra a velocidade.
 - **Integral:** dada a velocidade, descubra a posição (ou a área acumulada).
 
-Neste estágio você aprende o *conceito* (primitiva e área), a ferramenta que liga tudo (o **Teorema Fundamental do Cálculo**) e a primeira técnica de cálculo: a **substituição**, que é a regra da cadeia de trás para frente. As demais técnicas ficam para o Estágio 1 de Cálculo 2.
+Neste estágio você primeiro fecha as **aplicações da derivada** (L'Hôpital, gráficos e otimização) e depois aprende o *conceito* (primitiva e área), a ferramenta que liga tudo (o **Teorema Fundamental do Cálculo**) e a primeira técnica de cálculo: a **substituição**, que é a regra da cadeia de trás para frente. As demais técnicas ficam para o Estágio 1 de Cálculo 2.
 
 ## Mapa do estágio
 
@@ -29,7 +29,7 @@ Neste estágio você aprende o *conceito* (primitiva e área), a ferramenta que 
 
 - **Todas as derivadas** do Estágio 2. Integrar é conferir de qual função aquela é a derivada.
 - Regra da cadeia (a substituição é ela ao contrário).
-- Notação de somatório $\sum$ (revisada na página 2).
+- Notação de somatório $\sum$ (revisada na página de Integral definida).
 
 ## Tabela para ter na mão
 

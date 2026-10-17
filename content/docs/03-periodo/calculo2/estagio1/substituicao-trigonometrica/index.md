@@ -52,7 +52,7 @@ $$
 com \(dx = a\sec\theta\operatorname{tg}\theta\,d\theta\). Triângulo: hipotenusa \(x\), cateto \(a\) junto ao ângulo, oposto \(\sqrt{x^2-a^2}\).
 
 > [!TIP]
-> Regra de bolso (do "alerta de gatinho" do material do professor):
+> Regra de bolso:
 > \((\text{variável})^2 + (\text{constante})^2 \Rightarrow \text{variável} = \text{constante}\cdot\operatorname{tg}\theta\)
 > \((\text{constante})^2 - (\text{variável})^2 \Rightarrow \text{variável} = \text{constante}\cdot\operatorname{sen}\theta\)
 > \((\text{variável})^2 - (\text{constante})^2 \Rightarrow \text{variável} = \text{constante}\cdot\sec\theta\)

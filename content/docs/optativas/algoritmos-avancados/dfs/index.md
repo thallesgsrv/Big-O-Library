@@ -1,6 +1,6 @@
 ---
 title: Busca em Profundidade (DFS)
-weight: 3
+weight: 2
 description: Mergulha o máximo possível por um caminho antes de voltar (backtracking).
 autores:
   - thallesgsrv

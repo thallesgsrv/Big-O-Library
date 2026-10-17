@@ -1,6 +1,6 @@
 ---
 title: Árvore de Segmentos (Segment Tree)
-weight: 6
+weight: 4
 description: Consultas de intervalo e atualizações pontuais em tempo logarítmico.
 autores:
   - thallesgsrv
