@@ -43,23 +43,23 @@ def dijkstra(grafo, origem):
     return dist
 ```
 
-### Java
+### C++
 
-```java
-static int[] dijkstra(List<int[]>[] g, int origem) {
-    int[] dist = new int[g.length];
-    Arrays.fill(dist, Integer.MAX_VALUE);
+```cpp
+static vector<int> dijkstra(const vector<vector<pair<int, int>>>& g, int origem) {
+    int n = (int)g.size();
+    vector<int> dist(n, INT_MAX);
     dist[origem] = 0;
-    PriorityQueue<int[]> fila = new PriorityQueue<>((a, b) -> a[0] - b[0]);
-    fila.add(new int[]{0, origem});
-    while (!fila.isEmpty()) {
-        int[] top = fila.poll();
-        int d = top[0], u = top[1];
-        if (d > dist[u]) continue;           // entrada velha
-        for (int[] e : g[u]) {               // e = {vizinho, peso}
-            if (d + e[1] < dist[e[0]]) {
-                dist[e[0]] = d + e[1];
-                fila.add(new int[]{dist[e[0]], e[0]});
+    priority_queue<pair<int, int>, vector<pair<int, int>>, greater<pair<int, int>>> fila;
+    fila.push({0, origem});
+    while (!fila.empty()) {
+        auto [d, u] = fila.top();
+        fila.pop();
+        if (d > dist[u]) continue;               // entrada velha
+        for (auto [v, w] : g[u]) {               // {vizinho, peso}
+            if (d + w < dist[v]) {
+                dist[v] = d + w;
+                fila.push({dist[v], v});
             }
         }
     }

@@ -32,11 +32,11 @@ def dfs(grafo, u, descoberta=None):
     return descoberta
 ```
 
-### Java
+### C++
 
-```java
-static void dfs(List<Integer>[] g, int u, int[] desc, int[] tempo) {
-    desc[u] = ++tempo[0];
+```cpp
+static void dfs(const vector<vector<int>>& g, int u, vector<int>& desc, int& tempo) {
+    desc[u] = ++tempo;
     for (int v : g[u])
         if (desc[v] == 0) dfs(g, v, desc, tempo);
 }

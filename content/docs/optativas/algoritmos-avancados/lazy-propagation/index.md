@@ -55,10 +55,10 @@ def query(i, l, r, ql, qr):
     return query(2 * i, l, m, ql, qr) + query(2 * i + 1, m + 1, r, ql, qr)
 ```
 
-### Java
+### C++
 
-```java
-static long[] t, lz;
+```cpp
+static vector<long long> t, lz;
 
 static void push(int i, int l, int r) {
     if (lz[i] == 0) return;
@@ -68,7 +68,7 @@ static void push(int i, int l, int r) {
     lz[i] = 0;
 }
 
-static void update(int i, int l, int r, int ql, int qr, long v) {
+static void update(int i, int l, int r, int ql, int qr, long long v) {
     if (qr < l || r < ql) return;
     if (ql <= l && r <= qr) { t[i] += v * (r - l + 1); lz[i] += v; return; }
     push(i, l, r);
@@ -78,7 +78,7 @@ static void update(int i, int l, int r, int ql, int qr, long v) {
     t[i] = t[2 * i] + t[2 * i + 1];
 }
 
-static long query(int i, int l, int r, int ql, int qr) {
+static long long query(int i, int l, int r, int ql, int qr) {
     if (qr < l || r < ql) return 0;
     if (ql <= l && r <= qr) return t[i];
     push(i, l, r);

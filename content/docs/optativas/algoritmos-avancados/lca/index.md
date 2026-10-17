@@ -47,20 +47,23 @@ def lca(u, v, up, prof):
     return up[0][u]
 ```
 
-### Java
+### C++
 
-```java
-static final int LOG = 17;
-static int[][] up;   // up[k][v]; up[0][raiz] = raiz
-static int[] prof;
+```cpp
+static const int LOG = 17;
+static vector<vector<int>> up;   // up[k][v]; up[0][raiz] = raiz
+static vector<int> prof;
 
 static int lca(int u, int v) {
-    if (prof[u] < prof[v]) { int tmp = u; u = v; v = tmp; }
-    for (int k = LOG - 1; k >= 0; k--)
+    if (prof[u] < prof[v]) swap(u, v);
+    for (int k = LOG - 1; k >= 0; --k)
         if (prof[u] - (1 << k) >= prof[v]) u = up[k][u];
     if (u == v) return u;
-    for (int k = LOG - 1; k >= 0; k--)
-        if (up[k][u] != up[k][v]) { u = up[k][u]; v = up[k][v]; }
+    for (int k = LOG - 1; k >= 0; --k)
+        if (up[k][u] != up[k][v]) {
+            u = up[k][u];
+            v = up[k][v];
+        }
     return up[0][u];
 }
 ```

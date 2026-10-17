@@ -36,18 +36,23 @@ def bfs(grafo, origem):
     return nivel
 ```
 
-### Java
+### C++
 
-```java
-static int[] bfs(List<Integer>[] g, int origem) {
-    int[] nivel = new int[g.length];
-    Arrays.fill(nivel, -1);
+```cpp
+static vector<int> bfs(const vector<vector<int>>& g, int origem) {
+    int n = (int)g.size();
+    vector<int> nivel(n, -1);
+    queue<int> fila;
     nivel[origem] = 0;
-    Queue<Integer> fila = new ArrayDeque<>(List.of(origem));
-    while (!fila.isEmpty()) {
-        int u = fila.poll();
+    fila.push(origem);
+    while (!fila.empty()) {
+        int u = fila.front();
+        fila.pop();
         for (int v : g[u])
-            if (nivel[v] == -1) { nivel[v] = nivel[u] + 1; fila.add(v); }
+            if (nivel[v] == -1) {
+                nivel[v] = nivel[u] + 1;
+                fila.push(v);
+            }
     }
     return nivel;
 }

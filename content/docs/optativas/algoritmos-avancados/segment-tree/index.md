@@ -62,14 +62,19 @@ class SegTree:
         self.t[i] = self.t[2 * i] + self.t[2 * i + 1]
 ```
 
-### Java
+### C++
 
-```java
+```cpp
 class SegTree {
-    int n; long[] t;
-    SegTree(int[] a) { n = a.length; t = new long[4 * n]; build(a, 1, 0, n - 1); }
+    int n; vector<long long> t;
+public:
+    SegTree(const vector<int>& a) {
+        n = (int)a.size();
+        t.assign(4 * n, 0);
+        build(a, 1, 0, n - 1);
+    }
 
-    void build(int[] a, int i, int l, int r) {
+    void build(const vector<int>& a, int i, int l, int r) {
         if (l == r) { t[i] = a[l]; return; }
         int m = (l + r) / 2;
         build(a, 2 * i, l, m);
@@ -77,7 +82,7 @@ class SegTree {
         t[i] = t[2 * i] + t[2 * i + 1];
     }
 
-    long query(int i, int l, int r, int ql, int qr) {
+    long long query(int i, int l, int r, int ql, int qr) {
         if (qr < l || r < ql) return 0;
         if (ql <= l && r <= qr) return t[i];
         int m = (l + r) / 2;
@@ -90,7 +95,7 @@ class SegTree {
         if (p <= m) update(2 * i, l, m, p, v); else update(2 * i + 1, m + 1, r, p, v);
         t[i] = t[2 * i] + t[2 * i + 1];
     }
-}
+};
 ```
 
 ## Complexidade
