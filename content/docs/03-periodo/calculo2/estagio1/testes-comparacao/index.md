@@ -24,7 +24,7 @@ $$
 \int_1^{+\infty}\frac{dx}{x^p}\ \ \text{converge se } p > 1,\ \text{diverge se } p \le 1
 $$
 
-e a exponencial \(\displaystyle\int_a^{+\infty}e^{-kx}\,dx\) com \(k > 0\), que sempre converge.
+e a exponencial \(\displaystyle\int_a^{+\infty}e^{-kx}\,dx\) com \(k > 0\), que sempre converge (primitiva \(-\tfrac1k e^{-kx}\), que vai a \(0\)).
 
 ## Teste da comparação
 
@@ -77,48 +77,49 @@ Em palavras: se as duas funções "se parecem" no infinito (razão tendendo a um
 
 **Exemplo 1.** \(\displaystyle\int_1^{+\infty}e^{-x^2}\,dx\)
 
-Não há primitiva elementar. Compare: para \(x \ge 1\) vale \(x^2 \ge x\), então \(-x^2 \le -x\) e
+1. Não há primitiva elementar, então vamos comparar.
+2. Para \(x \ge 1\) vale \(x^2 \ge x\) (multiplique \(x\ge1\) por \(x>0\)). Multiplicando por \(-1\), a desigualdade inverte: \(-x^2 \le -x\). Como a exponencial é crescente:
 
 $$
 0 < e^{-x^2} \le e^{-x}
 $$
 
-E \(\displaystyle\int_1^{+\infty}e^{-x}\,dx = e^{-1}\) converge. Pelo teste da comparação, \(\displaystyle\int_1^{+\infty}e^{-x^2}\,dx\) **converge**.
+3. \(\displaystyle\int_1^{+\infty}e^{-x}\,dx = \lim_{b\to\infty}\big[-e^{-x}\big]_1^b = 0 + e^{-1} = e^{-1}\) converge. Pelo teste da comparação (maior converge, menor converge), \(\displaystyle\int_1^{+\infty}e^{-x^2}\,dx\) **converge**.
 
 **Exemplo 2.** \(\displaystyle\int_1^{+\infty}\frac{\operatorname{sen}^2 x}{x^2}\,dx\)
 
-Como \(0 \le \operatorname{sen}^2 x \le 1\):
+1. Como \(0 \le \operatorname{sen}^2 x \le 1\), dividindo por \(x^2>0\):
 
 $$
 0 \le \frac{\operatorname{sen}^2 x}{x^2} \le \frac{1}{x^2}
 $$
 
-e \(\displaystyle\int_1^{+\infty}\frac{dx}{x^2}\) converge (\(p = 2 > 1\)). Logo a integral **converge**.
+2. \(\displaystyle\int_1^{+\infty}\frac{dx}{x^2}\) converge (\(p = 2 > 1\)). Logo a integral **converge**.
 
 > [!NOTE]
 > Aqui o limite \(\frac{f}{g} = \operatorname{sen}^2 x\) nem existe, então só a comparação direta funciona. Por isso é bom ter os dois testes na manga.
 
 **Exemplo 3.** \(\displaystyle\int_1^{+\infty}\frac{1}{1+x^2}\,dx\)
 
-Compare com \(g(x) = \dfrac{1}{x^2}\):
+1. Compare com \(g(x) = \dfrac{1}{x^2}\):
 
 $$
-\lim_{x\to\infty}\frac{1/(1+x^2)}{1/x^2} = \lim_{x\to\infty}\frac{x^2}{1+x^2} = 1
+\lim_{x\to\infty}\frac{1/(1+x^2)}{1/x^2} = \lim_{x\to\infty}\frac{x^2}{1+x^2} = \lim_{x\to\infty}\frac{1}{\frac1{x^2}+1} = 1
 $$
 
-Como \(0 < 1 < \infty\) e \(\int_1^\infty x^{-2}\,dx\) converge, a integral **converge**.
+2. Como \(0 < 1 < \infty\) e \(\int_1^\infty x^{-2}\,dx\) converge, a integral **converge**.
 
-(Como sabemos a primitiva, dá para conferir: o valor é \(\frac\pi2 - \frac\pi4 = \frac\pi4\). O teste, porém, só garante a convergência, nunca o valor.)
+(Como sabemos a primitiva, dá para conferir: \(\operatorname{arctg}b - \operatorname{arctg}1 \to \frac\pi2 - \frac\pi4 = \frac\pi4\). O teste, porém, só garante a convergência, nunca o valor.)
 
 **Exemplo 4.** \(\displaystyle\int_1^{+\infty}\frac{1-e^{-x}}{x}\,dx\)
 
-Para \(x\) grande, \(e^{-x}\) é minúsculo, então o numerador tende a \(1\) e a função se parece com \(\dfrac1x\). Compare com \(g(x) = \dfrac1x\):
+1. Para \(x\) grande, \(e^{-x}\) é minúsculo, então o numerador tende a \(1\) e a função se parece com \(\dfrac1x\). Compare com \(g(x) = \dfrac1x\):
 
 $$
-\lim_{x\to\infty}\frac{(1-e^{-x})/x}{1/x} = \lim_{x\to\infty}\big(1 - e^{-x}\big) = 1
+\lim_{x\to\infty}\frac{(1-e^{-x})/x}{1/x} = \lim_{x\to\infty}\big(1 - e^{-x}\big) = 1 - 0 = 1
 $$
 
-Como \(\int_1^\infty\frac{dx}{x}\) **diverge**, a integral dada também **diverge**.
+2. Como \(\int_1^\infty\frac{dx}{x}\) **diverge**, a integral dada também **diverge**.
 
 ## Quadro-resumo
 
@@ -145,14 +146,16 @@ $$
 > [!TIP]
 > **Memória:** perto de \(0\), \(x^{-p}\) com \(p\) pequeno é "fraco" e integra; no infinito, \(x^{-p}\) precisa de \(p\) grande. Os dois lados da fronteira \(p=1\) trocam de papel.
 
-**Exemplo A.** \(\displaystyle\int_0^1\frac{e^{-x}}{\sqrt x}\,dx\). Como \(e^{-x}\le1\), temos \(\dfrac{e^{-x}}{\sqrt x}\le\dfrac1{\sqrt x}\), e \(\int_0^1x^{-1/2}dx\) converge (\(p=\tfrac12<1\)). **Converge.**
+**Exemplo A.** \(\displaystyle\int_0^1\frac{e^{-x}}{\sqrt x}\,dx\). Em \([0,1]\), \(e^{-x}\le1\), logo \(\dfrac{e^{-x}}{\sqrt x}\le\dfrac1{\sqrt x}\), e \(\int_0^1x^{-1/2}dx\) converge (\(p=\tfrac12<1\)). **Converge.**
 
-**Exemplo B.** \(\displaystyle\int_0^1\frac{dx}{x+x^2}\). Em \((0,1]\), \(x+x^2\le2x\), logo \(\dfrac1{x+x^2}\ge\dfrac1{2x}\), e \(\int_0^1\frac{dx}{2x}\) diverge. **Diverge.**
+**Exemplo B.** \(\displaystyle\int_0^1\frac{dx}{x+x^2}\). Em \((0,1]\), \(x^2\le x\), então \(x+x^2\le2x\). Invertendo (tudo positivo), \(\dfrac1{x+x^2}\ge\dfrac1{2x}\), e \(\int_0^1\frac{dx}{2x}\) diverge. **Diverge.**
 
 **Exemplo C (limite).** \(\displaystyle\int_0^1\frac{\operatorname{sen}x}{x^{3/2}}\,dx\). Comparando com \(g(x)=x^{-1/2}\):
+
 $$
-\lim_{x\to0^+}\frac{\operatorname{sen}x/x^{3/2}}{x^{-1/2}}=\lim_{x\to0^+}\frac{\operatorname{sen}x}{x}=1\in(0,\infty)
+\lim_{x\to0^+}\frac{\operatorname{sen}x/x^{3/2}}{x^{-1/2}}=\lim_{x\to0^+}\frac{\operatorname{sen}x}{x^{3/2}}\cdot x^{1/2}=\lim_{x\to0^+}\frac{\operatorname{sen}x}{x}=1\in(0,\infty)
 $$
+
 Como \(\int_0^1x^{-1/2}dx\) converge, a nossa também **converge**.
 
 ## Extra 2: integrando que troca de sinal (convergência absoluta)
@@ -170,31 +173,33 @@ Os testes acima exigem \(f\ge0\). Se \(f\) oscila (muda de sinal), use:
 **Exercício 1.** Estude a convergência de \(\displaystyle\int_1^{+\infty}\frac{x+1}{x^3+x}\,dx\).
 
 {{< details title="Gabarito" >}}
-Para \(x\) grande, \(\dfrac{x+1}{x^3+x}\) se parece com \(\dfrac{1}{x^2}\). Comparando no limite:
+1. Para \(x\) grande, \(\dfrac{x+1}{x^3+x}\) se parece com \(\dfrac{x}{x^3} = \dfrac{1}{x^2}\).
+2. Comparando no limite:
 
 $$
-\lim_{x\to\infty}\frac{(x+1)/(x^3+x)}{1/x^2} = \lim_{x\to\infty}\frac{x^3+x^2}{x^3+x} = 1
+\lim_{x\to\infty}\frac{(x+1)/(x^3+x)}{1/x^2} = \lim_{x\to\infty}\frac{x^2(x+1)}{x^3+x} = \lim_{x\to\infty}\frac{x^3+x^2}{x^3+x} = \lim_{x\to\infty}\frac{1+\frac1x}{1+\frac1{x^2}} = 1
 $$
 
-Como \(\int_1^\infty x^{-2}\,dx\) converge, a integral **converge**.
+3. Como \(\int_1^\infty x^{-2}\,dx\) converge, a integral **converge**.
 {{< /details >}}
 
 **Exercício 2.** Estude a convergência de \(\displaystyle\int_1^{+\infty}\frac{dx}{\sqrt x + 1}\).
 
 {{< details title="Gabarito" >}}
-Para \(x\) grande, se parece com \(\dfrac{1}{\sqrt x}\) (\(p = \tfrac12\)). No limite:
+1. Para \(x\) grande, se parece com \(\dfrac{1}{\sqrt x}\) (\(p = \tfrac12\)).
+2. No limite:
 
 $$
-\lim_{x\to\infty}\frac{1/(\sqrt x+1)}{1/\sqrt x} = \lim_{x\to\infty}\frac{\sqrt x}{\sqrt x+1} = 1
+\lim_{x\to\infty}\frac{1/(\sqrt x+1)}{1/\sqrt x} = \lim_{x\to\infty}\frac{\sqrt x}{\sqrt x+1} = \lim_{x\to\infty}\frac{1}{1+\frac{1}{\sqrt x}} = 1
 $$
 
-Como \(\int_1^\infty x^{-1/2}\,dx\) diverge, a integral **diverge**.
+3. Como \(\int_1^\infty x^{-1/2}\,dx\) diverge, a integral **diverge**.
 {{< /details >}}
 
 **Exercício 3.** Estude a convergência de \(\displaystyle\int_1^{+\infty}\frac{\cos^2 x}{x^2+1}\,dx\).
 
 {{< details title="Gabarito" >}}
-Como \(0 \le \cos^2 x \le 1\) e \(x^2 + 1 > x^2\):
+Como \(0 \le \cos^2 x \le 1\) e \(x^2 + 1 > x^2\) (logo \(\frac{1}{x^2+1}<\frac1{x^2}\)):
 
 $$
 0 \le \frac{\cos^2 x}{x^2+1} \le \frac{1}{x^2+1} \le \frac{1}{x^2}
@@ -206,7 +211,7 @@ e \(\int_1^\infty x^{-2}\,dx\) converge. Logo a integral **converge** (comparaç
 **Exercício 4.** Estude a convergência de \(\displaystyle\int_e^{+\infty}\frac{\ln x}{x}\,dx\).
 
 {{< details title="Gabarito" >}}
-Para \(x \ge e\), \(\ln x \ge 1\), então
+Para \(x \ge e\), \(\ln x \ge \ln e = 1\), então
 
 $$
 \frac{\ln x}{x} \ge \frac1x \ge 0
@@ -218,7 +223,7 @@ e \(\int_e^\infty\frac{dx}{x}\) diverge. Pela comparação (menor diverge, maior
 **Exercício extra 1.** Estude \(\displaystyle\int_0^1\frac{dx}{\sqrt{x+x^3}}\).
 
 {{< details title="Gabarito" >}}
-Como \(x+x^3\ge x\), \(\dfrac1{\sqrt{x+x^3}}\le\dfrac1{\sqrt x}\), e \(\int_0^1x^{-1/2}dx\) converge. **Converge.**
+Como \(x+x^3\ge x\), \(\sqrt{x+x^3}\ge\sqrt x\), e invertendo, \(\dfrac1{\sqrt{x+x^3}}\le\dfrac1{\sqrt x}\). \(\int_0^1x^{-1/2}dx\) converge. **Converge.**
 {{< /details >}}
 
 **Exercício extra 2.** Estude \(\displaystyle\int_1^\infty\frac{\cos x}{x^{3/2}}\,dx\).

@@ -38,24 +38,43 @@ A parte mais difícil de integrar **não é executar** a técnica, e sim **escol
 ## 2. Completar quadrado
 
 Para \(ax^2+bx+c\) que não fatora, escreva como **(quadrado) + constante**:
+
 $$
 x^2+bx+c=\left(x+\tfrac b2\right)^2+\left(c-\tfrac{b^2}4\right)
 $$
+
+De onde vem: \(\left(x+\tfrac b2\right)^2 = x^2 + bx + \tfrac{b^2}{4}\). Então \(x^2+bx = \left(x+\tfrac b2\right)^2 - \tfrac{b^2}{4}\), e somamos o \(c\).
+
 Depois, \(u=x+\tfrac b2\) e caia em \(\operatorname{arctg}\) ou em substituição trigonométrica.
 
 **Fórmula-chave:**
+
 $$
 \int\frac{dx}{x^2+a^2}=\frac1a\operatorname{arctg}\frac xa+C
 $$
 
-**Exemplo 1.** \(\displaystyle\int\frac{dx}{x^2+2x+5}\). Como \(x^2+2x+5=(x+1)^2+4\):
+**Exemplo 1.** \(\displaystyle\int\frac{dx}{x^2+2x+5}\)
+
+1. Aqui \(b = 2\), então \(\tfrac b2 = 1\): \(x^2+2x+5 = (x+1)^2 + (5 - 1) = (x+1)^2 + 4\).
+2. Com \(u = x+1\), \(du = dx\), e \(4 = 2^2\):
+
 $$
-\int\frac{du}{u^2+2^2}=\frac12\operatorname{arctg}\frac{x+1}{2}+C
+\int\frac{du}{u^2+2^2} = \frac12\operatorname{arctg}\frac{u}{2} = \frac12\operatorname{arctg}\frac{x+1}{2} + C
 $$
 
-**Exemplo 2 (com \(x\) no numerador).** \(\displaystyle\int\frac{x\,dx}{x^2+2x+5}\). Escreva \(x=\tfrac12(2x+2)-1\) (o \(2x+2\) é a derivada do denominador):
+**Exemplo 2 (com \(x\) no numerador).** \(\displaystyle\int\frac{x\,dx}{x^2+2x+5}\)
+
+1. A derivada do denominador é \(2x+2\). Reescreva o numerador usando-a: \(x = \tfrac12(2x+2) - 1\). (Conferência: \(\tfrac12(2x+2) - 1 = x + 1 - 1 = x\). \(\checkmark\))
+2. Separe em duas integrais:
+
 $$
-\frac12\int\frac{2x+2}{x^2+2x+5}dx-\int\frac{dx}{x^2+2x+5}=\frac12\ln(x^2+2x+5)-\frac12\operatorname{arctg}\frac{x+1}2+C
+\frac12\int\frac{2x+2}{x^2+2x+5}\,dx - \int\frac{dx}{x^2+2x+5}
+$$
+
+3. A primeira é o padrão de ouro (numerador = derivada do denominador): \(\tfrac12\ln(x^2+2x+5)\). A segunda é o Exemplo 1.
+
+$$
+\frac12\ln(x^2+2x+5) - \frac12\operatorname{arctg}\frac{x+1}2 + C
 $$
 
 > [!IMPORTANT]
@@ -71,15 +90,23 @@ Quando você precisa de partes **várias vezes** (polinômio de grau alto vezes 
 
 **Exemplo 3.** \(\displaystyle\int x^3e^{2x}\,dx\)
 
-| Sinal | D | I |
+| Sinal | D (derivar) | I (integrar) |
 | --- | --- | --- |
 | \(+\) | \(x^3\) | \(\tfrac12e^{2x}\) |
 | \(-\) | \(3x^2\) | \(\tfrac14e^{2x}\) |
 | \(+\) | \(6x\) | \(\tfrac18e^{2x}\) |
 | \(-\) | \(6\) | \(\tfrac1{16}e^{2x}\) |
 
+Cada D é multiplicado pelo I da mesma linha (a coluna I já está integrada uma vez a mais), com o sinal da linha:
+
 $$
-=e^{2x}\left(\frac{x^3}2-\frac{3x^2}4+\frac{3x}4-\frac38\right)+C
++x^3\cdot\tfrac12e^{2x} \;-\; 3x^2\cdot\tfrac14e^{2x} \;+\; 6x\cdot\tfrac18e^{2x} \;-\; 6\cdot\tfrac1{16}e^{2x}
+$$
+
+Simplificando cada produto e colocando \(e^{2x}\) em evidência:
+
+$$
+e^{2x}\left(\frac{x^3}2-\frac{3x^2}4+\frac{3x}4-\frac38\right)+C
 $$
 
 > [!WARNING]
@@ -88,17 +115,26 @@ $$
 ## 4. Fórmulas de redução
 
 Quando a potência é alta, dá para **reduzir o expoente** a cada rodada (deduzidas por partes):
+
 $$
 \int\operatorname{sen}^nx\,dx=-\frac{\operatorname{sen}^{n-1}x\cos x}{n}+\frac{n-1}n\int\operatorname{sen}^{n-2}x\,dx
 $$
+
 $$
 \int\cos^nx\,dx=\frac{\cos^{n-1}x\operatorname{sen}x}{n}+\frac{n-1}n\int\cos^{n-2}x\,dx
 $$
+
 $$
 \int\sec^nx\,dx=\frac{\sec^{n-2}x\operatorname{tg}x}{n-1}+\frac{n-2}{n-1}\int\sec^{n-2}x\,dx
 $$
 
-**Exemplo 4.** \(\displaystyle\int\operatorname{sen}^2x\,dx\) (\(n=2\)): \(-\dfrac{\operatorname{sen}x\cos x}2+\dfrac12x+C\), o mesmo que \(\dfrac{x-\operatorname{sen}x\cos x}{2}+C\).
+**Exemplo 4.** \(\displaystyle\int\operatorname{sen}^2x\,dx\) (\(n=2\)):
+
+$$
+-\frac{\operatorname{sen}x\cos x}{2} + \frac12\int 1\,dx = -\frac{\operatorname{sen}x\cos x}{2} + \frac x2 = \frac{x-\operatorname{sen}x\cos x}{2} + C
+$$
+
+(É o mesmo resultado do arco duplo, pois \(\operatorname{sen}x\cos x = \tfrac12\operatorname{sen}2x\).)
 
 ## Problemas mistos
 
@@ -107,59 +143,134 @@ Antes de abrir o gabarito, **diga qual técnica** usaria.
 **Problema 1.** \(\displaystyle\int xe^{x^2}\,dx\)
 
 {{< details title="Gabarito" >}}
-Substituição simples: \(u=x^2\), \(du=2x\,dx\). Resposta: \(\tfrac12e^{x^2}+C\).
+*Técnica: substituição simples.* O miolo \(x^2\) tem derivada \(2x\), e há um \(x\) sobrando.
+
+1. \(u=x^2\), \(du=2x\,dx\), logo \(x\,dx = \tfrac{du}{2}\).
+2. \(\tfrac12\int e^u\,du = \tfrac12e^u\).
+
+$$
+\tfrac12e^{x^2}+C
+$$
 {{< /details >}}
 
 **Problema 2.** \(\displaystyle\int x^3\ln x\,dx\)
 
 {{< details title="Gabarito" >}}
-Partes, \(u=\ln x\), \(dv=x^3dx\): \(\dfrac{x^4}4\ln x-\displaystyle\int\dfrac{x^3}4dx=\dfrac{x^4}4\ln x-\dfrac{x^4}{16}+C\).
+*Técnica: partes* (\(\ln\) é o \(L\) da LIATE).
+
+1. \(u=\ln x\), \(dv=x^3dx\), \(du=\dfrac{dx}{x}\), \(v=\dfrac{x^4}4\).
+2. \(\dfrac{x^4}{4}\ln x-\displaystyle\int\dfrac{x^4}{4}\cdot\dfrac1x\,dx = \dfrac{x^4}{4}\ln x-\int\dfrac{x^3}4\,dx\).
+3. \(\int\dfrac{x^3}{4}dx = \dfrac{x^4}{16}\).
+
+$$
+\frac{x^4}4\ln x-\frac{x^4}{16}+C
+$$
 {{< /details >}}
 
 **Problema 3.** \(\displaystyle\int\cos^3x\,dx\)
 
 {{< details title="Gabarito" >}}
-Trigonométrica (expoente ímpar): \(\int(1-\operatorname{sen}^2x)\cos x\,dx\), com \(u=\operatorname{sen}x\): \(\operatorname{sen}x-\dfrac{\operatorname{sen}^3x}3+C\).
+*Técnica: trigonométrica* (expoente ímpar).
+
+1. \(\cos^3x = (1-\operatorname{sen}^2x)\cos x\), \(u=\operatorname{sen}x\), \(du=\cos x\,dx\).
+2. \(\int(1-u^2)\,du = u-\dfrac{u^3}{3}\).
+
+$$
+\operatorname{sen}x-\frac{\operatorname{sen}^3x}3+C
+$$
 {{< /details >}}
 
 **Problema 4.** \(\displaystyle\int\sqrt{9-x^2}\,dx\)
 
 {{< details title="Gabarito" >}}
-Subst. trigonométrica, \(x=3\operatorname{sen}\theta\): \(9\displaystyle\int\cos^2\theta\,d\theta=\dfrac92(\theta+\operatorname{sen}\theta\cos\theta)\). Resposta: \(\dfrac92\operatorname{arcsen}\dfrac x3+\dfrac x2\sqrt{9-x^2}+C\).
+*Técnica: substituição trigonométrica* (caso 2).
+
+1. \(x=3\operatorname{sen}\theta\), \(dx=3\cos\theta\,d\theta\), \(\sqrt{9-x^2}=3\cos\theta\).
+2. \(\displaystyle 9\int\cos^2\theta\,d\theta = 9\int\frac{1+\cos2\theta}{2}\,d\theta = \frac92\left(\theta+\frac{\operatorname{sen}2\theta}{2}\right) = \frac92(\theta+\operatorname{sen}\theta\cos\theta)\).
+3. Triângulo: \(\operatorname{sen}\theta=\dfrac x3\), \(\cos\theta=\dfrac{\sqrt{9-x^2}}3\), então \(\tfrac92\operatorname{sen}\theta\cos\theta = \tfrac x2\sqrt{9-x^2}\).
+
+$$
+\frac92\operatorname{arcsen}\frac x3+\frac x2\sqrt{9-x^2}+C
+$$
 {{< /details >}}
 
 **Problema 5.** \(\displaystyle\int\frac{x+1}{x^2-x-6}\,dx\)
 
 {{< details title="Gabarito" >}}
-\(x^2-x-6=(x-3)(x+2)\). Frações parciais: \(\dfrac{x+1}{(x-3)(x+2)}=\dfrac{4/5}{x-3}+\dfrac{1/5}{x+2}\). Resposta: \(\tfrac45\ln\lvert x-3\rvert+\tfrac15\ln\lvert x+2\rvert+C\).
+*Técnica: frações parciais.*
+
+1. Fatore: produto \(-6\), soma \(-1\): \(-3\) e \(2\). \(x^2-x-6=(x-3)(x+2)\).
+2. \(x+1=A(x+2)+B(x-3)\).
+   - \(x=3\): \(4=5A\), \(A=\tfrac45\).
+   - \(x=-2\): \(-1=-5B\), \(B=\tfrac15\).
+
+$$
+\tfrac45\ln\lvert x-3\rvert+\tfrac15\ln\lvert x+2\rvert+C
+$$
 {{< /details >}}
 
 **Problema 6.** \(\displaystyle\int x\operatorname{arctg}x\,dx\)
 
 {{< details title="Gabarito" >}}
-Partes, \(u=\operatorname{arctg}x\), \(dv=x\,dx\): \(\dfrac{x^2}2\operatorname{arctg}x-\dfrac12\displaystyle\int\dfrac{x^2}{1+x^2}dx\). Como \(\dfrac{x^2}{1+x^2}=1-\dfrac1{1+x^2}\): \(\dfrac{x^2+1}2\operatorname{arctg}x-\dfrac x2+C\).
+*Técnica: partes* (\(\operatorname{arctg}\) é o \(I\), vem antes do polinômio).
+
+1. \(u=\operatorname{arctg}x\), \(dv=x\,dx\), \(du=\dfrac{dx}{1+x^2}\), \(v=\dfrac{x^2}2\).
+2. \(\dfrac{x^2}2\operatorname{arctg}x-\dfrac12\displaystyle\int\dfrac{x^2}{1+x^2}dx\).
+3. Divida: \(\dfrac{x^2}{1+x^2}=\dfrac{(1+x^2)-1}{1+x^2}=1-\dfrac1{1+x^2}\). Então \(\int=x-\operatorname{arctg}x\).
+4. Juntando: \(\dfrac{x^2}{2}\operatorname{arctg}x-\dfrac x2+\dfrac12\operatorname{arctg}x\). Em evidência o \(\operatorname{arctg}\):
+
+$$
+\frac{x^2+1}2\operatorname{arctg}x-\frac x2+C
+$$
 {{< /details >}}
 
 **Problema 7.** \(\displaystyle\int\operatorname{tg}^2x\sec^2x\,dx\)
 
 {{< details title="Gabarito" >}}
-Substituição \(u=\operatorname{tg}x\), \(du=\sec^2x\,dx\): \(\dfrac{\operatorname{tg}^3x}3+C\).
+*Técnica: substituição.* Sobra \(\sec^2x\,dx\), então \(u=\operatorname{tg}x\), \(du=\sec^2x\,dx\): \(\int u^2du = \dfrac{u^3}{3}\).
+
+$$
+\frac{\operatorname{tg}^3x}3+C
+$$
 {{< /details >}}
 
 **Problema 8.** \(\displaystyle\int_0^1\ln x\,dx\)
 
 {{< details title="Gabarito" >}}
-Imprópria (explode em \(0\)) e partes. \(\int\ln x\,dx=x\ln x-x\). Então \(\lim_{c\to0^+}\big[x\ln x-x\big]_c^1=-1-\lim_{c\to0^+}(c\ln c-c)=-1\) (pois \(c\ln c\to0\), por L'Hôpital). **Converge a \(-1\).**
+*Técnica: imprópria (explode em \(0\)) e partes.*
+
+1. \(\int\ln x\,dx=x\ln x-x\).
+2. Em \(1\): \(0-1=-1\). Em \(c\): \(c\ln c-c\).
+3. \(\displaystyle\lim_{c\to0^+}\big[x\ln x-x\big]_c^1=-1-\lim_{c\to0^+}(c\ln c-c)\). Como \(c\ln c=\dfrac{\ln c}{1/c}\to\dfrac{1/c}{-1/c^2}=-c\to0\) (L'Hôpital), o limite é \(-1-0=-1\). **Converge a \(-1\).**
 {{< /details >}}
 
 **Problema 9.** \(\displaystyle\int\frac{x^2+1}{x^3+3x}\,dx\)
 
 {{< details title="Gabarito" >}}
-Numerador \(x^2+1\) não é exatamente a derivada \(3x^2+3\) do denominador, mas é \(\tfrac13\) dela: \(\tfrac13\int\dfrac{3x^2+3}{x^3+3x}dx=\tfrac13\ln\lvert x^3+3x\rvert+C\) (substituição simples).
+*Técnica: substituição (padrão de ouro com constante).*
+
+1. Derivada do denominador: \((x^3+3x)'=3x^2+3=3(x^2+1)\). O numerador \(x^2+1\) é **um terço** dela.
+2. \(u=x^3+3x\), \(du=3(x^2+1)dx\), logo \((x^2+1)dx=\tfrac{du}{3}\).
+
+$$
+\tfrac13\int\frac{du}{u}=\tfrac13\ln\lvert x^3+3x\rvert+C
+$$
 {{< /details >}}
 
 **Problema 10.** \(\displaystyle\int x^2\operatorname{sen}x\,dx\)
 
 {{< details title="Gabarito" >}}
-Tabular: \(D\): \(x^2,2x,2\); \(I\): \(-\cos x,-\operatorname{sen}x,\cos x\). Sinais \(+,-,+\): \(-x^2\cos x+2x\operatorname{sen}x+2\cos x+C\).
+*Técnica: tabular.*
+
+| Sinal | D | I |
+| --- | --- | --- |
+| \(+\) | \(x^2\) | \(-\cos x\) |
+| \(-\) | \(2x\) | \(-\operatorname{sen}x\) |
+| \(+\) | \(2\) | \(\cos x\) |
+
+Produtos com o sinal da linha:
+
+$$
++x^2(-\cos x)\;-\;2x(-\operatorname{sen}x)\;+\;2\cos x = -x^2\cos x+2x\operatorname{sen}x+2\cos x+C
+$$
 {{< /details >}}

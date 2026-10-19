@@ -27,7 +27,7 @@ Alguns nomes que vamos usar:
 1. **Grau:** se grau do numerador \(\ge\) grau do denominador, faça a divisão de polinômios. Você obtém um quociente (fácil de integrar) mais um resto sobre o denominador.
 2. **Fatore** o denominador em irredutíveis.
 3. **Monte a decomposição** conforme a tabela abaixo.
-4. **Ache as constantes** \(A, B, C, \ldots\) (multiplique tudo pelo denominador e use valores de \(x\) convenientes e/ou compare coeficientes).
+4. **Ache as constantes** \(A, B, C, \ldots\): multiplique tudo pelo denominador (isso elimina as frações) e use valores de \(x\) convenientes e/ou compare coeficientes.
 5. **Integre** cada parcela.
 
 ## Como montar a decomposição
@@ -41,38 +41,42 @@ Alguns nomes que vamos usar:
 
 Regra geral: **uma parcela para cada fator**, com potências repetidas gerando uma parcela por potência, e o numerador de cada parcela com grau *um a menos* que o do fator.
 
+> [!TIP]
+> Truque dos valores: escolha para \(x\) as **raízes dos fatores**. Cada escolha zera quase todas as parcelas e entrega uma constante de graça.
+
 ## Exemplos
 
 **Exemplo 1 (fatores distintos de grau 1, com divisão).** \(\displaystyle\int\frac{x^3 + x^2 + 1}{x^2 + x}\,dx\)
 
-O numerador tem grau 3 e o denominador grau 2. Divida: como \(x^3 + x^2 = x\,(x^2+x)\),
+1. O numerador tem grau 3 e o denominador grau 2: **divida primeiro**. Como \(x\,(x^2+x) = x^3 + x^2\), o quociente é \(x\) e o resto é \((x^3+x^2+1) - (x^3+x^2) = 1\):
 
 $$
 \frac{x^3+x^2+1}{x^2+x} = x + \frac{1}{x^2+x} = x + \frac{1}{x(x+1)}
 $$
 
-Decomponha: \(\dfrac{1}{x(x+1)} = \dfrac{A}{x} + \dfrac{B}{x+1}\). Multiplicando por \(x(x+1)\):
+2. Decomponha: \(\dfrac{1}{x(x+1)} = \dfrac{A}{x} + \dfrac{B}{x+1}\). Multiplicando os dois lados por \(x(x+1)\):
 
 $$
 1 = A(x+1) + Bx
 $$
 
-Com \(x = 0\): \(A = 1\). Com \(x = -1\): \(B = -1\). Então:
+3. Com \(x = 0\): \(1 = A(1) + B(0)\), logo \(A = 1\). Com \(x = -1\): \(1 = A(0) + B(-1)\), logo \(B = -1\).
+4. Integre (cada parcela é \(\ln\), e \(\int x\,dx = \tfrac{x^2}{2}\)):
 
 $$
 \int\left(x + \frac1x - \frac{1}{x+1}\right)dx = \frac{x^2}{2} + \ln\lvert x\rvert - \ln\lvert x+1\rvert + C
 $$
 
-> [!TIP]
-> Truque dos valores: escolha para \(x\) as **raízes dos fatores**. Cada escolha zera quase todas as parcelas e entrega uma constante de graça.
-
 **Exemplo 2 (fator repetido).** \(\displaystyle\int\frac{6x+7}{(x+3)^2}\,dx\)
+
+1. Fator repetido, então duas parcelas. Multiplique por \((x+3)^2\):
 
 $$
 \frac{6x+7}{(x+3)^2} = \frac{A}{x+3} + \frac{B}{(x+3)^2} \quad\Rightarrow\quad 6x + 7 = A(x+3) + B
 $$
 
-Comparando os coeficientes de \(x\): \(A = 6\). Termo constante: \(7 = 3A + B = 18 + B\), então \(B = -11\).
+2. Expanda: \(6x + 7 = Ax + 3A + B\). Compare os coeficientes de \(x\): \(A = 6\). Compare os termos constantes: \(7 = 3A + B = 18 + B\), logo \(B = -11\).
+3. Integre. Para a segunda, \(\int(x+3)^{-2}dx = -(x+3)^{-1}\), então \(-11\cdot\bigl(-\tfrac{1}{x+3}\bigr) = +\tfrac{11}{x+3}\):
 
 $$
 \int\left(\frac{6}{x+3} - \frac{11}{(x+3)^2}\right)dx = 6\ln\lvert x+3\rvert + \frac{11}{x+3} + C
@@ -80,22 +84,29 @@ $$
 
 **Exemplo 3 (dois irredutíveis de grau 2).** \(\displaystyle\int\frac{-3}{(x^2+1)(x^2+4)}\,dx\)
 
+1. Cada fator de grau 2 leva um numerador de grau 1:
+
 $$
 \frac{-3}{(x^2+1)(x^2+4)} = \frac{Ax+B}{x^2+1} + \frac{Cx+D}{x^2+4}
 $$
+
+2. Multiplique tudo pelo denominador:
 
 $$
 -3 = (Ax+B)(x^2+4) + (Cx+D)(x^2+1)
 $$
 
-Expandindo e comparando coeficientes de \(x^3, x^2, x, 1\):
-
-- \(x^3\): \(A + C = 0\)
-- \(x^2\): \(B + D = 0\)
-- \(x\): \(4A + C = 0\)
-- constante: \(4B + D = -3\)
-
-Da primeira e da terceira equações: \(A = C = 0\). Depois \(D = -B\) e \(4B - B = -3\), logo \(B = -1\) e \(D = 1\).
+3. Expanda cada produto:
+   - \((Ax+B)(x^2+4) = Ax^3 + 4Ax + Bx^2 + 4B\)
+   - \((Cx+D)(x^2+1) = Cx^3 + Cx + Dx^2 + D\)
+4. Agrupe por potência de \(x\) e compare com o lado esquerdo \(0x^3 + 0x^2 + 0x - 3\):
+   - \(x^3\): \(A + C = 0\)
+   - \(x^2\): \(B + D = 0\)
+   - \(x\): \(4A + C = 0\)
+   - constante: \(4B + D = -3\)
+5. Subtraindo a primeira da terceira: \(3A = 0\), logo \(A = 0\) e \(C = 0\). Da segunda, \(D = -B\); na quarta, \(4B - B = -3\), então \(B = -1\) e \(D = 1\).
+6. Conferência: \(-(x^2+4) + (x^2+1) = -3\). \(\checkmark\)
+7. Integre com \(\int\dfrac{dx}{x^2+k^2} = \dfrac1k\operatorname{arctg}\dfrac xk\):
 
 $$
 \int\left(\frac{-1}{x^2+1} + \frac{1}{x^2+4}\right)dx = -\operatorname{arctg} x + \frac12\operatorname{arctg}\frac{x}{2} + C
@@ -106,6 +117,8 @@ $$
 
 **Exemplo 4 (fator repetido e fator distinto).** \(\displaystyle\int\frac{dx}{(x+1)(x-1)^2}\)
 
+1. Monte e multiplique pelo denominador:
+
 $$
 \frac{1}{(x+1)(x-1)^2} = \frac{A}{x+1} + \frac{B}{x-1} + \frac{C}{(x-1)^2}
 $$
@@ -114,7 +127,10 @@ $$
 1 = A(x-1)^2 + B(x+1)(x-1) + C(x+1)
 $$
 
-Com \(x = -1\): \(1 = 4A\), então \(A = \tfrac14\). Com \(x = 1\): \(1 = 2C\), então \(C = \tfrac12\). Com \(x = 0\): \(1 = A - B + C\), então \(B = -\tfrac14\).
+2. Com \(x = -1\): \(1 = A(-2)^2 = 4A\), então \(A = \tfrac14\).
+3. Com \(x = 1\): \(1 = C(2)\), então \(C = \tfrac12\).
+4. Falta \(B\): use qualquer outro valor, por exemplo \(x = 0\): \(1 = A(1) + B(1)(-1) + C(1) = A - B + C\). Logo \(B = A + C - 1 = \tfrac14 + \tfrac12 - 1 = -\tfrac14\).
+5. Integre (a última: \(\int\tfrac12(x-1)^{-2}dx = -\dfrac{1}{2(x-1)}\)):
 
 $$
 \int\left(\frac{1/4}{x+1} - \frac{1/4}{x-1} + \frac{1/2}{(x-1)^2}\right)dx = \frac14\ln\lvert x+1\rvert - \frac14\ln\lvert x-1\rvert - \frac{1}{2(x-1)} + C
@@ -122,17 +138,21 @@ $$
 
 **Exemplo 5 (linear e irredutível de grau 2).** \(\displaystyle\int\frac{dx}{(x^2+1)(x-1)}\)
 
+1. Monte e multiplique:
+
 $$
 \frac{1}{(x^2+1)(x-1)} = \frac{A}{x-1} + \frac{Bx+C}{x^2+1} \quad\Rightarrow\quad 1 = A(x^2+1) + (Bx+C)(x-1)
 $$
 
-Com \(x = 1\): \(A = \tfrac12\). Coeficiente de \(x^2\): \(0 = A + B\), então \(B = -\tfrac12\). Termo constante: \(1 = A - C\), então \(C = -\tfrac12\).
+2. Com \(x = 1\): \(1 = A(2)\), logo \(A = \tfrac12\).
+3. Expanda: \(1 = Ax^2 + A + Bx^2 - Bx + Cx - C\). Coeficiente de \(x^2\): \(0 = A + B\), logo \(B = -\tfrac12\). Termo constante: \(1 = A - C\), logo \(C = A - 1 = -\tfrac12\).
+4. A fração fica:
 
 $$
 \frac{1/2}{x-1} - \frac12\cdot\frac{x+1}{x^2+1}
 $$
 
-Separando \(\dfrac{x+1}{x^2+1} = \dfrac{x}{x^2+1} + \dfrac{1}{x^2+1}\):
+5. Separe \(\dfrac{x+1}{x^2+1} = \dfrac{x}{x^2+1} + \dfrac{1}{x^2+1}\). A parte com \(x\) usa \(u = x^2+1\): \(\int\dfrac{x}{x^2+1}dx = \tfrac12\ln(x^2+1)\). Então \(-\tfrac12\cdot\tfrac12\ln(x^2+1) = -\tfrac14\ln(x^2+1)\):
 
 $$
 \int\frac{dx}{(x^2+1)(x-1)} = \tfrac12\ln\lvert x-1\rvert - \tfrac14\ln(x^2+1) - \tfrac12\operatorname{arctg} x + C
@@ -140,19 +160,23 @@ $$
 
 **Exemplo 6 (divisão necessária).** \(\displaystyle\int\frac{2x^3 - 4x^2 - x - 3}{x^2 - 2x - 3}\,dx\)
 
-Grau 3 sobre grau 2: divida. Como \(2x\,(x^2-2x-3) = 2x^3 - 4x^2 - 6x\), o resto é \(5x - 3\):
+1. Grau 3 sobre grau 2: divida. O primeiro termo do quociente é \(2x\), porque \(2x\cdot x^2 = 2x^3\). Multiplique \(2x\,(x^2-2x-3) = 2x^3 - 4x^2 - 6x\) e subtraia do numerador:
+
+$$
+(2x^3-4x^2-x-3) - (2x^3-4x^2-6x) = 5x - 3
+$$
+
+O resto \(5x-3\) tem grau 1 (menor que 2), então paramos:
 
 $$
 \frac{2x^3-4x^2-x-3}{x^2-2x-3} = 2x + \frac{5x-3}{x^2-2x-3}
 $$
 
-Fatore \(x^2 - 2x - 3 = (x-3)(x+1)\):
-
-$$
-\frac{5x-3}{(x-3)(x+1)} = \frac{A}{x-3} + \frac{B}{x+1} \quad\Rightarrow\quad 5x - 3 = A(x+1) + B(x-3)
-$$
-
-Com \(x = 3\): \(12 = 4A\), \(A = 3\). Com \(x = -1\): \(-8 = -4B\), \(B = 2\).
+2. Fatore o denominador: procure dois números de produto \(-3\) e soma \(-2\): \(-3\) e \(1\). Então \(x^2 - 2x - 3 = (x-3)(x+1)\).
+3. Decomponha: \(5x - 3 = A(x+1) + B(x-3)\).
+   - \(x = 3\): \(5(3)-3 = 12 = A(4)\), então \(A = 3\).
+   - \(x = -1\): \(5(-1)-3 = -8 = B(-4)\), então \(B = 2\).
+4. Integre:
 
 $$
 \int\left(2x + \frac{3}{x-3} + \frac{2}{x+1}\right)dx = x^2 + 3\ln\lvert x-3\rvert + 2\ln\lvert x+1\rvert + C
@@ -173,7 +197,9 @@ Seis constantes, seis equações. Dá trabalho, mas nenhuma ideia nova.
 **Exercício 1.** Calcule \(\displaystyle\int\frac{dx}{x^2-1}\).
 
 {{< details title="Gabarito" >}}
-\(\dfrac{1}{(x-1)(x+1)} = \dfrac{A}{x-1} + \dfrac{B}{x+1}\), com \(1 = A(x+1) + B(x-1)\). Em \(x = 1\): \(A = \tfrac12\). Em \(x = -1\): \(B = -\tfrac12\).
+1. \(x^2 - 1 = (x-1)(x+1)\), então \(\dfrac{1}{(x-1)(x+1)} = \dfrac{A}{x-1} + \dfrac{B}{x+1}\) e \(1 = A(x+1) + B(x-1)\).
+2. \(x = 1\): \(1 = 2A\), \(A = \tfrac12\). \(x = -1\): \(1 = -2B\), \(B = -\tfrac12\).
+3. Integre e junte os logaritmos (\(\ln a - \ln b = \ln\frac ab\)):
 
 $$
 \frac12\ln\lvert x-1\rvert - \frac12\ln\lvert x+1\rvert + C = \frac12\ln\left\lvert\frac{x-1}{x+1}\right\rvert + C
@@ -183,17 +209,20 @@ $$
 **Exercício 2.** Calcule \(\displaystyle\int\frac{dx}{x^2+x-2}\).
 
 {{< details title="Gabarito" >}}
-\(x^2 + x - 2 = (x-1)(x+2)\). Então \(1 = A(x+2) + B(x-1)\): \(x = 1\) dá \(A = \tfrac13\); \(x = -2\) dá \(B = -\tfrac13\).
+1. Fatore: números de produto \(-2\) e soma \(1\) são \(2\) e \(-1\). \(x^2+x-2 = (x-1)(x+2)\).
+2. \(1 = A(x+2) + B(x-1)\). \(x = 1\): \(1 = 3A\), \(A = \tfrac13\). \(x = -2\): \(1 = -3B\), \(B = -\tfrac13\).
 
 $$
-\frac13\ln\left\lvert\frac{x-1}{x+2}\right\rvert + C
+\frac13\ln\lvert x-1\rvert - \frac13\ln\lvert x+2\rvert + C = \frac13\ln\left\lvert\frac{x-1}{x+2}\right\rvert + C
 $$
 {{< /details >}}
 
 **Exercício 3.** Calcule \(\displaystyle\int\frac{3x+5}{(x+1)^2}\,dx\).
 
 {{< details title="Gabarito" >}}
-\(3x + 5 = A(x+1) + B\): \(A = 3\) e \(5 = 3 + B\), então \(B = 2\).
+1. \(\dfrac{3x+5}{(x+1)^2} = \dfrac{A}{x+1} + \dfrac{B}{(x+1)^2}\), logo \(3x + 5 = A(x+1) + B = Ax + A + B\).
+2. Coeficiente de \(x\): \(A = 3\). Constante: \(5 = A + B = 3 + B\), então \(B = 2\).
+3. Integre (\(\int 2(x+1)^{-2}dx = -\dfrac{2}{x+1}\)):
 
 $$
 3\ln\lvert x+1\rvert - \frac{2}{x+1} + C
@@ -203,7 +232,10 @@ $$
 **Exercício 4.** Calcule \(\displaystyle\int\frac{x^2+x+1}{x(x^2+1)}\,dx\).
 
 {{< details title="Gabarito" >}}
-\(\dfrac{x^2+x+1}{x(x^2+1)} = \dfrac{A}{x} + \dfrac{Bx+C}{x^2+1}\), com \(x^2 + x + 1 = A(x^2+1) + (Bx+C)x\). Em \(x = 0\): \(A = 1\). Coeficiente de \(x^2\): \(1 = A + B\), então \(B = 0\). Coeficiente de \(x\): \(C = 1\).
+1. \(\dfrac{x^2+x+1}{x(x^2+1)} = \dfrac{A}{x} + \dfrac{Bx+C}{x^2+1}\), logo \(x^2 + x + 1 = A(x^2+1) + (Bx+C)x\).
+2. Expanda: \(= Ax^2 + A + Bx^2 + Cx = (A+B)x^2 + Cx + A\).
+3. Compare: constante \(A = 1\); coeficiente de \(x\): \(C = 1\); coeficiente de \(x^2\): \(A + B = 1\), então \(B = 0\).
+4. Integre:
 
 $$
 \int\left(\frac1x + \frac{1}{x^2+1}\right)dx = \ln\lvert x\rvert + \operatorname{arctg} x + C

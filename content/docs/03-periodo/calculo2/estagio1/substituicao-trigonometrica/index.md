@@ -29,27 +29,36 @@ Uma pergunta que ajuda: nos três casos, quem é o maior lado? É **sempre a hip
 
 **Caso 1: \(x^2 + a^2\). Use \(x = a\operatorname{tg}\theta\).**
 
+1. Troque e coloque \(a^2\) em evidência: \(x^2 + a^2 = a^2\operatorname{tg}^2\theta + a^2 = a^2(\operatorname{tg}^2\theta + 1)\).
+2. Use \(\operatorname{tg}^2\theta + 1 = \sec^2\theta\): \(x^2+a^2 = a^2\sec^2\theta\), logo (com \(\sec\theta>0\), pois \(\theta\in(-\tfrac\pi2,\tfrac\pi2)\))
+
 $$
-\sqrt{x^2 + a^2} = \sqrt{a^2\operatorname{tg}^2\theta + a^2} = a\sqrt{\operatorname{tg}^2\theta + 1} = a\sec\theta
+\sqrt{x^2 + a^2} = a\sec\theta, \qquad dx = a\sec^2\theta\,d\theta
 $$
 
-com \(dx = a\sec^2\theta\,d\theta\). Triângulo: cateto oposto \(x\), adjacente \(a\), hipotenusa \(\sqrt{x^2+a^2}\).
+Triângulo: cateto oposto \(x\), adjacente \(a\), hipotenusa \(\sqrt{x^2+a^2}\).
 
 **Caso 2: \(a^2 - x^2\). Use \(x = a\operatorname{sen}\theta\).**
 
+1. \(a^2 - x^2 = a^2 - a^2\operatorname{sen}^2\theta = a^2(1-\operatorname{sen}^2\theta) = a^2\cos^2\theta\).
+2. Com \(\cos\theta>0\) (\(\theta\in(-\tfrac\pi2,\tfrac\pi2)\)):
+
 $$
-\sqrt{a^2 - x^2} = \sqrt{a^2 - a^2\operatorname{sen}^2\theta} = a\sqrt{1 - \operatorname{sen}^2\theta} = a\cos\theta
+\sqrt{a^2 - x^2} = a\cos\theta, \qquad dx = a\cos\theta\,d\theta
 $$
 
-com \(dx = a\cos\theta\,d\theta\). Triângulo: oposto \(x\), hipotenusa \(a\), adjacente \(\sqrt{a^2-x^2}\).
+Triângulo: oposto \(x\), hipotenusa \(a\), adjacente \(\sqrt{a^2-x^2}\).
 
 **Caso 3: \(x^2 - a^2\). Use \(x = a\sec\theta\).**
 
+1. \(x^2 - a^2 = a^2\sec^2\theta - a^2 = a^2(\sec^2\theta - 1) = a^2\operatorname{tg}^2\theta\).
+2. Para \(x \ge a\) (\(\theta\in[0,\tfrac\pi2)\), \(\operatorname{tg}\theta\ge0\)):
+
 $$
-\sqrt{x^2 - a^2} = \sqrt{a^2\sec^2\theta - a^2} = a\sqrt{\sec^2\theta - 1} = a\operatorname{tg}\theta
+\sqrt{x^2 - a^2} = a\operatorname{tg}\theta, \qquad dx = a\sec\theta\operatorname{tg}\theta\,d\theta
 $$
 
-com \(dx = a\sec\theta\operatorname{tg}\theta\,d\theta\). Triângulo: hipotenusa \(x\), cateto \(a\) junto ao ângulo, oposto \(\sqrt{x^2-a^2}\).
+Triângulo: hipotenusa \(x\), cateto \(a\) junto ao ângulo, oposto \(\sqrt{x^2-a^2}\).
 
 > [!TIP]
 > Regra de bolso:
@@ -71,13 +80,19 @@ com \(dx = a\sec\theta\operatorname{tg}\theta\,d\theta\). Triângulo: hipotenusa
 
 **Exemplo 1.** \(\displaystyle\int\frac{dx}{\sqrt{4+x^2}}\)
 
-Caso 1 com \(a = 2\): \(x = 2\operatorname{tg}\theta\), \(dx = 2\sec^2\theta\,d\theta\), \(\sqrt{4+x^2} = 2\sec\theta\).
+1. Caso 1 com \(a = 2\): \(x = 2\operatorname{tg}\theta\), \(dx = 2\sec^2\theta\,d\theta\), \(\sqrt{4+x^2} = 2\sec\theta\).
+2. Troque (o \(2\) de cima cancela o \(2\) de baixo e um \(\sec\theta\) também):
 
 $$
 \int\frac{2\sec^2\theta}{2\sec\theta}\,d\theta = \int\sec\theta\,d\theta = \ln\lvert\sec\theta + \operatorname{tg}\theta\rvert + C
 $$
 
-Voltando ao triângulo (oposto \(x\), adjacente \(2\), hipotenusa \(\sqrt{4+x^2}\)): \(\operatorname{tg}\theta = \dfrac{x}{2}\) e \(\sec\theta = \dfrac{\sqrt{4+x^2}}{2}\).
+3. Triângulo (oposto \(x\), adjacente \(2\), hipotenusa \(\sqrt{4+x^2}\)): \(\operatorname{tg}\theta = \dfrac{x}{2}\) e \(\sec\theta = \dfrac{\sqrt{4+x^2}}{2}\).
+4. Substitua e junte as frações (mesmo denominador \(2\)):
+
+$$
+\ln\left\lvert\frac{\sqrt{4+x^2}}{2} + \frac{x}{2}\right\rvert = \ln\left\lvert\frac{\sqrt{4+x^2} + x}{2}\right\rvert
+$$
 
 $$
 \int\frac{dx}{\sqrt{4+x^2}} = \ln\left\lvert\frac{\sqrt{4+x^2} + x}{2}\right\rvert + C
@@ -87,13 +102,20 @@ $$
 
 **Exemplo 2.** \(\displaystyle\int\frac{x^3}{x^2+1}\,dx\)
 
-Aqui aparece \(x^2 + 1\) (sem raiz): \(x = \operatorname{tg}\theta\), \(dx = \sec^2\theta\,d\theta\), \(x^2+1 = \sec^2\theta\).
+1. Aparece \(x^2 + 1\) (sem raiz): \(x = \operatorname{tg}\theta\), \(dx = \sec^2\theta\,d\theta\), \(x^2+1 = \sec^2\theta\).
+2. Troque (o \(\sec^2\theta\) cancela):
 
 $$
-\int\frac{\operatorname{tg}^3\theta\,\sec^2\theta}{\sec^2\theta}\,d\theta = \int\operatorname{tg}^3\theta\,d\theta = \int\operatorname{tg}\theta(\sec^2\theta - 1)\,d\theta = \frac{\operatorname{tg}^2\theta}{2} + \ln\lvert\cos\theta\rvert + C
+\int\frac{\operatorname{tg}^3\theta\,\sec^2\theta}{\sec^2\theta}\,d\theta = \int\operatorname{tg}^3\theta\,d\theta = \int\operatorname{tg}\theta(\sec^2\theta - 1)\,d\theta
 $$
 
-No triângulo (oposto \(x\), adjacente \(1\), hipotenusa \(\sqrt{x^2+1}\)): \(\operatorname{tg}\theta = x\) e \(\cos\theta = \dfrac{1}{\sqrt{x^2+1}}\).
+3. Separe: \(\int\operatorname{tg}\theta\sec^2\theta\,d\theta = \dfrac{\operatorname{tg}^2\theta}{2}\) (com \(u=\operatorname{tg}\theta\)) e \(-\int\operatorname{tg}\theta\,d\theta = \ln\lvert\cos\theta\rvert\):
+
+$$
+\frac{\operatorname{tg}^2\theta}{2} + \ln\lvert\cos\theta\rvert + C
+$$
+
+4. Triângulo (oposto \(x\), adjacente \(1\), hipotenusa \(\sqrt{x^2+1}\)): \(\operatorname{tg}\theta = x\) e \(\cos\theta = \dfrac{1}{\sqrt{x^2+1}}\). Então \(\ln\cos\theta = -\tfrac12\ln(x^2+1)\):
 
 $$
 \int\frac{x^3}{x^2+1}\,dx = \frac{x^2}{2} - \tfrac12\ln(x^2+1) + C
@@ -104,24 +126,34 @@ $$
 
 **Exemplo 3.** \(\displaystyle\int\frac{dx}{\sqrt{1-9x^2}}\)
 
-Reescreva \(1 - 9x^2 = 1 - (3x)^2\). Caso 2: \(3x = \operatorname{sen}\theta\), isto é, \(x = \tfrac13\operatorname{sen}\theta\), \(dx = \tfrac13\cos\theta\,d\theta\), \(\sqrt{1-9x^2} = \cos\theta\).
+1. Reescreva \(1 - 9x^2 = 1 - (3x)^2\). Caso 2: \(3x = \operatorname{sen}\theta\), isto é, \(x = \tfrac13\operatorname{sen}\theta\), \(dx = \tfrac13\cos\theta\,d\theta\), \(\sqrt{1-9x^2} = \cos\theta\).
+2. Troque:
 
 $$
-\int\frac{\tfrac13\cos\theta}{\cos\theta}\,d\theta = \frac{\theta}{3} + C = \frac{\operatorname{arcsen}(3x)}{3} + C
+\int\frac{\tfrac13\cos\theta}{\cos\theta}\,d\theta = \int\tfrac13\,d\theta = \frac{\theta}{3} + C
+$$
+
+3. Como \(\operatorname{sen}\theta = 3x\), \(\theta = \operatorname{arcsen}(3x)\):
+
+$$
+\int\frac{dx}{\sqrt{1-9x^2}} = \frac{\operatorname{arcsen}(3x)}{3} + C
 $$
 
 **Exemplo 4.** \(\displaystyle\int\frac{\ln x}{x\sqrt{1-(\ln x)^2}}\,dx\)
 
-Esta parece difícil, mas é uma pegadinha: faça primeiro \(u = \ln x\), \(du = \dfrac{dx}{x}\).
+Esta parece difícil, mas é uma pegadinha.
+
+1. Faça primeiro \(u = \ln x\), \(du = \dfrac{dx}{x}\). Fica \(\displaystyle\int\frac{u}{\sqrt{1-u^2}}\,du\).
+2. Agora \(w = 1 - u^2\), \(dw = -2u\,du\), logo \(u\,du = -\tfrac12\,dw\):
 
 $$
-\int\frac{u}{\sqrt{1-u^2}}\,du
+-\tfrac12\int w^{-1/2}\,dw = -\tfrac12\cdot\frac{w^{1/2}}{1/2} = -\sqrt{w}
 $$
 
-Agora \(w = 1 - u^2\), \(dw = -2u\,du\):
+3. Volte: \(w = 1-u^2 = 1-(\ln x)^2\):
 
 $$
--\tfrac12\int w^{-1/2}\,dw = -\sqrt{w} + C \quad\Rightarrow\quad -\sqrt{1-(\ln x)^2} + C
+\int\frac{\ln x}{x\sqrt{1-(\ln x)^2}}\,dx = -\sqrt{1-(\ln x)^2} + C
 $$
 
 > [!NOTE]
@@ -129,13 +161,14 @@ $$
 
 **Exemplo 5.** \(\displaystyle\int\frac{dx}{\sqrt{25x^2-4}}\)
 
-\(25x^2 - 4 = (5x)^2 - 2^2\). Caso 3: \(5x = 2\sec\theta\), \(dx = \tfrac25\sec\theta\operatorname{tg}\theta\,d\theta\), \(\sqrt{25x^2-4} = 2\operatorname{tg}\theta\).
+1. \(25x^2 - 4 = (5x)^2 - 2^2\). Caso 3: \(5x = 2\sec\theta\), \(dx = \tfrac25\sec\theta\operatorname{tg}\theta\,d\theta\), \(\sqrt{25x^2-4} = 2\operatorname{tg}\theta\).
+2. Troque (cancelam \(\operatorname{tg}\theta\) e o \(2\)):
 
 $$
 \int\frac{\tfrac25\sec\theta\operatorname{tg}\theta}{2\operatorname{tg}\theta}\,d\theta = \frac15\int\sec\theta\,d\theta = \frac15\ln\lvert\sec\theta + \operatorname{tg}\theta\rvert + C
 $$
 
-Triângulo: hipotenusa \(5x\), cateto \(2\), oposto \(\sqrt{25x^2-4}\). Então \(\sec\theta = \dfrac{5x}{2}\) e \(\operatorname{tg}\theta = \dfrac{\sqrt{25x^2-4}}{2}\):
+3. Triângulo: hipotenusa \(5x\), cateto \(2\), oposto \(\sqrt{25x^2-4}\). Então \(\sec\theta = \dfrac{5x}{2}\) e \(\operatorname{tg}\theta = \dfrac{\sqrt{25x^2-4}}{2}\):
 
 $$
 \int\frac{dx}{\sqrt{25x^2-4}} = \frac15\ln\left\lvert\frac{5x + \sqrt{25x^2-4}}{2}\right\rvert + C
@@ -145,11 +178,9 @@ $$
 
 O polinômio não está na forma pronta. **Complete o quadrado**:
 
-$$
-x^2 - 4x + 3 = (x-2)^2 - 1
-$$
-
-Com \(u = x - 2\) (\(du = dx\)), temos \(\displaystyle\int\frac{du}{\sqrt{u^2-1}}\). Caso 3 com \(a = 1\): \(u = \sec\theta\), que leva (como no Exemplo 5) a \(\ln\lvert\sec\theta + \operatorname{tg}\theta\rvert\), com \(\sec\theta = u\) e \(\operatorname{tg}\theta = \sqrt{u^2-1}\):
+1. \(x^2 - 4x\) pede \(+4\) para virar \((x-2)^2\). Some e subtraia \(4\): \(x^2-4x+3 = (x^2-4x+4) - 4 + 3 = (x-2)^2 - 1\).
+2. Com \(u = x - 2\) (\(du = dx\)), temos \(\displaystyle\int\frac{du}{\sqrt{u^2-1}}\).
+3. Caso 3 com \(a = 1\): \(u = \sec\theta\), \(du = \sec\theta\operatorname{tg}\theta\,d\theta\), \(\sqrt{u^2-1} = \operatorname{tg}\theta\). A integral vira \(\int\sec\theta\,d\theta = \ln\lvert\sec\theta+\operatorname{tg}\theta\rvert\), com \(\sec\theta = u\) e \(\operatorname{tg}\theta = \sqrt{u^2-1}\):
 
 $$
 \int\frac{dx}{\sqrt{x^2-4x+3}} = \ln\left\lvert x - 2 + \sqrt{x^2-4x+3}\right\rvert + C
@@ -163,23 +194,34 @@ $$
 **Exercício 1.** Calcule \(\displaystyle\int\frac{dx}{x^2+2x+5}\).
 
 {{< details title="Gabarito" >}}
-Complete o quadrado: \(x^2+2x+5 = (x+1)^2 + 4\). Com \(x + 1 = 2\operatorname{tg}\theta\), \(dx = 2\sec^2\theta\,d\theta\):
+1. Complete o quadrado: \(x^2+2x+5 = (x^2+2x+1) - 1 + 5 = (x+1)^2 + 4\).
+2. \(x + 1 = 2\operatorname{tg}\theta\), \(dx = 2\sec^2\theta\,d\theta\), e o denominador vira \(4\operatorname{tg}^2\theta + 4 = 4\sec^2\theta\):
 
 $$
-\int\frac{2\sec^2\theta}{4\sec^2\theta}\,d\theta = \frac{\theta}{2} + C = \frac12\operatorname{arctg}\!\left(\frac{x+1}{2}\right) + C
+\int\frac{2\sec^2\theta}{4\sec^2\theta}\,d\theta = \int\frac12\,d\theta = \frac{\theta}{2} + C
+$$
+
+3. De \(\operatorname{tg}\theta = \dfrac{x+1}{2}\), \(\theta = \operatorname{arctg}\dfrac{x+1}{2}\):
+
+$$
+\frac12\operatorname{arctg}\!\left(\frac{x+1}{2}\right) + C
 $$
 {{< /details >}}
 
 **Exercício 2.** Calcule \(\displaystyle\int\sqrt{9-x^2}\,dx\).
 
 {{< details title="Gabarito" >}}
-Caso 2: \(x = 3\operatorname{sen}\theta\), \(dx = 3\cos\theta\,d\theta\), \(\sqrt{9-x^2} = 3\cos\theta\).
+1. Caso 2: \(x = 3\operatorname{sen}\theta\), \(dx = 3\cos\theta\,d\theta\), \(\sqrt{9-x^2} = 3\cos\theta\).
+2. Troque: \(\displaystyle\int 3\cos\theta\cdot3\cos\theta\,d\theta = 9\int\cos^2\theta\,d\theta\).
+3. Arco duplo \(\cos^2\theta = \dfrac{1+\cos2\theta}{2}\):
 
 $$
-\int 9\cos^2\theta\,d\theta = \frac92\big(\theta + \operatorname{sen}\theta\cos\theta\big) + C
+9\int\frac{1+\cos2\theta}{2}\,d\theta = \frac92\left(\theta + \frac{\operatorname{sen}2\theta}{2}\right) = \frac92\big(\theta + \operatorname{sen}\theta\cos\theta\big)
 $$
 
-Triângulo: \(\operatorname{sen}\theta = \dfrac{x}{3}\), \(\cos\theta = \dfrac{\sqrt{9-x^2}}{3}\).
+(usando \(\operatorname{sen}2\theta = 2\operatorname{sen}\theta\cos\theta\)).
+
+4. Triângulo: \(\operatorname{sen}\theta = \dfrac{x}{3}\), \(\cos\theta = \dfrac{\sqrt{9-x^2}}{3}\). O produto é \(\dfrac{x\sqrt{9-x^2}}{9}\) e \(\dfrac92\cdot\dfrac{x\sqrt{9-x^2}}{9} = \dfrac{x\sqrt{9-x^2}}{2}\):
 
 $$
 \frac92\operatorname{arcsen}\frac{x}{3} + \frac{x}{2}\sqrt{9-x^2} + C
@@ -191,13 +233,16 @@ $$
 **Exercício 3.** Calcule \(\displaystyle\int\frac{dx}{x^2\sqrt{x^2+4}}\).
 
 {{< details title="Gabarito" >}}
-Caso 1: \(x = 2\operatorname{tg}\theta\), \(dx = 2\sec^2\theta\,d\theta\), \(\sqrt{x^2+4} = 2\sec\theta\).
+1. Caso 1: \(x = 2\operatorname{tg}\theta\), \(dx = 2\sec^2\theta\,d\theta\), \(\sqrt{x^2+4} = 2\sec\theta\), \(x^2 = 4\operatorname{tg}^2\theta\).
+2. Troque:
 
 $$
-\int\frac{2\sec^2\theta}{4\operatorname{tg}^2\theta\cdot 2\sec\theta}\,d\theta = \frac14\int\frac{\cos\theta}{\operatorname{sen}^2\theta}\,d\theta = -\frac{1}{4\operatorname{sen}\theta} + C
+\int\frac{2\sec^2\theta}{4\operatorname{tg}^2\theta\cdot2\sec\theta}\,d\theta = \frac14\int\frac{\sec\theta}{\operatorname{tg}^2\theta}\,d\theta
 $$
 
-No triângulo, \(\operatorname{sen}\theta = \dfrac{x}{\sqrt{x^2+4}}\):
+3. Escreva em seno e cosseno: \(\dfrac{\sec\theta}{\operatorname{tg}^2\theta} = \dfrac{1/\cos\theta}{\operatorname{sen}^2\theta/\cos^2\theta} = \dfrac{\cos\theta}{\operatorname{sen}^2\theta}\).
+4. Com \(u = \operatorname{sen}\theta\): \(\displaystyle\frac14\int u^{-2}\,du = -\frac{1}{4u} = -\frac{1}{4\operatorname{sen}\theta}\).
+5. No triângulo, \(\operatorname{sen}\theta = \dfrac{x}{\sqrt{x^2+4}}\):
 
 $$
 -\frac{\sqrt{x^2+4}}{4x} + C
@@ -207,9 +252,16 @@ $$
 **Exercício 4.** Calcule \(\displaystyle\int\frac{dx}{x\sqrt{x^2-9}}\) para \(x > 3\).
 
 {{< details title="Gabarito" >}}
-Caso 3: \(x = 3\sec\theta\), \(dx = 3\sec\theta\operatorname{tg}\theta\,d\theta\), \(\sqrt{x^2-9} = 3\operatorname{tg}\theta\).
+1. Caso 3: \(x = 3\sec\theta\), \(dx = 3\sec\theta\operatorname{tg}\theta\,d\theta\), \(\sqrt{x^2-9} = 3\operatorname{tg}\theta\).
+2. Troque (cancelam \(3\), \(\sec\theta\) e \(\operatorname{tg}\theta\)):
 
 $$
-\int\frac{3\sec\theta\operatorname{tg}\theta}{3\sec\theta\cdot3\operatorname{tg}\theta}\,d\theta = \frac{\theta}{3} + C = \frac13\operatorname{arcsec}\frac{x}{3} + C
+\int\frac{3\sec\theta\operatorname{tg}\theta}{3\sec\theta\cdot3\operatorname{tg}\theta}\,d\theta = \int\frac13\,d\theta = \frac{\theta}{3} + C
+$$
+
+3. De \(\sec\theta = \dfrac x3\):
+
+$$
+\frac13\operatorname{arcsec}\frac{x}{3} + C
 $$
 {{< /details >}}
