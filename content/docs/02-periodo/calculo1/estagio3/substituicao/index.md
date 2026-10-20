@@ -7,169 +7,166 @@ autores:
 date: 2026-10-14
 ---
 
-## 1. A ideia: a regra da cadeia ao contrário
+## 1. A ideia
 
-Pela regra da cadeia, $\dfrac{d}{dx}F(g(x))=F'(g(x))\,g'(x)$. Lendo ao contrário:
-
-$$
-\int f(g(x))\,g'(x)\,dx=\int f(u)\,du,\qquad u=g(x),\ du=g'(x)\,dx
-$$
-
-Em palavras: se o integrando tem uma função "de dentro" **e a sua derivada** por perto, troque o miolo por $u$ e a integral vira uma bem mais simples.
-
-## 2. Como saber se vale a pena?
-
-Faça três perguntas:
-
-1. Há uma **composição** (algo dentro de algo: raiz, potência, $\operatorname{sen}(\cdot)$, $e^{(\cdot)}$)?
-2. O resto do integrando é (a menos de uma **constante**) a **derivada do miolo**?
-3. Se sim às duas, escolha $u=$ miolo.
-
-## 3. Receita
-
-1. **Escolha $u$** (em geral, o miolo ou o que está no denominador/expoente).
-2. **Derive:** $du=u'\,dx$.
-3. **Reescreva a integral inteira em $u$.** Não pode sobrar nenhum $x$. Se sobrar só uma constante multiplicando, ajuste: $dx=\dfrac{du}{u'}$.
-4. **Integre** em $u$.
-5. **Volte para $x$** (substitua $u$ de novo). Na integral definida, veja a seção 5.
-6. **Confira derivando** o resultado.
-
-## 4. Exemplos (indefinidas)
-
-### Exemplo 1: $\displaystyle\int\sqrt{2x+1}\,dx$
-
-$u=2x+1\Rightarrow du=2\,dx\Rightarrow dx=\dfrac{du}2$.
-$$
-\int\sqrt u\,\frac{du}2=\frac12\cdot\frac23u^{3/2}+C=\frac13(2x+1)^{3/2}+C
-$$
-
-### Exemplo 2: $\displaystyle\int5\sec^2(5x+1)\,dx$
-
-$u=5x+1\Rightarrow du=5\,dx$. A integral é exatamente $\displaystyle\int\sec^2u\,du=\operatorname{tg}u+C=\operatorname{tg}(5x+1)+C$.
-
-### Exemplo 3: $\displaystyle\int e^{-x+2}\,dx$
-
-$u=-x+2\Rightarrow du=-dx$. $\displaystyle-\int e^u\,du=-e^{-x+2}+C$.
-
-### Exemplo 4: $\displaystyle\int\frac{\sec z\operatorname{tg}z}{\sqrt{\sec z}}\,dz$
-
-$u=\sec z\Rightarrow du=\sec z\operatorname{tg}z\,dz$.
-$$
-\int u^{-1/2}\,du=2\sqrt u+C=2\sqrt{\sec z}+C
-$$
-
-### Exemplo 5: $\displaystyle\int\frac{2z}{\sqrt[3]{z^2+1}}\,dz$
-
-$u=z^2+1\Rightarrow du=2z\,dz$.
-$$
-\int u^{-1/3}\,du=\frac32u^{2/3}+C=\frac32(z^2+1)^{2/3}+C
-$$
-
-### Exemplo 6: $\displaystyle\int\frac{1}{(1+x)^3}\,dx$
-
-$u=1+x$, $du=dx$: $\displaystyle\int u^{-3}\,du=-\frac{1}{2u^2}+C=-\frac1{2(1+x)^2}+C$.
-
-### Exemplo 7: quando é preciso separar
-
-$\displaystyle\int\frac{3x+2}{\sqrt{1-x^2}}\,dx=3\int\frac{x}{\sqrt{1-x^2}}\,dx+2\int\frac1{\sqrt{1-x^2}}\,dx$
-
-- Na primeira, $u=1-x^2$, $du=-2x\,dx$: $3\cdot\left(-\frac12\right)\displaystyle\int u^{-1/2}du=-3\sqrt{1-x^2}$.
-- A segunda é direto da tabela: $2\operatorname{arcsen}x$.
+A substituição é a **regra da cadeia de trás para frente**. Ao derivar uma função composta, aparece um fator extra (a derivada do miolo). Na integral, se esse fator extra estiver sobrando ao lado, é o sinal de que dá para trocar o miolo por uma letra só, \(u\).
 
 $$
-=-3\sqrt{1-x^2}+2\operatorname{arcsen}x+C
+\int f(g(x))\,g'(x)\,dx=\int f(u)\,du,\qquad u=g(x),\quad du=g'(x)\,dx
 $$
 
-### Exemplo 8: $\displaystyle\int\operatorname{tg}x\,dx$
+## 2. Receita (sempre a mesma)
 
-$\operatorname{tg}x=\dfrac{\operatorname{sen}x}{\cos x}$. Com $u=\cos x$, $du=-\operatorname{sen}x\,dx$:
+1. **Escolha \(u\):** normalmente o miolo (o que está dentro de raiz, potência, seno, exponencial) ou o que está no denominador.
+2. **Derive:** \(du=u'\,dx\).
+3. **Reescreva a integral inteira em \(u\).** Não pode sobrar nenhum \(x\). Se sobrar só uma constante, ajuste com \(dx=\dfrac{du}{u'}\).
+4. **Integre em \(u\).**
+5. **Volte para \(x\).**
+6. **Confira derivando.**
+
+## 3. Exemplo-mestre (sem pular nada)
+
+**Vamos resolver:**
+
 $$
--\int\frac{du}{u}=-\ln\lvert\cos x\rvert+C=\ln\lvert\sec x\rvert+C
+\int\operatorname{sen}(2x)\cos x\,dx
 $$
+
+**O que estou vendo?** Um seno e um cosseno multiplicados, mas com **ângulos diferentes**: \(2x\) e \(x\). Isso atrapalha, porque uma substituição precisa que as funções falem do mesmo ângulo. Então o primeiro objetivo é **colocar tudo no mesmo ângulo \(x\)**.
+
+**Passo 1: usar a identidade do arco duplo.** Ela desmonta \(\operatorname{sen}(2x)\) em funções de \(x\):
+
+$$
+\operatorname{sen}(2x)=2\operatorname{sen}x\cos x
+$$
+
+Substituindo na integral:
+
+$$
+\int2\operatorname{sen}x\cos x\cdot\cos x\,dx
+$$
+
+**Passo 2: juntar o que for igual.** Dois cossenos multiplicando viram \(\cos^2x\), e o \(2\) é constante, então sai da integral:
+
+$$
+=2\int\operatorname{sen}x\cos^2x\,dx
+$$
+
+**Passo 3: escolher \(u\).** Pergunte: *qual função, quando derivada, aparece sobrando na integral?* A derivada de \(\cos x\) é \(-\operatorname{sen}x\). Na integral temos \(\cos^2x\) (o miolo) **e** um \(\operatorname{sen}x\,dx\) sobrando. Combinou! Então \(u=\cos x\). Derivando:
+
+$$
+du=-\operatorname{sen}x\,dx\quad\Longrightarrow\quad\operatorname{sen}x\,dx=-du
+$$
+
+**Passo 4: trocar tudo por \(u\).** O \(\cos^2x\) vira \(u^2\) e o pedaço \(\operatorname{sen}x\,dx\) vira \(-du\):
+
+$$
+2\int\underbrace{\cos^2x}_{u^2}\;\underbrace{\operatorname{sen}x\,dx}_{-du}=-2\int u^2\,du
+$$
+
+Conferiu? Não sobrou nenhum \(x\). Ótimo.
+
+**Passo 5: integrar.** Regra da potência: some \(1\) ao expoente e divida pelo novo expoente.
+
+$$
+-2\int u^2\,du=-2\cdot\frac{u^3}{3}+C=-\frac23u^3+C
+$$
+
+**Passo 6: voltar para \(x\).** Como \(u=\cos x\):
+
+$$
+\boxed{-\frac23\cos^3x+C}
+$$
+
+**Passo 7: conferir derivando** (nunca pule):
+
+$$
+\frac{d}{dx}\left[-\frac23\cos^3x\right]=-\frac23\cdot3\cos^2x\cdot(-\operatorname{sen}x)=2\operatorname{sen}x\cos^2x
+$$
+
+E \(2\operatorname{sen}x\cos x\cdot\cos x=\operatorname{sen}(2x)\cos x\). Voltou ao início. \(\checkmark\)
+
+**Bônus: outro caminho dá a mesma resposta?** Pela fórmula de produto para soma, \(\operatorname{sen}A\cos B=\tfrac12[\operatorname{sen}(A-B)+\operatorname{sen}(A+B)]\), com \(A=2x\) e \(B=x\):
+
+$$
+\operatorname{sen}(2x)\cos x=\tfrac12[\operatorname{sen}x+\operatorname{sen}3x]\ \Rightarrow\ \int=-\tfrac12\cos x-\tfrac16\cos3x+C
+$$
+
+Parece diferente, mas como \(\cos3x=4\cos^3x-3\cos x\):
+
+$$
+-\tfrac12\cos x-\tfrac16(4\cos^3x-3\cos x)=-\tfrac12\cos x-\tfrac23\cos^3x+\tfrac12\cos x=-\tfrac23\cos^3x
+$$
+
+**Iguais.** Moral: integrais podem ter respostas de aparência diferente que diferem só por uma constante. Para conferir, derive.
+
+## 4. Mais exemplos
+
+**Exemplo A.** \(\displaystyle\int\sqrt{2x+1}\,dx\)
+
+1. O miolo da raiz é \(2x+1\). Escolho \(u=2x+1\).
+2. Derivando, \(du=2\,dx\). Na integral só há \(dx\), então isolo: \(dx=\dfrac{du}2\).
+3. Troco: \(\displaystyle\int\sqrt u\,\frac{du}{2}=\frac12\int u^{1/2}\,du\).
+4. Integro: \(\dfrac12\cdot\dfrac{u^{3/2}}{3/2}=\dfrac12\cdot\dfrac23u^{3/2}=\dfrac13u^{3/2}\).
+5. Volto: \(\boxed{\tfrac13(2x+1)^{3/2}+C}\).
+
+Conferência: \(\tfrac13\cdot\tfrac32(2x+1)^{1/2}\cdot2=(2x+1)^{1/2}\). \(\checkmark\)
+
+**Exemplo B.** \(\displaystyle\int\frac{x}{x^2+4}\,dx\)
+
+1. O denominador \(x^2+4\) é candidato a \(u\). O numerador \(x\) parece a derivada \(2x\) do denominador (faltando o \(2\)). \(u=x^2+4\).
+2. \(du=2x\,dx\), logo \(x\,dx=\dfrac{du}2\).
+3. Troco: \(\dfrac12\displaystyle\int\frac{du}{u}\).
+4. Integro: \(\dfrac12\ln\lvert u\rvert\).
+5. Volto: \(\boxed{\tfrac12\ln(x^2+4)+C}\) (sem módulo, pois \(x^2+4>0\)).
 
 > [!TIP]
-> Padrão de ouro: $\displaystyle\int\frac{u'}{u}\,dx=\ln\lvert u\rvert+C$. Se o numerador é a derivada do denominador, a resposta é $\ln$.
+> **Padrão de ouro:** se o numerador é a derivada do denominador, a resposta é \(\ln\lvert\text{denominador}\rvert\).
 
-## 5. Integrais definidas
+**Exemplo C (definida).** \(\displaystyle\int_0^1\sqrt{2x+1}\,dx\)
 
-Duas maneiras (escolha uma e **não misture**):
+Na integral definida a variável muda, então **os limites também mudam**. Esse é o erro que mais custa nota.
 
-**Método A: troque os limites.** Se $u=g(x)$:
+1. \(u=2x+1\), \(dx=\dfrac{du}2\).
+2. Limites novos: \(x=0\Rightarrow u=1\); \(x=1\Rightarrow u=3\).
+3. Integre e aplique:
+
 $$
-\int_a^bf(g(x))\,g'(x)\,dx=\int_{g(a)}^{g(b)}f(u)\,du
-$$
-O resultado já sai em número, sem voltar para $x$.
-
-**Método B:** resolva a indefinida, volte para $x$, e só então aplique os limites originais.
-
-**Exemplo 9.** $\displaystyle\int_0^1\sqrt{2x+1}\,dx$. Com $u=2x+1$: $x=0\Rightarrow u=1$; $x=1\Rightarrow u=3$.
-$$
-\int_1^3\sqrt u\,\frac{du}2=\frac13\Big[u^{3/2}\Big]_1^3=\frac{3\sqrt3-1}{3}\approx1{,}40
+\frac12\int_1^3u^{1/2}\,du=\frac12\cdot\frac23\Big[u^{3/2}\Big]_1^3=\frac13\big(3^{3/2}-1\big)=\frac13(3\sqrt3-1)
 $$
 
-**Exemplo 10.** $\displaystyle\int_0^2x\sqrt{x^2+1}\,dx$. $u=x^2+1$, $du=2x\,dx$; $u$ vai de $1$ a $5$:
 $$
-\frac12\int_1^5\sqrt u\,du=\frac13\Big[u^{3/2}\Big]_1^5=\frac{5\sqrt5-1}{3}
+\boxed{\frac{3\sqrt3-1}{3}\approx1{,}40}
 $$
 
-**Exemplo 11 (simetria).** $\displaystyle\int_{-1}^{1}\frac{2z}{\sqrt[3]{z^2+1}}\,dz$: com $u=z^2+1$, $z=-1\Rightarrow u=2$ e $z=1\Rightarrow u=2$. Limites iguais, integral $=0$. (O integrando é ímpar em um intervalo simétrico.)
+Não precisa voltar para \(x\): o resultado já é um número.
 
-> [!WARNING]
-> **Dois erros que custam muita nota:**
-> 1. Trocar para $u$ e **deixar os limites em $x$** (ex.: escrever $\int_0^1\sqrt u\,du$ no Exemplo 9). Os limites têm que acompanhar a variável.
-> 2. A substituição só vale se $u=g(x)$ for derivável e $f(g(x))$ for **contínua em todo o intervalo**. Ex.: $\int_0^{\pi}\sec^2x\,dx$ **não** é $\operatorname{tg}\pi-\operatorname{tg}0=0$, porque $\sec^2x$ explode em $x=\pi/2$.
+## 5. Exercícios
 
-## 6. O que fazer quando não funciona?
-
-- **Sobrou $x$ depois de trocar?** Escolha outro $u$ ou resolva $x$ em função de $u$ (ex.: $u=x+1\Rightarrow x=u-1$).
-- **Nada dá certo?** A integral provavelmente pede outra técnica: integração por partes, trigonométricas, frações parciais etc. (Cálculo 2, Estágio 1).
-
-## Exercícios propostos
-
-**Exercício 1.** $\displaystyle\int xe^{x^2}\,dx$
+**Exercício 1.** \(\displaystyle\int x\,e^{x^2}\,dx\).
 
 {{< details title="Gabarito" >}}
-$u=x^2$, $du=2x\,dx$: $\tfrac12\int e^u\,du=\tfrac12e^{x^2}+C$.
+1. Miolo \(x^2\), derivada \(2x\), e há \(x\) sobrando: \(u=x^2\), \(x\,dx=\dfrac{du}2\).
+2. \(\dfrac12\int e^u\,du=\dfrac12e^u+C=\dfrac12e^{x^2}+C\).
+3. Conferência: \(\left(\tfrac12e^{x^2}\right)'=\tfrac12e^{x^2}\cdot2x=xe^{x^2}\). \(\checkmark\)
 {{< /details >}}
 
-**Exercício 2.** $\displaystyle\int\cos x\,\operatorname{sen}^4x\,dx$
+**Exercício 2.** \(\displaystyle\int\cos^3x\operatorname{sen}x\,dx\).
 
 {{< details title="Gabarito" >}}
-$u=\operatorname{sen}x$, $du=\cos x\,dx$: $\int u^4du=\dfrac{\operatorname{sen}^5x}5+C$.
+1. \(u=\cos x\), \(\operatorname{sen}x\,dx=-du\).
+2. \(\int u^3(-du)=-\dfrac{u^4}4=-\dfrac{\cos^4x}{4}+C\).
 {{< /details >}}
 
-**Exercício 3.** $\displaystyle\int\frac{x}{x^2+4}\,dx$
+**Exercício 3.** \(\displaystyle\int\frac{2x+3}{x^2+3x+1}\,dx\).
 
 {{< details title="Gabarito" >}}
-$u=x^2+4$, $du=2x\,dx$: $\tfrac12\ln(x^2+4)+C$ (sem módulo, pois $x^2+4>0$).
+O numerador é a derivada do denominador: \((x^2+3x+1)'=2x+3\). Padrão de ouro: \(\ln\lvert x^2+3x+1\rvert+C\).
 {{< /details >}}
 
-**Exercício 4.** $\displaystyle\int\frac{\ln x}{x}\,dx$
+**Exercício 4.** \(\displaystyle\int_0^{\pi/2}\operatorname{sen}x\cos x\,dx\).
 
 {{< details title="Gabarito" >}}
-$u=\ln x$, $du=\dfrac{dx}{x}$: $\int u\,du=\dfrac{(\ln x)^2}2+C$.
-{{< /details >}}
-
-**Exercício 5.** $\displaystyle\int\frac{e^x}{1+e^{2x}}\,dx$
-
-{{< details title="Gabarito" >}}
-$u=e^x$, $du=e^x\,dx$: $\int\dfrac{du}{1+u^2}=\operatorname{arctg}(e^x)+C$.
-{{< /details >}}
-
-**Exercício 6.** $\displaystyle\int x\sqrt{x+1}\,dx$. *Dica: $u=x+1$, logo $x=u-1$.*
-
-{{< details title="Gabarito" >}}
-$\int(u-1)u^{1/2}du=\int(u^{3/2}-u^{1/2})du=\tfrac25u^{5/2}-\tfrac23u^{3/2}+C$, com $u=x+1$.
-{{< /details >}}
-
-**Exercício 7.** $\displaystyle\int_0^{1}\frac{x}{x^2+1}\,dx$
-
-{{< details title="Gabarito" >}}
-$u=x^2+1$ vai de $1$ a $2$: $\tfrac12\int_1^2\dfrac{du}u=\tfrac12\ln2$.
-{{< /details >}}
-
-**Exercício 8.** $\displaystyle\int_0^{\pi/2}\operatorname{sen}x\cos x\,dx$
-
-{{< details title="Gabarito" >}}
-$u=\operatorname{sen}x$ vai de $0$ a $1$: $\int_0^1u\,du=\tfrac12$.
+1. \(u=\operatorname{sen}x\), \(du=\cos x\,dx\). Limites: \(x=0\Rightarrow u=0\); \(x=\tfrac\pi2\Rightarrow u=1\).
+2. \(\int_0^1u\,du=\left[\dfrac{u^2}2\right]_0^1=\dfrac12\).
 {{< /details >}}

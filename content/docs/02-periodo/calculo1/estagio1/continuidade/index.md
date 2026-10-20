@@ -11,95 +11,104 @@ date: 2026-10-01
 
 Uma função é **contínua** quando seu gráfico pode ser traçado sem levantar o lápis. Se há um **buraco**, um **salto** ou uma **explosão** (assíntota), há descontinuidade.
 
-Um exemplo do dia a dia: se o custo de produzir um item muda de forma suave com a quantidade, a função é contínua. Se, a partir de certa quantidade, é preciso abrir um novo turno e o custo "salta", a função deixa de ser contínua nesse ponto.
-
 ## 2. Definição
 
-$f$ é contínua em $x=a$ quando:
+\(f\) é contínua em \(x=a\) quando:
+
 $$
 \boxed{\lim_{x\to a}f(x)=f(a)}
 $$
-Isso exige **três coisas** ao mesmo tempo:
 
-1. $f(a)$ existe;
-2. $\lim_{x\to a}f(x)$ existe;
-3. os dois são iguais.
+Isso exige três coisas **ao mesmo tempo**:
 
-Se uma falha, há descontinuidade. $f$ é **contínua** se for contínua em todo ponto do seu domínio. Também há continuidade **à direita** ($\lim_{x\to a^+}f=f(a)$) e **à esquerda** ($\lim_{x\to a^-}f=f(a)$); contínua em $a$ equivale a contínua dos dois lados.
+1. \(f(a)\) existe;
+2. \(\lim_{x\to a}f(x)\) existe (os laterais existem e são iguais);
+3. os dois são **iguais**.
+
+Se uma falha, há descontinuidade.
 
 ## 3. Tipos de descontinuidade
 
 | Tipo | O que acontece | Exemplo |
 | --- | --- | --- |
-| **Removível** | O limite existe, mas $f(a)$ não existe ou é diferente | $\dfrac{x^2-1}{x-1}$ em $x=1$ |
-| **Salto** | Laterais existem e são **diferentes** | $\dfrac{\lvert x\rvert}{x}$ em $0$ |
-| **Infinita** | Pelo menos um lado vai a $\pm\infty$ | $\dfrac1x$ em $0$ |
+| **Removível** | O limite existe, mas \(f(a)\) não existe ou é diferente | \(\frac{x^2-1}{x-1}\) em \(x=1\) |
+| **Salto** | Laterais existem e são diferentes | \(\frac{\lvert x\rvert}{x}\) em \(0\) |
+| **Infinita** | Pelo menos um lado vai a \(\pm\infty\) | \(\frac1x\) em \(0\) |
 
-"Removível" porque dá para **consertar** redefinindo o valor no ponto. No primeiro exemplo, definir $f(1)=2$ torna a função contínua.
+"Removível" porque dá para consertar redefinindo o valor no ponto. No primeiro exemplo, definir \(f(1)=2\) torna a função contínua.
 
 ## 4. Quem já é contínua (sem precisar testar)
 
-- **Polinômios**, $e^x$, $\operatorname{sen}$, $\cos$, e raízes: contínuas em todo o seu domínio.
-- **Funções racionais**, $\operatorname{tg}$, $\ln$: contínuas **onde estão definidas**.
-- **Somas, produtos, quocientes** (com denominador $\ne0$) e **composições** de contínuas são contínuas.
+- Polinômios, \(e^x\), \(\operatorname{sen}\), \(\cos\) e raízes: contínuas em todo o seu domínio.
+- Funções racionais, \(\operatorname{tg}\), \(\ln\): contínuas **onde estão definidas**.
+- Somas, produtos, quocientes (denominador \(\ne0\)) e composições de contínuas são contínuas.
 
 Por isso, em pontos do domínio dessas funções, **limite = substituição direta**.
 
-## 5. Receita: achar valor para a função ficar contínua
+## 5. Receita: achar o valor que torna a função contínua
 
-1. Calcule os limites laterais no ponto (ou o limite, se for fórmula única).
-2. **Iguale** os laterais e iguale ao valor da função.
+1. Calcule os limites laterais no ponto.
+2. **Iguale** os laterais (e ao valor da função no ponto).
 3. Resolva a equação para a constante.
 
-**Exemplo 1.** Para que valor de $c$ a função
+**Exemplo 1.** Para que valor de \(c\) a função abaixo é contínua em \(x=2\)?
+
 $$
 f(x)=\begin{cases}x^2-1,&x<2\\ c\,x+1,&x\ge2\end{cases}
 $$
-é contínua em $2$? Esquerda: $4-1=3$. Direita: $2c+1$. Igualando: $2c+1=3\Rightarrow c=1$.
 
-**Exemplo 2 (removível).** $f(x)=\dfrac{x^2-9}{x-3}$ para $x\ne3$. Como $f(x)=x+3$ perto de $3$, o limite é $6$. Definindo $f(3)=6$, vira contínua.
+1. Esquerda: \(\lim_{x\to2^-}(x^2-1)=4-1=3\).
+2. Direita (e valor): \(c\cdot2+1=2c+1\).
+3. Igualando: \(2c+1=3\). Subtraia \(1\): \(2c=2\). Divida: \(\boxed{c=1}\).
+
+**Exemplo 2 (removível).** \(f(x)=\dfrac{x^2-9}{x-3}\) para \(x\ne3\). Como \(\dfrac{(x-3)(x+3)}{x-3}=x+3\) perto de \(3\), o limite é \(6\). Definindo \(f(3)=6\), a função vira contínua.
 
 ## 6. Teorema do Valor Intermediário (TVI)
 
-Se $f$ é **contínua** em $[a,b]$ e $N$ é qualquer número entre $f(a)$ e $f(b)$, existe $c\in[a,b]$ com $f(c)=N$.
+> Se \(f\) é **contínua** em \([a,b]\) e \(N\) é qualquer número entre \(f(a)\) e \(f(b)\), então existe \(c\in[a,b]\) com \(f(c)=N\).
 
-**Intuição:** para ir do chão ao 10º andar de elevador sem pular, você passa por todos os andares do meio. Uma função contínua não "pula" valores.
+**Intuição:** para ir do térreo ao 10º andar de elevador sem pular, você passa por todos os andares do meio. Uma função contínua não "pula" valores.
 
-**Uso clássico (existência de raiz):** se $f$ é contínua e $f(a)$ e $f(b)$ têm **sinais opostos**, há uma raiz em $(a,b)$.
+**Uso clássico (existência de raiz):** se \(f\) é contínua e \(f(a)\), \(f(b)\) têm **sinais opostos**, existe uma raiz em \((a,b)\), pois \(0\) está entre os dois valores.
 
-**Exemplo 3.** $f(x)=x^3+x-1$ tem raiz em $(0,1)$? $f(0)=-1<0$ e $f(1)=1>0$, $f$ é contínua (polinômio). Sim, existe $c\in(0,1)$ com $f(c)=0$.
+**Exemplo 3.** \(f(x)=x^3+x-1\) tem raiz em \((0,1)\)?
+
+- \(f(0)=0+0-1=-1<0\) e \(f(1)=1+1-1=1>0\).
+- \(f\) é contínua (polinômio). Pelo TVI, existe \(c\in(0,1)\) com \(f(c)=0\).
 
 > [!WARNING]
-> O TVI **exige continuidade no intervalo todo**. Com $f(x)=\frac1x$, $f(-1)=-1$ e $f(1)=1$ mas **não há** raiz: $f$ não é contínua em $0$.
+> O TVI **exige continuidade no intervalo todo**. Com \(f(x)=\frac1x\): \(f(-1)=-1\) e \(f(1)=1\), mas **não há** raiz: \(f\) não é contínua em \(0\).
 
-## Exercícios
+## 7. Exercícios
 
-**Exercício 1.** $f$ é contínua em $x=1$? $f(x)=\dfrac{x^2-1}{x-1}$ para $x\ne1$ e $f(1)=3$.
+**Exercício 1.** \(f\) é contínua em \(x=1\), com \(f(x)=\dfrac{x^2-1}{x-1}\) para \(x\ne1\) e \(f(1)=3\)?
 
 {{< details title="Gabarito" >}}
-$\lim_{x\to1}f=2\ne f(1)=3$. **Não** é contínua (removível).
+\(\lim_{x\to1}\frac{(x-1)(x+1)}{x-1}=\lim(x+1)=2\), mas \(f(1)=3\). São diferentes: **não** é contínua (descontinuidade removível).
 {{< /details >}}
 
-**Exercício 2.** Ache $k$ para que $f(x)=\begin{cases}kx,&x\le1\\x^2+1,&x>1\end{cases}$ seja contínua em $1$.
+**Exercício 2.** Ache \(k\) para \(f(x)=\begin{cases}kx,&x\le1\\x^2+1,&x>1\end{cases}\) ser contínua em \(1\).
 
 {{< details title="Gabarito" >}}
-Esquerda: $k$. Direita: $2$. Logo $k=2$.
+Esquerda (e valor): \(k\cdot1=k\). Direita: \(1+1=2\). Igualando, \(\boxed{k=2}\).
 {{< /details >}}
 
-**Exercício 3.** Classifique a descontinuidade de $g(x)=\dfrac1{x-2}$ em $x=2$.
+**Exercício 3.** Classifique a descontinuidade de \(g(x)=\dfrac1{x-2}\) em \(x=2\).
 
 {{< details title="Gabarito" >}}
-Infinita ($-\infty$ à esquerda, $+\infty$ à direita; assíntota vertical).
+**Infinita**: \(-\infty\) à esquerda e \(+\infty\) à direita (assíntota vertical).
 {{< /details >}}
 
-**Exercício 4.** Mostre que $x^3=2x+1$ tem solução em $[1,2]$.
+**Exercício 4.** Mostre que \(x^3=2x+1\) tem solução em \([1,2]\).
 
 {{< details title="Gabarito" >}}
-$f(x)=x^3-2x-1$ é contínua. $f(1)=-2<0$, $f(2)=3>0$. Pelo TVI, existe raiz em $(1,2)$.
+1. Passe tudo para um lado: \(f(x)=x^3-2x-1\), contínua.
+2. \(f(1)=1-2-1=-2<0\) e \(f(2)=8-4-1=3>0\).
+3. Pelo TVI, existe \(c\in(1,2)\) com \(f(c)=0\), ou seja, \(c^3=2c+1\).
 {{< /details >}}
 
-**Exercício 5.** Onde $h(x)=\dfrac{x}{x^2-1}$ é contínua?
+**Exercício 5.** Onde \(h(x)=\dfrac{x}{x^2-1}\) é contínua?
 
 {{< details title="Gabarito" >}}
-Em todo o domínio: $\mathbb R\setminus\{-1,1\}$.
+É racional: contínua em todo o domínio. O denominador zera em \(x=\pm1\). Resposta: \(\mathbb R\setminus\{-1,1\}\).
 {{< /details >}}

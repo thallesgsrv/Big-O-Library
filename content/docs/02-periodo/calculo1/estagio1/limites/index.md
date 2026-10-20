@@ -7,103 +7,21 @@ autores:
 date: 2026-10-01
 ---
 
-## 1. Agora vem a ideia de limite
+## 1. A ideia: para onde a função está indo?
 
-Até aqui, perguntamos coisas como:
+Até agora perguntávamos: quanto vale \(f(2)\)? O limite pergunta outra coisa:
 
-> Quanto vale $f(2)$?
+> O que acontece com \(f(x)\) quando \(x\) está **chegando perto** de \(2\)?
 
-Mas o limite faz uma pergunta diferente:
+> [!TIP]
+> Pense no limite como um GPS. Ele não diz onde a função *está* em \(x=a\); diz **para onde ela está indo** quando você se aproxima de \(a\). O valor \(f(a)\) é onde ela de fato está, e os dois podem até ser diferentes.
 
-> O que está acontecendo com $f(x)$ quando $x$ está chegando perto de $2$?
+Podemos nos aproximar de \(a\) de dois lados:
 
-Essa diferença é fundamental.
+- pela **esquerda** (valores menores que \(a\)): \(1{,}9;\ 1{,}99;\ 1{,}999\ldots\), escrito \(x\to2^-\);
+- pela **direita** (valores maiores): \(2{,}1;\ 2{,}01;\ 2{,}001\ldots\), escrito \(x\to2^+\).
 
-Imagine que estamos nos aproximando de $2$.
-
-Podemos chegar por números menores:
-
-\[
-1.9,\ 1.99,\ 1.999,\ 1.9999
-\]
-
-Ou por números maiores:
-
-\[
-2.1,\ 2.01,\ 2.001,\ 2.0001
-\]
-
-Isso dá origem aos limites laterais.
-
-## 2. Limite pela esquerda
-
-Quando escrevemos:
-
-\[
-x \to 2^-
-\]
-
-o sinal $-$ significa:
-
-> estamos nos aproximando de $2$ usando valores menores que $2$.
-
-Por exemplo:
-
-\[
-1.9,\ 1.99,\ 1.999,\ 1.9999,\ldots
-\]
-
-Todos esses números estão à esquerda de $2$ na reta numérica.
-
-Portanto:
-
-\[
-x \to 2^-
-\]
-
-significa:
-
-> $x$ se aproxima de $2$ pela esquerda.
-
-## 3. Limite pela direita
-
-Agora fazemos o contrário.
-
-Quando escrevemos:
-
-\[
-x \to 2^+
-\]
-
-estamos nos aproximando de $2$ usando valores maiores que $2$.
-
-Por exemplo:
-
-\[
-2.1,\ 2.01,\ 2.001,\ 2.0001,\ldots
-\]
-
-Portanto:
-
-\[
-x \to 2^+
-\]
-
-significa:
-
-> $x$ se aproxima de $2$ pela direita.
-
-## 4. Vamos colocar isso em um gráfico
-
-Considere:
-
-\[
-f(x) = \frac{1}{x-2}
-\]
-
-O número $2$ não pertence ao domínio.
-
-Mas o que acontece quando chegamos perto dele?
+Isso dá os **limites laterais**.
 
 <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" role="img" aria-label="Gráfico da função 1 dividido por x menos 2 com assíntota vertical em x igual a 2" preserveAspectRatio="xMidYMid meet" style="max-width:100%;height:auto;display:block;">
 <line x1="70" y1="250" x2="750" y2="250" stroke="currentColor" stroke-width="2"></line>
@@ -113,468 +31,259 @@ Mas o que acontece quando chegamos perto dele?
 </svg>
 <p style="font-size:0.95rem;margin-top:0.5rem">Legenda: assíntota vertical em x = 2; os ramos mostram comportamento para x→2⁻ e x→2⁺.</p>
 
-A função tem uma assíntota vertical em $x=2$.
+## 2. Exemplo: assíntota e laterais diferentes
 
-### Aproximando pela esquerda
+Tome \(f(x)=\dfrac{1}{x-2}\). O número \(2\) não está no domínio (daria \(\frac10\)). Vamos olhar os dois lados:
 
-Quando:
+| \(x\) (esquerda) | \(x-2\) | \(f(x)\) |
+| --- | --- | --- |
+| \(1{,}9\) | \(-0{,}1\) | \(-10\) |
+| \(1{,}99\) | \(-0{,}01\) | \(-100\) |
+| \(1{,}999\) | \(-0{,}001\) | \(-1000\) |
 
-\[
-x \to 2^-
-\]
+| \(x\) (direita) | \(x-2\) | \(f(x)\) |
+| --- | --- | --- |
+| \(2{,}1\) | \(0{,}1\) | \(10\) |
+| \(2{,}01\) | \(0{,}01\) | \(100\) |
+| \(2{,}001\) | \(0{,}001\) | \(1000\) |
 
-A função desce cada vez mais:
+Pela esquerda, \(x-2\) é um número **negativo** minúsculo, então \(\frac{1}{\text{negativo minúsculo}}\) é negativo gigante. Pela direita, é positivo gigante:
 
-\[
-f(x) \to -\infty
-\]
+$$
+\lim_{x\to2^-}\frac1{x-2}=-\infty\qquad\qquad\lim_{x\to2^+}\frac1{x-2}=+\infty
+$$
 
-### Aproximando pela direita
+Os lados discordam, então **não existe** um número \(L\) que sirva de limite bilateral. A reta \(x=2\) é uma **assíntota vertical**.
 
-Quando:
+## 3. Definição em palavras
 
-\[
-x \to 2^+
-\]
+$$
+\lim_{x\to a}f(x)=L
+$$
 
-a função sobe cada vez mais:
+significa: quando \(x\) fica cada vez mais próximo de \(a\) (sem precisar ser igual a \(a\)), os valores \(f(x)\) ficam cada vez mais próximos de \(L\).
 
-\[
-f(x) \to +\infty
-\]
+O limite **bilateral existe** se, e somente se, os dois laterais existem **e são iguais**:
 
-Portanto:
+$$
+\lim_{x\to a}f(x)=L\iff\lim_{x\to a^-}f(x)=L\ \text{ e }\ \lim_{x\to a^+}f(x)=L
+$$
 
-\[
-\lim_{x\to2^-}\frac{1}{x-2} = -\infty
-\]
+## 4. Quando a função nem existe no ponto
 
-\[
-\lim_{x\to2^+}\frac{1}{x-2} = +\infty
-\]
+**Vamos resolver:** \(\displaystyle\lim_{x\to1}\frac{x^2-1}{x-1}\)
 
-Isso mostra que os lados esquerdo e direito não chegam ao mesmo valor. Aliás, $x=2$ nem está no domínio, e perto dele a função "explode": não existe um número $L$ que sirva de limite. Voltaremos a esse tipo de comportamento (limites infinitos e assíntotas) na próxima página.
+1. Substituindo \(x=1\): \(\dfrac{1-1}{1-1}=\dfrac00\). A função não está definida em \(x=1\).
+2. Mas \(x^2-1=(x-1)(x+1)\) (diferença de quadrados). Então, para \(x\ne1\):
 
-## 5. Então o que é o limite?
+$$
+\frac{x^2-1}{x-1}=\frac{(x-1)(x+1)}{x-1}=x+1
+$$
 
-Agora podemos entender a ideia de forma mais natural.
+3. Perto de \(1\), \(x\ne1\) (estamos *chegando*, não *estando*), então o corte é permitido. Fica \(\lim_{x\to1}(x+1)=1+1=2\).
 
-Quando escrevemos:
-
-\[
-\lim_{x\to a} f(x) = L
-\]
-
-estamos dizendo:
-
-> Quando $x$ fica cada vez mais próximo de $a$, os valores de $f(x)$ ficam cada vez mais próximos de $L$.
-
-O ponto importante é que estamos interessados no comportamento próximo de $a$.
-
-Não necessariamente no valor da função exatamente em $a$.
-
-> [!TIP]
-> **Intuição para fixar:** pense no limite como um GPS. Ele não diz onde a função *está* em $x=a$; diz **para onde ela está indo** quando você se aproxima de $a$. O valor $f(a)$ é onde a função *de fato* está, e os dois podem até ser diferentes.
-
-## 6. Um exemplo em que a função nem existe no ponto
-
-Considere:
-
-\[
-f(x)=\frac{x^2-1}{x-1}
-\]
-
-Se tentarmos calcular $f(1)$:
-
-\[
-f(1) = \frac{1^2-1}{1-1} = \frac{0}{0}
-\]
-
-Portanto, a função original não está definida em $x=1$.
-
-Mas podemos simplificar:
-
-\[
-x^2-1 = (x-1)(x+1)
-\]
-
-Logo:
-
-\[
-f(x) = \frac{(x-1)(x+1)}{x-1}
-\]
-
-Para $x \neq 1$:
-
-\[
-f(x) = x+1
-\]
-
-Agora podemos observar o comportamento próximo de $1$:
-
-\[
-\lim_{x\to1}(x+1) = 2
-\]
-
-Portanto:
-
-\[
+$$
 \boxed{\lim_{x\to1}\frac{x^2-1}{x-1}=2}
-\]
+$$
 
-Perceba a diferença:
+Perceba: \(f(1)\) **não existe**, mas o limite vale \(2\). O limite descreve o comportamento **ao redor** do ponto.
 
-- $f(1)$ não existe;
-- mas $\lim_{x\to1} f(x)=2$.
+## 5. Módulo e funções por partes
 
-O limite descreve o comportamento ao redor do ponto, não necessariamente o valor naquele ponto.
-
-## 7. Quando os dois lados concordam
-
-Para existir um limite bilateral:
-
-\[
-\lim_{x\to a} f(x)
-\]
-
-os dois lados precisam chegar ao mesmo lugar.
-
-Ou seja:
-
-\[
-\lim_{x\to a^-} f(x) = \lim_{x\to a^+} f(x)
-\]
-
-Se os dois lados chegam ao mesmo valor $L$, então:
-
-\[
-\lim_{x\to a} f(x) = L
-\]
-
-Se chegam a valores diferentes, o limite bilateral não existe.
-
-## 8. Limites com módulo e funções "por partes"
-
-O módulo $\lvert x\rvert$ muda de comportamento em $0$, então os lados esquerdo e direito costumam ser diferentes. A receita é **abrir o módulo em cada lado**:
+O módulo \(\lvert x\rvert\) muda de comportamento em \(0\), então os lados costumam ser diferentes. A receita é **abrir o módulo em cada lado**:
 
 $$
 \lvert x\rvert=\begin{cases}x,&x\ge0\\-x,&x<0\end{cases}
 $$
 
-**Exemplo.** $f(x)=\dfrac{\lvert x\rvert}{x}$ perto de $0$:
+**Exemplo.** \(f(x)=\dfrac{\lvert x\rvert}{x}\) perto de \(0\):
 
-- pela direita ($x>0$): $\dfrac{x}{x}=1$, então $\lim_{x\to0^+}f(x)=1$;
-- pela esquerda ($x<0$): $\dfrac{-x}{x}=-1$, então $\lim_{x\to0^-}f(x)=-1$.
+- pela direita (\(x>0\)): \(\dfrac{x}{x}=1\), limite lateral \(1\);
+- pela esquerda (\(x<0\)): \(\dfrac{-x}{x}=-1\), limite lateral \(-1\).
 
-Os lados discordam, logo $\lim_{x\to0}\dfrac{\lvert x\rvert}{x}$ **não existe**.
+Os lados discordam, logo o limite bilateral **não existe**.
 
-**Função por partes.** Se $f(x)=x+1$ para $x<1$ e $f(x)=3-x$ para $x\ge1$:
+**Função por partes.** Seja \(f(x)=\begin{cases}x+1,&x<1\\3-x,&x\ge1\end{cases}\) e queremos \(\lim_{x\to1}f(x)\).
 
-- esquerda: $\lim_{x\to1^-}(x+1)=2$;
-- direita: $\lim_{x\to1^+}(3-x)=2$.
+- Esquerda (\(x<1\)): \(\lim_{x\to1^-}(x+1)=2\).
+- Direita (\(x\ge1\)): \(\lim_{x\to1^+}(3-x)=3-1=2\).
 
-Os lados concordam, então $\lim_{x\to1}f(x)=2$ (e aqui até $f(1)=2$).
+Concordam: o limite é \(2\). Em função por partes, **calcule cada lado com a fórmula do seu lado**.
 
-> [!IMPORTANT]
-> Em função por partes, calcule **cada lado com a fórmula do seu lado**: para $x\to a^-$ use a fórmula de $x<a$; para $x\to a^+$ use a de $x>a$.
+## 6. Propriedades dos limites
 
-## 9. Propriedades dos limites
-
-Se $\lim_{x\to a}f(x)=L$ e $\lim_{x\to a}g(x)=M$ (ambos números reais) e $k$ é constante, então:
+Se \(\lim f=L\) e \(\lim g=M\) (números reais) e \(k\) é constante:
 
 | Propriedade | Resultado |
 | --- | --- |
-| Soma e diferença | $\lim(f\pm g)=L\pm M$ |
-| Constante vezes função | $\lim(k\,f)=k\,L$ |
-| Produto | $\lim(f\cdot g)=L\cdot M$ |
-| Quociente | $\lim\dfrac fg=\dfrac LM$, se $M\ne0$ |
-| Potência e raiz | $\lim f^n=L^n$ e $\lim\sqrt[n]{f}=\sqrt[n]{L}$ (com $L\ge0$ se $n$ par) |
+| Soma e diferença | \(\lim(f\pm g)=L\pm M\) |
+| Constante vezes função | \(\lim(kf)=kL\) |
+| Produto | \(\lim(fg)=LM\) |
+| Quociente | \(\lim\dfrac fg=\dfrac LM\), se \(M\ne0\) |
+| Potência e raiz | \(\lim f^n=L^n\); \(\lim\sqrt[n]f=\sqrt[n]L\) (com \(L\ge0\) se \(n\) par) |
 
-E os dois limites mais simples de todos: $\lim_{x\to a}k=k$ e $\lim_{x\to a}x=a$.
-
-Juntando tudo, para **polinômios** basta substituir:
-$$
-\lim_{x\to2}(3x^2-x+1)=3\cdot4-2+1=11
-$$
-e o mesmo vale para quocientes quando o denominador **não** zera:
-$$
-\lim_{x\to3}\frac{x^2+1}{x-1}=\frac{10}{2}=5
-$$
+Para **polinômios**, basta substituir: \(\lim_{x\to2}(3x^2-x+1)=3(4)-2+1=11\). O mesmo vale para quocientes cujo denominador não zera: \(\lim_{x\to3}\dfrac{x^2+1}{x-1}=\dfrac{10}{2}=5\).
 
 > [!WARNING]
-> Todas essas propriedades exigem que **cada limite exista**. Não dá para dizer que "$\lim(f+g)=\lim f+\lim g$" quando um deles diverge ou não existe.
+> Todas essas propriedades exigem que **cada limite exista**. Não dá para dizer que \(\lim(f+g)=\lim f+\lim g\) quando um deles diverge.
 
-## 10. A estratégia de todo limite: substituir primeiro
+## 7. A estratégia de todo limite: substituir primeiro
 
-**Passo 1.** Substitua $x=a$ direto na expressão. Três coisas podem acontecer:
+**Passo 1.** Substitua \(x=a\) direto. Três coisas podem acontecer:
 
 | Resultado da substituição | O que fazer |
 | --- | --- |
 | Um número | Acabou: esse é o limite |
-| $\dfrac{k}{0}$, com $k\ne0$ | Provavelmente é limite infinito (próxima página) |
-| $\dfrac00$ | Indeterminação: **manipule** a expressão e tente de novo |
+| \(\dfrac k0\), com \(k\ne0\) | Provavelmente limite infinito (veja *Limites infinitos*) |
+| \(\dfrac00\) | Indeterminação: **manipule** a expressão e tente de novo |
 
-$\dfrac00$ não é "zero" nem "não existe": é um aviso de que há um **fator em comum escondido** que está zerando em cima e embaixo. Nosso trabalho é achá-lo e cortar.
+\(\frac00\) não é "zero" nem "não existe": é um aviso de que há um **fator em comum escondido** zerando em cima e embaixo. Seu trabalho é achá-lo e cortar. As ferramentas são **fatorar**, **conjugado** e **limites trigonométricos**.
 
-**Ferramentas para $\dfrac00$:** fatorar (esta seção), multiplicar pelo conjugado (seção 11) e limites trigonométricos (seção 12).
+### Fatorando
 
-**Exemplo 1.** $\displaystyle\lim_{x\to2}\frac{x^2-5x+6}{x-2}$. Substituindo: $\frac00$. Fatorando o numerador, $x^2-5x+6=(x-2)(x-3)$:
+**Exemplo 1.** \(\displaystyle\lim_{x\to2}\frac{x^2-5x+6}{x-2}\)
+
+1. Substituindo \(x=2\): \(\dfrac{4-10+6}{0}=\dfrac00\).
+2. Fatore o numerador: dois números de produto \(6\) e soma \(-5\) são \(-2\) e \(-3\). \(x^2-5x+6=(x-2)(x-3)\).
+3. Corte o fator comum (\(x\ne2\)):
+
 $$
-\frac{(x-2)(x-3)}{x-2}=x-3\ (x\ne2)\ \Rightarrow\ \lim=-1
+\frac{(x-2)(x-3)}{x-2}=x-3\ \Rightarrow\ \lim_{x\to2}(x-3)=\boxed{-1}
 $$
 
-**Exemplo 2.** $\displaystyle\lim_{x\to3}\frac{x^2-9}{x-3}=\lim(x+3)=6$ (diferença de quadrados).
+**Exemplo 2.** \(\displaystyle\lim_{x\to3}\frac{x^2-9}{x-3}\). Diferença de quadrados: \(x^2-9=(x-3)(x+3)\). Cortando, sobra \(x+3\), que tende a \(\boxed{6}\).
 
-**Exemplo 3.** $\displaystyle\lim_{x\to2}\frac{x^3-8}{x-2}$. Como $x^3-8=(x-2)(x^2+2x+4)$:
-$$
-\lim(x^2+2x+4)=12
-$$
+**Exemplo 3 (diferença de cubos).** \(\displaystyle\lim_{x\to2}\frac{x^3-8}{x-2}\). Como \(x^3-8=(x-2)(x^2+2x+4)\) (confira expandindo: \(x^3+2x^2+4x-2x^2-4x-8=x^3-8\)), sobra \(x^2+2x+4\), que tende a \(4+4+4=\boxed{12}\).
 
 > [!TIP]
-> **Lembretes de fatoração:** $a^2-b^2=(a-b)(a+b)$; $a^3-b^3=(a-b)(a^2+ab+b^2)$; para $ax^2+bx+c$ ache as raízes. Se $a$ é raiz do polinômio, $(x-a)$ **sempre** é um fator.
+> **Lembretes de fatoração:** \(a^2-b^2=(a-b)(a+b)\); \(a^3-b^3=(a-b)(a^2+ab+b^2)\); para \(ax^2+bx+c\), ache as raízes. Se \(a\) é raiz do polinômio, \((x-a)\) **sempre** é um fator.
 
-## 11. Regra prática para tirar a raiz
+### Tirando a raiz: o conjugado
 
-Quando um limite envolve uma expressão com raiz, a estratégia mais útil é multiplicar pela expressão conjugada.
+**Vamos resolver:** \(\displaystyle\lim_{x\to0}\frac{\sqrt{x+1}-1}{x}\)
 
-Essa técnica é conhecida como racionalização.
+1. Substituindo \(x=0\): \(\dfrac{1-1}{0}=\dfrac00\). Não dá para fatorar com a raiz no caminho.
+2. Multiplique em cima e embaixo pelo **conjugado** do numerador (mesmos termos, sinal trocado) para usar \((a-b)(a+b)=a^2-b^2\) e fazer a raiz sumir:
 
-### Exemplo
+$$
+\frac{\sqrt{x+1}-1}{x}\cdot\frac{\sqrt{x+1}+1}{\sqrt{x+1}+1}=\frac{(x+1)-1}{x\big(\sqrt{x+1}+1\big)}=\frac{x}{x\big(\sqrt{x+1}+1\big)}
+$$
 
-Considere:
+3. Como \(x\ne0\) perto de \(0\), corte o \(x\): sobra \(\dfrac{1}{\sqrt{x+1}+1}\).
+4. Agora substituir funciona: \(\dfrac1{1+1}=\dfrac12\).
 
-\[
-\lim_{x \to 0} \frac{\sqrt{x+1}-1}{x}
-\]
+$$
+\boxed{\lim_{x\to0}\frac{\sqrt{x+1}-1}{x}=\frac12}
+$$
 
-Se substituirmos $x=0$, vemos que aparece a forma $0/0$. Então precisamos manipular a expressão.
+## 8. Limites trigonométricos
 
-A ideia é multiplicar pelo conjugado do numerador:
+O limite fundamental:
 
-\[
-\frac{\sqrt{x+1}-1}{x}\cdot\frac{\sqrt{x+1}+1}{\sqrt{x+1}+1}
-\]
+$$
+\boxed{\lim_{x\to0}\frac{\operatorname{sen}x}{x}=1}
+$$
 
-Isso resulta em:
+Perto de zero, o seno cresce quase na mesma proporção do ângulo, então o quociente tende a \(1\). A regra prática é o **truque do espelho**: se aparece \(\operatorname{sen}(\text{algo})\), force o mesmo "algo" embaixo, multiplicando e dividindo pelo que faltar.
 
-\[
-\frac{(\sqrt{x+1})^2 - 1^2}{x(\sqrt{x+1}+1)}
-\]
+**Exemplo A.** \(\displaystyle\lim_{x\to0}\frac{\operatorname{sen}3x}{x}\)
 
-\[
-\frac{x}{x(\sqrt{x+1}+1)}
-\]
+1. Queremos \(3x\) embaixo. Multiplique e divida por \(3\): \(\dfrac{\operatorname{sen}3x}{x}=3\cdot\dfrac{\operatorname{sen}3x}{3x}\).
+2. Com \(t=3x\to0\): \(\dfrac{\operatorname{sen}t}{t}\to1\). Resultado: \(3\cdot1=3\).
 
-Como $x \neq 0$ perto de zero, podemos cancelar $x$:
+**Exemplo B.** \(\displaystyle\lim_{x\to0}\frac{\operatorname{tg}x}{x}\)
 
-\[
-\frac{1}{\sqrt{x+1}+1}
-\]
+\(\dfrac{\operatorname{tg}x}{x}=\dfrac{\operatorname{sen}x}{x}\cdot\dfrac1{\cos x}\to1\cdot\dfrac11=1\).
 
-Agora calculamos o limite:
+**Exemplo C.** \(\displaystyle\lim_{x\to0}\frac{\operatorname{sen}3x}{\operatorname{sen}5x}\)
 
-\[
-\lim_{x \to 0} \frac{1}{\sqrt{x+1}+1}
-\]
+$$
+\frac{\operatorname{sen}3x}{\operatorname{sen}5x}=\frac{\operatorname{sen}3x}{3x}\cdot\frac{5x}{\operatorname{sen}5x}\cdot\frac{3x}{5x}\to1\cdot1\cdot\frac35=\frac35
+$$
 
-Substituindo $x=0$:
+(O fator \(\frac{3x}{5x}=\frac35\) é o que compensa por termos criado \(3x\) e \(5x\).)
 
-\[
-\frac{1}{\sqrt{1}+1} = \frac{1}{2}
-\]
+**Exemplo D.** \(\displaystyle\lim_{x\to0}\frac{1-\cos x}{x}\)
 
-Portanto:
+1. Substituindo: \(\frac00\). Multiplique pelo conjugado \(1+\cos x\):
 
-\[
-\boxed{\lim_{x \to 0} \frac{\sqrt{x+1}-1}{x} = \frac{1}{2}}
-\]
+$$
+\frac{(1-\cos x)(1+\cos x)}{x(1+\cos x)}=\frac{1-\cos^2x}{x(1+\cos x)}=\frac{\operatorname{sen}^2x}{x(1+\cos x)}
+$$
 
-Regra prática:
+2. Separe: \(\dfrac{\operatorname{sen}x}{x}\cdot\dfrac{\operatorname{sen}x}{1+\cos x}\to1\cdot\dfrac{0}{1+1}=0\).
 
-> Quando aparecer uma diferença com raiz, multiplique pelo conjugado para eliminar a raiz do numerador ou do denominador.
+## 9. Teorema do confronto (sanduíche)
 
-## 12. Limites trigonométricos
+Se, perto de \(a\), \(g(x)\le f(x)\le h(x)\), e \(\lim g=\lim h=L\), então \(\lim f=L\). Se \(f\) está sempre entre duas funções que convergem ao mesmo valor, ela não pode escapar.
 
-Alguns limites aparecem com tanta frequência que vale a pena memorizar a regra principal:
+**Vamos resolver o exemplo clássico:** \(\displaystyle\lim_{x\to0}x^2\operatorname{sen}\!\left(\frac1x\right)\)
 
-\[
-\lim_{x\to 0} \frac{\operatorname{sen} x}{x} = 1
-\]
+1. Substituir não dá: \(\operatorname{sen}\frac1x\) oscila sem parar perto de \(0\) e nem tem limite.
+2. Mas sabemos que \(-1\le\operatorname{sen}\frac1x\le1\).
+3. Multiplique tudo por \(x^2\). Como \(x^2\ge0\), as desigualdades **não** invertem:
 
-Essa regra é a base para resolver muitos limites que, à primeira vista, parecem complicados.
+$$
+-x^2\le x^2\operatorname{sen}\!\left(\frac1x\right)\le x^2
+$$
 
-Quando $x$ fica muito pequeno, o seno cresce na mesma proporção que o próprio ângulo. Por isso, perto de zero, o quociente $\frac{\operatorname{sen} x}{x}$ tende a $1$.
+4. \(\lim_{x\to0}(-x^2)=0\) e \(\lim_{x\to0}x^2=0\). Pelo confronto:
 
-### Regra prática
+$$
+\boxed{\lim_{x\to0}x^2\operatorname{sen}\!\left(\frac1x\right)=0}
+$$
 
-Se aparecer um limite do tipo:
+## 10. Exercícios
 
-\[
-\lim_{x\to 0} \frac{\operatorname{sen}(ax)}{x}
-\]
-
-você pode usar a ideia de que:
-
-\[
-\frac{\operatorname{sen}(ax)}{x} = a \cdot \frac{\operatorname{sen}(ax)}{ax}
-\]
-
-Portanto:
-
-\[
-\lim_{x\to 0} \frac{\operatorname{sen}(ax)}{x} = a
-\]
-
-Exemplo:
-
-\[
-\lim_{x\to 0} \frac{\operatorname{sen}(3x)}{x} = 3
-\]
-
-### Mais limites trigonométricos
-
-Todos saem de $\dfrac{\operatorname{sen}u}{u}\to1$ com um pouco de álgebra:
-
-- $\displaystyle\lim_{x\to0}\frac{\operatorname{tg}x}{x}=\lim\frac{\operatorname{sen}x}{x}\cdot\frac1{\cos x}=1\cdot1=1$
-- $\displaystyle\lim_{x\to0}\frac{\operatorname{sen}3x}{\operatorname{sen}5x}=\lim\frac{\operatorname{sen}3x}{3x}\cdot\frac{5x}{\operatorname{sen}5x}\cdot\frac35=\frac35$
-- $\displaystyle\lim_{x\to0}\frac{1-\cos x}{x}=\lim\frac{(1-\cos x)(1+\cos x)}{x(1+\cos x)}=\lim\frac{\operatorname{sen}x}{x}\cdot\frac{\operatorname{sen}x}{1+\cos x}=1\cdot0=0$
-
-> [!TIP]
-> **Truque do "espelho":** se aparece $\operatorname{sen}(\text{algo})$, force o mesmo "algo" embaixo, multiplicando e dividindo pelo que faltar.
-
-## 13. Teorema do confronto
-
-Em muitos casos, não conseguimos calcular um limite diretamente, mas conseguimos comparar a função com outras duas que já sabemos como se comportam.
-
-Esse é o papel do teorema do confronto.
-
-Se, perto de $a$, tivermos:
-
-\[
-g(x) \le f(x) \le h(x)
-\]
-
-e também:
-
-\[
-\lim_{x\to a} g(x) = L
-\quad\text{e}\quad
-\lim_{x\to a} h(x) = L,
-\]
-
-então:
-
-\[
-\boxed{\lim_{x\to a} f(x) = L}
-\]
-
-A ideia é simples: se a função $f(x)$ fica sempre entre duas funções que convergem para o mesmo valor, então ela não pode escapar desse valor.
-
-### Exemplo clássico
-
-Considere:
-
-\[
-f(x) = x^2 \operatorname{sen}\left(\frac{1}{x}\right)
-\]
-
-Quando $x$ está perto de $0$, sabemos que:
-
-\[
--1 \le \operatorname{sen}\left(\frac{1}{x}\right) \le 1
-\]
-
-Multiplicando tudo por $x^2$, que é sempre não negativo, obtemos:
-
-\[
--x^2 \le x^2 \operatorname{sen}\left(\frac{1}{x}\right) \le x^2
-\]
-
-Agora observe:
-
-\[
-\lim_{x\to 0} (-x^2) = 0
-\quad\text{e}\quad
-\lim_{x\to 0} x^2 = 0
-\]
-
-Pelo teorema do confronto:
-
-\[
-\boxed{\lim_{x\to 0} x^2 \operatorname{sen}\left(\frac{1}{x}\right) = 0}
-\]
-
-Esse exemplo mostra uma ideia muito importante: mesmo quando a função oscila, se ela estiver presa entre duas funções que vão para o mesmo valor, então ela também vai para esse valor.
-
-## 14. Resumo rápido
-
-- **Limite** descreve para onde $f(x)$ vai quando $x\to a$, não onde $f$ está em $a$.
-- **Bilateral existe** $\iff$ os dois laterais existem e são iguais.
-- **Sempre** tente substituir primeiro. Se der $\frac00$: fatore, racionalize ou use $\frac{\operatorname{sen}u}{u}\to1$.
-- **Confronto:** se $f$ está presa entre duas funções que vão ao mesmo $L$, ela vai a $L$.
-
-## 15. Exercícios de fixação
-
-**Exercício 1.** Para $f(x)=\dfrac1{x-2}$, quais valores de $x$ são usados em $x\to2^-$ e em $x\to2^+$?
+**Exercício 1.** \(\displaystyle\lim_{x\to0}\frac{\operatorname{sen}3x}{x}\).
 
 {{< details title="Gabarito" >}}
-$x\to2^-$: valores menores que $2$ ($1{,}9;\ 1{,}99;\ldots$). $x\to2^+$: valores maiores que $2$ ($2{,}1;\ 2{,}01;\ldots$).
+\(3\cdot\dfrac{\operatorname{sen}3x}{3x}\to3\cdot1=\boxed3\).
 {{< /details >}}
 
-**Exercício 2.** Calcule $\displaystyle\lim_{x\to2^-}\frac1{x-2}$ e $\displaystyle\lim_{x\to2^+}\frac1{x-2}$.
+**Exercício 2.** \(\displaystyle\lim_{x\to0}\frac{\sqrt{x+4}-2}{x}\).
 
 {{< details title="Gabarito" >}}
-Pela esquerda, $x-2$ é um número negativo minúsculo, então o quociente vai a $-\infty$. Pela direita, $x-2$ é positivo minúsculo e o quociente vai a $+\infty$.
+1. \(\frac00\). Multiplique pelo conjugado \(\sqrt{x+4}+2\).
+2. Numerador: \((\sqrt{x+4})^2-2^2=x+4-4=x\).
+3. \(\dfrac{x}{x(\sqrt{x+4}+2)}=\dfrac1{\sqrt{x+4}+2}\to\dfrac1{2+2}=\boxed{\tfrac14}\).
 {{< /details >}}
 
-**Exercício 3.** $\displaystyle\lim_{x\to0}\frac{\operatorname{sen}(3x)}{x}$.
+**Exercício 3.** Use o confronto para mostrar que \(\displaystyle\lim_{x\to0}x\operatorname{sen}\frac1x=0\).
 
 {{< details title="Gabarito" >}}
-$3\cdot\dfrac{\operatorname{sen}3x}{3x}\to3\cdot1=3$.
+1. \(-1\le\operatorname{sen}\frac1x\le1\). Tomando módulo: \(\left\lvert\operatorname{sen}\frac1x\right\rvert\le1\).
+2. Multiplique por \(\lvert x\rvert\ge0\): \(\left\lvert x\operatorname{sen}\frac1x\right\rvert\le\lvert x\rvert\), ou seja, \(-\lvert x\rvert\le x\operatorname{sen}\frac1x\le\lvert x\rvert\).
+3. Os dois extremos tendem a \(0\). Logo o limite é \(\boxed0\).
 {{< /details >}}
 
-**Exercício 4.** $\displaystyle\lim_{x\to0}\frac{\sqrt{x+4}-2}{x}$.
+**Exercício 4.** \(\displaystyle\lim_{x\to4}\frac{x^2-16}{x-4}\).
 
 {{< details title="Gabarito" >}}
-Conjugado: $\dfrac{(x+4)-4}{x(\sqrt{x+4}+2)}=\dfrac1{\sqrt{x+4}+2}\to\dfrac14$.
+\(\frac00\). \(x^2-16=(x-4)(x+4)\); corta e sobra \(x+4\to\boxed8\).
 {{< /details >}}
 
-**Exercício 5.** Use o confronto para mostrar que $\displaystyle\lim_{x\to0}x\operatorname{sen}\frac1x=0$.
+**Exercício 5.** \(\displaystyle\lim_{x\to-2}\frac{x^2+x-2}{x+2}\).
 
 {{< details title="Gabarito" >}}
-$-1\le\operatorname{sen}\frac1x\le1\Rightarrow-\lvert x\rvert\le x\operatorname{sen}\frac1x\le\lvert x\rvert$. Os dois extremos vão a $0$, logo o limite é $0$.
+\(\frac00\). Produto \(-2\), soma \(1\): \(2\) e \(-1\). \(x^2+x-2=(x+2)(x-1)\). Corta \((x+2)\) e sobra \(x-1\to-2-1=\boxed{-3}\).
 {{< /details >}}
 
-**Exercício 6.** $\displaystyle\lim_{x\to4}\frac{x^2-16}{x-4}$.
+**Exercício 6.** Calcule os laterais em \(0\) de \(\frac{\lvert x\rvert}{x}\) e conclua.
 
 {{< details title="Gabarito" >}}
-$\frac00$. Fatorando, $\dfrac{(x-4)(x+4)}{x-4}=x+4\to8$.
+Direita: \(1\). Esquerda: \(-1\). São diferentes, então o limite bilateral **não existe**.
 {{< /details >}}
 
-**Exercício 7.** $\displaystyle\lim_{x\to-2}\frac{x^2+x-2}{x+2}$.
+**Exercício 7.** \(\displaystyle\lim_{x\to0}\frac{\operatorname{tg}2x}{x}\).
 
 {{< details title="Gabarito" >}}
-$x^2+x-2=(x+2)(x-1)$, então o limite é $x-1\to-3$.
+1. \(\operatorname{tg}2x=\dfrac{\operatorname{sen}2x}{\cos2x}\).
+2. \(\dfrac{\operatorname{tg}2x}{x}=2\cdot\dfrac{\operatorname{sen}2x}{2x}\cdot\dfrac1{\cos2x}\to2\cdot1\cdot1=\boxed2\).
 {{< /details >}}
 
-**Exercício 8.** Calcule os limites laterais em $0$ de $\dfrac{\lvert x\rvert}{x}$ e conclua se o limite existe.
+**Exercício 8.** \(\displaystyle\lim_{x\to0}\frac{\operatorname{sen}4x}{\operatorname{sen}x}\).
 
 {{< details title="Gabarito" >}}
-Direita: $1$. Esquerda: $-1$. São diferentes, então o limite **não existe**.
+\(\dfrac{\operatorname{sen}4x}{\operatorname{sen}x}=\dfrac{\operatorname{sen}4x}{4x}\cdot\dfrac{x}{\operatorname{sen}x}\cdot4\to1\cdot1\cdot4=\boxed4\).
 {{< /details >}}
-
-**Exercício 9.** $\displaystyle\lim_{x\to0}\frac{\operatorname{tg}2x}{x}$.
-
-{{< details title="Gabarito" >}}
-$\dfrac{\operatorname{sen}2x}{x\cos2x}=2\cdot\dfrac{\operatorname{sen}2x}{2x}\cdot\dfrac1{\cos2x}\to2$.
-{{< /details >}}
-
-**Exercício 10.** $\displaystyle\lim_{x\to0}\frac{\operatorname{sen}4x}{\operatorname{sen}x}$.
-
-{{< details title="Gabarito" >}}
-$\dfrac{\operatorname{sen}4x}{4x}\cdot\dfrac{x}{\operatorname{sen}x}\cdot4\to4$.
-{{< /details >}}
-
-> [!NOTE]
-> A continuidade e os limites infinitos têm página própria. Siga para as próximas páginas do estágio.
-
