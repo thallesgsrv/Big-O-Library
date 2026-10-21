@@ -7,6 +7,18 @@ autores:
 date: 2026-10-15
 ---
 
+## Sobre
+
+Até aqui só escrevemos fórmulas. Agora damos **significado** a elas: quando uma fórmula é verdadeira ou falsa, como calcular isso com tabelas e como usar as tabelas para decidir se um argumento é válido.
+
+Ao final você deve conseguir:
+
+- calcular o valor de uma fórmula numa **interpretação**;
+- montar a **tabela-verdade** completa e classificar a fórmula (tautologia, contradição ou contingência);
+- testar uma **consequência lógica** procurando um contra-exemplo;
+- reconhecer os argumentos famosos (e as falácias) e as **equivalências** mais usadas;
+- distinguir `→`, `↔`, `⊨` e `≡`, que parecem primos mas são coisas diferentes.
+
 ## 1. Da forma ao significado
 
 Até aqui só escrevemos fórmulas. Mas $p\land\neg q$ sozinha é só um desenho: ela ainda **não é verdadeira nem falsa**. Para saber, precisamos dizer **como está o mundo**: $p$ é verdadeira? $q$ é verdadeira?
@@ -14,7 +26,7 @@ Até aqui só escrevemos fórmulas. Mas $p\land\neg q$ sozinha é só um desenho
 - **Sintaxe:** como se *escreve* (letras, conectivos, parênteses).
 - **Semântica:** o que a fórmula *significa* (quando é verdadeira ou falsa).
 
-Os valores possíveis são **verdadeiro (V)** e **falso (F)**. (Nos slides aparece também T/F, de *True/False*, ou 1/0. É tudo igual.)
+Os valores possíveis são **verdadeiro (V)** e **falso (F)**. (Em outros materiais aparece também T/F, de *True/False*, ou 1/0. É tudo igual.)
 
 ## 2. Interpretação
 
@@ -52,7 +64,16 @@ Como memorizar sem decorar:
 - **$\oplus$:** V quando os dois têm **valores diferentes**.
 - **$\to$:** só é F em **um** caso: $p$ verdadeira e $q$ falsa.
 
-(E também: NAND $p\uparrow q$ é o contrário de $\land$; NOR $p\downarrow q$ é o contrário de $\lor$.)
+Os conectivos estendidos NAND e NOR são simplesmente o **contrário** de $\land$ e de $\lor$:
+
+| $p$ | $q$ | $p\uparrow q$ (NAND) | $p\downarrow q$ (NOR) |
+| --- | --- | --- | --- |
+| V | V | F | F |
+| V | F | V | F |
+| F | V | V | F |
+| F | F | V | V |
+
+(NAND só é F quando os dois são V. NOR só é V quando os dois são F. Se você fez Introdução à Computação, são as portas NAND e NOR dos circuitos.)
 
 ## 4. Entendendo a implicação (a que mais confunde)
 
@@ -116,6 +137,24 @@ Em vez de testar uma "foto" de cada vez, listamos **todas** as fotos possíveis.
 | F | F | V | V | **V** |
 
 A coluna final é **toda V**. Isso quer dizer que $p\to q$ e $\neg q\to\neg p$ sempre têm o mesmo valor (a "contrapositiva").
+
+**Exemplo com 3 letras.** $(p\to q)\land(q\to r)\to(p\to r)$. São $2^3=8$ linhas, e a fórmula é montada por partes. Repare na ordem das linhas: $p$ muda a cada 4, $q$ a cada 2, $r$ a cada 1.
+
+| $p$ | $q$ | $r$ | $p\to q$ | $q\to r$ | $(p\to q)\land(q\to r)$ | $p\to r$ | **fórmula** |
+| --- | --- | --- | --- | --- | --- | --- | --- |
+| V | V | V | V | V | V | V | **V** |
+| V | V | F | V | F | F | F | **V** |
+| V | F | V | F | V | F | V | **V** |
+| V | F | F | F | V | F | F | **V** |
+| F | V | V | V | V | V | V | **V** |
+| F | V | F | V | F | F | V | **V** |
+| F | F | V | V | V | V | V | **V** |
+| F | F | F | V | V | V | V | **V** |
+
+A última coluna é toda V: **tautologia**. É o silogismo hipotético ("se $p$ leva a $q$ e $q$ leva a $r$, então $p$ leva a $r$") virando fórmula. Observe que a única linha em que a implicação maior poderia falhar seria uma com o bloco $(p\to q)\land(q\to r)$ em V e $p\to r$ em F, e essa linha **não existe**.
+
+> [!TIP]
+> **Não precisa preencher a fórmula inteira de uma vez.** Preencha uma coluna por vez, sempre usando só as colunas já prontas. Se errar uma coluna do meio, o erro se espalha, então confira cada coluna antes de seguir.
 
 ## 7. Classificando fórmulas
 
@@ -189,6 +228,25 @@ Nas linhas em que a premissa é V (1ª, 3ª, 5ª, 7ª e 8ª), a conclusão tamb�
 
 **Exemplo 2.** $p\land q\to r\ \models\ p\to r$. Na linha $p=V,q=F,r=F$: a premissa é $(V\land F)\to F=F\to F=V$, mas a conclusão é $V\to F=F$. **Contra-exemplo, logo inválido.**
 
+### Argumentos famosos (e as falácias que parecem com eles)
+
+Alguns formatos aparecem tanto que ganharam nome. Todos podem ser conferidos com uma tabela:
+
+| Nome | Forma | Exemplo | Válido? |
+| --- | --- | --- | --- |
+| **Modus ponens** | $p\to q,\ p\models q$ | Se chove, a rua molha. Choveu. Logo, a rua molhou. | **Sim** |
+| **Modus tollens** | $p\to q,\ \neg q\models\neg p$ | Se o servidor está de pé, responde ao ping. Não responde. Logo, não está de pé. | **Sim** |
+| **Silogismo hipotético** | $p\to q,\ q\to r\models p\to r$ | Se estudo, passo. Se passo, me formo. Logo, se estudo, me formo. | **Sim** |
+| **Silogismo disjuntivo** | $p\lor q,\ \neg p\models q$ | O bug está no front ou no back. Não está no front. Logo, está no back. | **Sim** |
+| **Prova por casos** | $p\lor q,\ p\to r,\ q\to r\models r$ | Ou é par ou é ímpar; nos dois casos o programa termina. Logo, termina. | **Sim** |
+| *Afirmação do consequente* | $p\to q,\ q\models p$ | Se chove, a rua molha. A rua molhou. Logo, choveu. | **Não** |
+| *Negação do antecedente* | $p\to q,\ \neg p\models\neg q$ | Se chove, a rua molha. Não choveu. Logo, a rua não molhou. | **Não** |
+
+As duas últimas são as **falácias** clássicas: parecem o modus ponens e o modus tollens "espelhados", mas não valem. O contra-exemplo é o mesmo para as duas: $p=F$ e $q=V$ (a rua molhou por outro motivo, como um caminhão-pipa).
+
+> [!TIP]
+> **Dois jeitos de usar um "se":** confirmar a condição (modus ponens) ou negar a conclusão (modus tollens). Qualquer outra tentativa de "virar a seta" é suspeita.
+
 ### Truque: transformar argumento em fórmula
 
 $$
@@ -223,19 +281,63 @@ Duas fórmulas são **equivalentes** ($\varphi\equiv\psi$) quando têm **a mesma
 | $p\lor q\equiv\neg p\to q$ | ou vira se |
 | $\neg(p\to q)\equiv p\land\neg q$ | negar a promessa $=$ cumprir a condição e falhar |
 | $p\leftrightarrow q\equiv(p\to q)\land(q\to p)$ | desmonta o "se e somente se" |
-| $(p\to q)\land(p\to r)\equiv p\to(q\land r)$ | |
-| $(p\to r)\land(q\to r)\equiv(p\lor q)\to r$ | |
+| $(p\land q)\to r\equiv p\to(q\to r)$ | **exportação** (premissas em fila) |
+| $(p\to q)\land(p\to r)\equiv p\to(q\land r)$ | mesma condição, duas consequências |
+| $(p\to r)\land(q\to r)\equiv(p\lor q)\to r$ | duas condições, mesma consequência |
 | $(p\to q)\lor(p\to r)\equiv p\to(q\lor r)$ | |
 | $(p\to r)\lor(q\to r)\equiv(p\land q)\to r$ | |
+| $p\leftrightarrow q\equiv(p\land q)\lor(\neg p\land\neg q)$ | "os dois V ou os dois F" |
+| $p\oplus q\equiv\neg(p\leftrightarrow q)\equiv(p\lor q)\land\neg(p\land q)$ | "um dos dois, mas não ambos" |
 
 > [!TIP]
 > **De Morgan em palavras:** "não (A e B)" $=$ "não A **ou** não B". Para negar uma conjunção/disjunção, **nega cada parte e troca $\land\leftrightarrow\lor$**. Em código: `!(a && b)` é `!a || !b`.
 
+> [!WARNING]
+> **A implicação não é associativa:** $p\to(q\to r)\not\equiv(p\to q)\to r$. Com $p=F$, $q=V$, $r=F$, a primeira é V e a segunda é F. Por isso a precedência (a implicação associa à direita) importa.
+
+### Não confunda $\to$, $\leftrightarrow$, $\models$ e $\equiv$
+
+Os quatro símbolos são parecidos, mas vivem em andares diferentes:
+
+| Símbolo | O que é | Exemplo | Tem valor V ou F? |
+| --- | --- | --- | --- |
+| $\to$ | **conectivo**: parte de uma fórmula | $p\to q$ | **depende** da interpretação |
+| $\leftrightarrow$ | **conectivo**: parte de uma fórmula | $p\leftrightarrow q$ | **depende** da interpretação |
+| $\models$ | **afirmação sobre fórmulas**: "em toda interpretação em que as premissas são V, a conclusão é V" | $p,\ p\to q\models q$ | é verdadeira ou falsa **de uma vez por todas** |
+| $\equiv$ | **afirmação sobre fórmulas**: "têm sempre o mesmo valor" | $p\to q\equiv\neg p\lor q$ | é verdadeira ou falsa **de uma vez por todas** |
+
+Os dois pares se ligam assim:
+
+$$
+\varphi\models\psi\iff\ \models\varphi\to\psi
+\qquad\text{e}\qquad
+\varphi\equiv\psi\iff\ \models\varphi\leftrightarrow\psi
+$$
+
+Ou seja: **$\to$ e $\leftrightarrow$ são fórmulas, e $\models$ e $\equiv$ dizem que essas fórmulas são tautologias.** Escrever "$p\to q$" não afirma nada: apenas monta uma fórmula que, numa interpretação, pode ser V ou F. Escrever "$p\models q$" **afirma** que não existe interpretação com $p$ V e $q$ F.
+
 **Voltando ao código:** $p\lor(\neg p\land q)\equiv p\lor q$. Confira na tabela: quando $p$ é V, os dois lados são V; quando $p$ é F, o lado esquerdo vira $q$ e o direito também. Por isso `if (x>0 || (x<=0 && y>100))` pode ser reescrito como `if (x>0 || y>100)`.
 
-## 10. O ponto fraco da tabela
+## 10. Atalho: caçar o contra-exemplo direto
 
-A tabela tem $2^n$ linhas. Com 20 letras já são mais de **1 milhão** de linhas, e com 60 são mais do que a computação consegue. Nas próximas páginas veremos métodos mais **inteligentes** (tableaux e forma normal), que muitas vezes evitam percorrer tudo.
+Para testar um argumento, não precisamos ver as $2^n$ linhas. Só queremos saber se **existe uma** linha ruim: premissas V e conclusão F. Dá para procurar essa linha **de trás para frente**:
+
+1. Escreva o que você quer: **cada premissa V e a conclusão F**.
+2. Comece pelo que é **forçado** (por exemplo, "conclusão $p$ é F" já fixa $p=F$).
+3. Propague os valores pelas outras fórmulas.
+4. Se aparecer uma **contradição** (uma letra tendo que ser V e F ao mesmo tempo), não há contra-exemplo: **válido**. Se sobrar um mundo consistente, ele **é** o contra-exemplo: **inválido**.
+
+**Exemplo 1 (inválido).** $p\to q,\ q\models p$. Conclusão F: $p=F$. Premissa $q$ V: $q=V$. Premissa $p\to q$: $F\to V=V$, que é o que queríamos. Nenhuma contradição, então $p=F,q=V$ é um **contra-exemplo**.
+
+**Exemplo 2 (válido).** $p\to q,\ \neg q\models\neg p$. Conclusão F: $\neg p=F$, logo $p=V$. Premissa $\neg q$ V: $q=F$. Premissa $p\to q$ precisa ser V, mas $V\to F=F$. **Contradição**, então não existe contra-exemplo: **válido**.
+
+**Exemplo 3 (válido).** $p\lor q,\ p\to r,\ q\to r\models r$. Conclusão F: $r=F$. Em $p\to r$ (V) com $r=F$, só dá certo se $p=F$. Em $q\to r$ (V), $q=F$. Mas aí $p\lor q$ é $F\lor F=F$, e ela precisava ser V. **Contradição**: válido.
+
+Quando há **escolha** (por exemplo, $p\lor q$ V não diz *qual* dos dois é V), é preciso testar as duas opções, e o raciocínio vira uma **árvore**. É exatamente isso que o tableaux, na próxima página, faz de modo sistemático.
+
+## 11. O ponto fraco da tabela
+
+A tabela tem $2^n$ linhas. Com 20 letras já são mais de **1 milhão** de linhas; com 30, mais de **1 bilhão**; com 60, mais de $10^{18}$, algo inviável na prática mesmo para um computador rápido. Nas próximas páginas veremos métodos mais **inteligentes** (tableaux e forma normal), que muitas vezes evitam percorrer tudo.
 
 ## Resumo
 
@@ -243,6 +345,9 @@ A tabela tem $2^n$ linhas. Com 20 letras já são mais de **1 milhão** de linha
 - **Tautologia:** sempre V. **Contradição:** sempre F. **Contingência:** depende. **Satisfazível:** pelo menos um V.
 - **$\varphi_1..\varphi_n\models\psi$:** não existe linha com premissas V e conclusão F.
 - **Equivalentes:** mesma coluna. Dominar De Morgan e $p\to q\equiv\neg p\lor q$ já resolve muito.
+- **Modus ponens** e **modus tollens** são válidos. **Afirmar o consequente** e **negar o antecedente** são falácias.
+- $\to$ e $\leftrightarrow$ são **fórmulas**; $\models$ e $\equiv$ são **afirmações** de que algo vale em todas as interpretações.
+- **Atalho:** para testar um argumento, force "premissas V, conclusão F" e propague; contradição $\Rightarrow$ válido.
 
 ## Exercícios
 
@@ -405,6 +510,44 @@ $\neg(p\lor q)\equiv\neg p\land\neg q$, e uma conjunção sempre implica a disju
 
 Coluna toda V: **tautologia**.
 {{< /details >}}
+
+**Exercício 5.** Monte a tabela de $(p\lor q)\land\neg r$ e diga em quais linhas a fórmula é V.
+
+{{< details title="Gabarito" >}}
+| $p$ | $q$ | $r$ | $p\lor q$ | $\neg r$ | **fórmula** |
+| --- | --- | --- | --- | --- | --- |
+| V | V | V | V | F | **F** |
+| V | V | F | V | V | **V** |
+| V | F | V | V | F | **F** |
+| V | F | F | V | V | **V** |
+| F | V | V | V | F | **F** |
+| F | V | F | V | V | **V** |
+| F | F | V | F | F | **F** |
+| F | F | F | F | V | **F** |
+
+É V em três linhas ($VVF$, $VFF$, $FVF$), que são os **modelos** da fórmula. Tem V e F: **contingência**.
+{{< /details >}}
+
+**Exercício 6.** Use o atalho (forçar premissas V e conclusão F) para decidir: $p\land q\to r,\ \neg r\models\neg p\land\neg q$.
+
+{{< details title="Gabarito" >}}
+Conclusão F: $\neg p\land\neg q=F$, isto é, $p$ ou $q$ é V. Premissa $\neg r$ V: $r=F$. Premissa $p\land q\to r$ V com $r=F$: precisa de $p\land q=F$. Dá para ter isso com $p=V,q=F$ (ou $p=F,q=V$), e aí $p$ ou $q$ é V, como a conclusão F exige. Sem contradição: **inválido**, com contra-exemplo $p=V,q=F,r=F$. (Intuição: "não passou em tudo" não obriga a ter falhado em tudo.)
+{{< /details >}}
+
+**Exercício 7.** Dê o nome do argumento e diga se é válido: *"Se o teste passou, o build está verde. O build está verde. Logo, o teste passou."*
+
+{{< quiz titulo="nome do argumento" >}}
+{{< questao fixa="true" >}}
+*"Se o teste passou, o build está verde. O build está verde. Logo, o teste passou."* Este argumento é:
+
+- [ ] Modus ponens, válido
+- [ ] Modus tollens, válido
+- [x] Afirmação do consequente, inválido
+- [ ] Negação do antecedente, inválido
+---
+Com $t$: o teste passou e $b$: o build está verde, é $t\to b,\ b\models t$. Afirma o consequente. Contra-exemplo: $t=F,b=V$ (o build pode estar verde por outro motivo).
+{{< /questao >}}
+{{< /quiz >}}
 
 ### Mais treino
 

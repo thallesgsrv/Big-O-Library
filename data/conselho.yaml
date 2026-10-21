@@ -32,7 +32,7 @@ professores:
     titulo: Guardião dos Algoritmos
     disciplina: Estruturas de Dados
     periodo: 3
-    frase: "Você tem brio?"
+    frase: "Você não precisa ser o mais rápido da selva, só precisa ser mais rápido que o ultimo."
     github: joaoarthurbm
 
   - nome: Prof. Rodrigo Cohen
@@ -48,6 +48,7 @@ professores:
     disciplina: Fundamentos Matemáticos para Ciência da Computação 2
     periodo: 2
     github: tiagomassoni
+    frase: "Seja oportunista!"
 
   - nome: Prof. Dalton Serey
     titulo: Mestre das Primeiras Linhas

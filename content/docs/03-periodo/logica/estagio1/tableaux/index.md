@@ -7,6 +7,17 @@ autores:
 date: 2026-10-15
 ---
 
+## Sobre
+
+A tabela-verdade funciona, mas cresce rápido demais. O **tableaux semântico** é um método de **detetive**: supomos que a fórmula é verdadeira e investigamos o que isso exige, abrindo uma árvore. Se todos os caminhos dão em contradição, a suposição era impossível; se sobrar um caminho limpo, ele nos entrega um **modelo**.
+
+Ao final você deve conseguir:
+
+- classificar qualquer fórmula como regra $\alpha$ (empilha) ou $\beta$ (ramifica);
+- montar a árvore, fechar os ramos certos e **ler o modelo** de um ramo aberto;
+- decidir se uma fórmula é **satisfazível** ou **válida** (usando a negação);
+- evitar os erros mais comuns do método.
+
 ## 1. O problema: tabela demais
 
 A tabela-verdade tem $2^n$ linhas. Para 30 letras seriam **mais de um bilhão**. Mas muitas vezes não precisamos olhar tudo: basta **achar uma linha que funcione** (um modelo) e parar.
@@ -50,12 +61,15 @@ Assumir a fórmula V obriga **as duas partes** a serem V. Basta escrever as duas
 
 Assumir a fórmula V dá **opções**: basta uma das partes ser V. Cada opção vira um **galho**.
 
-| Fórmula | Vira (dois galhos) | Por quê |
-| --- | --- | --- |
-| $p\lor q$ | $p\ \big|\ q$ | uma das duas |
-| $\neg(p\land q)$ | $\neg p\ \big|\ \neg q$ | pelo menos uma é falsa |
-| $p\to q$ | $\neg p\ \big|\ q$ | $\neg p\lor q$ |
-| $\neg(p\leftrightarrow q)$ | $\neg(p\to q)\ \big|\ \neg(q\to p)$ | valores diferentes |
+| Fórmula | Galho da esquerda | Galho da direita | Por quê |
+| --- | --- | --- | --- |
+| $p\lor q$ | $p$ | $q$ | uma das duas |
+| $\neg(p\land q)$ | $\neg p$ | $\neg q$ | pelo menos uma é falsa |
+| $p\to q$ | $\neg p$ | $q$ | $\neg p\lor q$ |
+| $\neg(p\leftrightarrow q)$ | $\neg(p\to q)$ | $\neg(q\to p)$ | valores diferentes |
+
+> [!NOTE]
+> **E se aparecer $\oplus$, $\uparrow$ ou $\downarrow$?** Troque pela definição antes de começar: $p\oplus q$ vira $\neg(p\leftrightarrow q)$, $p\uparrow q$ vira $\neg(p\land q)$ e $p\downarrow q$ vira $\neg(p\lor q)$. Todas já têm regra na tabela acima.
 
 > [!TIP]
 > **Macete:** a regra é $\alpha$ se a fórmula "exige tudo" e $\beta$ se "oferece opções". Pergunte: *"se isso é verdadeiro, quais partes são obrigatoriamente verdadeiras?"* Todas $\Rightarrow$ $\alpha$. Só uma delas $\Rightarrow$ $\beta$.
@@ -77,17 +91,17 @@ Terminologia:
 > [!IMPORTANT]
 > **Sempre faça as regras $\alpha$ antes das $\beta$.** O resultado é o mesmo, mas a árvore fica menor (menos galhos duplicando trabalho).
 
+**Como ler as árvores abaixo.** Cada linha é um nó, escrito com **todas as fórmulas daquele ramo**. A indentação mostra quem veio de quem, e `├─` / `└─` separam os galhos. À direita, uma anotação diz qual regra foi usada. Um ramo terminado em $\times$ está **fechado**.
+
 ## 5. Exemplos passo a passo
 
 ### Exemplo 1: $p\land(\neg q\lor\neg p)$ é satisfazível?
 
 ```
 p ∧ (¬q ∨ ¬p)
-      │ α
-p, (¬q ∨ ¬p)
-     ╱     ╲  β
- p, ¬q     p, ¬p
- aberto    fechado ✗
+└─ p, (¬q ∨ ¬p)           α em ∧
+   ├─ p, ¬q               β em ∨   aberto ✓
+   └─ p, ¬p  ✗            β em ∨   fechado
 ```
 
 O ramo da esquerda tem só $\{p,\neg q\}$ (sem complementares): **aberto**. **Satisfazível.** O modelo vem direto dos literais: $p=V$, $q=F$.
@@ -96,12 +110,11 @@ O ramo da esquerda tem só $\{p,\neg q\}$ (sem complementares): **aberto**. **Sa
 
 ```
 (p ∨ q) ∧ (¬p ∧ ¬q)
-        │ α
-(p ∨ q), (¬p ∧ ¬q)
-      ╱        ╲   β
-p, (¬p∧¬q)    q, (¬p∧¬q)
-    │ α            │ α
-p, ¬p, ¬q ✗    q, ¬p, ¬q ✗
+└─ (p ∨ q), (¬p ∧ ¬q)             α em ∧
+   ├─ p, (¬p ∧ ¬q)                β em ∨
+   │  └─ p, ¬p, ¬q  ✗             α em ∧   (p e ¬p)
+   └─ q, (¬p ∧ ¬q)                β em ∨
+      └─ q, ¬p, ¬q  ✗             α em ∧   (q e ¬q)
 ```
 
 Todos os ramos fecham: **insatisfazível.** Faz sentido: "$p$ ou $q$" e "nem $p$ nem $q$" não convivem.
@@ -110,14 +123,16 @@ Todos os ramos fecham: **insatisfazível.** Faz sentido: "$p$ ou $q$" e "nem $p$
 
 ```
 (p → q) → (r ∧ q)
-      ╱          ╲   β
- ¬(p → q)      (r ∧ q)
-    │ α           │ α
-  p, ¬q          r, q
-  aberto         aberto
+├─ ¬(p → q)               β em →
+│  └─ p, ¬q               α em ¬→   aberto ✓
+└─ (r ∧ q)                β em →
+   └─ r, q                α em ∧    aberto ✓
 ```
 
-**Satisfazível**, com dois jeitos: $p=V,q=F$ (e $r$ qualquer), ou $r=V,q=V$.
+**Satisfazível**, com dois jeitos: $p=V,q=F$ (e $r$ qualquer), ou $r=V,q=V$ (e $p$ qualquer).
+
+> [!TIP]
+> **Confira o modelo na fórmula original.** Com $p=V,q=F,r=V$: $(V\to F)\to(V\land F)=F\to F=V$. Deu V, então o modelo está certo. Esse hábito pega erros de regra aplicada ao contrário.
 
 > [!NOTE]
 > **Átomos que não aparecem** no ramo aberto podem ter qualquer valor (como o $r$ no primeiro modelo).
@@ -149,13 +164,11 @@ Tableaux da **negação**: $\neg\big(\neg(a\land b)\lor(c\land b)\big)$.
 
 ```
 ¬(¬(a∧b) ∨ (c∧b))
-        │ α
-(a∧b), ¬(c∧b)
-        │ α
-a, b, ¬(c∧b)
-      ╱     ╲   β
-a, b, ¬c   a, b, ¬b ✗
- aberto
+└─ ¬¬(a∧b), ¬(c∧b)            α em ¬∨
+   └─ (a∧b), ¬(c∧b)           α em ¬¬
+      └─ a, b, ¬(c∧b)         α em ∧
+         ├─ a, b, ¬c          β em ¬∧   aberto ✓
+         └─ a, b, ¬b  ✗       β em ¬∧   fechado
 ```
 
 Há ramo aberto: $a=V,b=V,c=F$. Nessa interpretação a fórmula original é **F**. Logo ela é **inválida**, com contra-exemplo $a=V,b=V,c=F$.
@@ -166,14 +179,15 @@ Tableaux da negação (que é a conjunção sem o $\neg$ de fora):
 
 ```
 ((p→q) ∧ ¬(p↔q)) ∧ ¬¬p
-          │ α  (várias vezes)
-p→q,  ¬(p↔q),  p
-        ╱            ╲   β em p→q
-  ¬p, ..., p ✗        q, ¬(p↔q), p
-                          ╱          ╲   β em ¬(p↔q)
-                 ¬(p→q), q, p     ¬(q→p), q, p
-                    │ α              │ α
-               p, ¬q, q ✗          q, ¬p, p ✗
+└─ (p→q) ∧ ¬(p↔q), ¬¬p                 α em ∧
+   └─ p→q, ¬(p↔q), ¬¬p                 α em ∧
+      └─ p→q, ¬(p↔q), p                α em ¬¬
+         ├─ ¬p, ¬(p↔q), p  ✗           β em →   (¬p e p)
+         └─ q, ¬(p↔q), p               β em →
+            ├─ ¬(p→q), q, p            β em ¬↔
+            │  └─ p, ¬q, q, p  ✗       α em ¬→  (¬q e q)
+            └─ ¬(q→p), q, p            β em ¬↔
+               └─ q, ¬p, q, p  ✗       α em ¬→  (¬p e p)
 ```
 
 Todos fechados: a negação é insatisfazível, então a fórmula é **válida**.
@@ -181,6 +195,14 @@ Todos fechados: a negação é insatisfazível, então a fórmula é **válida**
 ## 7. Custo
 
 No **pior caso**, o tableaux também cresce como $2^n$ (igual à tabela-verdade). Por exemplo, em $(p\lor q)\land(p\lor\neg q)\land(\neg p\lor q)\land(\neg p\lor\neg q)$ todos os ramos têm que ser explorados. Mas, **na prática**, ele costuma ser bem mais rápido, porque fecha caminhos cedo e para no primeiro modelo.
+
+## Erros comuns
+
+- **Tratar $\neg(p\land q)$ como $\alpha$.** De Morgan **troca** o conectivo: $\neg(p\land q)$ é "$\neg p$ **ou** $\neg q$", logo é $\beta$ e ramifica. Já $\neg(p\lor q)$ é "$\neg p$ **e** $\neg q$", logo é $\alpha$.
+- **Fechar um ramo com literais que não são complementares.** $\{p,\neg q\}$ **não** fecha: complementares são a mesma letra com e sem $\neg$ ($p$ e $\neg p$).
+- **Declarar o ramo "aberto" cedo demais.** Só vale quando ele está **saturado** (só literais). Se ainda há uma fórmula que não é literal, continue expandindo.
+- **Esquecer de expandir uma fórmula $\beta$ em todos os ramos abertos que a contêm.** Se ela estava antes de uma ramificação, **cada galho** abaixo dela herda a obrigação de usá-la.
+- **Concluir "válida" olhando o tableaux da própria fórmula.** Tableaux fechado em $\varphi$ quer dizer $\varphi$ **insatisfazível** (contradição). Para saber se é **válida**, o tableaux é o de $\neg\varphi$.
 
 ## Resumo
 
@@ -220,3 +242,85 @@ Negação: $p$, $\neg q$, $p\to(r\to q)$ e $p\to r$. Em $p\to(r\to q)$: ramo $\n
 {{< details title="Gabarito" >}}
 Negação: $(p\to q)$ e $\neg(\neg q\to\neg p)$, que vira $\neg q$ e $\neg\neg p$ (isto é, $p$). Em $p\to q$: ramo $\neg p$ fecha com $p$; ramo $q$ fecha com $\neg q$. **Válida** (contrapositiva).
 {{< /details >}}
+
+**Exercício 6.** $\neg(p\land q)\land(p\lor q)$ é satisfazível? Se for, diga todos os modelos.
+
+{{< details title="Gabarito" >}}
+```
+¬(p∧q) ∧ (p∨q)
+└─ ¬(p∧q), (p∨q)                α em ∧
+   ├─ ¬p, (p∨q)                 β em ¬∧
+   │  ├─ ¬p, p  ✗               β em ∨
+   │  └─ ¬p, q                  β em ∨   aberto ✓
+   └─ ¬q, (p∨q)                 β em ¬∧
+      ├─ ¬q, p                  β em ∨   aberto ✓
+      └─ ¬q, q  ✗               β em ∨
+```
+**Satisfazível**, com dois modelos: $p=F,q=V$ e $p=V,q=F$. Repare: é exatamente o $p\oplus q$ ("um dos dois, mas não ambos").
+{{< /details >}}
+
+**Exercício 7.** O conjunto de fórmulas $(p\to q)\land(q\to r)\land p\land\neg r$ é satisfazível?
+
+{{< details title="Gabarito" >}}
+Por $\alpha$ (várias vezes): $p\to q,\ q\to r,\ p,\ \neg r$. Em $p\to q$: o galho $\neg p$ fecha (temos $p$) e sobra o galho $q$. Nele, em $q\to r$: o galho $\neg q$ fecha (temos $q$) e o galho $r$ fecha (temos $\neg r$). Todos fechados: **insatisfazível**. (É a cadeia $p\Rightarrow q\Rightarrow r$ batendo de frente com $\neg r$.)
+{{< /details >}}
+
+**Exercício 8.** Para cada fórmula, qual regra se aplica quando ela aparece num ramo (assumindo que é V)?
+
+{{< quiz titulo="alfa ou beta?" >}}
+
+{{< questao fixa="true" >}}
+$\neg(p\to q)$ é uma regra...
+
+- [x] $\alpha$ (empilha: $p,\ \neg q$)
+- [ ] $\beta$ (ramifica)
+---
+A única forma de $p\to q$ ser F é $p$ V e $q$ F, e as duas coisas têm que valer juntas. Não há opção, então empilha.
+{{< /questao >}}
+
+{{< questao fixa="true" >}}
+$p\to q$ é uma regra...
+
+- [ ] $\alpha$ (empilha)
+- [x] $\beta$ (ramifica: $\neg p\ \mid\ q$)
+---
+É o mesmo que $\neg p\lor q$: basta uma das duas partes, então são duas opções.
+{{< /questao >}}
+
+{{< questao fixa="true" >}}
+$\neg(p\land q)$ é uma regra...
+
+- [ ] $\alpha$ (empilha)
+- [x] $\beta$ (ramifica: $\neg p\ \mid\ \neg q$)
+---
+De Morgan: $\neg(p\land q)\equiv\neg p\lor\neg q$. Um "ou" oferece opções.
+{{< /questao >}}
+
+{{< questao fixa="true" >}}
+$\neg(p\lor q)$ é uma regra...
+
+- [x] $\alpha$ (empilha: $\neg p,\ \neg q$)
+- [ ] $\beta$ (ramifica)
+---
+De Morgan: $\neg(p\lor q)\equiv\neg p\land\neg q$. Um "e" exige as duas partes.
+{{< /questao >}}
+
+{{< questao fixa="true" >}}
+$p\leftrightarrow q$ é uma regra...
+
+- [x] $\alpha$ (empilha: $p\to q,\ q\to p$)
+- [ ] $\beta$ (ramifica)
+---
+Nesta página, $p\leftrightarrow q$ vira a conjunção $(p\to q)\land(q\to p)$: as duas valem ao mesmo tempo.
+{{< /questao >}}
+
+{{< questao fixa="true" >}}
+$\neg(p\leftrightarrow q)$ é uma regra...
+
+- [ ] $\alpha$ (empilha)
+- [x] $\beta$ (ramifica: $\neg(p\to q)\ \mid\ \neg(q\to p)$)
+---
+Os valores diferem de dois jeitos: $p$ V e $q$ F, ou $p$ F e $q$ V. Duas opções, então ramifica.
+{{< /questao >}}
+
+{{< /quiz >}}

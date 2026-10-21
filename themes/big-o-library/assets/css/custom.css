@@ -650,7 +650,7 @@ a.bo-m-chip:hover,a.bo-m-chip:focus-visible{border-color:var(--ac);transform:tra
 .bo-credits-person.is-sabio .bo-av>span{font-size:9px}
 @media (prefers-reduced-motion:reduce){.bo-g-opt,.bo-g-bar i,.bo-lab,.bo-rs-sage,.bo-m-node,.bo-m-edge,.bo-m-chip{transition:none!important}.bo-g-opt:hover,.bo-lab:hover,.bo-rs-sage:hover{transform:none}}
 
-/* ===== Melhorias de usabilidade ===== */
+/*  Melhorias de usabilidade  */
 /* Banner de cookies compacto: ocupa pouco espaço, sobretudo no celular */
 .bo-consent{padding:10px 12px;gap:8px 12px;font-size:12px;line-height:1.45;max-width:640px}
 .bo-consent-txt{flex:1 1 240px}

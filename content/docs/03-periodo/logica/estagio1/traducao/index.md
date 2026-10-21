@@ -7,6 +7,17 @@ autores:
 date: 2026-10-15
 ---
 
+## Sobre
+
+Traduzir do português para a lógica é a parte mais **escorregadia** do curso: o português tem jeitinhos ("só se", "a menos que", "basta") que mudam o sentido de uma frase inteira. Aqui você ganha uma receita, um dicionário e os truques para não errar o lado da seta.
+
+Ao final você deve conseguir:
+
+- traduzir uma frase para uma fórmula usando a receita de 4 passos;
+- distinguir **"se"**, **"só se"**, **condição necessária** e **condição suficiente**;
+- escolher entre "ou" inclusivo e exclusivo;
+- traduzir um **argumento** inteiro (premissas $\models$ conclusão) e **conferir** a sua tradução com cenários.
+
 ## 1. A receita de 4 passos
 
 Traduzir é a parte mais **escorregadia** do curso, porque o português é cheio de jeitinhos. Use sempre esta receita:
@@ -26,17 +37,24 @@ Traduzir é a parte mais **escorregadia** do curso, porque o português é cheio
 | $A$ **e** $B$; $A$ **mas** $B$; $A$ **também** $B$; $A$ **além disso** $B$; **embora**, **porém** | $A\land B$ |
 | $A$ **ou** $B$ | $A\lor B$ (ou $A\oplus B$, veja a seção 4) |
 | **Não** $A$; é **falso que** $A$; **não é verdade que** $A$ | $\neg A$ |
-| **Se** $A$, **então** $B$; $A$ **implica** $B$; $A$, **logo** $B$; $B$ **segue de** $A$ | $A\to B$ |
+| **Se** $A$, **então** $B$; $A$ **implica** $B$; $B$ **segue de** $A$ | $A\to B$ |
 | $A$ **somente se** $B$; $A$ **só se** $B$ | $A\to B$ |
 | $B$ **se** $A$; $B$ **quando** $A$; **sempre que** $A$, $B$ | $A\to B$ |
 | $A$ **é suficiente** para $B$; **basta** $A$ para $B$ | $A\to B$ |
 | $A$ **é necessária** para $B$; $B$ **só se** $A$ | $B\to A$ |
 | $A$ **se, e somente se,** $B$; $A$ é necessária **e** suficiente para $B$ | $A\leftrightarrow B$ |
-| $A$ **a não ser que** $B$ | $\neg B\to A$ |
+| $A$ **a não ser que** $B$; $A$ **a menos que** $B$; $A$ **exceto se** $B$ | $\neg B\to A$ (equivale a $A\lor B$) |
+| **Se** $A$, **então** $B$, **senão** $C$ | $(A\to B)\land(\neg A\to C)$ |
 | **Nem** $A$ **nem** $B$ | $\neg A\land\neg B$ |
 | **Não ambos**: $A$ e $B$ | $\neg(A\land B)$ |
 
-**"Mas" é "e"!** Logicamente, "mas" só acrescenta um tom de contraste. *"Estudei, mas não passei"* $=$ $e\land\neg p$.
+**"Mas" é "e"!** Logicamente, "mas" só acrescenta um tom de contraste. Com $e$: "Estudei" e $p$: "Passei", a frase *"Estudei, mas não passei"* vira $e\land\neg p$.
+
+> [!WARNING]
+> **"Logo" e "portanto" não são implicação.** Elas marcam a **conclusão de um argumento** (veja a seção 8), e não um conectivo dentro de uma fórmula. "Se $A$, então $B$" é uma fórmula ($A\to B$); "$A$, logo $B$" é um argumento ($A\models B$).
+
+> [!NOTE]
+> **Para quem programa:** "se $A$, então $B$, senão $C$" é exatamente um `if (A) { B } else { C }`. E "a menos que" é só um "ou" disfarçado: *"Chego cedo, a menos que chova"* diz que ou chego cedo, ou chove (ou os dois).
 
 ## 3. O problema número 1: o "se"
 
@@ -77,7 +95,32 @@ Todas dizem $c\to a$. Moral: **o "suficiente" vira o antecedente, o "necessário
 
 Na dúvida, pergunte: **"os dois ao mesmo tempo seria possível/aceitável?"** Se sim, inclusivo.
 
-## 5. Exemplos resolvidos
+## 5. Como conferir a sua tradução
+
+Depois de traduzir, **teste a fórmula contra cenários**. Para cada situação possível, pergunte: *"a frase em português fica respeitada ou violada?"* e compare com o valor da fórmula.
+
+**Exemplo.** *"Só vou ao teatro se for comédia."* Com $p$: "Vou ao teatro" e $q$: "A peça é comédia", duas candidatas: $p\to q$ e $q\to p$.
+
+| Cenário | A frase fica... | $p\to q$ | $q\to p$ |
+| --- | --- | --- | --- |
+| Vou, e é comédia | respeitada | V | V |
+| Vou, e **não** é comédia | **violada** | F | V |
+| Não vou, mas é comédia | respeitada (não prometi ir a toda comédia) | V | **F** |
+| Não vou, e não é comédia | respeitada | V | V |
+
+Só $p\to q$ concorda com a frase nos quatro cenários. A candidata $q\to p$ erra no terceiro: ela diria que a frase foi violada, mas ninguém prometeu ir a *toda* comédia.
+
+> [!TIP]
+> **O cenário decisivo** quase sempre é aquele em que a frase é **violada**. Ache a situação que faria alguém dizer *"você mentiu"* e confira que a fórmula dá F exatamente ali.
+
+### Armadilhas frequentes
+
+- **"E" que significa "então".** *"Estude e você passará"* é uma promessa: $e\to p$. Não é $e\land p$, que diria que você estuda *e* passa, como se fossem dois fatos soltos.
+- **"Não" e "ou" juntos.** *"Não é verdade que choveu ou fez frio"* é $\neg(c\lor f)$. Já *"Não choveu, ou fez frio"* é $\neg c\lor f$. Leia em voz alta e veja onde está a pausa.
+- **"Só" não é sempre "só se".** *"Só Ana passou"* quer dizer que *mais ninguém* passou (veja a seção 7). *"Ana só passa se estudar"* é a implicação $p\to e$.
+- **"Todo" e "algum".** Em lógica proposicional não existem. Traduza o caso concreto de que a frase fala (como no exemplo do Zé) e deixe os quantificadores para a lógica de predicados.
+
+## 6. Exemplos resolvidos
 
 **1.** "Se eu **era** feliz, então você e eu somos felizes."
 $p$: eu era feliz; $q$: eu sou feliz; $r$: você é feliz. $\Rightarrow$ $p\to(q\land r)$.
@@ -103,7 +146,7 @@ $a$: instalou; $c$: vendeu o carro; $f$: pagou o financiamento. $\Rightarrow$ $a
 
 **9.** "É proibido fumar cigarro ou charuto." $\Rightarrow$ não pode fumar nenhum dos dois: $\neg p\land\neg q\equiv\neg(p\lor q)$.
 
-## 6. Contando: "apenas um", "pelo menos", "exatamente"
+## 7. Contando: "apenas um", "pelo menos", "exatamente"
 
 Sejam $a,b,c$: Amadeu, Bruno e Carlito passaram no teste.
 
@@ -112,19 +155,25 @@ Sejam $a,b,c$: Amadeu, Bruno e Carlito passaram no teste.
 | Carlito é o único a passar | $c\land\neg a\land\neg b$ |
 | Amadeu foi o único que **não** passou | $\neg a\land b\land c$ |
 | Apenas um passou | $(a\land\neg b\land\neg c)\lor(\neg a\land b\land\neg c)\lor(\neg a\land\neg b\land c)$ |
+| Ninguém passou | $\neg a\land\neg b\land\neg c$ |
+| Todos passaram | $a\land b\land c$ |
 | Pelo menos um passou | $a\lor b\lor c$ |
+| Pelo menos dois passaram | $(a\land b)\lor(a\land c)\lor(b\land c)$ |
+| No máximo um passou | $\neg(a\land b)\land\neg(a\land c)\land\neg(b\land c)$ |
 | No máximo dois passaram | $\neg(a\land b\land c)$ |
 | Exatamente dois passaram | $(a\land b\land\neg c)\lor(a\land\neg b\land c)\lor(\neg a\land b\land c)$ |
 
-**Macete:** para "exatamente", liste **cada caso** possível com $\lor$ e, dentro de cada caso, diga **quem passou e quem não passou** com $\land$.
+**Macete:** para "exatamente", liste **cada caso** possível com $\lor$ e, dentro de cada caso, diga **quem passou e quem não passou** com $\land$. Para "pelo menos", liste só os casos **mínimos** (aqui, os pares). Para "no máximo", é mais fácil **negar** o que passaria do limite.
 
-## 7. Traduzindo argumentos
+## 8. Traduzindo argumentos
 
 Um argumento vira uma lista de **premissas** (separadas por vírgula) seguida de $\models$ e da **conclusão**:
 $$
 \text{premissa}_1,\ \text{premissa}_2,\ \ldots\ \models\ \text{conclusão}
 $$
 ($\models$ lê-se "implica logicamente" ou "tem como consequência". Existe também $\vdash$, que significa "se prova", mas por ora trate os dois como "a conclusão decorre".)
+
+Para separar as premissas da conclusão, procure as palavras-pista da página de Conceitos: **logo, portanto, então** marcam a conclusão; **porque, pois, já que** marcam premissas.
 
 **Exemplo 1 (Swing).** $s$: usa Swing; $i$: importou; $c$: compilou.
 $$
@@ -172,6 +221,9 @@ $$
 - "Mas" $=$ "e". "A se B" $=$ $B\to A$. "A só se B" $=$ $A\to B$.
 - Suficiente $=$ antecedente. Necessário $=$ consequente.
 - "Ou" é inclusivo, a não ser que digam "mas não ambos".
+- "A menos que $B$" é $\neg B\to A$ (equivale a $A\lor B$). "Se $A$ então $B$, senão $C$" é $(A\to B)\land(\neg A\to C)$.
+- "Logo" e "portanto" marcam a conclusão de um **argumento** ($\models$), não um $\to$.
+- **Confira a tradução com cenários**, sobretudo o que **viola** a frase.
 
 ## Exercícios
 
@@ -227,3 +279,72 @@ $(A\to B\land C)\to D$. Como $\land$ tem precedência sobre $\to$, $A\to B\land 
 {{< details title="Gabarito" >}}
 $e$: Ana estuda; $p$: Ana passa. $e\to p,\ \neg p\models\neg e$. (Válido: é a contrapositiva em ação.)
 {{< /details >}}
+
+**Exercício 8.** Traduza: *"Você não passa em Lógica a menos que estude."* ($p$: passa em Lógica; $e$: estuda.) Depois escreva uma fórmula equivalente que use "só se".
+
+{{< details title="Gabarito" >}}
+"$A$ a menos que $B$" é $\neg B\to A$, com $A$: "não passa" ($\neg p$) e $B$: "estuda" ($e$). Fica $\neg e\to\neg p$. Pela contrapositiva, é o mesmo que $p\to e$: "só passa se estudar".
+{{< /details >}}
+
+**Exercício 9.** Traduza para uma fórmula: *"Se o usuário está logado, o sistema mostra o painel; senão, mostra a tela de login."* ($l$: logado; $p$: mostra o painel; $g$: mostra o login.)
+
+{{< details title="Gabarito" >}}
+$(l\to p)\land(\neg l\to g)$. É um `if (l) { p } else { g }`. Cada ramo vira uma implicação, e as duas valem ao mesmo tempo.
+{{< /details >}}
+
+**Exercício 10.** Com $t_1,t_2,t_3$ ("o teste $i$ falhou"), traduza: (a) *pelo menos dois testes falharam*; (b) *no máximo um teste falhou*.
+
+{{< details title="Gabarito" >}}
+(a) $(t_1\land t_2)\lor(t_1\land t_3)\lor(t_2\land t_3)$.\
+(b) $\neg(t_1\land t_2)\land\neg(t_1\land t_3)\land\neg(t_2\land t_3)$ (nunca dois ao mesmo tempo).
+{{< /details >}}
+
+**Exercício 11.** Escolha a tradução certa. Cada pergunta usa uma armadilha diferente.
+
+{{< quiz titulo="qual tradução?" >}}
+
+{{< questao >}}
+*"O servidor só responde se a rede estiver ativa."* ($r$: responde; $a$: rede ativa.)
+
+- [x] $r\to a$
+- [ ] $a\to r$
+- [ ] $r\leftrightarrow a$
+- [ ] $r\land a$
+---
+"Só ... se" aponta para a **exigência**: responder obriga a rede ativa. A rede ativa não garante resposta (a $a\to r$ é a recíproca, o erro mais comum).
+{{< /questao >}}
+
+{{< questao >}}
+*"Ter nota 7 basta para passar."* ($n$: nota 7; $p$: passa.)
+
+- [x] $n\to p$
+- [ ] $p\to n$
+- [ ] $n\land p$
+- [ ] $p\leftrightarrow n$
+---
+"Basta" é **suficiente**, e suficiente vira antecedente. Ter 7 garante passar, mas dá para passar sem ter 7 (com 8, por exemplo), por isso não é $\leftrightarrow$.
+{{< /questao >}}
+
+{{< questao >}}
+*"O código não compila a menos que as importações estejam corretas."* ($c$: compila; $i$: importações corretas.)
+
+- [x] $c\to i$
+- [ ] $i\to c$
+- [ ] $\neg c\to\neg i$
+- [ ] $c\land i$
+---
+"$A$ a menos que $B$" é $\neg B\to A$, aqui $\neg i\to\neg c$. Pela contrapositiva, é $c\to i$: compilar exige importações corretas. As outras são recíprocas ou afirmam coisas demais.
+{{< /questao >}}
+
+{{< questao >}}
+*"Ter a chave é necessário para abrir o cofre."* ($k$: tem a chave; $a$: abre o cofre.)
+
+- [x] $a\to k$
+- [ ] $k\to a$
+- [ ] $k\leftrightarrow a$
+- [ ] $a\land k$
+---
+Necessário vira **consequente**: se abriu, então tinha a chave. Ter a chave não garante abrir (pode faltar a senha).
+{{< /questao >}}
+
+{{< /quiz >}}

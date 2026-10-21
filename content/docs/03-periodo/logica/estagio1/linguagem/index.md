@@ -7,6 +7,17 @@ autores:
 date: 2026-10-15
 ---
 
+## Sobre
+
+Para raciocinar com método, primeiro precisamos de uma **língua** sem ambiguidade. Nesta página você aprende as peças dessa língua (letras, conectivos e parênteses), as regras para montar frases corretas (as **fórmulas bem formadas**) e como ler a **estrutura** de uma fórmula.
+
+Ao final você deve conseguir:
+
+- dizer se uma sequência de símbolos é ou não uma fórmula;
+- achar o **conectivo principal** e as **subfórmulas** de uma fórmula;
+- colocar e tirar parênteses usando a **precedência**;
+- ler uma condição de `if` como uma fórmula lógica.
+
 ## 1. Por que inventar uma linguagem?
 
 Uma piada clássica:
@@ -62,6 +73,9 @@ Conectivos estendidos (atalhos úteis):
 | NAND | $p\uparrow q$ | "não ambos": $\neg(p\land q)$ |
 | NOR | $p\downarrow q$ | "nem um nem outro": $\neg(p\lor q)$ |
 
+> [!NOTE]
+> Os conectivos estendidos são **atalhos**: tudo que eles dizem dá para escrever só com $\neg,\land,\lor,\to,\leftrightarrow$. Por exemplo, $p\oplus q$ é o mesmo que $\neg(p\leftrightarrow q)$, $p\uparrow q$ é $\neg(p\land q)$ e $p\downarrow q$ é $\neg(p\lor q)$. Por isso as regras de construção abaixo só falam dos cinco primeiros.
+
 ### (c) Parênteses
 
 Servem para **tirar a ambiguidade**. É a versão lógica de "(leite + ovos) × dúzia" versus "leite + (ovos × dúzia)".
@@ -75,7 +89,7 @@ Nem toda sequência de símbolos é uma fórmula. As regras de construção são
 3. Se $A$ e $B$ são fórmulas, então $(A\land B)$, $(A\lor B)$, $(A\to B)$ e $(A\leftrightarrow B)$ também são.
 4. **Nada mais** é fórmula.
 
-Pense em montar LEGO: só vale encaixe permitido.
+Pense em montar LEGO: só vale encaixe permitido. Uma letra sozinha, como $p$, já é uma fórmula (regra 1). E $\neg\neg p$ também: é a regra 2 usada duas vezes. Por conveniência, costuma-se **omitir os parênteses mais externos**: escrevemos $p\land q$ em vez de $(p\land q)$.
 
 **Exemplo.** Quais são bem formadas?
 
@@ -84,9 +98,48 @@ Pense em montar LEGO: só vale encaixe permitido.
 3. $(((P\lor R)\to T)\leftrightarrow(Q\land S))$ **Sim.**
 4. $(\neg P\to(Q\land(R\leftrightarrow S)))(\neg P\to(Q\land(R\leftrightarrow S)))$ **Não.** São duas fórmulas coladas, sem conectivo entre elas.
 
-## 4. Reduzindo parênteses: precedência
+## 4. Subfórmulas, conectivo principal e árvore
+
+Toda fórmula é construída **de dentro para fora**, pelas regras da seção anterior. Desmontar a construção, **de fora para dentro**, mostra a **estrutura** da fórmula, e vamos precisar disso o tempo todo (na tradução, no tableaux, na FNC).
+
+- **Subfórmulas** de uma fórmula são todas as fórmulas que aparecem dentro dela, incluindo as letras e a própria fórmula.
+- O **conectivo principal** é o **último** conectivo aplicado na construção: o que fica "por fora" e manda na fórmula.
+
+**Exemplo.** $(p\land q)\to\neg r$.
+
+- Subfórmulas: $p,\ q,\ r,\ p\land q,\ \neg r$ e a fórmula inteira (6 ao todo).
+- Conectivo principal: $\to$.
+
+Dá para desenhar isso como uma **árvore sintática**: a raiz é o conectivo principal e as folhas são as letras.
+
+```
+→
+├─ ∧
+│  ├─ p
+│  └─ q
+└─ ¬
+   └─ r
+```
+
+Para calcular o valor de uma fórmula (próxima página), você vai **das folhas até a raiz**.
+
+> [!WARNING]
+> **Cuidado com o $\neg$.** Em $\neg(p\land q)$ o conectivo principal é $\neg$, porque ele cobre tudo. Já em $\neg p\land q$ o principal é $\land$, porque o $\neg$ só atinge o $p$. Duas fórmulas parecidas, estruturas completamente diferentes.
+
+| Fórmula | Conectivo principal | Por quê |
+| --- | --- | --- |
+| $\neg(p\land q)$ | $\neg$ | a negação cobre tudo |
+| $\neg p\land q$ | $\land$ | o $\neg$ só atinge o $p$ |
+| $p\lor q\to r$ | $\to$ | pela precedência (seção 5), o $\to$ é o mais fraco |
+| $p\to q\to r$ | o **primeiro** $\to$ | a implicação associa à direita: $p\to(q\to r)$ |
+| $p\leftrightarrow q\land r$ | $\leftrightarrow$ | é o mais fraco: $p\leftrightarrow(q\land r)$ |
+
+**Como achar o conectivo principal:** tire os parênteses mais externos e procure o conectivo que **não está dentro de nenhum parêntese**. Se a fórmula começa com um $\neg$ que cobre tudo, é ele. Sem parênteses, vale o de **menor precedência**.
+
+## 5. Reduzindo parênteses: precedência
 
 Escrever todos os parênteses vira um pesadelo:
+
 $$
 (((P\lor R)\to T)\leftrightarrow(Q\land S))
 $$
@@ -106,12 +159,19 @@ Quem tem **prioridade maior "agarra" primeiro** os vizinhos:
 - $p\lor q\land r$ significa $p\lor(q\land r)$, e **não** $(p\lor q)\land r$.
 - $p\to q\leftrightarrow\neg q\to\neg p$ significa $(p\to q)\leftrightarrow((\neg q)\to(\neg p))$.
 
+Na prática, para colocar **todos** os parênteses em uma fórmula sem eles:
+
+1. Coloque parênteses em volta de cada $\neg$ e do que ele atinge.
+2. Depois nos $\land$ (e $\uparrow$), depois nos $\lor$ (e $\downarrow$), depois nos $\to$ e por último nos $\leftrightarrow$ e $\oplus$.
+
 **Associatividade.** $\land$ e $\lor$ podem ser agrupados de qualquer jeito: $p\lor q\lor r$ é seguro. Já a implicação **associa à direita**: $p\to q\to r$ significa $p\to(q\to r)$.
 
 > [!WARNING]
-> **Na dúvida, use parênteses!** Precedência é para economizar tinta, não para deixar a fórmula enigmática. E nunca escreva $p\to q\to r$ achando que é $(p\to q)\to r$: são coisas **diferentes**.
+> **Na dúvida, use parênteses!** $\leftrightarrow$ e $\oplus$ têm a **mesma** prioridade, então $p\leftrightarrow q\oplus r$ não diz qual vem primeiro: escreva os parênteses. Precedência é para economizar tinta, não para deixar a fórmula enigmática. E nunca escreva $p\to q\to r$ achando que é $(p\to q)\to r$: são coisas **diferentes**.
 
 ### Exercício de simplificação (remova parênteses desnecessários)
+
+A coluna da direita mostra o resultado. Tente cobrir a coluna e fazer sozinho antes de conferir.
 
 | Fórmula original | Simplificada |
 | --- | --- |
@@ -122,7 +182,7 @@ Quem tem **prioridade maior "agarra" primeiro** os vizinhos:
 | $\neg(p\land(q\lor r))$ | $\neg(p\land(q\lor r))$ (os parênteses internos **são necessários**) |
 | $((p\land(p\to q))\to q)$ | $p\land(p\to q)\to q$ |
 
-## 5. Ponte com a programação
+## 6. Ponte com a programação
 
 Os conectivos são os operadores booleanos que você já usa:
 
@@ -140,10 +200,18 @@ Os conectivos são os operadores booleanos que você já usa:
 
 Curiosidade: essa condição pode ser **simplificada** para $p\lor q$, isto é, `if (x > 0 || y > 100)`. (Veja por quê na página de Tabela-verdade.) Lógica serve para deixar código mais limpo.
 
+## Erros comuns
+
+- **Duas letras coladas** ($pq$) ou **dois conectivos seguidos** ($p\land\lor q$). Falta uma fórmula no meio.
+- **Esquecer os parênteses** e escrever $p\lor q\land r$ pensando em $(p\lor q)\land r$.
+- **Confundir $\neg p\land q$ com $\neg(p\land q)$**: o primeiro nega só o $p$.
+- **Confundir o símbolo $\to$** (conectivo, parte da fórmula) **com o $\models$** (afirmação sobre um argumento, que você vai ver na tradução e na semântica).
+
 ## Resumo
 
 - Lógica proposicional é uma linguagem **sem ambiguidade** e **simbólica**.
 - Peças: letras (átomos), conectivos ($\neg,\land,\lor,\to,\leftrightarrow$) e parênteses.
+- **Conectivo principal:** o último aplicado, o que fica por fora. **Subfórmulas:** tudo que aparece dentro, incluindo as letras.
 - Precedência: $\neg$ > $\land$ > $\lor$ > $\to$ > $\leftrightarrow$. Na dúvida, parênteses.
 
 ## Exercícios
@@ -195,4 +263,109 @@ O $\neg$ só atinge o $p$; depois vem o $\lor$; e o $\to$ fica por último.
 
 {{< details title="Gabarito" >}}
 $p$: "$a>0$", $q$: "$b>0$". Fórmula: $p\land\neg q$.
+{{< /details >}}
+
+**Exercício 5.** Qual é o conectivo principal de cada fórmula?
+
+{{< quiz titulo="conectivo principal" >}}
+
+{{< questao >}}
+O conectivo principal de $\neg p\land q\to r$ é:
+
+- [ ] $\neg$
+- [ ] $\land$
+- [x] $\to$
+---
+Com a precedência, $\neg p\land q\to r$ é $((\neg p)\land q)\to r$. O $\to$ é o mais fraco, então é o último a ser aplicado.
+{{< /questao >}}
+
+{{< questao >}}
+O conectivo principal de $\neg(p\to q)\lor r$ é:
+
+- [ ] $\neg$
+- [ ] $\to$
+- [x] $\lor$
+---
+O $\neg$ cobre só o parêntese $(p\to q)$. Quem junta $\neg(p\to q)$ com $r$ é o $\lor$.
+{{< /questao >}}
+
+{{< questao >}}
+O conectivo principal de $\neg(p\lor q\to r)$ é:
+
+- [x] $\neg$
+- [ ] $\lor$
+- [ ] $\to$
+---
+O $\neg$ está fora de um parêntese que cobre a fórmula toda. Tudo que aparece dentro é subfórmula dele.
+{{< /questao >}}
+
+{{< /quiz >}}
+
+**Exercício 6.** Quais destas sequências são fórmulas bem formadas?
+
+{{< quiz titulo="fórmulas bem formadas" >}}
+
+{{< questao fixa="true" >}}
+$(p\land q)\to r$ é uma fórmula bem formada?
+
+- [x] Sim
+- [ ] Não
+---
+Duas fórmulas ($p$ e $q$) unidas por $\land$, e o resultado unido a $r$ por $\to$. Todas as regras respeitadas.
+{{< /questao >}}
+
+{{< questao fixa="true" >}}
+$\neg\neg p$ é uma fórmula bem formada?
+
+- [x] Sim
+- [ ] Não
+---
+$p$ é fórmula; $\neg p$ é fórmula (regra 2); e $\neg\neg p$ também (regra 2 de novo).
+{{< /questao >}}
+
+{{< questao fixa="true" >}}
+$p\lor\land q$ é uma fórmula bem formada?
+
+- [ ] Sim
+- [x] Não
+---
+Dois conectivos binários seguidos: falta uma fórmula entre o $\lor$ e o $\land$.
+{{< /questao >}}
+
+{{< questao fixa="true" >}}
+$(p\to(q\leftrightarrow))$ é uma fórmula bem formada?
+
+- [ ] Sim
+- [x] Não
+---
+O $\leftrightarrow$ precisa de uma fórmula dos dois lados, e aqui falta a do lado direito.
+{{< /questao >}}
+
+{{< /quiz >}}
+
+**Exercício 7.** Desenhe a árvore sintática de $\neg(p\lor q)\to(\neg p\land\neg q)$ e liste todas as suas subfórmulas.
+
+{{< details title="Gabarito" >}}
+```
+→
+├─ ¬
+│  └─ ∨
+│     ├─ p
+│     └─ q
+└─ ∧
+   ├─ ¬
+   │  └─ p
+   └─ ¬
+      └─ q
+```
+
+Subfórmulas (8): $p,\ q,\ p\lor q,\ \neg(p\lor q),\ \neg p,\ \neg q,\ \neg p\land\neg q$ e a fórmula inteira. (Curiosidade: o lado esquerdo e o direito são a lei de De Morgan, e a fórmula toda é uma tautologia.)
+{{< /details >}}
+
+**Exercício 8.** Coloque todos os parênteses em $p\to q\lor r\leftrightarrow\neg s\land t$.
+
+{{< details title="Gabarito" >}}
+O $\leftrightarrow$ é o mais fraco, então é o principal: $(p\to q\lor r)\leftrightarrow(\neg s\land t)$. À esquerda, $\lor$ antes de $\to$: $(p\to(q\lor r))$. À direita, $\neg$ antes de $\land$: $((\neg s)\land t)$.
+
+Completo: $\big(p\to(q\lor r)\big)\leftrightarrow\big((\neg s)\land t\big)$.
 {{< /details >}}

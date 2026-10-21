@@ -7,6 +7,17 @@ autores:
 date: 2026-10-15
 ---
 
+## Sobre
+
+Antes de qualquer símbolo, vamos entender **o que a lógica estuda**: quando uma conclusão é *obrigada* a seguir de certas informações. Esta página usa só português e exemplos do dia a dia; os símbolos chegam na próxima.
+
+Ao final você deve conseguir:
+
+- separar **proposições** de frases que não são V nem F;
+- achar **premissas e conclusão** num texto, mesmo "embaralhado";
+- explicar a diferença entre argumento **válido**, **correto** e **inválido**;
+- provar que um argumento é inválido com um **contra-exemplo**.
+
 ## 1. O que é lógica?
 
 Considere:
@@ -110,12 +121,36 @@ Daí a distinção:
 
 **Exemplos:**
 
-- Merge Sort é mais eficiente que Bubble Sort; Bubble Sort é mais eficiente que Bogosort; **logo**, Merge Sort é mais eficiente que Bogosort. **Válido** (o "mais eficiente que" encadeia) e, como as premissas são verdadeiras, também **correto**.
+- Merge Sort é mais eficiente que Bubble Sort; Bubble Sort é mais eficiente que Bogosort; **logo**, Merge Sort é mais eficiente que Bogosort. **Válido**, desde que aceitemos que "mais eficiente que" **encadeia** (é transitivo), como "maior que" nos números. Como as premissas são verdadeiras, também é **correto**.
 - "Todo programador é nerd. Nerds odeiam videogames. Logo, programadores odeiam videogames." **Válido**, mas **não correto** (premissas falsas).
 - "Se choveu, a rua está molhada. A rua está molhada. Logo, choveu." **Inválido!** A rua pode estar molhada por outro motivo (um caminhão-pipa, por exemplo). Esse erro é tão comum que tem nome: *afirmar o consequente*.
 
 > [!WARNING]
 > **Válido $\neq$ bom $\neq$ correto.** Um argumento pode ser válido e ter conclusão falsa (se uma premissa for falsa). E uma conclusão verdadeira pode vir de um argumento inválido (por sorte).
+
+### Como mostrar que um argumento é inválido: o contra-exemplo
+
+Para provar que um argumento **não** é válido, basta **uma** situação possível em que **todas as premissas são verdadeiras e a conclusão é falsa**. Essa situação é um **contra-exemplo**.
+
+*"Todo estudante de computação ama café. Ana ama café. Logo, Ana é estudante de computação."*
+
+Contra-exemplo: Ana estuda Medicina e adora café. As duas premissas são V, a conclusão é F. Pronto: **inválido**.
+
+*"Se Ana mora em Campina Grande, mora na Paraíba. Ana mora na Paraíba. Logo, Ana mora em Campina Grande."*
+
+Contra-exemplo: Ana mora em João Pessoa. Premissas V, conclusão F. **Inválido.**
+
+Repare que a validade **proíbe uma única combinação**:
+
+| Premissas | Conclusão | Pode acontecer num argumento válido? |
+| --- | --- | --- |
+| todas V | V | Sim, é o caso normal |
+| todas V | **F** | **Nunca.** É exatamente o que a validade proíbe |
+| alguma F | V | Sim (a conclusão acerta "por sorte") |
+| alguma F | F | Sim |
+
+> [!IMPORTANT]
+> **Existe uma assimetria útil.** Para provar que um argumento é **inválido**, basta **um** contra-exemplo. Para provar que é **válido**, é preciso mostrar que contra-exemplo **nenhum** existe, em **todas** as situações possíveis. Boa parte deste curso é aprender métodos sistemáticos (tabela-verdade, tableaux, FNC) para fazer essa segunda tarefa sem esquecer nenhum caso.
 
 ## 5. Dedutivo e indutivo
 
@@ -157,6 +192,7 @@ Executar o código **é** deduzir. Por isso lógica é a base de verificação d
 - **Proposição:** o que pode ser V ou F.
 - **Argumento:** premissas + conclusão.
 - **Válido:** premissas V $\Rightarrow$ conclusão V (sempre). **Correto:** válido + premissas V.
+- **Contra-exemplo:** situação com premissas V e conclusão F. **Um** basta para provar que o argumento é inválido.
 - **Lógica:** o estudo de quando um argumento é válido.
 
 ## Exercícios
@@ -223,3 +259,30 @@ O raciocínio "Todos os cisnes que vi são brancos; logo todos os cisnes são br
 Indutivo: a conclusão diz mais do que as premissas. E foi derrubada na prática: existem cisnes negros.
 {{< /questao >}}
 {{< /quiz >}}
+
+**Exercício 6.** Um argumento é **válido** e a sua conclusão é **falsa**. O que se pode concluir?
+
+{{< quiz titulo="válido com conclusão falsa" >}}
+{{< questao >}}
+Um argumento é válido e a conclusão é falsa. Então:
+
+- [x] Pelo menos uma premissa é falsa
+- [ ] Todas as premissas são verdadeiras
+- [ ] O argumento, na verdade, é inválido
+- [ ] A conclusão é verdadeira
+---
+Validade proíbe premissas todas V com conclusão F. Como a conclusão **é** F, não pode ser que todas as premissas sejam V: alguma é falsa. (E o argumento, por isso, é válido, mas **não correto**.)
+{{< /questao >}}
+{{< /quiz >}}
+
+**Exercício 7.** Dê um contra-exemplo para: *"Todo programador usa teclado. Marta usa teclado. Logo, Marta é programadora."*
+
+{{< details title="Gabarito" >}}
+Marta é jornalista e usa teclado para escrever. As duas premissas são V e a conclusão é F, logo o argumento é **inválido**.
+{{< /details >}}
+
+**Exercício 8.** O argumento "Se é quinta-feira, há aula de Lógica. Hoje é quinta-feira. Logo, há aula de Lógica" é válido. Mas, se hoje é terça, ele continua válido? E correto?
+
+{{< details title="Gabarito" >}}
+Continua **válido**: a validade depende só da forma, não do dia. Mas, sendo terça, a premissa "hoje é quinta-feira" é falsa, então ele **não é correto**.
+{{< /details >}}
