@@ -1,7 +1,7 @@
 ---
 title: Lógica para Computação
 weight: 5
-description: Raciocínio, lógica proposicional, tabela-verdade, tableaux semântico e forma normal conjuntiva.
+description: Raciocínio, lógica proposicional, tabela-verdade, tableaux semântico, forma normal conjuntiva, método axiomático e dedução natural.
 rotulo: Estágios
 autores:
   - thallesgsrv
