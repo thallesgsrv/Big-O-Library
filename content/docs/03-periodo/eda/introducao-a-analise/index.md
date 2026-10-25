@@ -19,37 +19,43 @@ O que a gente quer é uma medida que não dependa de nada disso e que responda u
 
 ## Contando operações
 
-Vamos achar o maior valor de um array.
+Vamos achar o maior valor de um array. Começamos assumindo que o primeiro elemento é o maior:
 
 ```java
-static int maximo(int[] v) {
-    int max = v[0];
-    for (int i = 1; i < v.length; i++) {
-        if (v[i] > max) {
-            max = v[i];
-        }
+int max = v[0];
+```
+
+Depois percorremos o restante do array. Cada posição nova é comparada com o maior que encontramos até ali:
+
+```java
+for (int i = 1; i < v.length; i++) {
+    if (v[i] > max) {
+        max = v[i];
     }
-    return max;
 }
 ```
 
-Com \(n\) elementos, o laço dá \(n - 1\) voltas. Em cada volta há uma comparação e, às vezes, uma atribuição. No total são algo entre \(n\) e \(2n\) operações, dependendo dos dados.
+No fim, `max` guarda a resposta. Com \(n\) elementos, o laço dá \(n - 1\) voltas. Em cada volta há uma comparação e, às vezes, uma atribuição. No total são algo entre \(n\) e \(2n\) operações, dependendo dos dados.
 
 Repare que não importa se uma comparação demora 1 ou 3 nanossegundos. Cada operação básica (comparar, somar, atribuir, acessar uma posição do array) leva um tempo **constante**, que não depende de \(n\). O que importa é quantas vezes elas se repetem, e aqui o número de repetições cresce junto com \(n\).
 
 ## Laços aninhados
 
-Agora um caso mais interessante: contar quantos pares de posições têm o mesmo valor.
+Agora um caso mais interessante: contar quantos pares de posições têm o mesmo valor. A gente começa com o contador zerado:
 
 ```java
-static int paresIguais(int[] v) {
-    int cont = 0;
-    for (int i = 0; i < v.length; i++) {
-        for (int j = i + 1; j < v.length; j++) {
-            if (v[i] == v[j]) cont++;
+int cont = 0;
+```
+
+Para cada posição `i`, comparamos o valor dela com as posições que vêm depois. Começar `j` em `i + 1` evita comparar uma posição com ela mesma e evita contar o mesmo par duas vezes.
+
+```java
+for (int i = 0; i < v.length; i++) {
+    for (int j = i + 1; j < v.length; j++) {
+        if (v[i] == v[j]) {
+            cont++;
         }
     }
-    return cont;
 }
 ```
 

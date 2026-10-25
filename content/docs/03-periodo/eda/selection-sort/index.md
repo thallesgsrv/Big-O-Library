@@ -36,31 +36,37 @@ Repare no contador de comparações: ele termina em 10 mesmo que o vetor já vie
 
 ## Implementação
 
-```java
-static void selectionSort(int[] v) {
-    for (int i = 0; i < v.length - 1; i++) {
-        int menor = i;
-        for (int j = i + 1; j < v.length; j++) {
-            if (v[j] < v[menor]) {
-                menor = j;
-            }
-        }
-        troca(v, i, menor);
-    }
-}
+Em cada rodada, `i` marca a posição que vamos preencher. A variável `menor` começa apontando para essa posição; depois percorremos o que ainda falta e guardamos o índice do menor valor encontrado.
 
-static void troca(int[] v, int a, int b) {
-    int tmp = v[a];
-    v[a] = v[b];
-    v[b] = tmp;
+```java
+for (int i = 0; i < v.length - 1; i++) {
+    int menor = i;
+
+    for (int j = i + 1; j < v.length; j++) {
+        if (v[j] < v[menor]) {
+            menor = j;
+        }
+    }
+
+    troca(v, i, menor);
 }
 ```
 
-O laço de fora decide qual posição `i` vamos preencher. O de dentro varre tudo que está à direita de `i` guardando em `menor` o índice do menor valor visto. No fim, uma troca coloca esse valor em `i`.
+Quando o laço de dentro termina, `menor` aponta para o menor valor do trecho que ainda não está ordenado. Aí vem a troca: o menor vai para `i`, e o valor que estava ali vai para a posição antiga do menor.
+
+```java
+static void troca(int[] v, int a, int b) {
+    int temporario = v[a];
+    v[a] = v[b];
+    v[b] = temporario;
+}
+```
+
+No fim da rodada, a posição `i` está resolvida e não precisamos olhar para ela de novo. O laço de fora só repete o processo para a próxima posição.
 
 ## Análise
 
-Quantas comparações? Na rodada \(i = 0\) são \(n - 1\), depois \(n - 2\), e assim por diante:
+Quantas comparações? Na rodada `i = 0` são `n - 1`, depois `n - 2`, e assim por diante:
 
 $$
 (n-1) + (n-2) + \dots + 1 = \frac{n(n-1)}{2} = \Theta(n^2)

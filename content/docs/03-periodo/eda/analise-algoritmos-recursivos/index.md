@@ -13,18 +13,21 @@ Contar laços é fácil. Mas e quando o algoritmo chama a si mesmo? Não há la�
 
 ## Relação de recorrência
 
-Veja o fatorial:
+Veja o fatorial. Toda recursão precisa de um caso em que ela para. Para o fatorial, esse caso é `n <= 1`:
 
 ```java
-static long fatorial(int n) {
-    if (n <= 1) return 1;
-    return n * fatorial(n - 1);
+if (n <= 1) {
+  return 1;
 }
 ```
 
-### Como esse código funciona
+Se não cair nesse caso, o problema fica menor: o fatorial de `n` é `n` vezes o fatorial de `n - 1`.
 
-A função resolve um problema grande usando a resposta de um problema um pouco menor: o fatorial de `n` é `n` vezes o fatorial de `n - 1`. A linha `if (n <= 1) return 1;` é o **ponto de parada**. Sem ela, a função chamaria a si mesma para sempre.
+```java
+return n * fatorial(n - 1);
+```
+
+A função resolve o problema grande usando a resposta de um problema menor. Sem o caso de parada, ela chamaria a si mesma para sempre.
 
 Acompanhe `fatorial(3)`:
 
@@ -114,11 +117,18 @@ Expandindo, \(T(n) = n + (n-1) + (n-2) + \dots + 1 = \frac{n(n+1)}{2}\), que é 
 
 ### Exemplo: Fibonacci ingênuo
 
+No Fibonacci, os casos pequenos já têm resposta: `fib(0)` devolve 0 e `fib(1)` devolve 1.
+
 ```java
-static int fib(int n) {
-    if (n <= 1) return n;
-    return fib(n - 1) + fib(n - 2);
+if (n <= 1) {
+  return n;
 }
+```
+
+Para os outros valores, a função soma os dois Fibonacci anteriores:
+
+```java
+return fib(n - 1) + fib(n - 2);
 ```
 
 Aqui cada chamada dispara **duas** outras, uma para `n - 1` e outra para `n - 2`. Veja `fib(4)`:

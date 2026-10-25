@@ -41,51 +41,64 @@ Observe a linha de dígitos: ela muda a cada passada, e os números que empatam 
 
 ## Implementação
 
+O radix sort repete uma ordenação estável, uma vez para cada casa decimal. `exp` diz qual casa estamos olhando: começa em `1` (unidades), depois vira `10` (dezenas), depois `100` (centenas).
+
 ```java
-import java.util.Arrays;
-
-static void radixSort(int[] v) {
-    int maior = Arrays.stream(v).max().getAsInt();
-
-    // Ordena primeiro pelas unidades, depois dezenas, centenas...
-    for (int exp = 1; maior / exp > 0; exp *= 10) {
-        countingPorDigito(v, exp);
-    }
-}
-
-static void countingPorDigito(int[] v, int exp) {
-    int[] contagem = new int[10];
-    int[] auxiliar = new int[v.length];
-
-    // 1. Conta quantos números possuem cada dígito
-    for (int numero : v) {
-        int digito = (numero / exp) % 10;
-        contagem[digito]++;
-    }
-
-    // 2. Calcula as posições finais de cada dígito
-    for (int i = 1; i < 10; i++) {
-        contagem[i] += contagem[i - 1];
-    }
-
-    // 3. Distribui os números mantendo a ordenação estável
-    for (int i = v.length - 1; i >= 0; i--) {
-        int numero = v[i];
-        int digito = (numero / exp) % 10;
-
-        int posicao = contagem[digito] - 1;
-        auxiliar[posicao] = numero;
-        contagem[digito]--;
-    }
-
-    // 4. Copia o resultado de volta para o vetor original
-    System.arraycopy(auxiliar, 0, v, 0, v.length);
+for (int exp = 1; maior / exp > 0; exp *= 10) {
+    countingPorDigito(v, exp);
 }
 ```
 
-A expressão `(x / exp) % 10` extrai o dígito: dividir por `exp` joga fora os dígitos à direita e `% 10` fica só com o último. Para `x = 531` e `exp = 10`, temos `531 / 10 = 53` e `53 % 10 = 3`.
+Para saber quantas casas precisamos processar, pegamos o maior número do array. No Java, dá para fazer isso com `Arrays.stream`; por isso precisamos do import abaixo:
 
-O laço de fora roda enquanto ainda existir algum dígito a processar, ou seja, até `exp` passar do maior número.
+```java
+import java.util.Arrays;
+
+int maior = Arrays.stream(v).max().getAsInt();
+```
+
+A expressão `(numero / exp) % 10` pega o dígito da casa atual. Por exemplo, com `numero = 531` e `exp = 10`, fazemos `531 / 10 = 53` e `53 % 10 = 3`: o dígito das dezenas é 3.
+
+Em cada passada, criamos dez contadores (um para cada dígito de 0 a 9) e contamos quantos números têm cada dígito naquela casa.
+
+```java
+int[] contagem = new int[10];
+int[] auxiliar = new int[v.length];
+
+for (int numero : v) {
+    int digito = (numero / exp) % 10;
+    contagem[digito]++;
+}
+```
+
+Depois acumulamos as contagens. Assim cada posição indica onde termina o grupo daquele dígito na saída.
+
+```java
+for (int i = 1; i < 10; i++) {
+    contagem[i] += contagem[i - 1];
+}
+```
+
+Agora colocamos cada número na posição certa do array auxiliar. A leitura é de trás para frente para manter a estabilidade, que é o que permite preservar a ordenação das casas que já processamos.
+
+```java
+for (int i = v.length - 1; i >= 0; i--) {
+    int numero = v[i];
+    int digito = (numero / exp) % 10;
+    int posicao = contagem[digito] - 1;
+
+    auxiliar[posicao] = numero;
+    contagem[digito]--;
+}
+```
+
+No fim da passada, copiamos o array auxiliar de volta para `v`. A próxima casa decimal vai trabalhar sobre essa ordem atualizada.
+
+```java
+System.arraycopy(auxiliar, 0, v, 0, v.length);
+```
+
+Os trechos acima compõem duas operações: `radixSort` percorre as casas decimais, e `countingPorDigito` faz uma ordenação estável pela casa indicada por `exp`.
 
 ## Análise
 

@@ -44,22 +44,32 @@ Veja com \([8, 3, 6, 2, 9, 1, 5]\), pivô \(= 5\):
 
 O 5 está na posição 3, com \([3, 2, 1]\) à esquerda e \([9, 6, 8]\) à direita. A partir daí, ninguém mais precisa mexer no 5.
 
+Primeiro guardamos o pivô (aqui, o último elemento) e começamos `i` antes do início do trecho. `i` vai marcar o fim da região dos valores menores ou iguais ao pivô.
+
 ```java
-static int particiona(int[] v, int esq, int dir) {
-    int pivo = v[dir];     // o pivô é o último elemento
-    int i = esq - 1;       // fim da região "menores ou iguais ao pivô"
+int pivo = v[dir];
+int i = esq - 1;
+```
 
-    for (int j = esq; j < dir; j++) {
-        if (v[j] <= pivo) {
-            i++;
-            troca(v, i, j);
-        }
+Agora `j` percorre o trecho. Quando encontra um valor que deve ficar à esquerda do pivô, aumentamos a região e trocamos esse valor para dentro dela.
+
+```java
+for (int j = esq; j < dir; j++) {
+    if (v[j] <= pivo) {
+        i++;
+        troca(v, i, j);
     }
-
-    troca(v, i + 1, dir);  // coloca o pivô logo depois da região
-    return i + 1;          // posição final do pivô
 }
 ```
+
+Quando `j` chega ao fim, todos os menores ou iguais já estão à esquerda. Só falta trocar o pivô para a primeira posição depois dessa região. Essa posição é a que ele vai ocupar definitivamente.
+
+```java
+troca(v, i + 1, dir);
+return i + 1;
+```
+
+Esses trechos formam a operação de partição: ela recebe os limites do pedaço que está sendo trabalhado e devolve o índice final do pivô.
 
 ## Veja funcionando
 
@@ -70,24 +80,33 @@ Use ▶ para executar sozinho ou ▶| para avançar um passo por vez (◀ volta)
 O **i** marca o fim da região dos menores ou iguais ao pivô e o **j** varre o trecho. Quando o laço termina, o pivô é trocado para logo depois dessa região, e ali ele fica para sempre.
 
 ## O quick sort
+Se o trecho tem zero ou um elemento, já está ordenado. Por isso a recursão só continua quando `esq < dir`:
 
 ```java
-static void quickSort(int[] v, int esq, int dir) {
-    if (esq < dir) {
-        int p = particiona(v, esq, dir);
-        quickSort(v, esq, p - 1);
-        quickSort(v, p + 1, dir);
-    }
-}
-
-static void troca(int[] v, int a, int b) {
-    int tmp = v[a];
-    v[a] = v[b];
-    v[b] = tmp;
+if (esq < dir) {
+    // particiona e ordena os dois lados
 }
 ```
 
-Chamada inicial: `quickSort(v, 0, v.length - 1)`. Note que o pivô fica de fora das duas chamadas (`p - 1` e `p + 1`), porque já está no lugar.
+Primeiro particionamos o trecho. O pivô volta na posição `p`, que já é definitiva. Então chamamos o quick sort para o trecho antes dele e para o trecho depois:
+
+```java
+int p = particiona(v, esq, dir);
+quickSort(v, esq, p - 1);
+quickSort(v, p + 1, dir);
+```
+
+A primeira chamada usa os limites do array inteiro: `quickSort(v, 0, v.length - 1)`. O pivô fica de fora das duas chamadas porque já está no lugar.
+
+As trocas da partição são feitas com um método auxiliar. Guardamos um dos valores por um instante para não perdê-lo:
+
+```java
+static void troca(int[] v, int a, int b) {
+    int temporario = v[a];
+    v[a] = v[b];
+    v[b] = temporario;
+}
+```
 
 ## Análise
 

@@ -63,85 +63,72 @@ A linha tracejada separa as duas metades que estão sendo juntas, e a linha **au
 
 ## Implementação
 
-O código tem **duas funções**, e cada uma faz um trabalho diferente:
-
-- `mergeSort` é a que **divide**: parte o array ao meio e chama a si mesma para cada metade.
-- `merge` é a que **junta**: pega duas metades já ordenadas e as une, como na tabela de cima.
+Vamos por partes. No `mergeSort`, primeiro precisamos parar quando o trecho tem zero ou um elemento: nesse caso ele já está ordenado.
 
 ```java
-static void mergeSort(int[] v, int inicio, int fim) {
-    // Caso base: com 0 ou 1 elemento já está ordenado, não há o que fazer.
-    if (inicio >= fim) {
-        return;
-    }
-
-    int meio = (inicio + fim) / 2;
-
-    mergeSort(v, inicio, meio);      // ordena a metade da esquerda
-    mergeSort(v, meio + 1, fim);     // ordena a metade da direita
-    merge(v, inicio, meio, fim);     // junta as duas metades já ordenadas
-}
-
-static void merge(int[] v, int inicio, int meio, int fim) {
-    // 1. Tira uma cópia do trecho que vamos juntar.
-    int tamanho = fim - inicio + 1;
-    int[] copia = new int[tamanho];
-    for (int x = 0; x < tamanho; x++) {
-        copia[x] = v[inicio + x];
-    }
-
-    // 2. Coloca um "dedo" no começo de cada metade da cópia.
-    int i = 0;                       // dedo da esquerda
-    int comecoDireita = meio - inicio + 1;
-    int j = comecoDireita;           // dedo da direita
-    int k = inicio;                  // posição de v onde vamos escrever
-
-    // 3. Enquanto as duas metades ainda têm elementos, copia o menor.
-    while (i < comecoDireita && j < tamanho) {
-        if (copia[i] <= copia[j]) {
-            v[k] = copia[i];
-            i++;
-        } else {
-            v[k] = copia[j];
-            j++;
-        }
-        k++;
-    }
-
-    // 4. Copia o que sobrou da outra.
-    while (i < comecoDireita) {
-        v[k] = copia[i];
-        i++;
-        k++;
-    }
+if (inicio >= fim) {
+    return;
 }
 ```
 
-A chamada inicial é `mergeSort(v, 0, v.length - 1)`: do primeiro ao último índice.
+Se ainda há mais de um elemento, encontramos o meio do trecho e pedimos para o `mergeSort` resolver cada metade. Quando as duas chamadas terminam, juntamos as metades com `merge`.
 
-### Lendo o `mergeSort`
+```java
+int meio = (inicio + fim) / 2;
 
-O `inicio` e o `fim` dizem **qual pedaço** do array estamos ordenando. O `meio` é o ponto onde cortamos. A função não ordena nada sozinha: ela só corta, pede para si mesma resolver cada metade e, no fim, chama o `merge`.
+mergeSort(v, inicio, meio);
+mergeSort(v, meio + 1, fim);
+merge(v, inicio, meio, fim);
+```
 
-Acompanhe com `[7, 3, 9, 1]` (índices 0 a 3):
+A chamada inicial usa o array inteiro: `mergeSort(v, 0, v.length - 1)`. A função vai se chamando até chegar em trechos de um elemento; depois as chamadas vão voltando e juntando os pedaços.
 
-1. `mergeSort(0, 3)`: o meio é 1. Chama a metade `0..1` e depois a `2..3`.
-2. `mergeSort(0, 1)`: o meio é 0. Chama `0..0` e `1..1`. Os dois têm um elemento só, então voltam na hora (caso base). Agora o `merge` junta `[7]` e `[3]` e o trecho vira `[3, 7]`.
-3. `mergeSort(2, 3)`: do mesmo jeito, junta `[9]` e `[1]` e vira `[1, 9]`.
-4. De volta ao `mergeSort(0, 3)`: o `merge` junta `[3, 7]` e `[1, 9]` e o resultado final é `[1, 3, 7, 9]`.
+Agora o `merge`: ele recebe duas metades que já estão ordenadas. Como vamos escrever o resultado de volta no array original, primeiro fazemos uma cópia do trecho para não apagar valores que ainda precisamos comparar.
 
-O ponto que costuma confundir: quando `mergeSort` chama a si mesma, a de cima **espera** a de baixo terminar. Só depois que as duas metades voltam é que o `merge` roda.
+```java
+int tamanho = fim - inicio + 1;
+int[] copia = new int[tamanho];
 
-### Lendo o `merge`
+for (int x = 0; x < tamanho; x++) {
+    copia[x] = v[inicio + x];
+}
+```
 
-Quando o `merge` é chamado, as duas metades de `v[inicio..fim]` já estão ordenadas (as chamadas de cima garantiram isso). O trabalho é só intercalá-las.
+Precisamos de dois índices para caminhar pela cópia, um em cada metade, e um terceiro (`k`) para saber onde escrever no array original.
 
-- **Passo 1, a cópia.** Vamos escrever de volta em `v`, então primeiro guardamos o trecho em `copia` para não perder valores.
-- **Passo 2, os dedos.** `i` aponta para o início da metade esquerda da cópia, `j` para o início da direita e `k` é o lugar de `v` onde o próximo elemento vai ser escrito. O `comecoDireita` marca onde a metade direita começa dentro da cópia.
-- **Passo 3, o laço principal.** Em cada volta comparamos `copia[i]` com `copia[j]`, escrevemos o menor em `v[k]` e avançamos o dedo daquele lado (e o `k`, sempre).
-- **Passo 4, as sobras.** Quando um lado acaba, o outro ainda pode ter elementos, e todos eles são maiores que o que já foi escrito. Basta copiá-los em ordem. Repare que o código só copia as sobras da **esquerda**: se sobrar algo da direita, esses elementos já estão no lugar certo dentro de `v` (o trecho da direita nunca foi sobrescrito antes da hora), então não precisa copiar de novo.
+```java
+int comecoDireita = meio - inicio + 1;
+int i = 0;
+int j = comecoDireita;
+int k = inicio;
+```
 
-Exemplo: juntando `[2, 8, 9]` e `[1, 3, 10]`, a `copia` é `[2, 8, 9, 1, 3, 10]` e `comecoDireita` vale 3. O dedo `i` começa na posição 0 (valor 2) e o `j` na posição 3 (valor 1). Como 1 é menor, ele vai primeiro para `v`, e assim por diante, igual à tabela lá em cima.
+Enquanto as duas metades ainda têm elementos, comparamos o que está apontado por `i` e `j`. Copiamos o menor para `v[k]` e avançamos só o índice de onde ele veio.
+
+```java
+while (i < comecoDireita && j < tamanho) {
+    if (copia[i] <= copia[j]) {
+        v[k] = copia[i];
+        i++;
+    } else {
+        v[k] = copia[j];
+        j++;
+    }
+    k++;
+}
+```
+
+Quando um dos lados acaba, pode sobrar elemento do outro. Se sobrou na esquerda, copiamos o restante para o array. Se sobrou na direita, ele já está na posição certa e não precisa ser copiado.
+
+```java
+while (i < comecoDireita) {
+    v[k] = copia[i];
+    i++;
+    k++;
+}
+```
+
+Por exemplo, juntando `[2, 8, 9]` e `[1, 3, 10]`, comparamos sempre o próximo valor de cada metade: primeiro vai `1`, depois `2`, depois `3`, e assim por diante. O resultado fica `[1, 2, 3, 8, 9, 10]`.
 
 ## Análise
 

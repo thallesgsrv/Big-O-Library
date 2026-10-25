@@ -37,32 +37,34 @@ Veja o "buraco" aberto quando a chave sai do vetor: os maiores deslizam uma casa
 
 ## Implementação
 
+O primeiro elemento já pode ser considerado ordenado. Então começamos no índice `1` e pegamos cada próximo valor para encaixar na parte ordenada.
+
 ```java
-static void insertionSort(int[] v) {
-    // O índice 0 já é a parte ordenada; começamos a pegar "cartas" do índice 1.
-    for (int i = 1; i < v.length; i++) {
-        int chave = v[i];   // a carta que vamos encaixar
-        int j = i - 1;      // olha a carta imediatamente à esquerda
-
-        // Enquanto a carta da esquerda for maior que a chave, ela anda uma casa para a direita.
-        while (j >= 0 && v[j] > chave) {
-            v[j + 1] = v[j];
-            j--;
-        }
-
-        // Achamos o buraco certo: a chave cai nele.
-        v[j + 1] = chave;
-    }
+for (int i = 1; i < v.length; i++) {
+    int chave = v[i];
+    int j = i - 1;
+    // aqui vamos abrir espaço para a chave
 }
 ```
 
-### Lendo o código
+`chave` é a carta que estamos tentando encaixar. Agora olhamos para a esquerda: enquanto encontramos valores maiores que ela, empurramos esses valores uma posição para a direita.
 
-- O `for` de fora escolhe a próxima chave. Tudo à esquerda dela já está ordenado.
-- O `while` anda para trás enquanto o elemento da esquerda for maior que a chave, copiando cada um uma casa para a frente. A condição `j >= 0` evita sair do começo do array.
-- Quando o `while` para (porque achou um elemento menor ou igual, ou porque chegou ao começo), a posição `j + 1` é o buraco certo para a chave.
+```java
+while (j >= 0 && v[j] > chave) {
+    v[j + 1] = v[j];
+    j--;
+}
+```
 
-Exemplo com a chave `1` em `[2, 4, 5, 6, 1, 3]`: `j` começa em 3 (o 6). Como 6 > 1, o 6 vai para a posição 4; depois o 5 vai para a 3, o 4 para a 2 e o 2 para a 1. Aí `j` chega a -1 e o `1` cai na posição 0.
+O `j >= 0` evita passar do começo do array. Quando o `while` para, `j + 1` é o espaço que ficou livre para a chave:
+
+```java
+v[j + 1] = chave;
+```
+
+Por exemplo, com a chave `1` em `[2, 4, 5, 6, 1, 3]`, os valores 6, 5, 4 e 2 andam uma posição para a direita. `j` chega a `-1`, então a chave vai para `j + 1`, que é o índice `0`.
+
+Juntando essas partes, o `for` repete o processo para todas as chaves que ainda faltam. A lógica de cada passo continua sendo: guardar a chave, abrir espaço e colocá-la no lugar.
 
 ## Análise
 
