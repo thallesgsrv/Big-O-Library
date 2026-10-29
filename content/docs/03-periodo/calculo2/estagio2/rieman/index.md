@@ -4,8 +4,6 @@ weight: 1
 description: De onde vem a integral definida - a construção por somas de Riemann, o limite, o Teorema Fundamental do Cálculo e o que cada integral significa em problemas aplicados.
 autores:
   - thallesgsrv
-baseadoEm:
-  - rodrigocohen
 date: 2026-10-29
 ---
 
