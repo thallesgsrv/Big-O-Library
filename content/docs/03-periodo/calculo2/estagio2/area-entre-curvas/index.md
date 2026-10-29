@@ -4,8 +4,6 @@ weight: 2
 description: Área entre dois gráficos integrando em x ou em y, e como lidar com funções definidas por partes e curvas que se cruzam.
 autores:
   - thallesgsrv
-baseadoEm:
-  - rodrigocohen
 date: 2026-10-29
 ---
 

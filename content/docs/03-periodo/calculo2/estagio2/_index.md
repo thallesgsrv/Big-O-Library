@@ -5,8 +5,6 @@ rotulo: Tópicos
 description: Aplicações da integral definida - somas de Riemann, área entre curvas e volume de sólidos.
 autores:
   - thallesgsrv
-baseadoEm:
-  - rodrigocohen
 date: 2026-10-29
 ---
 
