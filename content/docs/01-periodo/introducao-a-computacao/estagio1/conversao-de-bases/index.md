@@ -1,6 +1,6 @@
 ---
 title: Conversão entre Bases
-weight: 3
+weight: 8
 description: Divisões sucessivas, polinômio, agrupamento de 3 e 4 bits, octal e hexadecimal via binário, e números fracionários.
 autores:
   - thallesgsrv

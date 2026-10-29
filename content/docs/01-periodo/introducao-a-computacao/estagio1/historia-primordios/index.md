@@ -57,7 +57,7 @@ Por que não foi construída? A tecnologia da época não dava a precisão neces
 
 ## 5. Boole e Hollerith
 
-- **Boole (1854):** estabeleceu os fundamentos lógicos para criar programas. Sem a álgebra booleana não haveria circuitos digitais (você vai usá-la no Estágio 3).
+- **Boole (1854):** estabeleceu os fundamentos lógicos para criar programas. Sem a álgebra booleana não haveria circuitos digitais (você vai usá-la no Estágio 2).
 - **Hollerith (1890):** juntou os cartões de Jacquard com impulsos elétricos. Seu tabulador foi usado no recenseamento americano de 1890 e reduziu a apuração de **8 para 3 anos**. Em 1896 fundou a Tabulating Machine Company, que em 1924 virou a **IBM**.
 
 ## 6. O que fica dessa história

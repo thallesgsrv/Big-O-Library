@@ -1,6 +1,6 @@
 ---
 title: Bits, Bytes e Códigos de Caracteres
-weight: 1
+weight: 6
 description: Por que o computador usa binário, quanto cabe em n bits, unidades de medida e os códigos ASCII, EBCDIC e Unicode.
 autores:
   - thallesgsrv

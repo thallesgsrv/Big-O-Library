@@ -1,6 +1,6 @@
 ---
 title: Hardware - Entrada e Saída
-weight: 8
+weight: 3
 description: Dispositivos de E/S, interfaces, velocidade x throughput, comunicação paralela e serial, USB, simplex, half e full duplex e placa-mãe.
 autores:
   - thallesgsrv

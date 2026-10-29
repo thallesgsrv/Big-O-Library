@@ -1,8 +1,8 @@
 ---
-title: Estágio 2 - Representação da Informação
+title: Estágio 2 - Eletrônica Digital
 weight: 2
 rotulo: Tópicos
-description: Bits e bytes, códigos de caracteres, sistemas de numeração, números negativos, aritmética binária, ponto flutuante e BCD.
+description: Álgebra de Boole, portas lógicas e circuitos combinacionais (somadores, comparadores, multiplexadores, decodificadores).
 autores:
   - thallesgsrv
 date: 2026-10-17
@@ -10,34 +10,55 @@ date: 2026-10-17
 
 ## O que você vai aprender
 
-Este é o estágio das **contas**. Você vai ver como um computador, que só distingue "tem energia" e "não tem energia", guarda letras, números inteiros, números negativos e números com vírgula. E como ele faz contas com isso, errando de forma previsível.
+Neste estágio **0 e 1 viram circuitos**: álgebra de Boole, portas lógicas, e os circuitos combinacionais clássicos que fazem contas e escolhem sinais (somadores, comparadores, multiplexadores, decodificadores).
 
 ## Mapa do estágio
 
-1. **Bits, bytes e códigos:** unidades de medida, ASCII e Unicode.
-2. **Sistemas de numeração:** binário, octal, decimal e hexadecimal.
-3. **Conversão de bases:** divisões sucessivas, polinômio, agrupamentos.
-4. **Números negativos:** sinal e magnitude, complemento de 1, complemento de 2, excesso.
-5. **Aritmética binária:** soma, subtração, multiplicação, divisão e overflow.
-6. **Ponto flutuante:** notação científica em binário e padrão IEEE 754.
-7. **BCD e ponto fixo:** quando precisão total importa.
-8. **Aritmética adicional:** sinal e magnitude, ponto flutuante e BCD.
+1. **Álgebra de Boole e portas lógicas:** AND, OR, NOT e derivadas, tabelas-verdade, circuitos integrados.
+2. **Projeto de circuito combinacional:** da situação à tabela, à expressão, ao circuito; simplificação.
+3. **Projeto do semáforo:** um exemplo completo, até a montagem.
+4. **Somadores e comparadores:** como o hardware soma e compara.
+5. **Codificadores, multiplexadores e paridade.**
+
+## Cronograma
+
+| Aula | Data |
+| --- | --- |
+| Circuitos combinacionais básicos | 28/01/2026 |
+| Circuitos combinacionais clássicos: circuito aritmético e comparador | 30/01/2026 |
+| Circuitos combinacionais clássicos: multiplexadores e demultiplexadores | 04/02/2026 a 06/02/2026 |
+| Circuitos combinacionais clássicos: decodificadores e outros circuitos | 11/02/2026 |
+
+## Atividades
+
+| Atividade | Abre | Fecha |
+| --- | --- | --- |
+| Lista de Exercícios 02 (adicional) | 06/02/2026 às 00h00 | 06/02/2026 às 12h00 |
+| Lista de Exercícios 02 (adicional), atividade prática | 06/02/2026 às 00h00 | 09/02/2026 às 23h59 |
+| Lista 03, Parte I (circuitos combinacionais) | 17/02/2026 às 11h00 | 26/02/2026 às 11h59 |
+| Lista 03, Parte II (circuitos combinacionais) | 17/02/2026 às 00h00 | 01/03/2026 às 23h59 |
+| Lista de Exercícios 03, Parte II (adicional), atividade prática | 20/02/2026 às 00h00 | 23/02/2026 às 23h59 |
+| Lista Adicional da Prova 2 | 06/03/2026 às 00h00 | 09/03/2026 às 23h59 |
+
+Há também a **Lista de Exercícios Resolvidos** (cobre até circuitos combinacionais), sem prazo de entrega.
+
+## Materiais do estágio
+
+- [CircuitVerse](https://circuitverse.org/simulator): monte e teste circuitos digitais no navegador (use nas atividades práticas).
+- [IC_Exercícios (PDF)](https://1drv.ms/b/c/975ec841994373bd/IQBMjcEEWN5bTYkVbXtGYtuPAaggmRgigCe7V1mlEMgbfh0?e=gHHDAu)
 
 ## Cola rápida
 
-| Preciso... | Faço |
+| Ideia | Resumo |
 | --- | --- |
-| Quantos valores cabem em $n$ bits | $2^n$ |
-| Decimal para outra base | divisões sucessivas pela base; lê os restos de baixo para cima |
-| Outra base para decimal | polinômio: soma de dígito vezes base elevada à posição |
-| Binário para hexadecimal | agrupar de 4 em 4 bits |
-| Binário para octal | agrupar de 3 em 3 bits |
-| Negar em complemento de 2 | inverter todos os bits e somar 1 |
-| Subtrair $A - B$ | somar $A$ com o complemento de 2 de $B$ |
-| Expoente IEEE 754 simples | valor real mais 127 |
+| AND | saída 1 só se **todas** as entradas são 1 |
+| OR | saída 1 se **qualquer** entrada é 1 |
+| NOT | inverte |
+| XOR | saída 1 se as entradas são **diferentes** |
+| Soma de produtos | OR dos mintermos que dão saída 1 |
+| Meio somador | $S=A\oplus B$, $C_o=A\cdot B$ |
 
 ## Como estudar
 
-1. As conversões se aprendem **no papel**. Faça os exercícios sem olhar o gabarito.
-2. Domine complemento de 2: ele é a base da aritmética de inteiros em qualquer computador.
-3. Ponto flutuante parece difícil, mas é só notação científica em base 2. Se você entende $1{,}5 \times 10^3$, você entende IEEE 754.
+1. **Sempre** monte a tabela-verdade primeiro. Expressão e circuito saem dela.
+2. Simule os circuitos no CircuitVerse, no Logisim ou no TinkerCAD.

@@ -1,6 +1,6 @@
 ---
 title: Hardware - Memória
-weight: 7
+weight: 2
 description: Hierarquia de memória, registradores, cache, memória principal (RAM e ROM), endereços, capacidade e memória secundária.
 autores:
   - thallesgsrv

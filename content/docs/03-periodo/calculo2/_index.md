@@ -25,3 +25,9 @@ Cálculo 2 dá continuidade a Cálculo 1, aprofundando o estudo de integrais e s
 - Técnicas de integração
 - Integrais impróprias
 - Testes de comparação
+
+### Estágio 2
+
+- Somas de Riemann e integral definida
+- Área entre curvas
+- Volume de sólidos (em construção)

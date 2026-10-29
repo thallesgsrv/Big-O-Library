@@ -1,6 +1,6 @@
 ---
 title: Aritmética Adicional
-weight: 8
+weight: 13
 description: Soma e subtração em sinal e magnitude, operações em ponto flutuante e aritmética em BCD (material adicional).
 autores:
   - thallesgsrv

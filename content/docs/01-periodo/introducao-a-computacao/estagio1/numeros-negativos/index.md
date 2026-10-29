@@ -1,6 +1,6 @@
 ---
 title: Números Negativos
-weight: 4
+weight: 9
 description: Sinal e magnitude, complemento de 1, complemento de 2 e excesso de n, com tabelas de 8 bits e como converter.
 autores:
   - thallesgsrv

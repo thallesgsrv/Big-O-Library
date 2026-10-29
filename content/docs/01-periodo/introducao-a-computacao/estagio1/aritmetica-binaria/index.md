@@ -1,6 +1,6 @@
 ---
 title: Aritmética Binária
-weight: 5
+weight: 12
 description: Soma, subtração, multiplicação e divisão em binário, aritmética em complemento de 2 e a regra do overflow.
 autores:
   - thallesgsrv

@@ -1,6 +1,6 @@
 ---
 title: BCD e Ponto Fixo
-weight: 7
+weight: 11
 description: Decimal codificado em binário (BCD), BCD comprimido, sinal em BCD e representação em ponto fixo.
 autores:
   - thallesgsrv

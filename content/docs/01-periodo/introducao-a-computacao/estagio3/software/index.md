@@ -1,6 +1,6 @@
 ---
 title: Software
-weight: 9
+weight: 4
 description: Programas, categorias de software, sistema operacional e suas funções, tipos de SO, utilitários, aplicativos e modalidades de licença.
 autores:
   - thallesgsrv

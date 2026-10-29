@@ -44,7 +44,7 @@ $$
 Costuma-se escrever cada cláusula como **conjunto**: $\{\neg q,p,r\},\ \{\neg p,r\},\ \{q\}$. Como é conjunto, a ordem não importa e **repetição some**: $\{p,p,q\}$ é o mesmo que $\{p,q\}$.
 
 > [!NOTE]
-> **Você já viu isso em Introdução à Computação.** Na [síntese de circuitos](/docs/01-periodo/introducao-a-computacao/estagio3/projeto-combinacional/), o "produto de somas" (E de OUs) é exatamente a FNC, e a "soma de produtos" (OU de Es) é a sua prima, a **forma normal disjuntiva** (FND).
+> **Você já viu isso em Introdução à Computação.** Na [síntese de circuitos](/docs/01-periodo/introducao-a-computacao/estagio2/projeto-combinacional/), o "produto de somas" (E de OUs) é exatamente a FNC, e a "soma de produtos" (OU de Es) é a sua prima, a **forma normal disjuntiva** (FND).
 
 ## 2. Por que ela é útil? Validade fica trivial
 

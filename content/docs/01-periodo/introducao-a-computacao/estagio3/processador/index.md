@@ -1,6 +1,6 @@
 ---
 title: Hardware - Processador
-weight: 6
+weight: 1
 description: Arquitetura de von Neumann, CPU (ULA, UC, registradores), barramentos, clock, núcleos, CISC x RISC e desempenho.
 autores:
   - thallesgsrv

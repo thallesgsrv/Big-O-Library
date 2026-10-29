@@ -75,9 +75,11 @@ professores:
     disciplina: Introdução à Computação
     periodo: 1
     id: joseana
+    foto: joseana.png
 
   - nome: Prof. Maxwell Oliveira
     titulo: 
     disciplina: Introdução à Computação
     periodo: 1
     id: maxwell
+    foto: maxwell.png
