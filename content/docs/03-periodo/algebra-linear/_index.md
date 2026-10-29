@@ -26,6 +26,8 @@ Estuda matrizes, sistemas lineares e determinantes, base para os espaços vetori
 - matriz inversa e cálculo da inversa por operações elementares
 - sistemas de equações lineares e método de Gauss
 - determinantes: definição, propriedades e regras de cálculo
+- espaços vetoriais: definição, subespaços, soma de subespaços, combinação linear e geradores
+- dependência linear, base, dimensão, coordenadas e mudança de base
 
 ## Contribuição
 

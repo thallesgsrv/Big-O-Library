@@ -69,3 +69,15 @@ professores:
     disciplina: Laboratório de Estruturas de Dados
     periodo: 3
     github: fabriciocostadias
+
+  - nome: Prof. Joseana M. Fechine
+    titulo: 
+    disciplina: Introdução à Computação
+    periodo: 1
+    id: joseana
+
+  - nome: Prof. Maxwell Oliveira
+    titulo: 
+    disciplina: Introdução à Computação
+    periodo: 1
+    id: maxwell

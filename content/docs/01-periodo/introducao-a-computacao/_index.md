@@ -5,7 +5,9 @@ autores:
   - thallesgsrv
 date: 2026-10-15
 description: Primeiros passos em Ciência da Computação.
-rotulo: Estágios
+baseadoEm:
+  - joseana
+  - maxwell
 ---
 
 ## Sobre
