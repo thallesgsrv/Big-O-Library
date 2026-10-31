@@ -34,12 +34,12 @@
         {{- /* Só dentro de uma disciplina (ex.: período/disciplina/tópico): guias soltos como Git e Bash e disciplinas de página única ficam sem navegação. */ -}}
         {{- if and .IsPage (eq .Section "docs") .Parent (ge (len .Ancestors) 4) }}
           {{- /* Progresso de estudo: só com JavaScript (começa oculto) e guardado só no navegador (localStorage). Ver js/core/estudo.js */ -}}
-        <div class="bo-study" data-bo-study hidden>
-          <button type="button" class="bo-study-btn" aria-pressed="false" data-path="{{ .RelPermalink }}" data-title="{{ .Title }}">
-            <span class="bo-study-i" aria-hidden="true">✓</span> <span class="bo-study-t">Marcar como estudado</span>
-          </button>
-          <span class="bo-study-n">Fica salvo só neste navegador.</span>
-        </div>
+          <div class="bo-study" data-bo-study hidden>
+            <button type="button" class="bo-study-btn" aria-pressed="false" data-path="{{ .RelPermalink }}" data-title="{{ .Title }}">
+              <span class="bo-study-i" aria-hidden="true">✓</span> <span class="bo-study-t">Marcar como estudado</span>
+            </button>
+            <span class="bo-study-n">Fica salvo só neste navegador.</span>
+          </div>
           {{- $irmas := .Parent.RegularPages.ByWeight }}
           {{- $prev := false }}{{ $next := false }}
           {{- range $i, $p := $irmas }}

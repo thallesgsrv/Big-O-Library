@@ -46,9 +46,8 @@ var caixa = document.querySelector('[data-bo-continue]');
 if (caixa) {
   var u = ler(LAST, null);
   if (u && u.p && u.t) {
-    var link = caixa.querySelector('a');
-    link.setAttribute('href', u.p);
-    link.querySelector('.bo-cont-t').textContent = u.t;
+    caixa.setAttribute('href', u.p);
+    caixa.querySelector('.bo-cont-t').textContent = u.t;
     caixa.hidden = false;
   }
 }
