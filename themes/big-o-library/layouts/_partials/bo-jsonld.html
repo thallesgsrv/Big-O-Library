@@ -1,0 +1,25 @@
+{{- /* Dados estruturados (schema.org/LearningResource) para as páginas de material de uma disciplina.
+       Ajuda buscadores a entender que a página é material de estudo, de que disciplina e quem escreveu. */ -}}
+{{- if and .IsPage (eq .Section "docs") .Parent (ge (len .Ancestors) 4) -}}
+  {{- $autores := slice -}}
+  {{- range .Params.autores -}}
+    {{- $autores = $autores | append (dict "@type" "Person" "name" . "url" (printf "https://github.com/%s" .)) -}}
+  {{- end -}}
+  {{- /* a disciplina é o ancestral logo abaixo do período (período/disciplina/[estágio/]página) */ -}}
+  {{- $disc := index .Ancestors (sub (len .Ancestors) 4) -}}
+  {{- $ld := dict
+      "@context" "https://schema.org"
+      "@type" "LearningResource"
+      "name" .Title
+      "description" (.Params.description | default .Summary | plainify)
+      "inLanguage" "pt-BR"
+      "learningResourceType" "material de estudo"
+      "educationalLevel" "ensino superior"
+      "url" .Permalink
+      "isPartOf" (dict "@type" "Course" "name" $disc.Title "url" $disc.Permalink)
+  -}}
+  {{- with $autores }}{{ $ld = merge $ld (dict "author" .) }}{{ end -}}
+  {{- with .Params.date }}{{ $ld = merge $ld (dict "datePublished" (. | time.Format "2006-01-02")) }}{{ end -}}
+  {{- with .Lastmod }}{{ if not .IsZero }}{{ $ld = merge $ld (dict "dateModified" (. | time.Format "2006-01-02")) }}{{ end }}{{ end }}
+  <script type="application/ld+json">{{ $ld | jsonify | safeJS }}</script>
+{{- end -}}

@@ -1,0 +1,15 @@
+{
+  "name": "Big-O-Library",
+  "image": "mcr.microsoft.com/devcontainers/base:ubuntu",
+  "features": {
+    "ghcr.io/devcontainers/features/hugo:1": { "version": "0.165.0", "extended": true },
+    "ghcr.io/devcontainers/features/node:1": { "version": "22" },
+    "ghcr.io/devcontainers/features/python:1": { "version": "3.12" }
+  },
+  "postCreateCommand": "npm ci && pip install pyyaml",
+  "forwardPorts": [1313],
+  "portsAttributes": { "1313": { "label": "Site (hugo server)", "onAutoForward": "openBrowser" } },
+  "customizations": {
+    "vscode": { "extensions": ["DavidAnson.vscode-markdownlint", "EditorConfig.EditorConfig"] }
+  }
+}

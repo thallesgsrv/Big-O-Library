@@ -2,3 +2,9 @@ public/
 resources/_gen/
 .hugo_build.lock
 node_modules/
+*.patch
+.DS_Store
+Thumbs.db
+.vscode/
+.idea/
+public-check/

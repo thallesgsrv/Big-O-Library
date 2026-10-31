@@ -1,6 +1,6 @@
 ---
 title: Divisibilidade e aritmética modular
-weight: 3
+weight: 5
 description: Divisão, MDC, números primos e congruências, com usos em computação.
 autores:
   - thallesgsrv

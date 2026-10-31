@@ -1,0 +1,12 @@
+# Configuração do verificador de links (https://lychee.cli.rs).
+# Usada pelo workflow "Qualidade" (links internos, offline) e pelo "Links externos" (semanal).
+
+no_progress = true
+include_fragments = "anchor-only"   # confere também as âncoras (#secao), não só se a página existe
+
+# Falso positivo conhecido: ao checar "pasta/#ancora" o lychee não abre o index.html da pasta e acusa
+# "Cannot find fragment", mesmo com o id presente (o navegador resolve normalmente). Exclusão restrita aos
+# cards do Conselho; qualquer outra âncora quebrada continua sendo apontada.
+exclude = [
+  '/conselho/?#sabio-',
+]

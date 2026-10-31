@@ -1,0 +1,21 @@
+# Verificação semanal de links EXTERNOS (workflow "Links externos"). Os internos são checados a cada PR
+# com a configuração lychee.toml.
+
+no_progress = true
+include_fragments = "anchor-only"
+max_retries = 3
+retry_wait_time = 5
+timeout = 30
+max_concurrency = 8
+user_agent = "Mozilla/5.0 (compatible; Big-O-Library-LinkCheck; +https://github.com/thallesgsrv/Big-O-Library)"
+
+# 403 e 429 costumam ser bloqueio de robô ou limite de requisições, não link quebrado
+accept = ["200..=299", "403", "429"]
+
+exclude = [
+  '^https?://localhost',
+  '^https?://127\.0\.0\.1',
+  'example\.com',
+  'exemplo\.com',
+  '/conselho/?#sabio-',
+]

@@ -125,7 +125,7 @@
       if (s) {
         card = '<p class="bo-small bo-rs-note">Uma frase do Conselho dos Sábios para a próxima rodada:</p>' +
           '<a class="bo-rs-sage" style="--c:var(--p' + s.n + ')" href="' + CONSELHO + '#sabio-' + esc(s.slug) + '">' +
-          '<span class="bo-av" aria-hidden="true"><span>' + esc(s.ini) + '</span>' + (s.img ? '<img src="' + esc(s.img) + '" alt="" width="240" height="240" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '</span>' +
+          '<span class="bo-av" aria-hidden="true" data-ini="' + esc(s.ini).toUpperCase() + '">' + (s.img ? '<img src="' + esc(s.img) + '" alt="" width="240" height="240" loading="lazy" decoding="async" referrerpolicy="no-referrer" onerror="this.remove()">' : '') + '</span>' +
           '<span class="bo-rs-who"><span class="bo-rs-q">“' + esc(s.frase) + '”</span><span class="bo-rs-name">' + esc(s.nome) + '</span>' + (s.titulo ? '<span class="bo-rs-title">' + esc(s.titulo) + '</span>' : '') +
           '</span><span class="bo-rs-go" aria-hidden="true">ver card →</span></a>';
       }

@@ -1,7 +1,7 @@
 ---
 title: Forma Normal Conjuntiva (FNC)
 weight: 7
-description: Como colocar fórmulas num formato padrão (E de OUs) em que a validade é fácil de checar, e como usar isso para provar argumentos.
+description: Como colocar fórmulas num formato padrão (E de OUs), em que a validade é fácil de checar, e usar isso em argumentos.
 autores:
   - thallesgsrv
 date: 2026-10-15

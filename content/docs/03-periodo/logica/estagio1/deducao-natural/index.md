@@ -1,7 +1,7 @@
 ---
 title: Dedução Natural
 weight: 9
-description: Provas formais com regras de introdução e eliminação para cada conectivo, hipóteses temporárias e estratégias para achar a prova.
+description: Provas formais com regras de introdução e eliminação, hipóteses temporárias e estratégias para achar a prova.
 autores:
   - thallesgsrv
 date: 2026-10-21
@@ -363,6 +363,7 @@ Compare: provar $p\to p$ em Hilbert exige 5 passos (veja o [método axiomático]
 - $d$: calcula o número de disciplinas; $c$: calcula o CRE; $p$: feito em Python; $t$: imprime o histórico na tela; $f$: imprime em papel.
 
 {{< details title="Gabarito" >}}
+
 ```
 1  (d ∧ c) ∧ p     premissa
 2  t ∧ f           premissa
@@ -371,22 +372,26 @@ Compare: provar $p\to p$ em Hilbert exige 5 passos (veja o [método axiomático]
 5  t               ∧e1 2
 6  c ∧ t           ∧i 4, 5
 ```
+
 {{< /details >}}
 
 **Exercício 2.** $p\land q\ \vdash\ q\land p$
 
 {{< details title="Gabarito" >}}
+
 ```
 1  p ∧ q       premissa
 2  p           ∧e1 1
 3  q           ∧e2 1
 4  q ∧ p       ∧i 3, 2
 ```
+
 {{< /details >}}
 
 **Exercício 3.** $p\to q,\ q\to r\ \vdash\ p\to r$ (compare com a prova axiomática de 7 linhas).
 
 {{< details title="Gabarito" >}}
+
 ```
 1  p → q       premissa
 2  q → r       premissa
@@ -395,11 +400,13 @@ Compare: provar $p\to p$ em Hilbert exige 5 passos (veja o [método axiomático]
 5  │ r         →e 2, 4
 6  p → r       →i 3-5
 ```
+
 {{< /details >}}
 
 **Exercício 4.** $p\lor q,\ \neg p\ \vdash\ q$ (silogismo disjuntivo)
 
 {{< details title="Gabarito" >}}
+
 ```
 1  p ∨ q           premissa
 2  ¬p              premissa
@@ -409,11 +416,13 @@ Compare: provar $p\to p$ em Hilbert exige 5 passos (veja o [método axiomático]
 6  │ q             hipótese
 7  q               ∨e 1, 3-5, 6-6
 ```
+
 {{< /details >}}
 
 **Exercício 5.** $(p\lor q)\lor r\ \vdash\ p\lor(q\lor r)$
 
 {{< details title="Gabarito" >}}
+
 ```
 1   (p ∨ q) ∨ r            premissa
 2   │ p ∨ q                hipótese
@@ -428,12 +437,14 @@ Compare: provar $p\to p$ em Hilbert exige 5 passos (veja o [método axiomático]
 11  │ p ∨ (q ∨ r)          ∨i2 10
 12  p ∨ (q ∨ r)            ∨e 1, 2-8, 9-11
 ```
+
 Note que as duas caixas de casos externas são "$p\lor q$" (linhas 2-8) e "$r$" (linhas 9-11); a primeira tem, dentro, os dois casos de $p\lor q$.
 {{< /details >}}
 
 **Exercício 6.** $p\to\neg p\ \vdash\ \neg p$
 
 {{< details title="Gabarito" >}}
+
 ```
 1  p → ¬p      premissa
 2  │ p         hipótese
@@ -441,12 +452,14 @@ Note que as duas caixas de casos externas são "$p\lor q$" (linhas 2-8) e "$r$" 
 4  │ ⊥         ⊥i 2, 3
 5  ¬p          ¬i 2-4
 ```
+
 Intuição: se $p$ valesse, $p$ implicaria $\neg p$, e teríamos as duas ao mesmo tempo. Absurdo, logo $p$ não vale.
 {{< /details >}}
 
 **Exercício 7.** $p\land(q\lor r)\ \vdash\ (p\land q)\lor(p\land r)$ (distributividade)
 
 {{< details title="Gabarito" >}}
+
 ```
 1  p ∧ (q ∨ r)                 premissa
 2  p                           ∧e1 1
@@ -459,6 +472,7 @@ Intuição: se $p$ valesse, $p$ implicaria $\neg p$, e teríamos as duas ao mesm
 9  │ (p ∧ q) ∨ (p ∧ r)         ∨i2 8
 10 (p ∧ q) ∨ (p ∧ r)           ∨e 3, 4-6, 7-9
 ```
+
 {{< /details >}}
 
 **Exercício 8.** Encontre o erro nesta "prova" de $p\to q\ \vdash\ q$:

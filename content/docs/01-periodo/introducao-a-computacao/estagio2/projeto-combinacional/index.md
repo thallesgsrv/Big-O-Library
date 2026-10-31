@@ -1,7 +1,7 @@
 ---
 title: Projeto de Circuitos Combinacionais
 weight: 2
-description: Circuitos combinacionais x sequenciais, da tabela-verdade ao circuito, mintermos, simplificação e exemplos (alarme, caixa d'água, impressora).
+description: Circuitos combinacionais x sequenciais, da tabela-verdade ao circuito, mintermos, simplificação e exemplos.
 autores:
   - thallesgsrv
 date: 2026-10-17

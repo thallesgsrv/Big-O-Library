@@ -167,7 +167,7 @@
       el("rect", { width: 5, height: H, rx: 2, "class": "bo-m-tick" }, g);
       var ls = wrap(n.title);
       var t = el("text", { x: TX, y: H / 2 - (ls.length - 1) * LH / 2 + 4 }, g);
-      ls.forEach(function (l, i) { var s = el("tspan", { x: TX, dy: i ? LH : 0 }, t); s.textContent = l; });
+      ls.forEach(function (l, i) { var s = el("tspan", { x: TX, dy: i ? LH : 0 }, t); s.textContent = i < ls.length - 1 ? l + " " : l; });
       g.addEventListener("click", function () { choose(n.slug); });
       g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(n.slug); } });
       nodeEls[n.slug] = g;

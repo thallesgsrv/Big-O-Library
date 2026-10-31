@@ -231,7 +231,7 @@ Não: falta uma fórmula antes da seta (dois conectivos seguidos, $\land\to$).
 
 **Exercício 2.** Coloque os parênteses completos em $p\land q\to r\lor s$.
 
-{{< quiz titulo="parênteses completos" >}}
+{{< quiz titulo="parênteses completos (exercício 2)" >}}
 {{< questao >}}
 Com todos os parênteses, $p\land q\to r\lor s$ fica:
 
@@ -246,7 +246,7 @@ $\land$ e $\lor$ agarram primeiro; o $\to$ fica por último e liga os dois bloco
 
 **Exercício 3.** Coloque os parênteses completos em $\neg p\lor q\to r$.
 
-{{< quiz titulo="parênteses completos" >}}
+{{< quiz titulo="parênteses completos (exercício 3)" >}}
 {{< questao >}}
 Com todos os parênteses, $\neg p\lor q\to r$ fica:
 
@@ -346,6 +346,7 @@ O $\leftrightarrow$ precisa de uma fórmula dos dois lados, e aqui falta a do la
 **Exercício 7.** Desenhe a árvore sintática de $\neg(p\lor q)\to(\neg p\land\neg q)$ e liste todas as suas subfórmulas.
 
 {{< details title="Gabarito" >}}
+
 ```
 →
 ├─ ¬

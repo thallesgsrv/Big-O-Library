@@ -1,0 +1,26 @@
+{
+  // Lista curada: só regras que pegam defeitos de renderização ou de acessibilidade.
+  // As regras de estilo (tamanho de linha, HTML inline, estilo de lista...) ficam desligadas de propósito:
+  // o conteúdo usa HTML dos layouts e blocos de texto sem linguagem (provas, árvores) de forma intencional.
+  "config": {
+    "default": false,
+    "MD001": true,   // níveis de cabeçalho em sequência (h2 -> h3, sem pular)
+    "MD011": true,   // sintaxe de link invertida: (texto)[url]
+    "MD018": true,   // "#Título" sem espaço depois do #: não vira cabeçalho
+    "MD019": true,
+    "MD022": true,   // linha em branco em volta de cabeçalhos
+    "MD023": true,
+    "MD025": true,   // um único h1 por página (o título já vem do front matter)
+    "MD031": true,   // linha em branco em volta de blocos de código
+    "MD042": true,   // link vazio
+    "MD045": true,   // imagem sem texto alternativo
+    "MD047": true,   // arquivo termina com quebra de linha
+    "MD051": true,   // âncora interna que não existe
+    "MD052": true,   // referência de link sem definição
+    "MD053": true,
+    "MD055": true,   // formato das barras de tabela
+    "MD056": true    // número de colunas da tabela
+  },
+  "globs": ["content/**/*.md", "*.md", ".github/*.md"],
+  "ignores": ["node_modules/**", "public/**"]
+}

@@ -1,7 +1,7 @@
 ---
 title: Álgebra de Boole e Portas Lógicas
 weight: 1
-description: Lógica, operadores E, OU e NÃO, tabelas-verdade, portas lógicas, chaves automáticas, famílias lógicas e circuitos integrados.
+description: Operadores E, OU e NÃO, tabelas-verdade, portas lógicas, chaves automáticas, famílias lógicas e circuitos integrados.
 autores:
   - thallesgsrv
 date: 2026-10-17

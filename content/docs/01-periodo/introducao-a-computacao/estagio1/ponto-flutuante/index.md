@@ -1,7 +1,7 @@
 ---
 title: Ponto Flutuante e IEEE 754
 weight: 10
-description: Notação científica em binário, normalização, formato de 8 bits, padrão IEEE 754 (32 e 64 bits), casos especiais, overflow e underflow.
+description: Notação científica em binário, normalização, formato de 8 bits, IEEE 754 (32 e 64 bits), casos especiais e overflow.
 autores:
   - thallesgsrv
 date: 2026-10-17

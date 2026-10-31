@@ -1,0 +1,37 @@
+name: Links externos
+
+# Uma vez por semana confere se os links para fora do site ainda funcionam (links internos já são
+# checados a cada pull request). Se algum quebrar, o workflow falha e o GitHub avisa por e-mail.
+on:
+  schedule:
+    - cron: "0 12 * * 1"   # segunda-feira, 12:00 UTC
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+env:
+  HUGO_VERSION: 0.165.0
+  LYCHEE_VERSION: 0.24.2
+
+jobs:
+  links:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Instalar Hugo extended
+        run: |
+          wget -q -O "$RUNNER_TEMP/hugo.deb" "https://github.com/gohugoio/hugo/releases/download/v${HUGO_VERSION}/hugo_extended_${HUGO_VERSION}_linux-amd64.deb"
+          sudo dpkg -i "$RUNNER_TEMP/hugo.deb"
+
+      - name: Compilar
+        run: hugo --gc --baseURL / --destination public-check
+
+      - name: Instalar lychee
+        run: |
+          curl -sSL "https://github.com/lycheeverse/lychee/releases/download/lychee-v${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz" | tar xz -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/lychee-x86_64-unknown-linux-gnu" >> "$GITHUB_PATH"
+
+      - name: Verificar links externos
+        run: lychee --config lychee-external.toml --root-dir "$PWD/public-check" 'public-check/**/*.html'

@@ -14,7 +14,7 @@
 #              não mostra a citação e a mesa não sorteia essa pessoa.
 #  cor         (opcional) 1 a 9: escolhe a cor do card na paleta do site
 #              (1 = verde ... 9 = vermelho). Sem isso, as cores se alternam.
-#  foto        Nome do arquivo dentro de static/images/conselho/  (ex.: ada.jpg)
+#  foto        Nome do arquivo dentro de static/images/conselho/  (ex.: ada.webp; use imagens quadradas de ~240 px, em WebP ou JPEG, com menos de 30 KB)
 #              Sem foto + com github → usa o avatar do GitHub.
 #              Sem foto + sem github → mostra as iniciais.
 #  github      Só o usuário (ex.: joaoarthurbm). Pode apagar a linha se não tiver.
@@ -39,7 +39,7 @@ professores:
     titulo: Senhor dos Limites, Derivadas e Integrais
     disciplina: Cálculo 1 e Cálculo 2
     id: rodrigocohen
-    foto: rodrigo-cohen.jpg
+    foto: rodrigo-cohen.webp
     periodo: 2
     frase: "Tá ligado, velho?"
 
@@ -62,7 +62,7 @@ professores:
     disciplina: Lógica para Computação
     periodo: 3
     id: salatiel
-    foto: salatiel.jpg
+    foto: salatiel.webp
 
   - nome: Prof. Fabricio Costa
     titulo: Guardião dos Algoritmos
@@ -75,11 +75,11 @@ professores:
     disciplina: Introdução à Computação
     periodo: 1
     id: joseana
-    foto: joseana.png
+    foto: joseana.webp
 
   - nome: Prof. Maxwell Oliveira
     titulo: 
     disciplina: Introdução à Computação
     periodo: 1
     id: maxwell
-    foto: maxwell.png
+    foto: maxwell.webp

@@ -103,6 +103,7 @@ Considere palavras de **6 bits** (intervalo $-32$ a $+31$):
 -------------
   0 1 1 1 0 0   (+28)
 ```
+
 Sem vai-um para o sinal nem para fora: **correto**.
 
 **b) $+23 + (+20)$**
@@ -113,6 +114,7 @@ Sem vai-um para o sinal nem para fora: **correto**.
 -------------
   1 0 1 0 1 1   (negativo?!)
 ```
+
 Houve vai-um **só** para o bit de sinal: **overflow**. $+43$ não cabe em 6 bits (máximo 31).
 
 **c) $+15 + (-13)$**: $-13$ em complemento de 2 é `110011`.
@@ -123,6 +125,7 @@ Houve vai-um **só** para o bit de sinal: **overflow**. $+43$ não cabe em 6 bit
 -------------
 1 0 0 0 0 1 0   (+2)
 ```
+
 Vai-um para o sinal **e** para fora: o de fora é descartado, e o resultado $000010 = +2$ está **correto**.
 
 ## 6. Subtração em complemento de 2

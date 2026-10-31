@@ -1,7 +1,7 @@
 ---
 title: Codificadores, Multiplexadores e Paridade
 weight: 5
-description: Codificadores e decodificadores, multiplexadores e demultiplexadores, bit de paridade e circuitos geradores e verificadores.
+description: Codificadores e decodificadores, multiplexadores e demultiplexadores, bit de paridade, geradores e verificadores.
 autores:
   - thallesgsrv
 date: 2026-10-17

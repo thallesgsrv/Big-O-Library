@@ -54,8 +54,8 @@ date: 2026-10-03
 | `chmod u+x arquivo.sh` | Dá permissão de execução ao usuário dono. |
 | `chmod go-w arquivo.txt` | Remove permissão de escrita para grupo e outros. |
 | `chown usuario:grupo arquivo.txt` | Troca o dono e o grupo do arquivo. |
-| `ls | grep pdf` | Filtra a saída de `ls` para mostrar só arquivos com `pdf`. |
-| `cat arquivo.txt | wc -l` | Conta quantas linhas o arquivo tem. |
+| `ls \| grep pdf` | Filtra a saída de `ls` para mostrar só arquivos com `pdf`. |
+| `cat arquivo.txt \| wc -l` | Conta quantas linhas o arquivo tem. |
 | `echo "teste" > arquivo.txt` | Cria ou sobrescreve um arquivo com o texto. |
 | `echo "mais texto" >> arquivo.txt` | Adiciona texto ao final do arquivo. |
 | `2> erro.txt` | Redireciona mensagens de erro para um arquivo. |

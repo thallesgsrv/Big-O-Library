@@ -242,6 +242,7 @@ $q\lor r=\neg q\to r$. Então $p\land(q\lor r)=\neg\big(p\to\neg(\neg q\to r)\bi
 | 3 | $q$ | MP 1, 2 |
 | 4 | $q\to r$ | premissa |
 | 5 | $r$ | MP 3, 4 |
+
 {{< /details >}}
 
 **Exercício 4.** Prove $\vdash_Z\neg p\to\neg p$ e explique o que isso diz sobre $p\lor\neg p$.
@@ -260,6 +261,7 @@ $q\lor r=\neg q\to r$. Então $p\land(q\lor r)=\neg\big(p\to\neg(\neg q\to r)\bi
 | 3 | $(p\to(q\to r))\to((p\to q)\to(p\to r))$ | A2 com $\alpha=p$, $\beta=q$, $\gamma=r$ |
 | 4 | $(p\to q)\to(p\to r)$ | MP 2, 3 |
 | 5 | $p\to r$ | MP 1, 4 |
+
 {{< /details >}}
 
 {{< quiz titulo="solidez e completude" >}}

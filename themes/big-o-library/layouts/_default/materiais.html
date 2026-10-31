@@ -18,7 +18,7 @@
         {{- $n := int (index (index . 0) 1) -}}
         {{- /* o card inteiro é o link; as disciplinas só aparecem na página do período */ -}}
         {{- $k := len $pg.RegularPagesRecursive -}}
-        <a class="bo-per{{ if not $k }} is-soon{{ end }}" style="--c:var(--p{{ $n }})" href="{{ $url }}" aria-label="{{ index $cx (sub $n 1) }} {{ $n }}º período">
+        <a class="bo-per{{ if not $k }} is-soon{{ end }}" style="--c:var(--p{{ $n }})" href="{{ $url }}">
           <span class="bo-per-o" aria-hidden="true">{{ index $cx (sub $n 1) }}</span>
           <span class="bo-per-l"></span>
           <span class="bo-per-n">{{ $n }}º período <span class="bo-per-go" aria-hidden="true">→</span></span>

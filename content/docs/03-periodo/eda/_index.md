@@ -18,9 +18,12 @@ Aqui a gente aprende a medir o custo de um algoritmo sem depender de cronômetro
 ## Conteúdo previsto
 
 - análise de algoritmos: contagem de operações, notação assintótica e recorrências
-- ordenação quadrática: selection sort e insertion sort
+- ordenação quadrática: selection sort, insertion sort e bubble sort
 - ordenação por divisão e conquista: merge sort e quick sort
+- ordenação com heap: heap sort
 - ordenação linear: counting sort e radix sort
+- busca binária
+- estruturas de dados: pilha, fila e lista encadeada
 
 ## Comparando os algoritmos
 
@@ -30,8 +33,10 @@ Depois de ler os tópicos, esta tabela serve de resumo. \(n\) é o tamanho do ar
 |---|---|---|---|---|---|
 | Selection sort | \(n^2\) | \(n^2\) | \(n^2\) | não | sim |
 | Insertion sort | \(n\) | \(n^2\) | \(n^2\) | sim | sim |
+| Bubble sort (com parada antecipada) | \(n\) | \(n^2\) | \(n^2\) | sim | sim |
 | Merge sort | \(n \log n\) | \(n \log n\) | \(n \log n\) | sim | não |
 | Quick sort | \(n \log n\) | \(n \log n\) | \(n^2\) | não | sim |
+| Heap sort | \(n \log n\) | \(n \log n\) | \(n \log n\) | não | sim |
 | Counting sort | \(n + k\) | \(n + k\) | \(n + k\) | sim | não |
 | Radix sort | \(d(n + b)\) | \(d(n + b)\) | \(d(n + b)\) | sim | não |
 

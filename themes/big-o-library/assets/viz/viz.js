@@ -416,6 +416,102 @@
     yield { line: 0, msg: 'Pronto! O vetor está ordenado sem comparar números entre si: 3 passadas, cada uma custando n + 10.', a: [...a], sorted: new Set(a.map((_, i) => i)), p1: [], p2: ['3 passadas'], done: true };
   }
 
+  function* bubble() {
+    const a = [5, 1, 4, 2, 8, 3], n = a.length, sorted = new Set();
+    let cmpN = 0, swN = 0, rod = 0;
+    const snap = (line, msg, x = {}) => ({ line, msg, a: [...a], sorted: new Set(sorted),
+      p1: rod ? [`rodada ${rod}`] : [], p2: [`comparações: ${cmpN}`, `trocas: ${swN}`], ...x });
+    yield snap(0, 'Vamos ordenar [5, 1, 4, 2, 8, 3]. Em cada rodada comparamos vizinhos e trocamos os que estão fora de ordem: o maior elemento "borbulha" até o fim do trecho.');
+    for (let i = 0; i < n - 1; i++) {
+      rod = i + 1; let trocou = false;
+      yield snap(1, `Rodada ${rod}: ainda não houve troca. Vamos comparar os pares das posições 0 até ${n - 1 - i}.`);
+      for (let j = 0; j < n - 1 - i; j++) {
+        cmpN++;
+        const x = a[j], y = a[j + 1], ptr = { j, 'j+1': j + 1 };
+        if (x > y) {
+          yield snap(3, `${x} > ${y}: estão fora de ordem.`, { ptr, cmp: new Set([j, j + 1]) });
+          a[j] = y; a[j + 1] = x; swN++; trocou = true;
+          yield snap(3, `Troca feita: ${y} vem antes de ${x}.`, { ptr, cmp: new Set([j, j + 1]) });
+        } else {
+          yield snap(3, `${x} > ${y}? Não. Já estão em ordem, segue em frente.`, { ptr, cur: new Set([j, j + 1]) });
+        }
+      }
+      sorted.add(n - 1 - i);
+      if (!trocou) {
+        for (let k = 0; k < n; k++) sorted.add(k);
+        yield snap(4, `A rodada ${rod} terminou sem nenhuma troca: o vetor já está ordenado e podemos parar antes da hora.`, { done: true });
+        yield snap(0, `Pronto! ${cmpN} comparações e ${swN} trocas. Se o vetor já viesse ordenado, bastaria uma rodada: ${n - 1} comparações e nenhuma troca.`, { done: true });
+        return;
+      }
+      yield snap(4, `Fim da rodada ${rod}: ${a[n - 1 - i]} está no lugar definitivo (posição ${n - 1 - i}).`, { cur: new Set([n - 1 - i]) });
+    }
+    sorted.add(0);
+    yield snap(0, `Pronto! ${cmpN} comparações e ${swN} trocas.`, { done: true });
+  }
+
+  function* heap() {
+    const a = [4, 10, 3, 5, 1, 8, 7], n = a.length, sorted = new Set();
+    let tam = n, cmpN = 0, swN = 0, fase = 'construção';
+    const snap = (line, msg, x = {}) => ({ line, msg, a: [...a], sorted: new Set(sorted), rng: [0, tam - 1],
+      p1: [`fase: ${fase}`, `tamanho do heap: ${tam}`], p2: [`comparações: ${cmpN}`, `trocas: ${swN}`], ...x });
+    function* afunda(i, t) {
+      while (true) {
+        const l = 2 * i + 1, r = 2 * i + 2; let m = i;
+        const filhos = { esq: l < t ? l : null, dir: r < t ? r : null };
+        yield snap(4, `afunda(${i}): o pai é ${a[i]}; filhos: ${l < t ? a[l] : '–'} e ${r < t ? a[r] : '–'}.`, { ptr: { pai: i, ...filhos }, cur: new Set([i]) });
+        if (l < t) { cmpN++; if (a[l] > a[m]) m = l; }
+        if (r < t) { cmpN++; if (a[r] > a[m]) m = r; }
+        if (m === i) {
+          yield snap(5, `${a[i]} já é maior ou igual aos filhos: está no lugar certo e o heap está restaurado aqui.`, { ptr: { pai: i }, cur: new Set([i]) });
+          return;
+        }
+        yield snap(5, `O maior entre pai e filhos é ${a[m]} (posição ${m}).`, { ptr: { pai: i, maior: m }, cmp: new Set([i, m]) });
+        [a[i], a[m]] = [a[m], a[i]]; swN++;
+        yield snap(6, `Troca: ${a[i]} sobe e ${a[m]} desce. Continua afundando a partir da posição ${m}.`, { ptr: { pai: m }, cmp: new Set([i, m]) });
+        i = m;
+      }
+    }
+    yield snap(0, 'Vamos ordenar [4, 10, 3, 5, 1, 8, 7]. Primeiro transformamos o vetor em um heap máximo (todo pai é maior ou igual aos filhos, que ficam em 2i+1 e 2i+2); depois tiramos o maior elemento, um por vez.');
+    for (let i = (n >> 1) - 1; i >= 0; i--) yield* afunda(i, tam);
+    fase = 'extração';
+    yield snap(0, `Heap máximo pronto: o maior elemento (${a[0]}) está na posição 0.`, { cur: new Set([0]) });
+    for (let fim = n - 1; fim >= 1; fim--) {
+      yield snap(2, `Troca o maior (${a[0]}) com o último elemento do heap (${a[fim]}).`, { ptr: { raiz: 0, fim }, cmp: new Set([0, fim]) });
+      [a[0], a[fim]] = [a[fim], a[0]]; swN++; sorted.add(fim); tam = fim;
+      yield snap(2, `${a[fim]} está no lugar definitivo (posição ${fim}). O heap agora tem ${tam} elemento${tam > 1 ? 's' : ''}.`, { ptr: { fim }, cur: new Set([fim]) });
+      if (tam > 1) {
+        yield snap(3, `A nova raiz ${a[0]} pode violar o heap: vamos afundá-la.`, { ptr: { raiz: 0 }, cur: new Set([0]) });
+        yield* afunda(0, tam);
+      }
+    }
+    sorted.add(0); tam = n; fase = 'pronto';
+    yield snap(0, `Pronto! ${cmpN} comparações e ${swN} trocas. O custo é O(n log n) mesmo no pior caso, e sem vetor auxiliar.`, { rng: [0, n - 1], done: true });
+  }
+
+  function* binary() {
+    const a = [2, 5, 8, 12, 16, 23, 38, 56, 72, 91], n = a.length, alvo = 23;
+    let esq = 0, dir = n - 1, comp = 0;
+    const snap = (line, msg, x = {}) => ({ line, msg, a: [...a], rng: [esq, dir],
+      p1: [`alvo: ${alvo}`], p2: [`comparações: ${comp}`, `candidatos: ${dir >= esq ? dir - esq + 1 : 0}`], ...x });
+    yield snap(0, `Procuramos o ${alvo} em um vetor ordenado de ${n} elementos. A cada passo olhamos o elemento do meio e descartamos metade dos candidatos.`, { ptr: { esq, dir } });
+    while (esq <= dir) {
+      const meio = (esq + dir) >> 1; comp++;
+      yield snap(1, `Candidatos: posições ${esq} a ${dir}. Meio = (${esq} + ${dir}) / 2 = ${meio}, que guarda ${a[meio]}.`, { ptr: { esq, meio, dir }, cur: new Set([meio]) });
+      if (a[meio] === alvo) {
+        yield snap(2, `${a[meio]} = ${alvo}: achamos na posição ${meio}, com ${comp} comparações. Uma busca linear precisaria de ${meio + 1}.`, { ptr: { meio }, sorted: new Set([meio]), done: true });
+        return;
+      }
+      if (a[meio] < alvo) {
+        yield snap(3, `${a[meio]} < ${alvo}: como o vetor está ordenado, o alvo só pode estar à direita. Descartamos as posições ${esq} a ${meio}.`, { ptr: { esq, meio, dir }, cmp: new Set([meio]) });
+        esq = meio + 1;
+      } else {
+        yield snap(4, `${a[meio]} > ${alvo}: o alvo só pode estar à esquerda. Descartamos as posições ${meio} a ${dir}.`, { ptr: { esq, meio, dir }, cmp: new Set([meio]) });
+        dir = meio - 1;
+      }
+    }
+    yield snap(5, `Não sobrou nenhum candidato: ${alvo} não está no vetor.`, { done: true });
+  }
+
   const ALGOS = {
     dijkstra: {
       t1: 'Fila de prioridade', t2: 'Distâncias', graph: GRAFO, run: () => dijkstra(GRAFO, 'A'),
@@ -466,6 +562,23 @@
       kind: 'array', t1: 'Chave', t2: 'Operações', run: insertion,
       code: [[0,'para i de 1 até n-1:'],[1,'chave ← v[i]; j ← i-1'],[1,'enquanto j ≥ 0 e v[j] > chave:'],[2,'v[j+1] ← v[j]; j ← j-1'],[1,'v[j+1] ← chave']]
     },
+    bubble: {
+      kind: 'array', t1: 'Rodada', t2: 'Operações', run: bubble,
+      code: [[0,'para i de 0 até n-2:'],[1,'trocou ← falso'],[1,'para j de 0 até n-2-i:'],
+        [2,'se v[j] > v[j+1]: troca(v[j], v[j+1]); trocou ← verdadeiro'],[1,'se não trocou: para (já está ordenado)']]
+    },
+    heap: {
+      kind: 'array', t1: 'Situação do heap', t2: 'Operações', run: heap,
+      code: [[0,'constrói o heap máximo: para i de n/2-1 até 0: afunda(i, n)'],[0,'para fim de n-1 até 1:'],
+        [1,'troca(v[0], v[fim])   (o maior vai para o final)'],[1,'afunda(0, fim)   (restaura o heap em v[0..fim-1])'],
+        [0,'afunda(i, tam):  filhos em 2i+1 e 2i+2'],[1,'maior ← o maior entre v[i] e seus filhos'],
+        [1,'se maior ≠ i: troca(v[i], v[maior]); afunda(maior, tam)']]
+    },
+    binary: {
+      kind: 'array', t1: 'Alvo', t2: 'Contagem', run: binary,
+      code: [[0,'esq ← 0; dir ← n-1'],[0,'enquanto esq ≤ dir:   meio ← (esq + dir) / 2'],[1,'se v[meio] = alvo: retorna meio'],
+        [1,'se v[meio] < alvo: esq ← meio + 1'],[1,'senão: dir ← meio - 1'],[0,'retorna -1   (não encontrou)']]
+    },
     merge: {
       kind: 'array', t1: 'Trecho atual', t2: 'Operações', run: merge,
       code: [[0,'mergeSort(esq, dir):'],[1,'se esq ≥ dir: retorna (um elemento já está ordenado)'],[1,'meio ← (esq + dir) / 2'],
@@ -500,14 +613,23 @@
     const vmax = isArr ? Math.max(...steps.flatMap(s => s.a).filter(x => x != null)) : 1;
     const H = isArr ? 216 + Math.max(...steps.map(s => (s.rows || []).length)) * 62 : 300;
     let i = 0, timer = null;
-    el.innerHTML = `<div class="viz-top"><svg viewBox="0 0 560 ${H}" role="img" aria-label="${isArr ? 'Vetor' : 'Grafo'}"></svg>
+    const NOMES = { dijkstra: 'Dijkstra', bfs: 'busca em largura', dfs: 'busca em profundidade', segtree: 'árvore de segmentos',
+      lazy: 'propagação preguiçosa', lca: 'ancestral comum mais baixo', selection: 'selection sort', insertion: 'insertion sort',
+      merge: 'merge sort', quick: 'quick sort', counting: 'counting sort', radix: 'radix sort', bubble: 'bubble sort',
+      heap: 'heap sort', binary: 'busca binária' };
+    const nome = NOMES[el.dataset.algo] || el.dataset.algo;
+    el.setAttribute('role', 'group');
+    el.setAttribute('aria-label', 'Visualização interativa: ' + nome);
+    el.tabIndex = 0;
+    el.innerHTML = `<div class="viz-top"><svg viewBox="0 0 560 ${H}" role="img" aria-label="Ilustração do passo atual de ${nome}. A explicação em texto está logo abaixo."></svg>
       <div class="viz-side"><div><b class="t1"></b><div class="pq"></div></div>
       <div><b class="t2"></b><div class="dd"></div></div></div></div>
-      <div class="msg" aria-live="polite"></div>
-      <ol class="code">${A.code.map(([n, t]) => `<li style="padding-left:${6 + n * 18}px">${t}</li>`).join('')}</ol>
-      <div class="ctl"><button data-a="r" title="Reiniciar">⏮</button><button data-a="b" title="Passo anterior">◀</button>
-      <button data-a="p" title="Executar">▶</button><button data-a="f" title="Próximo passo">▶|</button>
-      <span class="cnt"></span><label>velocidade <input type="range" min="1" max="10" value="5"></label></div>`;
+      <div class="msg" role="status" aria-live="polite" aria-atomic="true"></div>
+      <ol class="code" aria-label="Pseudocódigo">${A.code.map(([n, t]) => `<li style="padding-left:calc(2.4em + ${n * 18}px)">${t}</li>`).join('')}</ol>
+      <div class="ctl"><button type="button" data-a="r" aria-label="Reiniciar" title="Reiniciar (Home)">⏮</button><button type="button" data-a="b" aria-label="Passo anterior" title="Passo anterior (←)">◀</button>
+      <button type="button" data-a="p" aria-label="Executar" title="Executar (espaço)">▶</button><button type="button" data-a="f" aria-label="Próximo passo" title="Próximo passo (→)">▶|</button>
+      <span class="cnt"></span><label>velocidade <input type="range" min="1" max="10" value="5"></label></div>
+      <p class="hint">Dica: com a visualização em foco, use ← e → para navegar nos passos, espaço para executar ou pausar e Home para reiniciar.</p>`;
     const $ = s => el.querySelector(s), lis = el.querySelectorAll('.code li');
     const pos = g ? Object.fromEntries(g.nodes.map(n => [n.id, n])) : {};
 
@@ -585,18 +707,39 @@
       lis.forEach((li, k) => li.classList.toggle('on', k === s.line));
       $('.cnt').textContent = `passo ${i + 1}/${steps.length}`;
     }
-    const stop = () => { clearInterval(timer); timer = null; el.querySelector('[data-a=p]').textContent = '▶'; };
+    const btnP = el.querySelector('[data-a=p]'), msgEl = $('.msg');
+    const setPlayUI = on => {
+      btnP.textContent = on ? '⏸' : '▶';
+      btnP.setAttribute('aria-label', on ? 'Pausar' : 'Executar');
+      btnP.title = on ? 'Pausar (espaço)' : 'Executar (espaço)';
+      // durante a execução automática o leitor de tela não anuncia cada passo (seria uma enxurrada)
+      msgEl.setAttribute('aria-live', on ? 'off' : 'polite');
+    };
+    const stop = () => { clearInterval(timer); timer = null; setPlayUI(false); };
     const go = d => { i = Math.max(0, Math.min(steps.length - 1, i + d)); draw(); };
     function play() {
       if (timer) return stop();
       if (i >= steps.length - 1) i = 0;
-      el.querySelector('[data-a=p]').textContent = '⏸';
+      setPlayUI(true);
       const ms = 1100 - $('input').value * 100;
       timer = setInterval(() => { if (i >= steps.length - 1) return stop(); go(1); }, ms);
     }
     el.addEventListener('click', e => {
-      const a = e.target.dataset && e.target.dataset.a; if (!a) return;
+      const b = e.target.closest && e.target.closest('button[data-a]');
+      const a = b && b.dataset.a; if (!a) return;
       if (a === 'p') play(); else { stop(); if (a === 'r') { i = 0; draw(); } else go(a === 'f' ? 1 : -1); }
+    });
+    // Atalhos: só quando o foco está na própria visualização (botões e o controle de velocidade têm o comportamento nativo).
+    el.addEventListener('keydown', e => {
+      if (e.target !== el || e.altKey || e.ctrlKey || e.metaKey) return;
+      const k = e.key;
+      if (k === 'ArrowRight') { stop(); go(1); }
+      else if (k === 'ArrowLeft') { stop(); go(-1); }
+      else if (k === 'Home') { stop(); i = 0; draw(); }
+      else if (k === 'End') { stop(); i = steps.length - 1; draw(); }
+      else if (k === ' ' || k === 'Spacebar') play();
+      else return;
+      e.preventDefault();
     });
     $('input').addEventListener('input', () => { if (timer) { stop(); play(); } });
     draw();

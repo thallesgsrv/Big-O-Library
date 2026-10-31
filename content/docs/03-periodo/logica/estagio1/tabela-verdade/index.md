@@ -1,7 +1,7 @@
 ---
 title: Semântica e Tabela-Verdade
 weight: 4
-description: Valores verdade, tabelas dos conectivos, interpretação e modelo, tautologia, satisfazibilidade, consequência lógica e equivalências.
+description: Valores verdade, tabelas dos conectivos, interpretação, tautologia, satisfazibilidade, consequência e equivalências.
 autores:
   - thallesgsrv
 date: 2026-10-15

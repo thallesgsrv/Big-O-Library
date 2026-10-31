@@ -20,6 +20,8 @@ Revisa a matemática que você vai usar nas disciplinas seguintes: funções, se
 - lógica proposicional e de predicados
 - teoria dos conjuntos
 - princípios de contagem
+- princípio da casa dos pombos
+- combinações, triângulo de Pascal e binômio de Newton
 
 ## Como estudar
 

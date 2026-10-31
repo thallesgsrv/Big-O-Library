@@ -61,14 +61,26 @@ Grafos: nós e arestas ficam em `GRAFO`/`LCAG`; opções da entrada: `nw: true` 
 
 4. **Página** `content/docs/optativas/algoritmos-avancados/bfs/index.md` com `{{< viz algoritmo="bfs" >}}` e um `weight` ainda não usado.
 
-5. **Testar sem navegador** (na raiz do repositório):
+5. **Dar um nome legível** em `NOMES` (dentro de `mount`, no viz.js): é o nome que leitores de tela anunciam para a animação. Sem a entrada, o próprio `id` é usado.
+
+6. **Testar sem navegador** (na raiz do repositório):
+
+       npm test
+
+   O arquivo `tests/viz.test.js` já confere todos os algoritmos registrados: passos válidos, `line` dentro do pseudocódigo, cópias de estado e resultado final ordenado nas ordenações. Para algo específico do seu algoritmo, acrescente um teste no mesmo arquivo. Para ver os passos na mão:
 
        node -e '
-       const fs=require("fs");global.document={readyState:"complete",querySelectorAll:()=>[]};
-       eval(fs.readFileSync("themes/big-o-library/assets/viz/viz.js","utf8").replace("const init","globalThis.A=ALGOS;const init"));
-       const st=[...A.bfs.run()]; console.log(st.length, st.at(-1).msg)'
+       const fs=require("fs"),vm=require("vm");const sb={document:{readyState:"complete",querySelectorAll:()=>[]}};sb.globalThis=sb;vm.createContext(sb);
+       vm.runInContext(fs.readFileSync("themes/big-o-library/assets/viz/viz.js","utf8").replace("const init","globalThis.ALGOS=ALGOS;const init"),sb);
+       const st=[...sb.ALGOS.bfs.run()]; console.log(st.length, st.at(-1).msg)'
 
-   Mostra o número de passos e a última mensagem. Se o resultado estiver errado, o bug é do algoritmo, não da animação.
+   Se o resultado estiver errado, o bug é do algoritmo, não da animação.
+
+7. **Rodar `python3 scripts/validar.py`**: ele confere que as páginas só usam algoritmos que existem em `ALGOS`.
+
+## Teclado
+
+Com a animação em foco (Tab), as setas ← e → voltam e avançam um passo, espaço executa ou pausa, Home reinicia e End vai ao último passo. Isso já vem do motor, não precisa implementar nada.
 
 ## Armadilhas
 

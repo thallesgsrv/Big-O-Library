@@ -1,6 +1,6 @@
 ---
 title: Quick sort
-weight: 7
+weight: 8
 description: Particionamento, escolha de pivô e por que o pior caso quadrático é raro.
 autores:
   - thallesgsrv
@@ -80,6 +80,7 @@ Use ▶ para executar sozinho ou ▶| para avançar um passo por vez (◀ volta)
 O **i** marca o fim da região dos menores ou iguais ao pivô e o **j** varre o trecho. Quando o laço termina, o pivô é trocado para logo depois dessa região, e ali ele fica para sempre.
 
 ## O quick sort
+
 Se o trecho tem zero ou um elemento, já está ordenado. Por isso a recursão só continua quando `esq < dir`:
 
 ```java

@@ -1,6 +1,6 @@
 ---
 title: Pilha
-weight: 10
+weight: 13
 description: Contrato LIFO e implementação de uma pilha com array.
 autores:
     - thallesgsrv
@@ -168,23 +168,6 @@ System.out.println(historico.isEmpty()); // true
 ```
 
 Cada `pop` desfaz a ação mais recente primeiro, que é exatamente a política LIFO.
-
-## Juntando as operações
-
-Agora dá para usar os métodos em sequência:
-
-```java
-Pilha historico = new Pilha(3);
-historico.push("abrir documento");
-historico.push("escrever título");
-
-System.out.println(historico.peek()); // escrever título
-System.out.println(historico.pop());  // escrever título
-System.out.println(historico.pop());  // abrir documento
-System.out.println(historico.isEmpty()); // true
-```
-
-O `peek` só mostra o elemento mais recente. Depois, cada `pop` remove uma ação, começando pela última que entrou.
 
 ## Análise de custo
 

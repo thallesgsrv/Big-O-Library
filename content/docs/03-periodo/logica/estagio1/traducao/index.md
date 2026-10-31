@@ -1,7 +1,7 @@
 ---
 title: Traduzindo o Português para a Lógica
 weight: 3
-description: Receita de tradução, dicionário português-lógica, condição necessária e suficiente, ou exclusivo e tradução de argumentos.
+description: Receita de tradução, dicionário português-lógica, condição necessária e suficiente, ou exclusivo e argumentos.
 autores:
   - thallesgsrv
 date: 2026-10-15

@@ -394,7 +394,8 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 /* medalhão */
 .bo-av{--s:64px;--ct:color-mix(in srgb,var(--c) 75%,var(--txt));position:relative;flex:none;display:grid;place-items:center;width:var(--s);height:var(--s);
   border-radius:50%;overflow:hidden;background:color-mix(in srgb,var(--c) 16%,var(--bg));border:2px solid var(--c)}
-.bo-av>span{font:600 calc(var(--s)*.36)/1 Fraunces,Georgia,serif;color:var(--ct);letter-spacing:-.5px}
+/* iniciais via pseudo-elemento: ficam fora do texto do DOM (não duplicam o nome do botão para leitores de tela e comandos de voz) */
+.bo-av::before{content:attr(data-ini);font:600 calc(var(--s)*.36)/1 Fraunces,Georgia,serif;color:var(--ct);letter-spacing:-.5px}
 .bo-av img{position:absolute;inset:0;width:100%;height:100%;margin:0;object-fit:cover;object-position:50% 22%}
 
 /* a mesa */
@@ -592,11 +593,11 @@ main .bo-small a{text-decoration:underline;text-underline-offset:.2em}
 .bo-m-bar{display:flex;align-items:center;gap:12px;padding:10px 16px;border-bottom:1px solid var(--line);background:color-mix(in srgb,var(--c) 7%,var(--bg))}
 .bo-m-dots{display:inline-flex;gap:6px}.bo-m-dots i{width:10px;height:10px;border-radius:50%;background:var(--line)}
 .bo-m-dots i:first-child{background:var(--c)}
-.bo-m-cmd{font:500 13px 'IBM Plex Mono',monospace;color:var(--ac);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+.bo-m-cmd{font:500 13px 'IBM Plex Mono',monospace;color:var(--ac-h);min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
 .bo-m-body{padding:22px 22px 24px}
 .bo-m-top{display:flex;flex-wrap:wrap;align-items:center;gap:8px 14px;margin-bottom:6px}
 .bo-m-h{margin:0;font:600 26px/1.2 Fraunces,Georgia,serif;color:var(--txt)}
-.bo-m-badge{font:500 12px 'IBM Plex Mono',monospace;color:var(--c);border:1px solid var(--c);border-radius:999px;padding:3px 10px;background:color-mix(in srgb,var(--c) 10%,transparent);white-space:nowrap}
+.bo-m-badge{font:500 12px 'IBM Plex Mono',monospace;color:color-mix(in srgb,var(--c) 70%,var(--txt));border:1px solid var(--c);border-radius:999px;padding:3px 10px;background:color-mix(in srgb,var(--c) 10%,transparent);white-space:nowrap}
 .bo-m-d{margin:0 0 20px;color:var(--body);line-height:1.7}
 .bo-m-cols{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:14px;margin-bottom:20px}
 .bo-m-box{padding:16px 18px;border:1px solid var(--line);border-radius:10px;background:var(--bg)}
@@ -647,7 +648,7 @@ a.bo-m-chip:hover,a.bo-m-chip:focus-visible{border-color:var(--ac);transform:tra
 /* sábios nas páginas */
 .bo-credits-person.is-sabio{padding:3px 12px 3px 3px;border-color:color-mix(in srgb,var(--c) 55%,var(--line))}
 .bo-credits-person.is-sabio .bo-av{--s:24px;border-width:1px}
-.bo-credits-person.is-sabio .bo-av>span{font-size:9px}
+.bo-credits-person.is-sabio .bo-av::before{font-size:9px}
 @media (prefers-reduced-motion:reduce){.bo-g-opt,.bo-g-bar i,.bo-lab,.bo-rs-sage,.bo-m-node,.bo-m-edge,.bo-m-chip{transition:none!important}.bo-g-opt:hover,.bo-lab:hover,.bo-rs-sage:hover{transform:none}}
 
 /*  Melhorias de usabilidade  */
@@ -707,3 +708,38 @@ body.hx\:overflow-hidden .bo-top{display:none}
 /* Áreas de toque do rodapé */
 .bo-footer a,.bo-page-foot a{display:inline-block;padding-block:8px}
 .bo-pgrid+.bo-lsh{margin-top:36px}
+
+/* Acessibilidade: link "pular para o conteúdo" (aparece só quando recebe foco do teclado) */
+.bo-skip{position:fixed;top:.5rem;left:.5rem;z-index:100;padding:.6rem 1rem;border-radius:8px;
+  background:var(--btn);color:var(--btn-t)!important;font-size:14px;font-weight:600;text-decoration:none;
+  transform:translateY(-200%);transition:transform .15s ease}
+.bo-skip:focus,.bo-skip:focus-visible{transform:translateY(0);outline:3px solid var(--txt);outline-offset:2px}
+@media (prefers-reduced-motion:reduce){.bo-skip{transition:none}}
+@media print{.bo-skip{display:none!important}}
+
+/* Links dentro de callouts (> [!NOTE] etc.) herdam a cor do texto do callout: a cor de link do site não tem
+   contraste suficiente sobre o fundo colorido. O sublinhado mantém o link identificável. */
+.content .hextra-alert a,.bo-doc .content .bo-sec .hextra-alert a{color:inherit;text-decoration:underline;text-underline-offset:2px}
+.content .hextra-alert a:hover,.bo-doc .content .bo-sec .hextra-alert a:hover{text-decoration-thickness:2px}
+
+/* Texto só para leitores de tela (ex.: rótulo de cabeçalho de tabela vazio, ver layouts/_markup/render-table.html) */
+.bo-sr{position:absolute;width:1px;height:1px;margin:-1px;padding:0;overflow:hidden;clip:rect(0,0,0,0);white-space:nowrap;border:0}
+
+/* Progresso de estudo (js/core/estudo.js) */
+.bo-study{display:flex;flex-wrap:wrap;align-items:center;gap:10px 14px;margin:36px 0 0}
+.bo-study[hidden],.bo-continue[hidden]{display:none}
+.bo-study-btn{font:600 14px 'IBM Plex Mono',monospace;display:inline-flex;align-items:center;gap:8px;padding:10px 16px;border-radius:8px;
+  background:var(--card);color:var(--txt);border:1px solid var(--line);cursor:pointer;transition:background-color .15s ease,border-color .15s ease}
+.bo-study-btn:hover{border-color:var(--ac)}
+.bo-study-btn:focus-visible{outline:3px solid var(--ac);outline-offset:2px}
+.bo-study-i{display:inline-grid;place-items:center;width:18px;height:18px;border-radius:50%;border:1.5px solid var(--mute);color:transparent;font-size:12px;line-height:1}
+.bo-study-btn.is-on{border-color:var(--ac);background:color-mix(in srgb,var(--ac) 10%,var(--card))}
+.bo-study-btn.is-on .bo-study-i{background:var(--ac);border-color:var(--ac);color:var(--btn-t)}
+.bo-study-n{font-size:12.5px;color:var(--mute)}
+.bo-card{position:relative}
+.bo-done{position:absolute;top:12px;right:14px;display:grid;place-items:center;width:22px;height:22px;border-radius:50%;
+  background:var(--ac);color:var(--btn-t);font-size:13px;font-weight:700;line-height:1}
+.bo-continue{margin:18px 0 0;font-size:14px}
+.bo-continue a{color:var(--ac-h);text-decoration:underline;text-underline-offset:3px}
+.bo-continue strong{color:var(--txt)}
+@media print{.bo-study,.bo-continue,.bo-done{display:none!important}}

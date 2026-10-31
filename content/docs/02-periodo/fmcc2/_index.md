@@ -18,7 +18,10 @@ Aprofunda o raciocínio formal: como provar que algo é verdadeiro, como funcion
 
 - técnicas de demonstração matemática
 - indução matemática
+- indução forte
+- recorrências
 - divisibilidade e aritmética modular
+- relações: equivalência e ordem
 
 ## Como estudar
 

@@ -1,6 +1,6 @@
 ---
 title: Merge sort
-weight: 6
+weight: 7
 description: Ordenação por divisão e conquista com custo n log n garantido.
 autores:
   - thallesgsrv

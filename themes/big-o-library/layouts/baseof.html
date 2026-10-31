@@ -2,6 +2,7 @@
 <html lang="{{ .Site.Language.Lang }}" dir="{{ .Site.Language.Direction | default `ltr` }}">
   {{- partial "head.html" . -}}
   <body>
+    <a class="bo-skip" href="#content">Pular para o conteúdo</a>
     {{- partial "navbar.html" . -}}
     {{- block "main" . }}{{ end -}}
     {{ partial "footer.html" . }}

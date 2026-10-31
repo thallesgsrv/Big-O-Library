@@ -10,6 +10,7 @@
   Big-O-Library
   <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="License">
   <img src="https://img.shields.io/github/stars/thallesgsrv/Big-O-Library?style=flat-square" alt="Stars">
+  <a href="https://github.com/thallesgsrv/Big-O-Library/actions/workflows/build.yml"><img src="https://github.com/thallesgsrv/Big-O-Library/actions/workflows/build.yml/badge.svg" alt="Build"></a>
 </h1>
 
 <p align="center">
@@ -22,6 +23,21 @@
 </p>
 
 A ideia surgiu a partir da forma como o professor [João Arthur](https://github.com/joaoarthurbm) organizou e disponibilizou o material de sua disciplina. O objetivo é levar esse modelo para as demais disciplinas do curso.
+
+## Como é
+
+<p align="center">
+  <picture>
+    <source media="(prefers-color-scheme: dark)" srcset=".github/img/home-escuro.png">
+    <img src=".github/img/home-claro.png" alt="Página inicial do o(library), com tema claro e escuro" width="820">
+  </picture>
+</p>
+
+As páginas de algoritmos têm animações passo a passo, com pseudocódigo sincronizado, controle por teclado e suporte aos temas claro e escuro:
+
+<p align="center">
+  <img src=".github/img/animacao.png" alt="Animação do heap sort: barras do vetor, mensagem explicando o passo e pseudocódigo com a linha atual destacada" width="560">
+</p>
 
 ## Recomendações
 
@@ -114,19 +130,38 @@ themes/big-o-library/layouts/      templates do site (páginas, cards, parciais 
 themes/big-o-library/assets/css/   estilo do projeto (custom.css)
 themes/big-o-library/assets/viz/   motor das animações de algoritmos (viz.js / viz.css)
 themes/big-o-library/archetypes/   modelo para novas disciplinas
-scripts/                           utilitários (baixar_fontes.py, baixar_vendor.py)
-package.json                       só para recompilar o CSS do tema (mantenedores); contribuir não precisa de Node
+scripts/                           validar.py (checa conteúdo), a11y.js (auditoria de acessibilidade), baixar_fontes.py, baixar_vendor.py
+tests/                             testes das animações (node --test)
+package.json                       ferramentas de manutenção (CSS, testes, lint, a11y); contribuir não precisa de Node
+Makefile                           atalhos: make serve, make check...
+lychee.toml                        configuração do verificador de links
 hugo.yaml                          configuração do Hugo
 deploy.sh                          publica o site na branch gh-pages (só mantenedores)
-.github/                           CONTRIBUTING, código de conduta e guias (animações e quiz)
+.github/                           CONTRIBUTING, código de conduta, guias (animações e quiz) e workflows do CI
 ```
 
 Para criar uma animação de algoritmo, veja o [guia de animações](.github/GUIA-ANIMACOES.md).
 Para colocar um quiz interativo em qualquer página, veja o [guia de quiz](.github/GUIA-QUIZ.md).
 
+## Checagens de qualidade
+
+O CI roda tudo isto a cada Pull Request. Dá para rodar localmente antes de enviar (`make check` faz as quatro primeiras de uma vez):
+
+| Comando | O que confere |
+|---|---|
+| `python3 scripts/validar.py` | front matter (título, peso, descrição, autores, data), pesos repetidos, datas no futuro, algoritmos de animação inexistentes, pré-requisitos e ciclos no mapa, fotos do Conselho |
+| `npm run lint:md` | defeitos de renderização no Markdown: cabeçalho sem espaço, tabela com colunas erradas, link vazio, imagem sem texto alternativo |
+| `npm test` | animações: cada algoritmo termina certo (vetor ordenado, distâncias corretas...) |
+| `npm run build:css` | recompila o CSS do tema; o CI falha se o `main.css` commitado estiver defasado |
+| `npm run a11y` | auditoria de acessibilidade (axe-core) em todas as páginas, nos temas claro e escuro. Precisa do site compilado com `hugo --baseURL / -d public-check` e de `CHROME_PATH` apontando para um Chrome/Chromium |
+
+Só `validar.py` precisa de Python (com `pip install pyyaml`); o resto precisa de Node 20 ou mais novo e de `npm ci` uma vez. Escrever conteúdo continua exigindo só o Hugo.
+
+Uma vez por semana, o workflow "Links externos" confere se os links para fora do site continuam no ar.
+
 ## Publicação
 
-O site publicado vem da branch `gh-pages`. O workflow `.github/workflows/build.yml` só compila o site em cada push e Pull Request, para checar se o build passa; ele não publica. Quem tem permissão de escrita no repositório gera e envia o site com o script da raiz:
+O site publicado vem da branch `gh-pages`. O workflow `.github/workflows/build.yml` valida, testa e compila o site em cada push e Pull Request; ele não publica. (Há também o workflow manual `pages.yml`, para quem preferir migrar a publicação para o GitHub Actions; as instruções estão no próprio arquivo.) Quem tem permissão de escrita no repositório gera e envia o site com o script da raiz:
 
 ```bash
 git checkout main && git pull
@@ -147,9 +182,17 @@ Este projeto é um material complementar produzido por estudantes e não substit
 
 Sempre que possível, materiais de terceiros serão referenciados e vinculados à fonte original, respeitando suas licenças e direitos autorais.
 
-## Status
+## Roadmap
 
-Em desenvolvimento.
+Estado atual: **em desenvolvimento**. O que está planejado, em ordem aproximada de prioridade:
+
+- [ ] Mais tópicos de matemática discreta: probabilidade discreta (FMCC1) e grafos (FMCC2)
+- [ ] Estruturas de dados em EDA: árvores binárias de busca, tabelas hash
+- [ ] Páginas para as disciplinas do mapa de pré-requisitos que ainda não têm material
+- [ ] Animações novas: lista encadeada, árvore binária de busca
+- [ ] Imagem de pré-visualização (Open Graph) por disciplina
+
+Quer ajudar com algum item? Veja [como contribuir](.github/CONTRIBUTING.md) ou abra uma issue.
 
 ## Histórico de Estrelas
 

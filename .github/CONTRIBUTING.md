@@ -11,7 +11,8 @@ https://thallesgsrv.github.io/Big-O-Library/contribuir/ (fonte: [`content/contri
 2. Use o modelo: `hugo new --kind disciplina docs/NN-periodo/nome-da-disciplina/index.md`
 3. Preencha `title`, `weight`, `description`, `autores` (seu usuário do GitHub) e `date`. O restante do markdown é livre: cada disciplina pode ter as seções que fizerem sentido (o modelo é só um ponto de partida).
 4. Confira o resultado no seu computador com `hugo server` (precisa de Git e Hugo **extended** 0.165.0; não precisa de internet). O passo a passo completo para Linux, macOS e Windows está no [README](../README.md#rodando-localmente). Use `git clone`, não o ZIP do GitHub.
-5. Abra um Pull Request. Prefere não usar Git? Abra uma [issue](https://github.com/thallesgsrv/Big-O-Library/issues/new).
+5. Opcional, mas ajuda a evitar idas e vindas na revisão: com Python instalado, rode `pip install pyyaml` e `python3 scripts/validar.py`. Ele avisa de `weight` repetido, `date` no futuro, descrição ou autores faltando, entre outros. O CI roda a mesma checagem no seu Pull Request (veja as [checagens de qualidade](../README.md#checagens-de-qualidade)).
+6. Abra um Pull Request. Prefere não usar Git? Abra uma [issue](https://github.com/thallesgsrv/Big-O-Library/issues/new).
 
 Material de terceiros: linke a fonte original, não copie o conteúdo.
 

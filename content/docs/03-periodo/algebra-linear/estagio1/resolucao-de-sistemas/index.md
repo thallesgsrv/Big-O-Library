@@ -1,7 +1,7 @@
 ---
 title: Resolvendo e Classificando Sistemas
 weight: 5
-description: Sistemas possíveis, impossíveis, determinados e indeterminados; variáveis livres, sistemas homogêneos e problemas com parâmetro.
+description: Sistemas possíveis, impossíveis, determinados e indeterminados; variáveis livres, homogêneos e parâmetros.
 autores:
   - thallesgsrv
 date: 2026-10-11

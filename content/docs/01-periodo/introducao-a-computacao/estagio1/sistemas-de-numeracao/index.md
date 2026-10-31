@@ -1,7 +1,7 @@
 ---
 title: Sistemas de Numeração
 weight: 7
-description: Base, notação posicional x não posicional, binário, octal, decimal e hexadecimal, regras gerais e tabela de correspondência.
+description: Base, notação posicional, binário, octal, decimal e hexadecimal, regras gerais e tabela de correspondência.
 autores:
   - thallesgsrv
 date: 2026-10-17

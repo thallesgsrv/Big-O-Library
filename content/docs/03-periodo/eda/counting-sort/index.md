@@ -1,6 +1,6 @@
 ---
 title: Counting sort
-weight: 8
+weight: 10
 description: Ordenação linear sem comparações, contando quantas vezes cada valor aparece.
 autores:
   - thallesgsrv

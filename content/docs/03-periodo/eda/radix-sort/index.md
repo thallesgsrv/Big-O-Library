@@ -1,6 +1,6 @@
 ---
 title: Radix sort
-weight: 9
+weight: 11
 description: Ordena números dígito por dígito, usando o counting sort como peça interna.
 autores:
   - thallesgsrv

@@ -1,25 +1,82 @@
 name: Build
 
+# A cada push na main e a cada pull request: valida conteúdo, roda testes, compila o site,
+# confere links internos e roda a auditoria de acessibilidade.
 on:
   push:
     branches: [main]
   pull_request:
     branches: [main]
+  workflow_dispatch:
 
 concurrency:
   group: build-${{ github.ref }}
   cancel-in-progress: true
 
+permissions:
+  contents: read
+
+env:
+  HUGO_VERSION: 0.165.0     # a 0.165 é necessária para a renderização de matemática (KaTeX) do site
+  LYCHEE_VERSION: 0.24.2    # versão em que o lychee.toml foi testado
+
 jobs:
-  build:
+  conteudo:
+    name: Conteúdo e Markdown
     runs-on: ubuntu-latest
-    env:
-      HUGO_VERSION: 0.165.0
     steps:
-      - name: Checkout
-        uses: actions/checkout@v4
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
         with:
-          fetch-depth: 0
+          python-version: "3.12"
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - name: Validar front matter, pesos, datas, pré-requisitos e animações
+        run: |
+          pip install pyyaml
+          python3 scripts/validar.py
+
+      - name: Lint do Markdown
+        run: |
+          npm ci
+          npm run lint:md
+
+  testes:
+    name: Testes e CSS
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - name: Testes das animações (viz.js)
+        run: npm test
+
+      - name: CSS compilado está em dia
+        run: |
+          npm run build:css
+          if ! git diff --exit-code -- themes/big-o-library/assets/css/compiled/main.css; then
+            echo "::error::main.css está defasado em relação ao código-fonte. Rode 'npm run build:css' e faça commit do resultado."
+            exit 1
+          fi
+
+  site:
+    name: Compilar e checar links
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0   # o Hugo usa o histórico do Git para a data de atualização das páginas
 
       - name: Instalar Hugo extended
         run: |
@@ -27,5 +84,52 @@ jobs:
           sudo dpkg -i "$RUNNER_TEMP/hugo.deb"
           hugo version
 
-      - name: Compilar
+      - name: Compilar (produção)
         run: hugo --gc --minify --environment production
+
+      - name: Compilar para verificação (baseURL na raiz)
+        run: hugo --gc --baseURL / --destination public-check
+
+      - name: Instalar lychee
+        run: |
+          curl -sSL "https://github.com/lycheeverse/lychee/releases/download/lychee-v${LYCHEE_VERSION}/lychee-x86_64-unknown-linux-gnu.tar.gz" | tar xz -C "$RUNNER_TEMP"
+          echo "$RUNNER_TEMP/lychee-x86_64-unknown-linux-gnu" >> "$GITHUB_PATH"
+
+      - name: Links e âncoras internas
+        run: lychee --config lychee.toml --offline --root-dir "$PWD/public-check" 'public-check/**/*.html'
+
+      - name: Guardar o site para a auditoria de acessibilidade
+        uses: actions/upload-artifact@v4
+        with:
+          name: site-verificacao
+          path: public-check
+          retention-days: 1
+
+  a11y:
+    name: Acessibilidade (axe)
+    needs: site
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+
+      - run: npm ci
+
+      - uses: actions/download-artifact@v4
+        with:
+          name: site-verificacao
+          path: public-check
+
+      - name: Instalar o Chrome
+        id: chrome
+        uses: browser-actions/setup-chrome@v1
+
+      - name: Auditar todas as páginas (tema claro e escuro)
+        env:
+          CHROME_PATH: ${{ steps.chrome.outputs.chrome-path }}
+          SITE_DIR: public-check
+        run: npm run a11y

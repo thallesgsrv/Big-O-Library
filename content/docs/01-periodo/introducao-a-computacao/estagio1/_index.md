@@ -2,7 +2,7 @@
 title: Estágio 1 - História e Representação da Informação
 weight: 1
 rotulo: Tópicos
-description: Conceitos básicos, história e classificação dos computadores, bits, bases numéricas, números negativos, aritmética binária, ponto flutuante e BCD.
+description: História e classificação dos computadores, bases numéricas, números negativos, aritmética binária, ponto flutuante, BCD.
 autores:
   - thallesgsrv
 date: 2026-10-17

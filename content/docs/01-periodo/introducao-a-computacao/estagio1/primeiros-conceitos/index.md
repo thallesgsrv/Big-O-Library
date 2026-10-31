@@ -1,7 +1,7 @@
 ---
 title: Primeiros Conceitos
 weight: 1
-description: Computação x informática, dado x informação, sistema computacional, hardware, software e o curso de Ciência da Computação.
+description: Computação x informática, dado x informação, sistema computacional, hardware, software e o curso.
 autores:
   - thallesgsrv
 date: 2026-10-17

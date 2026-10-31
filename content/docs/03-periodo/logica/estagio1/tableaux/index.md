@@ -246,6 +246,7 @@ Negação: $(p\to q)$ e $\neg(\neg q\to\neg p)$, que vira $\neg q$ e $\neg\neg p
 **Exercício 6.** $\neg(p\land q)\land(p\lor q)$ é satisfazível? Se for, diga todos os modelos.
 
 {{< details title="Gabarito" >}}
+
 ```
 ¬(p∧q) ∧ (p∨q)
 └─ ¬(p∧q), (p∨q)                α em ∧
@@ -256,6 +257,7 @@ Negação: $(p\to q)$ e $\neg(\neg q\to\neg p)$, que vira $\neg q$ e $\neg\neg p
       ├─ ¬q, p                  β em ∨   aberto ✓
       └─ ¬q, q  ✗               β em ∨
 ```
+
 **Satisfazível**, com dois modelos: $p=F,q=V$ e $p=V,q=F$. Repare: é exatamente o $p\oplus q$ ("um dos dois, mas não ambos").
 {{< /details >}}
 

@@ -1,7 +1,7 @@
 ---
 title: Software
 weight: 4
-description: Programas, categorias de software, sistema operacional e suas funções, tipos de SO, utilitários, aplicativos e modalidades de licença.
+description: Programas, categorias de software, sistema operacional e suas funções, tipos de SO, utilitários e licenças.
 autores:
   - thallesgsrv
 date: 2026-10-17
