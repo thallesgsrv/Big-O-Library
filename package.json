@@ -7,7 +7,8 @@
     "test": "node --test",
     "validar": "python3 scripts/validar.py",
     "lint:md": "markdownlint-cli2",
-    "a11y": "node scripts/a11y.js"
+    "a11y": "node scripts/a11y.js",
+    "check": "npm run validar && npm run lint:md && npm test && npm run build:css"
   },
   "devDependencies": {
     "@tailwindcss/cli": "4.3.0",
