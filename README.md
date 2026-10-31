@@ -122,7 +122,7 @@ hugo new --kind disciplina docs/01-periodo/nome-da-disciplina/index.md
 ```text
 content/docs/                      materiais: NN-periodo/disciplina/ e optativas/
 content/contribuir.md              guia de escrita (publicado no site)
-content/lab/                       laboratório: jogo de complexidade, mapa de pré-requisitos e curvas
+content/lab/                       laboratório: jogo de complexidade e mapa de pré-requisitos
 data/disciplinas.yaml              disciplinas e pré-requisitos do mapa (com ou sem pasta)
 data/conselho.yaml                 Conselho dos Sábios
 data/jogo.yaml                     trechos do jogo "Qual a complexidade?"
@@ -130,14 +130,11 @@ themes/big-o-library/layouts/      templates do site (páginas, cards, parciais 
 themes/big-o-library/assets/css/   estilo do projeto (custom.css)
 themes/big-o-library/assets/viz/   motor das animações de algoritmos (viz.js / viz.css)
 themes/big-o-library/archetypes/   modelo para novas disciplinas
-scripts/                           validar.py (checa conteúdo), a11y.js (auditoria de acessibilidade), baixar_fontes.py, baixar_vendor.py
-tests/                             testes das animações (node --test)
+scripts/                           validar.py, a11y.js, deploy.sh, baixar_fontes.py, baixar_vendor.py e tests/ (testes das animações)
 package.json                       ferramentas de manutenção (CSS, testes, lint, a11y); contribuir não precisa de Node
 Makefile                           atalhos: make serve, make check...
-lychee.toml                        configuração do verificador de links
 hugo.yaml                          configuração do Hugo
-deploy.sh                          publica o site na branch gh-pages (só mantenedores)
-.github/                           CONTRIBUTING, código de conduta, guias (animações e quiz) e workflows do CI
+.github/                           CONTRIBUTING, código de conduta, guias (animações e quiz), configuração dos links (lychee/) e workflows do CI
 ```
 
 Para criar uma animação de algoritmo, veja o [guia de animações](.github/GUIA-ANIMACOES.md).
@@ -161,11 +158,11 @@ Uma vez por semana, o workflow "Links externos" confere se os links para fora do
 
 ## Publicação
 
-O site publicado vem da branch `gh-pages`. O workflow `.github/workflows/build.yml` valida, testa e compila o site em cada push e Pull Request; ele não publica. (Há também o workflow manual `pages.yml`, para quem preferir migrar a publicação para o GitHub Actions; as instruções estão no próprio arquivo.) Quem tem permissão de escrita no repositório gera e envia o site com o script da raiz:
+O site publicado vem da branch `gh-pages`. O workflow `.github/workflows/build.yml` valida, testa e compila o site em cada push e Pull Request; ele não publica. (Há também o workflow manual `pages.yml`, para quem preferir migrar a publicação para o GitHub Actions; as instruções estão no próprio arquivo.) Quem tem permissão de escrita no repositório gera e envia o site com o script `scripts/deploy.sh`:
 
 ```bash
 git checkout main && git pull
-./deploy.sh "mensagem do commit"
+./scripts/deploy.sh "mensagem do commit"
 ```
 
 O script publica o que está na **sua pasta** (inclusive alterações ainda não commitadas), por isso rode com `git status` limpo. Contribuidores não precisam publicar nada: abrem o Pull Request e a publicação é feita pelos mantenedores depois do merge.

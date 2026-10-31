@@ -1,6 +1,5 @@
 {{ define "main" }}
 {{- $repo := site.Params.repo | default "https://github.com/thallesgsrv/Big-O-Library" -}}
-{{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
 {{ partial "sidebar.html" (dict "context" .) }}
 <main class="bo-wrap" id="content">
   <section class="bo-hero">

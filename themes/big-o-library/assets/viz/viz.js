@@ -1,4 +1,3 @@
-/* Motor de visualização: cada algoritmo é um gerador que devolve o estado a cada passo. */
 (function () {
   const fmt = x => (x === Infinity ? '∞' : x == null ? '–' : x);
 
@@ -217,7 +216,6 @@
     yield* query(3, 6);
   }
 
-  /* Ordenação: desenho de vetores (kind: 'array') */
   const faixa = (x, y) => (x > y ? 'vazio' : x === y ? `[${x}]` : `[${x}..${y}]`);
 
   function* selection() {
@@ -712,7 +710,6 @@
       btnP.textContent = on ? '⏸' : '▶';
       btnP.setAttribute('aria-label', on ? 'Pausar' : 'Executar');
       btnP.title = on ? 'Pausar (espaço)' : 'Executar (espaço)';
-      // durante a execução automática o leitor de tela não anuncia cada passo (seria uma enxurrada)
       msgEl.setAttribute('aria-live', on ? 'off' : 'polite');
     };
     const stop = () => { clearInterval(timer); timer = null; setPlayUI(false); };
@@ -729,7 +726,6 @@
       const a = b && b.dataset.a; if (!a) return;
       if (a === 'p') play(); else { stop(); if (a === 'r') { i = 0; draw(); } else go(a === 'f' ? 1 : -1); }
     });
-    // Atalhos: só quando o foco está na própria visualização (botões e o controle de velocidade têm o comportamento nativo).
     el.addEventListener('keydown', e => {
       if (e.target !== el || e.altKey || e.ctrlKey || e.metaKey) return;
       const k = e.key;

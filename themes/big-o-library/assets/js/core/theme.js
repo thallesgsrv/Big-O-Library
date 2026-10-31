@@ -1,7 +1,3 @@
-// Seletor de tema (Claro / Escuro / Sistema).
-// Autocontido: não depende de funções de outros arquivos e posiciona o menu
-// pelo retângulo do botão (position: fixed), sem cálculos com window.innerHeight,
-// que erram em celulares quando a barra de endereço aparece/some.
 (function () {
   var DEFAULT = '{{ site.Params.theme.default | default `system` }}';
   var THEMES = ["light", "dark"];
@@ -11,14 +7,13 @@
     try { return localStorage.getItem("color-theme") || DEFAULT; } catch (e) { return DEFAULT; }
   }
   function writeStored(value) {
-    try { localStorage.setItem("color-theme", value); } catch (e) { /* armazenamento bloqueado: o tema vale só nesta visita */ }
+    try { localStorage.setItem("color-theme", value); } catch (e) { }
   }
   function applyClass(theme) {
     if (typeof window.setTheme === "function") {
       window.setTheme(theme);
       return;
     }
-    // Plano B caso o script do <head> não tenha rodado.
     var root = document.documentElement;
     var resolved = THEMES.indexOf(theme) !== -1
       ? theme
@@ -106,7 +101,7 @@
       e.preventDefault();
       e.stopPropagation();
       if (toggle.dataset.state === "open") close(toggle, false);
-      else open(toggle, e.detail === 0); // foco no menu só quando aberto pelo teclado
+      else open(toggle, e.detail === 0);
     });
 
     toggle.addEventListener("keydown", function (e) {
@@ -150,7 +145,6 @@
     toggles.forEach(function (t) { close(t, false); });
   });
 
-  // Mudança do tema do sistema: só reage se o usuário escolheu "Sistema"
   if (window.matchMedia) {
     var mq = window.matchMedia("(prefers-color-scheme: dark)");
     var onSystemChange = function () { if (readStored() === "system") applyClass("system"); };

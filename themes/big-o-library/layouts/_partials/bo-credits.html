@@ -1,6 +1,3 @@
-{{- /* Crédito da página: quem escreveu + data de publicação/atualização.
-       Vem do front matter (autores: [usuario-github, ...] e date: AAAA-MM-DD); a data de atualização
-       vem do Git (enableGitInfo) ou de 'lastmod'. Só aparece se a página tiver autores ou data explícita. */ -}}
 {{- $autores := slice -}}
 {{- with .Params.autores -}}
   {{- if reflect.IsSlice . -}}{{- $autores = . -}}{{- else -}}{{- $autores = slice . -}}{{- end -}}
@@ -9,7 +6,6 @@
 {{- with .Params.baseadoem -}}
   {{- if reflect.IsSlice . -}}{{- $base = . -}}{{- else -}}{{- $base = slice . -}}{{- end -}}
 {{- end -}}
-{{- /* sábios do Conselho (data/conselho.yaml) reconhecidos pelo id/github: o crédito leva ao card deles */ -}}
 {{- $sabios := dict -}}
 {{- range partial "bo-sabios.html" . }}{{ if .key }}{{ $sabios = merge $sabios (dict .key .) }}{{ end }}{{ end -}}
 {{- $pub := .Date -}}

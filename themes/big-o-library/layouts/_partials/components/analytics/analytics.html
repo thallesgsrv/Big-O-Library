@@ -1,6 +1,5 @@
 {{- if hugo.IsProduction -}}
 {{- if .Site.Config.Services.GoogleAnalytics.ID }}
-  {{- /* Sem preconnect: ele abriria conexão com o Google antes do consentimento (LGPD). */ -}}
   {{ partial "components/analytics/google-analytics.html" . -}}
 {{- end }}
 {{- end }}

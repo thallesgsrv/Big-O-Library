@@ -1,4 +1,3 @@
-{{- /* Banner de cookies (só em produção e só se houver Google Analytics configurado). */ -}}
 {{- if and hugo.IsProduction site.Config.Services.GoogleAnalytics.ID }}
 <div class="bo-consent" id="bo-consent" role="region" aria-label="Aviso de cookies" hidden>
   <p class="bo-consent-txt">$ analytics --ask<br>Google Analytics só liga se você aceitar (para saber quais materiais mais ajudam). Dá para mudar no rodapé.</p>

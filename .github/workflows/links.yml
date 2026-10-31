@@ -1,7 +1,5 @@
 name: Links externos
 
-# Uma vez por semana confere se os links para fora do site ainda funcionam (links internos já são
-# checados a cada pull request). Se algum quebrar, o workflow falha e o GitHub avisa por e-mail.
 on:
   schedule:
     - cron: "0 12 * * 1"   # segunda-feira, 12:00 UTC
@@ -34,4 +32,4 @@ jobs:
           echo "$RUNNER_TEMP/lychee-x86_64-unknown-linux-gnu" >> "$GITHUB_PATH"
 
       - name: Verificar links externos
-        run: lychee --config lychee-external.toml --root-dir "$PWD/public-check" 'public-check/**/*.html'
+        run: lychee --config .github/lychee/externo.toml --root-dir "$PWD/public-check" 'public-check/**/*.html'

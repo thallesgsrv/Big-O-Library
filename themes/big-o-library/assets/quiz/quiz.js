@@ -19,7 +19,6 @@
     var sages = []; try { sages = JSON.parse(root.getAttribute("data-sages") || "[]"); } catch (e) { sages = []; }
     var N = qs.length, cur = 0, acertos = 0, res = [];
 
-    /* moldura: linha de comando, placar e barra de progresso */
     var top = document.createElement("div"); top.className = "bo-qz-top";
     top.innerHTML = '<span class="bo-qz-cmd" aria-hidden="true"></span><span class="bo-qz-score"></span>';
     var bar = document.createElement("div"); bar.className = "bo-qz-bar";
@@ -27,7 +26,7 @@
     bar.setAttribute("aria-valuemin", "0"); bar.setAttribute("aria-valuemax", String(N)); bar.innerHTML = "<i></i>";
     var panel = document.createElement("div"); panel.className = "bo-qz-result"; panel.hidden = true;
     root.insertBefore(top, body); root.insertBefore(bar, body); root.appendChild(panel);
-    var solo = N === 1; /* questão avulsa: sem barra, placar nem tela de resultado */
+    var solo = N === 1;
     if (solo) lista = true;
     root.classList.add("is-on", lista ? "is-lista" : "is-single");
     if (solo) root.classList.add("is-solo");
@@ -168,7 +167,6 @@
       if (!lista) $(panel, ".bo-qz-again").focus();
     }
 
-    /* cliques e teclado (letras A–J ou números 1–9, só com o foco dentro do quiz) */
     qs.forEach(function (q, i) {
       var multi = q.getAttribute("data-multi") === "1";
       $$(q, ".bo-qz-opt").forEach(function (b) {

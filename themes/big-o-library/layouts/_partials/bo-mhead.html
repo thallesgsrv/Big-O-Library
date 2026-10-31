@@ -1,6 +1,3 @@
-{{- /* Cabeçalho das páginas "soltas" (materiais, colaboradores, conselho e lab).
-       Args (dict): page = página atual; cmd = comando exibido no breadcrumb (ex.: "ls lab/");
-       title = h1; lead = parágrafo (opcional). O breadcrumb é o mesmo das páginas de docs (bo-crumbs.html). */ -}}
 <div class="bo-mhead">
   {{ partial "bo-crumbs.html" (dict "page" .page "cmd" .cmd) }}
   <h1 class="bo-h1 bo-h1-big">{{ .title }}</h1>

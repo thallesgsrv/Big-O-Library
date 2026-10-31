@@ -1,25 +1,6 @@
-{{- /* Quiz interativo para qualquer página. Guia completo: .github/GUIA-QUIZ.md
-
-   Uso:
-     {{< quiz titulo="Classifique as fórmulas" >}}
-       {{< questao >}} ... {{< /questao >}}
-       {{< questao >}} ... {{< /questao >}}
-     {{< /quiz >}}
-
-   Parâmetros (todos opcionais):
-     titulo      nome mostrado no topo (padrão: "quiz")
-     modo        "um-por-vez" (padrão: uma questão por vez, com barra de progresso)
-                 ou "lista" (todas as questões na página, cada uma independente)
-     embaralhar  "true" embaralha a ordem das alternativas a cada tentativa
-     conselho    "false" tira a frase do Conselho dos Sábios da tela de resultado
-   Com uma única {{< questao >}} o quiz vira "questão avulsa": sem barra, placar nem resultado.
-
-   As questões são escritas em Markdown (com fórmulas $...$) e renderizadas no build:
-   o JavaScript só alterna o que aparece. CSS/JS: assets/quiz/. Classes: .bo-qz* */ -}}
 {{- $titulo := .Get "titulo" | default "quiz" -}}
 {{- $modo := cond (eq (.Get "modo") "lista") "lista" "um-por-vez" -}}
 {{- $emb := cond (eq (.Get "embaralhar") "true") "1" "0" -}}
-{{- /* quiz com uma só questão vira "questão avulsa": sem resultado, logo sem frase do Conselho */ -}}
 {{- $nq := len (findRE `class="bo-qz-q"` (string .Inner)) -}}
 {{- $cons := and (ne (.Get "conselho") "false") (gt $nq 1) -}}
 {{- if not (.Page.Store.Get "quiz-assets") -}}

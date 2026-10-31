@@ -1,7 +1,3 @@
-{{- /* Breadcrumb padrão do site: caminho (~/big-o-library / ...) + linha de comando do que "roda" nessa pasta.
-       Args (dict): page = página atual; cmd = comando exibido depois do "$" (ex.: "cat git.md", "ls lab/").
-       O caminho é uma lista ordenada (<ol>) e emite JSON-LD BreadcrumbList para os buscadores.
-       Usado por bo-hero.html (docs) e bo-mhead.html (páginas soltas e lab). CSS: .bo-crumbs* em custom.css. */ -}}
 {{- $p := .page -}}
 {{- $items := slice (dict "@type" "ListItem" "position" 1 "name" "Big-O-Library" "item" $p.Site.Home.Permalink) -}}
 <nav class="bo-crumbs" aria-label="Breadcrumb">

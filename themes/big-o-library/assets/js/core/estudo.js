@@ -1,12 +1,8 @@
-// Progresso de estudo. Tudo fica só no navegador (localStorage); nada é enviado a servidor algum.
-//   bo:estudado  { "/caminho/da/pagina/": timestamp }   páginas marcadas como estudadas
-//   bo:ultimo    { p, t, at }                           última página de material aberta
 var KEY = 'bo:estudado', LAST = 'bo:ultimo';
 function ler(k, padrao) { try { var v = localStorage.getItem(k); return v ? JSON.parse(v) : padrao; } catch (e) { return padrao; } }
-function gravar(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { /* storage indisponível: segue sem salvar */ } }
+function gravar(k, v) { try { localStorage.setItem(k, JSON.stringify(v)); } catch (e) { } }
 var feito = ler(KEY, {});
 
-// ✓ nos cards de listas de materiais (links <a class="bo-card">)
 function marcarCards() {
   document.querySelectorAll('a.bo-card[href]').forEach(function (a) {
     var on = !!feito[a.getAttribute('href')], m = a.querySelector('.bo-done');
@@ -19,7 +15,6 @@ function marcarCards() {
   });
 }
 
-// botão "marcar como estudado" nas páginas de material
 var area = document.querySelector('[data-bo-study]');
 var btn = area && area.querySelector('.bo-study-btn');
 if (btn) {
@@ -41,7 +36,6 @@ if (btn) {
 }
 marcarCards();
 
-// home: atalho para continuar de onde parou
 var caixa = document.querySelector('[data-bo-continue]');
 if (caixa) {
   var u = ler(LAST, null);

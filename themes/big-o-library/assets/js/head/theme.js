@@ -1,7 +1,3 @@
-// Aplica o tema salvo ANTES da pintura da página (evita o "flash" claro/escuro).
-// Este arquivo NÃO pode ir para core/theme.js: lá o script roda tarde demais.
-// localStorage pode lançar erro (modo anônimo, cookies bloqueados, navegadores
-// embutidos de apps); por isso todo acesso passa por try/catch.
 (function () {
   var DEFAULT = '{{ site.Params.theme.default | default `system` }}';
 

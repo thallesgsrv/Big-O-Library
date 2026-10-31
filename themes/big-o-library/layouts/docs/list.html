@@ -1,5 +1,3 @@
-{{- /* Layout de lista de seções. O título dos cards é configurável pelo front matter (rotulo: Estágios; padrão: Disciplinas).
-       Ordem: título → resumo → texto de apoio (seções recolhíveis) → CARDS. */ -}}
 {{ define "main" }}
   {{- $p := partial "bo-periodo.html" . -}}
   {{- $badge := $p.badge -}}
@@ -15,7 +13,6 @@
 
           <div class="content">
 
-            {{/* cada "##" do texto vira uma seção recolhível; os cards abaixo ficam sempre abertos */}}
             <div class="bo-fold" data-bo-fold>
               {{ .Content }}
             </div>
@@ -31,6 +28,7 @@
                       <div class="bo-bar"></div>
                       <div class="bo-t">{{ .Title }}</div>
                       <div class="bo-d">{{ with .Params.description }}{{ . }}{{ else }}Ver materiais{{ end }}</div>
+                      <span class="bo-go" aria-hidden="true">→</span>
                     </a>
                   </li>
                 {{ end }}

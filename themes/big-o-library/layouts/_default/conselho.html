@@ -1,11 +1,6 @@
-{{- /* Conselho dos Sábios: professores que contribuíram com materiais (sem commit).
-       Dados: data/conselho.yaml | Fotos: static/images/conselho/ | CSS: .bo-stage*, .bo-sage* em custom.css
-       Estrutura: "mesa" (palco com a frase em destaque + assentos) e a grade de cards.
-       Foto: arquivo local > avatar do GitHub > iniciais. Cor: cada card ganha a sua (paleta --p1..--p9). */ -}}
 {{ define "main" }}
 {{ partial "sidebar.html" (dict "context" .) }}
 
-{{- /* 1) ordem: por período (1..9); sem período/optativa por último; dentro do mesmo período, a ordem do arquivo */ -}}
 {{- $raw := hugo.Data.conselho.professores | default slice -}}
 {{- $sorted := slice -}}
 {{- range $want := slice 1 2 3 4 5 6 7 8 9 0 -}}
@@ -44,7 +39,6 @@
   {{- $list = $list | append (dict "p" $p "i" $i "slug" $slug "n" $n "c" (printf "var(--p%d)" $n) "per" $per "img" $img "ini" $ini "pend" $pend "frase" $f) -}}
 {{- end -}}
 
-{{- /* 3) a mesa só mostra quem tem frase (card sem frase não vira "vaga" no palco) */ -}}
 {{- $quoted := slice -}}
 {{- range $list }}{{ if not .pend }}{{ $quoted = $quoted | append . }}{{ end }}{{ end -}}
 {{- $first := 0 -}}
@@ -59,10 +53,8 @@
   {{ with .Content }}<div class="bo-sage-intro">{{ . }}</div>{{ end }}
 
   {{- if $list }}
-  {{- /* Inline de propósito: precisa rodar antes da primeira pintura para os cards não piscarem. */}}
   <script>document.documentElement.classList.add("bo-js")</script>
 
-  {{- /* A mesa: palco com a frase em destaque + assentos */}}
   {{- if $quoted }}
   <section class="bo-stage" aria-label="A mesa do conselho" style="--c: {{ (index $quoted 0).c | safeCSS }}">
     <div class="bo-stage-bar">
@@ -96,7 +88,6 @@
   </section>
   {{- end }}
 
-  {{- /* Os cards */}}
   <ol class="bo-council" aria-label="Professores do Conselho dos Sábios">
     {{- range $list }}
     {{- $p := .p }}

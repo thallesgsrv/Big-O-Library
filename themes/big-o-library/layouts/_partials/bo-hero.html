@@ -1,6 +1,3 @@
-{{- /* Cabeçalho de página: breadcrumb (~/big-o-library / ... $ cat arquivo.md), título, selo e texto de apoio.
-       Args (dict): page = página; badge = texto do selo (opcional); lead = parágrafo abaixo do título (opcional).
-       Usado por bo-pagina.html (single) e docs/list.html. O breadcrumb vem de bo-crumbs.html. */ -}}
 {{- $p := .page -}}
 {{- $nome := $p.Title | urlize -}}
 {{- with $p.File }}{{ $nome = .ContentBaseName }}{{ end -}}

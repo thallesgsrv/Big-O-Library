@@ -1,5 +1,3 @@
-// Menu hambúrguer (navegação lateral no celular).
-// Roda no "DOMContentLoaded" e é tolerante a páginas sem barra lateral.
 document.addEventListener('DOMContentLoaded', function () {
   const menu = document.querySelector('.hextra-hamburger-menu');
   const sidebarContainer = document.querySelector('.hextra-sidebar-container');
@@ -10,13 +8,10 @@ document.addEventListener('DOMContentLoaded', function () {
   const CLOSED = 'hx:max-md:[transform:translate3d(0,-100%,0)]';
   const OPEN = 'hx:max-md:[transform:translate3d(0,0,0)]';
 
-  // Fonte única da verdade: o atributo aria-expanded do botão.
   function isMenuOpen() {
     return menu.getAttribute('aria-expanded') === 'true';
   }
 
-  // No celular, a barra lateral fechada só sai da tela por transform: `inert` a tira
-  // da ordem de Tab e dos leitores de tela.
   function syncInert() {
     sidebarContainer.inert = mobileQuery.matches && !isMenuOpen();
   }
@@ -31,7 +26,6 @@ document.addEventListener('DOMContentLoaded', function () {
     sidebarContainer.classList.remove(open ? CLOSED : OPEN);
     sidebarContainer.classList.add(open ? OPEN : CLOSED);
 
-    // Menu aberto: trava a rolagem do fundo (só no celular).
     document.body.classList.toggle('hx:overflow-hidden', open);
     document.body.classList.toggle('hx:md:overflow-auto', open);
 
@@ -47,7 +41,6 @@ document.addEventListener('DOMContentLoaded', function () {
     }
   }
 
-  // Estado inicial consistente (fechado), mesmo que o HTML venha com a classe trocada.
   menu.setAttribute('aria-expanded', 'false');
   if (icon) icon.classList.remove('open');
   sidebarContainer.classList.remove(OPEN);
@@ -56,8 +49,6 @@ document.addEventListener('DOMContentLoaded', function () {
 
   menu.addEventListener('click', function (e) {
     e.preventDefault();
-    // Toque/clique com ponteiro não deve mandar o foco para o campo de busca
-    // (abriria o teclado do celular). Só move o foco quando acionado pelo teclado.
     setOpen(!isMenuOpen(), { focusOnOpen: e.detail === 0 });
   });
 
@@ -68,7 +59,6 @@ document.addEventListener('DOMContentLoaded', function () {
     if (mobileQuery.matches && isMenuOpen()) setOpen(false);
   });
 
-  // Ao ampliar a tela para o layout de desktop, fecha o menu e libera a rolagem.
   function onBreakpointChange() {
     if (!mobileQuery.matches && isMenuOpen()) {
       setOpen(false, { focusOnOpen: false });
@@ -79,7 +69,6 @@ document.addEventListener('DOMContentLoaded', function () {
   if (mobileQuery.addEventListener) mobileQuery.addEventListener('change', onBreakpointChange);
   else if (mobileQuery.addListener) mobileQuery.addListener(onBreakpointChange);
 
-  // Fecha o menu ao tocar em um link da barra lateral que aponta para âncora da mesma página.
   sidebarContainer.addEventListener('click', function (e) {
     const link = e.target.closest && e.target.closest('a');
     if (!link) return;

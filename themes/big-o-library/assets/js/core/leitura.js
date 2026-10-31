@@ -1,4 +1,3 @@
-// Barra de progresso de leitura + botão "voltar ao topo" (só em páginas de conteúdo).
 if (document.querySelector(".bo-doc")) {
   var bar = document.createElement("div");
   bar.className = "bo-prog"; bar.setAttribute("aria-hidden", "true");

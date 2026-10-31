@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Publica o site: gera o HTML em public/ e envia para a branch gh-pages.
-# Uso: ./deploy.sh "mensagem do commit"
+# Uso: scripts/deploy.sh "mensagem do commit"
 set -euo pipefail
+cd "$(dirname "$0")/.."
 
 MESSAGE="${1:-atualiza o site}"
 

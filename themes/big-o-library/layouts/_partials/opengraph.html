@@ -1,4 +1,3 @@
-{{- /* Valores sem espaços/quebras de linha dentro do atributo content (antes saíam com "\n    article\n  ") */ -}}
 {{- $desc := cond (ne (trim (.Description | default "") " ") "") .Description (cond .IsPage (.Summary | plainify | truncate 200) (site.Params.description | default "")) -}}
 <meta property="og:title" content="{{ .Title }}">
 <meta property="og:description" content="{{ $desc | plainify | htmlUnescape | chomp }}">

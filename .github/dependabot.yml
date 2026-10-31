@@ -1,6 +1,3 @@
-# Atualizações automáticas de dependências (um pull request por grupo, uma vez por semana).
-# Atenção: o Tailwind do tema fica fixado em versão exata; ao aceitar uma atualização, rode
-# `npm run build:css` e confira o site (o CI já falha se o main.css ficar defasado).
 version: 2
 updates:
   - package-ecosystem: github-actions

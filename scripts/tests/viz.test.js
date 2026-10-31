@@ -1,12 +1,10 @@
-// Testes do motor de animações (themes/big-o-library/assets/viz/viz.js).
-// Rodam sem navegador: `npm test` (ou `node --test tests/`). Só precisam do Node 18+.
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const fs = require('node:fs');
 const path = require('node:path');
 const vm = require('node:vm');
 
-const SRC = fs.readFileSync(path.join(__dirname, '..', 'themes', 'big-o-library', 'assets', 'viz', 'viz.js'), 'utf8');
+const SRC = fs.readFileSync(path.join(__dirname, '..', '..', 'themes', 'big-o-library', 'assets', 'viz', 'viz.js'), 'utf8');
 const sandbox = { document: { readyState: 'complete', querySelectorAll: () => [] }, globalThis: null };
 sandbox.globalThis = sandbox;
 vm.createContext(sandbox);

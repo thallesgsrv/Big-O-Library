@@ -21,7 +21,7 @@
 }
 
 .hextra-search-trigger-label {
-  @apply hx:hidden hx:md:inline hx:grow hx:text-start hx:truncate;
+  @apply hx:sr-only hx:md:not-sr-only hx:md:inline hx:grow hx:text-start hx:truncate;
 }
 
 .hextra-search-trigger-kbd {

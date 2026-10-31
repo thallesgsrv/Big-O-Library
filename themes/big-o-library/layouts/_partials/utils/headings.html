@@ -1,14 +1,3 @@
-{{- /*
-  Returns page headings in the same top-level shape as Page.Fragments.Headings.
-
-  Hugo may not populate Page.Fragments for external renderers unless the renderer is
-  configured to emit TOC data. When fragments are unavailable, derive a minimal
-  heading tree from rendered HTML so theme TOCs and search anchors still work.
-
-  @param {Page} .
-
-  @returns {dict} A "headings" slice with page heading entries.
-*/ -}}
 
 {{- $headings := slice -}}
 {{- with .Fragments -}}

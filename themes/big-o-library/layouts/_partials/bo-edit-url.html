@@ -1,5 +1,3 @@
-{{- /* URL de "editar esta página". Fonte única (toc.html e bo-pagina.html).
-       Respeita editURL do front matter; senão monta a partir de params.editURL.base. */ -}}
 {{- $editURL := site.Params.editURL.base | default "" -}}
 {{- with .Params.editURL -}}
   {{- $editURL = . -}}

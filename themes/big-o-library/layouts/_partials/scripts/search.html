@@ -1,4 +1,3 @@
-{{- /* Busca (FlexSearch): o bundle vem de assets/, caminho em params.search.flexsearch.js. */ -}}
 {{- if site.Params.search.enable -}}
   {{- $lib := resources.Get site.Params.search.flexsearch.js | fingerprint -}}
 

@@ -1,19 +1,3 @@
-{{- /* Uma questão dentro de {{< quiz >}}. Guia: .github/GUIA-QUIZ.md
-
-   Formato do corpo (tudo em Markdown):
-
-     Enunciado, em quantas linhas quiser (aceita $fórmulas$, código, listas).
-
-     - [ ] alternativa errada
-     - [x] alternativa certa
-     - [ ] outra errada
-           linha extra da mesma alternativa (vira quebra de linha)
-     ---
-     Explicação mostrada depois da resposta (opcional, também em Markdown).
-
-   Uma alternativa [x]  -> clicou, respondeu.
-   Duas ou mais [x]     -> "marque todas": a pessoa seleciona e clica em "verificar".
-   Parâmetro opcional:  fixa="true"  mantém a ordem das alternativas mesmo com embaralhar. */ -}}
 {{- $raw := replace (.InnerDeindent | default "") "\r\n" "\n" -}}
 {{- $stem := "" -}}{{- $exp := "" -}}{{- $opts := slice -}}
 {{- $mode := "stem" -}}{{- $cur := "" -}}{{- $curOk := false -}}{{- $has := false -}}
@@ -37,7 +21,6 @@
 {{- end -}}
 {{- if $has }}{{ $opts = $opts | append (dict "ok" $curOk "txt" $cur) }}{{ end -}}
 
-{{- /* validação: falha o build com a posição exata, em vez de publicar quiz quebrado */ -}}
 {{- if lt (len $opts) 2 -}}{{- errorf "questao: precisa de pelo menos 2 alternativas no formato '- [ ] texto' (%s)" .Position -}}{{- end -}}
 {{- $nok := 0 -}}{{- $long := false -}}
 {{- range $opts }}{{ if .ok }}{{ $nok = add $nok 1 }}{{ end }}{{ if gt (len .txt) 16 }}{{ $long = true }}{{ end }}{{ end -}}

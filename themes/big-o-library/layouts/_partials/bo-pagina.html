@@ -1,11 +1,6 @@
-{{- /* Corpo único das páginas de conteúdo (docs, contribuir, colaboradores...).
-       Selo/cor do período vêm de bo-periodo.html; o cabeçalho, de bo-hero.html;
-       cada "##" do texto vira seção recolhível (bo-recolher.html).
-       Chamado por _default/single.html. */ -}}
 {{- $p := partial "bo-periodo.html" . -}}
 
 <div class="hx:mx-auto hx:flex hextra-max-page-width">
-  {{/* sidebar desativada no desktop; no mobile continua sendo o menu do hambúrguer */}}
   {{ partial "sidebar.html" (dict "context" .) }}
   {{- if and (ne .Params.toc false) .Fragments.Headings }}{{ partial "toc.html" . }}{{ end }}
   <article class="hx:w-full hx:break-words hx:flex hx:min-h-[calc(100vh-var(--hextra-navbar-height))] hx:min-w-0 hx:justify-center hx:pb-8 hx:pr-[calc(env(safe-area-inset-right)-1.5rem)]">
@@ -14,7 +9,6 @@
       <div class="{{ $p.class }}">
         {{ partial "bo-hero.html" (dict "page" . "badge" $p.badge "lead" (.Params.summary | default .Params.description)) }}
 
-        {{/* sumário recolhível, só abaixo de 1280 px (acima disso o toc.html lateral assume) */}}
         {{ if and (ne .Params.toc false) .Fragments.Headings }}
         <details class="bo-toc-m">
           <summary>Sumário desta página</summary>
@@ -28,12 +22,8 @@
           </div>
         </div>
 
-        {{ partial "bo-credits.html" . }}
-
-        {{- /* Anterior/próximo na ordem do front matter (weight) — só em materiais (docs). */ -}}
-        {{- /* Só dentro de uma disciplina (ex.: período/disciplina/tópico): guias soltos como Git e Bash e disciplinas de página única ficam sem navegação. */ -}}
-        {{- if and .IsPage (eq .Section "docs") .Parent (ge (len .Ancestors) 4) }}
-          {{- /* Progresso de estudo: só com JavaScript (começa oculto) e guardado só no navegador (localStorage). Ver js/core/estudo.js */ -}}
+        {{- $material := and .IsPage (eq .Section "docs") .Parent (ge (len .Ancestors) 4) }}
+        {{- if $material }}
           <div class="bo-study" data-bo-study hidden>
             <button type="button" class="bo-study-btn" aria-pressed="false" data-path="{{ .RelPermalink }}" data-title="{{ .Title }}">
               <span class="bo-study-i" aria-hidden="true">✓</span> <span class="bo-study-t">Marcar como estudado</span>
@@ -55,6 +45,8 @@
         </nav>
           {{- end }}
         {{- end }}
+
+        {{ partial "bo-credits.html" . }}
 
         <div class="bo-page-foot">
           {{- if .Parent -}}

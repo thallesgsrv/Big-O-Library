@@ -56,18 +56,14 @@
 .viz .rn{fill:currentColor;fill-opacity:.85;font-family:monospace;font-size:11px}
 .viz .sep{stroke:var(--hot);stroke-dasharray:4 4;stroke-width:2}
 
-/* Tema escuro (classe html.dark do tema): cores com contraste suficiente sobre fundo escuro */
 html.dark .viz{--cur:#4dabf7;--hot:#fb923c;--on-hot:#0b0f14;--halo:rgba(11,15,20,.92)}
 
-/* Foco visível para teclado */
 .viz:focus-visible,.viz .ctl button:focus-visible,.viz .ctl input:focus-visible{outline:3px solid var(--cur);outline-offset:2px}
 .viz .hint{margin:8px 0 0;font-size:.75rem;opacity:.8;line-height:1.4}
 .viz .ctl button:active{transform:scale(.96)}
 @media (prefers-reduced-motion:reduce){.viz *{transition:none!important;animation:none!important}}
 @media print{.viz .ctl,.viz .hint{display:none}}
 
-/* Pseudocódigo: numeração própria. A regra de listas numeradas das seções (.bo-sec ol) vazava para cá
-   e fazia o número sobrepor o texto e abria espaços entre as linhas. */
 .viz ol.code{display:block!important;gap:0!important;margin:0 0 10px!important;padding:6px!important;counter-reset:n}
 .viz ol.code>li{position:relative;counter-increment:n;margin:0!important}
 .viz ol.code>li::before{content:counter(n)!important;position:absolute;left:.6em;width:1.4em;text-align:right;font-weight:400!important;color:inherit!important;opacity:.6}

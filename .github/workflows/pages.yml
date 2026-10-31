@@ -1,11 +1,11 @@
 name: Publicar no GitHub Pages
 
-# Publicação manual, como alternativa ao ./deploy.sh (que envia para a branch gh-pages).
+# Publicação manual, como alternativa ao scripts/deploy.sh (que envia para a branch gh-pages).
 #
 # Para usar:
 #   1. No repositório, vá em Settings > Pages > Build and deployment e escolha "GitHub Actions" como fonte.
 #   2. Rode este workflow em Actions > "Publicar no GitHub Pages" > Run workflow.
-# Enquanto a fonte do Pages for "Deploy from a branch", continue usando o ./deploy.sh e ignore este arquivo.
+# Enquanto a fonte do Pages for "Deploy from a branch", continue usando o scripts/deploy.sh e ignore este arquivo.
 # Quando migrar de vez, troque "workflow_dispatch" por "push: branches: [main]" para publicar a cada merge.
 on:
   workflow_dispatch:

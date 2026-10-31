@@ -67,7 +67,7 @@ Grafos: nós e arestas ficam em `GRAFO`/`LCAG`; opções da entrada: `nw: true` 
 
        npm test
 
-   O arquivo `tests/viz.test.js` já confere todos os algoritmos registrados: passos válidos, `line` dentro do pseudocódigo, cópias de estado e resultado final ordenado nas ordenações. Para algo específico do seu algoritmo, acrescente um teste no mesmo arquivo. Para ver os passos na mão:
+   O arquivo `scripts/tests/viz.test.js` já confere todos os algoritmos registrados: passos válidos, `line` dentro do pseudocódigo, cópias de estado e resultado final ordenado nas ordenações. Para algo específico do seu algoritmo, acrescente um teste no mesmo arquivo. Para ver os passos na mão:
 
        node -e '
        const fs=require("fs"),vm=require("vm");const sb={document:{readyState:"complete",querySelectorAll:()=>[]}};sb.globalThis=sb;vm.createContext(sb);

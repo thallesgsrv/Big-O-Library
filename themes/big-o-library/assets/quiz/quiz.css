@@ -1,5 +1,3 @@
-/* Quiz interativo ({{< quiz >}} / {{< questao >}}). Mesmo visual do jogo em /lab/complexidade.
-   Usa os tokens do site (--card, --line, --txt, --body, --mute, --ac, --p1..--p9). Prefixo: .bo-qz */
 .bo-qz{margin:1.75rem 0;padding:20px;border:1px solid var(--line);border-radius:12px;background:color-mix(in srgb,var(--card) 55%,transparent)}
 .bo-qz-top{display:flex;justify-content:space-between;align-items:baseline;gap:12px;flex-wrap:wrap;margin-bottom:10px}
 .bo-qz-cmd{font-size:13px;color:var(--ac);overflow-wrap:anywhere}
@@ -7,12 +5,10 @@
 .bo-qz-bar{height:4px;border-radius:2px;background:var(--line);overflow:hidden;margin-bottom:18px}
 .bo-qz-bar i{display:block;height:100%;width:0;background:var(--ac);transition:width .35s ease}
 
-/* questão avulsa (quiz com uma só questão) */
 .bo-qz.is-solo .bo-qz-bar,.bo-qz.is-solo .bo-qz-n,.bo-qz.is-solo .bo-qz-score{display:none}
 .bo-qz.is-solo .bo-qz-top{margin-bottom:14px}
 .bo-qz-next.bo-b2{padding:12px 20px;font-size:14px;border:1px solid var(--line);border-radius:6px;background:transparent;color:var(--txt)}
 
-/* questão */
 .bo-qz-q{margin:0}
 .bo-qz.is-on.is-lista .bo-qz-q+.bo-qz-q{margin-top:28px;padding-top:24px;border-top:1px dashed var(--line)}
 .bo-qz-n{margin:0 0 6px;font-size:12px;letter-spacing:.04em;text-transform:uppercase;color:var(--mute)}
@@ -55,12 +51,10 @@
 .bo-qz-exp p{margin:0 0 .7em}
 .bo-qz-fb .bo-qz-next{margin-top:6px}
 
-/* resultado (reaproveita .bo-rs* do jogo) */
 .bo-qz-result{margin-top:22px}
 .bo-qz-result[hidden]{display:none}
 .bo-qz.is-single .bo-qz-result{margin-top:0}
 
-/* sem JavaScript: tudo visível, correta marcada */
 .bo-qz:not(.is-on) .bo-qz-q+.bo-qz-q{margin-top:24px}
 .bo-qz:not(.is-on) .bo-qz-opt{cursor:default}
 .bo-qz:not(.is-on) .bo-qz-opt[data-ok="1"]{border-color:var(--p1)}

@@ -1,17 +1,7 @@
 #!/usr/bin/env node
-// Auditoria de acessibilidade (axe-core + Chrome headless) sobre o site já compilado.
 //
-//   hugo --gc --baseURL / -d public          # compile com baseURL "/" para servir da raiz
-//   CHROME_PATH=/caminho/do/chrome npm run a11y
 //
-// Opções (variáveis de ambiente):
-//   SITE_DIR     pasta do site compilado           (padrão: public)
-//   CHROME_PATH  executável do Chrome/Chromium     (obrigatório na linha de comando)
-//   TEMAS        "claro,escuro", "claro" ou "escuro" (padrão: claro,escuro)
-//   SHARD        "i/n": audita só a fatia i de n (1-based), para dividir o trabalho (padrão: 1/1)
-//   PAGINAS      lista de URLs separadas por vírgula, em vez de todas as páginas
 //
-// Sai com código 1 se houver qualquer violação (WCAG 2.0/2.1 A e AA + boas práticas do axe).
 'use strict';
 const fs = require('node:fs');
 const path = require('node:path');
@@ -68,15 +58,12 @@ async function main({ executablePath, args = ['--no-sandbox', '--disable-setuid-
         await page.setViewport({ width: 1280, height: 900 });
         await page.evaluateOnNewDocument(t => { try { localStorage.setItem('color-theme', t); } catch (e) { /* sem storage */ } }, tema === 'escuro' ? 'dark' : 'light');
         const resp = await page.goto(base + u, { waitUntil: 'load' });
-        // Se a página não carregou, auditar a página de erro geraria "violações" enganosas: aborta com a causa real.
         if (!resp || resp.status() !== 200) throw new Error(`${u} respondeu ${resp ? resp.status() : 'sem resposta'}; confira SITE_DIR e se o site foi compilado com --baseURL /`);
         await page.evaluate(t => document.documentElement.classList.toggle('dark', t === 'escuro'), tema);
-        await page.evaluate(() => document.querySelectorAll('details').forEach(d => { d.open = true; })); // audita também as seções recolhidas
+        await page.evaluate(() => document.querySelectorAll('details').forEach(d => { d.open = true; }));
         await page.evaluate(axeSrc);
         const r = await page.evaluate(async () => {
           const res = await axe.run(document, { runOnly: { type: 'tag', values: ['wcag2a', 'wcag2aa', 'wcag21a', 'wcag21aa', 'best-practice'] } });
-          // Exceção deliberada: cabeçalho de tabela só com fórmula. O KaTeX publica o texto da fórmula em MathML
-          // visualmente oculto (que leitores de tela leem), mas o axe não conta isso como texto e acusa "cabeçalho vazio".
           const violations = res.violations.map(v => v.id !== 'empty-table-header' ? v : {
             ...v, nodes: v.nodes.filter(n => { const e = document.querySelector(n.target[0]); return !(e && e.querySelector('.katex-mathml')); }) })
             .filter(v => v.nodes.length);

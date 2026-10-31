@@ -1,6 +1,3 @@
-{{- /* Google Analytics com consentimento (LGPD): o gtag.js só é baixado depois que a pessoa aceita
-       no banner (bo-consent.html). A escolha fica em localStorage["bo-cookies"] = "sim" | "nao".
-       Respeita Do Not Track: com DNT ligado nada é carregado e o banner nem aparece. */ -}}
 {{- with site.Config.Services.GoogleAnalytics.ID }}
 <script>
   window.dataLayer = window.dataLayer || [];

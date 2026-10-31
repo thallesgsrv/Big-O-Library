@@ -1,5 +1,5 @@
 # Verificação semanal de links EXTERNOS (workflow "Links externos"). Os internos são checados a cada PR
-# com a configuração lychee.toml.
+# com a configuração interno.toml.
 
 no_progress = true
 include_fragments = "anchor-only"

@@ -33,6 +33,6 @@
   >
     {{- partial "utils/icon.html" (dict "name" "search" "attributes" `class="hextra-search-trigger-icon" focusable="false"`) -}}
     <span class="hextra-search-trigger-label">{{ $placeholder }}</span>
-    <kbd class="hextra-search-trigger-kbd">CTRL K</kbd>
+    <kbd class="hextra-search-trigger-kbd" aria-hidden="true">CTRL K</kbd>
   </button>
 {{- end -}}

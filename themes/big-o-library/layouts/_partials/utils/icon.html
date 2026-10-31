@@ -1,4 +1,3 @@
-{{- /* Ícone SVG inline, lido de data/icons.yaml. Parâmetros: name, attributes (opcional). */ -}}
 {{- $icon := index hugo.Data.icons .name -}}
 {{- if not $icon -}}
   {{- errorf "ícone %q não encontrado em data/icons.yaml" .name -}}

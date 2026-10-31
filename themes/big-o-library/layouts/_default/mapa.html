@@ -1,7 +1,3 @@
-{{- /* /lab/mapa: o curso como grafo. A fonte é data/disciplinas.yaml (id, nome, periodo, prereq): cada entrada vira um nó,
-       com ou sem pasta em content/docs/. Se existe a pasta (docs/NN-periodo/<id> ou docs/optativas/<id>), o nó abre a página
-       e usa o título/descrição dela. Sem pasta, o nó é normal, só sem link. Pontilhado só para `prereq` com id inexistente (provável erro de digitação). Disciplinas com pasta que não estão
-       no YAML também entram (com `prereq:` do front matter, se houver). Layout e interação em JS (SVG). CSS: .bo-m* em custom.css */ -}}
 {{ define "main" }}
 {{ partial "sidebar.html" (dict "context" .) }}
 {{- /* 1) o YAML, indexado por id */ -}}
@@ -12,7 +8,6 @@
     {{- with .id }}{{ $yml = merge $yml (dict (printf "%v" .) $d) }}{{ end -}}
   {{- end -}}
 {{- end -}}
-{{- /* 2) as páginas reais */ -}}
 {{- $nodes := slice -}}
 {{- $seen := dict -}}
 {{- range sort site.Pages "Path" -}}
@@ -39,7 +34,6 @@
     {{- $seen = merge $seen (dict $slug true) -}}
   {{- end -}}
 {{- end -}}
-{{- /* 3) entradas do YAML sem pasta: nós normais, só que sem link (url vazia) */ -}}
 {{- range hugo.Data.disciplinas.disciplinas -}}
   {{- $id := printf "%v" .id -}}
   {{- if and .id (not (index $seen $id)) -}}
@@ -52,7 +46,6 @@
     {{- $seen = merge $seen (dict $id true) -}}
   {{- end -}}
 {{- end -}}
-{{- /* 4) avisos: pré-requisito que não existe em lugar nenhum (provável erro de digitação) */ -}}
 {{- range $nodes -}}
   {{- $n := . -}}
   {{- range .pre -}}

@@ -1,6 +1,3 @@
-/* assets/js/bo-recolher.js
-   Transforma cada seção "##" de um bloco [data-bo-fold] em <details>/<summary> nativo.
-   Sem JavaScript, o texto continua todo visível. Carregado por _partials/bo-recolher.html. */
 (function () {
   var CTA = /^contribui/;
   var roots = document.querySelectorAll('[data-bo-fold]');

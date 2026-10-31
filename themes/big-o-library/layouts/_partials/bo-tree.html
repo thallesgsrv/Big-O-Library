@@ -1,5 +1,3 @@
-{{- /* Árvore leve do acervo para o terminal do Ctrl+K (cd, ls, cat, tree, man, fortune, sabios).
-       Publica um JSON pequeno e fingerprintado; o JS só baixa quando alguém digita um comando. Retorna a URL. */ -}}
 {{- $pages := slice -}}
 {{- range sort site.Pages "Path" -}}
   {{- if and (hasPrefix .Path "/docs/") (in (slice "page" "section") .Kind) -}}

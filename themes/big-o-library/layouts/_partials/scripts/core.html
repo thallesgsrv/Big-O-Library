@@ -1,4 +1,3 @@
-{{- /* Scripts do núcleo (menu, tema, sidebar, busca...) unidos em js/main.js. Cada arquivo roda isolado (IIFE + try/catch), então um erro não derruba os demais. */ -}}
 {{- $parts := slice -}}
 {{- range resources.Match "js/core/*.js" -}}
   {{- $res := resources.ExecuteAsTemplate .Name $ . -}}

@@ -67,7 +67,6 @@ document.addEventListener('DOMContentLoaded', function () {
       if (codeElement) {
         let code = codeElement.innerText;
         // Replace double newlines with single newlines in the innerText
-        // as each line inside <span> has trailing newline '\n'
         if ("lang" in codeElement.dataset) {
           code = code.replace(/\n\n/g, '\n');
         }

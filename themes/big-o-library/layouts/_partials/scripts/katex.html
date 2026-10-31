@@ -1,5 +1,3 @@
-{{- /* CSS do KaTeX: arquivo local em assets/ (params.math.katex.css), gerado por scripts/baixar_vendor.py.
-       Publicado em /css/ para que as fontes (../vendor/katex/fonts/) resolvam. */ -}}
 {{- $suffix := cond hugo.IsProduction ".min" "" -}}
 {{- with resources.Get site.Params.math.katex.css -}}
   {{- $css := resources.FromString (printf "css/katex%s.css" $suffix) .Content | fingerprint "sha512" -}}

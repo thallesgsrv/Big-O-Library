@@ -3,8 +3,8 @@
 
 Uso (na raiz do repositório):
 
-    python3 scripts/validar.py            # erros quebram (exit 1); avisos só informam
-    python3 scripts/validar.py --strict   # avisos também quebram
+    python3 scripts/validar.py
+    python3 scripts/validar.py --strict
 
 Dependência: PyYAML (`pip install pyyaml`; já vem instalado em quase todo Linux/macOS com Python).
 
@@ -28,13 +28,13 @@ from pathlib import Path
 
 try:
     import yaml
-except ImportError:  # mensagem clara em vez de traceback
+except ImportError:
     sys.exit("PyYAML não encontrado. Instale com: pip install pyyaml")
 
 RAIZ = Path(__file__).resolve().parent.parent
 DOCS = RAIZ / "content" / "docs"
 TEMA = RAIZ / "themes" / "big-o-library"
-DESC_MAX = 120   # o guia sugere ~90; só avisa acima de 120, quando o card da lista realmente quebra
+DESC_MAX = 120
 CHAVES_CONHECIDAS = {
     "title", "weight", "description", "autores", "date", "summary", "prereq", "baseadoEm", "rotulo",
     "layout", "hideEdit", "toc", "draft", "lastmod", "images", "canonical", "noindex", "excludeSearch",
@@ -120,7 +120,6 @@ def validar_paginas() -> None:
         if fm is None:
             continue
         onde = rel(arq)
-        # páginas de nível alto (docs/_index.md, períodos e optativas) só precisam de título e peso
         nivel_alto = arq.name == "_index.md" and len(arq.relative_to(DOCS).parts) <= 2
         obrigatorios = ["title", "weight"] if nivel_alto else ["title", "weight", "description", "autores", "date"]
         for k in obrigatorios:
@@ -136,7 +135,6 @@ def validar_paginas() -> None:
             if isinstance(w, bool) or not isinstance(w, int):
                 erro(onde, f"`weight` precisa ser um número inteiro (achei {w!r})")
             else:
-                # irmãs = páginas com o mesmo pai. index.md e _index.md ficam na própria pasta, então o pai é a pasta de cima
                 por_pasta[arq.parent.parent].append((arq, w))
 
         d = fm.get("date")
@@ -197,7 +195,6 @@ def validar_disciplinas() -> None:
         for pr in d.get("prereq") or []:
             if pr not in ids:
                 erro("data/disciplinas.yaml", f"'{i}' tem pré-requisito inexistente: '{pr}'")
-    # ciclos (busca em profundidade com três cores)
     cor: dict[str, int] = {}
 
     def visita(u: str, trilha: list[str]) -> None:
@@ -214,7 +211,6 @@ def validar_disciplinas() -> None:
     for i in ids:
         if cor.get(i) is None:
             visita(i, [])
-    # só as pastas de período precisam estar no mapa (as de optativas podem ser grupos de tópicos)
     de_periodo = {p.name for p in DOCS.glob("[0-9][0-9]-periodo/*") if p.is_dir()}
     for p in sorted(de_periodo):
         if p not in ids:

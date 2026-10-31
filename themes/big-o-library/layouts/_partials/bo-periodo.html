@@ -1,7 +1,3 @@
-{{- /* Contexto de período de uma página, deduzido da URL (01-periodo → 1º período) ou de data/extras.yaml
-       (optativas, bash-shell-linux, git-github...).
-       Retorna um dict: "badge" (texto do selo, vazio fora de período/extras) e "class" (classes do contêiner).
-       Usado por bo-pagina.html e docs/list.html. */ -}}
 {{- $url := .RelPermalink -}}
 {{- $badge := "" -}}
 {{- $class := "bo-page bo-page-doc" -}}

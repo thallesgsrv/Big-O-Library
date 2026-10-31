@@ -1,6 +1,3 @@
-{{- /* /lab/complexidade: jogo "Qual a complexidade?".
-       Trechos: data/jogo.yaml | Sábios: data/conselho.yaml (via bo-sabios) | CSS: .bo-g* e .bo-rs* em custom.css
-       No fim, mostra a classe em que a pessoa mais acertou e uma frase de um sábio do Conselho sorteado (sem relação com a classe: o Conselho não é um ranking). */ -}}
 {{ define "main" }}
 {{ partial "sidebar.html" (dict "context" .) }}
 {{- $sab := slice -}}

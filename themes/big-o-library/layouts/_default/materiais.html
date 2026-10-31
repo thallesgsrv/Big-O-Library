@@ -1,6 +1,5 @@
 {{ define "main" }}
 {{- $cx := partial "bo-cx.html" . -}}
-{{/* drawer do menu mobile (o botão ☰ do header depende dele); escondido no desktop */}}
 {{ partial "sidebar.html" (dict "context" .) }}
 <main class="bo-wrap" id="content">
   {{ partial "bo-mhead.html" (dict
@@ -10,13 +9,11 @@
 
   <div class="bo-lsh" aria-hidden="true">$ ls -l periodos/ <span>&nbsp;&nbsp; # a cor é o custo</span></div>
   <div class="bo-pgrid">
-    {{- /* o número do período vem do nome da pasta (01-periodo → 1), não de um contador */ -}}
     {{- range .Pages.ByWeight -}}
       {{- $pg := . -}}
       {{- $url := .RelPermalink -}}
       {{- with findRESubmatch `/0?([1-9])-periodo/?$` $url 1 -}}
         {{- $n := int (index (index . 0) 1) -}}
-        {{- /* o card inteiro é o link; as disciplinas só aparecem na página do período */ -}}
         {{- $k := len $pg.RegularPagesRecursive -}}
         <a class="bo-per{{ if not $k }} is-soon{{ end }}" style="--c:var(--p{{ $n }})" href="{{ $url }}">
           <span class="bo-per-o" aria-hidden="true">{{ index $cx (sub $n 1) }}</span>
@@ -30,7 +27,6 @@
 
   <div class="bo-lsh" aria-hidden="true">$ ls extras/ <span>&nbsp;&nbsp; # optativas e guias</span></div>
   <div class="bo-pgrid">
-    {{- /* Extras (optativas, bash, git...): vêm de data/extras.yaml, mesmo card dos períodos */ -}}
     {{- range hugo.Data.extras -}}
       {{- $e := . -}}
       {{- with site.GetPage (printf "/docs/%s" $e.slug) -}}

@@ -33,7 +33,6 @@ def tarball(pacote, versao):
     print("baixando", url)
     dados = urllib.request.urlopen(url, timeout=60).read()
     tar = tarfile.open(fileobj=io.BytesIO(dados), mode="r:gz")
-    # os arquivos vêm sob o prefixo "package/"
     return {m.name[len("package/"):]: tar.extractfile(m).read()
             for m in tar.getmembers() if m.isfile()}
 
@@ -51,12 +50,10 @@ def katex():
     versao = json.loads(arquivos["package.json"])["version"]
     css = arquivos["dist/katex.min.css"].decode("utf-8")
 
-    # Só woff2: todo navegador atual suporta, e woff/ttf eram ~2/3 do peso de fontes.
     css = re.sub(r',url\(fonts/[^)]+\.woff\) format\("woff"\)', "", css)
     css = re.sub(r',url\(fonts/[^)]+\.ttf\) format\("truetype"\)', "", css)
     if ".woff)" in css or ".ttf)" in css:
         sys.exit("O CSS do KaTeX mudou de formato; ajuste as expressões regulares.")
-    # O Hugo publica o CSS em /css/; as fontes ficam em /vendor/katex/fonts/.
     css = css.replace("url(fonts/", "url(../vendor/katex/fonts/")
 
     css_dir.mkdir(parents=True, exist_ok=True)

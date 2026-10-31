@@ -60,14 +60,11 @@
   {{- end -}}
   <script src="{{ $scripts.RelPermalink }}"></script>
 
-  {{- /* .WordCount força a renderização do conteúdo, que é quando o hook de passthrough marca "hasMath". */ -}}
   {{ $noop := .WordCount -}}
   {{ if .Page.Store.Get "hasMath" -}}
     {{ partialCached "scripts/katex.html" . -}}
   {{ end -}}
 
-  {{- /* Fontes: com params.fontesLocais vêm de static/fonts/ (gerado por scripts/baixar_fontes.py);
-         sem ele, do Google Fonts. */ -}}
   {{- if site.Params.fontesLocais }}
   {{ partial "fontes.html" . }}
   {{- else }}

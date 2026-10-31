@@ -1,7 +1,4 @@
-/* Terminal do Ctrl+K: a busca também entende comandos (ls, cd, cat, tree, fortune, sabios...).
-   Sem estado: o "diretório atual" é a página em que a pessoa está. Nada executa ao digitar;
-   efeitos (tema, fechar, limpar) só acontecem com Enter/clique. A árvore vem de um JSON leve (meta bo-tree). */
-var SEM_ARG = ['help', 'ls', 'tree', 'pwd', 'whoami', 'fortune', 'sabios', 'jogo', 'mapa', 'curvas', 'lab', 'theme', 'tema', 'clear', 'exit', 'vim'];
+var SEM_ARG = ['help', 'ls', 'tree', 'pwd', 'whoami', 'fortune', 'sabios', 'jogo', 'mapa', 'lab', 'theme', 'tema', 'clear', 'exit', 'vim'];
 var COM_ARG = ['cd', 'cat', 'man', 'sudo', 'rm'];
 var meta = document.querySelector('meta[name="bo-tree"]');
 var TREE = null, loading = null;
@@ -53,7 +50,6 @@ function last(p) { var a = p.split('/'); return a[a.length - 1]; }
 var ROOT_T = 'materiais';
 function root(d) { return { p: '', u: d.base + 'docs/', t: ROOT_T, d: 'Todos os materiais, por período.', s: true }; }
 
-/* devolve até 5 páginas: caminho exato (relativo ou absoluto) e, se não houver, busca aproximada */
 function resolve(d, arg, cur) {
   arg = arg.replace(/^\.?\/+/, function (m) { return m.charAt(0) === '/' ? '/' : ''; });
   if (arg === '' || arg === '~' || arg === '/') return [root(d)];
@@ -91,7 +87,7 @@ var HELP = [
   ['tree [pasta]', 'mostra a árvore do acervo'],
   ['fortune', 'sorteia uma frase do Conselho dos Sábios'],
   ['sabios', 'lista o Conselho'],
-  ['lab', 'jogo, mapa de pré-requisitos e curvas de crescimento'],
+  ['lab', 'jogo e mapa de pré-requisitos'],
   ['man <assunto>', 'resumo de uma página'],
   ['theme', 'alterna claro/escuro'],
   ['pwd · whoami · clear · exit', 'o de sempre']
@@ -154,12 +150,10 @@ function runCmd(d, p) {
     case 'lab':
       return [
         link('complexidade', 'jogo: qual a complexidade deste código?', d.lab + 'complexidade/'),
-        link('mapa', 'grafo de pré-requisitos das disciplinas', d.lab + 'mapa/'),
-        link('curvas', 'quanto cada classe cresce (e quanto demora)', d.lab + 'curvas/')
+        link('mapa', 'grafo de pré-requisitos das disciplinas', d.lab + 'mapa/')
       ];
     case 'jogo': return [link('complexidade', 'jogo: qual a complexidade deste código?', d.lab + 'complexidade/')];
     case 'mapa': return [link('mapa', 'grafo de pré-requisitos das disciplinas', d.lab + 'mapa/')];
-    case 'curvas': return [link('curvas', 'quanto cada classe cresce (e quanto demora)', d.lab + 'curvas/')];
     case 'theme': case 'tema':
       return [act('alternar tema', 'agora: ' + (themeNow() === 'dark' ? 'escuro' : 'claro'), 'theme')];
     case 'clear': return [act('limpar', '', 'clear')];
@@ -235,7 +229,7 @@ function doAct(a) {
     if (c) c.click();
   } else if (a === 'theme') {
     var t = themeNow() === 'dark' ? 'light' : 'dark';
-    try { localStorage.setItem('color-theme', t); } catch (e) { /* tema vale só nesta visita */ }
+    try { localStorage.setItem('color-theme', t); } catch (e) { }
     if (typeof window.setTheme === 'function') window.setTheme(t);
     else document.documentElement.classList.toggle('dark', t === 'dark');
     if (input) input.dispatchEvent(new Event('input', { bubbles: true }));

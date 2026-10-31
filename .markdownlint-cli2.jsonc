@@ -1,7 +1,4 @@
 {
-  // Lista curada: só regras que pegam defeitos de renderização ou de acessibilidade.
-  // As regras de estilo (tamanho de linha, HTML inline, estilo de lista...) ficam desligadas de propósito:
-  // o conteúdo usa HTML dos layouts e blocos de texto sem linguagem (provas, árvores) de forma intencional.
   "config": {
     "default": false,
     "MD001": true,   // níveis de cabeçalho em sequência (h2 -> h3, sem pular)

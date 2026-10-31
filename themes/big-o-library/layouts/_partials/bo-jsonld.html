@@ -1,11 +1,8 @@
-{{- /* Dados estruturados (schema.org/LearningResource) para as páginas de material de uma disciplina.
-       Ajuda buscadores a entender que a página é material de estudo, de que disciplina e quem escreveu. */ -}}
 {{- if and .IsPage (eq .Section "docs") .Parent (ge (len .Ancestors) 4) -}}
   {{- $autores := slice -}}
   {{- range .Params.autores -}}
     {{- $autores = $autores | append (dict "@type" "Person" "name" . "url" (printf "https://github.com/%s" .)) -}}
   {{- end -}}
-  {{- /* a disciplina é o ancestral logo abaixo do período (período/disciplina/[estágio/]página) */ -}}
   {{- $disc := index .Ancestors (sub (len .Ancestors) 4) -}}
   {{- $ld := dict
       "@context" "https://schema.org"

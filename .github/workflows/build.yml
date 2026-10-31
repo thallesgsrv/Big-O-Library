@@ -1,7 +1,5 @@
 name: Build
 
-# A cada push na main e a cada pull request: valida conteúdo, roda testes, compila o site,
-# confere links internos e roda a auditoria de acessibilidade.
 on:
   push:
     branches: [main]
@@ -17,8 +15,8 @@ permissions:
   contents: read
 
 env:
-  HUGO_VERSION: 0.165.0     # a 0.165 é necessária para a renderização de matemática (KaTeX) do site
-  LYCHEE_VERSION: 0.24.2    # versão em que o lychee.toml foi testado
+  HUGO_VERSION: 0.165.0
+  LYCHEE_VERSION: 0.24.2
 
 jobs:
   conteudo:
@@ -76,7 +74,7 @@ jobs:
     steps:
       - uses: actions/checkout@v4
         with:
-          fetch-depth: 0   # o Hugo usa o histórico do Git para a data de atualização das páginas
+          fetch-depth: 0
 
       - name: Instalar Hugo extended
         run: |
@@ -96,7 +94,7 @@ jobs:
           echo "$RUNNER_TEMP/lychee-x86_64-unknown-linux-gnu" >> "$GITHUB_PATH"
 
       - name: Links e âncoras internas
-        run: lychee --config lychee.toml --offline --root-dir "$PWD/public-check" 'public-check/**/*.html'
+        run: lychee --config .github/lychee/interno.toml --offline --root-dir "$PWD/public-check" 'public-check/**/*.html'
 
       - name: Guardar o site para a auditoria de acessibilidade
         uses: actions/upload-artifact@v4
