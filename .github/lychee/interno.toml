@@ -1,5 +1,5 @@
 # Configuração do verificador de links (https://lychee.cli.rs).
-# Usada pelo workflow "Qualidade" (links internos, offline) e pelo "Links externos" (semanal).
+# Usada pelo workflow "Build" (links internos, offline) e pelo "Links externos" (semanal).
 
 no_progress = true
 include_fragments = "anchor-only"   # confere também as âncoras (#secao), não só se a página existe

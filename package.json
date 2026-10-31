@@ -6,16 +6,16 @@
     "build:css": "tailwindcss -i themes/big-o-library/assets/css/styles.css -o themes/big-o-library/assets/css/compiled/main.css --minify",
     "test": "node --test",
     "validar": "python3 scripts/validar.py",
-    "lint:md": "markdownlint-cli2",
+    "lint:md": "markdownlint-cli2 --config .github/markdownlint.jsonc \"content/**/*.md\" \"*.md\" \".github/*.md\" \"#node_modules\"",
     "a11y": "node scripts/a11y.js",
     "check": "npm run validar && npm run lint:md && npm test && npm run build:css"
   },
   "devDependencies": {
-    "@tailwindcss/cli": "4.3.0",
+    "@tailwindcss/cli": "4.3.3",
     "axe-core": "4.14.0",
     "markdownlint-cli2": "0.24.0",
     "puppeteer-core": "25.16.0",
-    "tailwindcss": "4.3.0"
+    "tailwindcss": "4.3.3"
   },
   "engines": {
     "node": ">=20"

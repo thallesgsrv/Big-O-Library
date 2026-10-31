@@ -1,7 +1,6 @@
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset="themes/big-o-library/assets/images/bigo-library-dark.svg">
-    <source media="(prefers-color-scheme: light)" srcset="themes/big-o-library/assets/images/bigo-library-light.svg">
     <img src="themes/big-o-library/assets/images/bigo-library-light.svg" alt="o(library)" width="360">
   </picture>
 </p>
@@ -12,18 +11,22 @@
 </p>
 
 <p align="center">
-  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="Licença MIT">
   <a href="https://github.com/thallesgsrv/Big-O-Library/actions/workflows/build.yml"><img src="https://github.com/thallesgsrv/Big-O-Library/actions/workflows/build.yml/badge.svg" alt="Build"></a>
+  <img src="https://img.shields.io/badge/license-MIT-blue?style=flat-square" alt="Licença MIT">
 </p>
 
 <p align="center">
   <picture>
     <source media="(prefers-color-scheme: dark)" srcset=".github/img/home-escuro.png">
-    <img src=".github/img/home-claro.png" alt="Página inicial do o(library), com tema claro e escuro" width="820">
+    <img src=".github/img/home-claro.png" alt="Página inicial do o(library), nos temas claro e escuro" width="820">
   </picture>
 </p>
 
-A ideia surgiu a partir da forma como o professor [João Arthur](https://github.com/joaoarthurbm) organizou e disponibilizou o material de sua disciplina. O objetivo é levar esse modelo para as demais disciplinas do curso. Os materiais ficam no site, organizados por período e por optativas, e as páginas de algoritmos têm animações passo a passo com pseudocódigo sincronizado.
+## Sobre
+
+A ideia surgiu da forma como o professor [João Arthur](https://github.com/joaoarthurbm) organizou o material da disciplina dele. O objetivo é levar esse modelo para as demais disciplinas do curso.
+
+Os materiais ficam organizados por período e por optativas. As páginas de algoritmos têm animações passo a passo com pseudocódigo sincronizado, e há ainda um laboratório com o jogo "Qual a complexidade?" e o mapa de pré-requisitos.
 
 ## Rodando localmente
 
@@ -40,6 +43,8 @@ Abra <http://localhost:1313/Big-O-Library/>. Instalação por sistema, erros com
 ## Contribuindo
 
 Contribuições são bem-vindas, por [issue](https://github.com/thallesgsrv/Big-O-Library/issues) ou [Pull Request](https://github.com/thallesgsrv/Big-O-Library/pulls). O passo a passo está em [CONTRIBUTING.md](.github/CONTRIBUTING.md) e no [guia de escrita](https://thallesgsrv.github.io/Big-O-Library/contribuir/).
+
+## Aviso
 
 Este projeto é um material complementar produzido por estudantes e não substitui o conteúdo oficial, as aulas ou as orientações dos professores.
 

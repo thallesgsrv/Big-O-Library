@@ -13,5 +13,9 @@ updates:
     schedule:
       interval: weekly
     groups:
+      # Toda atualização do Tailwind muda o CSS compilado: depois de aceitar,
+      # rode `npm run build:css` na branch e faça commit do main.css.
+      tailwind:
+        patterns: ["tailwindcss", "@tailwindcss/*"]
       dev-tools:
         patterns: ["*"]

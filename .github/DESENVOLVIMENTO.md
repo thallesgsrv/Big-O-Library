@@ -86,7 +86,7 @@ themes/big-o-library/archetypes/   modelo para novas disciplinas
 scripts/                           validar.py, a11y.js, deploy.sh, baixar_fontes.py, baixar_vendor.py e tests/ (testes das animações)
 package.json                       ferramentas de manutenção (CSS, testes, lint, a11y); contribuir não precisa de Node
 hugo.yaml                          configuração do Hugo
-.github/                           CONTRIBUTING, DESENVOLVIMENTO, código de conduta, guias (animações e quiz), configuração dos links (lychee/) e workflows do CI
+.github/                           CONTRIBUTING, DESENVOLVIMENTO, código de conduta, guias (animações e quiz), configuração dos links (lychee/), regras do markdownlint e workflows do CI
 ```
 
 Para criar uma animação de algoritmo, veja o [guia de animações](.github/GUIA-ANIMACOES.md).
@@ -107,6 +107,8 @@ O CI roda tudo isto a cada Pull Request. Dá para rodar localmente antes de envi
 Só `validar.py` precisa de Python (com `pip install pyyaml`); o resto precisa de Node 20 ou mais novo e de `npm ci` uma vez. Escrever conteúdo continua exigindo só o Hugo.
 
 Uma vez por semana, o workflow "Links externos" confere se os links para fora do site continuam no ar.
+
+**Atualizações do Dependabot.** Todo PR que sobe o Tailwind muda o CSS compilado e falha em "CSS compilado está em dia" até alguém rodar `npm run build:css` na branch e commitar o `main.css`. Os demais PRs (actions e ferramentas) costumam passar direto.
 
 ## Publicação
 
