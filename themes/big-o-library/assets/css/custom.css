@@ -96,7 +96,7 @@ a.bo-card:hover{border-color:var(--ac)}
 .bo-go{margin-top:auto;align-self:flex-end;line-height:1;color:var(--mute);transition:transform .25s ease,color .2s ease}
 a.bo-card:hover .bo-go,a.bo-card:focus-visible .bo-go{color:var(--ac);transform:translateX(4px)}
 .bo-row{display:grid;gap:20px;margin-top:20px}
-@media (min-width:860px){.bo-r1,.bo-r2{grid-template-columns:1fr 1fr}}
+@media (min-width:860px){.bo-r1{grid-template-columns:1.4fr 1fr}.bo-r2{grid-template-columns:1fr 1.4fr}}
 .bo-text{padding:28px;gap:14px}
 .bo-cmd{font-size:13px;color:var(--ac)}
 .bo-text h2{margin:0;font:600 28px Fraunces,Georgia,serif;color:var(--txt)}
