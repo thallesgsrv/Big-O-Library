@@ -71,14 +71,14 @@ professores:
     github: fabriciocostadias
 
   - nome: Prof. Joseana M. Fechine
-    titulo: 
+    titulo: "Mãe da Computação"
     disciplina: Introdução à Computação
     periodo: 1
     id: joseana
     foto: joseana.webp
 
   - nome: Prof. Maxwell Oliveira
-    titulo: 
+    titulo: "Mestre da Computação"
     disciplina: Introdução à Computação
     periodo: 1
     id: maxwell
