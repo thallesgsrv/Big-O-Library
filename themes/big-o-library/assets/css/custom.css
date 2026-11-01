@@ -139,7 +139,7 @@ a.bo-card:hover .bo-go,a.bo-card:focus-visible .bo-go{color:var(--ac);transform:
 .bo-optlist .bo-bar{width:36px;height:4px;margin-bottom:8px;border-radius:4px;background:var(--ac-c);transition:width .3s ease}
 .bo-optlist .bo-t{font-size:18px;line-height:1.35}
 .bo-optlist .bo-d{flex:1;font-size:14px;line-height:1.65}
-.bo-optlist .bo-go{display:grid;place-items:center;box-sizing:border-box;width:34px;height:34px;padding-bottom:6px;line-height:1;margin-top:6px;border:1px solid var(--line);border-radius:50%;font-size:15px;transition:transform .25s ease,color .2s ease,background-color .2s ease,border-color .2s ease}
+.bo-optlist .bo-go{display:grid;place-items:center;box-sizing:border-box;width:34px;height:34px;padding:0;line-height:0;margin-top:6px;border:1px solid var(--line);border-radius:50%;transition:transform .25s ease,color .2s ease,background-color .2s ease,border-color .2s ease}
 a.bo-card:hover{border-color:var(--ac-c,var(--ac))}
 .bo-optlist a.bo-card:hover .bo-bar{width:64px}
 .bo-optlist a.bo-card:hover .bo-go,.bo-optlist a.bo-card:focus-visible .bo-go{color:var(--btn-t);background:var(--ac-c);border-color:var(--ac-c);transform:translateX(4px)}
@@ -695,3 +695,12 @@ body.hx\:overflow-hidden .bo-top{display:none}
 .bo-pager-a,.bo-top{border-radius:12px}
 .bo-footer{border-top-style:dashed}
 @media (prefers-reduced-motion:reduce){.bo-b1,.bo-b2{transition:none!important;transform:none!important}}
+
+.bo-optlist .bo-go svg{display:block;width:16px;height:16px}
+
+/* Link "pular para o conteúdo" */
+.bo-skip{position:fixed;top:8px;left:8px;z-index:1000;padding:10px 16px;border-radius:6px;background:var(--ac);color:var(--btn-t)!important;font-size:14px;text-decoration:none!important;transform:translateY(-200%);transition:transform .15s ease}
+.bo-skip:focus,.bo-skip:focus-visible{transform:translateY(0);outline:2px solid var(--txt);outline-offset:2px}
+#content{scroll-margin-top:80px}
+#content:focus{outline:none}
+@media (prefers-reduced-motion:reduce){.bo-skip{transition:none}}

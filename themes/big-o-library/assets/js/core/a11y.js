@@ -4,3 +4,9 @@ document.querySelectorAll('.content li > input[type="checkbox"]').forEach(functi
   var texto = li ? (li.textContent || '').replace(/\s+/g, ' ').trim() : '';
   if (texto) cb.setAttribute('aria-label', texto);
 });
+
+// Garante que o foco vá para o conteúdo ao usar "Pular para o conteúdo".
+(function () {
+  var main = document.getElementById('content');
+  if (main && !main.hasAttribute('tabindex')) main.setAttribute('tabindex', '-1');
+})();
