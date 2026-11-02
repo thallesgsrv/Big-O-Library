@@ -70,6 +70,7 @@
   (function () {
     var RAW = {{ $nodes }};
     var CONTRIBUIR = {{ "contribuir/" | relURL }};
+    var REPO = {{ site.Params.repo | default "https://github.com/thallesgsrv/Big-O-Library" }};
     var root = document.getElementById("bo-m");
     var svg = document.getElementById("bo-m-svg");
     var panel = document.getElementById("bo-m-panel");
@@ -155,7 +156,7 @@
     };
     list.forEach(function (n) {
       var p = pos[n.slug];
-      var g = el("g", { "class": "bo-m-node" + (n.ghost ? " is-ghost" : ""), transform: "translate(" + p.x + "," + p.y + ")", tabindex: 0, role: "button", "aria-pressed": "false", "aria-label": n.title + (n.ghost ? " (ainda sem material)" : ""), style: "--c:" + colColor(n.per || 99) }, gN);
+      var g = el("g", { "class": "bo-m-node" + (!n.url ? " is-ghost" : ""), transform: "translate(" + p.x + "," + p.y + ")", tabindex: 0, role: "button", "aria-pressed": "false", "aria-label": n.title + (!n.url ? " (ainda sem material)" : ""), style: "--c:" + colColor(n.per || 99) }, gN);
       el("rect", { width: W, height: H, rx: 9 }, g);
       el("rect", { width: 5, height: H, rx: 2, "class": "bo-m-tick" }, g);
       var ls = wrap(n.title);
@@ -177,7 +178,17 @@
     fit(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 
     var perLabel = function (n) { return n.per ? n.per + "º período" : "optativa"; };
-    var chip = function (n) { return n.ghost ? '<li><span class="bo-m-chip is-ghost">' + esc(n.title) + '<small>sem material</small></span></li>' : !n.url ? '<li><span class="bo-m-chip">' + esc(n.title) + '</span></li>' : '<li><a class="bo-m-chip" href="' + esc(n.url) + '">' + esc(n.title) + '</a></li>'; };
+    var chip = function (n) { return !n.url ? '<li><span class="bo-m-chip is-ghost">' + esc(n.title) + '<small>sem material</small></span></li>' : '<li><a class="bo-m-chip" href="' + esc(n.url) + '">' + esc(n.title) + '</a></li>'; };
+
+    /* link do editor do GitHub já com a pasta, o título e o próximo weight do período preenchidos */
+    var novoUrl = function (n) {
+      var pasta = n.per ? "0" + n.per + "-periodo" : "optativas", maxw = 0, d = new Date();
+      list.forEach(function (x) { if (x.url && x.per === n.per && x.w > maxw) maxw = x.w; });
+      var hoje = d.getFullYear() + "-" + ("0" + (d.getMonth() + 1)).slice(-2) + "-" + ("0" + d.getDate()).slice(-2);
+      var corpo = "---\ntitle: " + JSON.stringify(n.title) + "\nweight: " + (maxw + 1) + "\ndescription: Uma frase curta (até ~90 caracteres) sobre a disciplina.\nautores:\n  - seu-usuario-github\ndate: " + hoje + "\n---\n\nParágrafo de abertura: o que a disciplina estuda e para que serve.\n\n## Materiais\n\n### Livros e apostilas\n\n- [Título do livro](https://exemplo.com) — Autor (ano)\n";
+      return REPO + "/new/main?filename=" + encodeURIComponent("content/docs/" + pasta + "/" + n.slug + "/index.md") + "&value=" + encodeURIComponent(corpo);
+    };
+    var temPaginaNoPeriodo = function (n) { return list.some(function (x) { return x.url && x.per === n.per; }); };
 
     function choose(slug) {
       var n = by[slug], anc = closure(slug, up), desc = closure(slug, down);
@@ -212,14 +223,17 @@
         '</section><section class="bo-m-box"><h3>O que ela libera</h3>' +
         (give.length ? '<ul class="bo-m-chips bo-m-lib">' + give.map(chip).join("") + '</ul>' : '<p class="bo-m-empty">Nada depende dela (ainda).</p>') +
         '</section></div>' +
-        '<div class="bo-btns">' + (n.ghost ? '<a class="bo-b2" href="' + CONTRIBUIR + '">escrever o material desta disciplina</a>' : n.url ? '<a class="bo-b1" href="' + esc(n.url) + '">abrir material →</a>' : '<p class="bo-m-empty">Disciplina só no mapa: não há material dela no site.</p>') + '</div></div>';
+        (n.url ? '<div class="bo-btns"><a class="bo-b1" href="' + esc(n.url) + '">abrir material →</a></div>'
+               : '<p class="bo-m-empty">Ainda não há material desta disciplina no site. Quem já cursou pode ser quem escreve.</p>' +
+                 '<div class="bo-btns"><a class="bo-b1" href="' + esc(novoUrl(n)) + '" target="_blank" rel="noopener">escrever esta disciplina</a><a class="bo-b2" href="' + CONTRIBUIR + '">guia de escrita</a></div>' +
+                 (temPaginaNoPeriodo(n) ? '' : '<p class="bo-small">Será o primeiro material do ' + (n.per ? n.per + 'º período' : 'grupo') + ': crie também o <code>_index.md</code> da pasta do período (o guia explica).</p>')) + '</div>';
       /* leva o nó escolhido para dentro da área visível do scroll horizontal */
       var sc = document.getElementById("bo-m-scroll"), p = pos[slug];
       if (sc && sc.scrollWidth > sc.clientWidth) sc.scrollTo({ left: Math.max(0, p.x - 24), behavior: "smooth" });
     }
 
     /* começa com a disciplina que mais depende de outras (mostra o grafo funcionando) */
-    var start = list.filter(function (n) { return !n.ghost; }).sort(function (a, b) { return Object.keys(closure(b.slug, up)).length - Object.keys(closure(a.slug, up)).length; })[0] || list[0];
+    var start = list.filter(function (n) { return n.url; }).sort(function (a, b) { return Object.keys(closure(b.slug, up)).length - Object.keys(closure(a.slug, up)).length; })[0] || list[0];
     choose(start.slug);
 
     /* avisa que o grafo rola para os lados quando ele não cabe na tela */

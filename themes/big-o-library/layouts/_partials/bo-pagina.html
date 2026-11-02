@@ -24,12 +24,6 @@
 
         {{- $material := and .IsPage (eq .Section "docs") .Parent (ge (len .Ancestors) 4) }}
         {{- if $material }}
-          <div class="bo-study" data-bo-study hidden>
-            <button type="button" class="bo-study-btn" aria-pressed="false" data-path="{{ .RelPermalink }}" data-title="{{ .Title }}">
-              <span class="bo-study-i" aria-hidden="true">✓</span> <span class="bo-study-t">Marcar como estudado</span>
-            </button>
-            <span class="bo-study-n">Fica salvo só neste navegador.</span>
-          </div>
           {{- $irmas := .Parent.RegularPages.ByWeight }}
           {{- $prev := false }}{{ $next := false }}
           {{- range $i, $p := $irmas }}
