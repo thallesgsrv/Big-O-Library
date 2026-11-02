@@ -9,32 +9,32 @@ date: 2026-10-31
 
 ## Sobre
 
-Até aqui, as estruturas que guardam elementos têm um problema ou outro:
+Vamos fazer um balanço do que temos até aqui, porque cada estrutura tem um defeito de personalidade:
 
-- o **array ordenado** busca em \(O(\log n)\) com busca binária, mas inserir e remover custa \(O(n)\), por causa dos deslocamentos;
-- a **lista encadeada** insere e remove com facilidade, mas buscar custa \(O(n)\);
+- o **array ordenado** busca em \(O(\log n)\), mas inserir e remover custa \(O(n)\), por causa dos deslocamentos;
+- a **lista encadeada** insere e remove com facilidade, mas buscar é \(O(n)\);
 - a **tabela hash** é rápida, mas não guarda ordem.
 
-A **árvore binária de busca** (BST, de *binary search tree*) é uma tentativa de ter o melhor dos dois mundos: buscar, inserir e remover em \(O(\log n)\), mantendo os elementos **ordenados**. A ideia é pegar a lógica da busca binária e embuti-la na própria forma da estrutura.
+Dá para ter o melhor dos três? A **árvore binária de busca** (BST, de *binary search tree*) é a tentativa: buscar, inserir e remover em \(O(\log n)\) **mantendo tudo ordenado**. A ideia é pegar a lógica da busca binária e embuti-la na própria forma da estrutura. Em vez de *calcular* o meio do array, o meio está na raiz, e cada comparação já te manda para o lado certo.
 
-## Vocabulário de árvores
+## Vocabulário de árvores (rapidinho)
 
-Uma árvore é formada por **nós** ligados entre si. Em uma árvore binária, cada nó tem no máximo dois filhos.
+Uma árvore é feita de **nós** ligados. Em uma árvore binária, cada nó tem **no máximo dois filhos**. Pense em uma árvore genealógica de cabeça para baixo.
 
 - **Raiz**: o nó do topo, o único sem pai.
-- **Filhos** (esquerdo e direito) e **pai**: a relação entre um nó e os que estão logo abaixo dele.
+- **Filhos** (esquerdo e direito) e **pai**: quem está logo abaixo e logo acima.
 - **Folha**: nó sem filhos.
-- **Subárvore**: um nó e tudo que está abaixo dele. Toda subárvore é uma árvore.
-- **Altura** de um nó: o número de arestas no caminho mais longo até uma folha. Nesta página, uma folha tem altura 0 e a árvore vazia tem altura \(-1\). A altura da árvore é a altura da raiz.
+- **Subárvore**: um nó e tudo que está pendurado nele. E o detalhe bonito: toda subárvore é, ela mesma, uma árvore. Guarda isso, porque é por causa disso que a recursão funciona tão bem aqui.
+- **Altura** de um nó: número de arestas no caminho mais longo até uma folha. Aqui, folha tem altura 0 e a árvore vazia tem altura \(-1\). A altura da árvore é a da raiz.
 
-## A propriedade da BST
+## A regra que manda em tudo
 
 Para **todo nó** da árvore:
 
-- todos os valores da subárvore **esquerda** são **menores** que o valor do nó;
-- todos os valores da subárvore **direita** são **maiores** que o valor do nó.
+- todos os valores da subárvore **esquerda** são **menores** que o nó;
+- todos os valores da subárvore **direita** são **maiores** que o nó.
 
-Aqui vou tratar valores distintos (sem repetição). A árvore a seguir é uma BST:
+Vou tratar valores distintos (sem repetição). Esta aqui é uma BST:
 
 ```text
             50
@@ -46,13 +46,13 @@ Aqui vou tratar valores distintos (sem repetição). A árvore a seguir é uma B
        35    45
 ```
 
-Com a propriedade, procurar fica parecido com a busca binária: comparamos com o nó atual e **descartamos metade** (uma subárvore inteira) de uma vez. Procurando 45: é menor que 50, vai para a esquerda; é maior que 30, vai para a direita; é maior que 40, vai para a direita; achou.
+Com essa regra, procurar vira um jogo de "mais alto ou mais baixo". Procurando o 45: é menor que 50, vai para a esquerda. É maior que 30, direita. Maior que 40, direita. Achou. Cada comparação **descartou uma subárvore inteira**, igual a busca binária descartando metade do array.
 
 ## Construindo a árvore
 
 ### Passo 1: o nó e a árvore
 
-Cada nó guarda o valor e a referência para os dois filhos. A árvore só precisa conhecer a raiz.
+Cada nó guarda o valor e a referência para os dois filhos. A árvore só precisa conhecer a raiz (o resto, ela alcança a partir dali).
 
 ```java
 public class ArvoreBinariaBusca {
@@ -82,7 +82,7 @@ public class ArvoreBinariaBusca {
 
 ### Passo 2: buscar
 
-Começamos na raiz e, a cada passo, escolhemos o lado conforme a comparação. Se chegarmos a `null`, o valor não está na árvore.
+Começa na raiz e, a cada passo, escolhe o lado pela comparação. Chegou a `null`? O valor não está lá.
 
 ```java
 public boolean contains(int valor) {
@@ -99,7 +99,7 @@ public boolean contains(int valor) {
 
 ### Passo 3: inserir
 
-Inserir é buscar até cair em um `null`: é exatamente ali que o novo nó deve ficar. Escrevo de forma recursiva, em que cada chamada devolve a raiz da subárvore já atualizada. Assim, a ligação com o pai é refeita automaticamente.
+Aqui tem uma sacada boa: inserir é só **buscar até cair num `null`**, e é exatamente ali que o novo nó deve morar. Escrevo de forma recursiva, em que cada chamada devolve a raiz da subárvore já atualizada. Assim a ligação com o pai se refaz sozinha, sem a gente precisar guardar "quem é o pai".
 
 ```java
 public void add(int valor) {
@@ -120,13 +120,13 @@ private No add(No no, int valor) {
 }
 ```
 
-Inserindo `50, 30, 70, 20, 40, 60, 80, 35, 45`, nessa ordem, obtemos a árvore desenhada acima. Veja o caminho do `35`: menor que 50 (esquerda), maior que 30 (direita), menor que 40 (esquerda), subárvore vazia: o `35` vira filho esquerdo do `40`.
+Inserindo `50, 30, 70, 20, 40, 60, 80, 35, 45`, nessa ordem, saímos com a árvore desenhada lá em cima. Acompanha o `35`: menor que 50 (esquerda), maior que 30 (direita), menor que 40 (esquerda), subárvore vazia. O `35` vira filho esquerdo do `40`.
 
-A raiz é sempre o **primeiro** valor inserido. A forma da árvore depende da **ordem** de inserção; guarde essa observação, ela é importante mais adiante.
+A raiz é sempre o **primeiro** valor inserido, e a forma da árvore depende da **ordem** de inserção. Guarda essa observação com carinho, porque ela vai dar problema daqui a pouco.
 
 ### Passo 4: mínimo e máximo
 
-O menor valor está sempre no nó mais à esquerda; o maior, no mais à direita. Basta descer sempre pelo mesmo lado.
+O menor está sempre no nó mais à esquerda; o maior, no mais à direita. É só descer sempre pelo mesmo lado, sem comparar nada.
 
 ```java
 public int min() {
@@ -153,7 +153,7 @@ public int max() {
 
 ### Passo 5: altura
 
-A altura de um nó é 1 mais a maior altura entre seus filhos. A árvore vazia vale \(-1\), o que faz a folha valer \(1 + \max(-1, -1) = 0\).
+A altura de um nó é 1 mais a maior altura entre os filhos. A árvore vazia vale \(-1\), o que faz a folha valer \(1 + \max(-1, -1) = 0\).
 
 ```java
 public int altura() {
@@ -168,9 +168,9 @@ private int altura(No no) {
 }
 ```
 
-### Passo 6: percursos
+### Passo 6: percursos (visitar todo mundo)
 
-**Percorrer** uma árvore é visitar todos os nós em alguma ordem. Os três percursos recursivos clássicos mudam só o momento de visitar o nó em relação às subárvores:
+**Percorrer** é visitar todos os nós em alguma ordem. Os três clássicos mudam só o **momento** de visitar o nó em relação às subárvores:
 
 ```java
 public List<Integer> emOrdem() {
@@ -187,11 +187,11 @@ private void emOrdem(No no, List<Integer> saida) {
 }
 ```
 
-- **Em ordem** (esquerda, nó, direita): devolve os valores **em ordem crescente**. É uma consequência direta da propriedade da BST.
-- **Pré-ordem** (nó, esquerda, direita): visita o nó antes das subárvores. A raiz sai primeiro, então serve para copiar ou salvar a árvore.
-- **Pós-ordem** (esquerda, direita, nó): visita o nó depois das subárvores. Os filhos saem antes do pai, útil para apagar uma árvore ou calcular algo de baixo para cima.
+- **Em ordem** (esquerda, nó, direita): devolve os valores **em ordem crescente**. Não é coincidência, é a regra da BST aparecendo: tudo à esquerda é menor, então sai primeiro.
+- **Pré-ordem** (nó, esquerda, direita): visita o nó *antes* dos filhos. A raiz sai primeiro, ótimo para copiar ou salvar a árvore.
+- **Pós-ordem** (esquerda, direita, nó): visita o nó *depois* dos filhos. Bom para apagar uma árvore ou calcular algo de baixo para cima.
 
-Para as outras duas, basta mudar a posição da linha `saida.add(no.valor)` (imports necessários: `java.util.ArrayList` e `java.util.List`). Na árvore de exemplo:
+Para as outras duas, basta mudar a posição da linha `saida.add(no.valor)` (imports: `java.util.ArrayList` e `java.util.List`). Na árvore de exemplo:
 
 ```text
 em ordem:  [20, 30, 35, 40, 45, 50, 60, 70, 80]
@@ -199,15 +199,15 @@ pré-ordem: [50, 30, 20, 40, 35, 45, 70, 60, 80]
 pós-ordem: [20, 35, 45, 40, 30, 60, 80, 70, 50]
 ```
 
-### Passo 7: remover
+### Passo 7: remover (o chefão da fase)
 
-Remover é a operação mais delicada, porque a árvore precisa continuar sendo uma BST. Encontramos o nó (como na busca) e então há **três casos**:
+Remover é a parte delicada, porque a árvore precisa **continuar sendo uma BST** depois. Acha o nó (como na busca) e então são **três casos**:
 
-**Caso 1: o nó é folha.** Basta removê-lo (o pai passa a apontar para `null`).
+**Caso 1: o nó é folha.** Moleza. Tira, e o pai aponta para `null`.
 
-**Caso 2: o nó tem um único filho.** O filho ocupa o lugar do nó. A propriedade se mantém, porque tudo na subárvore do filho já estava do lado correto do ancestral.
+**Caso 2: o nó tem um único filho.** O filho sobe e ocupa o lugar. A regra continua valendo, porque tudo na subárvore dele já estava do lado certo dos ancestrais.
 
-**Caso 3: o nó tem dois filhos.** Não dá para simplesmente tirar o nó: ficaríamos com duas subárvores soltas. A solução é substituir o valor do nó pelo seu **sucessor**, o menor valor da subárvore direita. Esse valor é maior que tudo à esquerda e menor que tudo à direita, então a propriedade continua valendo. Depois, removemos o sucessor da subárvore direita (e ele, por ser o mais à esquerda, tem no máximo um filho: cai no caso 1 ou 2).
+**Caso 3: o nó tem dois filhos.** Aqui é que complica: se você só tirar o nó, sobram duas subárvores soltas sem ter onde pendurar. A saída esperta é **substituir o valor do nó pelo seu sucessor**: o menor valor da subárvore direita. Pensa bem: esse valor é maior que tudo à esquerda e menor que tudo o que sobra à direita. É o candidato perfeito para ocupar o trono sem quebrar a regra. Depois removemos o sucessor lá da direita (e como ele é o mais à esquerda, tem no máximo um filho: cai no caso 1 ou 2).
 
 ```java
 public void remove(int valor) {
@@ -253,14 +253,14 @@ remove(50)   caso 3: dois filhos. Sucessor = 60 (menor da subárvore direita).
              pré-ordem: [60, 40, 35, 45, 70, 80]
 ```
 
-## Análise de custo
+## Quanto custa?
 
-`contains`, `add` e `remove` descem por **um único caminho**, da raiz até no máximo uma folha. O número de passos é, portanto, no máximo a **altura** \(h\) da árvore: \(O(h)\).
+`contains`, `add` e `remove` descem por **um único caminho**, da raiz até no máximo uma folha. O número de passos é, no máximo, a **altura** \(h\) da árvore: \(O(h)\).
 
-Tudo depende, então, de \(h\) em relação a \(n\):
+Ou seja, tudo depende de como \(h\) se compara a \(n\):
 
-- **Árvore balanceada** (os dois lados com alturas parecidas): \(h \approx \log_2 n\), e as operações custam \(O(\log n)\). Um milhão de nós, uns 20 passos.
-- **Árvore degenerada**: se inserirmos valores já **ordenados** (`1, 2, 3, ..., n`), cada novo valor vai para a direita do anterior, e a árvore vira uma lista: altura \(n - 1\) e operações \(O(n)\).
+- **Árvore balanceada** (os dois lados com alturas parecidas): \(h \approx \log_2 n\), e as operações custam \(O(\log n)\). Um milhão de nós, uns 20 passos. Lindo.
+- **Árvore degenerada**: se você inserir valores já **ordenados** (`1, 2, 3, ..., n`), cada novo valor vai para a direita do anterior, e a árvore vira uma lista torta: altura \(n - 1\), operações \(O(n)\).
 
 ```text
 add(1) add(2) add(3) add(4) ...
@@ -274,15 +274,15 @@ add(1) add(2) add(3) add(4) ...
       4  ...   (altura = n - 1)
 ```
 
-Nos meus testes, inserir `1..5000` em ordem produziu uma árvore de altura 4999. Inserindo valores em ordem aleatória, a altura esperada é \(O(\log n)\), mas não há garantia: **a BST comum não controla o próprio formato**. Em ordem de pior caso, a altura chega a \(n-1\) (e as versões recursivas desta página poderiam estourar a pilha com árvores muito grandes).
+Nos meus testes, inserir `1..5000` em ordem produziu uma árvore de altura 4999. Uma "árvore" que é só um corredor. Com inserções em ordem aleatória, a altura esperada é \(O(\log n)\), mas **não há garantia**: a BST comum não controla o próprio formato, e ainda pode estourar a pilha de recursão com árvores muito grandes.
 
-| Operação | Árvore balanceada | Pior caso (degenerada) |
+| Operação | Balanceada | Pior caso (degenerada) |
 |---|---|---|
 | `contains`, `add`, `remove` | \(O(\log n)\) | \(O(n)\) |
 | `min`, `max` | \(O(\log n)\) | \(O(n)\) |
 | percursos | \(O(n)\) | \(O(n)\) |
 
-A solução para o pior caso é uma árvore que **se reorganiza** para manter a altura pequena. É exatamente o que a [árvore AVL](../avl/) faz.
+Então, qual o remédio? Uma árvore que **se arruma sozinha** para manter a altura pequena. Esse é o papel da [árvore AVL](../avl/), e é a próxima parada.
 
 ## Exercícios
 
@@ -305,7 +305,7 @@ A solução para o pior caso é uma árvore que **se reorganiza** para manter a 
    ```
 
    Pré-ordem: `[8, 3, 1, 6, 4, 7, 10, 14, 13]`. Em ordem: `[1, 3, 4, 6, 7, 8, 10, 13, 14]` (sempre crescente). Altura: 3.
-2. O `3` tem dois filhos (1 e 6): é o **caso 3**. O sucessor é o menor valor da subárvore direita, o `4`. O `4` ocupa o lugar do `3` e o `4` antigo (uma folha) é removido. Nova pré-ordem: `[8, 4, 1, 6, 7, 10, 14, 13]`.
+2. O `3` tem dois filhos (1 e 6): **caso 3**. O sucessor é o menor da subárvore direita, o `4`. O `4` ocupa o lugar do `3` e o `4` antigo (uma folha) é removido. Nova pré-ordem: `[8, 4, 1, 6, 7, 10, 14, 13]`.
 3. Insira primeiro o valor do meio (que vira a raiz) e depois, em cada metade, o valor do meio dela, e assim por diante: por exemplo `4, 2, 6, 1, 3, 5, 7`, que dá altura 2. Já `1, 2, 3, 4, 5, 6, 7` dá altura 6.
 4. Uma folha é um nó sem filhos:
 
@@ -336,7 +336,7 @@ O percurso em ordem visita a subárvore esquerda (menores), depois o nó, depois
 {{< /questao >}}
 
 {{< questao >}}
-Qual é o custo de `add` em uma BST em que os valores foram inseridos já em ordem crescente?
+Qual o custo de `add` em uma BST em que os valores foram inseridos já em ordem crescente?
 
 - [ ] \(O(1)\)
 - [ ] \(O(\log n)\)
@@ -350,11 +350,11 @@ Cada valor vai para a direita do anterior, e a árvore vira uma lista de altura 
 Ao remover um nó com dois filhos, por que o sucessor (menor valor da subárvore direita) é um bom substituto?
 
 - [ ] Porque é sempre uma folha.
-- [x] Porque é maior que tudo na subárvore esquerda e menor que o restante da direita, mantendo a propriedade da BST.
+- [x] Porque é maior que tudo na subárvore esquerda e menor que o restante da direita, mantendo a regra da BST.
 - [ ] Porque está sempre na raiz.
 - [ ] Porque evita ter que remover mais algum nó.
 ---
-O sucessor pode ter um filho direito, então ele nem sempre é folha, mas sempre tem no máximo um filho e cai nos casos simples de remoção.
+O sucessor pode ter um filho direito, então nem sempre é folha, mas sempre tem no máximo um filho e cai nos casos simples de remoção.
 {{< /questao >}}
 
 {{< /quiz >}}
@@ -362,10 +362,10 @@ O sucessor pode ter um filho direito, então ele nem sempre é folha, mas sempre
 ## Resumo
 
 - Em uma BST, para todo nó: esquerda menor, direita maior.
-- Busca, inserção e remoção descem por um caminho só e custam \(O(h)\), em que \(h\) é a altura.
+- Busca, inserção e remoção descem por um caminho só e custam \(O(h)\).
 - O percurso **em ordem** devolve os valores ordenados.
-- A remoção tem três casos: folha, um filho e dois filhos (substitui pelo sucessor).
-- Balanceada: \(h \approx \log n\). Mas inserções em ordem degeneram a árvore em uma lista, com \(h = n - 1\).
+- Remoção: três casos (folha, um filho, dois filhos com troca pelo sucessor).
+- Balanceada: \(h \approx \log n\). Mas inserir em ordem degenera a árvore numa lista, com \(h = n - 1\).
 - Para garantir \(O(\log n)\), é preciso uma árvore autobalanceada, como a AVL.
 
 ## Para estudar mais

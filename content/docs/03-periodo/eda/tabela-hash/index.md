@@ -9,31 +9,30 @@ date: 2026-10-31
 
 ## Sobre
 
-Precisamos guardar pares **chave → valor** e responder rápido a perguntas como "qual é o valor associado a `"casa"`?". Vamos comparar o que já conhecemos:
+Imagina uma biblioteca sem catálogo e sem estantes organizadas. Você quer o livro "Dom Casmurro". O que faz? Anda pelas prateleiras olhando lombada por lombada. É a busca em lista: \(O(n)\).
 
-| Estrutura | Buscar por chave | Inserir |
-|---|---|---|
-| Array / lista sem ordem | \(O(n)\) | \(O(1)\) no fim |
-| Array ordenado (busca binária) | \(O(\log n)\) | \(O(n)\), para abrir espaço |
+Agora imagina que a biblioteca é organizada por ordem alfabética. Dá para fazer busca binária, \(O(\log n)\), mas toda vez que chega um livro novo é preciso abrir espaço no meio da estante: \(O(n)\).
 
-Queremos algo melhor nas duas. A **tabela hash** consegue \(O(1)\) **em média** para buscar, inserir e remover. Ela é a estrutura por trás de `HashMap`, `HashSet`, de dicionários do Python e de objetos do JavaScript.
+E se existisse uma mágica que, dado o **nome do livro**, te dissesse **na hora** em qual prateleira ele está? Sem procurar, sem comparar. Essa mágica é a **tabela hash**, e ela é a estrutura por trás de `HashMap`, `HashSet`, dos dicionários do Python e dos objetos do JavaScript. Buscar, inserir e remover em \(O(1)\) **em média**.
 
-## Ideia 1: usar a chave como índice
+Spoiler: a mágica tem um truque, e o truque tem um defeito. Os dois são a graça desta página.
 
-Se as chaves fossem números pequenos, bastaria um array e usar a própria chave como posição: o valor da chave `7` fica em `v[7]`. Buscar, inserir e remover seriam \(O(1)\). Isso se chama **endereçamento direto**.
+## Ideia 1: usar a própria chave como índice
 
-O problema é que as chaves reais são strings, CPFs, ids enormes. Um array com uma posição para cada CPF possível teria \(10^{11}\) posições, e quase todas vazias.
+Se as chaves fossem números pequenos, seria trivial: um array, e o valor da chave `7` mora em `v[7]`. Buscar, inserir e remover em \(O(1)\). Isso se chama **endereçamento direto**.
+
+O problema é que as chaves reais são strings, CPFs, ids gigantes. Um array com uma posição para cada CPF possível teria \(10^{11}\) posições, quase todas vazias. Seria uma biblioteca do tamanho de um país para guardar 500 livros.
 
 ## Ideia 2: a função de hash
 
-A saída é **converter a chave em um índice** de um array pequeno. Essa conversão é a **função de hash**. Em dois passos:
+A saída é **converter a chave em um índice de um array pequeno**. Essa conversão é a **função de hash**, em dois passos:
 
 1. transformar a chave em um número inteiro (o *hash code*);
-2. reduzir esse número ao intervalo \([0, m-1]\), em que \(m\) é a capacidade da tabela, com o resto da divisão.
+2. encolher esse número para caber no array, com o resto da divisão: `número % capacidade`.
 
-Uma função de hash precisa ser **determinística** (mesma chave, mesmo índice sempre), **rápida** e espalhar bem as chaves pelo intervalo.
+Uma boa função de hash é **determinística** (mesma chave, mesmo índice, sempre), **rápida**, e **espalha** bem as chaves, sem amontoar todo mundo no mesmo canto.
 
-Uma primeira tentativa ingênua para strings é somar os códigos dos caracteres. Com capacidade 8:
+Para ver o que é uma função *ruim*, vamos tentar a ideia mais ingênua: somar os códigos dos caracteres. Com capacidade 8:
 
 ```text
 "amor" -> soma 431 -> 431 % 8 = 7
@@ -41,7 +40,9 @@ Uma primeira tentativa ingênua para strings é somar os códigos dos caracteres
 "mora" -> soma 431 -> 431 % 8 = 7
 ```
 
-Todas as palavras que são anagramas caem no mesmo índice, porque a soma não depende da ordem das letras. É uma função ruim. Uma melhoria é o **hash polinomial**: a cada caractere, multiplicamos o acumulado por uma constante (31 é a escolha clássica) antes de somar. Assim a posição de cada letra influencia o resultado:
+Todo anagrama cai no mesmo lugar, porque somar não liga para a ordem das letras. É como numerar prateleiras pela soma das letras do título: "Roma" e "Amor" brigariam pela mesma prateleira o tempo todo.
+
+A melhoria é o **hash polinomial**: a cada caractere, multiplica o acumulado por uma constante (31 é a clássica) antes de somar. Assim a **posição** de cada letra faz diferença:
 
 ```java
 private int indice(String chave, int capacidade) {
@@ -53,7 +54,7 @@ private int indice(String chave, int capacidade) {
 }
 ```
 
-Um detalhe importante: a conta pode estourar um `int` e dar **negativo**, e um índice negativo quebraria o programa. A máscara `& 0x7fffffff` zera o bit de sinal, deixando o número sempre não negativo antes do `%`. (Essa é a mesma fórmula que o `String.hashCode()` do Java usa.)
+Um detalhe importante: a conta pode estourar o `int` e dar **negativo**, e índice negativo derruba o programa. A máscara `& 0x7fffffff` zera o bit de sinal e garante um número não negativo antes do `%`. (É a mesma fórmula do `String.hashCode()` do Java.)
 
 Com capacidade 8, alguns exemplos:
 
@@ -65,13 +66,17 @@ Com capacidade 8, alguns exemplos:
 "eva"  -> 100816  -> índice 0    <- mesmo índice de "dani"
 ```
 
-## Colisões são inevitáveis
+Percebeu? `"ana"` e `"caio"` caíram no **mesmo índice 4**. Isso tem nome.
 
-Duas chaves diferentes que caem no mesmo índice formam uma **colisão**, como `"ana"` e `"caio"` acima. Não dá para evitá-las: existem muito mais chaves possíveis do que posições, e pelo princípio da casa dos pombos duas chaves vão acabar dividindo uma posição. O que define uma tabela hash é **como ela lida com colisões**. Vamos ver as duas estratégias principais.
+## Colisões: o defeito do truque
+
+Duas chaves diferentes que caem no mesmo índice formam uma **colisão**. E não adianta se esforçar: elas são **inevitáveis**. Existem muito mais chaves possíveis do que posições, e, pelo princípio da casa dos pombos, se você tem mais pombos que casinhas, dois vão acabar dividindo uma.
+
+Então a pergunta que define uma tabela hash não é "como evitar colisões", e sim **"o que fazer quando elas acontecem?"**. Existem duas respostas clássicas.
 
 ## Estratégia A: encadeamento separado
 
-Cada posição do array (chamada de **balde**) guarda uma lista encadeada com todas as chaves que caíram ali. Se duas chaves colidem, ficam na mesma lista.
+A ideia: cada posição do array (chamada de **balde**) guarda uma **lista encadeada** com todas as chaves que caíram ali. Colidiu? Entra na fila do balde. É um prédio onde cada andar tem uma sala de espera.
 
 ### Passo 1: o nó e a estrutura
 
@@ -111,11 +116,11 @@ public class TabelaHash {
 }
 ```
 
-`baldes[i]` é a cabeça da lista do balde `i` (ou `null`, se estiver vazio). `FATOR_MAXIMO` vai ser usado no passo do redimensionamento.
+`baldes[i]` é a cabeça da lista do balde `i` (ou `null`, se está vazio). O `FATOR_MAXIMO` a gente usa já já, no redimensionamento.
 
 ### Passo 2: get
 
-Calculamos o balde e percorremos a lista dele comparando as chaves com `equals`. Comparamos a **chave**, e não só o índice, porque várias chaves dividem o balde.
+Calculamos o balde e percorremos a lista dele comparando as chaves com `equals`. Comparamos a **chave** e não só o índice, porque vários moram no mesmo balde.
 
 ```java
 public Integer get(String chave) {
@@ -133,7 +138,7 @@ Devolvo `Integer` (e não `int`) para poder responder `null` quando a chave não
 
 ### Passo 3: put
 
-Se a chave já existe, atualizamos o valor. Se não, criamos um nó novo. Inserir **no início** da lista do balde é \(O(1)\), sem precisar percorrer até o fim.
+Se a chave já existe, só atualiza o valor. Se não, cria um nó novo. E inserimos **no início** do balde, que é \(O(1)\): sem percorrer até o fim.
 
 ```java
 public void put(String chave, int valor) {
@@ -152,7 +157,7 @@ public void put(String chave, int valor) {
 }
 ```
 
-Inserindo `"ana"`, `"bia"`, `"caio"`, `"dani"` e `"eva"` (nessa ordem) em uma tabela de capacidade 8:
+Inserindo `"ana"`, `"bia"`, `"caio"`, `"dani"` e `"eva"` (nessa ordem) numa tabela de capacidade 8:
 
 ```text
 balde 0:  eva -> dani
@@ -165,7 +170,7 @@ balde 6:  (vazio)
 balde 7:  (vazio)
 ```
 
-As colisões ficaram guardadas nas listas de `0` e `4`; o novo nó entra na frente.
+As colisões ficaram guardadas nas listas dos baldes `0` e `4`, e cada novo nó entra na frente.
 
 ### Passo 4: remove
 
@@ -191,9 +196,9 @@ public Integer remove(String chave) {
 }
 ```
 
-### Passo 5: o fator de carga e o redimensionamento
+### Passo 5: fator de carga e redimensionamento
 
-Se a tabela só crescesse em número de chaves e o array continuasse pequeno, as listas ficariam enormes e a busca viraria \(O(n)\). Medimos isso pelo **fator de carga**:
+Se a tabela só ganhasse chaves e o array continuasse pequeno, as listas ficariam enormes e a busca voltaria a ser \(O(n)\). Precisamos de um termômetro de "quão cheia está a tabela", o **fator de carga**:
 
 $$
 \alpha = \frac{n}{m}
@@ -201,7 +206,7 @@ $$
 
 em que \(n\) é o número de chaves guardadas e \(m\) é o número de baldes. Se as chaves se espalham bem, cada lista tem em média \(\alpha\) elementos, e uma busca custa em média \(O(1 + \alpha)\).
 
-A estratégia é manter \(\alpha\) limitado: quando passa de 0,75, **dobramos** a capacidade, como no [ArrayList](../arraylist/). O detalhe delicado é que o índice depende da capacidade (`% capacidade`), então não basta copiar: é preciso **recalcular o índice de cada chave** na tabela nova. Esse reprocessamento se chama *rehash*.
+A estratégia é manter \(\alpha\) sob controle: passou de 0,75? **Dobra a capacidade**, igual ao [ArrayList](../arraylist/). Só que aqui tem uma pegadinha que derruba muita gente: o índice depende da capacidade (`% capacidade`), então **não basta copiar**. É preciso recalcular o índice de cada chave para a tabela nova. Esse recálculo se chama *rehash*.
 
 ```java
 private void redimensiona(int novaCapacidade) {
@@ -220,9 +225,9 @@ private void redimensiona(int novaCapacidade) {
 }
 ```
 
-Reaproveitamos os nós em vez de criar novos. Guardar `proximo` antes de religar é essencial: ao mudar `atual.proximo`, perderíamos o resto da lista.
+Repara que reaproveitamos os nós em vez de criar novos. E guardar `proximo` **antes** de religar é essencial: se a gente mexe em `atual.proximo` primeiro, perde o resto da lista, como cortar o galho em que você está sentado.
 
-### Exemplo: contar palavras
+### Exemplo prático: contando palavras
 
 Uma aplicação clássica: quantas vezes cada palavra aparece em um texto.
 
@@ -244,15 +249,15 @@ System.out.println(contagem.get("zzz"));     // null
 
 ## Estratégia B: endereçamento aberto
 
-Aqui não existem listas: todos os pares ficam **dentro do próprio array**. Se o índice calculado já está ocupado, procuramos outra posição. Na **sondagem linear**, tentamos a próxima, depois a seguinte, e assim por diante, voltando ao início quando passa do fim (`(i + 1) % capacidade`).
+Resposta diferente para a mesma pergunta: **sem listas**. Todos os pares ficam dentro do próprio array. Se o lugar do seu índice está ocupado, você procura outro. Na **sondagem linear**, tenta a posição seguinte, depois a outra, e assim por diante, voltando ao início quando passa do fim (`(i + 1) % capacidade`). É chegar no estacionamento e a sua vaga favorita estar ocupada: você vai seguindo em frente até achar uma livre.
 
-Para buscar, o caminho é o mesmo: começamos no índice da chave e seguimos até achar a chave ou até chegar a uma posição **vazia**, o que prova que a chave não está lá.
+Para **buscar**, o caminho é o mesmo: começa no índice da chave e anda até achar a chave ou dar de cara com uma posição **vazia** (aí você sabe que ela não está na tabela, porque senão teria estacionado ali).
 
-### O problema da remoção
+### O problema da remoção (a pegadinha)
 
-Suponha as chaves `A`, `B` e `C`, todas com índice 3, e que ficaram nas posições 3, 4 e 5. Se removermos `B` apenas esvaziando a posição 4, a busca por `C` começa em 3, passa por `A`, encontra a posição 4 vazia e conclui (errado!) que `C` não existe.
+Imagina que `A`, `B` e `C` têm todas índice 3 e acabaram nas posições 3, 4 e 5. Agora você remove o `B` esvaziando a posição 4. E aí procura o `C`: começa em 3 (é o `A`), anda para 4... **vazio!** "Ah, então o `C` não existe." Errado. O `C` está logo ali, mas o buraco enganou a busca.
 
-A solução é um terceiro estado, **removido** (uma "lápide"): a posição não tem chave, mas a busca **continua** passando por ela. Cada posição passa a ter um estado: `VAZIO`, `OCUPADO` ou `REMOVIDO`.
+A solução é um terceiro estado, **removido**, a "lápide": a posição não tem mais chave, mas a busca **continua passando** por ela. Cada posição passa a ter um estado: `VAZIO`, `OCUPADO` ou `REMOVIDO`.
 
 ```java
 public class TabelaHashSondagem {
@@ -286,11 +291,11 @@ public class TabelaHashSondagem {
 }
 ```
 
-`usadas` conta também as lápides. Elas ocupam espaço na sondagem, então entram no cálculo da carga.
+O `usadas` conta também as lápides, porque elas continuam ocupando espaço na sondagem.
 
 ### Busca
 
-Um método auxiliar devolve a posição da chave, ou `-1`. Ele só para ao encontrar `VAZIO`; `REMOVIDO` é atravessado.
+Um método auxiliar devolve a posição da chave (ou `-1`). Ele só para ao encontrar `VAZIO`; `REMOVIDO` é atravessado.
 
 ```java
 private int busca(String chave) {
@@ -310,11 +315,11 @@ public Integer get(String chave) {
 }
 ```
 
-Esse laço termina porque garantimos que a tabela nunca fica cheia (veja o `put`): sempre existe pelo menos uma posição `VAZIO`.
+Esse laço sempre termina, porque a tabela nunca fica cheia (olha o `put`): sempre sobra pelo menos uma posição `VAZIO`.
 
 ### put e remove
 
-No `put`, primeiro vemos se a chave já existe. Se não, garantimos espaço e procuramos a primeira posição livre. Aqui mantenho a carga em no máximo 0,5, porque a sondagem linear degrada rápido quando a tabela enche (os elementos formam grandes blocos contínuos, chamados de *agrupamentos*).
+No `put`, primeiro vemos se a chave já existe. Se não, garantimos espaço e procuramos a primeira posição livre. Aqui mantenho a carga em no máximo 0,5, porque a sondagem linear degrada rápido quando enche: os elementos formam grandes blocos contínuos (os *agrupamentos*), e cada colisão aumenta o bloco, que atrai mais colisões. É um engarrafamento que se alimenta.
 
 ```java
 public void put(String chave, int valor) {
@@ -352,7 +357,7 @@ public Integer remove(String chave) {
 }
 ```
 
-O `redimensiona` reinsere só as posições `OCUPADO` em arrays novos (e, de quebra, as lápides somem):
+O `redimensiona` reinsere só as posições `OCUPADO` em arrays novos (e as lápides desaparecem de bônus):
 
 ```java
 private void redimensiona(int novaCapacidade) {
@@ -374,7 +379,7 @@ private void redimensiona(int novaCapacidade) {
 }
 ```
 
-## Comparando as duas estratégias
+## Qual escolher?
 
 | | Encadeamento separado | Endereçamento aberto |
 |---|---|---|
@@ -383,34 +388,34 @@ private void redimensiona(int novaCapacidade) {
 | Remoção | simples | exige lápides |
 | Cache | pior (nós espalhados) | melhor (tudo contíguo) |
 
-## Duas armadilhas
+## Duas armadilhas clássicas
 
-**Chaves precisam ter `equals` e `hashCode` consistentes.** Se duas chaves são iguais pelo `equals`, elas **têm** que produzir o mesmo hash. Se você usar um objeto seu como chave de um `HashMap` e sobrescrever só `equals`, a busca falha de formas misteriosas: a chave "igual" cai em outro balde.
+**`equals` e `hashCode` precisam combinar.** Se duas chaves são iguais pelo `equals`, elas **têm** que produzir o mesmo hash. Se você usa um objeto seu como chave de um `HashMap` e sobrescreve só o `equals`, a busca falha de formas misteriosas: a chave "igual" cai em outro balde e nunca é encontrada. Já perdeu uma tarde de debug por causa disso? Vai perder.
 
-**Chaves mutáveis.** Se você altera um objeto depois de usá-lo como chave, o hash dele muda, e a tabela nunca mais o encontra no balde onde foi guardado.
+**Chave mutável.** Se você altera um objeto *depois* de usá-lo como chave, o hash dele muda, e a tabela nunca mais o encontra onde o guardou. É como mudar de casa sem avisar o correio.
 
-## Análise de custo
+## Quanto custa?
 
 | Operação | Caso médio | Pior caso |
 |---|---|---|
 | `get`, `put`, `remove` | \(O(1)\) | \(O(n)\) |
 
-O pior caso acontece quando todas as chaves colidem no mesmo balde (ou no mesmo agrupamento): a tabela vira, na prática, uma lista. Com uma boa função de hash e o fator de carga controlado pelo redimensionamento, isso é raro e o custo médio é constante. O `put` que dispara o redimensionamento custa \(O(n)\), mas, como no ArrayList, isso acontece cada vez menos, e o custo amortizado continua \(O(1)\).
+O pior caso acontece quando todas as chaves colidem no mesmo balde (ou no mesmo agrupamento): a tabela vira uma lista com roupa de hash. Com uma boa função de hash e o fator de carga controlado pelo redimensionamento, isso é raro e o custo médio é constante. O `put` que dispara o redimensionamento custa \(O(n)\), mas, como no ArrayList, isso fica cada vez mais raro, e o custo amortizado continua \(O(1)\).
 
-Em troca da velocidade, a tabela hash **não guarda ordem**: não há como pegar o menor elemento, o próximo maior ou percorrer em ordem crescente sem ordenar tudo. Para isso existem as árvores, que vêm a seguir.
+E o que a gente paga pela velocidade? **A tabela não guarda ordem.** Não dá para pegar o menor elemento, o próximo maior, ou percorrer em ordem crescente sem ordenar tudo. Para isso existem as árvores, que vêm logo depois.
 
 ## Exercícios
 
 1. Uma tabela com 7 posições usa \(h(k) = k \bmod 7\) e **sondagem linear**. Insira, nessa ordem, as chaves 10, 17, 24, 3 e 8. Desenhe o array final.
 2. Na tabela do exercício anterior, remova a chave 17 **apenas esvaziando a posição**. O que acontece ao buscar a chave 24? Como as lápides resolvem?
 3. Por que o `redimensiona` do encadeamento recalcula o índice de cada chave, em vez de copiar cada balde para a mesma posição da tabela nova?
-4. Qual é o problema de usar a soma dos códigos dos caracteres como função de hash para palavras?
+4. Qual o problema de usar a soma dos códigos dos caracteres como função de hash para palavras?
 
 {{< details title="Gabarito" >}}
 1. \(10 \bmod 7 = 3\): vai para a posição 3. \(17 \bmod 7 = 3\): ocupada, tenta 4. \(24 \bmod 7 = 3\): 3 e 4 ocupadas, vai para 5. \(3 \bmod 7 = 3\): 3, 4 e 5 ocupadas, vai para 6. \(8 \bmod 7 = 1\): posição 1 livre. Array final (posições 0 a 6): `[_, 8, _, 10, 17, 24, 3]`.
-2. Ao buscar 24: começa na posição 3 (10, diferente), vai para 4 (agora vazia) e para, concluindo **errado** que 24 não está na tabela. Com a lápide, a posição 4 fica marcada como `REMOVIDO`, a busca atravessa e encontra 24 na posição 5.
-3. Porque o índice é `hash % capacidade`: ao mudar a capacidade, a mesma chave tende a ir para outro balde. Copiar o balde para a mesma posição deixaria chaves em lugares onde a busca nunca as procuraria.
-4. A soma ignora a ordem das letras, então todos os anagramas (`amor`, `roma`, `mora`) colidem. Além disso, as somas se concentram numa faixa pequena de valores, espalhando mal as chaves. O hash polinomial, com multiplicação por 31 a cada caractere, resolve isso.
+2. Ao buscar 24: começa na posição 3 (10, diferente), vai para 4 (agora vazia) e para, concluindo **errado** que 24 não está na tabela. Com a lápide, a posição 4 fica `REMOVIDO`, a busca atravessa e encontra 24 na posição 5.
+3. Porque o índice é `hash % capacidade`: ao mudar a capacidade, a mesma chave tende a ir para outro balde. Copiar o balde para a mesma posição deixaria chaves onde a busca nunca as procuraria.
+4. A soma ignora a ordem das letras, então todos os anagramas (`amor`, `roma`, `mora`) colidem. Além disso, as somas se concentram numa faixa pequena de valores, espalhando mal. O hash polinomial, com a multiplicação por 31 a cada caractere, resolve isso.
 {{< /details >}}
 
 {{< quiz titulo="Tabelas hash" >}}
@@ -453,11 +458,11 @@ A tabela hash espalha as chaves e não guarda ordem. Para percorrer em ordem é 
 ## Resumo
 
 - A tabela hash converte a **chave em um índice** com uma função de hash e guarda o par em um array.
-- **Colisões** (chaves diferentes com o mesmo índice) são inevitáveis e precisam de uma estratégia.
+- **Colisões** são inevitáveis (casa dos pombos) e precisam de uma estratégia.
 - **Encadeamento separado**: cada balde é uma lista encadeada.
 - **Endereçamento aberto**: tudo no array, com sondagem; a remoção exige lápides.
 - O **fator de carga** \(\alpha = n/m\) é mantido baixo dobrando a capacidade e recalculando os índices (*rehash*).
-- Busca, inserção e remoção custam \(O(1)\) em média e \(O(n)\) no pior caso; a estrutura não mantém ordem.
+- Busca, inserção e remoção: \(O(1)\) em média, \(O(n)\) no pior caso. Sem ordem.
 
 ## Para estudar mais
 

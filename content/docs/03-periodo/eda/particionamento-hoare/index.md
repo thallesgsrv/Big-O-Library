@@ -9,20 +9,22 @@ date: 2026-10-31
 
 ## Sobre
 
-Na página do [quick sort](../quick-sort/), o particionamento usado foi o de **Lomuto**: um índice varre o trecho e outro marca a fronteira dos "menores que o pivô". Funciona bem e é fácil de entender, mas faz muitas trocas.
+Na página do [quick sort](../quick-sort/), usamos o particionamento de **Lomuto**: um índice varre o trecho e outro marca a fronteira dos "menores que o pivô". É simples e dá para entender de primeira, mas tem um jeito meio trabalhoso de fazer as coisas: troca **muito**.
 
-O **particionamento de Hoare** é o original, criado por Tony Hoare junto com o quick sort, em 1959. A ideia é diferente: dois índices que começam nas **pontas** e caminham em direção um ao outro. Eles só trocam elementos quando encontram um par fora do lugar, um à esquerda que pertence ao lado direito e vice-versa.
+O **particionamento de Hoare** é o original, de Tony Hoare, criado junto com o próprio quick sort em 1959. A ideia é bem mais esperta, e parece uma cena de filme: **dois índices começam nas pontas e caminham um em direção ao outro**. Só trocam quando encontram um par fora do lugar. Quando se encontram no meio, acabou.
 
 ## A ideia
 
-Escolhido o pivô, queremos que, ao fim, tudo à esquerda de uma fronteira seja \(\le\) pivô e tudo à direita seja \(\ge\) pivô.
+Escolhido o pivô, queremos que, no fim, tudo à esquerda de uma fronteira seja \(\le\) pivô e tudo à direita seja \(\ge\) pivô.
 
-1. O índice `i` começa na esquerda e **avança** enquanto `v[i] < pivo`. Ele para no primeiro elemento que **não** é menor que o pivô, ou seja, um elemento que deveria estar à direita.
-2. O índice `j` começa na direita e **recua** enquanto `v[j] > pivo`. Ele para no primeiro elemento que **não** é maior que o pivô, um elemento que deveria estar à esquerda.
-3. Se `i` ainda está antes de `j`, os dois estão no lado errado: **trocamos** e continuamos.
-4. Se `i` alcançou ou passou `j`, as regiões se encontraram: terminou.
+1. O índice `i` começa na esquerda e **avança** enquanto `v[i] < pivo`. Ele para no primeiro elemento que **não** é menor que o pivô: alguém que deveria estar na direita.
+2. O índice `j` começa na direita e **recua** enquanto `v[j] > pivo`. Ele para no primeiro que **não** é maior que o pivô: alguém que deveria estar na esquerda.
+3. Se `i` ainda está antes de `j`, os dois estão no lado errado. **Trocam de lugar** e a caminhada continua.
+4. Se `i` alcançou ou passou `j`, as regiões se encontraram. Acabou.
 
-Cada elemento é visitado no máximo uma vez por um dos dois índices, então o custo é \(\Theta(n)\) para um trecho de tamanho \(n\), e cada troca já coloca **dois** elementos no lado certo.
+É como dois fiscais de festa, um em cada ponta do salão: um procura gente do lado errado à esquerda, o outro faz o mesmo à direita. Quando cada um acha alguém, os dois trocam de lado, e os fiscais continuam caminhando até se cruzarem.
+
+Cada elemento é visitado no máximo uma vez por um dos dois índices, então o custo é \(\Theta(n)\), e cada troca já coloca **dois** elementos no lado certo de uma vez. Eficiência de quem não gosta de desperdiçar viagem.
 
 ## Implementação
 
@@ -52,14 +54,14 @@ static void troca(int[] v, int i, int j) {
 
 Alguns detalhes que merecem atenção:
 
-- **`i` e `j` começam fora do trecho** (`esq - 1` e `dir + 1`) e usam `do ... while`: eles sempre andam um passo **antes** de testar. Isso evita testar o mesmo elemento duas vezes.
-- Os laços não saem do array. Na primeira rodada, o próprio pivô (que está no trecho) interrompe os dois índices; nas seguintes, os elementos que foram trocados fazem esse papel.
-- A comparação é **estrita** (`<` e `>`): os índices **param** em elementos iguais ao pivô. Isso parece estranho, mas é proposital, como veremos adiante.
-- Usei `esq + (dir - esq) / 2` para achar o meio sem risco de estouro do `int`.
+- **`i` e `j` começam fora do trecho** (`esq - 1` e `dir + 1`) e usam `do ... while`: sempre andam um passo **antes** de testar. Isso evita olhar o mesmo elemento duas vezes.
+- Os laços não saem do array. Na primeira rodada, o próprio pivô (que está no trecho) segura os dois índices; nas seguintes, os elementos que acabaram de ser trocados fazem esse papel.
+- A comparação é **estrita** (`<` e `>`): os índices **param** em elementos iguais ao pivô. Parece estranho, mas é de propósito, e já já você vai ver por quê.
+- Usei `esq + (dir - esq) / 2` para achar o meio sem risco de estourar o `int`.
 
-### O que a função devolve
+### O que a função devolve (a parte que pega)
 
-Diferente do Lomuto, **o pivô não termina necessariamente na posição final**. O retorno `j` é só o **ponto de corte**: tudo em `v[esq..j]` é \(\le\) pivô e tudo em `v[j+1..dir]` é \(\ge\) pivô. Por isso as chamadas recursivas são diferentes:
+Aqui o Hoare **não** é como o Lomuto: o pivô não termina necessariamente na posição final. O retorno `j` é só um **ponto de corte**: tudo em `v[esq..j]` é \(\le\) pivô e tudo em `v[j+1..dir]` é \(\ge\) pivô. Por isso as chamadas recursivas mudam:
 
 ```java
 static void quickSort(int[] v, int esq, int dir) {
@@ -71,10 +73,10 @@ static void quickSort(int[] v, int esq, int dir) {
 }
 ```
 
-No Lomuto, escrevíamos `(esq, p - 1)` e `(p + 1, dir)`, deixando o pivô de fora. Aqui o corte é entre `p` e `p + 1`, e nenhum elemento fica de fora.
+No Lomuto escrevíamos `(esq, p - 1)` e `(p + 1, dir)`, deixando o pivô de fora. Aqui o corte é entre `p` e `p + 1`, e ninguém fica de fora.
 
 > [!WARNING]
-> Esta versão **não funciona** com o último elemento como pivô (`pivo = v[dir]`). Em `[1, 2]`, o pivô é 2, `i` para em 1, `j` para em 1, a função devolve `j = 1` e a chamada recursiva `quickSort(v, 0, 1)` é a mesma de antes: recursão infinita. Com o elemento do meio (que, por usar divisão inteira, nunca é o último de um trecho com 2 ou mais elementos) ou com o primeiro, o trecho sempre diminui.
+> Esta versão **não funciona** com o último elemento como pivô (`pivo = v[dir]`). Tenta com `[1, 2]`: o pivô é 2, `i` para em 1, `j` para em 1, a função devolve `j = 1`, e a chamada recursiva `quickSort(v, 0, 1)` é **exatamente a mesma** de antes. Recursão infinita. Com o elemento do meio (que, por usar divisão inteira, nunca é o último de um trecho com 2 ou mais elementos) ou com o primeiro, o trecho sempre diminui.
 
 ## Acompanhando um exemplo
 
@@ -96,13 +98,13 @@ rodada 3      i para em 3 (4 não é < 4)
               3 >= 3: devolve j = 3
 ```
 
-Resultado: `[1, 2, 3, 4 | 9, 8, 7, 6]`. O corte é depois da posição 3. A esquerda tem tudo \(\le 4\), a direita tem tudo \(\ge 4\), e o quick sort continua nos dois pedaços.
+Resultado: `[1, 2, 3, 4 | 9, 8, 7, 6]`. O corte é depois da posição 3: à esquerda, tudo \(\le 4\); à direita, tudo \(\ge 4\). O quick sort continua nos dois pedaços. Duas trocas só, e o array já ficou dividido.
 
-## Por que a comparação estrita ajuda
+## Por que a comparação estrita ajuda tanto
 
-Considere um array em que **todos os elementos são iguais**, como `[4, 4, 4, 4]`. Na página do quick sort, vimos que o Lomuto com `<=` cai no pior caso, \(\Theta(n^2)\): todos são "menores ou iguais", e o pivô sempre vai parar na ponta.
+Considere um array em que **todos os elementos são iguais**, como `[4, 4, 4, 4]`. Na página do quick sort, vimos que o Lomuto com `<=` cai no pior caso, \(\Theta(n^2)\): todo mundo é "menor ou igual", e o pivô sempre acaba empurrado para uma ponta.
 
-No Hoare, `i` e `j` **param em elementos iguais ao pivô**, e fazem a troca (trocar dois valores iguais não muda nada, mas os dois índices avançam). Eles acabam se encontrando **no meio**:
+No Hoare, `i` e `j` **param em elementos iguais ao pivô** e trocam (trocar dois valores iguais não muda nada, mas os dois índices avançam). Resultado: eles se encontram **no meio**.
 
 ```text
 [4, 4, 4, 4]   pivô = v[1] = 4
@@ -111,7 +113,7 @@ Em seguida i = 2, j = 1: i >= j, devolve j = 1.
 Cortes: [0..1] e [2..3]  ->  dois pedaços iguais.
 ```
 
-O pedaço é dividido pela metade a cada nível, como no melhor caso. Medi isso com um array de 16384 elementos iguais: a profundidade da recursão foi 14, que é \(\log_2 16384\). Com o elemento do meio como pivô, o mesmo vale para um array já ordenado, que costuma ser o pior caso de quem escolhe o primeiro ou o último elemento.
+O trecho é partido ao meio a cada nível, como no melhor caso. Eu medi isso com um array de 16384 elementos iguais: a profundidade da recursão foi 14, que é \(\log_2 16384\). Com o elemento do meio como pivô, o mesmo vale para um array já ordenado, que costuma ser o pior pesadelo de quem escolhe o primeiro ou o último.
 
 ## Hoare ou Lomuto?
 
@@ -124,17 +126,17 @@ O pedaço é dividido pela metade a cada nível, como no melhor caso. Medi isso 
 | Elementos repetidos | pode ir a \(\Theta(n^2)\) | divide no meio |
 | Código | mais simples | mais sutil |
 
-Em um teste meu, ordenando 1 milhão de inteiros aleatórios, a versão de Lomuto (pivô no último elemento, `<=`) fez cerca de 2,7 vezes mais trocas que a de Hoare. Cada elemento é movido no máximo uma vez pelos índices, então o Hoare faz, no máximo, cerca de \(n/2\) trocas por partição; o Lomuto pode chegar a quase \(n\).
+Num teste meu, ordenando 1 milhão de inteiros aleatórios, o Lomuto (pivô no último, `<=`) fez cerca de **2,7 vezes mais trocas** que o Hoare. Faz sentido: cada elemento é movido no máximo uma vez pelos índices, então o Hoare faz cerca de \(n/2\) trocas por partição, no máximo; o Lomuto pode chegar a quase \(n\).
 
-Muitas implementações práticas de quick sort usam variações do esquema de Hoare. Para o aprendizado, vale conhecer os dois: o Lomuto, pela clareza, e o Hoare, pela eficiência.
+Muitas implementações práticas de quick sort usam variações do esquema de Hoare. Para estudar, vale conhecer os dois: o Lomuto, pela clareza; o Hoare, pela esperteza.
 
-## Análise de custo
+## Quanto custa?
 
-O particionamento é \(\Theta(n)\), como no Lomuto. O resto da análise do quick sort não muda: melhor caso e caso médio \(\Theta(n \log n)\); o pior caso \(\Theta(n^2)\) existe, mas com pivô no meio (ou aleatório) é improvável. Também continua **não estável** e **in-place**.
+O particionamento é \(\Theta(n)\), como no Lomuto. O resto da análise do quick sort não muda: melhor caso e caso médio \(\Theta(n \log n)\); o pior caso \(\Theta(n^2)\) existe, mas com pivô no meio (ou aleatório) é raro. Continua **não estável** e **in-place**.
 
 ## Exercícios
 
-1. Particione `[5, 3, 8, 6, 2, 7, 1, 4]` com Hoare (pivô = elemento do meio). Qual é o array final e o valor devolvido?
+1. Particione `[5, 3, 8, 6, 2, 7, 1, 4]` com Hoare (pivô = elemento do meio). Qual o array final e o valor devolvido?
 2. Faça o mesmo com `[4, 4, 4, 4]`. Em quantos pedaços ele é cortado?
 3. Por que não podemos usar `pivo = v[dir]` com o retorno `j` e as chamadas `(esq, p)` e `(p + 1, dir)`?
 
@@ -180,8 +182,8 @@ Parar e trocar elementos iguais faz os índices se encontrarem no meio do trecho
 - Hoare usa dois índices vindos das pontas: `i` avança enquanto `v[i] < pivo`, `j` recua enquanto `v[j] > pivo`, e trocam se `i < j`.
 - Devolve `j`, um ponto de corte. A recursão é em `(esq, p)` e `(p + 1, dir)`.
 - Não pode usar o último elemento como pivô com este retorno: use o do meio (ou o primeiro).
-- Faz bem menos trocas que o Lomuto e divide arrays com elementos repetidos no meio.
-- Custo \(\Theta(n)\) por partição; o quick sort continua \(\Theta(n \log n)\) em média, não estável e in-place.
+- Faz bem menos trocas que o Lomuto e divide arrays com muitos repetidos no meio.
+- \(\Theta(n)\) por partição; o quick sort segue \(\Theta(n \log n)\) em média, não estável e in-place.
 
 ## Para estudar mais
 

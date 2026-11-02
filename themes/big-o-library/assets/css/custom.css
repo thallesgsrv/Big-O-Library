@@ -165,8 +165,12 @@ a.bo-card:hover{border-color:var(--ac-c,var(--ac))}
 .bo-crumbs a{color:var(--mute);text-decoration:none;text-transform:lowercase}
 .bo-crumbs a:hover{color:var(--pc)}
 .bo-crumbs .bo-crumb-cmd{margin-top:.35rem;color:var(--pc,var(--ac));overflow-wrap:anywhere}
-.bo-crumbs-list{display:flex;flex-wrap:wrap;align-items:baseline;gap:.2rem .4rem;list-style:none;margin:0!important;padding:0!important}
-.bo-crumbs-list>li{display:inline-flex;align-items:baseline;gap:.4rem;margin:0!important;padding:0!important}
+.bo-crumbs-list{display:flex;flex-wrap:nowrap;align-items:baseline;gap:.4rem;list-style:none;margin:-12px 0!important;padding:12px 0!important;overflow-x:auto;overflow-y:hidden;white-space:nowrap;scrollbar-width:none;-webkit-overflow-scrolling:touch;overscroll-behavior-x:contain}
+.bo-crumbs-list::-webkit-scrollbar{display:none}
+.bo-crumbs-list.has-l{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px);mask-image:linear-gradient(90deg,transparent 0,#000 28px)}
+.bo-crumbs-list.has-r{-webkit-mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,#000 calc(100% - 28px),transparent)}
+.bo-crumbs-list.has-l.has-r{-webkit-mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent);mask-image:linear-gradient(90deg,transparent 0,#000 28px,#000 calc(100% - 28px),transparent)}
+.bo-crumbs-list>li{flex:0 0 auto;display:inline-flex;align-items:baseline;gap:.4rem;margin:0!important;padding:0!important}
 .bo-crumbs-list>li::marker{content:none}
 @media (pointer:coarse){.bo-crumbs .bo-crumbs-list a{display:inline-block;padding-block:12px;margin-block:-12px}}
 .bo-badge{display:inline-block;padding:5px 14px;font-size:13px;font-weight:500;border:1px solid var(--pc);border-radius:999px;background:color-mix(in srgb,var(--pc) 10%,transparent);color:color-mix(in srgb,var(--pc) 70%,var(--txt))}
@@ -704,3 +708,9 @@ body.hx\:overflow-hidden .bo-top{display:none}
 #content{scroll-margin-top:80px}
 #content:focus{outline:none}
 @media (prefers-reduced-motion:reduce){.bo-skip{transition:none}}
+
+/* cards de período/extras/lab: mesmo botão circular dos cards de disciplina */
+.bo-per-go{display:grid;place-items:center;box-sizing:border-box;width:34px;height:34px;margin-top:auto;align-self:flex-end;padding:0;line-height:0;border:1px solid var(--line);border-radius:50%;color:var(--mute);transition:transform .25s ease,color .2s ease,background-color .2s ease,border-color .2s ease}
+.bo-per-go svg{display:block;width:16px;height:16px}
+.bo-per:focus-visible .bo-per-go,.bo-per:active .bo-per-go{color:var(--btn-t);background:var(--c);border-color:var(--c)}
+@media (hover:hover){.bo-per:hover .bo-per-go,.bo-lab:hover .bo-per-go{color:var(--btn-t);background:var(--c);border-color:var(--c);transform:translateX(4px)}}
