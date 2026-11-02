@@ -320,6 +320,7 @@ Então, qual o remédio? Uma árvore que **se arruma sozinha** para manter a alt
        return contaFolhas(no.esq) + contaFolhas(no.dir);
    }
    ```
+
 {{< /details >}}
 
 {{< quiz titulo="Árvore binária de busca" >}}
