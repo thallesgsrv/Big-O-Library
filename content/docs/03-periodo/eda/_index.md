@@ -19,11 +19,13 @@ Aqui a gente aprende a medir o custo de um algoritmo sem depender de cronômetro
 
 - análise de algoritmos: contagem de operações, notação assintótica e recorrências
 - ordenação quadrática: selection sort, insertion sort e bubble sort
-- ordenação por divisão e conquista: merge sort e quick sort
+- ordenação por divisão e conquista: merge sort e quick sort (com os particionamentos de Lomuto e de Hoare)
 - ordenação com heap: heap sort
 - ordenação linear: counting sort e radix sort
 - busca binária
-- estruturas de dados: pilha, fila e lista encadeada
+- estruturas de dados lineares: pilha, fila, lista com array (ArrayList), lista encadeada e tabela hash
+- cache: memória, localidade e cache LRU
+- árvores: árvore binária de busca, heap e árvore AVL
 
 ## Comparando os algoritmos
 
@@ -42,6 +44,28 @@ Depois de ler os tópicos, esta tabela serve de resumo. \(n\) é o tamanho do ar
 
 > [!NOTE]
 > No radix sort, \(b\) é a base numérica usada (10 nos nossos exemplos).
+
+## Comparando as estruturas de dados
+
+Para escolher uma estrutura, o que importa é quais operações o seu problema mais faz. \(n\) é o número de elementos e \(h\) a altura de uma árvore.
+
+| Estrutura | Buscar | Inserir | Remover | Guarda ordem? |
+|---|---|---|---|---|
+| ArrayList | \(O(n)\) | \(O(1)\) amortizado no fim, \(O(n)\) no meio | \(O(n)\) | só a de inserção |
+| Lista encadeada | \(O(n)\) | \(O(1)\) no início | \(O(n)\), ou \(O(1)\) se já tiver o nó | só a de inserção |
+| Tabela hash | \(O(1)\) médio | \(O(1)\) médio | \(O(1)\) médio | não |
+| Árvore binária de busca | \(O(h)\) | \(O(h)\) | \(O(h)\) | sim (percurso em ordem) |
+| Árvore AVL | \(O(\log n)\) | \(O(\log n)\) | \(O(\log n)\) | sim (percurso em ordem) |
+| Heap | \(O(n)\) | \(O(\log n)\) | \(O(\log n)\) o maior | só o maior (raiz) |
+
+Na BST comum, \(h\) vai de \(\log n\) (balanceada) a \(n - 1\) (degenerada). Pilha e fila são ArrayList ou lista encadeada com um contrato restrito (LIFO e FIFO), com operações \(O(1)\).
+
+## Ordem sugerida de estudo
+
+1. **Análise**: introdução, assintótica e recursivos. É a régua para todo o resto.
+2. **Ordenação**: quadráticas, depois merge, quick (e Hoare), heap e as lineares.
+3. **Estruturas lineares**: pilha, fila, ArrayList, cache, lista encadeada e tabela hash.
+4. **Árvores**: BST, heap e AVL, nessa ordem. A AVL só faz sentido depois de ver o problema da BST, e o heap sort fica mais claro depois do heap.
 
 ## Materiais
 
