@@ -119,4 +119,6 @@ git checkout main && git pull
 ./scripts/deploy.sh "mensagem do commit"
 ```
 
+O script confere a versão do Hugo (a mesma do CI, lida de `.github/workflows/build.yml`) e aborta se for outra: com versão diferente, o HTML das fórmulas não combina com o CSS do KaTeX do tema e símbolos como `≠` aparecem quebrados no site.
+
 O script publica o que está na **sua pasta** (inclusive alterações ainda não commitadas), por isso rode com `git status` limpo. Contribuidores não precisam publicar nada: abrem o Pull Request e a publicação é feita pelos mantenedores depois do merge.

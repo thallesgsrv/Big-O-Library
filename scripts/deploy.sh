@@ -6,6 +6,22 @@ cd "$(dirname "$0")/.."
 
 MESSAGE="${1:-atualiza o site}"
 
+# Confere a versão do Hugo antes de qualquer coisa. O CSS das fórmulas (KaTeX)
+# do tema só combina com a versão fixada no CI; com outra, símbolos como \neq
+# aparecem quebrados no site publicado.
+HUGO_ESPERADO="$(sed -n 's/^  HUGO_VERSION: *//p' .github/workflows/build.yml | head -n 1)"
+HUGO_ATUAL="$(hugo version 2>/dev/null || true)"
+if [ -z "$HUGO_ESPERADO" ]; then
+  echo "Não consegui ler HUGO_VERSION em .github/workflows/build.yml." >&2
+  exit 1
+fi
+if ! grep -q "hugo v${HUGO_ESPERADO}[-+ ]" <<<"$HUGO_ATUAL" || ! grep -q "+extended" <<<"$HUGO_ATUAL"; then
+  echo "Hugo incorreto. Esperado: v${HUGO_ESPERADO} extended." >&2
+  echo "Encontrado: ${HUGO_ATUAL:-hugo não encontrado no PATH}" >&2
+  echo "Veja .github/DESENVOLVIMENTO.md para instalar a versão certa." >&2
+  exit 1
+fi
+
 # Primeira vez: liga a pasta public/ à branch gh-pages
 if [ ! -e public/.git ]; then
   rm -rf public
