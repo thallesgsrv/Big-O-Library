@@ -4,7 +4,7 @@ weight: 19
 description: Busca, inserção e remoção em uma árvore ordenada; percursos, altura e o risco de degenerar.
 autores:
   - thallesgsrv
-date: 2026-10-31
+date: 2026-11-04
 ---
 
 ## Sobre
@@ -99,32 +99,79 @@ public boolean contains(int valor) {
 
 ### Passo 3: inserir
 
-Aqui tem uma sacada boa: inserir é só **buscar até cair num `null`**, e é exatamente ali que o novo nó deve morar. Escrevo de forma recursiva, em que cada chamada devolve a raiz da subárvore já atualizada. Assim a ligação com o pai se refaz sozinha, sem a gente precisar guardar "quem é o pai".
+Antes do código, vamos inserir na mão `50, 30, 70, 20, 40, 60, 80, 35, 45`, nessa ordem:
+
+- `50`: a árvore está vazia, então ele vira a **raiz**.
+- `30`: menor que 50, vai para a esquerda. Não tem ninguém lá: vira filho esquerdo.
+- `70`: maior que 50, vai para a direita. Vira filho direito.
+- `20`: menor que 50 (esquerda) e menor que 30 (esquerda). Vira filho esquerdo do 30.
+- `40`, `60` e `80` entram do mesmo jeito: `40` à direita do 30, `60` à esquerda do 70 e `80` à direita do 70.
+- `35`: menor que 50 (esquerda), maior que 30 (direita), menor que 40 (esquerda). Vira filho esquerdo do 40.
+- `45`: menor que 50, maior que 30, maior que 40. Vira filho direito do 40.
+
+Repara que todo valor novo entra como **folha**: é só buscar até cair num `null`, e é exatamente ali que ele deve morar. A raiz é sempre o **primeiro** valor inserido, e a forma da árvore depende da **ordem** de inserção. Guarda essa observação com carinho, porque ela vai dar problema daqui a pouco.
+
+No código, é a mesma caminhada da busca, com uma diferença: em vez de andar até cair no `null`, paramos **um passo antes**, quando o filho que queríamos visitar está vazio, e penduramos o nó novo ali.
 
 ```java
 public void add(int valor) {
-    raiz = add(raiz, valor);
-}
-
-private No add(No no, int valor) {
-    if (no == null) {
+    if (raiz == null) {
+        raiz = new No(valor);
         tamanho++;
-        return new No(valor);          // achou o lugar: cria o nó aqui
+        return;
     }
-    if (valor < no.valor) {
-        no.esq = add(no.esq, valor);
-    } else if (valor > no.valor) {
-        no.dir = add(no.dir, valor);
-    }                                  // se for igual, não faz nada
-    return no;
+    No atual = raiz;
+    while (true) {
+        if (valor == atual.valor) {
+            return;                        // repetido: não faz nada
+        }
+        if (valor < atual.valor) {
+            if (atual.esq == null) {       // lugar livre à esquerda
+                atual.esq = new No(valor);
+                tamanho++;
+                return;
+            }
+            atual = atual.esq;
+        } else {
+            if (atual.dir == null) {       // lugar livre à direita
+                atual.dir = new No(valor);
+                tamanho++;
+                return;
+            }
+            atual = atual.dir;
+        }
+    }
 }
 ```
 
-Inserindo `50, 30, 70, 20, 40, 60, 80, 35, 45`, nessa ordem, saímos com a árvore desenhada lá em cima. Acompanha o `35`: menor que 50 (esquerda), maior que 30 (direita), menor que 40 (esquerda), subárvore vazia. O `35` vira filho esquerdo do `40`.
+### Passo 4: a mesma inserção, de forma recursiva
 
-A raiz é sempre o **primeiro** valor inserido, e a forma da árvore depende da **ordem** de inserção. Guarda essa observação com carinho, porque ela vai dar problema daqui a pouco.
+Há outro jeito de escrever isso, e vale aprender agora porque a **remoção** vai precisar dele. Lembra que toda subárvore é uma árvore? Então "inserir na árvore" é o mesmo que "inserir na subárvore da esquerda ou da direita, conforme a comparação", e o caso base é a árvore vazia (`null`), onde o nó novo nasce.
 
-### Passo 4: mínimo e máximo
+O truque é que cada chamada **devolve a raiz da subárvore já atualizada**, e quem chamou religa o resultado no filho. Assim a ligação com o pai se refaz sozinha, sem a gente precisar guardar "quem é o pai".
+
+```java
+public void addRecursivo(int valor) {
+    raiz = addRecursivo(raiz, valor);
+}
+
+private No addRecursivo(No no, int valor) {
+    if (no == null) {
+        tamanho++;
+        return new No(valor);                      // achou o lugar: o nó nasce aqui
+    }
+    if (valor < no.valor) {
+        no.esq = addRecursivo(no.esq, valor);      // religa o que voltou
+    } else if (valor > no.valor) {
+        no.dir = addRecursivo(no.dir, valor);
+    }                                              // se for igual, não faz nada
+    return no;                                     // este nó continua no mesmo lugar
+}
+```
+
+Quase sempre o `no.esq = addRecursivo(no.esq, valor)` religa exatamente o nó que já estava ali, e nada muda. A única vez que muda é na última chamada, quando o `null` vira o nó novo. Os dois jeitos fazem o mesmo trabalho e custam o mesmo.
+
+### Passo 5: mínimo e máximo
 
 O menor está sempre no nó mais à esquerda; o maior, no mais à direita. É só descer sempre pelo mesmo lado, sem comparar nada.
 
@@ -151,7 +198,7 @@ public int max() {
 }
 ```
 
-### Passo 5: altura
+### Passo 6: altura
 
 A altura de um nó é 1 mais a maior altura entre os filhos. A árvore vazia vale \(-1\), o que faz a folha valer \(1 + \max(-1, -1) = 0\).
 
@@ -168,7 +215,7 @@ private int altura(No no) {
 }
 ```
 
-### Passo 6: percursos (visitar todo mundo)
+### Passo 7: percursos (visitar todo mundo)
 
 **Percorrer** é visitar todos os nós em alguma ordem. Os três clássicos mudam só o **momento** de visitar o nó em relação às subárvores:
 
@@ -199,7 +246,7 @@ pré-ordem: [50, 30, 20, 40, 35, 45, 70, 60, 80]
 pós-ordem: [20, 35, 45, 40, 30, 60, 80, 70, 50]
 ```
 
-### Passo 7: remover (o chefão da fase)
+### Passo 8: remover (o chefão da fase)
 
 Remover é a parte delicada, porque a árvore precisa **continuar sendo uma BST** depois. Acha o nó (como na busca) e então são **três casos**:
 
@@ -216,28 +263,35 @@ public void remove(int valor) {
 
 private No remove(No no, int valor) {
     if (no == null) {
-        return null;                       // valor não está na árvore
+        return null;                           // valor não está na árvore
     }
     if (valor < no.valor) {
         no.esq = remove(no.esq, valor);
     } else if (valor > no.valor) {
         no.dir = remove(no.dir, valor);
     } else {
-        if (no.esq == null) {              // caso 1 (folha) e caso 2 (só filho direito)
+        // achamos o nó a remover
+        if (no.esq == null && no.dir == null) {    // caso 1: folha
+            tamanho--;
+            return null;
+        }
+        if (no.esq == null) {                      // caso 2: só filho direito
             tamanho--;
             return no.dir;
         }
-        if (no.dir == null) {              // caso 2 (só filho esquerdo)
+        if (no.dir == null) {                      // caso 2: só filho esquerdo
             tamanho--;
             return no.esq;
         }
-        No sucessor = min(no.dir);         // caso 3: dois filhos
+        No sucessor = min(no.dir);                 // caso 3: dois filhos
         no.valor = sucessor.valor;
         no.dir = remove(no.dir, sucessor.valor);
     }
     return no;
 }
 ```
+
+É o padrão do Passo 4 de novo: cada chamada devolve **quem deve ocupar aquele lugar**. No caso 1, ninguém (`null`). No caso 2, o único filho. No caso 3, o próprio nó, só que com o valor trocado.
 
 Na árvore de exemplo, removendo em sequência:
 
@@ -252,6 +306,12 @@ remove(50)   caso 3: dois filhos. Sucessor = 60 (menor da subárvore direita).
              O valor 60 vai para a raiz e o 60 antigo é removido.
              pré-ordem: [60, 40, 35, 45, 70, 80]
 ```
+
+Três perguntas que sempre aparecem:
+
+- **Essa chamada recursiva do caso 3 pode nunca parar?** Não. O sucessor é o mais à esquerda da subárvore direita, então ele não tem filho esquerdo: no máximo um filho. A remoção dele cai no caso 1 ou 2, que terminam sem recursão.
+- **E se o nó não tiver sucessor?** No caso 3 o nó tem filho direito, então o sucessor sempre existe. Só o maior valor da árvore não tem sucessor, e ele nunca tem dois filhos.
+- **Posso usar o predecessor, o maior da subárvore esquerda?** Pode. Só que a árvore que sai é diferente, então vale deixar essa escolha clara.
 
 ## Quanto custa?
 

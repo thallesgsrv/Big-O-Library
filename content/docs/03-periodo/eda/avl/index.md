@@ -4,12 +4,24 @@ weight: 21
 description: Árvore de busca autobalanceada, com fator de balanceamento, rotações e altura O(log n).
 autores:
   - thallesgsrv
-date: 2026-10-31
+date: 2026-11-04
 ---
 
 ## Sobre
 
 Na [árvore binária de busca](../arvore-binaria-de-busca/), a gente descobriu o calcanhar de Aquiles: tudo custa \(O(h)\), e inserir valores em ordem crescente transforma a árvore numa lista torta, com \(h = n - 1\). Para ter \(O(\log n)\) **de verdade**, e não "na sorte", a árvore precisa **manter a própria altura pequena**.
+
+Inserindo `1, 2, 3, 4` numa BST comum, o que acontece:
+
+```text
+1
+ \
+  2
+   \
+    3
+     \
+      4        altura 3 = n - 1: uma lista torta
+```
 
 A **árvore AVL** (de Adelson-Velsky e Landis, os dois autores de 1962) faz exatamente isso. Depois de cada inserção ou remoção, ela confere se ficou torta e, se ficou, **se endireita** com umas manobras chamadas **rotações**. Foi a primeira árvore de busca autobalanceada já inventada.
 
@@ -140,20 +152,31 @@ private No rotacaoEsquerda(No x) {
 
 ### Passo 3: os quatro casos de desbalanceamento
 
-Quando algum nó chega a \(fb = +2\) ou \(fb = -2\), existem quatro situações, que dependem de **por onde** o excesso de altura entrou:
+Quando um nó chega a \(fb = +2\) ou \(fb = -2\), olhamos **por onde o excesso de altura entrou**. São quatro situações, e em cada desenho abaixo o nó desbalanceado é o do topo.
 
-| Caso | `fb` do nó | `fb` do filho pesado | Correção |
-|---|---|---|---|
-| esquerda-esquerda | +2 | \(\ge 0\) | rotação à direita no nó |
-| direita-direita | -2 | \(\le 0\) | rotação à esquerda no nó |
-| esquerda-direita | +2 | -1 | rotação à esquerda no filho esquerdo, **depois** à direita no nó |
-| direita-esquerda | -2 | +1 | rotação à direita no filho direito, **depois** à esquerda no nó |
-
-Os dois últimos são as **rotações duplas**, e vale entender o porquê. Quando o excesso é "dobrado" (o filho pesado pesa para o lado *oposto*), uma rotação simples só **muda o problema de lugar**, como empurrar um tapete amassado e a dobra aparecer do outro lado. Então primeiro a gente endireita o filho, transformando o caso em esquerda-esquerda (ou direita-direita), e só aí roda o nó.
+**Caso 1: esquerda-esquerda.** O peso está no filho esquerdo, e esse filho também pende para a esquerda. Acontece, por exemplo, ao inserir `30, 20, 10`. A correção é uma **rotação à direita** no nó desbalanceado.
 
 ```text
-Esquerda-direita: insira 30, 10, 20
+    30  (fb +2)             20
+   /                       /  \
+  20            ->       10    30
+ /
+10
+```
 
+**Caso 2: direita-direita.** É o espelho: inserir `10, 20, 30`. A correção é uma **rotação à esquerda** no nó.
+
+```text
+10  (fb -2)                 20
+  \                        /  \
+   20           ->       10    30
+     \
+      30
+```
+
+**Caso 3: esquerda-direita.** O peso está no filho esquerdo, mas esse filho pende para a **direita**: inserir `30, 10, 20`. Aqui uma rotação simples não resolve, porque só **muda o problema de lugar**, como empurrar um tapete amassado e a dobra aparecer do outro lado. Então primeiro endireitamos o filho com uma rotação à esquerda (o que transforma o caso em esquerda-esquerda) e só depois rodamos o nó à direita. É uma **rotação dupla**.
+
+```text
       30  (fb +2)           30                 20
      /                     /                  /  \
     10          ->       20        ->       10    30
@@ -162,26 +185,48 @@ Esquerda-direita: insira 30, 10, 20
                   (rot. esquerda em 10)  (rot. direita em 30)
 ```
 
-Tudo isso cabe num método só, o `balancear`: atualiza a altura do nó, olha o fator e aplica a correção se precisar. Devolve a nova raiz da subárvore (que é o próprio `no`, se já estava ok).
+**Caso 4: direita-esquerda.** O espelho do anterior: inserir `10, 30, 20`. Rotação à direita no filho direito e depois rotação à esquerda no nó.
+
+```text
+10  (fb -2)              10                      20
+  \                        \                    /  \
+   30           ->          20        ->      10    30
+  /                           \
+ 20                            30
+                   (rot. direita em 30)  (rot. esquerda em 10)
+```
+
+Para reconhecer o caso, basta olhar o `fb` do nó e o `fb` do filho pesado:
+
+| Caso | `fb` do nó | `fb` do filho pesado | Correção |
+|---|---|---|---|
+| esquerda-esquerda | +2 | \(\ge 0\) | rotação à direita no nó |
+| direita-direita | -2 | \(\le 0\) | rotação à esquerda no nó |
+| esquerda-direita | +2 | -1 | rotação à esquerda no filho esquerdo, **depois** à direita no nó |
+| direita-esquerda | -2 | +1 | rotação à direita no filho direito, **depois** à esquerda no nó |
+
+Tudo cabe num método só, o `balancear`: atualiza a altura do nó, olha o fator e aplica a correção se precisar. Cada `if` abaixo é uma linha da tabela. Ele devolve a nova raiz da subárvore (que é o próprio `no`, se já estava ok).
 
 ```java
 private No balancear(No no) {
     atualizaAltura(no);
     int fb = fatorBalanceamento(no);
 
-    if (fb > 1) {                                   // pesado à esquerda
-        if (fatorBalanceamento(no.esq) < 0) {       // caso esquerda-direita
-            no.esq = rotacaoEsquerda(no.esq);
-        }
+    if (fb > 1 && fatorBalanceamento(no.esq) >= 0) {     // caso 1: esquerda-esquerda
         return rotacaoDireita(no);
     }
-    if (fb < -1) {                                  // pesado à direita
-        if (fatorBalanceamento(no.dir) > 0) {       // caso direita-esquerda
-            no.dir = rotacaoDireita(no.dir);
-        }
+    if (fb < -1 && fatorBalanceamento(no.dir) <= 0) {    // caso 2: direita-direita
         return rotacaoEsquerda(no);
     }
-    return no;
+    if (fb > 1) {                                        // caso 3: esquerda-direita
+        no.esq = rotacaoEsquerda(no.esq);
+        return rotacaoDireita(no);
+    }
+    if (fb < -1) {                                       // caso 4: direita-esquerda
+        no.dir = rotacaoDireita(no.dir);
+        return rotacaoEsquerda(no);
+    }
+    return no;                                           // já estava balanceado
 }
 ```
 
@@ -274,7 +319,7 @@ Um detalhe que surpreende: remover de um lado deixa o **outro** lado pesado. Na 
 
 A raiz `20` fica com \(fb = -2\), e o filho pesado (`30`) tem \(fb = -1\): caso direita-direita, uma rotação à esquerda resolve.
 
-Outra diferença para a inserção: depois de **inserir**, uma rotação (simples ou dupla) basta para consertar tudo. Na **remoção**, a rotação pode diminuir a altura da subárvore, e isso pode desbalancear um ancestral lá em cima, exigindo outra rotação, e outra, até a raiz. Como o `balancear` roda em todo nó do caminho de volta, o código já cobre isso, com no máximo \(O(\log n)\) rotações.
+Outra diferença: ao **inserir**, uma rotação (simples ou dupla) basta para consertar tudo. Ao **remover**, a rotação pode diminuir a altura da subárvore e desbalancear um ancestral mais acima, que também precisa girar, e assim até a raiz. O `balancear` já roda em todo nó do caminho de volta, então o código cobre isso sozinho (no máximo \(O(\log n)\) rotações).
 
 ### Passo 6: buscar
 

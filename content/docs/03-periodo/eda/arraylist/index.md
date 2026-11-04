@@ -4,7 +4,7 @@ weight: 16
 description: Uma lista que cresce sozinha, montada do zero em cima de um array, e por que o dobro é o número mágico.
 autores:
   - thallesgsrv
-date: 2026-10-31
+date: 2026-11-04
 ---
 
 ## Sobre
@@ -12,6 +12,8 @@ date: 2026-10-31
 Array tem um defeito de personalidade: ele é **teimoso**. Você diz `new String[4]` e pronto, são quatro posições para sempre. Quer o quinto elemento? Azar. Na pilha com array, a gente já sentiu isso: encheu, estourou exceção.
 
 Só que, na vida real, ninguém sabe de antemão quantas coisas vai guardar. Quantos usuários vão se cadastrar? Quantas mensagens vão chegar? Dá para chutar um número gigante e desperdiçar memória, ou dá para fazer algo mais esperto.
+
+O tamanho fixo é só o primeiro incômodo. O array também **não sabe remover**: o máximo que você consegue é colocar `null` na posição, e isso deixa um buraco que você precisa tratar (empurrando todo mundo para a esquerda ou espalhando `if (v[i] != null)` pelo código). E, como o array quase nunca está cheio, quem usa precisa controlar sozinho **quantas posições estão em uso**.
 
 A ideia do **ArrayList** cabe em uma frase: *guarde tudo num array e, quando ele encher, mude para um array maior*. Quem usa a lista nem percebe a mudança. É como trocar de apartamento quando a casa fica pequena: você leva a mobília toda, e o endereço novo é só um detalhe.
 
@@ -190,7 +192,7 @@ public String remove(int indice) {
 }
 ```
 
-Sobre aquele `elementos[tamanho] = null` no fim: depois do deslocamento, a última posição ficou com uma cópia repetida. Ela já está fora da lista, mas ainda segura a referência, e o objeto não poderia ser recolhido pelo coletor de lixo. É um vazamento de memória silencioso. Limpar custa uma linha.
+A última linha, `elementos[tamanho] = null`, limpa a posição que sobrou depois do deslocamento. Ela já está fora da lista (os limites são de `0` a `tamanho - 1`), então não é obrigatório, mas assim o array não fica segurando uma referência a um objeto que já saiu.
 
 ```text
 antes:  ["a", "X", "b", "c", "d", "e", null, null]   tamanho = 6
@@ -253,29 +255,23 @@ System.out.println(lista.size());        // 3
 
 O `add(e)` merece uma conversa, porque ele parece mentiroso. Uma chamada isolada pode custar \(O(n)\), por causa da cópia. Como é que a gente diz que é \(O(1)\)?
 
-Porque a cópia é **rara**. Começando com capacidade 1 e fazendo \(n\) inserções, as cópias acontecem quando o tamanho é 1, 2, 4, 8... até algo menor que \(n\):
-
-$$
-1 + 2 + 4 + \dots + 2^k < 2n
-$$
-
-No total, as cópias movem menos de \(2n\) elementos. Somando as \(n\) escritas normais, as \(n\) inserções custam menos de \(3n\), ou seja, **menos de 3 operações por inserção, em média**. Esse custo médio sobre uma sequência de operações se chama **custo amortizado**, e aqui vale \(O(1)\). É como pagar a mudança de apartamento parcelada: cada `add` paga uma continha pequena, e a mudança cara já estava quitada.
+Porque a cópia é **rara**. Começando com capacidade 1 e fazendo 16 inserções, o array cresce quando o tamanho chega a 1, 2, 4 e 8, e as cópias movem, no total, \(1 + 2 + 4 + 8 = 15\) elementos: pouco mais de um elemento copiado por inserção. Em geral, com o dobro, o total de elementos copiados fica abaixo de \(2n\) em \(n\) inserções. Esse custo médio sobre uma sequência de operações se chama **custo amortizado**, e aqui vale \(O(1)\). É como pagar a mudança de apartamento parcelada: cada `add` paga uma continha pequena, e a mudança cara já estava quitada.
 
 > [!IMPORTANT]
-> O **dobro** é o que segura o \(O(1)\) amortizado. Se a gente crescesse de **um em um**, todo `add` depois de cheio copiaria tudo, e \(n\) inserções custariam \(1 + 2 + \dots + (n-1) = n(n-1)/2\), ou seja, \(O(n^2)\). Qualquer crescimento por um *fator* (1,5, 2...) funciona. Somar uma constante, não.
+> O **dobro** é o que segura o \(O(1)\) amortizado. Se a gente crescesse de **um em um**, todo `add` com a lista cheia copiaria tudo: nas mesmas 16 inserções seriam \(1 + 2 + \dots + 15 = 120\) elementos copiados (contra 15), e em \(n\) inserções a conta é \(n(n-1)/2\), ou seja, \(O(n^2)\). Qualquer crescimento por um *fator* (1,5, 2...) funciona. Somar uma constante, não.
 
 O preço do dobro é memória: no pior caso, quase metade do array fica reservada e sem uso. Troca justa.
 
 ## Exercícios
 
 1. Com `new ListaArray(2)`, adicione 5 elementos. Em quais `add` o array é copiado? Qual a capacidade no final?
-2. Quantos elementos são copiados, no total, para fazer \(n = 16\) inserções começando com capacidade 1 e dobrando? E se o crescimento fosse de um em um?
+2. Quantos elementos são copiados, no total, para fazer \(n = 32\) inserções começando com capacidade 1 e dobrando? E se o crescimento fosse de um em um?
 3. Implemente `boolean remove(String elemento)`, que remove a primeira ocorrência (se existir) e diz se removeu.
 4. Por que `add(0, e)` é \(O(n)\), enquanto `add(e)` é \(O(1)\) amortizado?
 
 {{< details title="Gabarito" >}}
 1. Capacidade 2: o 3º `add` copia 2 elementos e vai para 4; o 5º copia 4 e vai para 8. Capacidade final: 8.
-2. Dobrando, as cópias acontecem nos tamanhos 1, 2, 4 e 8: \(1 + 2 + 4 + 8 = 15\) elementos copiados. De um em um seriam \(1 + 2 + \dots + 15 = 120\). Oito vezes mais, e a diferença só piora com \(n\) maior.
+2. Dobrando, as cópias acontecem nos tamanhos 1, 2, 4, 8 e 16: \(1 + 2 + 4 + 8 + 16 = 31\) elementos copiados. De um em um seriam \(1 + 2 + \dots + 31 = 496\). Mais de quinze vezes isso, e a diferença só piora com \(n\) maior.
 3. Dá para reaproveitar o que já existe, sem reescrever o deslocamento:
 
    ```java

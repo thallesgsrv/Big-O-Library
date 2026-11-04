@@ -4,7 +4,7 @@ weight: 20
 description: Heap máximo em array, com sobe, afunda, inserção, remoção do maior e construção em O(n).
 autores:
   - thallesgsrv
-date: 2026-10-31
+date: 2026-11-04
 ---
 
 ## Sobre
@@ -31,17 +31,16 @@ Aparece no agendador de tarefas do sistema operacional, nos jogos (qual inimigo 
 
 Repara no padrão: nas duas primeiras, ou a inserção ou a remoção é lenta. O heap é o "meio-termo esperto": **nenhuma das duas fica lenta**, ele só paga um pouquinho em cada.
 
-## Relembrando: o heap máximo
+## O heap máximo, com calma
 
-Um **heap máximo** é uma árvore binária **completa** (todos os níveis cheios, menos talvez o último, preenchido da esquerda para a direita) em que **todo pai é maior ou igual aos seus filhos**. Consequência: o maior elemento está sempre na raiz, de graça.
+Um **heap máximo** é uma árvore binária que respeita **duas regras**:
 
-E tem um golpe de mestre: por ser completa, a árvore cabe num **array sem nenhum ponteiro**. Para o índice \(i\) (começando em 0):
+1. **Pai maior ou igual aos filhos.** Consequência: o maior elemento está sempre na raiz, de graça.
+2. **Árvore completa:** todos os níveis estão cheios, menos talvez o último, que é preenchido da esquerda para a direita, **sem buracos**.
 
-- filho da esquerda: \(2i + 1\)
-- filho da direita: \(2i + 2\)
-- pai: \(\lfloor (i - 1) / 2 \rfloor\)
+Atenção: heap **não é** uma BST. Na BST, a esquerda é menor e a direita é maior. No heap, os dois filhos são menores ou iguais ao pai, e a ordem entre irmãos não importa. É uma ordem fraquinha de propósito, e é justamente por ser fraca que é barata de manter.
 
-O array `[10, 5, 8, 1, 3, 2]` representa:
+Este é um heap:
 
 ```text
         10
@@ -51,7 +50,40 @@ O array `[10, 5, 8, 1, 3, 2]` representa:
     1  3 2
 ```
 
-Perceba que o heap **não** é ordenado entre irmãos (5 e 8 estão em qualquer ordem). Ele só garante "pai ≥ filho". É uma ordem fraquinha de propósito, e é justamente por ser fraca que é barata de manter.
+Já os dois abaixo não são, cada um quebrando uma regra:
+
+```text
+quebra a regra 1                 quebra a regra 2
+
+        10                              10
+       /  \                            /  \
+      5    8                          5    8
+     / \                               \
+    1   9    9 > 5 (pai)                3    o 5 tem filho direito
+                                             sem ter o esquerdo
+```
+
+### Por que completa?
+
+Por duas razões. A primeira: uma árvore completa tem a **menor altura possível**, \(\lfloor \log_2 n \rfloor\), então tudo que depende da altura custa \(O(\log n)\). A segunda: sem buracos, a árvore cabe em um **array, sem nenhum ponteiro**.
+
+### A árvore dentro de um array
+
+Basta ler a árvore **nível por nível, da esquerda para a direita**. O heap de cima vira o array `[10, 5, 8, 1, 3, 2]`. Olhando as posições:
+
+| Índice | Valor | Filho esquerdo | Filho direito | Pai |
+|---|---|---|---|---|
+| 0 | 10 | 1 (valor 5) | 2 (valor 8) | não tem |
+| 1 | 5 | 3 (valor 1) | 4 (valor 3) | 0 (valor 10) |
+| 2 | 8 | 5 (valor 2) | 6 (não existe) | 0 (valor 10) |
+
+O padrão aparece. Para o índice \(i\) (começando em 0):
+
+- filho da esquerda: \(2i + 1\)
+- filho da direita: \(2i + 2\)
+- pai: \(\lfloor (i - 1) / 2 \rfloor\)
+
+Um índice maior ou igual a `tamanho` significa que aquele filho não existe (como o 6 acima, que está fora do heap).
 
 ## Construindo o heap
 
@@ -100,7 +132,20 @@ O `peek` é \(O(1)\): o maior mora sempre na posição 0.
 
 ### Passo 2: inserir e o `sobe`
 
-Onde colocar o novo elemento? O único lugar que mantém a árvore **completa** é a próxima posição livre do array, no fim. O problema: ele pode ser maior que o pai e quebrar a regra. A correção é um "VIP subindo na fila": enquanto for maior que o pai, **troca com ele**.
+Onde colocar o novo elemento? O único lugar que mantém a árvore **completa** é a próxima posição livre do array, no fim. O problema: ele pode ser maior que o pai e quebrar a regra 1. A correção é um "VIP subindo na fila": enquanto for maior que o pai, **troca com ele**.
+
+Inserindo `5, 3, 8, 1, 9, 2` num heap vazio:
+
+```text
+add(5)   [5]
+add(3)   [5, 3]                  3 < 5, fica
+add(8)   [8, 3, 5]               8 > pai (5): sobe e vira a raiz
+add(1)   [8, 3, 5, 1]            1 < pai (3), fica
+add(9)   [9, 8, 5, 1, 3]         9 sobe duas vezes: passa pelo 3 e pelo 8
+add(2)   [9, 8, 5, 1, 3, 2]      2 < pai (5), fica
+```
+
+Olha o `9`: entrou lá no fim, passou pelo 3, passou pelo 8, e virou rei. Agora o código:
 
 ```java
 public void add(int valor) {
@@ -120,22 +165,28 @@ private void sobe(int i) {
 }
 ```
 
-Inserindo `5, 3, 8, 1, 9, 2` num heap vazio:
-
-```text
-add(5)   [5]
-add(3)   [5, 3]                  3 < 5, fica
-add(8)   [8, 3, 5]               8 > pai (5): sobe e vira a raiz
-add(1)   [8, 3, 5, 1]            1 < pai (3), fica
-add(9)   [9, 8, 5, 1, 3]         9 sobe duas vezes: passa pelo 3 e pelo 8
-add(2)   [9, 8, 5, 1, 3, 2]      2 < pai (5), fica
-```
-
-Olha o `9`: entrou lá no fim, passou pelo 3, passou pelo 8, e virou rei. Como o `sobe` anda sempre em direção à raiz, ele faz no máximo tantas trocas quanto a altura: \(O(\log n)\).
+Como o `sobe` anda sempre em direção à raiz, ele faz no máximo tantas trocas quanto a altura: \(O(\log n)\).
 
 ### Passo 3: remover o maior e o `afunda`
 
 O maior é a raiz, mas não dá para só arrancá-la: sobraria um buraco no topo. O truque é elegante: **pega o último elemento do array, coloca na raiz** e diminui o tamanho. A árvore continua completa, mas a nova raiz provavelmente é pequena demais para o cargo. Então a gente a faz **afundar**, trocando sempre com o **maior** dos dois filhos, até ela se acomodar. É o estagiário que foi promovido a diretor por engano e vai sendo corrigido nível por nível.
+
+Continuando do heap `[9, 8, 5, 1, 3, 2]`:
+
+```text
+remove()   devolve 9
+           último (2) vai para a raiz:     [2, 8, 5, 1, 3]
+           afunda: filhos 8 e 5, o maior é 8:   [8, 2, 5, 1, 3]
+           afunda: filhos 1 e 3, o maior é 3:   [8, 3, 5, 1, 2]
+           chegou ao fim.
+
+remove()   devolve 8
+           último (2) vai para a raiz:     [2, 3, 5, 1]
+           afunda: filhos 3 e 5, o maior é 5:   [5, 3, 2, 1]
+           2 não tem filhos: termina.
+```
+
+Por que trocar com o **maior** dos filhos? Porque quem subir vai virar pai do outro filho, e só o maior dos dois consegue ser maior ou igual ao irmão. Se subisse o menor, quebraria a regra do outro lado. Em código:
 
 ```java
 public int remove() {
@@ -157,23 +208,6 @@ private void afunda(int i) {
         i = maior;
     }
 }
-```
-
-Por que trocar com o **maior** dos filhos? Porque quem subir vai virar pai do outro filho, e só o maior dos dois consegue ser maior ou igual ao irmão. Se subisse o menor, quebraria a regra do outro lado.
-
-Continuando do heap `[9, 8, 5, 1, 3, 2]`:
-
-```text
-remove()   devolve 9
-           último (2) vai para a raiz:     [2, 8, 5, 1, 3]
-           afunda: filhos 8 e 5, o maior é 8:   [8, 2, 5, 1, 3]
-           afunda: filhos 1 e 3, o maior é 3:   [8, 3, 5, 1, 2]
-           chegou ao fim.
-
-remove()   devolve 8
-           último (2) vai para a raiz:     [2, 3, 5, 1]
-           afunda: filhos 3 e 5, o maior é 5:   [5, 3, 2, 1]
-           2 não tem filhos: termina.
 ```
 
 O `afunda`, como o `sobe`, anda numa direção só, então também custa \(O(\log n)\).
@@ -202,11 +236,7 @@ afunda(0)        o 3 troca com o 9:                 [9, 3, 8, 7, 5, 1, 2]
                  continua: o 3 troca com o 7:       [9, 7, 8, 3, 5, 1, 2]
 ```
 
-Por que isso é \(O(n)\) e não \(O(n \log n)\)? Porque nem todo mundo afunda a árvore inteira. A metade das posições são folhas e não fazem nada. Um quarto só pode descer uma vez. Um oitavo, duas. Quem pode descer muito é muito raro, e os muitos são os que quase não trabalham:
-
-$$
-\sum_{h=0}^{\log n} \frac{n}{2^{h+1}} \cdot h \;=\; O(n)
-$$
+Por que isso é \(O(n)\) e não \(O(n \log n)\)? Porque nem todo mundo afunda a árvore inteira. A metade das posições são folhas e não fazem nada. Um quarto só pode descer uma vez. Um oitavo, duas. Quem pode descer muito é muito raro, e os muitos são os que quase não trabalham. Somando o trabalho de todos, o total é proporcional a \(n\).
 
 ## Usando
 
