@@ -27,6 +27,8 @@ Uma árvore é feita de **nós** ligados. Em uma árvore binária, cada nó tem 
 - **Subárvore**: um nó e tudo que está pendurado nele. E o detalhe bonito: toda subárvore é, ela mesma, uma árvore. Guarda isso, porque é por causa disso que a recursão funciona tão bem aqui.
 - **Altura** de um nó: número de arestas no caminho mais longo até uma folha. Aqui, folha tem altura 0 e a árvore vazia tem altura \(-1\). A altura da árvore é a da raiz.
 
+![Árvore com raiz 50, folhas destacadas e a subárvore do 40 tracejada](bst-vocabulario.png)
+
 ## A regra que manda em tudo
 
 Para **todo nó** da árvore:
@@ -36,15 +38,7 @@ Para **todo nó** da árvore:
 
 Vou tratar valores distintos (sem repetição). Esta aqui é uma BST:
 
-```text
-            50
-          /    \
-        30      70
-       /  \    /  \
-     20   40  60   80
-         /  \
-       35    45
-```
+![BST com raiz 50; o caminho 50, 30, 40, 45 está destacado na busca pelo 45](bst-exemplo-busca.png)
 
 Com essa regra, procurar vira um jogo de "mais alto ou mais baixo". Procurando o 45: é menor que 50, vai para a esquerda. É maior que 30, direita. Maior que 40, direita. Achou. Cada comparação **descartou uma subárvore inteira**, igual a busca binária descartando metade do array.
 
@@ -255,6 +249,8 @@ Remover é a parte delicada, porque a árvore precisa **continuar sendo uma BST*
 **Caso 2: o nó tem um único filho.** O filho sobe e ocupa o lugar. A regra continua valendo, porque tudo na subárvore dele já estava do lado certo dos ancestrais.
 
 **Caso 3: o nó tem dois filhos.** Aqui é que complica: se você só tirar o nó, sobram duas subárvores soltas sem ter onde pendurar. A saída esperta é **substituir o valor do nó pelo seu sucessor**: o menor valor da subárvore direita. Pensa bem: esse valor é maior que tudo à esquerda e menor que tudo o que sobra à direita. É o candidato perfeito para ocupar o trono sem quebrar a regra. Depois removemos o sucessor lá da direita (e como ele é o mais à esquerda, tem no máximo um filho: cai no caso 1 ou 2).
+
+![Três casos de remoção: folha, nó com um filho e nó com dois filhos substituído pelo sucessor](bst-remocao.png)
 
 ```java
 public void remove(int valor) {

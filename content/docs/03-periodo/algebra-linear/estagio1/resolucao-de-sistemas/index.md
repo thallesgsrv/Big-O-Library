@@ -33,6 +33,8 @@ Para duas variáveis, cada equação é uma **reta** no plano e a solução é o
 - Retas coincidentes (a mesma reta escrita de duas formas): SPI.
 - Retas paralelas distintas (nunca se encontram): SI.
 
+![Três pares de retas: que se cruzam (uma solução), coincidentes (infinitas soluções) e paralelas (nenhuma solução)](tres-casos.png)
+
 > [!NOTE]
 > Não existe sistema linear com "exatamente duas soluções". Ou é uma, ou nenhuma, ou infinitas.
 

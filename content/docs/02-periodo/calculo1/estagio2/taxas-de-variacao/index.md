@@ -46,6 +46,8 @@ Várias grandezas variam no tempo e estão ligadas por uma equação. Derivando 
 
 **Exemplo 3 (a escada).** Uma escada de \(5\) m está encostada na parede. A base se afasta a \(1\) m/s. Com a base a \(3\) m da parede, quão rápido desce o topo?
 
+![Escada de 5 m encostada na parede: a base a 3 m, o topo a 4 m de altura, base se afastando a 1 m/s](escada.png)
+
 1. \(x\) = distância da base à parede, \(y\) = altura do topo. Pitágoras: \(x^2+y^2=25\).
 2. Derive em \(t\) (cadeia: \(x\) e \(y\) dependem de \(t\)): \(2x\,x'+2y\,y'=0\).
 3. No instante: \(x=3\), \(y=\sqrt{25-9}=4\), \(x'=1\).

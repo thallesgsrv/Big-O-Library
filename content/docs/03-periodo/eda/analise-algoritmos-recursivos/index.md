@@ -101,6 +101,8 @@ Montando a árvore, nível por nível:
 
 Todo nível custa \(n\): quando o número de chamadas dobra, o tamanho de cada uma cai pela metade e os dois efeitos se cancelam. São \(\log_2 n\) níveis, então
 
+![Árvore de recursão do merge sort com n igual a 8: 4 níveis, cada um custando 8](arvore-merge-sort.png)
+
 $$
 T(n) = n \cdot \log_2 n = \Theta(n \log n)
 $$

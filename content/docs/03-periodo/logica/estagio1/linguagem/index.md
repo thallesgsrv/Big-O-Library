@@ -112,19 +112,14 @@ Toda fórmula é construída **de dentro para fora**, pelas regras da seção an
 
 Dá para desenhar isso como uma **árvore sintática**: a raiz é o conectivo principal e as folhas são as letras.
 
-```
-→
-├─ ∧
-│  ├─ p
-│  └─ q
-└─ ¬
-   └─ r
-```
+![Árvore sintática de (p ∧ q) → ¬r: a raiz é o conectivo →, com ∧ e ¬ abaixo e as letras nas folhas](arvore-sintatica.png)
 
 Para calcular o valor de uma fórmula (próxima página), você vai **das folhas até a raiz**.
 
 > [!WARNING]
 > **Cuidado com o $\neg$.** Em $\neg(p\land q)$ o conectivo principal é $\neg$, porque ele cobre tudo. Já em $\neg p\land q$ o principal é $\land$, porque o $\neg$ só atinge o $p$. Duas fórmulas parecidas, estruturas completamente diferentes.
+
+![Duas árvores: em ¬(p ∧ q) a raiz é ¬, e em ¬p ∧ q a raiz é ∧](arvore-negacao.png)
 
 | Fórmula | Conectivo principal | Por quê |
 | --- | --- | --- |

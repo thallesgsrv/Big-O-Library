@@ -111,6 +111,8 @@ Nada de percorrer coisa nenhuma: o computador calcula o endereço de `elementos[
 
 A próxima posição livre é justamente `tamanho`, então inserir no fim é só escrever ali e aumentar o contador. O problema é quando `tamanho` já é igual à capacidade: acabou o espaço.
 
+![Array cheio com 4 elementos copiado para um array de capacidade 8, onde o 5 já cabe](arraylist-crescer.png)
+
 É aí que entra a mudança de apartamento. Criamos um array com o **dobro** da capacidade e copiamos tudo para ele. O `Arrays.copyOf` faz as duas coisas de uma vez:
 
 ```java
@@ -145,6 +147,8 @@ Repara que só o 3º e o 5º `add` foram caros (copiaram 2 e 4 elementos). Os ou
 ## Passo 5: add no meio (abrindo um buraco)
 
 Para inserir no índice `i`, precisamos abrir um buraco ali. Todo mundo de `i` em diante dá um passo para a direita, e o detalhe que pega muita gente é: **começando pelo último**.
+
+![add(1, 99): os elementos 20, 30 e 40 deslocam uma casa para a direita para abrir espaço](arraylist-add-meio.png)
 
 Pensa numa fila de cadeiras em que todo mundo precisa escorregar uma cadeira para o lado. Se o primeiro escorrega antes de o segundo sair, ele senta no colo de alguém. Começando de trás, cada um tem uma cadeira vazia esperando.
 

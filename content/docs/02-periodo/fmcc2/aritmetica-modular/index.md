@@ -44,6 +44,8 @@ Um **primo** tem exatamente dois divisores positivos: 1 e ele mesmo. Todo inteir
 
 $a\equiv b\pmod m$ significa que $a$ e $b$ deixam o **mesmo resto** na divisão por $m$ (ou, equivalentemente, $m\mid(a-b)$). Pense no relógio: $15\equiv3\pmod{12}$.
 
+![Relógio de 12 horas: 3 e 15 caem na mesma posição, por isso 15 é congruente a 3 módulo 12](relogio-mod12.png)
+
 Dá para somar e multiplicar **antes** de tirar o resto:
 
 $$

@@ -15,6 +15,8 @@ Como provar que uma afirmação vale para **todo** número natural, se não dá 
 
 Se (1) o primeiro dominó cai e (2) cada dominó que cai derruba o próximo, então **todos** caem.
 
+![Fileira de dominós: o primeiro cai e cada um derruba o próximo](dominos.png)
+
 ## Estrutura da prova
 
 Para provar $P(n)$ para todo $n \ge n_0$:

@@ -52,6 +52,8 @@ $$
 
 Em algum ponto, a tangente é paralela à secante. Consequência: \(f'>0\) num intervalo faz \(f\) crescente; \(f'<0\), decrescente.
 
+![Curva com a secante entre a e b e uma tangente paralela a ela no ponto c](valor-medio.png)
+
 ## 4. Crescimento e concavidade
 
 | Sinal | Significado |
@@ -73,6 +75,8 @@ Em algum ponto, a tangente é paralela à secante. Consequência: \(f'>0\) num i
 2. \(f''<0\) para \(x<1\) (côncava para baixo) e \(f''>0\) para \(x>1\) (para cima).
 3. Inflexão em \(x=1\): \(f(1)=1-3+2=0\), ponto \((1,0)\).
 
+![Gráfico de x³-3x²+2 com máximo local em (0, 2), mínimo local em (2, -2) e inflexão em (1, 0)](concavidade-x3.png)
+
 ## 5. Receita: esboço de gráfico
 
 1. **Domínio** e interceptos (\(x=0\); raízes, se fáceis).
@@ -83,6 +87,8 @@ Em algum ponto, a tangente é paralela à secante. Consequência: \(f'>0\) num i
 6. **Marque os pontos** importantes e ligue respeitando crescimento e concavidade.
 
 **Exemplo 4 (completo).** Esboçar \(f(x)=x^4-4x^3+10\).
+
+![Gráfico de x⁴-4x³+10 com mínimo em (3, -17) e inflexões em (0, 10) e (2, -6)](esboco-x4.png)
 
 **Intercepto:** \(f(0)=10\).
 

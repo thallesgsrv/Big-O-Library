@@ -78,6 +78,8 @@ Todo computador, sob o controle de um programa, faz quatro coisas:
 > [!TIP]
 > Pense na digestão: entra o alimento (entrada), o estômago trabalha (processamento), o que sobra sai (saída) e parte fica guardada (armazenamento).
 
+![Entrada, processamento e saída em sequência, com o armazenamento ligado ao processamento](quatro-operacoes.png)
+
 ## 6. Cursos da área de Computação
 
 Os cursos se dividem em quatro categorias:

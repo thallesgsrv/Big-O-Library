@@ -36,6 +36,8 @@ Divida o número pela **base de destino**, depois o quociente, e assim por diant
 | 2 ÷ 2 | 1 | 0 |
 | 1 | | |
 
+![Divisões sucessivas de 538 por 2: os restos lidos de baixo para cima formam 1000011010](divisoes-sucessivas.png)
+
 Lendo de baixo para cima: $538_{10} = 1000011010_2$.
 
 Para outras bases é o mesmo processo, só muda o divisor:

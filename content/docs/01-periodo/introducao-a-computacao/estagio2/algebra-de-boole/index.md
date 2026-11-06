@@ -86,6 +86,8 @@ Ligando chaves:
 
 As portas **implementam** as funções lógicas. Têm uma ou mais entradas e **uma única saída**. Desenhar o esquema elétrico de cada porta em um projeto grande seria inviável; por isso existe uma **simbologia padrão** (AND em "D", OR curvada, NOT triângulo com círculo, etc.).
 
+![Símbolos das portas NOT, AND, OR, NAND, NOR e XOR](portas-logicas.png)
+
 ## 7. Circuitos integrados
 
 As portas vêm em **circuitos integrados** (CIs ou *chips*): um cristal de silício dentro de um encapsulamento (por exemplo o DIP, com pinos nas duas laterais). Cada CI comporta algumas portas, limitado pelos pinos.

@@ -22,6 +22,8 @@ Conclusão já vista: o computador faz tudo com **somas**. Falta ver como se faz
 
 Soma **dois bits**, sem considerar "vem-um" de uma coluna anterior. Serve para somar números de 1 bit ou a **coluna mais à direita**.
 
+![Circuito do meio somador: uma porta XOR para a soma e uma porta AND para o vai-um](meio-somador.png)
+
 - Entradas: $A$ e $B$.
 - Saídas: soma $S$ e "vai-um" $C_o$ (*carry out*).
 
@@ -41,6 +43,8 @@ $$
 ## 3. Somador completo (*full adder*)
 
 Soma **dois bits mais o "vem-um"** da coluna da direita ($C_i$, *carry in*). É usado em todas as colunas exceto a mais à direita.
+
+![Somador completo formado por dois meios somadores e uma porta OR para o vai-um final](somador-completo.png)
 
 - Entradas: $A$, $B$ e $C_i$.
 - Saídas: $S$ e $C_o$.

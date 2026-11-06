@@ -103,6 +103,8 @@ $$
 
 Essa soma tem nome: **soma de Riemann** de \(f\) na partição escolhida.
 
+![Partição de [0,1] em 3 partes com os pontos escolhidos e os retângulos de altura f(xᵢ*)](particao-s3.png)
+
 ### Um exemplo com números
 
 Para \(f(x)=x^2+1\) em \([0,1]\) com \(n = 3\) partes, \(\Delta x = \tfrac13\) e as partes são \([0,\tfrac13]\), \([\tfrac13,\tfrac23]\), \([\tfrac23,1]\). Veja o efeito da escolha do ponto \(x_i^*\):
@@ -114,6 +116,8 @@ Para \(f(x)=x^2+1\) em \([0,1]\) com \(n = 3\) partes, \(\Delta x = \tfrac13\) e
 | extremo direito | \(\tfrac13,\ \tfrac23,\ 1\) | \(\tfrac{10}9,\ \tfrac{13}9,\ 2\) | \(\tfrac13\cdot\tfrac{41}{9}=\tfrac{41}{27}\approx1{,}519\) |
 
 Como \(f\) é crescente, o extremo esquerdo **subestima** (retângulos ficam abaixo do gráfico) e o direito **superestima** (retângulos passam do gráfico). O ponto médio compensa um pouco de cada lado, e por isso chega mais perto. Os três valores são aproximações da mesma área, e a área verdadeira (que vamos calcular) é \(\tfrac43\approx1{,}333\).
+
+![Três somas de Riemann com n igual a 3: extremo esquerdo subestima, ponto médio chega mais perto e extremo direito superestima](riemann-tres-escolhas.png)
 
 ### Passagem ao limite
 

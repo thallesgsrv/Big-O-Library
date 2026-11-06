@@ -23,6 +23,8 @@ $$
 
 Os primeiros valores: $T(1) = 1$, $T(2) = 3$, $T(3) = 7$, $T(4) = 15$. Parece $2^n - 1$.
 
+![Torre de Hanói com 3 discos: mover 2 discos para o pino do meio, o maior para o destino e depois os 2 de volta por cima](hanoi.png)
+
 ## Como resolver: expandir e provar
 
 A estratégia tem dois passos.
@@ -67,6 +69,8 @@ T(n) = \log_2 n + 1
 $$
 
 É exatamente o custo da busca binária no pior caso, quando $n$ é potência de 2.
+
+![Cadeia n, n/2, n/4 até 1, com custo 1 por passo: log₂ n mais 1 no total](divide-ao-meio.png)
 
 ## Erros comuns
 

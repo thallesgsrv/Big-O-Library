@@ -20,6 +20,8 @@ Memória é o componente que **armazena as informações** usadas ou que serão 
 
 Porque a CPU é muito mais rápida que a memória e não dá para construir uma única memória que seja ao mesmo tempo **rápida, grande e barata**. Por isso a memória é um **subsistema** com vários tipos, organizados em uma **hierarquia** (uma pirâmide):
 
+![Pirâmide com registradores, cache, memória principal e memória secundária: quanto mais rápida, menor e mais cara](hierarquia-memorias.png)
+
 | Nível | Velocidade | Capacidade | Custo | Volátil? |
 | --- | --- | --- | --- | --- |
 | **Registradores** | altíssima (1 a 5 ns*) | muito pequena (bytes) | altíssimo | sim |
@@ -73,6 +75,8 @@ O tamanho máximo é limitado pelo **barramento de endereços**, pelo **chipset*
 - **Palavra:** grupo de células que a máquina lê e escreve de uma vez.
 - Uma memória de $N$ células tem endereços de $0$ a $N-1$.
 - Com um barramento de endereços de $E$ bits, o espaço de endereçamento é $N = 2^E$ células.
+
+![Oito células de memória de 1 byte com endereços de 0 a 7](enderecos.png)
 
 | Barramento de endereços | Células | Em bytes |
 | --- | --- | --- |

@@ -37,6 +37,8 @@ Subespaço tem cara de coisa "reta e que passa pela origem":
 
 Uma reta como \(y = x + 1\) **não** é subespaço, porque não passa pela origem (o ponto \((0, 0)\) não satisfaz a equação). Uma parábola não é subespaço, porque é curva e não fecha na soma.
 
+![A reta y=x passa pela origem, a reta y=x+1 não passa, e o plano x+y+z=0 em R³ passa pela origem](subespacos-geometria.png)
+
 ## Receita para decidir
 
 Olhe para a forma como \(W\) é definido:

@@ -15,6 +15,8 @@ Os computadores atuais seguem a **arquitetura de von Neumann**: instruções e d
 
 As quatro operações básicas (entrada, processamento, saída, armazenamento) já são conhecidas. O processador cuida do **processamento**.
 
+![Arquitetura de von Neumann: CPU com UC, ULA e registradores, ligada por barramentos à memória principal e à entrada e saída](von-neumann.png)
+
 ## 2. A CPU
 
 A **Unidade Central de Processamento** manipula os dados direta ou indiretamente. Ela executa **microinstruções** internas (o *microcódigo*, gravado pelo fabricante), de acordo com as instruções que recebe dos programas na memória principal.

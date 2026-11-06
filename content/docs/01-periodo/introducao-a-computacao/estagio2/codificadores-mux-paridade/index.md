@@ -30,6 +30,8 @@ $$
 
 Seleciona **uma entre várias entradas** e a leva a uma **única saída**, conforme as variáveis de seleção. É um "seletor". Com $n$ variáveis de seleção, escolhe entre $2^n$ entradas.
 
+![Multiplexador 4 por 1 com entradas I0 a I3, seletoras S0 e S1 e saída Y](mux-4x1.png)
+
 **MUX 2:1** (uma variável de seleção $S$):
 
 | S | Y |

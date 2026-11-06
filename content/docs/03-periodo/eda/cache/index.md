@@ -34,6 +34,8 @@ Memória rápida é cara e pequena; memória grande é barata e lenta. Então os
 
 Quando o processador precisa de um dado, ele olha primeiro no cache. Achou? **Cache hit**, rapidinho. Não achou? **Cache miss**, e lá vai ele buscar na RAM, devagar.
 
+![Pirâmide com registradores, cache, RAM e disco: quanto mais perto do processador, mais rápido e menor](hierarquia-memoria.png)
+
 ## O truque do cache: ele traz o vizinho junto
 
 Aqui está o detalhe que explica tudo. O cache **não busca um byte por vez**. Quando você pede um dado, ele traz um bloco inteiro dos vizinhos, a **linha de cache**, normalmente de 64 bytes. Um `int` tem 4 bytes, então uma única viagem à RAM traz **16 inteiros consecutivos** de um array.
@@ -46,6 +48,8 @@ Isso funciona porque os programas costumam seguir duas regras, e o cache aposta 
 - **Localidade temporal**: quem acessou um dado agora provavelmente vai acessar o mesmo de novo daqui a pouco.
 
 Um laço que percorre um array em ordem é o sonho do cache: o primeiro acesso dá *miss* e traz 16 inteiros; os 15 seguintes já estão lá, de graça.
+
+![Array com 16 posições dentro de uma linha de cache: o primeiro acesso é miss e os seguintes são hits](linha-de-cache.png)
 
 ## Experimento: linhas ou colunas?
 

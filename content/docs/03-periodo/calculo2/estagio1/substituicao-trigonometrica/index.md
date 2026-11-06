@@ -66,6 +66,8 @@ Triângulo: hipotenusa $x$, cateto $a$ junto ao ângulo, oposto $\sqrt{x^2-a^2}$
 > $(\text{constante})^2 - (\text{variável})^2 \Rightarrow \text{variável} = \text{constante}\cdot\operatorname{sen}\theta$
 > $(\text{variável})^2 - (\text{constante})^2 \Rightarrow \text{variável} = \text{constante}\cdot\sec\theta$
 
+![Os três triângulos retângulos das substituições trigonométricas: tangente, seno e secante](tres-triangulos.png)
+
 ## Receita
 
 Passo 1. Identifique o caso e faça a substituição $x = a\,(\ldots)$. Calcule também $dx$.

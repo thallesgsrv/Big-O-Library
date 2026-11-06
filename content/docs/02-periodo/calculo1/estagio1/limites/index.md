@@ -23,13 +23,7 @@ Podemos nos aproximar de \(a\) de dois lados:
 
 Isso dá os **limites laterais**.
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 500" width="100%" role="img" aria-label="Gráfico da função 1 dividido por x menos 2 com assíntota vertical em x igual a 2" preserveAspectRatio="xMidYMid meet" style="max-width:100%;height:auto;display:block;">
-<line x1="70" y1="250" x2="750" y2="250" stroke="currentColor" stroke-width="2"></line>
-<line x1="400" y1="40" x2="400" y2="460" stroke="currentColor" stroke-width="2" stroke-dasharray="8 8"></line>
-<path d="M80 280 C180 280 300 290 370 330 C390 350 395 400 398 460" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
-<path d="M402 40 C405 100 410 160 430 190 C500 225 600 235 720 240" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round"></path>
-</svg>
-<p style="font-size:0.95rem;margin-top:0.5rem">Legenda: assíntota vertical em x = 2; os ramos mostram comportamento para x→2⁻ e x→2⁺.</p>
+![Gráfico de 1 sobre x menos 2 com assíntota vertical em x igual a 2: o lado esquerdo vai a menos infinito e o direito a mais infinito](limite-assintota.png)
 
 ## 2. Exemplo: assíntota e laterais diferentes
 

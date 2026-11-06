@@ -23,6 +23,8 @@ Para todos os exemplos, vamos usar a lista `[5, 3, 1, 4]`.
 
 **Ideia:** compare vizinhos. Se estão fora de ordem, troque. Depois de uma passada completa, o **maior** elemento "borbulhou" até o final. Repita para o resto.
 
+![Primeira passada do bubble sort em [5, 3, 1, 4]: o 5 é trocado até o final](bubble-passada.png)
+
 ```python
 def bubble_sort(lista):
     n = len(lista)
@@ -60,6 +62,8 @@ Por que `range(n - 1 - i)`? Depois de `i` passadas, os últimos `i` elementos j�
 
 **Ideia:** como ao organizar cartas de baralho. Pegue uma carta de cada vez e **insira-a no lugar certo** entre as que já estão ordenadas à esquerda.
 
+![Insertion sort em [5, 3, 1, 4]: cada elemento entra no lugar certo da parte ordenada à esquerda](insertion-cartas.png)
+
 ```python
 def insertion_sort(lista):
     for i in range(1, len(lista)):
@@ -86,6 +90,8 @@ Acompanhando `[5, 3, 1, 4]` (a parte ordenada fica antes da barra):
 ## Merge sort: "dividir e conquistar"
 
 **Ideia:** uma lista de 0 ou 1 elemento já está ordenada. Para ordenar uma lista maior, **divida ao meio**, ordene cada metade e depois **junte (*merge*)** as duas metades já ordenadas, sempre pegando o menor dos dois primeiros.
+
+![Merge sort em [5, 3, 1, 4]: divide até listas de 1 elemento e junta ordenando](merge-divide-junta.png)
 
 Dois passos, duas funções. Primeiro, juntar duas listas **já ordenadas**:
 

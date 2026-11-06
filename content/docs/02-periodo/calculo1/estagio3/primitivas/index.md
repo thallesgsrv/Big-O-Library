@@ -13,6 +13,8 @@ date: 2026-10-14
 
 **Por que existe a constante \(C\)?** \(x^2\), \(x^2+5\) e \(x^2-100\) têm todas derivada \(2x\). Constantes somem ao derivar, então ao voltar precisamos reaparecer com uma. A primitiva mais geral é \(F(x)+C\). Para fixar \(C\) usamos uma condição extra.
 
+![Parábolas x²+C para C igual a -2, 0, 2 e 4: todas têm a mesma derivada 2x](familia-primitivas.png)
+
 **Exemplo 1.** Ache \(F\) com \(F'(x)=3x^2\) e \(F(1)=-1\).
 
 1. \(F(x)=x^3+C\).

@@ -37,6 +37,8 @@ A compatibilização de velocidades usa **buffers**: memórias que guardam os da
 | Problema | *skew*: bits chegam fora de ordem por interferência | |
 | Adequada para | dispositivos rápidos e próximos (discos, CD/DVD, impressora, scanner) | dispositivos lentos (mouse, teclado) e longa distância (modem) |
 
+![Comunicação paralela com 8 fios e serial com um fio](paralela-vs-serial.png)
+
 Na serial, os bytes são **serializados** (desmontados em bits), transmitidos, e **remontados** quando completam 8 bits.
 
 ### USB (*Universal Serial Bus*)

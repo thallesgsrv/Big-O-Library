@@ -34,6 +34,8 @@ $$
 
 Da primeira, \(a = 5 - 3b\). Na segunda: \(10 - 6b + b = 5\), então \(b = 1\) e \(a = 2\). Conferindo: \(2(1, 2) + 1 \cdot (3, 1) = (5, 5)\). ✓
 
+![O vetor (5,5) obtido como 2 vezes (1,2) mais 1 vez (3,1)](combinacao-linear.png)
+
 > [!NOTE]
 > **Toda pergunta "este vetor é combinação linear destes?" vira um sistema linear.** Os vetores dados viram as **colunas** da matriz, e o vetor que queremos obter vira a coluna dos termos independentes. Se o sistema tem solução, a resposta é sim, e a solução dá os coeficientes.
 
@@ -65,6 +67,8 @@ Igualando coeficientes: \(a = 1\) (do \(x^2\)), \(b + c = 2\) (do \(x\)) e \(a +
 ## O subespaço gerado
 
 O conjunto de **todas** as combinações lineares de \(v_1, \ldots, v_k\) é chamado de **subespaço gerado** por eles, e escrevemos
+
+![Plano z igual a x mais y em R³, gerado pelos vetores (1,0,1) e (0,1,1)](span-r3.png)
 
 $$
 [v_1, \ldots, v_k] = \{\, a_1 v_1 + \cdots + a_k v_k \;:\; a_1, \ldots, a_k \in \mathbb{R} \,\}.

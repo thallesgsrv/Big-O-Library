@@ -35,6 +35,8 @@ Siga o esquema da página [Somas de Riemann e integral definida](../rieman/), ag
 
 Uma forma de enxergar: a área entre as curvas é a área sob \(f\) **menos** a área sob \(g\). A subtração dentro da integral só junta as duas contas em uma.
 
+![Região entre duas curvas, com um retângulo fino de altura f(x) menos g(x)](area-entre-curvas-ideia.png)
+
 Para a descrição em \(y\), o raciocínio é o mesmo girado em 90°: os retângulos ficam **deitados**, de espessura \(\Delta y\), indo da curva da esquerda até a da direita.
 
 ## Receita
@@ -50,6 +52,8 @@ Para a descrição em \(y\), o raciocínio é o mesmo girado em 90°: os retâng
 ## Exemplos
 
 **Exemplo 1 (integrando em \(x\)).** Área entre \(f(x) = \dfrac{x^2}{4} + 1\) e \(g(x) = -\dfrac{x^2}{4} + x\) em \([0,1]\).
+
+![Região entre f(x)=x²/4+1 e g(x)=-x²/4+x no intervalo de 0 a 1](area-exemplo1.png)
 
 Passo 1. Quem está por cima? Calcule a diferença:
 
@@ -74,6 +78,8 @@ g(x) = \begin{cases} x, & 0 \le x \le 1\\ 1, & 1 \le x \le 3\end{cases}
 $$
 
 Passo 1. As expressões mudam em \(x = 1\) e em \(x = 2\). Quebre \([0,3]\) em \([0,1]\), \([1,2]\) e \([2,3]\). Em todos os trechos \(g \ge f\), então "de cima" é \(g\).
+
+![Regiões entre os gráficos por partes de f e g em [0,3], divididas nos trechos [0,1], [1,2] e [2,3]](area-exemplo2.png)
 
 Passo 2. Uma integral por trecho:
 

@@ -96,6 +96,8 @@ $$
 
 Passo 2. \(\displaystyle\int_1^{+\infty}\frac{dx}{x^2}\) converge (\(p = 2 > 1\)). Logo a integral **converge**.
 
+![Duas comparações: e elevado a menos x ao quadrado abaixo de e elevado a menos x, e seno ao quadrado sobre x ao quadrado abaixo de 1 sobre x ao quadrado](comparacao-exemplos.png)
+
 **Exemplo 3.** \(\displaystyle\int_1^{+\infty}\frac{1}{1+x^2}\,dx\)
 
 Passo 1. Compare com \(g(x) = \dfrac{1}{x^2}\):

@@ -32,6 +32,8 @@ Descartar a constante parece estranho, mas lembre que cada operação básica te
 
 Dizemos que \(f(n) = O(g(n))\) quando, a partir de algum ponto, \(f\) nunca ultrapassa \(g\) multiplicada por uma constante. Formalmente: existem constantes \(c > 0\) e \(n_0\) tais que
 
+![Curva do custo real f(n) abaixo da curva c vezes g(n) a partir do ponto n0](definicao-o.png)
+
 $$
 f(n) \le c \cdot g(n) \quad \text{para todo } n \ge n_0
 $$
@@ -81,6 +83,8 @@ Para sentir a diferença, veja quantas operações cada classe faz:
 | 1.000 | 10 | 9.966 | 1.000.000 | astronômico |
 
 Com \(n = 100\), um algoritmo exponencial já está fora de questão, mesmo no melhor computador do mundo.
+
+![Curvas de 1, log n, n, n log n, n ao quadrado e 2 elevado a n até n igual a 20: a exponencial dispara](classes-de-crescimento.png)
 
 ## Regras práticas
 

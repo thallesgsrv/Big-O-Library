@@ -97,25 +97,13 @@ Terminologia:
 
 ### Exemplo 1: $p\land(\neg q\lor\neg p)$ é satisfazível?
 
-```
-p ∧ (¬q ∨ ¬p)
-└─ p, (¬q ∨ ¬p)           α em ∧
-   ├─ p, ¬q               β em ∨   aberto ✓
-   └─ p, ¬p  ✗            β em ∨   fechado
-```
+![Tableau de p ∧ (¬q ∨ ¬p): o ramo p, ¬q fica aberto e o ramo p, ¬p fecha](tableau-exemplo1.png)
 
 O ramo da esquerda tem só $\{p,\neg q\}$ (sem complementares): **aberto**. **Satisfazível.** O modelo vem direto dos literais: $p=V$, $q=F$.
 
 ### Exemplo 2: $(p\lor q)\land(\neg p\land\neg q)$
 
-```
-(p ∨ q) ∧ (¬p ∧ ¬q)
-└─ (p ∨ q), (¬p ∧ ¬q)             α em ∧
-   ├─ p, (¬p ∧ ¬q)                β em ∨
-   │  └─ p, ¬p, ¬q  ✗             α em ∧   (p e ¬p)
-   └─ q, (¬p ∧ ¬q)                β em ∨
-      └─ q, ¬p, ¬q  ✗             α em ∧   (q e ¬q)
-```
+![Tableau de (p ∨ q) ∧ (¬p ∧ ¬q): os dois ramos fecham, então é insatisfazível](tableau-exemplo2.png)
 
 Todos os ramos fecham: **insatisfazível.** Faz sentido: "$p$ ou $q$" e "nem $p$ nem $q$" não convivem.
 

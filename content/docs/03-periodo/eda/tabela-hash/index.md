@@ -134,6 +134,8 @@ Como `hash` é \(O(1)\), as três operações também são. Parece tudo resolvid
 
 O pedido `9301` também termina em 1, então `hash(9301) = 1`, a mesma posição do `4821`. Pelo nosso `put`, o `9301` **sobrescreve** o `4821` em silêncio: o pedido some. E o `get(4821)` passaria a devolver o pedido `9301`, porque só olhamos o índice e nunca conferimos a chave. Isso tem nome: **colisão**. Na verdade, toda chave que termina em 1 vai para a posição 1.
 
+![Função de hash mod 10: 4821 e 9301 colidem no balde 1, enquanto 7305 vai para o balde 5](hash-colisao.png)
+
 Temos três caminhos:
 
 1. **Ignorar o problema.** Fora de cogitação: uma estrutura de dados não pode perder o que você guardou.
@@ -164,6 +166,8 @@ Inserindo `4821`, `9301`, `7305` e `5415` numa tabela de 10 baldes:
 Como `4821` e `9301` têm o mesmo **hash** (mas chaves diferentes), eles dividem a lista do balde 1. Por isso a lista guarda o objeto inteiro: é a **chave** que diferencia quem está no mesmo balde. E atenção, porque esse é um erro recorrente: **não existem duas chaves iguais numa tabela hash**. Se você faz `put` de uma chave que já existe, o valor é **atualizado**.
 
 A tabela agora é um array de listas. Cada balde começa como `null` e só ganha uma lista quando alguém precisa dele:
+
+![Baldes com listas encadeadas: 4821 e 9301 dividem o balde 1; no pior caso todas as chaves caem no mesmo balde](hash-encadeamento.png)
 
 ```java
 public class TabelaHash {
@@ -279,6 +283,8 @@ Inserindo `4821`, `9301`, `7305`, `5415` e `8541` numa tabela de 10 posições:
 3. `7305`: `(5 + 0) % 10 = 5`. Livre, ocupa a posição 5.
 4. `5415`: `(5 + 0) % 10 = 5`. Ocupada. Com `sondagem = 1`, vai para a posição 6. Livre, ocupa.
 5. `8541`: `hash = 1`. Ocupadas a 1 e a 2. Com `sondagem = 2`, `(1 + 2) % 10 = 3`. Livre, ocupa a posição 3.
+
+![Tabela de 10 posições com 4821, 9301, 8541, 7305 e 5415 após as colisões resolvidas por sondagem linear](hash-enderecamento-aberto.png)
 
 ```text
 posição:  0  1     2     3     4  5     6     7  8  9

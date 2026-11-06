@@ -55,30 +55,7 @@ print(resultado)  # 14
 
 Acompanhe a pilha (o topo é a linha de cima):
 
-```text
-1) Começa o programa
-   | (programa principal)          |
-
-2) Chama soma_dobros(3, 4)
-   | soma_dobros: a=3, b=4         |
-   | (programa principal)          |
-
-3) soma_dobros chama dobro(3)
-   | dobro: x=3                    |  <- topo: só este é visível
-   | soma_dobros: a=3, b=4         |
-   | (programa principal)          |
-
-4) dobro devolve 6 e o prato sai
-   | soma_dobros: a=3, b=4         |  (agora tem o 6 em mãos)
-   | (programa principal)          |
-
-5) soma_dobros chama dobro(4), que devolve 8 e sai
-   | soma_dobros: a=3, b=4         |  (6 + 8)
-   | (programa principal)          |
-
-6) soma_dobros devolve 14 e sai
-   | (programa principal)          |  resultado = 14
-```
+![Seis estados da pilha de chamadas ao executar soma_dobros(3, 4): soma_dobros e dobro entram e saem da pilha até o resultado 14](pilha-de-chamadas.png)
 
 Repare que `x` do `dobro` e `a` do `soma_dobros` são pratos diferentes: mesmo que tivessem o mesmo nome, não se misturariam.
 

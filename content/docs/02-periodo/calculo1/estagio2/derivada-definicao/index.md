@@ -20,6 +20,8 @@ $$
 
 3. Aproximamos \(Q\) de \(P\) fazendo \(h\to0\). As secantes viram, no limite, a tangente.
 
+![Curva com o ponto P, três retas secantes por pontos Q cada vez mais próximos e a reta tangente em P](secante-tangente.png)
+
 ## 2. Definição de derivada
 
 $$
@@ -91,6 +93,8 @@ $$
 
 **Exemplo 3 (reta tangente).** Tangente a \(y=x^2\) em \(x_0=2\).
 
+![Parábola y=x² com a reta tangente y=4x-4 no ponto (2, 4)](tangente-x2.png)
+
 1. Pela definição (ou regra), \(f'(x)=2x\). Então \(m=f'(2)=4\).
 2. \(f(2)=4\). A reta é \(y-4=4(x-2)\).
 3. Distribua e isole \(y\): \(y=4x-8+4=\boxed{4x-4}\).
@@ -108,6 +112,8 @@ A derivada **não existe** em:
 - **Bico (quina):** inclinações diferentes dos dois lados. Ex.: \(\lvert x\rvert\) em \(0\) (esquerda dá \(-1\), direita dá \(+1\)).
 - **Descontinuidade:** salto ou buraco.
 - **Tangente vertical:** a inclinação "vai para o infinito". Ex.: \(\sqrt[3]{x}\) em \(0\).
+
+![Três gráficos onde a derivada não existe: bico em |x|, salto e tangente vertical na raiz cúbica](derivada-nao-existe.png)
 
 > [!IMPORTANT]
 > **Derivável implica contínua.** A volta é falsa: \(\lvert x\rvert\) é contínua em \(0\) e não é derivável.

@@ -16,6 +16,8 @@ date: 2026-10-06
 - **`if`, `elif` e `else`** escolhem o que executar. Só **um** bloco roda: o primeiro cuja condição for verdadeira.
 - A **indentação** (os espaços no começo da linha) faz parte da sintaxe: ela diz o que está dentro do `if`.
 
+![Fluxograma de if, elif e else: cada condição falsa leva à próxima, e o else fica no final](fluxo-decisao.png)
+
 ## Exemplo
 
 ```python
@@ -55,11 +57,7 @@ Os parênteses importam: `and` é avaliado antes de `or`, e eles deixam claro o 
 
 Uma imagem mental que ajuda:
 
-```text
-texto:     b   a   n   a   n   a
-índice:    0   1   2   3   4   5
-negativo: -6  -5  -4  -3  -2  -1
-```
+![A palavra banana com índices positivos de 0 a 5 e negativos de menos 6 a menos 1](indices-string.png)
 
 ## Exemplo: `len` e índices
 

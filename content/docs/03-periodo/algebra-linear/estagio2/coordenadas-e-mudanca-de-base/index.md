@@ -42,6 +42,8 @@ Então \([v]_B = \begin{bmatrix} 3 \\ 2 \end{bmatrix}\). Conferindo: \(3(1, 1) +
 
 Repare: o **mesmo** vetor \((5, 1)\) tem endereço \((5, 1)\) na base canônica e endereço \((3, 2)\) na base \(B\).
 
+![O vetor (5,1) como 3 vezes (1,1) mais 2 vezes (1,-1), sobre a malha oblíqua da base B](coordenadas-base-b.png)
+
 **Exemplo 2 (polinômios).** Em \(P_2\), seja \(p(x) = 3 - x + 2x^2\).
 
 - Na base \(B = (1, x, x^2)\): \([p]_B = \begin{bmatrix} 3 \\ -1 \\ 2 \end{bmatrix}\).

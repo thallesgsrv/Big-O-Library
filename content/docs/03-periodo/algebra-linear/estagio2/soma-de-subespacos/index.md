@@ -59,6 +59,8 @@ Dado \((a, b, c)\), escrevemos \((a, b, c) = (a, b, 0) + (0, 0, c)\), com o prim
 > [!TIP]
 > Geometricamente, dois planos distintos pela origem em \(\mathbb{R}^3\) sempre somam \(\mathbb{R}^3\): juntos eles "apontam" para todas as direções.
 
+![Soma de eixos em R², de eixos em R³ formando o plano z=0, e de dois planos que somam R³ e se cortam numa reta](soma-geometria.png)
+
 ## Soma direta
 
 O Exemplo 3 tem um detalhe incômodo. O vetor \((0, 1, 0)\) pode ser escrito de **duas formas** como "algo de \(U\) + algo de \(W\)":

@@ -71,6 +71,8 @@ date: 2026-10-03
 | `tar -czf backup.tar.gz pasta/` | Compacta uma pasta em `.tar.gz`. |
 | `tar -xzf backup.tar.gz` | Extrai um arquivo `.tar.gz`. |
 
+![Árvore de diretórios com a raiz /, home, usuario, projetos e Documentos; pwd mostra /home/usuario e cd .. sobe um nível](arvore-diretorios.png)
+
 ## Lista rápida
 
 - `ls` — lista arquivos

@@ -17,6 +17,8 @@ Uma **relação binária** de $A$ em $B$ é um subconjunto $R \subseteq A \times
 
 Exemplo: em $A = \{1, 2, 3\}$, a relação "menor que" é $\{(1,2), (1,3), (2,3)\}$.
 
+![Diagrama de setas da relação menor que em {1, 2, 3}: setas de 1 para 2, de 1 para 3 e de 2 para 3](menor-que-setas.png)
+
 ## As quatro propriedades
 
 Uma relação $R$ em $A$ é:
@@ -63,6 +65,8 @@ $$
 $$
 
 É por isso que a aritmética modular trabalha só com os restos $0, 1, 2$: cada classe é representada por um elemento.
+
+![Três classes de equivalência de congruência módulo 3, com os restos 0, 1 e 2](classes-mod3.png)
 
 ## Relações de ordem
 

@@ -42,26 +42,11 @@ Atenção: heap **não é** uma BST. Na BST, a esquerda é menor e a direita é 
 
 Este é um heap:
 
-```text
-        10
-       /  \
-      5    8
-     / \  /
-    1  3 2
-```
+![Heap máximo com 10 na raiz e o array correspondente [10, 5, 8, 1, 3, 2]](heap-exemplo.png)
 
 Já os dois abaixo não são, cada um quebrando uma regra:
 
-```text
-quebra a regra 1                 quebra a regra 2
-
-        10                              10
-       /  \                            /  \
-      5    8                          5    8
-     / \                               \
-    1   9    9 > 5 (pai)                3    o 5 tem filho direito
-                                             sem ter o esquerdo
-```
+![Duas árvores que não são heap: uma com filho maior que o pai, outra com nó sem filho esquerdo e com filho direito](heap-invalidos.png)
 
 ### Por que completa?
 
@@ -145,6 +130,8 @@ add(9)   [9, 8, 5, 1, 3]         9 sobe duas vezes: passa pelo 3 e pelo 8
 add(2)   [9, 8, 5, 1, 3, 2]      2 < pai (5), fica
 ```
 
+![Inserção do 9: ele entra no fim, troca com o 3 e depois com o 8, virando a raiz](heap-sobe.png)
+
 Olha o `9`: entrou lá no fim, passou pelo 3, passou pelo 8, e virou rei. Agora o código:
 
 ```java
@@ -185,6 +172,8 @@ remove()   devolve 8
            afunda: filhos 3 e 5, o maior é 5:   [5, 3, 2, 1]
            2 não tem filhos: termina.
 ```
+
+![Remoção do maior: o 2 vai para a raiz e afunda trocando com o 8 e depois com o 3](heap-afunda.png)
 
 Por que trocar com o **maior** dos filhos? Porque quem subir vai virar pai do outro filho, e só o maior dos dois consegue ser maior ou igual ao irmão. Se subisse o menor, quebraria a regra do outro lado. Em código:
 

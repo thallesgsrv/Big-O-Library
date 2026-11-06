@@ -17,9 +17,7 @@ Pense numa caça ao tesouro: cada pista diz onde está a seguinte. Para chegar �
 
 A lista é formada por **nós**. Cada nó guarda um valor e uma referência para o próximo nó. O último nó aponta para `null`. A lista só precisa guardar uma referência para o primeiro nó, a **cabeça**.
 
-```text
-cabeça → [10 | •] → [20 | •] → [30 | null]
-```
+![Lista encadeada: cabeça aponta para o nó 10, que aponta para o 20, que aponta para o 30, que aponta para null](lista-estrutura.png)
 
 Se a cabeça é `null`, a lista está vazia.
 
@@ -99,6 +97,8 @@ public boolean contem(int valor) {
 ### Remover um valor
 
 Para remover um nó no meio, precisamos que o nó **anterior** passe a apontar para o seguinte. Por isso o laço olha sempre para `atual.proximo`. Remover a cabeça é um caso à parte, porque ela não tem anterior.
+
+![Remoção do 20: o ponteiro do nó 10 passa a apontar direto para o 30](lista-remocao.png)
 
 ```java
 public boolean remove(int valor) {

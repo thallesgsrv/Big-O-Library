@@ -17,6 +17,8 @@ Software é o conjunto de **instruções ordenadas e lógicas** que o hardware e
 | **Rígido:** mudar é difícil e só o fabricante faz | **Maleável:** programadores mudam fácil |
 | Depende do software para funcionar | Ordena e controla as ações do hardware |
 
+![Camadas do usuário ao hardware: aplicativos e utilitários, sistema operacional e hardware](camadas.png)
+
 Um conjunto específico de instruções é um **programa**. Programas ficam na memória secundária e são escritos em **linguagens de programação**. Quando o computador usa um programa, diz-se que ele está **rodando** ou **executando** (o programa, ou parte dele, é copiado para a memória principal).
 
 Quem projeta e desenvolve programas são analistas de sistemas e programadores; a **Engenharia de Software** estuda o desenvolvimento.

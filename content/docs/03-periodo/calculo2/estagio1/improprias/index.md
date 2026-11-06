@@ -49,9 +49,13 @@ $$
 
 e cada pedaço é um limite separado.
 
+![Área sob 1/x² a partir de 1, que é finita, e sob 1/x, que cresce sem limite](improprias-tipo1.png)
+
 ## Tipo 2: assíntotas verticais
 
 - Se \(f\) é contínua em \([a, b)\) e descontínua em \(b\):
+
+![Gráfico de 1 sobre raiz de x em (0, 2] com assíntota vertical em x=0 e área finita](improprias-tipo2.png)
 
 $$
 \int_a^b f(x)\,dx = \lim_{c\to b^-}\int_a^c f(x)\,dx

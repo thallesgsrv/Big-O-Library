@@ -99,6 +99,8 @@ Fila de capacidade 3, mostrando o array e o valor de `inicio` e `tamanho` após 
 
 Na última linha o 40 foi parar na posição `0`: \((1 + 2) \bmod 3 = 0\). É exatamente a volta circular reaproveitando o espaço que o 10 liberou.
 
+![Cinco estados de uma fila circular de capacidade 3, com o 40 voltando para a posição 0](fila-circular.png)
+
 ## Análise de custo
 
 Todas as operações (`enfileira`, `desenfileira`, `primeiro`, `estaVazia`, `estaCheia`) fazem um número fixo de passos e custam \(O(1)\). A memória é \(O(c)\), em que `c` é a capacidade. Assim como na pilha com array, a capacidade é fixa: se encher, `enfileira` lança exceção.

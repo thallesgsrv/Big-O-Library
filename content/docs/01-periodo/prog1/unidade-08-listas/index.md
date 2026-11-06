@@ -129,6 +129,8 @@ b.append(4)
 print(a)       # [1, 2, 3, 4]
 ```
 
+![Duas variáveis apontando para a mesma lista versus uma cópia independente](lista-alias.png)
+
 Para copiar de verdade, crie uma lista nova e preencha:
 
 ```python

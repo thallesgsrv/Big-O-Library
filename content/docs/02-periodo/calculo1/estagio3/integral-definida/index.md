@@ -29,6 +29,8 @@ Como achar a área sob \(f(x)=x^2+1\) em \([0,1]\)? Não é um polígono, então
 2. Em cada parte escolha um ponto \(x_i^*\) e construa um retângulo de altura \(f(x_i^*)\).
 3. Some as áreas (soma de Riemann): \(S_n=\displaystyle\sum_{i=1}^{n}f(x_i^*)\,\Delta x\).
 
+![Retângulos sob a curva x²+1 em [0,1] com n igual a 3, 8 e 30: a aproximação melhora até 4/3](riemann-retangulos.png)
+
 **Exemplo 1 (\(n=3\), extremo direito).**
 
 1. \(\Delta x=\dfrac{1-0}3=\dfrac13\) e os pontos são \(x_i^*=\dfrac13,\dfrac23,1\).

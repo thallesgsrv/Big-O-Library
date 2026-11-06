@@ -28,6 +28,8 @@ print(f"Olá, {nome}! Ano que vem você terá {idade + 1} anos.")
 
 Repare em `int(...)`: ele converte o texto digitado em número, e só então dá para somar 1. O `f"..."` (f-string) insere valores dentro do texto.
 
+![Variáveis como caixas etiquetadas: nome guarda texto, idade guarda inteiro, altura guarda decimal e maior guarda booleano](variaveis-caixas.png)
+
 ## Exemplo: dividindo segundos em horas, minutos e segundos
 
 ```python

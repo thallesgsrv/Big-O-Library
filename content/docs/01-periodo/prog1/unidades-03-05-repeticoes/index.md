@@ -18,6 +18,8 @@ date: 2026-10-06
 - **Acumulador** é uma variável que vai guardando um resultado a cada volta (soma, contagem, maior valor até agora).
 - **Contador** é um acumulador que sobe de um em um.
 
+![Fluxograma do while: testa a condição, executa o corpo e volta ao teste até a condição ficar falsa](fluxo-while.png)
+
 ## Exemplo 1: `while` com contador
 
 ```python

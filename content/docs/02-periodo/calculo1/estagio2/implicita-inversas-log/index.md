@@ -17,6 +17,8 @@ date: 2026-10-11
 
 **Exemplo 1.** Ache \(y'\) no ponto \((3,-4)\) se \(x^2+y^2=25\).
 
+![Circunferência x²+y²=25 com a reta tangente no ponto (3, -4), de inclinação 3/4](circulo-implicita.png)
+
 1. Derive: \(2x+2y\,y'=0\).
 2. Isole: \(2y\,y'=-2x\), logo \(y'=-\dfrac xy\).
 3. Em \((3,-4)\): \(y'=-\dfrac{3}{-4}=\boxed{\dfrac34}\).

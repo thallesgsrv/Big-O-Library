@@ -73,6 +73,8 @@ Até meados dos anos 80 cada fabricante tinha o seu formato. O **IEEE 754** (198
 
 O expoente é guardado em **excesso**: $E_{guardado} = e_{real} + 127$ (simples).
 
+![Campos do IEEE 754: float com 1 bit de sinal, 8 de expoente e 23 de significando; double com 1, 11 e 52](ieee754-campos.png)
+
 | Expoente guardado | Significado |
 | --- | --- |
 | `00000000` (0) | caso especial (zero e não normalizados) |

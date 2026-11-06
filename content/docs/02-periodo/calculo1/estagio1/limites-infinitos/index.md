@@ -32,6 +32,8 @@ Se, quando \(x\to a\), \(f(x)\) cresce sem limite, escrevemos \(\lim f=+\infty\)
 
 **Exemplo 1.** \(\displaystyle\lim_{x\to3^+}\frac{2}{x-3}\) e \(\displaystyle\lim_{x\to3^-}\frac{2}{x-3}\)
 
+![Gráfico de 2 sobre x menos 3: vai a menos infinito pela esquerda de 3 e a mais infinito pela direita](assintota-vertical.png)
+
 - Pela direita, \(x>3\), então \(x-3\) é positivo minúsculo: \(\frac{2}{0^+}=+\infty\).
 - Pela esquerda, \(x<3\), \(x-3\) é negativo minúsculo: \(\frac{2}{0^-}=-\infty\).
 
@@ -108,6 +110,8 @@ $$
 Por isso \(\dfrac{x^2}{e^x}\to0\). (L'Hôpital é mais uma ferramenta para isso.)
 
 **Exemplo 9.** Assíntotas de \(f(x)=\dfrac{2x}{x-1}\).
+
+![Gráfico de 2x/(x-1) com assíntota vertical x=1 e assíntota horizontal y=2](assintotas-exemplo9.png)
 
 - **Vertical:** o denominador zera em \(x=1\) e o numerador \((2)\) não: \(x=1\).
 - **Horizontal:** graus iguais, razão dos líderes \(\frac21=2\): \(y=2\).

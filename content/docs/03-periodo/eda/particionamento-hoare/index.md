@@ -82,6 +82,8 @@ No Lomuto escrevíamos `(esq, p - 1)` e `(p + 1, dir)`, deixando o pivô de fora
 
 Para `[7, 2, 9, 4, 3, 8, 1, 6]`: `esq = 0`, `dir = 7`, pivô = `v[3] = 4`.
 
+![Passo a passo do particionamento de Hoare: i e j param, trocam e se encontram na posição 3](hoare-passos.png)
+
 ```text
 início        [7, 2, 9, 4, 3, 8, 1, 6]    i = -1, j = 8
 

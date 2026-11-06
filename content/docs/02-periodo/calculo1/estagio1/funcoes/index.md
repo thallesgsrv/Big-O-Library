@@ -53,21 +53,7 @@ Considere novamente \(f(x) = x^2 - 4\). Calculando cada valor (lembre que \((-3)
 
 Agora, em vez de olhar apenas para os números, vamos colocar esses pontos no plano cartesiano.
 
-<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 700 330" width="100%" role="img" aria-label="Gráfico da função f(x)=x²-4: parábola com vértice em (0, -4) cruzando o eixo x em -2 e 2" preserveAspectRatio="xMidYMid meet" style="max-width:100%;height:auto;display:block;">
-<line x1="60" y1="170" x2="660" y2="170" stroke="currentColor" stroke-width="2"></line>
-<line x1="350" y1="10" x2="350" y2="315" stroke="currentColor" stroke-width="2"></line>
-<path d="M89 20 Q 350 560 611 20" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"></path>
-<circle cx="89" cy="20" r="5" fill="currentColor"></circle>
-<circle cx="176" cy="170" r="5" fill="currentColor"></circle>
-<circle cx="263" cy="260" r="5" fill="currentColor"></circle>
-<circle cx="350" cy="290" r="6" fill="currentColor"></circle>
-<circle cx="437" cy="260" r="5" fill="currentColor"></circle>
-<circle cx="524" cy="170" r="5" fill="currentColor"></circle>
-<circle cx="611" cy="20" r="5" fill="currentColor"></circle>
-<text x="362" y="310" font-size="15" fill="currentColor">(0, -4)</text>
-<text x="82" y="160" font-size="15" fill="currentColor">(-2, 0)</text>
-<text x="540" y="160" font-size="15" fill="currentColor">(2, 0)</text>
-</svg>
+![Gráfico da função f(x)=x²-4: parábola com vértice em (0, -4) cruzando o eixo x em -2 e 2](parabola-x2-menos-4.png)
 
 Legenda do gráfico:
 
@@ -212,6 +198,8 @@ $$
 **Conferência:** \(f(f^{-1}(x)) = 2\cdot\dfrac{x-1}{2}+1 = (x-1)+1 = x\). \(\checkmark\)
 
 **Gráfico:** o de \(f^{-1}\) é o espelho do de \(f\) em torno da reta \(y=x\).
+
+![Retas f(x)=2x+1 e sua inversa (x-1)/2, simétricas em relação à reta y igual a x](funcao-inversa.png)
 
 **Inversas importantes:** \(\ln\) é a inversa de \(e^x\); \(\sqrt x\) é a inversa de \(x^2\) (para \(x\ge0\)); \(\operatorname{arcsen}\), \(\arccos\) e \(\operatorname{arctg}\) são inversas de \(\operatorname{sen}\), \(\cos\), \(\operatorname{tg}\) (restritas a trechos onde são injetoras).
 

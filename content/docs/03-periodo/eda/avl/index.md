@@ -13,15 +13,7 @@ Na [árvore binária de busca](../arvore-binaria-de-busca/), a gente descobriu o
 
 Inserindo `1, 2, 3, 4` numa BST comum, o que acontece:
 
-```text
-1
- \
-  2
-   \
-    3
-     \
-      4        altura 3 = n - 1: uma lista torta
-```
+![Inserindo 1, 2, 3, 4: a BST comum vira uma lista de altura 3 e a AVL fica com altura 2](avl-torta-vs-balanceada.png)
 
 A **árvore AVL** (de Adelson-Velsky e Landis, os dois autores de 1962) faz exatamente isso. Depois de cada inserção ou remoção, ela confere se ficou torta e, se ficou, **se endireita** com umas manobras chamadas **rotações**. Foi a primeira árvore de busca autobalanceada já inventada.
 
@@ -37,13 +29,7 @@ $$
 
 Uma árvore é AVL se for uma BST e **todo nó** tiver \(fb \in \{-1, 0, +1\}\). Em português: as duas subárvores de qualquer nó diferem em, no máximo, 1 de altura. Usamos a convenção de que subárvore vazia tem altura \(-1\).
 
-```text
-        20  fb = 0                     20  fb = -2   <- desbalanceada!
-       /  \                              \
-     10    30                             30
-                                            \
-                                             40
-```
+![Árvore AVL com fb 0 e árvore desbalanceada com fb igual a menos 2](avl-fator-balanceamento.png)
 
 ## Por que isso garante \(O(\log n)\)?
 
@@ -65,23 +51,9 @@ Uma **rotação** reorganiza alguns nós para mudar a altura **sem quebrar a reg
 
 **Rotação à direita** em `y` (quando o lado esquerdo está pesado): o filho esquerdo `x` sobe, `y` desce para a direita de `x`, e a subárvore `B`, que estava no meio dos dois, vira filho esquerdo de `y`.
 
-```text
-        y                       x
-       / \                     / \
-      x   C        ->         A   y
-     / \                         / \
-    A   B                       B   C
-```
+![Rotação à direita em y e rotação à esquerda em x, com as subárvores A, B e C](avl-rotacoes.png)
 
-A ordem dos valores é preservada (\(A < x < B < y < C\)), então continua sendo uma BST. Imagina um galho pesado de um lado: você gira o ponto de apoio e o peso se redistribui. A **rotação à esquerda** é o espelho:
-
-```text
-      x                           y
-     / \                         / \
-    A   y          ->           x   C
-       / \                     / \
-      B   C                   A   B
-```
+A ordem dos valores é preservada (\(A < x < B < y < C\)), então continua sendo uma BST. Imagina um galho pesado de um lado: você gira o ponto de apoio e o peso se redistribui. A **rotação à esquerda** é o espelho, na parte de baixo da figura.
 
 ## Construindo a AVL
 
@@ -154,47 +126,15 @@ private No rotacaoEsquerda(No x) {
 
 Quando um nó chega a \(fb = +2\) ou \(fb = -2\), olhamos **por onde o excesso de altura entrou**. São quatro situações, e em cada desenho abaixo o nó desbalanceado é o do topo.
 
-**Caso 1: esquerda-esquerda.** O peso está no filho esquerdo, e esse filho também pende para a esquerda. Acontece, por exemplo, ao inserir `30, 20, 10`. A correção é uma **rotação à direita** no nó desbalanceado.
+![Os quatro casos de desbalanceamento da AVL e a árvore resultante de cada correção](avl-quatro-casos.png)
 
-```text
-    30  (fb +2)             20
-   /                       /  \
-  20            ->       10    30
- /
-10
-```
+**Caso 1: esquerda-esquerda.** O peso está no filho esquerdo, e esse filho também pende para a esquerda. Acontece, por exemplo, ao inserir `30, 20, 10`. A correção é uma **rotação à direita** no nó desbalanceado.
 
 **Caso 2: direita-direita.** É o espelho: inserir `10, 20, 30`. A correção é uma **rotação à esquerda** no nó.
 
-```text
-10  (fb -2)                 20
-  \                        /  \
-   20           ->       10    30
-     \
-      30
-```
-
 **Caso 3: esquerda-direita.** O peso está no filho esquerdo, mas esse filho pende para a **direita**: inserir `30, 10, 20`. Aqui uma rotação simples não resolve, porque só **muda o problema de lugar**, como empurrar um tapete amassado e a dobra aparecer do outro lado. Então primeiro endireitamos o filho com uma rotação à esquerda (o que transforma o caso em esquerda-esquerda) e só depois rodamos o nó à direita. É uma **rotação dupla**.
 
-```text
-      30  (fb +2)           30                 20
-     /                     /                  /  \
-    10          ->       20        ->       10    30
-      \                 /
-       20             10
-                  (rot. esquerda em 10)  (rot. direita em 30)
-```
-
 **Caso 4: direita-esquerda.** O espelho do anterior: inserir `10, 30, 20`. Rotação à direita no filho direito e depois rotação à esquerda no nó.
-
-```text
-10  (fb -2)              10                      20
-  \                        \                    /  \
-   30           ->          20        ->      10    30
-  /                           \
- 20                            30
-                   (rot. direita em 30)  (rot. esquerda em 10)
-```
 
 Para reconhecer o caso, basta olhar o `fb` do nó e o `fb` do filho pesado:
 

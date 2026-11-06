@@ -20,6 +20,8 @@ Um jeito de enxergar: o sistema \(AX = B\) tem **solução única** exatamente q
 
 (Geometricamente, num sistema \(2 \times 2\), o determinante mede a "área" do paralelogramo formado pelas linhas da matriz. Área zero significa que as retas são paralelas ou iguais.)
 
+![Paralelogramo formado pelas linhas (3,1) e (1,2), de área 5, e paralelogramo achatado numa reta quando o determinante é zero](determinante-area.png)
+
 ## Determinante de ordem 1 e 2
 
 Para uma matriz \(1 \times 1\), o determinante é o próprio número: \(\det [a] = a\).

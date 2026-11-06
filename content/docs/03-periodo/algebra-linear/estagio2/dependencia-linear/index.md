@@ -43,6 +43,8 @@ Uma forma de pensar: a combinação com todos os coeficientes zero **sempre** d�
 - **Vetores repetidos:** a lista é LD (a diferença entre os dois iguais dá \(0\)).
 - **Mais vetores do que a dimensão:** em \(\mathbb{R}^n\), qualquer lista com **mais de \(n\) vetores é LD**. (O sistema homogêneo correspondente tem mais incógnitas do que equações, então tem solução não nula. Isso vem direto do Estágio 1.)
 
+![Dois vetores na mesma reta (LD) geram só uma reta; dois vetores em direções diferentes (LI) geram o plano todo](dependencia-geometria.png)
+
 ## Como testar na prática
 
 1. Monte a equação \(a_1 v_1 + \cdots + a_k v_k = 0\).

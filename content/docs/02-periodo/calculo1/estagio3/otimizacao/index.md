@@ -28,6 +28,8 @@ Otimizar é achar o **maior** ou **menor** valor de algo (área, volume, custo, 
 
 **Exemplo 1 (caixa sem tampa).** De uma folha \(12\times12\) cm recortam-se quadrados de lado \(x\) nos cantos e dobram-se as abas. Que \(x\) maximiza o volume?
 
+![Folha 12 por 12 com quadrados de lado x recortados nos cantos e gráfico do volume com máximo em x=2](caixa-sem-tampa.png)
+
 1. A base fica \((12-2x)\times(12-2x)\) e a altura é \(x\), com \(0<x<6\):
 
 $$
@@ -48,6 +50,8 @@ V(2)=2\cdot(12-4)^2=2\cdot64=\boxed{128\ \text{cm}^3}
 $$
 
 **Exemplo 2 (retângulo sob a parábola).** Maior área de um retângulo com base no eixo \(x\) e vértices superiores em \(y=4-x^2\).
+
+![Retângulo com a base no eixo x e os vértices superiores sobre a parábola y=4-x²](retangulo-parabola.png)
 
 1. Com metade da base \(x\) e altura \(4-x^2\):
 

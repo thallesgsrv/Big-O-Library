@@ -64,6 +64,8 @@ Ainda há **dois zeros** ($00000000$ e $11111111$) e é preciso tratar o "vai-um
 
 Em 8 bits o intervalo é de **−128 a +127**: existe **um único zero** (sobra uma combinação, usada pelo −128).
 
+![Roda de 4 bits em complemento de 2: de 0 a 7 em azul e de menos 8 a menos 1 em laranja](complemento-2-roda.png)
+
 **Vantagens:** um único circuito, o somador, faz soma e subtração, e o sinal entra na conta naturalmente. É o que todo computador usa para inteiros.
 
 > [!TIP]

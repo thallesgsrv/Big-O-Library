@@ -37,6 +37,8 @@ Começo com `topo = -1` porque ainda não tem nenhum elemento. Quando `topo` val
 
 Repara também que o array e a pilha não são a mesma coisa. A pilha vai do índice `0` até `topo`; o que estiver depois disso não faz parte dela, mesmo que ainda tenha algum valor guardado no array.
 
+![Array de 5 posições com A, B e C; topo aponta para o índice 2 e as posições 3 e 4 estão fora da pilha](pilha-array.png)
+
 ## Operações
 
 Vou mostrar cada método separado. Assim fica mais fácil acompanhar o que muda no array e no `topo`.

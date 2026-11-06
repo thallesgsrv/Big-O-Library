@@ -37,6 +37,8 @@ Se uma falha, há descontinuidade.
 
 "Removível" porque dá para consertar redefinindo o valor no ponto. No primeiro exemplo, definir \(f(1)=2\) torna a função contínua.
 
+![Três gráficos: descontinuidade removível (buraco), de salto e infinita](tipos-descontinuidade.png)
+
 ## 4. Quem já é contínua (sem precisar testar)
 
 - Polinômios, \(e^x\), \(\operatorname{sen}\), \(\cos\) e raízes: contínuas em todo o seu domínio.
@@ -68,6 +70,8 @@ $$
 > Se \(f\) é **contínua** em \([a,b]\) e \(N\) é qualquer número entre \(f(a)\) e \(f(b)\), então existe \(c\in[a,b]\) com \(f(c)=N\).
 
 **Intuição:** para ir do térreo ao 10º andar de elevador sem pular, você passa por todos os andares do meio. Uma função contínua não "pula" valores.
+
+![Gráfico de x³+x-1 passando de -1 em x=0 a 1 em x=1 e cruzando o eixo x em cerca de 0,68](tvi.png)
 
 **Uso clássico (existência de raiz):** se \(f\) é contínua e \(f(a)\), \(f(b)\) têm **sinais opostos**, existe uma raiz em \((a,b)\), pois \(0\) está entre os dois valores.
 

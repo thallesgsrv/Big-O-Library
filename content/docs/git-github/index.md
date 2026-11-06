@@ -66,6 +66,8 @@ git remote add origin https://github.com/usuario/repositorio.git
 git push -u origin main
 ```
 
+![Caminho de uma alteração: diretório de trabalho, área de preparação, repositório local e GitHub, com git add, commit e push](fluxo-git.png)
+
 ## Branches
 
 ```bash
@@ -73,6 +75,8 @@ git checkout -b feature/login
 git switch main
 git merge feature/login
 ```
+
+![Branch feature/login criada a partir da main e depois unida com git merge](branches.png)
 
 ## Repositórios locais e remotos
 
