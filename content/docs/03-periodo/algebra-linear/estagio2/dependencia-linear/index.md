@@ -1,137 +1,167 @@
 ---
 title: Dependência Linear
 weight: 5
-description: Quando um vetor é desnecessário numa lista, como testar independência linear e os casos rápidos.
+description: Quando um vetor é desnecessário, como testar LI com sistema ou determinante e como achar os valores de k.
 autores:
   - thallesgsrv
-date: 2026-10-29
+date: 2026-11-09
 ---
 
 ## Sobre
 
-Na página anterior, \((1, 2)\) e \((2, 4)\) geravam só uma reta. O segundo vetor não acrescentava nada: ele já era "feito" a partir do primeiro. Isso é **redundância**, e a dependência linear é a ferramenta para detectá-la.
+Imagine que você tem uma lista de vetores e quer saber se **algum deles está sobrando**. "Sobrando" quer dizer que dá para fabricá-lo usando os outros. Por exemplo, na lista \(\{(1, 0), (0, 1), (3, 5)\}\), o terceiro vetor sobra, porque \((3, 5) = 3(1, 0) + 5(0, 1)\).
 
-- Uma lista de vetores é **linearmente independente (LI)** quando **nenhum é desnecessário**: cada um traz uma direção nova.
-- Uma lista é **linearmente dependente (LD)** quando **algum é desnecessário**: ele pode ser fabricado a partir dos outros.
+Uma lista **sem nenhum vetor sobrando** é **linearmente independente (LI)**. Uma lista **com pelo menos um vetor sobrando** é **linearmente dependente (LD)**.
 
 ## A definição
 
-Dizemos que \(v_1, \ldots, v_k\) são **linearmente independentes** (LI) se a única maneira de ter
+Os vetores \(v_1, \ldots, v_n\) são **LI** se a única solução de
 
 $$
-a_1 v_1 + a_2 v_2 + \cdots + a_k v_k = 0
+a_1v_1 + a_2v_2 + \cdots + a_nv_n = 0
 $$
 
-é com **todos** os coeficientes nulos, \(a_1 = a_2 = \cdots = a_k = 0\).
+é a **trivial**: \(a_1 = a_2 = \cdots = a_n = 0\). Se existir alguma solução com algum \(a_i \neq 0\), são **LD**.
 
-Caso exista uma combinação dando o vetor nulo com **algum** coeficiente diferente de zero, os vetores são **linearmente dependentes** (LD).
-
-Uma forma de pensar: a combinação com todos os coeficientes zero **sempre** dá o vetor nulo (é a "solução óbvia", que não diz nada). A pergunta é se **existe outra**. Se só existe a óbvia, são LI. Se existe outra, são LD.
+**Por que isso quer dizer "ninguém sobra"?** Suponha uma solução com \(a_1 \neq 0\). Passando os outros termos para o outro lado e dividindo por \(a_1\), você escreve \(v_1\) como combinação dos demais, ou seja, \(v_1\) sobra. Reciprocamente, se um vetor sobra, a relação entre ele e os outros é uma solução com algum coeficiente diferente de zero.
 
 > [!NOTE]
-> **LD é o mesmo que "um dos vetores é combinação linear dos outros".** Se \(a_1 v_1 + \cdots + a_k v_k = 0\) com \(a_1 \neq 0\), então
-> $$
-> v_1 = -\frac{a_2}{a_1} v_2 - \cdots - \frac{a_k}{a_1} v_k.
-> $$
-> E, reciprocamente, se \(v_1\) é combinação dos outros, passamos tudo para um lado e ganhamos uma combinação nula com coeficiente \(1\) em \(v_1\).
-
-## Casos que se resolvem de cabeça
-
-- **Um único vetor \(v\):** é LI se, e somente se, \(v \neq 0\). (Se \(v = 0\), então \(1 \cdot v = 0\) com coeficiente não nulo.)
-- **Lista com o vetor nulo:** é sempre **LD**, porque \(1 \cdot 0 + 0 \cdot v_2 + \cdots = 0\).
-- **Dois vetores:** são LD se, e somente se, **um é múltiplo do outro** (são "paralelos").
-- **Vetores repetidos:** a lista é LD (a diferença entre os dois iguais dá \(0\)).
-- **Mais vetores do que a dimensão:** em \(\mathbb{R}^n\), qualquer lista com **mais de \(n\) vetores é LD**. (O sistema homogêneo correspondente tem mais incógnitas do que equações, então tem solução não nula. Isso vem direto do Estágio 1.)
-
-![Dois vetores na mesma reta (LD) geram só uma reta; dois vetores em direções diferentes (LI) geram o plano todo](dependencia-geometria.png)
+> A solução trivial (todos zero) **sempre existe**. A pergunta é se existe **outra** além dela.
 
 ## Como testar na prática
 
-1. Monte a equação \(a_1 v_1 + \cdots + a_k v_k = 0\).
-2. Isso vira um **sistema linear homogêneo** nas incógnitas \(a_1, \ldots, a_k\), com os vetores nas **colunas**.
-3. Escalone.
-   - Se **toda coluna** tem pivô, a única solução é a nula: **LI**.
-   - Se **sobra variável livre**, existem soluções não nulas: **LD**.
+Este é o procedimento para qualquer lista:
 
-**Exemplo 1 (LD).** \(v_1 = (1, 2, 3)\), \(v_2 = (0, 1, 1)\) e \(v_3 = (1, 3, 4)\). Montando a matriz com os vetores nas colunas e escalonando:
+1. Monte a equação \(a_1v_1 + \cdots + a_nv_n = 0\).
+2. Iguale coordenada a coordenada: sai um **sistema homogêneo** (lado direito zero).
+3. Resolva (escalone):
+   - só a solução nula → **LI**;
+   - tem variável livre (infinitas soluções) → **LD**.
 
-$$
-\begin{bmatrix} 1 & 0 & 1 \\ 2 & 1 & 3 \\ 3 & 1 & 4 \end{bmatrix}
-\xrightarrow{\substack{L_2 \to L_2 - 2L_1 \\ L_3 \to L_3 - 3L_1}}
-\begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \\ 0 & 1 & 1 \end{bmatrix}
-\xrightarrow{L_3 \to L_3 - L_2}
-\begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 0 \end{bmatrix}
-$$
-
-A terceira coluna não tem pivô, então \(a_3\) é livre: \(a_3 = t\), \(a_2 = -t\), \(a_1 = -t\). Com \(t = 1\): \(-v_1 - v_2 + v_3 = 0\), ou seja, \(v_3 = v_1 + v_2\). São **LD**.
-
-**Exemplo 2 (LI).** \(v_1 = (1, 0, 0)\), \(v_2 = (1, 1, 0)\) e \(v_3 = (1, 1, 1)\).
+**Exemplo 1: LI.** \(\{(1, 2), (3, -1)\}\) em \(\mathbb{R}^2\).
 
 $$
-\begin{bmatrix} 1 & 1 & 1 \\ 0 & 1 & 1 \\ 0 & 0 & 1 \end{bmatrix}
+a(1, 2) + b(3, -1) = (0, 0)
+\;\Longrightarrow\;
+\begin{cases} a + 3b = 0 \\ 2a - b = 0 \end{cases}
 $$
 
-Já está escalonada e as três colunas têm pivô. A única solução do sistema homogêneo é a nula: **LI**.
+Da segunda, \(b = 2a\). Na primeira: \(a + 6a = 0\), então \(a = 0\) e \(b = 0\). Só a solução trivial: **LI**.
 
-**Exemplo 3 (polinômios).**
+**Exemplo 2: LD.** \(\{(1, 0, 1), (1, 1, 0), (0, 1, -1)\}\) em \(\mathbb{R}^3\).
 
-- \(1\), \(x\) e \(x^2\) são LI em \(P_2\): se \(a + bx + cx^2 = 0\) (o polinômio nulo), então todos os coeficientes são zero, isto é, \(a = b = c = 0\).
-- \(1 + x\), \(1 - x\) e \(2\) são LD: \((1 + x) + (1 - x) - 1 \cdot 2 = 0\).
+O sistema é \(a + b = 0\), \(b + c = 0\), \(a - c = 0\). Da primeira, \(b = -a\); da segunda, \(c = -b = a\); a terceira vira \(a - a = 0\), sempre verdadeira. A variável \(a\) fica **livre**: com \(a = 1\) sai \(b = -1\) e \(c = 1\), e de fato
 
-**Exemplo 4 (matrizes).** As quatro matrizes \(E_{11}, E_{12}, E_{21}, E_{22}\) (cada uma com um \(1\) em uma posição e zeros nas demais) são LI em \(M(2, 2)\): \(aE_{11} + bE_{12} + cE_{21} + dE_{22} = \begin{bmatrix} a & b \\ c & d \end{bmatrix}\), que só é a matriz nula se \(a = b = c = d = 0\).
+$$
+1\cdot(1, 0, 1) - 1\cdot(1, 1, 0) + 1\cdot(0, 1, -1) = (0, 0, 0).
+$$
 
-**Exemplo 5 (funções).**
+Há solução não trivial: **LD**. (O vetor \((1, 0, 1)\) sobra: é igual a \((1, 1, 0) - (0, 1, -1)\).)
 
-- \(\sin x\) e \(\cos x\) são LI. Se \(a \sin x + b \cos x = 0\) para todo \(x\), tomando \(x = 0\) sai \(b = 0\), e tomando \(x = \pi/2\) sai \(a = 0\).
-- \(1\), \(\sin^2 x\) e \(\cos^2 x\) são LD, porque \(\sin^2 x + \cos^2 x - 1 = 0\) para todo \(x\).
+## Atalho: o determinante
+
+Quando a lista tem **\(n\) vetores em \(\mathbb{R}^n\)** (a matriz é quadrada), monte a matriz com os vetores como linhas (ou colunas) e calcule o determinante:
+
+- \(\det \neq 0\) → **LI**;
+- \(\det = 0\) → **LD**.
+
+No Exemplo 2: \(\det \begin{bmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \\ 0 & 1 & -1 \end{bmatrix} = 1(-1 - 0) - 0 + 1(1 - 0) = 0\). ✓ (LD)
+
+O determinante só vale para matriz **quadrada**. Se o número de vetores é diferente da dimensão, escalone ou use os casos rápidos abaixo.
+
+## Casos que se resolvem de cabeça
+
+- **Lista que contém o vetor nulo** → LD (\(1 \cdot 0 = 0\) é uma solução não trivial).
+- **Um vetor sozinho** \(\{v\}\) → LI se \(v \neq 0\).
+- **Dois vetores** → LD se um é múltiplo do outro (paralelos), LI caso contrário.
+- **Mais vetores do que a dimensão** (por exemplo, 3 vetores em \(\mathbb{R}^2\), ou 4 em \(P_2\)) → **sempre LD**.
+- **Vetores repetidos** → LD.
+
+![Dois vetores na mesma reta (LD) geram só uma reta; dois vetores em direções diferentes (LI) geram o plano todo](dependencia-geometria.png)
+
+## Polinômios e matrizes: traduza para lista
+
+Para decidir LI em \(P_2\) ou \(M(2,2)\), **troque cada objeto pela sua lista de coeficientes** (veja Espaços Vetoriais) e use as ferramentas de \(\mathbb{R}^n\).
+
+**Exemplo 3: polinômios.** \(\{1 + t,\; 1 - t,\; t^2\}\) em \(P_2\). As listas são \((1, 1, 0)\), \((1, -1, 0)\), \((0, 0, 1)\). O determinante é
+
+$$
+\det \begin{bmatrix} 1 & 1 & 0 \\ 1 & -1 & 0 \\ 0 & 0 & 1 \end{bmatrix} = 1 \cdot (-1 - 1) = -2 \neq 0,
+$$
+
+então **LI**.
+
+**Exemplo 4: matrizes.** \(\left\{\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix}\right\}\) em \(M(2,2)\). Repare que a terceira é a soma das duas primeiras, então \(I + \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} - \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} = 0\). **LD**.
+
+**Exemplo 5: quatro matrizes.** Para \(\left\{\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}, \begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix}\right\}\), as listas \((1,0,0,1)\), \((0,1,1,0)\), \((1,1,0,1)\), \((1,0,1,1)\) formam uma matriz \(4 \times 4\) de determinante \(0\). **LD**. De fato, a soma das duas últimas é \(2\cdot I + \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}\).
+
+## Valores de k que tornam o conjunto LI
+
+Quando o enunciado traz um parâmetro \(k\), o determinante vira uma expressão em \(k\), e a pergunta é **quando ele é diferente de zero**.
+
+**Exemplo 6.** Para que valores de \(k\) o conjunto \(\{(1, 0, k), (0, 1, k), (1, 1, k^2)\}\) é LI?
+
+$$
+\det \begin{bmatrix} 1 & 0 & k \\ 0 & 1 & k \\ 1 & 1 & k^2 \end{bmatrix}
+= 1 \cdot (k^2 - k) - 0 + k \cdot (0 - 1) = k^2 - 2k = k(k - 2).
+$$
+
+O determinante é diferente de zero quando \(k \neq 0\) e \(k \neq 2\). Então o conjunto é **LI para todo \(k \in \mathbb{R}\) com \(k \neq 0\) e \(k \neq 2\)**, e LD para \(k = 0\) ou \(k = 2\).
+
+**Exemplo 7.** Para \(\{(1, 1, 0), (0, 1, k), (k, 0, 1)\}\), o determinante é \(1 \cdot (1 - 0) - 1 \cdot (0 - k^2) = 1 + k^2\), que é sempre positivo. Então é **LI para todo \(k\)**. (Pode acontecer de nenhum valor de \(k\) quebrar a independência.)
+
+> [!TIP]
+> "**Base de \(\mathbb{R}^3\)**" para três vetores é a mesma coisa que "**LI**", porque \(\dim \mathbb{R}^3 = 3\). Então os exercícios do tipo "para que \(k\) é base" e "para que \(k\) é LI" se resolvem do mesmo jeito: \(\det \neq 0\).
+
+## LI e geradores: a ponte
+
+- Dois vetores LI em \(\mathbb{R}^3\) geram um **plano**, não o \(\mathbb{R}^3\) inteiro.
+- Se um vetor é combinação dos outros, **tirá-lo não muda o gerado**: ele não acrescentava nada.
+- Uma lista LI que **também gera** o espaço é chamada de **base** (próxima página).
 
 ## Erros comuns
 
-> [!WARNING]
-> **"Não são paralelos, então são LI"** só vale para **dois** vetores. Com três ou mais, não. Em \(\mathbb{R}^2\), os vetores \((1, 0)\), \((0, 1)\) e \((1, 1)\) não são paralelos dois a dois, mas são LD, pois \((1, 1) = (1, 0) + (0, 1)\).
-
-> [!WARNING]
-> **A ordem dos vetores não importa** para LI/LD. Mudar a ordem da lista não muda a resposta.
-
-> [!WARNING]
-> **LI e "gerar" são coisas diferentes.** Os vetores \((1, 0)\) e \((2, 0)\) em \(\mathbb{R}^2\) são LD e não geram \(\mathbb{R}^2\). O vetor \((1, 0)\) sozinho é LI, mas também não gera \(\mathbb{R}^2\). Na próxima página vamos exigir as duas coisas juntas.
+- **Usar determinante com matriz não quadrada.** Só vale quando o número de vetores é igual à dimensão.
+- **Achar que a solução trivial prova LD.** Ela sempre existe; o que importa é existir outra.
+- **Esquecer de "traduzir" polinômios e matrizes para listas** antes de montar a matriz.
+- **Cortar valores de \(k\) sem conferir.** Se \(\det = k(k - 2)\), os valores problemáticos são os que **zeram** o determinante (\(k = 0\) e \(k = 2\)).
 
 ## Exercícios
 
-**Exercício 1.** \((1, 2)\) e \((3, 4)\) são LI?
-
-{{< details title="Gabarito" >}}
-São LI. Um não é múltiplo do outro: se \((3, 4) = c(1, 2)\), então \(c = 3\) pela primeira coordenada e \(c = 2\) pela segunda, impossível. (Outro jeito: \(\det \begin{bmatrix} 1 & 3 \\ 2 & 4 \end{bmatrix} = 4 - 6 = -2 \neq 0\).)
-{{< /details >}}
-
-**Exercício 2.** Verifique se \((1, -1, 2)\), \((2, 0, 1)\) e \((0, 2, -3)\) são LI ou LD.
+**Exercício 1.** \(\{(1, 2), (2, 4)\}\) é LI?
 
 {{< details title="Resolução" >}}
-Queremos \(a(1, -1, 2) + b(2, 0, 1) + c(0, 2, -3) = (0, 0, 0)\):
-
-$$
-\begin{cases} a + 2b = 0 \\ -a + 2c = 0 \\ 2a + b - 3c = 0 \end{cases}
-$$
-
-Da primeira, \(a = -2b\). Da segunda, \(c = a/2 = -b\). Na terceira: \(2(-2b) + b - 3(-b) = -4b + b + 3b = 0\), que vale para qualquer \(b\). Então \(b\) é livre. Com \(b = 1\): \(a = -2\), \(c = -1\). Conferindo: \(-2(1, -1, 2) + (2, 0, 1) - (0, 2, -3) = (0, 0, 0)\). São **LD**.
+Não. \((2, 4) = 2(1, 2)\): um é múltiplo do outro, então são paralelos. LD.
 {{< /details >}}
 
-**Exercício 3.** Para quais valores de \(k\) os vetores \((1, 2)\) e \((3, k)\) são LD?
+**Exercício 2.** \(\{(1, 1, 0), (1, -1, 1)\}\) é LI em \(\mathbb{R}^3\)?
 
 {{< details title="Resolução" >}}
-Dois vetores são LD quando um é múltiplo do outro: \((3, k) = 3 \cdot (1, 2) = (3, 6)\), então \(k = 6\). (Pelo determinante: \(\det \begin{bmatrix} 1 & 3 \\ 2 & k \end{bmatrix} = k - 6 = 0\).) Para \(k \neq 6\), são LI.
+\(a(1,1,0) + b(1,-1,1) = 0\) dá \(a + b = 0\), \(a - b = 0\), \(b = 0\). Então \(b = 0\) e \(a = 0\). LI. (Também dá para ver que não são paralelos.)
 {{< /details >}}
 
-**Exercício 4.** Quatro vetores de \(\mathbb{R}^3\) podem ser LI?
-
-{{< details title="Gabarito" >}}
-Não. Em \(\mathbb{R}^3\), qualquer lista com mais de 3 vetores é LD, porque o sistema homogêneo teria 4 incógnitas e só 3 equações, então sobra variável livre.
-{{< /details >}}
-
-**Exercício 5.** Mostre que \(1\), \(x - 1\) e \((x - 1)^2\) são LI em \(P_2\).
+**Exercício 3.** \(\{t + 1,\; t - 1\}\) é LI em \(P_1\)?
 
 {{< details title="Resolução" >}}
-Se \(a \cdot 1 + b(x - 1) + c(x - 1)^2 = 0\), desenvolvendo temos \(cx^2 + (b - 2c)x + (a - b + c) = 0\). Todos os coeficientes são nulos: \(c = 0\), então \(b - 2c = 0\) dá \(b = 0\), e \(a - b + c = 0\) dá \(a = 0\). A única combinação nula é a trivial, então são LI.
+As listas são \((1, 1)\) e \((-1, 1)\). Não são múltiplas uma da outra (o determinante \(1 \cdot 1 - 1 \cdot (-1) = 2 \neq 0\)). LI.
+{{< /details >}}
+
+**Exercício 4.** \(\{t + 1,\; 1 + t^2,\; 1 - t + t^2\}\) é LI em \(P_2\)?
+
+{{< details title="Resolução" >}}
+As listas (coeficientes de \(1, t, t^2\)) são \((1, 1, 0)\), \((1, 0, 1)\), \((1, -1, 1)\). O determinante é \(1(0 \cdot 1 - 1 \cdot (-1)) - 1(1 \cdot 1 - 1 \cdot 1) + 0 = 1 \cdot 1 - 0 = 1 \neq 0\). LI.
+{{< /details >}}
+
+**Exercício 5.** Para que \(k\) o conjunto \(\{(1, 0, 1), (1, 1, 0), (k, 1, -1)\}\) é LI?
+
+{{< details title="Resolução" >}}
+\(\det \begin{bmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \\ k & 1 & -1 \end{bmatrix} = 1(-1 - 0) - 0 + 1(1 - k) = -1 + 1 - k = -k\). É LI para \(k \neq 0\).
+{{< /details >}}
+
+**Exercício 6.** O vetor \((-5, 3, 2)\) e o vetor \((3, -1, 3)\) podem gerar todo \(\mathbb{R}^3\)? Justifique.
+
+{{< details title="Resolução" >}}
+Não. Dois vetores geram, no máximo, um plano pela origem. Para gerar \(\mathbb{R}^3\) são necessários 3 vetores LI.
 {{< /details >}}
 
 ## Teste rápido
@@ -139,36 +169,47 @@ Se \(a \cdot 1 + b(x - 1) + c(x - 1)^2 = 0\), desenvolvendo temos \(cx^2 + (b - 
 {{< quiz titulo="LI ou LD?" >}}
 
 {{< questao >}}
-Qual dessas listas é **LD**?
+Quais vetores \(\{v_1, v_2, v_3\}\) são LD?
 
-- [ ] \((1, 0)\) e \((0, 1)\)
-- [ ] \((1, 2)\) e \((3, 4)\)
-- [x] \((1, 0)\), \((0, 1)\) e \((1, 1)\)
-- [ ] \((1, 1, 0)\) e \((0, 1, 1)\)
+- [ ] Quando a única solução de \(a_1v_1 + a_2v_2 + a_3v_3 = 0\) é a trivial
+- [x] Quando existe solução com algum \(a_i \neq 0\)
+- [ ] Quando \(\det \neq 0\)
+- [ ] Quando os três são diferentes de zero
 ---
-Três vetores em \(\mathbb{R}^2\) são sempre LD (mais vetores do que a dimensão). Aqui, \((1, 1) = (1, 0) + (0, 1)\). Todas as outras listas são LI.
+LD é existir uma relação não trivial entre os vetores. Se só a solução nula serve, são LI.
 {{< /questao >}}
 
 {{< questao >}}
-A lista \(v_1, v_2, v_3\) é LD. O que podemos concluir **com certeza**?
+Quatro polinômios de \(P_2\) formam um conjunto...
 
-- [ ] Todos os vetores são múltiplos uns dos outros
-- [ ] \(v_3\) é combinação linear de \(v_1\) e \(v_2\)
-- [x] Pelo menos um dos vetores é combinação linear dos outros
-- [ ] Nenhum dos vetores é combinação linear dos outros
+- [ ] sempre LI
+- [x] sempre LD
+- [ ] LI se nenhum for nulo
+- [ ] LI se o grau for 2
 ---
-LD quer dizer que algum vetor é desnecessário, mas **não sabemos qual**. Pode ser \(v_1\) o redundante, e \(v_3\) não ser combinação dos outros dois.
+\(\dim P_2 = 3\), e mais vetores do que a dimensão são sempre LD.
 {{< /questao >}}
 
 {{< questao >}}
-Uma lista de vetores contém o vetor nulo. Ela é:
+O conjunto \(\{(1, 2, 3), (0, 0, 0), (4, 5, 6)\}\) é...
 
-- [ ] LI, porque o vetor nulo não atrapalha
-- [x] LD, porque \(1 \cdot 0 = 0\) é uma combinação nula com coeficiente não nulo
-- [ ] LI se os outros vetores forem LI
-- [ ] Não dá para saber
+- [ ] LI, pois \((1,2,3)\) e \((4,5,6)\) não são paralelos
+- [x] LD, pois contém o vetor nulo
+- [ ] LI, pois são 3 vetores em \(\mathbb{R}^3\)
+- [ ] Não dá para decidir
 ---
-Qualquer lista com o vetor nulo é LD: coloque coeficiente \(1\) no vetor nulo e coeficiente \(0\) em todos os outros, e a combinação dá o vetor nulo.
+Com o vetor nulo na lista, \(0\cdot v_1 + 1 \cdot 0 + 0 \cdot v_3 = 0\) é uma solução não trivial.
+{{< /questao >}}
+
+{{< questao >}}
+Se \(\det\) da matriz com os vetores é \(k(k - 2)\), para quais \(k\) o conjunto é LD?
+
+- [ ] \(k \neq 0\) e \(k \neq 2\)
+- [x] \(k = 0\) ou \(k = 2\)
+- [ ] Somente \(k = 2\)
+- [ ] Todos os \(k\)
+---
+LD é \(\det = 0\), que acontece quando \(k = 0\) ou \(k = 2\).
 {{< /questao >}}
 
 {{< /quiz >}}

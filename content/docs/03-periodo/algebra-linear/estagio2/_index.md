@@ -2,34 +2,64 @@
 title: Estágio 2 - Espaços Vetoriais
 weight: 2
 rotulo: Conteúdos
-description: O que é um espaço vetorial, subespaços, combinação linear, independência linear, base, dimensão e coordenadas.
+description: Do zero e sem Vetorial. Espaços, subespaços, combinação linear, base, dimensão e coordenadas.
 autores:
   - thallesgsrv
-date: 2026-10-29
+date: 2026-11-09
 ---
+
+## Pode começar do zero
+
+Você **não precisa ter cursado Vetorial** (Geometria Analítica) para este estágio. Tudo o que vem de lá e que você vai usar cabe em três ideias:
+
+1. **Um vetor é só uma lista de números.** \((2, 5)\) é um vetor de \(\mathbb{R}^2\) e \((1, 0, -3)\) é um vetor de \(\mathbb{R}^3\). Você não precisa pensar em setas, ângulos ou produto escalar. Se quiser desenhar, \((2, 5)\) é o ponto que fica 2 para a direita e 5 para cima.
+2. **Dá para somar listas e esticar listas.** Somar é somar posição por posição: \((1, 2) + (3, 5) = (4, 7)\). Esticar é multiplicar todas as posições pelo mesmo número: \(3 \cdot (1, 2) = (3, 6)\).
+3. **Quase tudo vira um sistema linear.** Quando você travar, a pergunta mágica é: *"dá para transformar isso em um sistema linear e escalonar?"*. Quase sempre dá.
+
+O resto (subespaço, base, dimensão, coordenadas) é vocabulário novo para coisas que você já sabe fazer.
 
 ## Bagagem esperada
 
-Este estágio é mais **ideia** do que conta, mas as contas que aparecem vêm quase todas do Estágio 1:
+As contas que aparecem vêm quase todas do Estágio 1:
 
+- **Escalonamento e sistemas lineares:** é a ferramenta principal do estágio.
+- **Determinante:** serve de atalho para decidir se uma lista de vetores é independente.
 - **Matrizes:** somar matrizes e multiplicar uma matriz por um número. Elas viram exemplos de "vetores".
-- **Escalonamento:** é a ferramenta principal. Quase todo exercício deste estágio termina em "monte um sistema linear e escalone".
-- **Polinômios e funções:** saber somar dois polinômios e multiplicar um polinômio por um número.
-- **Notação de conjuntos:** \(\in\), \(\subset\) e conjuntos escritos como \(\{(x,y) : y = 2x\}\), que se lê "o conjunto dos pares \((x,y)\) tais que \(y = 2x\)".
+- **Polinômios:** somar dois polinômios e multiplicar um polinômio por um número.
+
+## Como ler a notação de conjuntos
+
+Quase toda definição do estágio tem este formato:
+
+$$
+W = \{\,(x, y, z) \in \mathbb{R}^3 \;\mid\; x - 3z = 0\,\}
+$$
+
+Leia da esquerda para a direita:
+
+- **\(\{\) e \(\}\)**: "o conjunto de".
+- **\((x, y, z) \in \mathbb{R}^3\)**: "os vetores \((x, y, z)\) que moram em \(\mathbb{R}^3\)". Este é o **espaço grande**, de onde os candidatos saem.
+- **A barra \(\mid\)** (alguns livros usam dois pontos \(:\)): lê-se **"tais que"**.
+- **\(x - 3z = 0\)**: o **filtro**. Só entra em \(W\) quem passa nesse filtro.
+
+Então \(W\) é "o conjunto dos vetores de \(\mathbb{R}^3\) **tais que** \(x - 3z = 0\)". Para pertencer a \(W\) é preciso **estar no espaço grande e passar pelo filtro**. Guarde esta imagem: ela resolve metade das dúvidas das próximas páginas.
 
 ## A ideia do estágio
 
-Até aqui, cada objeto tinha a sua própria "personalidade": matriz tem linhas e colunas, polinômio tem grau, par ordenado tem coordenadas. Neste estágio a gente faz o contrário e **esquece o que o objeto é**. Só interessa o que dá para fazer com ele:
+Até aqui, cada objeto tinha a sua própria personalidade: matriz tem linhas e colunas, polinômio tem grau, par ordenado tem coordenadas. Neste estágio a gente faz o contrário e **esquece o que o objeto é**. Só interessa o que dá para fazer com ele:
 
 1. **somar** dois objetos do mesmo tipo;
 2. **esticar** (multiplicar por um número) um objeto.
 
-Se um conjunto tem essas duas operações e elas obedecem a umas regras bem comportadas, esse conjunto é um **espaço vetorial**, e os seus elementos passam a se chamar **vetores**, mesmo que sejam matrizes, polinômios ou funções. A vantagem é grande: uma teoria só vale para todos eles.
+Se um conjunto tem essas duas operações e elas se comportam bem, ele é um **espaço vetorial**, e os seus elementos passam a se chamar **vetores**, mesmo que sejam matrizes, polinômios ou funções. A vantagem é grande: uma teoria só vale para todos eles.
+
+> [!TIP]
+> **Truque que serve para o estágio inteiro.** Todo objeto "esquisito" vira uma lista de números. O polinômio \(a + bt + ct^2\) vira \((a, b, c)\). A matriz \(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\) vira \((a, b, c, d)\). Depois disso, é só fazer contas com listas, como em \(\mathbb{R}^3\) ou \(\mathbb{R}^4\).
 
 ## Mapa do estágio
 
 1. [**Espaços vetoriais**](espacos-vetoriais/): a definição, as 8 regras e exemplos (e não exemplos).
-2. [**Subespaços**](subespacos/): como saber, com 3 testes, se um pedaço de um espaço vetorial continua sendo espaço vetorial.
+2. [**Subespaços**](subespacos/): como provar que um conjunto **é** subespaço e como mostrar que **não é**.
 3. [**Soma de subespaços**](soma-de-subespacos/): juntar dois subespaços e a soma direta.
 4. [**Combinação linear e geradores**](combinacao-linear-e-geradores/): o que dá para "fabricar" a partir de alguns vetores.
 5. [**Dependência linear**](dependencia-linear/): quando um vetor é desnecessário.
@@ -37,6 +67,21 @@ Se um conjunto tem essas duas operações e elas obedecem a umas regras bem comp
 7. [**Coordenadas e mudança de base**](coordenadas-e-mudanca-de-base/): o "endereço" de um vetor e como ele muda quando a base muda.
 
 As páginas seguem essa ordem de propósito: cada uma usa a anterior.
+
+## Qual ferramenta usar em cada tipo de exercício
+
+| O enunciado pede... | Ferramenta | Página |
+| --- | --- | --- |
+| "É subespaço? Justifique." | Zero, soma, escalar (com letras) ou contraexemplo (com números) | [Subespaços](subespacos/) |
+| "Escreva \(v\) como combinação linear de..." | Montar e resolver um sistema | [Combinação linear](combinacao-linear-e-geradores/) |
+| "Mostre que \(v\) **não** é combinação linear" | Sistema impossível | [Combinação linear](combinacao-linear-e-geradores/) |
+| "Condição para \((x, y, z)\) ser combinação linear" | Sistema com letras no lado direito | [Combinação linear](combinacao-linear-e-geradores/) |
+| "Encontre geradores" | Isolar variáveis e separar por variável livre | [Combinação linear](combinacao-linear-e-geradores/) |
+| "É LI? Para que valores de \(k\)?" | Sistema homogêneo ou determinante | [Dependência linear](dependencia-linear/) |
+| "É base? Qual a dimensão?" | LI + contar vetores | [Base e dimensão](base-e-dimensao/) |
+| "Encontre base de \(W_1 \cap W_2\) e \(W_1 + W_2\)" | Juntar equações / juntar geradores | [Soma de subespaços](soma-de-subespacos/) |
+| "Calcule \([v]_B\)" | Resolver \(v = a_1b_1 + \cdots + a_nb_n\) | [Coordenadas](coordenadas-e-mudanca-de-base/) |
+| "Matriz de mudança de base" | Colunas = vetores da base de partida escritos na de chegada | [Coordenadas](coordenadas-e-mudanca-de-base/) |
 
 ## Colinha do estágio
 
@@ -49,9 +94,6 @@ As páginas seguem essa ordem de propósito: cada uma usa a anterior.
 | Base | Qual é a lista enxuta que gera tudo? | Gera e é LI (ou \(n\) vetores LI em dimensão \(n\)) |
 | Dimensão | Quantos vetores tem uma base? | Contar os vetores de qualquer base |
 | Coordenadas | Qual é o endereço do vetor nesta base? | Resolver \(v = a_1v_1 + \cdots + a_nv_n\) |
-
-> [!TIP]
-> Se travar em qualquer exercício, pergunte: **"dá para transformar isso em um sistema linear?"**. Na maioria das vezes dá, e aí é só escalonar.
 
 ## Contribuição
 

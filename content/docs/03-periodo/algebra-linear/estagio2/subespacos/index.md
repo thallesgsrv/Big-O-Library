@@ -1,10 +1,10 @@
 ---
 title: Subespaços
 weight: 2
-description: Como saber, com 3 testes, se um pedaço de um espaço vetorial continua sendo espaço vetorial.
+description: Como provar com letras que um conjunto é subespaço, como achar um contraexemplo e como ler o filtro depois da barra.
 autores:
   - thallesgsrv
-date: 2026-10-29
+date: 2026-11-09
 ---
 
 ## Sobre
@@ -21,12 +21,157 @@ Seja \(V\) um espaço vetorial e \(W \subset V\). Então \(W\) é subespaço de 
 2. se \(u, v \in W\), então \(u + v \in W\) (**fecha na soma**);
 3. se \(u \in W\) e \(\alpha \in \mathbb{R}\), então \(\alpha u \in W\) (**fecha no escalar**).
 
-**Por que só isso basta?** As regras 1, 2, 5, 6, 7 e 8 envolvem só igualdades de contas, e elas já valem em \(V\), logo valem também dentro de \(W\). As regras 3 e 4 (vetor nulo e oposto) vêm dos passos acima: o nulo está pelo passo 1 e o oposto \(-u = (-1)u\) está pelo passo 3.
+**Por que só isso basta?** As regras 1, 2, 5, 6, 7 e 8 são só igualdades de contas, e elas já valem em \(V\), logo valem também dentro de \(W\). As regras 3 e 4 (vetor nulo e oposto) vêm dos passos acima: o nulo está pelo passo 1 e o oposto \(-u = (-1)u\) está pelo passo 3.
 
 > [!TIP]
 > **Comece sempre pelo passo 1.** Se \(0 \notin W\), acabou: \(W\) não é subespaço, sem precisar de mais nada. É o jeito mais rápido de descartar um conjunto. (Se \(0 \in W\), ainda falta conferir os passos 2 e 3.)
 
 Todo espaço vetorial \(V\) tem pelo menos dois subespaços, chamados **triviais**: o próprio \(V\) e o conjunto \(\{0\}\).
+
+## Entendendo o que vem depois da barra
+
+A dificuldade mais comum nesse assunto não é a prova em si, é **ler o enunciado**. Releia a notação:
+
+$$
+W = \{\,(x, y, z) \in \mathbb{R}^3 \;\mid\; x - 3z = 0\,\}
+$$
+
+A barra \(\mid\) lê-se "tais que". O que vem depois dela é o **filtro**. Então:
+
+> **Pertencer a \(W\) = estar no espaço grande (\(\mathbb{R}^3\)) + passar no filtro (\(x - 3z = 0\)).**
+
+Por exemplo, \((6, 5, 2)\) está em \(W\) porque \(6 - 3 \cdot 2 = 0\). Já \((1, 1, 1)\) não está, porque \(1 - 3 = -2 \neq 0\).
+
+Toda prova de subespaço se resume a **jogar vetores no filtro**:
+
+- **Passo 1:** o vetor nulo passa no filtro?
+- **Passo 2:** se \(u\) e \(v\) passam, \(u + v\) passa?
+- **Passo 3:** se \(u\) passa, \(\alpha u\) passa?
+
+## Dois tipos de justificativa
+
+O erro mais comum é usar números quando deveria usar letras, ou o contrário. A regra é:
+
+| Você quer mostrar que... | Use | Por quê |
+| --- | --- | --- |
+| **é** subespaço | **letras genéricas**, nunca números | precisa valer para **todos** os elementos |
+| **não é** subespaço | **um exemplo com números** (contraexemplo) | basta **um** caso que falha |
+
+Testar com números e ver que funcionou **não prova** que é subespaço: o próximo número pode falhar. E, ao contrário, um único número que falha **derruba** o conjunto.
+
+## Provando que É subespaço
+
+Receita fixa, sempre igual. Anote este esquema de três linhas:
+
+> **Hipótese:** escreva o que \(u\) e \(v\) satisfazem (eles estão em \(W\), então passam no filtro).
+> **Vetor:** escreva o vetor que você quer testar (\(u + v\) ou \(\alpha u\)).
+> **Conferindo o filtro:** substitua no filtro e **use a hipótese** para concluir.
+
+**Exemplo 1.** \(W = \{(x, y, z) \in \mathbb{R}^3 \mid 2x - y + z = 0\}\).
+
+*Passo 1.* \((0, 0, 0)\): \(2 \cdot 0 - 0 + 0 = 0\). ✓
+
+*Passo 2.* Sejam \(u = (x_1, y_1, z_1)\) e \(v = (x_2, y_2, z_2)\) em \(W\).
+
+- Hipótese: \(2x_1 - y_1 + z_1 = 0\) e \(2x_2 - y_2 + z_2 = 0\).
+- Vetor: \(u + v = (x_1 + x_2,\; y_1 + y_2,\; z_1 + z_2)\).
+- Conferindo o filtro:
+
+$$
+2(x_1 + x_2) - (y_1 + y_2) + (z_1 + z_2) = \underbrace{(2x_1 - y_1 + z_1)}_{0} + \underbrace{(2x_2 - y_2 + z_2)}_{0} = 0. \;✓
+$$
+
+*Passo 3.* Sejam \(u = (x_1, y_1, z_1) \in W\) e \(\alpha \in \mathbb{R}\). Então \(\alpha u = (\alpha x_1, \alpha y_1, \alpha z_1)\) e
+
+$$
+2(\alpha x_1) - (\alpha y_1) + (\alpha z_1) = \alpha \underbrace{(2x_1 - y_1 + z_1)}_{0} = 0. \;✓
+$$
+
+O truque de toda a prova é **agrupar os termos até reconhecer a expressão do filtro, que você já sabe que vale 0**.
+
+**Exemplo 2: filtro com duas condições.** \(W = \{(x, y, z, t) \in \mathbb{R}^4 \mid x - y = 0 \text{ e } z + t = 0\}\).
+
+O vetor tem que passar nas **duas** condições, então você confere as duas em cada passo.
+
+*Passo 1.* \((0,0,0,0)\): \(0 - 0 = 0\) e \(0 + 0 = 0\). ✓
+
+*Passo 2.* Hipótese: \(x_1 = y_1\), \(z_1 + t_1 = 0\), \(x_2 = y_2\), \(z_2 + t_2 = 0\). O vetor \(u + v\) tem coordenadas \((x_1 + x_2,\; y_1 + y_2,\; z_1 + z_2,\; t_1 + t_2)\). Conferindo:
+
+- \((x_1 + x_2) - (y_1 + y_2) = (x_1 - y_1) + (x_2 - y_2) = 0 + 0 = 0\). ✓
+- \((z_1 + z_2) + (t_1 + t_2) = (z_1 + t_1) + (z_2 + t_2) = 0 + 0 = 0\). ✓
+
+*Passo 3.* Para \(\alpha u = (\alpha x_1, \alpha y_1, \alpha z_1, \alpha t_1)\): \(\alpha x_1 - \alpha y_1 = \alpha(x_1 - y_1) = 0\) e \(\alpha z_1 + \alpha t_1 = \alpha(z_1 + t_1) = 0\). ✓
+
+**Exemplo 3: matrizes.** \(W = \left\{\begin{bmatrix} a & b \\ c & d \end{bmatrix} \in M(2,2) \;\mid\; a = d \text{ e } b = -c\right\}\).
+
+Sejam \(u = \begin{bmatrix} a_1 & b_1 \\ c_1 & d_1 \end{bmatrix}\) e \(v = \begin{bmatrix} a_2 & b_2 \\ c_2 & d_2 \end{bmatrix}\) em \(W\). Hipótese: \(a_1 = d_1\), \(b_1 = -c_1\), \(a_2 = d_2\), \(b_2 = -c_2\).
+
+Em \(u + v\), os "novos" \(a\), \(b\), \(c\), \(d\) são \(a_1 + a_2\), \(b_1 + b_2\), \(c_1 + c_2\), \(d_1 + d_2\). Conferindo:
+
+- \(a_1 + a_2 = d_1 + d_2\), somando duas igualdades. ✓
+- \(b_1 + b_2 = -c_1 - c_2 = -(c_1 + c_2)\). ✓
+
+O escalar é igual: multiplique as duas igualdades por \(\alpha\). O vetor nulo (matriz de zeros) passa. Logo \(W\) é subespaço.
+
+**Exemplo 4: simétricas.** \(W = \{A \in M(2,2) \mid A = A^T\}\). Se \(A^T = A\) e \(B^T = B\), então \((A + B)^T = A^T + B^T = A + B\) e \((\alpha A)^T = \alpha A^T = \alpha A\). A matriz nula também é simétrica. ✓
+
+### Atalho: o teorema do "igual a zero"
+
+Repare que nos Exemplos 1 e 2 a conta foi sempre a mesma. Dá para provar **uma vez só** o caso geral:
+
+> Todo conjunto definido por equações do tipo **(combinação linear das coordenadas) = 0** é um subespaço.
+
+Prova: se \(c_1x_1 + \cdots + c_nx_n = 0\) vale para \(u = (x_1, \ldots, x_n)\) e para \(v = (x'_1, \ldots, x'_n)\), então
+
+$$
+c_1(x_1 + x'_1) + \cdots + c_n(x_n + x'_n) = 0 + 0 = 0
+\qquad\text{e}\qquad
+c_1(\alpha x_1) + \cdots + c_n(\alpha x_n) = \alpha \cdot 0 = 0.
+$$
+
+Quando o seu professor aceitar esse argumento, uma justificativa de duas linhas basta. Quando pedir a prova completa, use o esquema de três linhas acima.
+
+## Polinômios: p(0), p(1) e p(t) não são a mesma coisa
+
+Em \(P_2\), os vetores são polinômios. A confusão mais comum é não saber o que o filtro está pedindo.
+
+- **\(p\)** (ou \(p(t)\)) é o polinômio inteiro: é o **vetor**.
+- **\(p(0)\)** e **\(p(1)\)** são **números**: o valor do polinômio quando você troca \(t\) por 0 ou por 1.
+
+Você **não escolhe** \(p(0)\) e \(p(1)\). Eles vêm do polinômio \(p\) que você pegou. A forma mais segura é escrever \(p(t) = a + bt + ct^2\). Então:
+
+$$
+p(0) = a
+\qquad
+p(1) = a + b + c
+\qquad
+p(2) = a + 2b + 4c.
+$$
+
+**Exemplo 5.** \(W = \{p \in P_2 \mid p(1) = 2p(0)\}\).
+
+Em coeficientes, o filtro \(p(1) = 2p(0)\) vira \(a + b + c = 2a\), ou seja, \(-a + b + c = 0\). É uma equação linear igual a zero nas coordenadas \((a, b, c)\), então **é subespaço**, pelo teorema acima.
+
+Sem coeficientes, a prova também sai: se \(p(1) = 2p(0)\) e \(q(1) = 2q(0)\), então \((p + q)(1) = p(1) + q(1) = 2p(0) + 2q(0) = 2(p+q)(0)\) ✓ e \((\alpha p)(1) = \alpha p(1) = 2\alpha p(0) = 2(\alpha p)(0)\) ✓. O que sustenta a conta é a definição da soma de funções: \((p + q)(x) = p(x) + q(x)\).
+
+### Quando a condição vale em um ponto e quando vale sempre
+
+| Condição | Significa | Como traduzir |
+| --- | --- | --- |
+| \(p(0) = 0\), \(p(1) = 2p(0)\) | vale **só nesses pontos** | trocar \(t\) pelos pontos e usar \(a, b, c\) |
+| \(p(t) = t\,p'(t)\) | vale **para todo \(t\)** | comparar coeficiente a coeficiente |
+
+**Exemplo 6.** \(W = \{p \in P_2 \mid p(t) = t \cdot p'(t) \text{ para todo } t\}\).
+
+Com \(p = a + bt + ct^2\) temos \(p' = b + 2ct\) e \(t\,p' = bt + 2ct^2\). Dois polinômios são iguais quando têm os **mesmos coeficientes**:
+
+$$
+a + bt + ct^2 = 0 + bt + 2ct^2
+\;\Longrightarrow\;
+a = 0,\quad b = b,\quad c = 2c \Rightarrow c = 0.
+$$
+
+Logo \(p = bt\): \(W\) é o conjunto dos múltiplos de \(t\), que é subespaço. (Ele é uma reta dentro de \(P_2\).)
 
 ## Enxergando no plano e no espaço
 
@@ -39,101 +184,98 @@ Uma reta como \(y = x + 1\) **não** é subespaço, porque não passa pela orige
 
 ![A reta y=x passa pela origem, a reta y=x+1 não passa, e o plano x+y+z=0 em R³ passa pela origem](subespacos-geometria.png)
 
-## Receita para decidir
+## Provando que NÃO é subespaço
 
-Olhe para a forma como \(W\) é definido:
+Aqui basta **um** contraexemplo, e ele usa números. A estratégia:
 
-- **Equações lineares sem termo constante** (\(x + y + z = 0\), \(x = 2y\), \(AX = 0\)): quase certamente é subespaço. Faça os 3 passos.
-- **Aparece um número solto** (\(x + y = 1\)), **um quadrado ou produto** (\(y = x^2\), \(xy = 0\)), **uma desigualdade** (\(x \geq 0\)) **ou condições como "invertível" ou "determinante igual a 1"**: desconfie. Teste o passo 1 primeiro e, se passar, procure um contraexemplo para a soma ou para o escalar.
+> Pegue o elemento **mais simples** que pertence a \(W\) e pergunte: *"que operação estraga este filtro?"* Depois aplique essa operação.
 
-## Exemplos que são subespaços
+| O filtro tem... | O que estraga | Contraexemplo típico |
+| --- | --- | --- |
+| número solto (\(x + y = 1\), \(p(0) = 1\)) | o **zero** | mostrar que \((0,0,\ldots)\) não passa |
+| desigualdade (\(x \geq y\), \(a + d \leq b + c\)) | esticar por **número negativo** | elemento com folga, vezes \(-1\) |
+| "\(x \in \mathbb{Z}\)" | esticar por **fração** | elemento inteiro, vezes \(\tfrac12\) |
+| produto (\(xy = 0\), \(\det A = 0\)) ou quadrado (\(y = x^2\)) | **somar** dois elementos | dois elementos cuja soma sai |
 
-**Exemplo 1.** \(W = \{(x, y, z) \in \mathbb{R}^3 : x + y + z = 0\}\) (um plano pela origem).
+**Exemplo 7: número solto.** \(W = \{(x, y, z) \mid x + y = 1\}\). O vetor nulo dá \(0 + 0 = 0 \neq 1\), então \(0 \notin W\). **Não é subespaço.**
 
-- Passo 1: \((0, 0, 0)\) satisfaz \(0 + 0 + 0 = 0\). ✓
-- Passo 2: se \(u = (x_1, y_1, z_1)\) e \(v = (x_2, y_2, z_2)\) estão em \(W\), então \(x_1 + y_1 + z_1 = 0\) e \(x_2 + y_2 + z_2 = 0\). Somando, \((x_1 + x_2) + (y_1 + y_2) + (z_1 + z_2) = 0\), ou seja, \(u + v \in W\). ✓
-- Passo 3: \(\alpha u = (\alpha x_1, \alpha y_1, \alpha z_1)\) e \(\alpha x_1 + \alpha y_1 + \alpha z_1 = \alpha \cdot 0 = 0\). ✓
-
-**Exemplo 2.** As matrizes **simétricas** \(n \times n\) (aquelas com \(A^T = A\)) formam um subespaço de \(M(n, n)\).
-
-- A matriz nula é simétrica. ✓
-- Se \(A^T = A\) e \(B^T = B\), então \((A + B)^T = A^T + B^T = A + B\). ✓
-- Se \(A^T = A\), então \((\alpha A)^T = \alpha A^T = \alpha A\). ✓
-
-**Exemplo 3.** \(W = \{p \in P_2 : p(1) = 0\}\), os polinômios de grau até 2 que têm \(1\) como raiz.
-
-- O polinômio nulo vale \(0\) em \(x = 1\). ✓
-- Se \(p(1) = 0\) e \(q(1) = 0\), então \((p + q)(1) = p(1) + q(1) = 0\). ✓
-- \((\alpha p)(1) = \alpha \cdot p(1) = 0\). ✓
-
-**Exemplo 4 (o mais importante para o curso).** O conjunto das soluções de um **sistema linear homogêneo** \(AX = 0\) é um subespaço de \(\mathbb{R}^n\). É o que o Estágio 1 já tinha preparado:
-
-- \(A \cdot 0 = 0\), então \(X = 0\) é solução. ✓
-- Se \(AX = 0\) e \(AY = 0\), então \(A(X + Y) = AX + AY = 0\). ✓
-- Se \(AX = 0\), então \(A(\alpha X) = \alpha (AX) = 0\). ✓
-
-Esse subespaço é chamado de **núcleo** da matriz \(A\), e vai aparecer bastante mais à frente no curso.
-
-## Exemplos que NÃO são subespaços
-
-**Exemplo 5.** \(W = \{(x, y) : y = x + 1\}\). O ponto \((0, 0)\) não está em \(W\) (pois \(0 \neq 0 + 1\)). Falha o passo 1.
-
-**Exemplo 6.** \(W = \{(x, y) : x \geq 0 \text{ e } y \geq 0\}\). Falha o passo 3: \((1, 1) \in W\), mas \((-1) \cdot (1, 1) = (-1, -1) \notin W\).
-
-**Exemplo 7.** \(W = \{(x, y) : xy = 0\}\), a união dos dois eixos.
-O \((0, 0)\) está em \(W\), e esticar um ponto de um eixo mantém ele no eixo. Mas **a soma falha**: \((1, 0) \in W\) e \((0, 1) \in W\), só que \((1, 0) + (0, 1) = (1, 1)\), e \(1 \cdot 1 = 1 \neq 0\).
-
-**Exemplo 8.** O conjunto das soluções de \(AX = B\) com \(B \neq 0\). O vetor \(X = 0\) **não** é solução (daria \(A \cdot 0 = 0 \neq B\)). Falha o passo 1. Por isso o conjunto de soluções de um sistema não homogêneo é uma reta ou plano **deslocado**, que não passa pela origem.
-
-**Exemplo 9.** As matrizes \(2 \times 2\) com determinante zero. A nula está lá, e \(\det(\alpha A) = \alpha^2 \det A = 0\), então esticar funciona. Mas a soma falha:
-
-$$
-\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} +
-\begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} =
-\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix},
-$$
-
-e a identidade tem determinante \(1\). As duas primeiras têm determinante zero, mas a soma não.
+**Exemplo 8: desigualdade.** \(W = \{(x, y, z) \mid x \geq y\}\). Tome \(u = (2, 1, 0) \in W\), pois \(2 \geq 1\). Então \((-1) \cdot u = (-2, -1, 0)\), e \(-2 \geq -1\) é falso, então \((-1)u \notin W\). **Não é subespaço.**
 
 > [!WARNING]
-> Passar no passo 1 **não** prova que é subespaço. Os exemplos 7 e 9 contêm o vetor nulo e mesmo assim não são subespaços. Para provar que **é** subespaço, os três passos precisam valer para **todos** os vetores. Para provar que **não é**, basta **um** contraexemplo.
+> **Multiplicar por número negativo inverte a desigualdade.** Por isso desigualdades quebram, **mas só se o elemento tiver "folga"**. Se você escolher \(u = (0, 0, 0)\), que satisfaz \(0 \geq 0\), o \(-u\) continua em \(W\) e você não acha o problema. O elemento precisa ter um lado **estritamente** maior que o outro (\(2 > 1\)).
+
+**Exemplo 9: igualdade não quebra com escalar negativo.** Em \(W = \{(x, y, z) \mid x = y\}\), multiplicar por \(-3\) mantém \(x = y\), porque você multiplica os **dois lados** pelo mesmo número. Por isso **igualdade** com número negativo não derruba nada. O que você precisa conferir é a soma e, aqui, ela fecha (\(x_1 + x_2 = y_1 + y_2\)). **É subespaço.**
+
+**Exemplo 10: produto.** \(W = \{(x, y) \mid xy = 0\}\) (os dois eixos). \((1, 0) \in W\) e \((0, 1) \in W\), mas \((1, 0) + (0, 1) = (1, 1)\) e \(1 \cdot 1 = 1 \neq 0\). **Não é subespaço** (não fecha na soma).
+
+**Exemplo 11: determinante.** \(W = \{A \in M(2,2) \mid \det A = 0\}\). As matrizes \(\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}\) e \(\begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}\) têm determinante 0, mas a soma é a identidade, com determinante 1. **Não é subespaço.**
+
+**Exemplo 12: desigualdade em matrizes.** \(W = \left\{\begin{bmatrix} a & b \\ c & d \end{bmatrix} \mid a + d \leq b + c\right\}\). Escolha uma matriz com folga: \(a = 0, b = 1, c = 0, d = 0\) satisfaz \(0 \leq 1\). Multiplicando por \(-1\): \(b = -1\), e fica \(0 \leq -1\), que é falso. **Não é subespaço.**
+
+## Receita para decidir
+
+1. **Teste o zero.** Se não passa, acabou: não é subespaço.
+2. Olhe o filtro:
+   - **Só igualdades lineares "= 0"** (\(x - 3z = 0\), \(A = A^T\), \(p(0) = 0\)): provavelmente **é**. Prove com letras.
+   - **Desigualdade, "\(\in \mathbb{Z}\)", número solto, produto ou quadrado**: provavelmente **não é**. Ache o contraexemplo.
 
 ## Interseção e união
 
-A **interseção** de dois subespaços é sempre um subespaço. Se \(U\) e \(W\) são subespaços de \(V\) e \(u, v \in U \cap W\), então \(u + v\) está em \(U\) (porque \(U\) fecha na soma) e em \(W\) (idem), logo está em \(U \cap W\). O mesmo vale para o escalar, e o \(0\) está nos dois.
+- A **interseção** de dois subespaços é sempre um subespaço. Quem passa nos dois filtros passa no filtro "junto", e as contas de soma e escalar continuam valendo.
+- A **união** de dois subespaços **em geral não é** subespaço. Os eixos \(x\) e \(y\) são subespaços de \(\mathbb{R}^2\), mas \((1, 0) + (0, 1) = (1, 1)\) não está em nenhum dos dois.
 
-A **união** \(U \cup W\), em geral, **não** é subespaço. O exemplo 7 é isso: \(U\) = eixo \(x\), \(W\) = eixo \(y\), e a soma de um vetor de cada um sai dos eixos. A próxima página mostra o que fazer quando queremos "juntar" subespaços de verdade.
+A união ser subespaço só acontece quando um dos dois está dentro do outro.
+
+## Erros comuns
+
+- **Provar com números que "é" subespaço.** Não prova nada. Use letras.
+- **Esquecer de usar a hipótese.** Na soma, você precisa dizer que \(u\) e \(v\) estão em \(W\), e usar isso na conta. Sem isso, a prova não fecha.
+- **Conferir só uma das condições** quando o filtro tem "e" (duas condições).
+- **Achar que "multiplicar por \(-1\)" derruba qualquer conjunto.** Só derruba quando há desigualdade com folga.
+- **Confundir \(p(0)\) com o polinômio.** \(p(0)\) é um número; \(p\) é o vetor.
 
 ## Exercícios
 
-**Exercício 1.** \(W = \{(x, y, z) \in \mathbb{R}^3 : x = 2y\}\) é subespaço de \(\mathbb{R}^3\)?
-
-{{< details title="Gabarito" >}}
-Sim. Passo 1: \((0,0,0)\) satisfaz \(0 = 2 \cdot 0\). Passo 2: se \(x_1 = 2y_1\) e \(x_2 = 2y_2\), então \(x_1 + x_2 = 2(y_1 + y_2)\). Passo 3: se \(x = 2y\), então \(\alpha x = 2(\alpha y)\).
-{{< /details >}}
-
-**Exercício 2.** \(W = \{(x, y, z) \in \mathbb{R}^3 : x + y = 1\}\) é subespaço de \(\mathbb{R}^3\)?
-
-{{< details title="Gabarito" >}}
-Não. O vetor nulo \((0, 0, 0)\) dá \(0 + 0 = 0 \neq 1\), então não está em \(W\). Falha o passo 1.
-{{< /details >}}
-
-**Exercício 3.** As matrizes \(2 \times 2\) triangulares superiores (aquelas com \(a_{21} = 0\)) formam um subespaço de \(M(2, 2)\)?
-
-{{< details title="Gabarito" >}}
-Sim. A matriz nula tem \(a_{21} = 0\). Somar duas matrizes com \(a_{21} = 0\) dá uma matriz com \(a_{21} = 0 + 0 = 0\). Esticar mantém \(\alpha \cdot 0 = 0\).
-{{< /details >}}
-
-**Exercício 4.** \(W = \{p \in P_2 : p(0) = 1\}\) é subespaço de \(P_2\)?
-
-{{< details title="Gabarito" >}}
-Não. O polinômio nulo tem \(p(0) = 0 \neq 1\), então não está em \(W\). Falha o passo 1.
-{{< /details >}}
-
-**Exercício 5.** Mostre que \(W = \{(x, y) \in \mathbb{R}^2 : x = 0 \text{ ou } y = 0\}\) não é subespaço, escolhendo dois vetores específicos.
+**Exercício 1.** Prove que \(W = \{(x, y, z) \in \mathbb{R}^3 \mid x = 2y\}\) é subespaço.
 
 {{< details title="Resolução" >}}
-Tome \(u = (1, 0)\) e \(v = (0, 1)\). Ambos estão em \(W\) (o primeiro tem \(y = 0\), o segundo tem \(x = 0\)). Mas \(u + v = (1, 1)\) tem \(x \neq 0\) e \(y \neq 0\), então não está em \(W\). Falha o passo 2.
+*Zero:* \(0 = 2 \cdot 0\). ✓
+
+*Soma:* se \(x_1 = 2y_1\) e \(x_2 = 2y_2\), então \(x_1 + x_2 = 2y_1 + 2y_2 = 2(y_1 + y_2)\). ✓
+
+*Escalar:* se \(x_1 = 2y_1\), então \(\alpha x_1 = 2(\alpha y_1)\). ✓
+{{< /details >}}
+
+**Exercício 2.** \(W = \{(x, y, z) \in \mathbb{R}^3 \mid x + y + z = 1\}\) é subespaço?
+
+{{< details title="Resolução" >}}
+Não. O vetor nulo não passa no filtro: \(0 + 0 + 0 = 0 \neq 1\).
+{{< /details >}}
+
+**Exercício 3.** Prove que as matrizes antissimétricas \(W = \{A \in M(2,2) \mid A^T = -A\}\) formam subespaço.
+
+{{< details title="Resolução" >}}
+A matriz nula satisfaz \(0^T = -0\). Se \(A^T = -A\) e \(B^T = -B\), então \((A + B)^T = A^T + B^T = -A - B = -(A + B)\) e \((\alpha A)^T = \alpha A^T = -\alpha A = -(\alpha A)\). ✓
+{{< /details >}}
+
+**Exercício 4.** Prove que \(W = \{p \in P_2 \mid p(2) = 0\}\) é subespaço.
+
+{{< details title="Resolução" >}}
+O polinômio nulo vale 0 em \(t = 2\). Se \(p(2) = 0\) e \(q(2) = 0\), então \((p + q)(2) = p(2) + q(2) = 0\) e \((\alpha p)(2) = \alpha p(2) = 0\). ✓
+
+Em coeficientes: \(a + 2b + 4c = 0\), uma equação linear igual a zero.
+{{< /details >}}
+
+**Exercício 5.** \(W = \{(x, y) \in \mathbb{R}^2 \mid |x| = |y|\}\) é subespaço?
+
+{{< details title="Resolução" >}}
+Não. \((1, 1) \in W\) e \((1, -1) \in W\), mas a soma \((2, 0)\) tem \(|2| \neq |0|\). Não fecha na soma.
+{{< /details >}}
+
+**Exercício 6.** \(W = \{p \in P_2 \mid p(0) \geq 0\}\) é subespaço?
+
+{{< details title="Resolução" >}}
+Não. \(p(t) = 1\) está em \(W\) (\(p(0) = 1 \geq 0\)), mas \((-1)p = -1\) tem valor \(-1\) em 0 e não está em \(W\). Não fecha no escalar.
 {{< /details >}}
 
 ## Teste rápido
@@ -141,36 +283,47 @@ Tome \(u = (1, 0)\) e \(v = (0, 1)\). Ambos estão em \(W\) (o primeiro tem \(y 
 {{< quiz titulo="é subespaço?" >}}
 
 {{< questao >}}
-Qual destes conjuntos é subespaço de \(\mathbb{R}^2\)?
+Qual destes é um subespaço de \(\mathbb{R}^3\)?
 
-- [ ] \(\{(x, y) : y = 2x + 1\}\)
-- [x] \(\{(x, y) : y = 2x\}\)
-- [ ] \(\{(x, y) : y = x^2\}\)
-- [ ] \(\{(x, y) : x \geq 0\}\)
+- [ ] \(\{(x, y, z) \mid x + y + z = 2\}\)
+- [ ] \(\{(x, y, z) \mid x \geq 0\}\)
+- [x] \(\{(x, y, z) \mid x = y = z\}\)
+- [ ] \(\{(x, y, z) \mid xyz = 0\}\)
 ---
-Só a reta \(y = 2x\) passa pela origem e é "reta de verdade". A reta \(y = 2x + 1\) não passa pela origem, a parábola não fecha na soma e o semiplano \(x \geq 0\) não fecha no esticar por números negativos.
+\(x = y = z\) é a reta de direção \((1, 1, 1)\) pela origem. O primeiro não contém o zero; o segundo não fecha no escalar negativo; o quarto não fecha na soma (\((1,0,0) + (0,1,1) = (1,1,1)\) tem \(xyz = 1\)).
 {{< /questao >}}
 
 {{< questao >}}
-O conjunto \(W\) **não** contém o vetor nulo. O que podemos concluir?
+Para provar que um conjunto **é** subespaço, você usa...
 
-- [ ] \(W\) é subespaço, só que bem pequeno
-- [x] \(W\) não é subespaço
-- [ ] Não dá para concluir nada
-- [ ] \(W\) é subespaço se fechar na soma
+- [ ] um exemplo numérico que funciona
+- [x] letras genéricas e a hipótese de que os vetores estão no conjunto
+- [ ] só o teste do vetor nulo
+- [ ] o contraexemplo mais simples
 ---
-Todo subespaço tem o vetor nulo (basta esticar qualquer vetor por \(0\)). Se \(0 \notin W\), então \(W\) não pode ser subespaço.
+Para provar que algo vale para todos os elementos é preciso usar elementos genéricos. Exemplos numéricos servem para **derrubar** um conjunto, não para aprová-lo.
 {{< /questao >}}
 
 {{< questao >}}
-As matrizes \(2 \times 2\) com determinante \(0\) formam um subespaço de \(M(2, 2)\)?
+Por que \(\{(x, y) \mid x \geq y\}\) não é subespaço?
 
-- [ ] Sim, porque contêm a matriz nula
-- [ ] Sim, porque \(\det(\alpha A) = 0\) quando \(\det A = 0\)
-- [ ] Não, porque não contêm a matriz nula
-- [x] Não, porque não fecham na soma
+- [ ] Porque não contém o vetor nulo
+- [ ] Porque não fecha na soma
+- [x] Porque multiplicar \((2, 1)\) por \(-1\) inverte a desigualdade e sai do conjunto
+- [ ] Porque é uma reta
 ---
-A matriz nula está lá e esticar funciona, mas a soma de duas matrizes de determinante zero pode ter determinante diferente de zero. Por exemplo, as matrizes diagonais com um único \(1\) somam a identidade.
+O zero passa (\(0 \geq 0\)), e a soma fecha. O que falha é o escalar negativo: \((2, 1) \in W\), mas \((-2, -1) \notin W\), pois \(-2 \geq -1\) é falso.
+{{< /questao >}}
+
+{{< questao >}}
+Em \(P_2\), o que significa \(p(0)\) para \(p(t) = a + bt + ct^2\)?
+
+- [ ] o polinômio nulo
+- [x] o número \(a\)
+- [ ] o número \(a + b + c\)
+- [ ] o vetor \((a, b, c)\)
+---
+\(p(0)\) é o valor do polinômio quando \(t = 0\): só sobra o termo constante, \(a\). Já \(a + b + c\) é \(p(1)\).
 {{< /questao >}}
 
 {{< /quiz >}}

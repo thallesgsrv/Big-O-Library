@@ -1,176 +1,189 @@
 ---
 title: Soma de Subespaços
 weight: 3
-description: Como juntar dois subespaços em um só, e o que é a soma direta (decomposição única).
+description: Como juntar dois subespaços em um só, como calcular a interseção e a soma na prática, e o que é a soma direta.
 autores:
   - thallesgsrv
-date: 2026-10-29
+date: 2026-11-09
 ---
 
 ## Sobre
 
-Na página anterior vimos que a **interseção** de subespaços é subespaço, mas a **união** não é. Então, se quisermos "juntar" dois subespaços \(U\) e \(W\) num só, o que fazemos?
+Se \(W_1\) e \(W_2\) são subespaços de \(V\), dá para criar dois subespaços novos a partir deles:
 
-A ideia é parar de empilhar os conjuntos lado a lado e passar a **somar vetores**: pegamos um vetor de \(U\), um vetor de \(W\) e somamos. O conjunto de todos os resultados possíveis é o **menor subespaço que contém \(U\) e \(W\)**.
+- a **interseção** \(W_1 \cap W_2\): os vetores que estão **nos dois** ao mesmo tempo;
+- a **soma** \(W_1 + W_2\): tudo o que dá para formar **pegando um vetor de cada** e somando.
+
+Aqui aparece a primeira pergunta "de engenharia" do curso: *dado \(W_1\) e \(W_2\), qual é uma base da interseção e da soma?* A resposta depende de **como** os subespaços foram dados (por equações ou por geradores), e a página mostra as duas situações.
 
 ## A soma
 
-Sejam \(U\) e \(W\) subespaços de \(V\). A **soma** deles é
-
 $$
-U + W = \{\, u + w \;:\; u \in U \text{ e } w \in W \,\}.
+W_1 + W_2 = \{\, w_1 + w_2 \;\mid\; w_1 \in W_1 \text{ e } w_2 \in W_2 \,\}.
 $$
 
-> [!NOTE]
-> \(U + W\) **sempre é subespaço** de \(V\), e ele contém tanto \(U\) quanto \(W\) (porque dá para escolher \(w = 0\), ou \(u = 0\)).
+Leia: "os vetores que se escrevem como (um vetor de \(W_1\)) + (um vetor de \(W_2\))".
 
-**Por que é subespaço?** Vamos aos três passos:
+**Por que não usar a união?** A união \(W_1 \cup W_2\) em geral não é subespaço (página anterior). A soma é o **menor subespaço que contém os dois**: ela é a "união já consertada", acrescentando todas as somas que faltavam.
 
-1. \(0 = 0 + 0\), com \(0 \in U\) e \(0 \in W\). ✓
-2. Se \(u_1 + w_1\) e \(u_2 + w_2\) estão em \(U + W\), a soma deles é \((u_1 + u_2) + (w_1 + w_2)\). Como \(u_1 + u_2 \in U\) e \(w_1 + w_2 \in W\), o resultado está em \(U + W\). ✓
-3. \(\alpha(u + w) = \alpha u + \alpha w\), com \(\alpha u \in U\) e \(\alpha w \in W\). ✓
+A soma sempre é subespaço: se \(u = w_1 + w_2\) e \(u' = w'_1 + w'_2\), então \(u + u' = (w_1 + w'_1) + (w_2 + w'_2)\), com a primeira parte em \(W_1\) e a segunda em \(W_2\). O escalar é parecido.
 
-## Exemplos
+## Exemplos para enxergar
 
-**Exemplo 1.** Em \(\mathbb{R}^2\), seja \(U\) o eixo \(x\) e \(W\) o eixo \(y\):
+**Exemplo 1.** Em \(\mathbb{R}^2\), sejam \(W_1\) o eixo \(x\) (vetores \((a, 0)\)) e \(W_2\) o eixo \(y\) (vetores \((0, b)\)). Então \((a, 0) + (0, b) = (a, b)\), que é qualquer vetor de \(\mathbb{R}^2\). Logo \(W_1 + W_2 = \mathbb{R}^2\).
 
-$$
-U = \{(x, 0)\}, \qquad W = \{(0, y)\}.
-$$
+**Exemplo 2.** Em \(\mathbb{R}^3\), sejam \(W_1\) o eixo \(x\) e \(W_2\) o eixo \(y\). A soma é o plano \(z = 0\) (todos os \((a, b, 0)\)).
 
-Qualquer \((a, b)\) é igual a \((a, 0) + (0, b)\), então \(U + W = \mathbb{R}^2\). Os eixos, sozinhos, não formam subespaço, mas a soma deles forma.
-
-**Exemplo 2.** Em \(\mathbb{R}^3\), seja \(U\) o eixo \(x\) e \(W\) o eixo \(y\):
-
-$$
-U = \{(x, 0, 0)\}, \qquad W = \{(0, y, 0)\}.
-$$
-
-A soma é o plano \(z = 0\), isto é, \(U + W = \{(x, y, 0)\}\).
-
-**Exemplo 3.** Em \(\mathbb{R}^3\), sejam dois planos:
-
-$$
-U = \{(x, y, 0)\} \qquad\text{e}\qquad W = \{(0, y, z)\}.
-$$
-
-Dado \((a, b, c)\), escrevemos \((a, b, c) = (a, b, 0) + (0, 0, c)\), com o primeiro em \(U\) e o segundo em \(W\). Logo \(U + W = \mathbb{R}^3\).
-
-> [!TIP]
-> Geometricamente, dois planos distintos pela origem em \(\mathbb{R}^3\) sempre somam \(\mathbb{R}^3\): juntos eles "apontam" para todas as direções.
+**Exemplo 3.** Em \(\mathbb{R}^3\), dois planos diferentes pela origem. Eles se encontram numa reta (a interseção), e a soma é o \(\mathbb{R}^3\) inteiro.
 
 ![Soma de eixos em R², de eixos em R³ formando o plano z=0, e de dois planos que somam R³ e se cortam numa reta](soma-geometria.png)
 
+## Como calcular na prática
+
+### Interseção: junte as equações
+
+A interseção são os vetores que passam em **todos os filtros dos dois subespaços ao mesmo tempo**. Então, se \(W_1\) e \(W_2\) vêm por equações, **junte as equações** e resolva o sistema.
+
+**Exemplo 4.** Em \(\mathbb{R}^3\), \(W_1 = \{x + y + z = 0\}\) e \(W_2 = \{x = y\}\).
+
+Juntando: \(x + y + z = 0\) e \(x = y\). Substituindo \(y = x\) na primeira: \(2x + z = 0\), então \(z = -2x\). Os vetores são
+
+$$
+(x, x, -2x) = x \cdot (1, 1, -2).
+$$
+
+Uma base de \(W_1 \cap W_2\) é \(\{(1, 1, -2)\}\), e \(\dim(W_1 \cap W_2) = 1\).
+
+### Soma: junte os geradores
+
+A soma é formada por \(w_1 + w_2\). Se \(W_1 = [a_1, \ldots, a_p]\) e \(W_2 = [b_1, \ldots, b_q]\), então todo elemento da soma é combinação de \(a_1, \ldots, a_p, b_1, \ldots, b_q\). Então **junte os geradores**: \(W_1 + W_2 = [a_1, \ldots, a_p, b_1, \ldots, b_q]\).
+
+Esse conjunto gera, mas pode ter vetores a mais. Para tirar os que sobram, **escalone**: coloque os vetores como **linhas** de uma matriz, escalone e as linhas **não nulas** que restarem formam uma base (e a quantidade delas é a dimensão).
+
+**Exemplo 5.** Continuando o Exemplo 4. Primeiro ache geradores de cada um (isolando variáveis):
+
+- \(W_1\): \(z = -x - y\), então \((x, y, -x - y) = x(1, 0, -1) + y(0, 1, -1)\).
+- \(W_2\): \((x, x, z) = x(1, 1, 0) + z(0, 0, 1)\).
+
+Juntando e escalonando as linhas:
+
+$$
+\begin{bmatrix} 1 & 0 & -1 \\ 0 & 1 & -1 \\ 1 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+\;\xrightarrow{L_3 \to L_3 - L_1 - L_2}\;
+\begin{bmatrix} 1 & 0 & -1 \\ 0 & 1 & -1 \\ 0 & 0 & 2 \\ 0 & 0 & 1 \end{bmatrix}
+\;\xrightarrow{L_3 \to L_3 - 2L_4}\;
+\begin{bmatrix} 1 & 0 & -1 \\ 0 & 1 & -1 \\ 0 & 0 & 0 \\ 0 & 0 & 1 \end{bmatrix}.
+$$
+
+Sobram 3 linhas não nulas, então \(\dim(W_1 + W_2) = 3\) e \(W_1 + W_2 = \mathbb{R}^3\).
+
+### A fórmula da dimensão
+
+Em vez de escalonar, muitas vezes dá para usar:
+
+$$
+\dim(W_1 + W_2) = \dim W_1 + \dim W_2 - \dim(W_1 \cap W_2).
+$$
+
+No Exemplo 5: \(2 + 2 - 1 = 3\). ✓
+
+O que a fórmula diz em palavras: ao somar as dimensões, a interseção foi contada duas vezes, então tira-se uma vez.
+
+> [!TIP]
+> **Ordem de ataque** quando o enunciado pede base e dimensão de \(W_1 \cap W_2\) e \(W_1 + W_2\): (1) ache a **interseção** juntando equações; (2) ache as dimensões de \(W_1\) e \(W_2\); (3) use a **fórmula** para a soma; (4) se precisar de uma base da soma, junte geradores e escalone.
+
 ## Soma direta
 
-O Exemplo 3 tem um detalhe incômodo. O vetor \((0, 1, 0)\) pode ser escrito de **duas formas** como "algo de \(U\) + algo de \(W\)":
+Às vezes, **cada vetor da soma se escreve de um único jeito** como \(w_1 + w_2\). Nesse caso a soma é chamada de **soma direta**, e se escreve \(W_1 \oplus W_2\).
 
-$$
-(0, 1, 0) = (0, 1, 0) + (0, 0, 0)
-\qquad\text{e}\qquad
-(0, 1, 0) = (0, 0, 0) + (0, 1, 0).
-$$
+**Teorema.** \(W_1 + W_2\) é soma direta se, e somente se, \(W_1 \cap W_2 = \{0\}\).
 
-Isso acontece porque \(U\) e \(W\) **têm vetores em comum** (o eixo \(y\) está nos dois). Quando isso não acontece, cada vetor da soma tem uma decomposição **única**, e dizemos que a soma é **direta**.
+**Por quê?** Se existisse um vetor \(z \neq 0\) na interseção, o vetor \(0\) poderia ser escrito de dois jeitos: \(0 = 0 + 0\) e \(0 = z + (-z)\). Perder a unicidade é exatamente ter interseção maior que \(\{0\}\). E se a interseção é só \(\{0\}\), duas escritas \(w_1 + w_2 = w'_1 + w'_2\) dão \(w_1 - w'_1 = w'_2 - w_2\), que está nos dois subespaços, então vale \(0\), e as duas escritas coincidem.
 
-Dizemos que \(U + W\) é uma **soma direta**, e escrevemos \(U \oplus W\), quando
+**Quando \(V = W_1 \oplus W_2\)?** Quando duas coisas acontecem:
 
-$$
-U \cap W = \{0\}.
-$$
+1. \(W_1 + W_2 = V\) (juntos eles geram tudo);
+2. \(W_1 \cap W_2 = \{0\}\) (sem sobreposição).
 
-**Teorema.** Se \(U \cap W = \{0\}\), então todo vetor de \(U + W\) se escreve de **uma única maneira** como \(u + w\) com \(u \in U\) e \(w \in W\).
-
-**Por quê?** Suponha que \(v = u + w = u' + w'\), com \(u, u' \in U\) e \(w, w' \in W\). Passando termos de lado:
-
-$$
-u - u' = w' - w.
-$$
-
-O lado esquerdo está em \(U\) (diferença de vetores de \(U\)) e o lado direito está em \(W\). Então esse vetor está em \(U \cap W = \{0\}\), ou seja, é \(0\). Daí \(u = u'\) e \(w = w'\).
-
-> [!NOTE]
-> A soma direta é a forma "arrumada" de somar: sem repetição, sem ambiguidade. Vai ser útil quando falarmos de base e dimensão.
+Em dimensão, isso é o mesmo que \(\dim W_1 + \dim W_2 = \dim V\) com interseção \(\{0\}\).
 
 ## Exemplos de soma direta
 
-**Exemplo 4.** \(\mathbb{R}^2 = U \oplus W\), com \(U\) o eixo \(x\) e \(W\) o eixo \(y\): a interseção é só \((0, 0)\).
+**Exemplo 6.** Em \(\mathbb{R}^3\), \(W_1 = [(1, 0, 0)]\) e \(W_2 = [(1, 1, 0), (0, 1, 1)]\).
 
-**Exemplo 5.** Em \(\mathbb{R}^2\), sejam duas retas:
-
-$$
-U = \{(x, y) : y = x\} \qquad\text{e}\qquad W = \{(x, y) : y = -x\}.
-$$
-
-Um ponto comum teria \(y = x\) e \(y = -x\), então \(x = y = 0\): a interseção é \(\{0\}\). Para decompor, por exemplo, \((3, 1)\), procuramos \((a, a) + (b, -b) = (3, 1)\):
+Os três vetores \((1,0,0)\), \((1,1,0)\) e \((0,1,1)\) formam a matriz de linhas
 
 $$
-a + b = 3, \qquad a - b = 1 \;\Rightarrow\; a = 2, \; b = 1.
+\begin{bmatrix} 1 & 0 & 0 \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{bmatrix}
+\quad\text{com determinante } 1 \cdot (1 \cdot 1 - 0 \cdot 1) = 1 \neq 0.
 $$
 
-Então \((3, 1) = (2, 2) + (1, -1)\), e essa é a **única** forma.
+Determinante diferente de zero quer dizer que os três são LI, então geram \(\mathbb{R}^3\) (dimensão 3). Logo \(W_1 + W_2 = \mathbb{R}^3\). Pela fórmula, \(3 = 1 + 2 - \dim(W_1 \cap W_2)\), então \(\dim(W_1 \cap W_2) = 0\), ou seja, a interseção é \(\{0\}\). Portanto \(\mathbb{R}^3 = W_1 \oplus W_2\).
 
-**Exemplo 6 (clássico).** Toda matriz quadrada é, de modo único, a soma de uma matriz **simétrica** com uma **antissimétrica** (aquelas com \(A^T = -A\)). Chamando \(S\) o subespaço das simétricas e \(K\) o das antissimétricas, vale \(M(n, n) = S \oplus K\).
-
-A decomposição é dada por uma fórmula explícita:
+**A unicidade na prática.** Qualquer \(v = (a, b, c)\) se escreve como \(x(1,0,0) + s(1,1,0) + r(0,1,1)\), com
 
 $$
-A = \underbrace{\frac{A + A^T}{2}}_{\text{simétrica}} + \underbrace{\frac{A - A^T}{2}}_{\text{antissimétrica}}.
+r = c, \qquad s = b - c, \qquad x = a - b + c.
 $$
 
-E a interseção é \(\{0\}\): se uma matriz é simétrica **e** antissimétrica, então \(A = A^T = -A\), logo \(2A = 0\) e \(A = 0\).
+Por exemplo, \((4, 3, 1) = 2(1,0,0) + 2(1,1,0) + 1(0,1,1)\), ou seja, \(w_1 = (2, 0, 0)\) e \(w_2 = (2, 3, 1)\). Essa decomposição é a **única**.
 
-Por exemplo, com \(A = \begin{bmatrix} 1 & 2 \\ 4 & 3 \end{bmatrix}\):
+**Exemplo 7.** Em \(\mathbb{R}^4\), \(W_1 = \{(x, y, z, t) \mid x + y = 0 \text{ e } z = t\}\) e \(W_2 = \{(x, y, z, t) \mid x = y \text{ e } z + t = 0\}\).
 
-$$
-\frac{A + A^T}{2} = \begin{bmatrix} 1 & 3 \\ 3 & 3 \end{bmatrix}
-\qquad\text{e}\qquad
-\frac{A - A^T}{2} = \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix},
-$$
+*Interseção:* juntando as quatro equações, \(x + y = 0\) e \(x = y\) dão \(x = y = 0\); \(z = t\) e \(z + t = 0\) dão \(z = t = 0\). Só sobra o vetor nulo, então \(W_1 \cap W_2 = \{0\}\).
 
-e a soma das duas devolve \(A\).
+*Dimensões:* \(W_1 = [(1,-1,0,0), (0,0,1,1)]\) e \(W_2 = [(1,1,0,0), (0,0,1,-1)]\), ambos de dimensão 2.
+
+*Soma:* \(\dim(W_1 + W_2) = 2 + 2 - 0 = 4 = \dim \mathbb{R}^4\). Logo \(\mathbb{R}^4 = W_1 \oplus W_2\).
+
+**Exemplo 8: soma que não é direta.** No Exemplo 4, \(W_1 \cap W_2 = [(1, 1, -2)] \neq \{0\}\). A soma é \(\mathbb{R}^3\), mas **não** é direta. Por exemplo, o vetor \((1, 1, -2)\) se escreve como \((1, 1, -2) + 0\) e também como \(0 + (1, 1, -2)\).
+
+> [!NOTE]
+> Se \(W_1 + W_2 = V\) mas a interseção não é \(\{0\}\), você pode escrever **\(V = W_1 + W_2\)**, e não \(V = W_1 \oplus W_2\). O símbolo \(\oplus\) só pode ser usado quando a interseção é \(\{0\}\).
 
 ## Resumo
 
-| Situação | O que acontece |
+| Quero... | Faço... |
 | --- | --- |
-| \(U \cap W\) | Sempre é subespaço. |
-| \(U \cup W\) | Em geral **não** é subespaço. |
-| \(U + W\) | Sempre é subespaço: o menor que contém \(U\) e \(W\). |
-| \(U \cap W = \{0\}\) | A soma é **direta** (\(U \oplus W\)): decomposição única. |
+| \(W_1 \cap W_2\) (subespaços por equações) | juntar as equações e resolver |
+| \(W_1 + W_2\) (subespaços por geradores) | juntar os geradores e escalonar |
+| \(\dim(W_1 + W_2)\) | \(\dim W_1 + \dim W_2 - \dim(W_1 \cap W_2)\) |
+| saber se \(V = W_1 + W_2\) | ver se \(\dim(W_1 + W_2) = \dim V\) |
+| saber se a soma é direta | ver se \(W_1 \cap W_2 = \{0\}\) |
+| saber se \(V = W_1 \oplus W_2\) | as duas condições acima |
 
 ## Exercícios
 
-**Exercício 1.** Seja \(U = \{(x, y, z) : z = 0\}\) e \(W = \{(x, y, z) : x = y = 0\}\). Mostre que \(\mathbb{R}^3 = U \oplus W\).
-
-{{< details title="Gabarito" >}}
-\(U\) é o plano \(xy\) e \(W\) é o eixo \(z\). Todo \((a, b, c) = (a, b, 0) + (0, 0, c)\), então \(U + W = \mathbb{R}^3\). Um vetor em \(U \cap W\) tem \(z = 0\) (por estar em \(U\)) e \(x = y = 0\) (por estar em \(W\)), então é \((0,0,0)\). Logo a soma é direta.
-{{< /details >}}
-
-**Exercício 2.** Decomponha \((5, 1)\) como soma de um vetor de \(U = \{(x, y) : y = x\}\) com um vetor de \(W = \{(x, y) : y = -x\}\).
+**Exercício 1.** Em \(\mathbb{R}^3\), \(W_1 = \{(x, y, z) \mid x + y - z = 0\}\) e \(W_2 = \{(x, y, z) \mid x = y\}\). Ache uma base e a dimensão de \(W_1 \cap W_2\) e de \(W_1 + W_2\). \(\mathbb{R}^3 = W_1 \oplus W_2\)?
 
 {{< details title="Resolução" >}}
-Procuramos \((a, a) + (b, -b) = (5, 1)\), isto é, \(a + b = 5\) e \(a - b = 1\). Somando as equações: \(2a = 6\), então \(a = 3\) e \(b = 2\). Assim \((5, 1) = (3, 3) + (2, -2)\).
+*Interseção:* \(x = y\) e \(x + y - z = 0\) dão \(z = 2x\), então \((x, x, 2x) = x(1, 1, 2)\). Base \(\{(1, 1, 2)\}\), dimensão 1.
+
+*Dimensões:* \(\dim W_1 = 2\) e \(\dim W_2 = 2\) (uma equação em \(\mathbb{R}^3\) deixa 2 variáveis livres).
+
+*Soma:* \(\dim(W_1 + W_2) = 2 + 2 - 1 = 3\), então \(W_1 + W_2 = \mathbb{R}^3\). Uma base é qualquer conjunto de 3 vetores LI, por exemplo \(\{(1,0,1), (0,1,1), (1,1,0)\}\) (geradores de \(W_1\) e \(W_2\) juntos).
+
+*Soma direta?* Não, pois a interseção tem dimensão 1 e não é \(\{0\}\).
 {{< /details >}}
 
-**Exercício 3.** Seja \(U = \{(x, y, 0)\}\) e \(W = \{(0, y, z)\}\) em \(\mathbb{R}^3\). A soma \(U + W\) é direta? Dê um vetor que se decomponha de duas formas.
-
-{{< details title="Gabarito" >}}
-Não é direta, porque \(U \cap W = \{(0, y, 0)\}\) (o eixo \(y\)) tem mais do que o vetor nulo. Um exemplo é \((0, 1, 0) = (0, 1, 0) + (0, 0, 0) = (0, 0, 0) + (0, 1, 0)\).
-{{< /details >}}
-
-**Exercício 4.** Decomponha \(A = \begin{bmatrix} 2 & 6 \\ 0 & 4 \end{bmatrix}\) como soma de uma matriz simétrica com uma antissimétrica.
+**Exercício 2.** Em \(\mathbb{R}^3\), \(W_1 = [(1, 0, 0)]\) e \(W_2 = [(0, 1, 0), (0, 0, 1)]\). Mostre que \(\mathbb{R}^3 = W_1 \oplus W_2\).
 
 {{< details title="Resolução" >}}
-\(A^T = \begin{bmatrix} 2 & 0 \\ 6 & 4 \end{bmatrix}\). Então
+Os três vetores são a base canônica, então geram \(\mathbb{R}^3\): \(W_1 + W_2 = \mathbb{R}^3\). Como \(\dim W_1 + \dim W_2 = 1 + 2 = 3 = \dim(W_1 + W_2)\), a fórmula dá \(\dim(W_1 \cap W_2) = 0\). A interseção é \(\{0\}\). Logo a soma é direta.
+{{< /details >}}
 
-$$
-\frac{A + A^T}{2} = \begin{bmatrix} 2 & 3 \\ 3 & 4 \end{bmatrix}
-\qquad\text{e}\qquad
-\frac{A - A^T}{2} = \begin{bmatrix} 0 & 3 \\ -3 & 0 \end{bmatrix}.
-$$
+**Exercício 3.** Em \(M(2,2)\), seja \(S\) o subespaço das matrizes simétricas e \(A\) o das antissimétricas. Mostre que \(M(2,2) = S \oplus A\).
 
-A primeira é simétrica, a segunda é antissimétrica, e a soma delas é \(A\).
+{{< details title="Resolução" >}}
+*Interseção:* se \(M^T = M\) e \(M^T = -M\), então \(M = -M\), logo \(M = 0\). Interseção \(\{0\}\).
+
+*Soma:* toda matriz se escreve como \(M = \frac{M + M^T}{2} + \frac{M - M^T}{2}\), sendo a primeira parte simétrica e a segunda antissimétrica. Logo \(S + A = M(2,2)\).
+{{< /details >}}
+
+**Exercício 4.** Em \(\mathbb{R}^2\), \(W_1 = [(1, 0)]\) e \(W_2 = [(2, 0)]\). Qual é \(W_1 + W_2\)? A soma é direta?
+
+{{< details title="Resolução" >}}
+Os dois são o eixo \(x\). A soma é o eixo \(x\) (dimensão 1, e não \(\mathbb{R}^2\)). A interseção é o eixo \(x\) inteiro, que não é \(\{0\}\), então **não é** direta.
 {{< /details >}}
 
 ## Teste rápido
@@ -178,25 +191,36 @@ A primeira é simétrica, a segunda é antissimétrica, e a soma delas é \(A\).
 {{< quiz titulo="soma e soma direta" >}}
 
 {{< questao >}}
-Qual afirmação é **verdadeira** para subespaços \(U\) e \(W\) de \(V\)?
+Se \(\dim W_1 = 3\), \(\dim W_2 = 2\) e \(\dim(W_1 \cap W_2) = 1\), quanto vale \(\dim(W_1 + W_2)\)?
 
-- [ ] \(U \cup W\) é sempre subespaço
-- [ ] \(U + W\) só é subespaço quando \(U \cap W = \{0\}\)
-- [x] \(U + W\) é sempre subespaço
-- [ ] \(U \cap W\) nunca contém o vetor nulo
+- [ ] 6
+- [ ] 5
+- [x] 4
+- [ ] 3
 ---
-A soma \(U + W\) é sempre subespaço (é o menor que contém os dois). A união, em geral, não é; e a interseção sempre contém o vetor nulo, pois ele está nos dois subespaços.
+\(\dim(W_1 + W_2) = 3 + 2 - 1 = 4\). A interseção foi contada duas vezes, então tira-se uma vez.
 {{< /questao >}}
 
 {{< questao >}}
-Se \(U \cap W = \{0\}\), o que isso garante?
+Para \(V = W_1 \oplus W_2\), precisa valer:
 
-- [ ] Que \(U + W = V\)
-- [x] Que cada vetor de \(U + W\) se escreve de uma única forma como \(u + w\)
-- [ ] Que \(U = \{0\}\) ou \(W = \{0\}\)
-- [ ] Que \(U\) e \(W\) têm o mesmo tamanho
+- [ ] \(W_1 \cap W_2 = V\)
+- [ ] \(W_1 + W_2 = \{0\}\)
+- [x] \(W_1 + W_2 = V\) e \(W_1 \cap W_2 = \{0\}\)
+- [ ] \(\dim W_1 = \dim W_2\)
 ---
-A soma direta garante a decomposição única, mas não garante que a soma seja o espaço inteiro. Por exemplo, dois eixos em \(\mathbb{R}^3\) têm interseção \(\{0\}\), mas somam só um plano.
+A soma direta exige as duas coisas: juntos geram tudo e não têm nada em comum além do zero.
+{{< /questao >}}
+
+{{< questao >}}
+Para achar \(W_1 \cap W_2\) quando os dois são dados por equações, você...
+
+- [ ] soma os geradores
+- [x] junta todas as equações e resolve o sistema
+- [ ] subtrai as dimensões
+- [ ] testa só o vetor nulo
+---
+Estar na interseção é passar nos filtros dos dois subespaços ao mesmo tempo, então basta juntar as equações.
 {{< /questao >}}
 
 {{< /quiz >}}

@@ -1,20 +1,20 @@
 ---
 title: Espaços Vetoriais
 weight: 1
-description: A definição de espaço vetorial, as 8 regras explicadas sem mistério, exemplos e não exemplos.
+description: O que é um vetor, o que é um espaço vetorial, as 8 regras explicadas sem mistério, exemplos e não exemplos.
 autores:
   - thallesgsrv
-date: 2026-10-29
+date: 2026-11-09
 ---
 
 ## Sobre
 
-Um **espaço vetorial** é um conjunto onde dá para **somar** dois elementos e **esticar** um elemento (multiplicar por um número), sem nunca sair do conjunto, e onde essas duas operações se comportam do jeito que a gente espera.
+Um **espaço vetorial** é um conjunto onde dá para **somar** dois elementos e **esticar** um elemento (multiplicar por um número), **sem nunca sair do conjunto**, e onde essas duas operações se comportam do jeito que a gente espera.
 
-Pense num videogame com só dois botões: "somar" e "esticar". Um conjunto é um espaço vetorial quando esses dois botões funcionam bem em todos os elementos dele. Os elementos desse conjunto são chamados de **vetores**, e os números que usamos para esticar são chamados de **escalares**. Neste curso, os escalares são sempre números reais.
+Pense num videogame com só dois botões: "somar" e "esticar". Um conjunto é um espaço vetorial quando esses dois botões funcionam bem em todos os elementos dele. Os elementos são chamados de **vetores** e os números usados para esticar são chamados de **escalares** (neste curso, sempre números reais).
 
 > [!NOTE]
-> A palavra "vetor" aqui **não** quer dizer "seta". Quer dizer "elemento de um espaço vetorial". Uma matriz pode ser um vetor. Um polinômio pode ser um vetor. Uma função também.
+> A palavra "vetor" aqui **não** quer dizer "seta". Quer dizer "elemento de um espaço vetorial". Uma lista de números pode ser um vetor. Uma matriz pode ser um vetor. Um polinômio também.
 
 ## Começando pelo que você já conhece
 
@@ -26,12 +26,36 @@ $$
 \alpha \cdot (x, y) = (\alpha x,\; \alpha y)
 $$
 
-Somar é "andar um vetor e depois o outro". Esticar é "alongar (ou encolher, ou inverter) o vetor". Nada de novo até aqui. A novidade é perceber que **matrizes, polinômios e funções também podem ser somados e esticados**:
+Com números:
+
+- Somar: \((1, 2) + (3, 5) = (4, 7)\).
+- Esticar: \(3 \cdot (1, 2) = (3, 6)\). Esticar por \(-1\) inverte o vetor: \((-1)\cdot(1, 2) = (-1, -2)\). Esticar por \(\tfrac12\) encolhe.
+
+Se você quiser enxergar, "somar" é andar um vetor e depois o outro, e "esticar" é alongar, encolher ou inverter. Nada de novo até aqui. A novidade é perceber que **matrizes, polinômios e funções também podem ser somados e esticados**:
 
 - \(\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} + \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} = \begin{bmatrix} 1 & 3 \\ 4 & 4 \end{bmatrix}\) e \(2 \cdot \begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = \begin{bmatrix} 2 & 4 \\ 6 & 8 \end{bmatrix}\).
-- \((x^2 + 1) + (3x - 5) = x^2 + 3x - 4\) e \(3 \cdot (x^2 + 1) = 3x^2 + 3\).
+- \((t^2 + 1) + (3t - 5) = t^2 + 3t - 4\) e \(3 \cdot (t^2 + 1) = 3t^2 + 3\).
 
 Se esses objetos também respeitarem as regras abaixo, a teoria que a gente constrói para o plano vale para eles de graça.
+
+## Tudo vira uma lista de números
+
+Este é o truque que simplifica o estágio inteiro. Repare no que acontece quando você só olha os coeficientes:
+
+| Objeto | Vira a lista |
+| --- | --- |
+| \(a + bt + ct^2\) (em \(P_2\)) | \((a, b, c)\) |
+| \(\begin{bmatrix} a & b \\ c & d \end{bmatrix}\) (em \(M(2,2)\)) | \((a, b, c, d)\) |
+
+E as operações combinam:
+
+$$
+(1 + 2t + 3t^2) + (4 + 5t + 6t^2) = 5 + 7t + 9t^2
+\quad\longleftrightarrow\quad
+(1, 2, 3) + (4, 5, 6) = (5, 7, 9).
+$$
+
+Somar polinômios é somar as listas de coeficientes. Por isso, **\(P_2\) "se comporta como" \(\mathbb{R}^3\), e \(M(2,2)\) "se comporta como" \(\mathbb{R}^4\)**. Sempre que um exercício com polinômios ou matrizes parecer assustador, traduza para lista e faça a conta com números.
 
 ## A definição
 
@@ -63,20 +87,20 @@ Dizemos que \(V\) é um **espaço vetorial real** quando, para quaisquer \(u, v,
 As regras 1 a 4 falam só da soma. As regras 5 a 8 dizem como a soma e o esticar conversam entre si.
 
 > [!TIP]
-> Na prática você quase nunca confere as 8 regras uma por uma. Se as operações são as usuais (de números, matrizes, polinômios, funções), as regras já valem. **O que costuma falhar é o fechamento**, ou o conjunto ter operações estranhas. Comece sempre por aí.
+> Na prática você quase nunca confere as 8 regras uma por uma. Se as operações são as usuais (de números, listas, matrizes, polinômios, funções), as regras já valem. **O que costuma falhar é o fechamento** (ou o conjunto ter operações estranhas). Comece sempre por aí.
 
 ## Exemplos que valem a pena guardar
 
 Em todos eles, as operações são as usuais.
 
-**1. \(\mathbb{R}^n\).** As listas \((x_1, \ldots, x_n)\) de \(n\) números reais, somadas e esticadas coordenada a coordenada. O vetor nulo é \((0, \ldots, 0)\) e o oposto de \((x_1, \ldots, x_n)\) é \((-x_1, \ldots, -x_n)\).
+**1. \(\mathbb{R}^n\).** As listas \((x_1, \ldots, x_n)\) de \(n\) números reais, somadas e esticadas posição por posição. O vetor nulo é \((0, \ldots, 0)\) e o oposto de \((x_1, \ldots, x_n)\) é \((-x_1, \ldots, -x_n)\).
 
 **2. \(M(m, n)\).** O conjunto de todas as matrizes \(m \times n\). O vetor nulo é a matriz nula e o oposto de \(A\) é \(-A\).
 
-**3. \(P_n\).** O conjunto dos polinômios de **grau menor ou igual a \(n\)**, incluindo o polinômio nulo. Por exemplo, \(P_2\) tem todos os \(ax^2 + bx + c\). O vetor nulo é o polinômio \(0\).
+**3. \(P_n\).** O conjunto dos polinômios de **grau menor ou igual a \(n\)**, incluindo o polinômio nulo. Por exemplo, \(P_2\) tem todos os \(a + bt + ct^2\). O vetor nulo é o polinômio \(0\).
 
 > [!WARNING]
-> O "menor **ou igual**" é essencial. Os polinômios de grau **exatamente** 2 não formam espaço vetorial: \((x^2 + x) + (-x^2 + 1) = x + 1\), que tem grau 1. A soma saiu do conjunto. Além disso, o polinômio nulo (o vetor nulo!) não tem grau 2.
+> O "menor **ou igual**" é essencial. Os polinômios de grau **exatamente** 2 não formam espaço vetorial: \((t^2 + t) + (-t^2 + 1) = t + 1\), que tem grau 1. A soma saiu do conjunto. Além disso, o polinômio nulo (o vetor nulo!) não tem grau 2.
 
 **4. \(F(\mathbb{R}, \mathbb{R})\).** O conjunto de todas as funções de \(\mathbb{R}\) em \(\mathbb{R}\). Somar \(f\) e \(g\) significa criar a função \((f + g)(x) = f(x) + g(x)\), e esticar significa \((\alpha f)(x) = \alpha \cdot f(x)\). O vetor nulo é a função que vale 0 para todo \(x\).
 
@@ -84,10 +108,10 @@ Em todos eles, as operações são as usuais.
 
 ## Exemplos que NÃO são espaços vetoriais
 
-Saber por que algo falha ensina mais do que saber por que funciona.
+Saber por que algo falha ensina mais do que saber por que funciona. Repare que **uma única falha basta**.
 
-**A. O primeiro quadrante** \(\{(x, y) : x \geq 0 \text{ e } y \geq 0\}\), com as operações usuais.
-Falha o fechamento do esticar: \((1, 1)\) está no conjunto, mas \((-1) \cdot (1, 1) = (-1, -1)\) não está. Sem o oposto, as regras caem.
+**A. O primeiro quadrante** \(\{(x, y) \mid x \geq 0 \text{ e } y \geq 0\}\), com as operações usuais.
+Falha o fechamento do esticar: \((1, 1)\) está no conjunto, mas \((-1) \cdot (1, 1) = (-1, -1)\) não está.
 
 **B. Os inteiros** \(\mathbb{Z}\), vistos como subconjunto de \(\mathbb{R}\).
 Falha o fechamento do esticar: \(\tfrac{1}{2} \cdot 1 = \tfrac{1}{2} \notin \mathbb{Z}\).
@@ -98,7 +122,7 @@ $$
 \alpha \cdot (x, y) = (\alpha x,\; 0).
 $$
 
-Aqui o fechamento vale, mas falha a regra 8: \(1 \cdot (1, 1) = (1, 0) \neq (1, 1)\). Ou seja, **as operações fazem parte da definição**: o mesmo conjunto com outras operações pode deixar de ser espaço vetorial.
+O fechamento vale, mas falha a regra 8: \(1 \cdot (1, 1) = (1, 0) \neq (1, 1)\). **As operações fazem parte da definição**: o mesmo conjunto com outras operações pode deixar de ser espaço vetorial.
 
 **D. Outro esticar torto.** Em \(\mathbb{R}^2\), com a soma usual, defina \(\alpha \cdot (x, y) = (\alpha x,\; y)\).
 Falha a regra 6. Com \(v = (1, 1)\) e \(\alpha = \beta = 1\):
@@ -116,7 +140,7 @@ Considere o conjunto \(\mathbb{R}_{+}\) dos números reais **positivos**, com es
 - "soma": \(u \oplus v = u \cdot v\) (a soma é o **produto** usual);
 - "esticar": \(\alpha \odot u = u^{\alpha}\) (esticar é **elevar** à potência \(\alpha\)).
 
-Parece estranho, mas é um espaço vetorial. O vetor nulo é o número \(1\), porque \(u \oplus 1 = u \cdot 1 = u\). O oposto de \(u\) é \(1/u\), porque \(u \oplus \tfrac{1}{u} = 1\). E as regras de potência garantem as demais, por exemplo:
+Parece estranho, mas é um espaço vetorial. O vetor nulo é o número \(1\), porque \(u \oplus 1 = u \cdot 1 = u\). O oposto de \(u\) é \(1/u\), porque \(u \oplus \tfrac{1}{u} = 1\). As regras de potência garantem as demais, por exemplo:
 
 $$
 (\alpha + \beta) \odot u = u^{\alpha + \beta} = u^{\alpha} \cdot u^{\beta} = (\alpha \odot u) \oplus (\beta \odot u).
@@ -143,14 +167,14 @@ $$
 Agora some o oposto de \(0 \cdot v\) nos dois lados. À esquerda sobra o vetor nulo, e à direita sobra \(0 \cdot v\). Logo \(0 = 0 \cdot v\).
 
 > [!NOTE]
-> Repare que o "\(0\)" do número e o "\(0\)" do vetor são coisas diferentes. Nos livros os dois se escrevem igual e você descobre pelo contexto. Alguns autores usam \(\vec{0}\) para o vetor.
+> O "\(0\)" do número e o "\(0\)" do vetor são coisas diferentes. Nos livros os dois se escrevem igual e você descobre pelo contexto. Alguns autores usam \(\vec{0}\) para o vetor.
 
 ## Exercícios
 
-**Exercício 1.** Em \(P_2\), qual é o vetor nulo e qual é o oposto de \(p(x) = x^2 - 3x + 1\)?
+**Exercício 1.** Em \(P_2\), qual é o vetor nulo e qual é o oposto de \(p(t) = t^2 - 3t + 1\)?
 
 {{< details title="Gabarito" >}}
-O vetor nulo é o polinômio \(0\) (todos os coeficientes iguais a zero). O oposto de \(p\) é \(-p(x) = -x^2 + 3x - 1\), porque \(p(x) + (-p(x)) = 0\).
+O vetor nulo é o polinômio \(0\) (todos os coeficientes iguais a zero). O oposto de \(p\) é \(-p(t) = -t^2 + 3t - 1\), porque \(p(t) + (-p(t)) = 0\).
 {{< /details >}}
 
 **Exercício 2.** Em \(\mathbb{R}^2\), com a soma usual e \(\alpha \cdot (x, y) = (\alpha x,\; y)\), mostre que **não** é um espaço vetorial.
@@ -159,7 +183,7 @@ O vetor nulo é o polinômio \(0\) (todos os coeficientes iguais a zero). O opos
 Falha a regra 6. Tome \(v = (1, 1)\), \(\alpha = 1\) e \(\beta = 1\). Então \((\alpha + \beta) v = (2, 1)\), mas \(\alpha v + \beta v = (1, 1) + (1, 1) = (2, 2)\). Como \((2, 1) \neq (2, 2)\), a regra não vale.
 {{< /details >}}
 
-**Exercício 3.** O conjunto \(\{(x, y) \in \mathbb{R}^2 : y = x^2\}\), com as operações usuais, é um espaço vetorial?
+**Exercício 3.** O conjunto \(\{(x, y) \in \mathbb{R}^2 \mid y = x^2\}\), com as operações usuais, é um espaço vetorial?
 
 {{< details title="Gabarito" >}}
 Não. Não fecha na soma: \((1, 1)\) e \((2, 4)\) estão no conjunto, mas \((1, 1) + (2, 4) = (3, 5)\) não está, porque \(3^2 = 9 \neq 5\).
@@ -177,6 +201,12 @@ $$
 Como \((-1)v\) somado com \(v\) dá o vetor nulo, ele é o oposto de \(v\) (e o oposto é único). Então \((-1) v = -v\).
 {{< /details >}}
 
+**Exercício 5.** Escreva o polinômio \(2 - t + 3t^2\) e a matriz \(\begin{bmatrix} 2 & -1 \\ 3 & 0 \end{bmatrix}\) como listas de números.
+
+{{< details title="Gabarito" >}}
+O polinômio vira \((2, -1, 3)\) (coeficientes de \(1\), \(t\) e \(t^2\), nessa ordem). A matriz vira \((2, -1, 3, 0)\) (linha por linha).
+{{< /details >}}
+
 ## Teste rápido
 
 {{< quiz titulo="é espaço vetorial?" >}}
@@ -189,7 +219,7 @@ Com as operações usuais, qual destes conjuntos é um espaço vetorial?
 - [x] As matrizes \(2 \times 2\)
 - [ ] Os pares \((x, y)\) com \(y = x^2\)
 ---
-As matrizes \(2 \times 2\) fecham na soma e no esticar, e as 8 regras vêm das contas com números. Os pares com \(x \geq 0\) não fecham no esticar por um número negativo; os polinômios de grau exatamente 3 não fecham na soma (\(x^3 + (-x^3) = 0\)); e os pares com \(y = x^2\) não fecham na soma.
+As matrizes \(2 \times 2\) fecham na soma e no esticar, e as 8 regras vêm das contas com números. Os pares com \(x \geq 0\) não fecham no esticar por um número negativo; os polinômios de grau exatamente 3 não fecham na soma (\(t^3 + (-t^3) = 0\)); e os pares com \(y = x^2\) não fecham na soma.
 {{< /questao >}}
 
 {{< questao >}}

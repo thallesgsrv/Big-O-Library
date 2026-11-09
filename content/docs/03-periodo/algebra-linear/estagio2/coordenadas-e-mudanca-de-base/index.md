@@ -1,106 +1,150 @@
 ---
 title: Coordenadas e Mudança de Base
 weight: 7
-description: O endereço de um vetor numa base, e como converter esse endereço quando a base muda.
+description: O endereço de um vetor numa base e como ele muda quando a base muda, em R^n, polinômios e matrizes.
 autores:
   - thallesgsrv
-date: 2026-10-29
+date: 2026-11-09
 ---
 
 ## Sobre
 
-Quando alguém diz "o ponto \((3, 5)\)", está usando um **sistema de endereços**: "ande 3 para a direita e 5 para cima". Esse endereço só faz sentido por causa dos eixos escolhidos. Se escolhermos **outros eixos**, o mesmo ponto passa a ter **outro endereço**, sem o ponto ter se mexido.
+Ao dizer "o ponto \((3, 2)\)", você já usou **coordenadas** sem perceber: "3 passos para a direita e 2 para cima". Os "passos" são medidos com as réguas \((1, 0)\) e \((0, 1)\), a base canônica.
 
-Na linguagem de álgebra linear, os eixos são uma **base**, e o endereço é o vetor de **coordenadas**.
+A ideia desta página: **nada obriga a usar essas réguas**. Dá para medir o mesmo ponto com outras réguas (outra base), e as coordenadas mudam, mas o ponto continua o mesmo. Mudança de base é a ferramenta que traduz um endereço no outro.
 
 ## Coordenadas numa base
 
-Na página anterior vimos que, se \(B = (v_1, \ldots, v_n)\) é uma base de \(V\), todo vetor \(v \in V\) se escreve de **uma única maneira**:
+Uma base **ordenada** é uma base em que a **ordem dos vetores importa**. Escrevemos \(B = (b_1, \ldots, b_n)\).
+
+Como vimos, todo vetor \(v\) se escreve de **um único jeito** como combinação dos vetores da base:
 
 $$
-v = a_1 v_1 + a_2 v_2 + \cdots + a_n v_n.
+v = a_1 b_1 + a_2 b_2 + \cdots + a_n b_n.
 $$
 
-Os números \(a_1, \ldots, a_n\) são as **coordenadas de \(v\) na base \(B\)**, e as organizamos numa coluna:
+Os números \(a_1, \ldots, a_n\) são as **coordenadas de \(v\) na base \(B\)**, e formam o **vetor coordenado**, escrito como coluna:
 
 $$
 [v]_B = \begin{bmatrix} a_1 \\ a_2 \\ \vdots \\ a_n \end{bmatrix}.
 $$
 
-> [!IMPORTANT]
-> Aqui a base é **ordenada**: \((v_1, v_2)\) e \((v_2, v_1)\) são bases diferentes, e trocar a ordem troca a ordem das coordenadas. Por isso escrevemos com parênteses, não com chaves.
+**Como calcular:** é só o problema de combinação linear. Monte o sistema \(v = a_1b_1 + \cdots + a_nb_n\) e resolva.
 
-Para achar as coordenadas, monte a equação \(v = a_1 v_1 + \cdots + a_n v_n\) e resolva o sistema. Como \(B\) é base, **sempre há exatamente uma solução**.
-
-**Exemplo 1.** Em \(\mathbb{R}^2\), seja \(B = ((1, 1), (1, -1))\) e \(v = (5, 1)\). Procuramos \(a\) e \(b\):
+**Exemplo 1.** Em \(\mathbb{R}^2\), seja \(B = ((1, 1), (1, -1))\) e \(v = (5, 1)\). Queremos \(a(1,1) + b(1,-1) = (5, 1)\):
 
 $$
-a(1, 1) + b(1, -1) = (5, 1) \;\Rightarrow\; a + b = 5, \quad a - b = 1 \;\Rightarrow\; a = 3, \; b = 2.
+\begin{cases} a + b = 5 \\ a - b = 1 \end{cases}
+\;\Longrightarrow\; a = 3,\; b = 2.
 $$
 
-Então \([v]_B = \begin{bmatrix} 3 \\ 2 \end{bmatrix}\). Conferindo: \(3(1, 1) + 2(1, -1) = (5, 1)\). ✓
-
-Repare: o **mesmo** vetor \((5, 1)\) tem endereço \((5, 1)\) na base canônica e endereço \((3, 2)\) na base \(B\).
+Então \([v]_B = \begin{bmatrix} 3 \\ 2 \end{bmatrix}\). Ou seja, \((5, 1) = 3(1,1) + 2(1,-1)\).
 
 ![O vetor (5,1) como 3 vezes (1,1) mais 2 vezes (1,-1), sobre a malha oblíqua da base B](coordenadas-base-b.png)
 
-**Exemplo 2 (polinômios).** Em \(P_2\), seja \(p(x) = 3 - x + 2x^2\).
-
-- Na base \(B = (1, x, x^2)\): \([p]_B = \begin{bmatrix} 3 \\ -1 \\ 2 \end{bmatrix}\).
-- Na base \(B' = (x^2, x, 1)\) (mesmos vetores, ordem trocada): \([p]_{B'} = \begin{bmatrix} 2 \\ -1 \\ 3 \end{bmatrix}\).
-
-**Exemplo 3 (matrizes).** Em \(M(2, 2)\), com a base canônica \((E_{11}, E_{12}, E_{21}, E_{22})\):
-
-$$
-\begin{bmatrix} 1 & 2 \\ 3 & 4 \end{bmatrix} = 1E_{11} + 2E_{12} + 3E_{21} + 4E_{22}
-\quad\Longrightarrow\quad
-[A]_B = \begin{bmatrix} 1 \\ 2 \\ 3 \\ 4 \end{bmatrix}.
-$$
-
 > [!NOTE]
-> Na **base canônica** de \(\mathbb{R}^n\), as coordenadas são as próprias entradas do vetor. É por isso que, antes deste estágio, nunca precisamos pensar em "coordenadas": estávamos sempre na base canônica sem perceber.
+> Na base canônica, as coordenadas são os próprios números do vetor: \([(5, 1)]_{\text{can}} = (5, 1)\). Por isso "coordenadas" parecem não fazer nada nessa base: o endereço e o vetor são a mesma lista.
+
+**Exemplo 2.** Em \(\mathbb{R}^2\), \(B = ((2, 1), (1, -1))\) e \(v = (5, 1)\):
+
+$$
+\begin{cases} 2a + b = 5 \\ a - b = 1 \end{cases}
+\;\Longrightarrow\; 3a = 6,\; a = 2,\; b = 1.
+$$
+
+Logo \([v]_B = (2, 1)\). Confira: \(2(2,1) + 1(1,-1) = (5, 1)\). ✓ (O mesmo \(v\) do Exemplo 1 tem outro endereço em outra base.)
+
+**Exemplo 3: em \(\mathbb{R}^3\).** \(B = ((1, 2, 3), (0, 1, 2), (0, 0, 1))\) e \(v = (1, 3, 5)\).
+
+$$
+\begin{cases} a = 1 \\ 2a + b = 3 \\ 3a + 2b + c = 5 \end{cases}
+\;\Longrightarrow\; a = 1,\; b = 1,\; c = 5 - 3 - 2 = 0.
+$$
+
+Então \([v]_B = (1, 1, 0)\).
+
+**Antes de calcular: \(B\) precisa ser base.** Neste exemplo, a matriz com esses vetores é triangular com 1 na diagonal, determinante 1. Os três vetores são LI e, como \(\dim \mathbb{R}^3 = 3\), formam uma base.
+
+### O caminho de volta
+
+Se você tem as coordenadas e quer o vetor, é só **montar a combinação**:
+
+$$
+[v]_B = \begin{bmatrix} 1 \\ -2 \\ 3 \end{bmatrix}
+\;\Longrightarrow\;
+v = 1(1,2,3) - 2(0,1,2) + 3(0,0,1) = (1,\; 2 - 2,\; 3 - 4 + 3) = (1, 0, 2).
+$$
+
+Esse sentido não precisa de sistema: é só uma conta.
+
+## Polinômios e matrizes
+
+Nada muda: as coordenadas são os coeficientes da combinação.
+
+**Exemplo 4: polinômios.** Em \(P_2\), seja \(B = (1,\; t + 1,\; t^2)\). Ache \([p]_B\) para \(p(t) = 3 + 2t\):
+
+\(3 + 2t = a \cdot 1 + b(t + 1) + c\,t^2 = (a + b) + bt + ct^2\). Comparando: \(b = 2\), \(a + b = 3 \Rightarrow a = 1\), \(c = 0\). Então \([p]_B = (1, 2, 0)\).
+
+**Exemplo 5: matrizes.** Em \(M(2,2)\), seja
+
+$$
+B = \left( \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix},\;
+\begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix},\;
+\begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix},\;
+\begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} \right)
+$$
+
+e \(A = \begin{bmatrix} 2 & 1 \\ 0 & 3 \end{bmatrix}\). Escrevendo \(A = a B_1 + b B_2 + c B_3 + d B_4\) e igualando entrada por entrada:
+
+$$
+\begin{cases}
+a + b + c + d = 2 & (\text{entrada } 1,1) \\
+b + c + d = 1 & (1,2) \\
+c + d = 0 & (2,1) \\
+d = 3 & (2,2)
+\end{cases}
+$$
+
+De baixo para cima: \(d = 3\), \(c = -3\), \(b = 1\), \(a = 1\). Então \([A]_B = (1, 1, -3, 3)\).
+
+**Exemplo 6: simétricas.** O espaço \(S_2\) das matrizes simétricas \(2 \times 2\) tem base \(\alpha = \left(\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}\right)\), de dimensão **3**. Para \(\begin{bmatrix} a & b \\ b & d \end{bmatrix}\), as coordenadas são \((a, b, d)\).
 
 ## Por que coordenadas importam
 
-As coordenadas **transformam qualquer espaço de dimensão \(n\) em \(\mathbb{R}^n\)**, e as contas continuam funcionando:
+Escolhida uma base \(B\) de \(V\) (com \(\dim V = n\)), a operação "pegar as coordenadas" respeita soma e esticar:
 
 $$
-[u + v]_B = [u]_B + [v]_B \qquad\text{e}\qquad [\alpha v]_B = \alpha\,[v]_B.
+[u + v]_B = [u]_B + [v]_B
+\qquad\text{e}\qquad
+[\alpha v]_B = \alpha\,[v]_B.
 $$
 
-Ou seja, **somar polinômios é somar suas colunas de coordenadas**, e esticar uma matriz é esticar a sua coluna. Isso explica por que \(\mathbb{R}^n\) é o "modelo" de todo espaço de dimensão \(n\).
-
-Uma consequência prática: para decidir se vetores de um espaço qualquer são LI, ou formam uma base, **troque cada vetor pela sua coluna de coordenadas** e faça o teste em \(\mathbb{R}^n\), que já sabemos fazer.
-
-**Exemplo 4.** Os polinômios \(1 + x\), \(x + x^2\) e \(1 + x^2\) formam uma base de \(P_2\)? Na base \((1, x, x^2)\), as coordenadas são \((1, 1, 0)\), \((0, 1, 1)\) e \((1, 0, 1)\). Com elas como colunas:
-
-$$
-\det \begin{bmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \\ 0 & 1 & 1 \end{bmatrix} =
-1(1 \cdot 1 - 0 \cdot 1) - 0 + 1(1 \cdot 1 - 1 \cdot 0) = 1 + 1 = 2 \neq 0.
-$$
-
-O determinante é diferente de zero, então as colunas são LI. São 3 vetores LI em \(P_2\) (que tem dimensão 3), então são uma **base**.
+Isso significa que **qualquer espaço de dimensão \(n\) se comporta como \(\mathbb{R}^n\)**. Questões sobre polinômios ou matrizes podem ser resolvidas nas coordenadas, com as contas que você já conhece (escalonamento, determinantes). Essa é a justificativa para o truque "traduza para lista" que usamos o estágio inteiro.
 
 ## Mudança de base
 
 Agora a pergunta central: se eu conheço as coordenadas de \(v\) numa base \(B\), como descubro as coordenadas dele em outra base \(C\)?
 
-A resposta é uma **matriz**, que chamaremos de **matriz de mudança de base de \(B\) para \(C\)**, e que vamos escrever como \(M_{B \to C}\). Ela funciona assim:
+A resposta é uma **matriz**, a **matriz de mudança de base de \(B\) para \(C\)**, que vamos escrever como \(M_{B \to C}\):
 
 $$
 [v]_C = M_{B \to C}\,[v]_B.
 $$
 
-> [!NOTE]
-> Cada livro tem sua notação para essa matriz. Você vai ver \([I]_B^C\), \([I]_{BC}\), \(P_{B \to C}\) e outras. A ideia é sempre a mesma. Confira qual notação o seu professor usa.
+Pense nela como um **tradutor**: entra o endereço na língua \(B\), sai o endereço na língua \(C\).
 
-**Como montar \(M_{B \to C}\):** se \(B = (b_1, \ldots, b_n)\), as **colunas** da matriz são as coordenadas dos vetores de \(B\) escritas **na base \(C\)**:
+> [!WARNING]
+> **A notação muda de livro para livro e de professor para professor.** Você vai ver \([I]_B^C\), \([I]_{BC}\), \(P_{B \to C}\) e outras, e a posição dos índices (em cima ou embaixo) não é padronizada. Não decore a notação: **confira o sentido pelo exemplo do enunciado**. Se a matriz dada, multiplicada por \([v]_\beta\), deve resultar em \([v]_\alpha\), ela leva \(\beta\) para \(\alpha\). Se o enunciado dá a matriz no sentido contrário ao que você quer, **use a inversa**.
+
+### Como montar a matriz
+
+Se \(B = (b_1, \ldots, b_n)\), as **colunas** de \(M_{B \to C}\) são as coordenadas dos vetores de \(B\) escritas **na base \(C\)**:
 
 $$
 M_{B \to C} = \Big[\; [b_1]_C \;\; [b_2]_C \;\; \cdots \;\; [b_n]_C \;\Big].
 $$
 
-Em palavras: "pegue cada vetor da base de **partida**, descubra o endereço dele na base de **chegada**, e coloque como coluna".
+Em palavras: **pegue cada vetor da base de partida, descubra o endereço dele na base de chegada, e coloque como coluna.**
 
 **Por que funciona?** Se \([v]_B = (a_1, \ldots, a_n)\), então \(v = a_1 b_1 + \cdots + a_n b_n\). Tirando as coordenadas na base \(C\) dos dois lados e usando que elas respeitam soma e esticar:
 
@@ -108,7 +152,7 @@ $$
 [v]_C = a_1 [b_1]_C + \cdots + a_n [b_n]_C = M_{B \to C} \begin{bmatrix} a_1 \\ \vdots \\ a_n \end{bmatrix}.
 $$
 
-**Exemplo 5.** Em \(\mathbb{R}^2\), seja \(B\) a base canônica \(((1, 0), (0, 1))\) e \(C = ((1, 1), (1, -1))\). Escrevemos os vetores de \(B\) na base \(C\):
+**Exemplo 7.** Em \(\mathbb{R}^2\), \(B\) é a base canônica e \(C = ((1, 1), (1, -1))\). Escrevemos os vetores de \(B\) na base \(C\):
 
 $$
 (1, 0) = \tfrac{1}{2}(1, 1) + \tfrac{1}{2}(1, -1)
@@ -128,32 +172,34 @@ $$
 [v]_C = \begin{bmatrix} 1/2 & 1/2 \\ 1/2 & -1/2 \end{bmatrix} \begin{bmatrix} 5 \\ 1 \end{bmatrix} = \begin{bmatrix} 3 \\ 2 \end{bmatrix},
 $$
 
-que é exatamente o que achamos no Exemplo 1. ✓
+exatamente o que achamos no Exemplo 1. ✓
 
-### A mudança no sentido contrário
+### Atalho quando uma das bases é a canônica
 
-A matriz de \(C\) para \(B\) desfaz a anterior. Ela é a **inversa**:
+- **Da base \(C\) para a canônica:** as colunas são os **próprios vetores de \(C\)**, porque um vetor já está escrito na canônica. Nenhuma conta.
+- **Da canônica para a base \(C\):** é a **inversa** da matriz anterior.
 
-$$
-M_{C \to B} = (M_{B \to C})^{-1}.
-$$
-
-No Exemplo 5, \(M_{C \to B}\) tem como colunas os vetores de \(C\) escritos na base canônica, ou seja, os próprios vetores de \(C\):
-
-$$
-M_{C \to B} = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}.
-$$
-
-Conferindo que uma é a inversa da outra:
+No Exemplo 7, \(M_{C \to B} = \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}\), e de fato
 
 $$
 \begin{bmatrix} 1/2 & 1/2 \\ 1/2 & -1/2 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}. \;✓
 $$
 
-> [!TIP]
-> **Atalho com a base canônica.** Quando uma das bases é a canônica, uma das duas matrizes é imediata: a matriz da base \(C\) **para a canônica** tem como colunas os próprios vetores de \(C\). Para ir no sentido contrário, **inverta** essa matriz (com o método do Estágio 1).
+### O sentido contrário: use a inversa
 
-## Mudança de base entre duas bases quaisquer
+A matriz de \(C\) para \(B\) desfaz a de \(B\) para \(C\):
+
+$$
+M_{C \to B} = (M_{B \to C})^{-1}.
+$$
+
+Se for só uma conta numérica (poucas coordenadas), muitas vezes é mais rápido **resolver o sistema** do que inverter.
+
+**Exemplo 8.** O enunciado dá \(M = \begin{bmatrix} 1 & 2 \\ 0 & 1 \end{bmatrix}\), que leva \(\alpha\) para \(\beta\) (isto é, \([v]_\beta = M[v]_\alpha\)), e \([v]_\beta = (5, 3)\). Quanto vale \([v]_\alpha\)?
+
+Precisamos do sentido contrário. Em vez de inverter, resolva \(M[v]_\alpha = (5, 3)\): com \([v]_\alpha = (a, b)\), \(a + 2b = 5\) e \(b = 3\), então \(a = -1\). Logo \([v]_\alpha = (-1, 3)\). (Com a inversa \(\begin{bmatrix} 1 & -2 \\ 0 & 1 \end{bmatrix}\) dá o mesmo.)
+
+### Entre duas bases quaisquer
 
 Quando nenhuma das bases é a canônica, existe um método direto: escalonar a matriz aumentada
 
@@ -161,9 +207,9 @@ $$
 \big[\; C \;\big|\; B \;\big] \;\longrightarrow\; \big[\; I \;\big|\; M_{B \to C} \;\big],
 $$
 
-em que \(C\) e \(B\) são as matrizes com os vetores das bases nas **colunas**. É o mesmo método da inversa: o lado esquerdo vira a identidade e o lado direito vira a matriz de mudança.
+em que \(C\) e \(B\) são as matrizes com os vetores das bases nas **colunas**. É o mesmo método da inversa.
 
-**Exemplo 6.** Sejam \(B = ((1, 0), (1, 1))\) e \(C = ((2, 1), (1, 1))\), bases de \(\mathbb{R}^2\). Montamos \([\,C \mid B\,]\) e escalonamos:
+**Exemplo 9.** \(B = ((1, 0), (1, 1))\) e \(C = ((2, 1), (1, 1))\). Montamos \([\,C \mid B\,]\) e escalonamos:
 
 $$
 \left[\begin{array}{cc|cc} 2 & 1 & 1 & 1 \\ 1 & 1 & 0 & 1 \end{array}\right]
@@ -180,76 +226,100 @@ $$
 \left[\begin{array}{cc|cc} 1 & 0 & 1 & 0 \\ 0 & 1 & -1 & 1 \end{array}\right]
 $$
 
-Logo
+Logo \(M_{B \to C} = \begin{bmatrix} 1 & 0 \\ -1 & 1 \end{bmatrix}\).
+
+Teste com \(v = (3, 2)\). Na base \(B\): \(a(1,0) + b(1,1) = (3,2)\) dá \(b = 2\) e \(a = 1\), então \([v]_B = (1, 2)\). Aplicando a matriz: \([v]_C = (1, -1 + 2) = (1, 1)\). Confira: \(1(2,1) + 1(1,1) = (3, 2)\). ✓
+
+### Mudando por etapas
+
+Se você sabe ir de \(B\) para \(C\) e de \(C\) para \(D\), vai de \(B\) para \(D\) **multiplicando**, com a **primeira etapa à direita**:
 
 $$
-M_{B \to C} = \begin{bmatrix} 1 & 0 \\ -1 & 1 \end{bmatrix}.
+M_{B \to D} = M_{C \to D}\,M_{B \to C}.
 $$
 
-Teste com \(v = (3, 2)\). Na base \(B\): \(a(1, 0) + b(1, 1) = (3, 2)\) dá \(b = 2\) e \(a = 1\), então \([v]_B = (1, 2)\). Aplicando a matriz:
+Isso é útil quando a canônica serve de ponte: \(M_{B \to C} = M_{\text{can} \to C}\,M_{B \to \text{can}}\).
+
+### Descobrindo uma base a partir da matriz
+
+Se você sabe \(M_{\alpha \to \beta}\) e \(\beta\), e quer \(\alpha\): as **colunas** da matriz são os vetores de \(\alpha\) escritos na base \(\beta\). Basta "desfazer" as coordenadas.
+
+**Exemplo 10.** \(\beta = ((1, 1), (0, 2))\) e \(M_{\alpha \to \beta} = \begin{bmatrix} 2 & 1 \\ 0 & 3 \end{bmatrix}\).
+
+- 1º vetor de \(\alpha\): coordenadas \((2, 0)\) em \(\beta\), logo \(2(1,1) + 0(0,2) = (2, 2)\).
+- 2º vetor de \(\alpha\): coordenadas \((1, 3)\), logo \(1(1,1) + 3(0,2) = (1, 7)\).
+
+Então \(\alpha = ((2, 2), (1, 7))\).
+
+### Polinômios: mudança de base
+
+\(\alpha = (1, t, t^2)\) e \(\beta = (1, t + 1, t^2)\). Para \(M_{\beta \to \alpha}\), escrevemos cada vetor de \(\beta\) na base \(\alpha\):
 
 $$
-[v]_C = \begin{bmatrix} 1 & 0 \\ -1 & 1 \end{bmatrix} \begin{bmatrix} 1 \\ 2 \end{bmatrix} = \begin{bmatrix} 1 \\ 1 \end{bmatrix}.
+1 = (1, 0, 0), \qquad t + 1 = (1, 1, 0), \qquad t^2 = (0, 0, 1)
+\quad\Longrightarrow\quad
+M_{\beta \to \alpha} = \begin{bmatrix} 1 & 1 & 0 \\ 0 & 1 & 0 \\ 0 & 0 & 1 \end{bmatrix}.
 $$
 
-Conferindo na base \(C\): \(1 \cdot (2, 1) + 1 \cdot (1, 1) = (3, 2)\). ✓
+Com \(p = 3 + 2t\): \([p]_\alpha = (3, 2, 0)\) e, como visto no Exemplo 4, \([p]_\beta = (1, 2, 0)\). Conferindo: \(M_{\beta \to \alpha}(1, 2, 0) = (1 + 2, 2, 0) = (3, 2, 0)\). ✓
 
 ## Resumo
 
 | Quero... | Faço... |
 | --- | --- |
-| Coordenadas de \(v\) na base \(B\) | Resolver \(v = a_1 v_1 + \cdots + a_n v_n\) |
-| Testar se vetores de \(V\) são LI ou base | Trocar por coordenadas e testar em \(\mathbb{R}^n\) |
-| \(M_{B \to C}\) | Colunas = coordenadas dos vetores de \(B\) na base \(C\) |
-| Usar \(M_{B \to C}\) | \([v]_C = M_{B \to C}\,[v]_B\) |
-| Voltar de \(C\) para \(B\) | \(M_{C \to B} = (M_{B \to C})^{-1}\) |
-| \(M_{B \to C}\) sem ser canônica | Escalonar \([\,C \mid B\,]\) até virar \([\,I \mid M_{B \to C}\,]\) |
+| \([v]_B\) | resolver \(v = a_1b_1 + \cdots + a_nb_n\) |
+| \(v\) a partir de \([v]_B\) | montar a combinação \(a_1b_1 + \cdots + a_nb_n\) |
+| \(M_{B \to C}\) | colunas = \([b_i]_C\) (cada vetor de \(B\) escrito em \(C\)) |
+| \(M_{C \to B}\) | inversa de \(M_{B \to C}\) |
+| passar de \(B\) para \(D\) por \(C\) | \(M_{C \to D}\,M_{B \to C}\) |
+| a base \(\alpha\), dada \(M_{\alpha \to \beta}\) | desfazer as coordenadas das colunas usando \(\beta\) |
 
 ## Exercícios
 
-**Exercício 1.** Ache as coordenadas de \((3, 5)\) na base \(B = ((1, 2), (0, 1))\).
+**Exercício 1.** Em \(\mathbb{R}^2\), \(B = ((2, 1), (1, -1))\). Mostre que \(B\) é base e calcule \([(4, -1)]_B\).
 
 {{< details title="Resolução" >}}
-Queremos \(a(1, 2) + b(0, 1) = (3, 5)\). A primeira coordenada dá \(a = 3\). A segunda dá \(2a + b = 5\), então \(b = -1\). Logo \([v]_B = \begin{bmatrix} 3 \\ -1 \end{bmatrix}\). Conferindo: \(3(1, 2) - (0, 1) = (3, 5)\). ✓
+O determinante é \(2 \cdot (-1) - 1 \cdot 1 = -3 \neq 0\), então os dois vetores são LI e formam uma base de \(\mathbb{R}^2\).
+
+\(a(2,1) + b(1,-1) = (4,-1)\) dá \(2a + b = 4\) e \(a - b = -1\). Somando: \(3a = 3\), \(a = 1\) e \(b = 2\). Então \([(4,-1)]_B = (1, 2)\).
 {{< /details >}}
 
-**Exercício 2.** Ache as coordenadas de \(p(x) = 2 - x + 3x^2\) na base \(B = (1 + x,\; x,\; x^2)\) de \(P_2\).
+**Exercício 2.** Com \(B = ((1, 2, 3), (0, 1, 2), (0, 0, 1))\): (a) as coordenadas de \(u = (5, 4, 2)\); (b) o vetor \(v\) com \([v]_B = (2, -3, 4)\).
 
 {{< details title="Resolução" >}}
-Queremos \(a(1 + x) + bx + cx^2 = 2 - x + 3x^2\). O lado esquerdo vale \(a + (a + b)x + cx^2\). Igualando: \(a = 2\), \(a + b = -1\) (então \(b = -3\)) e \(c = 3\). Logo \([p]_B = \begin{bmatrix} 2 \\ -3 \\ 3 \end{bmatrix}\).
+(a) \(a = 5\); \(2a + b = 4 \Rightarrow b = -6\); \(3a + 2b + c = 2 \Rightarrow c = 2 - 15 + 12 = -1\). \([u]_B = (5, -6, -1)\).
+
+(b) \(v = 2(1,2,3) - 3(0,1,2) + 4(0,0,1) = (2,\; 4 - 3,\; 6 - 6 + 4) = (2, 1, 4)\).
 {{< /details >}}
 
-**Exercício 3.** Seja \(B\) a base canônica de \(\mathbb{R}^2\) e \(C = ((1, 2), (0, 1))\). Calcule \(M_{B \to C}\) e use-a para achar \([v]_C\) com \(v = (3, 5)\).
+**Exercício 3.** \(\alpha = ((1, 0), (0, 1))\), \(\beta = ((-1, 1), (1, 1))\) e \(\gamma = ((2, 0), (0, 2))\). Se \([v]_\beta = (2, 1)\), ache \([v]_\alpha\) e \([v]_\gamma\).
 
 {{< details title="Resolução" >}}
-Escrevemos os vetores de \(B\) na base \(C\):
+\(v = 2(-1, 1) + 1(1, 1) = (-1, 3)\), que é \([v]_\alpha = (-1, 3)\) (base canônica).
 
-- \((1, 0) = 1 \cdot (1, 2) + (-2)(0, 1)\), coordenadas \((1, -2)\);
-- \((0, 1) = 0 \cdot (1, 2) + 1 \cdot (0, 1)\), coordenadas \((0, 1)\).
-
-Então \(M_{B \to C} = \begin{bmatrix} 1 & 0 \\ -2 & 1 \end{bmatrix}\). Como \([v]_B = (3, 5)\):
-
-$$
-[v]_C = \begin{bmatrix} 1 & 0 \\ -2 & 1 \end{bmatrix}\begin{bmatrix} 3 \\ 5 \end{bmatrix} = \begin{bmatrix} 3 \\ -1 \end{bmatrix},
-$$
-
-igual ao resultado do Exercício 1. ✓
+Para \(\gamma\): \(a(2,0) + b(0,2) = (-1, 3)\) dá \(a = -\tfrac12\) e \(b = \tfrac32\). Então \([v]_\gamma = (-\tfrac12, \tfrac32)\).
 {{< /details >}}
 
-**Exercício 4.** No exercício anterior, ache \(M_{C \to B}\).
+**Exercício 4.** Ache \(M_{\beta \to \alpha}\) e \(M_{\alpha \to \beta}\) para \(\alpha\) canônica e \(\beta = ((-1, 1), (1, 1))\).
 
 {{< details title="Resolução" >}}
-As colunas são os vetores de \(C\) escritos na base canônica, ou seja, os próprios vetores: \(M_{C \to B} = \begin{bmatrix} 1 & 0 \\ 2 & 1 \end{bmatrix}\). Conferindo que é a inversa da anterior:
+\(M_{\beta \to \alpha}\) tem os vetores de \(\beta\) como colunas: \(\begin{bmatrix} -1 & 1 \\ 1 & 1 \end{bmatrix}\).
 
-$$
-\begin{bmatrix} 1 & 0 \\ 2 & 1 \end{bmatrix}\begin{bmatrix} 1 & 0 \\ -2 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}. \;✓
-$$
+\(M_{\alpha \to \beta}\) é a inversa: \(\dfrac{1}{-2}\begin{bmatrix} 1 & -1 \\ -1 & -1 \end{bmatrix} = \begin{bmatrix} -1/2 & 1/2 \\ 1/2 & 1/2 \end{bmatrix}\).
 {{< /details >}}
 
-**Exercício 5.** Se \([v]_B = (2, 0, 1)\) com \(B = ((1, 0, 0), (1, 1, 0), (1, 1, 1))\), quem é \(v\)?
+**Exercício 5.** Em \(P_2\), com \(\alpha = (1, t, t^2)\) e \(\beta = (1, 2t + 1, t^2)\): ache \(M_{\beta \to \alpha}\) e \([3 + 2t]_\beta\).
 
 {{< details title="Resolução" >}}
-As coordenadas dizem os coeficientes: \(v = 2(1, 0, 0) + 0 \cdot (1, 1, 0) + 1 \cdot (1, 1, 1) = (3, 1, 1)\).
+Escrevendo os vetores de \(\beta\) em \(\alpha\): \(1 = (1,0,0)\), \(2t + 1 = (1, 2, 0)\), \(t^2 = (0,0,1)\). Então \(M_{\beta \to \alpha} = \begin{bmatrix} 1 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 1 \end{bmatrix}\).
+
+Para \([3 + 2t]_\beta\): \(3 + 2t = a + b(2t + 1) + ct^2\) dá \(2b = 2\), \(b = 1\), \(a + b = 3\), \(a = 2\), \(c = 0\). Logo \([3 + 2t]_\beta = (2, 1, 0)\).
+{{< /details >}}
+
+**Exercício 6.** Em \(S_2\) (matrizes simétricas \(2 \times 2\)) com a base \(\alpha\) do Exemplo 6, ache \([A]_\alpha\) para \(A = \begin{bmatrix} 3 & -1 \\ -1 & 2 \end{bmatrix}\).
+
+{{< details title="Resolução" >}}
+Nas simétricas, \(\begin{bmatrix} a & b \\ b & d \end{bmatrix}\) tem coordenadas \((a, b, d)\) na base \(\alpha\). Aqui, \([A]_\alpha = (3, -1, 2)\).
 {{< /details >}}
 
 ## Teste rápido
@@ -257,47 +327,47 @@ As coordenadas dizem os coeficientes: \(v = 2(1, 0, 0) + 0 \cdot (1, 1, 0) + 1 \
 {{< quiz titulo="coordenadas e mudança de base" >}}
 
 {{< questao >}}
-Qual é \([v]_B\) para \(B = ((1, 0), (1, 1))\) e \(v = (3, 2)\)?
+Em \(\mathbb{R}^2\), \(B = ((1, 1), (1, -1))\). Quanto vale \([(5, 1)]_B\)?
 
-- [ ] \((3, 2)\)
-- [ ] \((2, 1)\)
-- [x] \((1, 2)\)
+- [ ] \((5, 1)\)
 - [ ] \((2, 3)\)
+- [x] \((3, 2)\)
+- [ ] \((1, 5)\)
 ---
-Resolvemos \(a(1, 0) + b(1, 1) = (a + b,\, b) = (3, 2)\). A segunda coordenada dá \(b = 2\) e a primeira dá \(a = 1\). Conferindo: \(1(1, 0) + 2(1, 1) = (3, 2)\).
+\(3(1,1) + 2(1,-1) = (5, 1)\). As coordenadas na base \(B\) são \((3, 2)\).
 {{< /questao >}}
 
 {{< questao >}}
-Se trocarmos a ordem dos vetores da base, o que acontece com as coordenadas de um vetor?
+As colunas de \(M_{B \to C}\) são...
 
-- [ ] Nada, elas ficam iguais
-- [x] Elas são reordenadas do mesmo jeito
-- [ ] Elas mudam de sinal
-- [ ] Elas deixam de existir
+- [ ] os vetores de \(C\) escritos na base \(B\)
+- [x] os vetores de \(B\) escritos na base \(C\)
+- [ ] os vetores de \(B\) escritos na base canônica
+- [ ] os vetores de \(C\) escritos na base canônica
 ---
-As coordenadas são os coeficientes de cada vetor da base. Se o vetor \(v_1\) passa a ser o segundo da lista, o coeficiente dele passa a ser a segunda coordenada. Por isso a base é *ordenada*.
+Cada coluna é o endereço, na base de **chegada** (\(C\)), de um vetor da base de **partida** (\(B\)).
 {{< /questao >}}
 
 {{< questao >}}
-O que são as **colunas** da matriz de mudança de base \(M_{B \to C}\)?
+Se \(M_{B \to C}\) é conhecida e você precisa de \(M_{C \to B}\), basta...
 
-- [ ] Os vetores da base \(C\) escritos na base canônica
-- [x] As coordenadas dos vetores da base \(B\) escritas na base \(C\)
-- [ ] As coordenadas dos vetores da base \(C\) escritas na base \(B\)
-- [ ] Os vetores da base \(B\) escritos na base canônica
+- [ ] transpor a matriz
+- [x] inverter a matriz
+- [ ] trocar as linhas pelas colunas
+- [ ] multiplicar por \(-1\)
 ---
-A matriz recebe coordenadas na base de **partida** (\(B\)) e devolve coordenadas na base de **chegada** (\(C\)). Então cada coluna é um vetor de \(B\) com o endereço da base \(C\). A terceira opção descreve \(M_{C \to B}\), a matriz inversa.
+Ir e voltar desfaz uma mudança com a outra, então as duas são inversas uma da outra.
 {{< /questao >}}
 
 {{< questao >}}
-Sabendo \(M_{B \to C}\), como obtemos \(M_{C \to B}\)?
+Qual é a dimensão de \(M(2,2)\), e quantas coordenadas tem uma matriz em uma base de \(M(2,2)\)?
 
-- [ ] Transpondo \(M_{B \to C}\)
-- [ ] Trocando o sinal de todas as entradas
-- [x] Calculando a inversa de \(M_{B \to C}\)
-- [ ] Não é possível
+- [ ] 2 e 2
+- [ ] 3 e 3
+- [x] 4 e 4
+- [ ] 4 e 2
 ---
-Ir de \(B\) para \(C\) e depois voltar de \(C\) para \(B\) deve devolver o vetor original, então as duas matrizes são inversas uma da outra. Toda matriz de mudança de base é invertível.
+\(\dim M(2,2) = 4\), então qualquer base tem 4 matrizes e o vetor coordenado tem 4 números.
 {{< /questao >}}
 
 {{< /quiz >}}
