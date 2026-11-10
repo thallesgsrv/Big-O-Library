@@ -96,6 +96,9 @@ que é um sistema homogêneo em \(a, b, c, d\). Resolva e escreva o vetor \(a\,u
 > [!TIP]
 > **Base da soma por parâmetros:** junte todos os geradores como **colunas**, escalone e use as colunas com pivô (veja "Base contida no conjunto dado", na página de Base e Dimensão). A quantidade de pivôs é \(\dim(W_1 + W_2)\) e serve para conferir a fórmula.
 
+> [!TIP]
+> **Propriedades também são equações.** Um subespaço descrito por uma palavra, como "matrizes simétricas", entra na conta depois de traduzido. Em \(\begin{bmatrix} x & y \\ z & t \end{bmatrix}\), simétrica quer dizer \(A = A^T\), ou seja, **\(y = z\)**. A partir daí é "juntar as equações" com as do outro subespaço (veja a Prova da Tarde, Questão 4, em [Provas Resolvidas](../provas-resolvidas/)).
+
 ### Soma: junte os geradores
 
 A soma é formada por \(w_1 + w_2\). Se \(W_1 = [a_1, \ldots, a_p]\) e \(W_2 = [b_1, \ldots, b_q]\), então todo elemento da soma é combinação de \(a_1, \ldots, a_p, b_1, \ldots, b_q\). Então **junte os geradores**: \(W_1 + W_2 = [a_1, \ldots, a_p, b_1, \ldots, b_q]\).

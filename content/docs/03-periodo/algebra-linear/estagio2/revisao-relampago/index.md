@@ -31,7 +31,7 @@ Três padrões que se repetiram nas quatro provas:
 1. **30 min:** leia as definições e as 8 receitas abaixo, sem fazer contas.
 2. **60 min:** faça o [mini-simulado](#mini-simulado) com o relógio rodando e sem olhar o gabarito.
 3. **45 min:** corrija. Para cada erro, abra a página indicada e refaça um exercício dela.
-4. **60 min:** refaça só o que errou e treine as receitas 5, 6 e 7, que são as que mais derrubam.
+4. **60 min:** refaça só o que errou e treine as receitas 5, 6 e 7, que são as que mais derrubam. Se sobrar tempo, resolva uma das [provas resolvidas](../provas-resolvidas/) sem olhar a resolução.
 5. **Durma.** O que não entrou até aqui não entra de madrugada, e a prova cobra cabeça descansada.
 
 ## As definições em 6 linhas
@@ -59,7 +59,7 @@ Três padrões que se repetiram nas quatro provas:
 
 1. Monte \(v = a\,u_1 + b\,u_2\) e iguale **coordenada a coordenada**: sai um sistema.
 2. Com mais equações do que incógnitas: **resolva duas** e **teste o resultado na que sobrou**. Se não bate, o sistema é impossível e \(v\) **não** é combinação linear.
-3. Para achar \(k\): resolva \(a\) e \(b\) com as equações que não têm \(k\) e deixe a equação com \(k\) dar o valor dele.
+3. Para achar \(k\): resolva \(a\) e \(b\) com as equações que não têm \(k\) e deixe a equação com \(k\) dar o valor dele. Se o \(k\) vier numa expressão como \(k^2 - 6k\), a equação que sobra é do 2º grau: **resolva e confira cada raiz** (podem ser duas, [exemplo aqui](../combinacao-linear-e-geradores/#quando-o-parâmetro-aparece-ao-quadrado)).
 
 *Exemplo:* \((3, k, 7)\) como combinação de \((1,2,1)\) e \((2,1,3)\). As equações sem \(k\) são \(a + 2b = 3\) e \(a + 3b = 7\), que dão \(b = 4\) e \(a = -5\). A do meio dá \(k = 2a + b = -10 + 4 = -6\).
 

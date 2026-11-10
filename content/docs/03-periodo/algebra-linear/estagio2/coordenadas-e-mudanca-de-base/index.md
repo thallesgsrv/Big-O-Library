@@ -442,9 +442,9 @@ $$
 
 $$
 \begin{bmatrix} 3 & -1 \\ -1 & 2 \end{bmatrix}
-= 3\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}
-- 1\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}
-+ 2\begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+= 3\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} -
+1\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} +
+2\begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
 $$
 
 **Passo 2: ler os coeficientes.**

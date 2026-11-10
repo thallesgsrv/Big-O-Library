@@ -9,7 +9,7 @@ date: 2026-11-09
 ---
 
 > [!TIP]
-> **Prova amanhã?** Vá direto para a [Revisão Relâmpago](revisao-relampago/): receitas, armadilhas e um mini-simulado com gabarito. Cada receita aponta a página onde o assunto está explicado com calma.
+> **Prova amanhã?** Vá direto para a [Revisão Relâmpago](revisao-relampago/): receitas, armadilhas e um mini-simulado com gabarito. Cada receita aponta a página onde o assunto está explicado com calma. Para treinar com provas reais, use as [Provas Resolvidas](provas-resolvidas/).
 
 ## Pode começar do zero
 
@@ -69,6 +69,7 @@ Se um conjunto tem essas duas operações e elas se comportam bem, ele é um **e
 6. [**Base e dimensão**](base-e-dimensao/): o menor conjunto que gera tudo, e o "tamanho" de um espaço.
 7. [**Coordenadas e mudança de base**](coordenadas-e-mudanca-de-base/): o "endereço" de um vetor e como ele muda quando a base muda.
 8. [**Revisão Relâmpago**](revisao-relampago/): o resumo de véspera de prova, com mini-simulado.
+9. [**Provas Resolvidas**](provas-resolvidas/): as quatro provas do 2º estágio de 2025.2 resolvidas passo a passo.
 
 As páginas seguem essa ordem de propósito: cada uma usa a anterior.
 

@@ -124,6 +124,41 @@ A condição é **\(2x - y - z = 0\)**. Isso é a equação do plano gerado por 
 
 Se o vetor tem um parâmetro \(k\), basta aplicar a condição. Por exemplo, para que \((3, k, 2)\) seja combinação linear de \(v_1\) e \(v_2\), é preciso \(2 \cdot 3 - k - 2 = 0\), ou seja, **\(k = 4\)**. Conferindo: \(b = 2/3\), \(a = 3 - 4/3 = 5/3\), e \(2a + b = 10/3 + 2/3 = 4 = k\). ✓
 
+### Quando o parâmetro aparece ao quadrado
+
+Às vezes o parâmetro não vem sozinho: a coordenada do vetor é uma **expressão em \(k\)**, como \(k^2 - 6k\). O método é o mesmo (primeiro as equações sem \(k\)), mas a equação que sobra fica do **2º grau**, e podem sair **dois valores**.
+
+**Exemplo.** Para que valores de \(k\) o vetor \(w = (-10, -13, k^2 - 6k)\) pertence a \([(1,1,-1),\; (4,5,2)]\)?
+
+**Passo 1: montar o sistema.**
+
+$$
+\begin{cases}
+a + 4b = -10 \\
+a + 5b = -13 \\
+-a + 2b = k^2 - 6k
+\end{cases}
+$$
+
+**Passo 2: resolver as duas primeiras** (as que não têm \(k\)). Subtraindo, \(b = -3\), e então \(a = -10 + 12 = 2\).
+
+**Passo 3: a terceira dá a equação em \(k\).**
+
+$$
+-2 + 2(-3) = k^2 - 6k \;\Longrightarrow\; k^2 - 6k + 8 = 0.
+$$
+
+**Passo 4: resolver.**
+
+$$
+(k - 2)(k - 4) = 0 \;\Longrightarrow\; k = 2 \text{ ou } k = 4.
+$$
+
+**Passo 5: conferir.** Com \(k = 2\), \(k^2 - 6k = 4 - 12 = -8\). Com \(k = 4\), \(16 - 24 = -8\). Os dois batem com \(-a + 2b = -2 - 6 = -8\).
+
+> [!WARNING]
+> Quando o enunciado diz "o(s) valor(es) de \(k\)", **não pare no primeiro valor**. Uma equação do 2º grau tem até duas raízes, e perder uma delas custa a questão inteira.
+
 ## Polinômios e matrizes: traduza para lista
 
 Nada de novo: **iguale os coeficientes**. Dois polinômios são iguais quando têm os mesmos coeficientes em cada potência de \(t\). Duas matrizes são iguais quando têm as mesmas entradas.

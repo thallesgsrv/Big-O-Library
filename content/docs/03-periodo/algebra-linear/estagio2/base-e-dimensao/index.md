@@ -132,9 +132,9 @@ A receita tem três passos:
 
 $$
 \begin{bmatrix} a + b & b + c \\ a - c & 0 \end{bmatrix}
-= a\underbrace{\begin{bmatrix} 1 & 0 \\ 1 & 0 \end{bmatrix}}_{A}
-+ b\underbrace{\begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}}_{B}
-+ c\underbrace{\begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}}_{C}.
+= a\underbrace{\begin{bmatrix} 1 & 0 \\ 1 & 0 \end{bmatrix}}_{A} +
+b\underbrace{\begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix}}_{B} +
+c\underbrace{\begin{bmatrix} 0 & 1 \\ -1 & 0 \end{bmatrix}}_{C}.
 $$
 
 **Passo 2.** São três geradores, mas repare que \(A + C = B\). Em listas: \((1,0,1,0) + (0,1,-1,0) = (1,1,0,0)\). O \(B\) é desnecessário.

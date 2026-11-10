@@ -17,6 +17,8 @@ O que confere (as regras estão em content/contribuir.md):
   - data/disciplinas.yaml: ids únicos, pré-requisitos que existem, sem ciclos, nó sem pasta com nome e período
   - data/conselho.yaml: foto existe em static/images/conselho/
   - baseadoEm aponta para alguém que está no Conselho
+  - fórmulas em bloco ($$ ... $$): nenhuma linha pode começar com `+`, `-` ou `*` (seguidos de espaço),
+    `1.`, `>` ou `#`, porque o Markdown lê isso como lista, citação ou título e o KaTeX quebra
 """
 from __future__ import annotations
 
@@ -231,10 +233,37 @@ def validar_conselho() -> None:
     print(f"  {len(profs)} sábios do Conselho verificados")
 
 
+def validar_matematica() -> None:
+    """Linha de fórmula em bloco que começa com `+ `, `- `, `1. `, `>` ou `#` quebra o KaTeX.
+
+    O Markdown processa o texto antes do KaTeX: uma linha iniciada por `+ b...` dentro de `$$ ... $$`
+    vira item de lista, o bloco é partido e a fórmula aparece como texto cru. A correção é mover o
+    operador para o fim da linha anterior (em TeX, quebra de linha não muda o resultado).
+    """
+    risco = re.compile(r"^\s*(?:[-+*]\s|\d+[.)]\s|>|#{1,6}\s)")
+    for arq in sorted((RAIZ / "content").rglob("*.md")):
+        em_bloco = False
+        em_codigo = False
+        for i, linha in enumerate(arq.read_text(encoding="utf-8").split("\n"), 1):
+            if linha.lstrip().startswith("```"):
+                em_codigo = not em_codigo
+                continue
+            if em_codigo:
+                continue
+            if linha.strip() in ("$$", "\\[", "\\]"):
+                em_bloco = not em_bloco
+                continue
+            if em_bloco and risco.match(linha):
+                erro(f"{rel(arq)}:{i}", "linha de fórmula em bloco começa com marcador de Markdown "
+                     f"({linha.strip()[:25]!r}…); mova o operador para o fim da linha anterior")
+    print("  fórmulas em bloco verificadas")
+
+
 def main() -> int:
     strict = "--strict" in sys.argv
     print("Validando conteúdo e dados…")
     validar_paginas()
+    validar_matematica()
     validar_disciplinas()
     validar_conselho()
     for a in avisos:
