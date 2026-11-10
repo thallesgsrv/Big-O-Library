@@ -131,37 +131,117 @@ O determinante é diferente de zero quando \(k \neq 0\) e \(k \neq 2\). Então o
 **Exercício 1.** \(\{(1, 2), (2, 4)\}\) é LI?
 
 {{< details title="Resolução" >}}
-Não. \((2, 4) = 2(1, 2)\): um é múltiplo do outro, então são paralelos. LD.
+**Passo 1: olhar a relação entre os vetores.**
+
+$$
+(2, 4) = 2 \cdot (1, 2)
+$$
+
+Um é múltiplo do outro, então são paralelos.
+
+**Passo 2: achar a combinação não trivial.**
+
+$$
+2 \cdot (1, 2) - 1 \cdot (2, 4) = (0, 0).
+$$
+
+**Resposta:** LD.
 {{< /details >}}
 
 **Exercício 2.** \(\{(1, 1, 0), (1, -1, 1)\}\) é LI em \(\mathbb{R}^3\)?
 
 {{< details title="Resolução" >}}
-\(a(1,1,0) + b(1,-1,1) = 0\) dá \(a + b = 0\), \(a - b = 0\), \(b = 0\). Então \(b = 0\) e \(a = 0\). LI. (Também dá para ver que não são paralelos.)
+**Passo 1: montar o sistema homogêneo.**
+
+\(a(1, 1, 0) + b(1, -1, 1) = (0, 0, 0)\), ou seja,
+
+$$
+\begin{cases}
+a + b = 0 \\
+a - b = 0 \\
+b = 0
+\end{cases}
+$$
+
+**Passo 2: resolver.**
+
+Da terceira, \(b = 0\). Na primeira, \(a = 0\).
+
+**Resposta:** só a solução trivial, então são LI.
+
+*Atalho:* dois vetores que não são múltiplos um do outro já são LI.
 {{< /details >}}
 
 **Exercício 3.** \(\{t + 1,\; t - 1\}\) é LI em \(P_1\)?
 
 {{< details title="Resolução" >}}
-As listas são \((1, 1)\) e \((-1, 1)\). Não são múltiplas uma da outra (o determinante \(1 \cdot 1 - 1 \cdot (-1) = 2 \neq 0\)). LI.
+**Passo 1: traduzir para listas** (coeficientes de \(1\) e \(t\)).
+
+$$
+t + 1 \to (1, 1), \qquad t - 1 \to (-1, 1)
+$$
+
+**Passo 2: determinante.**
+
+$$
+\det \begin{bmatrix} 1 & 1 \\ -1 & 1 \end{bmatrix} = 1 \cdot 1 - 1 \cdot (-1) = 2 \neq 0.
+$$
+
+**Resposta:** LI.
 {{< /details >}}
 
 **Exercício 4.** \(\{t + 1,\; 1 + t^2,\; 1 - t + t^2\}\) é LI em \(P_2\)?
 
 {{< details title="Resolução" >}}
-As listas (coeficientes de \(1, t, t^2\)) são \((1, 1, 0)\), \((1, 0, 1)\), \((1, -1, 1)\). O determinante é \(1(0 \cdot 1 - 1 \cdot (-1)) - 1(1 \cdot 1 - 1 \cdot 1) + 0 = 1 \cdot 1 - 0 = 1 \neq 0\). LI.
+**Passo 1: traduzir para listas** (coeficientes de \(1\), \(t\), \(t^2\)).
+
+$$
+t + 1 \to (1, 1, 0), \qquad 1 + t^2 \to (1, 0, 1), \qquad 1 - t + t^2 \to (1, -1, 1)
+$$
+
+**Passo 2: determinante.**
+
+$$
+\det \begin{bmatrix} 1 & 1 & 0 \\ 1 & 0 & 1 \\ 1 & -1 & 1 \end{bmatrix}
+= 1(0 \cdot 1 - 1 \cdot (-1)) - 1(1 \cdot 1 - 1 \cdot 1) + 0
+= 1 \cdot 1 - 1 \cdot 0 = 1.
+$$
+
+**Resposta:** \(1 \neq 0\), então são LI.
 {{< /details >}}
 
 **Exercício 5.** Para que \(k\) o conjunto \(\{(1, 0, 1), (1, 1, 0), (k, 1, -1)\}\) é LI?
 
 {{< details title="Resolução" >}}
-\(\det \begin{bmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \\ k & 1 & -1 \end{bmatrix} = 1(-1 - 0) - 0 + 1(1 - k) = -1 + 1 - k = -k\). É LI para \(k \neq 0\).
+**Passo 1: determinante em função de \(k\).**
+
+$$
+\det \begin{bmatrix} 1 & 0 & 1 \\ 1 & 1 & 0 \\ k & 1 & -1 \end{bmatrix}
+= 1(1 \cdot (-1) - 0 \cdot 1) - 0 + 1(1 \cdot 1 - 1 \cdot k)
+$$
+
+**Passo 2: simplificar.**
+
+$$
+= -1 + 1 - k = -k.
+$$
+
+**Passo 3: quando é diferente de zero.**
+
+\(-k \neq 0\) quando \(k \neq 0\).
+
+**Resposta:** LI para todo \(k \neq 0\) (e LD para \(k = 0\)).
 {{< /details >}}
 
-**Exercício 6.** O vetor \((-5, 3, 2)\) e o vetor \((3, -1, 3)\) podem gerar todo \(\mathbb{R}^3\)? Justifique.
+**Exercício 6.** Os vetores \((-5, 3, 2)\) e \((3, -1, 3)\) podem gerar todo \(\mathbb{R}^3\)? Justifique.
 
 {{< details title="Resolução" >}}
-Não. Dois vetores geram, no máximo, um plano pela origem. Para gerar \(\mathbb{R}^3\) são necessários 3 vetores LI.
+**Ideia.** Contar vetores.
+
+- \(\dim \mathbb{R}^3 = 3\), então gerar \(\mathbb{R}^3\) exige pelo menos 3 vetores.
+- Dois vetores geram, no máximo, um plano pela origem.
+
+**Resposta:** **não** geram.
 {{< /details >}}
 
 ## Teste rápido

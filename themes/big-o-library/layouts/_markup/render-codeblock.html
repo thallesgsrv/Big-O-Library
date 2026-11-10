@@ -1,9 +1,30 @@
+{{- /* Bloco de código em janela de terminal (macOS + barra de status do vim).
+       O botão de copiar PRECISA vir logo depois do bloco de código: o JS
+       (assets/js/core/code-copy.js) usa previousElementSibling. */ -}}
 {{- $class := .Attributes.class | default "" -}}
 {{- $filename := .Attributes.filename | default "" -}}
 {{- $lang := .Attributes.lang | default .Type -}}
 
-<div class="hextra-code-block hx:relative hx:mt-6 hx:first:mt-0 hx:group/code">
-  {{- partial "components/codeblock" (dict "filename" $filename "lang" $lang "content" .Inner "options" .Options) -}}
+{{- $shell := in (slice "bash" "sh" "shell" "zsh" "console" "fish") $lang -}}
+{{- $saida := or (not $lang) (in (slice "text" "txt" "plaintext" "output") $lang) -}}
+{{- $nomes := dict "java" "Java" "python" "Python" "py" "Python" "cpp" "C++" "c" "C" "bash" "zsh" "sh" "zsh" "shell" "zsh" "text" "saída" "txt" "saída" "markdown" "Markdown" "md" "Markdown" "yaml" "YAML" "yml" "YAML" "js" "JavaScript" -}}
+{{- $rotulo := index $nomes $lang | default $lang | default "saída" -}}
+{{- $titulo := $filename | default $rotulo -}}
+{{- $linhas := len (split (strings.TrimRight "\n" .Inner) "\n") -}}
 
-  {{- partialCached "components/codeblock-copy-button" (dict "filename" $filename) $filename -}}
+<div class="hextra-code-block bo-term{{ if $shell }} bo-term--sh{{ else if $saida }} bo-term--out{{ end }} hx:relative hx:mt-6 hx:first:mt-0 hx:group/code{{ with $class }} {{ . }}{{ end }}">
+  <div class="bo-term-bar">
+    <span class="bo-term-dots" aria-hidden="true"><i></i><i></i><i></i></span>
+    <span class="bo-term-title" dir="auto">{{ $titulo }}</span>
+  </div>
+
+  {{- partial "components/codeblock" (dict "filename" "" "lang" $lang "content" .Inner "options" .Options) -}}
+
+  {{- partialCached "components/codeblock-copy-button" (dict "filename" "") "bo-term" -}}
+
+  <div class="bo-term-status" aria-hidden="true">
+    <span class="bo-term-mode">{{ if $shell }}INSERT{{ else if $saida }}VIEW{{ else }}NORMAL{{ end }}</span>
+    <span class="bo-term-file">{{ $filename | default "[sem nome]" }}</span>
+    <span class="bo-term-meta">{{ $rotulo }} · {{ $linhas }}L · utf-8</span>
+  </div>
 </div>

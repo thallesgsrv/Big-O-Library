@@ -173,38 +173,116 @@ Agora some o oposto de \(0 \cdot v\) nos dois lados. À esquerda sobra o vetor n
 
 **Exercício 1.** Em \(P_2\), qual é o vetor nulo e qual é o oposto de \(p(t) = t^2 - 3t + 1\)?
 
-{{< details title="Gabarito" >}}
-O vetor nulo é o polinômio \(0\) (todos os coeficientes iguais a zero). O oposto de \(p\) é \(-p(t) = -t^2 + 3t - 1\), porque \(p(t) + (-p(t)) = 0\).
+{{< details title="Resolução" >}}
+**Passo 1: o vetor nulo.**
+
+É o polinômio com todos os coeficientes iguais a zero:
+
+$$
+0 = 0 + 0t + 0t^2.
+$$
+
+**Passo 2: o oposto.**
+
+Troque o sinal de cada coeficiente:
+
+$$
+-p(t) = -t^2 + 3t - 1.
+$$
+
+**Passo 3: conferir.**
+
+$$
+p(t) + (-p(t)) = (t^2 - t^2) + (-3t + 3t) + (1 - 1) = 0. \;✓
+$$
 {{< /details >}}
 
 **Exercício 2.** Em \(\mathbb{R}^2\), com a soma usual e \(\alpha \cdot (x, y) = (\alpha x,\; y)\), mostre que **não** é um espaço vetorial.
 
-{{< details title="Gabarito" >}}
-Falha a regra 6. Tome \(v = (1, 1)\), \(\alpha = 1\) e \(\beta = 1\). Então \((\alpha + \beta) v = (2, 1)\), mas \(\alpha v + \beta v = (1, 1) + (1, 1) = (2, 2)\). Como \((2, 1) \neq (2, 2)\), a regra não vale.
+{{< details title="Resolução" >}}
+**Passo 1: escolher qual regra quebrar.**
+
+A regra 6 é a candidata: \((\alpha + \beta)v = \alpha v + \beta v\).
+
+**Passo 2: escolher números simples.**
+
+\(v = (1, 1)\), \(\alpha = 1\) e \(\beta = 1\).
+
+**Passo 3: calcular os dois lados.**
+
+$$
+(\alpha + \beta)v = 2 \cdot (1, 1) = (2 \cdot 1,\; 1) = (2, 1)
+$$
+
+$$
+\alpha v + \beta v = (1, 1) + (1, 1) = (2, 2)
+$$
+
+**Conclusão.** \((2, 1) \neq (2, 2)\), então a regra 6 falha e o conjunto **não** é espaço vetorial.
 {{< /details >}}
 
 **Exercício 3.** O conjunto \(\{(x, y) \in \mathbb{R}^2 \mid y = x^2\}\), com as operações usuais, é um espaço vetorial?
 
-{{< details title="Gabarito" >}}
-Não. Não fecha na soma: \((1, 1)\) e \((2, 4)\) estão no conjunto, mas \((1, 1) + (2, 4) = (3, 5)\) não está, porque \(3^2 = 9 \neq 5\).
+{{< details title="Resolução" >}}
+**Passo 1: o que testar.**
+
+O fechamento da soma. Se falhar, acabou.
+
+**Passo 2: dois elementos do conjunto.**
+
+$$
+(1, 1) \text{ vale, pois } 1 = 1^2
+\qquad
+(2, 4) \text{ vale, pois } 4 = 2^2
+$$
+
+**Passo 3: somar e conferir o filtro.**
+
+$$
+(1, 1) + (2, 4) = (3, 5)
+$$
+
+O filtro pede \(5 = 3^2 = 9\), o que é falso.
+
+**Conclusão.** A soma saiu do conjunto, então **não** é espaço vetorial.
 {{< /details >}}
 
 **Exercício 4.** Use a regra 6 para provar que \((-1) \cdot v = -v\).
 
 {{< details title="Resolução" >}}
-Some \(v\) e \((-1) v\) usando a regra 8 e a regra 6:
+**Passo 1: somar \(v\) com \((-1)v\).**
+
+Use a regra 8 (\(v = 1 \cdot v\)):
 
 $$
-v + (-1) v = 1 \cdot v + (-1) \cdot v = (1 + (-1)) \cdot v = 0 \cdot v = 0.
+v + (-1)v = 1 \cdot v + (-1) \cdot v
 $$
 
-Como \((-1)v\) somado com \(v\) dá o vetor nulo, ele é o oposto de \(v\) (e o oposto é único). Então \((-1) v = -v\).
+**Passo 2: juntar com a regra 6.**
+
+$$
+1 \cdot v + (-1) \cdot v = (1 + (-1)) \cdot v = 0 \cdot v = 0
+$$
+
+**Passo 3: concluir.**
+
+\((-1)v\) somado com \(v\) dá o vetor nulo, então ele é o oposto de \(v\) (e o oposto é único). Logo \((-1)v = -v\). ∎
 {{< /details >}}
 
 **Exercício 5.** Escreva o polinômio \(2 - t + 3t^2\) e a matriz \(\begin{bmatrix} 2 & -1 \\ 3 & 0 \end{bmatrix}\) como listas de números.
 
-{{< details title="Gabarito" >}}
-O polinômio vira \((2, -1, 3)\) (coeficientes de \(1\), \(t\) e \(t^2\), nessa ordem). A matriz vira \((2, -1, 3, 0)\) (linha por linha).
+{{< details title="Resolução" >}}
+**Polinômio.** Coeficientes de \(1\), \(t\) e \(t^2\), nessa ordem:
+
+$$
+2 - t + 3t^2 \;\longrightarrow\; (2, -1, 3)
+$$
+
+**Matriz.** Entradas lidas linha por linha:
+
+$$
+\begin{bmatrix} 2 & -1 \\ 3 & 0 \end{bmatrix} \;\longrightarrow\; (2, -1, 3, 0)
+$$
 {{< /details >}}
 
 ## Teste rápido

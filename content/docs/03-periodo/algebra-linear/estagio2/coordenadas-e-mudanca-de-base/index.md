@@ -279,47 +279,177 @@ Com \(p = 3 + 2t\): \([p]_\alpha = (3, 2, 0)\) e, como visto no Exemplo 4, \([p]
 **Exercício 1.** Em \(\mathbb{R}^2\), \(B = ((2, 1), (1, -1))\). Mostre que \(B\) é base e calcule \([(4, -1)]_B\).
 
 {{< details title="Resolução" >}}
-O determinante é \(2 \cdot (-1) - 1 \cdot 1 = -3 \neq 0\), então os dois vetores são LI e formam uma base de \(\mathbb{R}^2\).
+**Passo 1: mostrar que é base.**
 
-\(a(2,1) + b(1,-1) = (4,-1)\) dá \(2a + b = 4\) e \(a - b = -1\). Somando: \(3a = 3\), \(a = 1\) e \(b = 2\). Então \([(4,-1)]_B = (1, 2)\).
+São 2 vetores em \(\mathbb{R}^2\), então basta o determinante:
+
+$$
+\det \begin{bmatrix} 2 & 1 \\ 1 & -1 \end{bmatrix} = 2 \cdot (-1) - 1 \cdot 1 = -3 \neq 0.
+$$
+
+São LI, então formam uma base.
+
+**Passo 2: montar o sistema.**
+
+\(a(2, 1) + b(1, -1) = (4, -1)\):
+
+$$
+\begin{cases}
+2a + b = 4 \\
+a - b = -1
+\end{cases}
+$$
+
+**Passo 3: resolver.**
+
+Somando as equações: \(3a = 3\), então \(a = 1\). Depois \(b = a + 1 = 2\).
+
+**Resposta:** \([(4, -1)]_B = (1, 2)\).
 {{< /details >}}
 
 **Exercício 2.** Com \(B = ((1, 2, 3), (0, 1, 2), (0, 0, 1))\): (a) as coordenadas de \(u = (5, 4, 2)\); (b) o vetor \(v\) com \([v]_B = (2, -3, 4)\).
 
 {{< details title="Resolução" >}}
-(a) \(a = 5\); \(2a + b = 4 \Rightarrow b = -6\); \(3a + 2b + c = 2 \Rightarrow c = 2 - 15 + 12 = -1\). \([u]_B = (5, -6, -1)\).
+**Item (a)**
 
-(b) \(v = 2(1,2,3) - 3(0,1,2) + 4(0,0,1) = (2,\; 4 - 3,\; 6 - 6 + 4) = (2, 1, 4)\).
+**Passo 1: o sistema.**
+
+$$
+\begin{cases}
+a = 5 \\
+2a + b = 4 \\
+3a + 2b + c = 2
+\end{cases}
+$$
+
+**Passo 2: resolver de cima para baixo.**
+
+$$
+a = 5
+$$
+
+$$
+b = 4 - 2a = 4 - 10 = -6
+$$
+
+$$
+c = 2 - 3a - 2b = 2 - 15 + 12 = -1
+$$
+
+**Resposta:** \([u]_B = (5, -6, -1)\).
+
+**Item (b)**
+
+**Passo 1: montar a combinação.**
+
+$$
+v = 2(1, 2, 3) - 3(0, 1, 2) + 4(0, 0, 1)
+$$
+
+**Passo 2: somar coordenada a coordenada.**
+
+$$
+v = \big(2,\; 4 - 3,\; 6 - 6 + 4\big)
+$$
+
+**Resposta:** \(v = (2, 1, 4)\).
 {{< /details >}}
 
 **Exercício 3.** \(\alpha = ((1, 0), (0, 1))\), \(\beta = ((-1, 1), (1, 1))\) e \(\gamma = ((2, 0), (0, 2))\). Se \([v]_\beta = (2, 1)\), ache \([v]_\alpha\) e \([v]_\gamma\).
 
 {{< details title="Resolução" >}}
-\(v = 2(-1, 1) + 1(1, 1) = (-1, 3)\), que é \([v]_\alpha = (-1, 3)\) (base canônica).
+**Passo 1: achar o vetor \(v\).**
 
-Para \(\gamma\): \(a(2,0) + b(0,2) = (-1, 3)\) dá \(a = -\tfrac12\) e \(b = \tfrac32\). Então \([v]_\gamma = (-\tfrac12, \tfrac32)\).
+$$
+v = 2(-1, 1) + 1(1, 1) = (-2 + 1,\; 2 + 1) = (-1, 3).
+$$
+
+**Passo 2: coordenadas em \(\alpha\) (canônica).**
+
+São os próprios números: \([v]_\alpha = (-1, 3)\).
+
+**Passo 3: coordenadas em \(\gamma\).**
+
+\(a(2, 0) + b(0, 2) = (-1, 3)\) dá
+
+$$
+2a = -1 \Rightarrow a = -\tfrac{1}{2}, \qquad 2b = 3 \Rightarrow b = \tfrac{3}{2}.
+$$
+
+**Resposta:** \([v]_\alpha = (-1, 3)\) e \([v]_\gamma = \left(-\tfrac{1}{2}, \tfrac{3}{2}\right)\).
 {{< /details >}}
 
 **Exercício 4.** Ache \(M_{\beta \to \alpha}\) e \(M_{\alpha \to \beta}\) para \(\alpha\) canônica e \(\beta = ((-1, 1), (1, 1))\).
 
 {{< details title="Resolução" >}}
-\(M_{\beta \to \alpha}\) tem os vetores de \(\beta\) como colunas: \(\begin{bmatrix} -1 & 1 \\ 1 & 1 \end{bmatrix}\).
+**Passo 1: \(M_{\beta \to \alpha}\).**
 
-\(M_{\alpha \to \beta}\) é a inversa: \(\dfrac{1}{-2}\begin{bmatrix} 1 & -1 \\ -1 & -1 \end{bmatrix} = \begin{bmatrix} -1/2 & 1/2 \\ 1/2 & 1/2 \end{bmatrix}\).
+Como \(\alpha\) é a canônica, as colunas são os próprios vetores de \(\beta\):
+
+$$
+M_{\beta \to \alpha} = \begin{bmatrix} -1 & 1 \\ 1 & 1 \end{bmatrix}.
+$$
+
+**Passo 2: \(M_{\alpha \to \beta}\) é a inversa.**
+
+O determinante é \(-1 \cdot 1 - 1 \cdot 1 = -2\). Trocando os elementos da diagonal, mudando o sinal dos outros e dividindo pelo determinante:
+
+$$
+M_{\alpha \to \beta} = \frac{1}{-2}\begin{bmatrix} 1 & -1 \\ -1 & -1 \end{bmatrix} = \begin{bmatrix} -\tfrac{1}{2} & \tfrac{1}{2} \\ \tfrac{1}{2} & \tfrac{1}{2} \end{bmatrix}.
+$$
+
+**Conferindo:** o produto das duas dá a identidade.
+
+$$
+\begin{bmatrix} -\tfrac12 & \tfrac12 \\ \tfrac12 & \tfrac12 \end{bmatrix}\begin{bmatrix} -1 & 1 \\ 1 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}. \;✓
+$$
 {{< /details >}}
 
 **Exercício 5.** Em \(P_2\), com \(\alpha = (1, t, t^2)\) e \(\beta = (1, 2t + 1, t^2)\): ache \(M_{\beta \to \alpha}\) e \([3 + 2t]_\beta\).
 
 {{< details title="Resolução" >}}
-Escrevendo os vetores de \(\beta\) em \(\alpha\): \(1 = (1,0,0)\), \(2t + 1 = (1, 2, 0)\), \(t^2 = (0,0,1)\). Então \(M_{\beta \to \alpha} = \begin{bmatrix} 1 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 1 \end{bmatrix}\).
+**Passo 1: escrever cada vetor de \(\beta\) na base \(\alpha\).**
 
-Para \([3 + 2t]_\beta\): \(3 + 2t = a + b(2t + 1) + ct^2\) dá \(2b = 2\), \(b = 1\), \(a + b = 3\), \(a = 2\), \(c = 0\). Logo \([3 + 2t]_\beta = (2, 1, 0)\).
+$$
+1 \to (1, 0, 0), \qquad 2t + 1 \to (1, 2, 0), \qquad t^2 \to (0, 0, 1)
+$$
+
+**Passo 2: colocar como colunas.**
+
+$$
+M_{\beta \to \alpha} = \begin{bmatrix} 1 & 1 & 0 \\ 0 & 2 & 0 \\ 0 & 0 & 1 \end{bmatrix}
+$$
+
+**Passo 3: \([3 + 2t]_\beta\).**
+
+$$
+3 + 2t = a + b(2t + 1) + c\,t^2 = (a + b) + 2b\,t + c\,t^2.
+$$
+
+Comparando os coeficientes:
+
+$$
+2b = 2 \Rightarrow b = 1, \qquad a + b = 3 \Rightarrow a = 2, \qquad c = 0.
+$$
+
+**Resposta:** \([3 + 2t]_\beta = (2, 1, 0)\).
 {{< /details >}}
 
 **Exercício 6.** Em \(S_2\) (matrizes simétricas \(2 \times 2\)) com a base \(\alpha\) do Exemplo 6, ache \([A]_\alpha\) para \(A = \begin{bmatrix} 3 & -1 \\ -1 & 2 \end{bmatrix}\).
 
 {{< details title="Resolução" >}}
-Nas simétricas, \(\begin{bmatrix} a & b \\ b & d \end{bmatrix}\) tem coordenadas \((a, b, d)\) na base \(\alpha\). Aqui, \([A]_\alpha = (3, -1, 2)\).
+**Passo 1: escrever como combinação da base.**
+
+$$
+\begin{bmatrix} 3 & -1 \\ -1 & 2 \end{bmatrix}
+= 3\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}
+- 1\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}
++ 2\begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+$$
+
+**Passo 2: ler os coeficientes.**
+
+**Resposta:** \([A]_\alpha = (3, -1, 2)\).
 {{< /details >}}
 
 ## Teste rápido

@@ -138,33 +138,103 @@ Em particular, a soma é direta quando \(\dim(W_1 + W_2) = \dim W_1 + \dim W_2\)
 **Exercício 1.** Encontre uma base e a dimensão de \(W = \{(x, y, z) \mid x = y = z\}\) e de \(W' = \{(x, y, z) \mid x + y + z = 0\}\).
 
 {{< details title="Resolução" >}}
-\(W\): \((x, x, x) = x(1,1,1)\), base \(\{(1,1,1)\}\), dimensão 1.
+**Para \(W\):**
 
-\(W'\): \((x, y, z)\) com \(x = -y - z\) dá \(y(-1,1,0) + z(-1,0,1)\), base \(\{(-1,1,0), (-1,0,1)\}\), dimensão 2.
+Todos os vetores têm a forma
+
+$$
+(x, x, x) = x\,(1, 1, 1).
+$$
+
+Base \(\{(1, 1, 1)\}\) e \(\dim W = 1\).
+
+**Para \(W'\):**
+
+Isole \(x = -y - z\). As variáveis livres são \(y\) e \(z\):
+
+$$
+(x, y, z) = (-y - z,\; y,\; z) = y\,(-1, 1, 0) + z\,(-1, 0, 1).
+$$
+
+Base \(\{(-1, 1, 0),\; (-1, 0, 1)\}\) e \(\dim W' = 2\).
 {{< /details >}}
 
 **Exercício 2.** \(\{1, 2 - t, 3 - t^2, t + 2t^2\}\) é base de \(P_2\)?
 
 {{< details title="Resolução" >}}
-Não. São 4 polinômios e \(\dim P_2 = 3\). Com mais vetores que a dimensão a lista é LD.
+**Passo 1: contar.**
+
+São 4 polinômios.
+
+**Passo 2: comparar com a dimensão.**
+
+\(\dim P_2 = 3\).
+
+**Resposta:** mais vetores do que a dimensão, então a lista é LD e **não** é base. Não precisa de conta.
 {{< /details >}}
 
 **Exercício 3.** \(\{t, 1 + t, t - t^2\}\) é base de \(P_2\)?
 
 {{< details title="Resolução" >}}
-Sim. Há 3 polinômios e \(\dim P_2 = 3\), e o determinante das listas de coeficientes é \(1 \neq 0\) (Exemplo 4), então são LI.
+**Passo 1: contar.**
+
+São 3 polinômios e \(\dim P_2 = 3\). Basta testar se são LI.
+
+**Passo 2: traduzir para listas** (coeficientes de \(1\), \(t\), \(t^2\)).
+
+$$
+t \to (0, 1, 0), \qquad 1 + t \to (1, 1, 0), \qquad t - t^2 \to (0, 1, -1)
+$$
+
+**Passo 3: determinante.**
+
+$$
+\det \begin{bmatrix} 0 & 1 & 0 \\ 1 & 1 & 0 \\ 0 & 1 & -1 \end{bmatrix} = -1 \cdot \big(1 \cdot (-1) - 0\big) = 1 \neq 0.
+$$
+
+**Resposta:** LI com 3 vetores, então é base de \(P_2\).
 {{< /details >}}
 
 **Exercício 4.** \(\{(1, 0, 2), (1, 1, 2), (1, 1, 4)\}\) e \(\{(2, 1, -1), (1, 0, -1), (1, 1, 0)\}\) são bases de \(\mathbb{R}^3\)?
 
 {{< details title="Resolução" >}}
-O primeiro tem determinante 2, então é base. O segundo tem determinante 0, então não é (é LD).
+Os dois têm 3 vetores em \(\mathbb{R}^3\), então basta o determinante.
+
+**Primeiro conjunto:**
+
+$$
+\det \begin{bmatrix} 1 & 0 & 2 \\ 1 & 1 & 2 \\ 1 & 1 & 4 \end{bmatrix} = 1(4 - 2) - 0 + 2(1 - 1) = 2 \neq 0.
+$$
+
+LI, então **é base**.
+
+**Segundo conjunto:**
+
+$$
+\det \begin{bmatrix} 2 & 1 & -1 \\ 1 & 0 & -1 \\ 1 & 1 & 0 \end{bmatrix} = 2(0 + 1) - 1(0 + 1) + (-1)(1 - 0) = 2 - 1 - 1 = 0.
+$$
+
+LD, então **não é base**.
 {{< /details >}}
 
 **Exercício 5.** Qual é a dimensão do espaço das matrizes simétricas \(2 \times 2\)? Dê uma base.
 
 {{< details title="Resolução" >}}
-\(\begin{bmatrix} a & b \\ b & d \end{bmatrix} = a\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} + b\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} + d\begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}\). Base com 3 matrizes, dimensão 3.
+**Passo 1: escrever a matriz genérica.**
+
+Simétrica significa entrada \((1,2)\) igual à \((2,1)\):
+
+$$
+\begin{bmatrix} a & b \\ b & d \end{bmatrix}
+$$
+
+**Passo 2: separar uma parcela por entrada livre** (\(a\), \(b\) e \(d\)).
+
+$$
+= a\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} + b\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} + d\begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix}
+$$
+
+**Resposta:** a base tem 3 matrizes (as três acima), então a dimensão é 3.
 {{< /details >}}
 
 ## Teste rápido

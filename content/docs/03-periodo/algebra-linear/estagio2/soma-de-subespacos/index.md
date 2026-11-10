@@ -157,33 +157,111 @@ Por exemplo, \((4, 3, 1) = 2(1,0,0) + 2(1,1,0) + 1(0,1,1)\), ou seja, \(w_1 = (2
 **Exercício 1.** Em \(\mathbb{R}^3\), \(W_1 = \{(x, y, z) \mid x + y - z = 0\}\) e \(W_2 = \{(x, y, z) \mid x = y\}\). Ache uma base e a dimensão de \(W_1 \cap W_2\) e de \(W_1 + W_2\). \(\mathbb{R}^3 = W_1 \oplus W_2\)?
 
 {{< details title="Resolução" >}}
-*Interseção:* \(x = y\) e \(x + y - z = 0\) dão \(z = 2x\), então \((x, x, 2x) = x(1, 1, 2)\). Base \(\{(1, 1, 2)\}\), dimensão 1.
+**Passo 1: a interseção (juntar as equações).**
 
-*Dimensões:* \(\dim W_1 = 2\) e \(\dim W_2 = 2\) (uma equação em \(\mathbb{R}^3\) deixa 2 variáveis livres).
+$$
+\begin{cases} x + y - z = 0 \\ x = y \end{cases}
+$$
 
-*Soma:* \(\dim(W_1 + W_2) = 2 + 2 - 1 = 3\), então \(W_1 + W_2 = \mathbb{R}^3\). Uma base é qualquer conjunto de 3 vetores LI, por exemplo \(\{(1,0,1), (0,1,1), (1,1,0)\}\) (geradores de \(W_1\) e \(W_2\) juntos).
+Com \(y = x\), a primeira vira \(2x - z = 0\), ou seja, \(z = 2x\). Os vetores da interseção são
 
-*Soma direta?* Não, pois a interseção tem dimensão 1 e não é \(\{0\}\).
+$$
+(x, x, 2x) = x\,(1, 1, 2).
+$$
+
+**Base de \(W_1 \cap W_2\):** \(\{(1, 1, 2)\}\), e \(\dim(W_1 \cap W_2) = 1\).
+
+**Passo 2: as dimensões de \(W_1\) e \(W_2\).**
+
+Cada um tem uma equação em \(\mathbb{R}^3\), então 2 variáveis livres:
+
+$$
+\dim W_1 = 2, \qquad \dim W_2 = 2.
+$$
+
+**Passo 3: a soma (fórmula).**
+
+$$
+\dim(W_1 + W_2) = 2 + 2 - 1 = 3.
+$$
+
+Como \(\dim \mathbb{R}^3 = 3\), temos \(W_1 + W_2 = \mathbb{R}^3\).
+
+**Base de \(W_1 + W_2\):** qualquer 3 vetores LI. Por exemplo, juntando geradores de \(W_1\) (\((1,0,1)\), \((0,1,1)\)) e de \(W_2\) (\((1,1,0)\)):
+
+$$
+\{(1, 0, 1),\; (0, 1, 1),\; (1, 1, 0)\}.
+$$
+
+**Passo 4: soma direta?**
+
+A interseção tem dimensão 1, então não é \(\{0\}\).
+
+**Conclusão.** \(\mathbb{R}^3 = W_1 + W_2\), mas **não** é soma direta.
 {{< /details >}}
 
 **Exercício 2.** Em \(\mathbb{R}^3\), \(W_1 = [(1, 0, 0)]\) e \(W_2 = [(0, 1, 0), (0, 0, 1)]\). Mostre que \(\mathbb{R}^3 = W_1 \oplus W_2\).
 
 {{< details title="Resolução" >}}
-Os três vetores são a base canônica, então geram \(\mathbb{R}^3\): \(W_1 + W_2 = \mathbb{R}^3\). Como \(\dim W_1 + \dim W_2 = 1 + 2 = 3 = \dim(W_1 + W_2)\), a fórmula dá \(\dim(W_1 \cap W_2) = 0\). A interseção é \(\{0\}\). Logo a soma é direta.
+**Passo 1: a soma gera tudo.**
+
+Juntando os geradores, sai a base canônica de \(\mathbb{R}^3\):
+
+$$
+(1,0,0),\; (0,1,0),\; (0,0,1).
+$$
+
+Logo \(W_1 + W_2 = \mathbb{R}^3\).
+
+**Passo 2: a interseção é só o zero.**
+
+$$
+\dim(W_1 \cap W_2) = \dim W_1 + \dim W_2 - \dim(W_1 + W_2) = 1 + 2 - 3 = 0.
+$$
+
+**Conclusão.** A soma é \(\mathbb{R}^3\) e a interseção é \(\{0\}\), então \(\mathbb{R}^3 = W_1 \oplus W_2\). ∎
 {{< /details >}}
 
 **Exercício 3.** Em \(M(2,2)\), seja \(S\) o subespaço das matrizes simétricas e \(A\) o das antissimétricas. Mostre que \(M(2,2) = S \oplus A\).
 
 {{< details title="Resolução" >}}
-*Interseção:* se \(M^T = M\) e \(M^T = -M\), então \(M = -M\), logo \(M = 0\). Interseção \(\{0\}\).
+**Passo 1: a interseção é só o zero.**
 
-*Soma:* toda matriz se escreve como \(M = \frac{M + M^T}{2} + \frac{M - M^T}{2}\), sendo a primeira parte simétrica e a segunda antissimétrica. Logo \(S + A = M(2,2)\).
+Se \(M\) está nos dois, vale \(M^T = M\) e \(M^T = -M\). Então
+
+$$
+M = -M \;\Longrightarrow\; 2M = 0 \;\Longrightarrow\; M = 0.
+$$
+
+**Passo 2: a soma é tudo.**
+
+Toda matriz \(M\) se escreve como
+
+$$
+M = \underbrace{\frac{M + M^T}{2}}_{\text{simétrica}} + \underbrace{\frac{M - M^T}{2}}_{\text{antissimétrica}}.
+$$
+
+**Conclusão.** \(S + A = M(2,2)\) e \(S \cap A = \{0\}\), então a soma é direta. ∎
 {{< /details >}}
 
 **Exercício 4.** Em \(\mathbb{R}^2\), \(W_1 = [(1, 0)]\) e \(W_2 = [(2, 0)]\). Qual é \(W_1 + W_2\)? A soma é direta?
 
 {{< details title="Resolução" >}}
-Os dois são o eixo \(x\). A soma é o eixo \(x\) (dimensão 1, e não \(\mathbb{R}^2\)). A interseção é o eixo \(x\) inteiro, que não é \(\{0\}\), então **não é** direta.
+**Passo 1: o que são \(W_1\) e \(W_2\).**
+
+\((2, 0) = 2(1, 0)\), então os dois são o **mesmo eixo \(x\)**.
+
+**Passo 2: a soma.**
+
+$$
+W_1 + W_2 = \text{eixo } x, \qquad \dim = 1 \;(\text{não é } \mathbb{R}^2).
+$$
+
+**Passo 3: a interseção.**
+
+\(W_1 \cap W_2\) é o eixo \(x\) inteiro, que não é \(\{0\}\).
+
+**Conclusão.** A soma é o eixo \(x\) e **não** é direta.
 {{< /details >}}
 
 ## Teste rápido

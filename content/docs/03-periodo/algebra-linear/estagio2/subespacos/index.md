@@ -239,43 +239,146 @@ A união ser subespaço só acontece quando um dos dois está dentro do outro.
 **Exercício 1.** Prove que \(W = \{(x, y, z) \in \mathbb{R}^3 \mid x = 2y\}\) é subespaço.
 
 {{< details title="Resolução" >}}
-*Zero:* \(0 = 2 \cdot 0\). ✓
+**Passo 1: o filtro.** Um vetor \((x, y, z)\) está em \(W\) quando \(x = 2y\).
 
-*Soma:* se \(x_1 = 2y_1\) e \(x_2 = 2y_2\), então \(x_1 + x_2 = 2y_1 + 2y_2 = 2(y_1 + y_2)\). ✓
+**Passo 2: o vetor nulo.**
 
-*Escalar:* se \(x_1 = 2y_1\), então \(\alpha x_1 = 2(\alpha y_1)\). ✓
+$$
+(0, 0, 0): \quad 0 = 2 \cdot 0. \;✓
+$$
+
+**Passo 3: a soma.**
+
+- Hipótese: \(x_1 = 2y_1\) e \(x_2 = 2y_2\).
+- Vetor: \(u + v = (x_1 + x_2,\; y_1 + y_2,\; z_1 + z_2)\).
+- Conferindo o filtro:
+
+$$
+x_1 + x_2 = 2y_1 + 2y_2 = 2(y_1 + y_2). \;✓
+$$
+
+**Passo 4: o escalar.**
+
+- Hipótese: \(x_1 = 2y_1\).
+- Vetor: \(\alpha u = (\alpha x_1,\; \alpha y_1,\; \alpha z_1)\).
+- Conferindo o filtro:
+
+$$
+\alpha x_1 = \alpha(2y_1) = 2(\alpha y_1). \;✓
+$$
+
+**Conclusão.** Os três passos valem, então \(W\) é subespaço.
 {{< /details >}}
 
 **Exercício 2.** \(W = \{(x, y, z) \in \mathbb{R}^3 \mid x + y + z = 1\}\) é subespaço?
 
 {{< details title="Resolução" >}}
-Não. O vetor nulo não passa no filtro: \(0 + 0 + 0 = 0 \neq 1\).
+**Passo 1: testar o vetor nulo.**
+
+$$
+(0, 0, 0): \quad 0 + 0 + 0 = 0
+$$
+
+**Passo 2: comparar com o filtro.**
+
+O filtro exige \(x + y + z = 1\), e o resultado foi \(0 \neq 1\).
+
+**Conclusão.** \((0, 0, 0) \notin W\), então \(W\) **não** é subespaço.
 {{< /details >}}
 
 **Exercício 3.** Prove que as matrizes antissimétricas \(W = \{A \in M(2,2) \mid A^T = -A\}\) formam subespaço.
 
 {{< details title="Resolução" >}}
-A matriz nula satisfaz \(0^T = -0\). Se \(A^T = -A\) e \(B^T = -B\), então \((A + B)^T = A^T + B^T = -A - B = -(A + B)\) e \((\alpha A)^T = \alpha A^T = -\alpha A = -(\alpha A)\). ✓
+**Passo 1: o vetor nulo.**
+
+$$
+0^T = 0 = -0. \;✓
+$$
+
+**Passo 2: a soma.**
+
+- Hipótese: \(A^T = -A\) e \(B^T = -B\).
+- Conferindo o filtro em \(A + B\):
+
+$$
+(A + B)^T = A^T + B^T = -A - B = -(A + B). \;✓
+$$
+
+**Passo 3: o escalar.**
+
+- Hipótese: \(A^T = -A\).
+- Conferindo o filtro em \(\alpha A\):
+
+$$
+(\alpha A)^T = \alpha A^T = \alpha(-A) = -(\alpha A). \;✓
+$$
+
+**Conclusão.** \(W\) é subespaço.
 {{< /details >}}
 
 **Exercício 4.** Prove que \(W = \{p \in P_2 \mid p(2) = 0\}\) é subespaço.
 
 {{< details title="Resolução" >}}
-O polinômio nulo vale 0 em \(t = 2\). Se \(p(2) = 0\) e \(q(2) = 0\), então \((p + q)(2) = p(2) + q(2) = 0\) e \((\alpha p)(2) = \alpha p(2) = 0\). ✓
+**Passo 1: o vetor nulo.**
 
-Em coeficientes: \(a + 2b + 4c = 0\), uma equação linear igual a zero.
+O polinômio nulo vale 0 em qualquer ponto, então \(0(2) = 0\). ✓
+
+**Passo 2: a soma.**
+
+- Hipótese: \(p(2) = 0\) e \(q(2) = 0\).
+- Conferindo o filtro em \(p + q\):
+
+$$
+(p + q)(2) = p(2) + q(2) = 0 + 0 = 0. \;✓
+$$
+
+**Passo 3: o escalar.**
+
+$$
+(\alpha p)(2) = \alpha \cdot p(2) = \alpha \cdot 0 = 0. \;✓
+$$
+
+**Conclusão.** \(W\) é subespaço.
+
+*Outro jeito:* com \(p = a + bt + ct^2\), o filtro vira \(a + 2b + 4c = 0\), uma equação linear igual a zero.
 {{< /details >}}
 
 **Exercício 5.** \(W = \{(x, y) \in \mathbb{R}^2 \mid |x| = |y|\}\) é subespaço?
 
 {{< details title="Resolução" >}}
-Não. \((1, 1) \in W\) e \((1, -1) \in W\), mas a soma \((2, 0)\) tem \(|2| \neq |0|\). Não fecha na soma.
+**Passo 1: o zero passa?** \(|0| = |0|\). Sim, então é preciso olhar a soma e o escalar.
+
+**Passo 2: dois elementos de \(W\).**
+
+$$
+(1, 1) \in W \text{ (pois } |1| = |1|\text{)}
+\qquad
+(1, -1) \in W \text{ (pois } |1| = |-1|\text{)}
+$$
+
+**Passo 3: somar e testar.**
+
+$$
+(1, 1) + (1, -1) = (2, 0), \qquad |2| = 2 \neq 0 = |0|.
+$$
+
+**Conclusão.** A soma saiu de \(W\), então **não** é subespaço.
 {{< /details >}}
 
 **Exercício 6.** \(W = \{p \in P_2 \mid p(0) \geq 0\}\) é subespaço?
 
 {{< details title="Resolução" >}}
-Não. \(p(t) = 1\) está em \(W\) (\(p(0) = 1 \geq 0\)), mas \((-1)p = -1\) tem valor \(-1\) em 0 e não está em \(W\). Não fecha no escalar.
+**Passo 1: o filtro é uma desigualdade.** Desconfie do escalar negativo.
+
+**Passo 2: elemento com folga.** \(p(t) = 1\) está em \(W\), pois \(p(0) = 1 > 0\).
+
+**Passo 3: multiplicar por \(-1\).**
+
+$$
+(-1) \cdot p = -1, \qquad (-1 \cdot p)(0) = -1 \not\geq 0.
+$$
+
+**Conclusão.** \((-1)p \notin W\), então **não** é subespaço (não fecha no escalar).
 {{< /details >}}
 
 ## Teste rápido

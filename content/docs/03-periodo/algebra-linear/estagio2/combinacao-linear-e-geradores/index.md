@@ -224,45 +224,250 @@ $$
 **Exercício 1.** Escreva \((1, -3, 10)\) como combinação linear de \(u = (1, 0, 0)\), \(v = (1, 1, 0)\) e \(w = (2, -3, 5)\).
 
 {{< details title="Resolução" >}}
-Queremos \(a u + b v + c w\). O sistema é \(a + b + 2c = 1\), \(b - 3c = -3\), \(5c = 10\). Então \(c = 2\), \(b = -3 + 6 = 3\) e \(a = 1 - 3 - 4 = -6\). Conferindo: \(-6(1,0,0) + 3(1,1,0) + 2(2,-3,5) = (-6 + 3 + 4,\; 3 - 6,\; 10) = (1, -3, 10)\). ✓
+**Passo 1: montar o sistema.**
+
+Queremos \(a u + b v + c w = (1, -3, 10)\). Coordenada a coordenada:
+
+$$
+\begin{cases}
+a + b + 2c = 1 \\
+b - 3c = -3 \\
+5c = 10
+\end{cases}
+$$
+
+**Passo 2: resolver de baixo para cima.**
+
+$$
+c = 2
+$$
+
+$$
+b = -3 + 3c = -3 + 6 = 3
+$$
+
+$$
+a = 1 - b - 2c = 1 - 3 - 4 = -6
+$$
+
+**Passo 3: conferir.**
+
+$$
+-6(1,0,0) + 3(1,1,0) + 2(2,-3,5) = (-6 + 3 + 4,\; 3 - 6,\; 10) = (1, -3, 10). \;✓
+$$
+
+**Resposta:** \((1, -3, 10) = -6u + 3v + 2w\).
 {{< /details >}}
 
 **Exercício 2.** Com \(v_1 = (1, -3, 2)\) e \(v_2 = (2, 4, -1)\): (a) escreva \(u = (-4, -18, 7)\) como combinação linear de \(v_1\) e \(v_2\); (b) mostre que \(v = (4, 3, -6)\) não é; (c) dê a condição para \((x, y, z)\) ser combinação linear.
 
 {{< details title="Resolução" >}}
-**(a)** O sistema é \(a + 2b = -4\), \(-3a + 4b = -18\), \(2a - b = 7\). Das duas primeiras, \(a = -4 - 2b\) e \(-3(-4 - 2b) + 4b = -18\), logo \(12 + 10b = -18\), \(b = -3\) e \(a = 2\). Na terceira: \(2 \cdot 2 + 3 = 7\) ✓. Então \(u = 2v_1 - 3v_2\).
+**Item (a)**
 
-**(b)** O sistema é \(a + 2b = 4\), \(-3a + 4b = 3\), \(2a - b = -6\). Das duas primeiras: \(a = 4 - 2b\), \(-12 + 10b = 3\), \(b = 3/2\), \(a = 1\). Na terceira: \(2 \cdot 1 - 3/2 = 1/2 \neq -6\). O sistema é impossível.
+**Passo 1: o sistema.**
 
-**(c)** Com \(a + 2b = x\), \(-3a + 4b = y\), \(2a - b = z\): da primeira \(a = x - 2b\), da segunda \(10b = y + 3x\), da terceira \(2x - 5b = z\). Substituindo \(b = (y + 3x)/10\) na terceira: \(2x - (y + 3x)/2 = z\), e multiplicando por 2, \(4x - y - 3x = 2z\), ou seja, \(x - y - 2z = 0\).
+$$
+\begin{cases}
+a + 2b = -4 \\
+-3a + 4b = -18 \\
+2a - b = 7
+\end{cases}
+$$
 
-*Teste:* \(u\) dá \(-4 + 18 - 14 = 0\) ✓ e \(v\) dá \(4 - 3 + 12 = 13 \neq 0\) ✓.
+**Passo 2: resolver as duas primeiras.**
+
+Da primeira, \(a = -4 - 2b\). Na segunda:
+
+$$
+-3(-4 - 2b) + 4b = -18 \;\Longrightarrow\; 12 + 10b = -18 \;\Longrightarrow\; b = -3.
+$$
+
+Então \(a = -4 + 6 = 2\).
+
+**Passo 3: testar na terceira.**
+
+$$
+2a - b = 4 + 3 = 7. \;✓
+$$
+
+**Resposta:** \(u = 2v_1 - 3v_2\).
+
+**Item (b)**
+
+**Passo 1: o sistema.**
+
+$$
+\begin{cases}
+a + 2b = 4 \\
+-3a + 4b = 3 \\
+2a - b = -6
+\end{cases}
+$$
+
+**Passo 2: resolver as duas primeiras.**
+
+Da primeira, \(a = 4 - 2b\). Na segunda:
+
+$$
+-12 + 6b + 4b = 3 \;\Longrightarrow\; b = \tfrac{3}{2}, \qquad a = 1.
+$$
+
+**Passo 3: testar na terceira.**
+
+$$
+2a - b = 2 - \tfrac{3}{2} = \tfrac{1}{2} \neq -6.
+$$
+
+**Conclusão.** Os valores que servem nas duas primeiras falham na terceira. O sistema é impossível, então \(v\) **não** é combinação linear.
+
+**Item (c)**
+
+**Passo 1: o sistema com letras.**
+
+$$
+\begin{cases}
+a + 2b = x \\
+-3a + 4b = y \\
+2a - b = z
+\end{cases}
+$$
+
+**Passo 2: resolver a e b.**
+
+Da primeira, \(a = x - 2b\). Na segunda:
+
+$$
+-3x + 6b + 4b = y \;\Longrightarrow\; b = \frac{y + 3x}{10}.
+$$
+
+**Passo 3: exigir a terceira.**
+
+Com \(a = x - 2b\), a terceira vira \(2x - 5b = z\). Substituindo \(b\):
+
+$$
+2x - \frac{y + 3x}{2} = z.
+$$
+
+Multiplicando por 2:
+
+$$
+4x - y - 3x = 2z \;\Longrightarrow\; x - y - 2z = 0.
+$$
+
+**Resposta (condição):** \(x - y - 2z = 0\).
+
+**Conferindo:** \(u\) dá \(-4 + 18 - 14 = 0\) ✓ e \(v\) dá \(4 - 3 + 12 = 13 \neq 0\) ✓.
 {{< /details >}}
 
 **Exercício 3.** Quais destes vetores são combinação linear de \(u = (0, -2, 2)\) e \(v = (1, 3, -1)\)? (a) \((2, 2, 2)\) (b) \((3, 1, 5)\) (c) \((0, 4, 5)\) (d) \((0, 0, 0)\)
 
 {{< details title="Resolução" >}}
-Primeiro ache a condição do plano: \((x, y, z) = a u + b v\) dá \(x = b\), \(y = -2a + 3b\), \(z = 2a - b\). Somando as duas últimas, \(y + z = 2b = 2x\), então a condição é \(2x - y - z = 0\).
+**Passo 1: achar a condição do plano.**
 
-(a) \(4 - 2 - 2 = 0\) ✓ sim. (b) \(6 - 1 - 5 = 0\) ✓ sim. (c) \(0 - 4 - 5 = -9\) não. (d) o vetor nulo é sempre combinação linear (todos os coeficientes zero) ✓ sim.
+\((x, y, z) = a u + b v\) dá
+
+$$
+x = b, \qquad y = -2a + 3b, \qquad z = 2a - b.
+$$
+
+Somando as duas últimas, \(y + z = 2b = 2x\). A condição é
+
+$$
+2x - y - z = 0.
+$$
+
+**Passo 2: testar cada vetor.**
+
+| Vetor | \(2x - y - z\) | Resultado |
+| --- | --- | --- |
+| (a) \((2, 2, 2)\) | \(4 - 2 - 2 = 0\) | sim |
+| (b) \((3, 1, 5)\) | \(6 - 1 - 5 = 0\) | sim |
+| (c) \((0, 4, 5)\) | \(0 - 4 - 5 = -9\) | **não** |
+| (d) \((0, 0, 0)\) | \(0\) | sim |
+
+**Resposta:** (a), (b) e (d).
 {{< /details >}}
 
 **Exercício 4.** Para que valor de \(k\) o vetor \((-1, k, -7)\) é combinação linear de \((1, -3, 2)\) e \((2, 4, -1)\)?
 
 {{< details title="Resolução" >}}
-Pela condição \(x - y - 2z = 0\) do Exercício 2(c): \(-1 - k - 2(-7) = 0\), logo \(13 - k = 0\) e \(k = 13\).
+**Passo 1: usar a condição do Exercício 2(c).**
+
+$$
+x - y - 2z = 0
+$$
+
+**Passo 2: substituir \((x, y, z) = (-1, k, -7)\).**
+
+$$
+-1 - k - 2(-7) = 0
+$$
+
+$$
+13 - k = 0
+$$
+
+**Resposta:** \(k = 13\).
 {{< /details >}}
 
 **Exercício 5.** O polinômio \(3 + 4t + 10t^2\) pertence ao subespaço gerado por \(t\), \(1 - t\) e \(4 + t^2\)?
 
 {{< details title="Resolução" >}}
-Queremos \(a t + b(1 - t) + c(4 + t^2) = (b + 4c) + (a - b)t + ct^2\). Comparando com \(3 + 4t + 10t^2\): \(b + 4c = 3\), \(a - b = 4\), \(c = 10\). Então \(c = 10\), \(b = -37\), \(a = -33\). Sim, pertence: \(-33t - 37(1 - t) + 10(4 + t^2) = 3 + 4t + 10t^2\).
+**Passo 1: montar a combinação e agrupar por potência.**
+
+$$
+a\,t + b(1 - t) + c(4 + t^2) = (b + 4c) + (a - b)\,t + c\,t^2.
+$$
+
+**Passo 2: comparar com \(3 + 4t + 10t^2\).**
+
+$$
+\begin{cases}
+b + 4c = 3 \\
+a - b = 4 \\
+c = 10
+\end{cases}
+$$
+
+**Passo 3: resolver de baixo para cima.**
+
+$$
+c = 10, \qquad b = 3 - 40 = -37, \qquad a = 4 + b = -33.
+$$
+
+**Passo 4: conferir.**
+
+$$
+-33t - 37(1 - t) + 10(4 + t^2) = 3 + 4t + 10t^2. \;✓
+$$
+
+**Resposta:** sim, pertence.
 {{< /details >}}
 
 **Exercício 6.** Encontre geradores de \(W = \{(x, y, z) \in \mathbb{R}^3 \mid x + y + z = 0\}\).
 
 {{< details title="Resolução" >}}
-\(z = -x - y\), então \((x, y, -x - y) = x(1, 0, -1) + y(0, 1, -1)\). Geradores: \((1, 0, -1)\) e \((0, 1, -1)\).
+**Passo 1: isolar uma variável.**
+
+$$
+z = -x - y
+$$
+
+As variáveis livres são \(x\) e \(y\).
+
+**Passo 2: escrever o vetor genérico.**
+
+$$
+(x, y, z) = (x, y, -x - y)
+$$
+
+**Passo 3: separar uma parcela por variável livre.**
+
+$$
+(x, y, -x - y) = x\,(1, 0, -1) + y\,(0, 1, -1)
+$$
+
+**Resposta:** \(W = [(1, 0, -1),\; (0, 1, -1)]\).
 {{< /details >}}
 
 ## Teste rápido

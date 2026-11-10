@@ -10,7 +10,7 @@
 {{- end -}}
 
 {{- if transform.CanHighlight $lang -}}
-  <div>{{- highlight $content $lang $options -}}</div>
+  <div class="bo-term-body">{{- highlight $content $lang $options -}}</div>
 {{- else -}}
-  <div><pre><code>{{ $content }}</code></pre></div>
+  <div class="bo-term-body"><pre><code>{{ $content }}</code></pre></div>
 {{- end -}}
