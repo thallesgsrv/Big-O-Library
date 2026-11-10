@@ -354,7 +354,7 @@ Considere \(v_1 = (1, 0, 0)\), \(v_2 = (2, 1, 0)\), \(v_3 = (5, -3, 0)\), \(v_4 
 
 São 4 vetores em \(\mathbb{R}^3\), e \(\dim \mathbb{R}^3 = 3\). Mais vetores que a dimensão, então são **LD**.
 
-**Parte 2: base contida no conjunto** (método das colunas, em [Base e Dimensão](../base-e-dimensao/#base-contida-no-conjunto-dado)).
+**Parte 2: base contida no conjunto** (método das colunas, na seção "Base contida no conjunto dado" de [Base e Dimensão](../base-e-dimensao/)).
 
 **Passo 1: vetores como colunas.**
 

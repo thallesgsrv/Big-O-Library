@@ -165,37 +165,36 @@ Inserindo `4821`, `9301`, `7305` e `5415` numa tabela de 10 baldes:
 
 Como `4821` e `9301` têm o mesmo **hash** (mas chaves diferentes), eles dividem a lista do balde 1. Por isso a lista guarda o objeto inteiro: é a **chave** que diferencia quem está no mesmo balde. E atenção, porque esse é um erro recorrente: **não existem duas chaves iguais numa tabela hash**. Se você faz `put` de uma chave que já existe, o valor é **atualizado**.
 
-A tabela agora é um array de listas. Cada balde começa como `null` e só ganha uma lista quando alguém precisa dele:
+A tabela agora é uma lista de listas. Cada balde começa como uma lista vazia, e só cresce quando um pedido entra nele:
 
 ![Baldes com listas encadeadas: 4821 e 9301 dividem o balde 1; no pior caso todas as chaves caem no mesmo balde](hash-encadeamento.png)
 
 ```java
 public class TabelaHash {
 
-    private ArrayList<Pedido>[] tabela;
+    private ArrayList<ArrayList<Pedido>> tabela;
 
-    @SuppressWarnings("unchecked")      // o Java não cria array de genéricos direto
     public TabelaHash(int capacidade) {
-        tabela = new ArrayList[capacidade];
+        tabela = new ArrayList<>(capacidade);
+        for (int i = 0; i < capacidade; i++) {
+            tabela.add(new ArrayList<>());
+        }
     }
 
     private int hash(int chave) {
-        return chave % tabela.length;
+        return chave % tabela.size();
     }
 }
 ```
 
 ### get
 
-Calcula o balde e, se existir uma lista ali, percorre comparando **as chaves**. Se o balde for `null` ou a chave não estiver na lista, devolve `null`.
+Calcula o balde e percorre a lista comparando **as chaves**. Se a chave não estiver lá, devolve `null`.
 
 ```java
 public Pedido get(int chave) {
-    ArrayList<Pedido> lista = tabela[hash(chave)];
+    ArrayList<Pedido> lista = tabela.get(hash(chave));
 
-    if (lista == null) {
-        return null;
-    }
     for (Pedido p : lista) {
         if (p.getNumero() == chave) {
             return p;
@@ -207,17 +206,13 @@ public Pedido get(int chave) {
 
 ### put
 
-Se o balde ainda é `null`, cria a lista. Depois percorre a lista procurando a chave: se achar, **atualiza**; se não achar, adiciona no fim.
+Calcula o balde, percorre a lista procurando a chave: se achar, **atualiza**; se não achar, adiciona no fim.
 
 ```java
 public void put(int chave, Pedido valor) {
     int hash = hash(chave);
-    ArrayList<Pedido> lista = tabela[hash];
+    ArrayList<Pedido> lista = tabela.get(hash);
 
-    if (lista == null) {
-        lista = new ArrayList<>();
-        tabela[hash] = lista;
-    }
     for (int i = 0; i < lista.size(); i++) {
         if (lista.get(i).getNumero() == chave) {
             lista.set(i, valor);          // chave repetida: só atualiza
@@ -234,11 +229,8 @@ Acha o pedido no balde e tira da lista. O `remove(i)` do `ArrayList` já devolve
 
 ```java
 public Pedido remove(int chave) {
-    ArrayList<Pedido> lista = tabela[hash(chave)];
+    ArrayList<Pedido> lista = tabela.get(hash(chave));
 
-    if (lista == null) {
-        return null;
-    }
     for (int i = 0; i < lista.size(); i++) {
         if (lista.get(i).getNumero() == chave) {
             return lista.remove(i);
@@ -457,7 +449,7 @@ private int hash(int chave) {
 }
 ```
 
-**Por que usar isso, se já temos a divisão?** Porque aqui o valor de \(m\) **não é crítico**: pode até ser uma potência de 2, que era justamente o que evitávamos. Veja as chaves `16, 32, 48, ..., 160` numa tabela de 16 posições:
+**Por que usar isso, se já temos a divisão?** Porque aqui o valor de \(m\) **não é crítico**: pode até ser uma potência de 2, que era justamente o que evitávamos. Veja as chaves `16, 32, 48, 64, ..., 160` numa tabela de 16 posições:
 
 ```text
 divisão:        todas caem na posição 0
@@ -512,7 +504,7 @@ private int hash(String chave) {
 
 Nossas tabelas têm tamanho fixo. No encadeamento, as listas só crescem e as operações voltam a \(O(n)\). No endereçamento aberto, a tabela chega a ficar cheia. Em ambos os casos, a saída é a mesma: quando \(\alpha\) passa de um limite, **criar uma tabela maior e passar tudo para ela**. A biblioteca padrão do Java usa o limite de **0,75**.
 
-Por que 0,75 e não 0,1 ou 0,95? Se o limite for baixo, o redimensionamento acontece o tempo todo, e ele custa \(O(n)\). Se for alto, as colisões se multiplicam. Lembra da tabela de Knuth: em \(\alpha = 0{,}9\), uma busca sem sucesso na sondagem linear já custa mais de 50 posições. O 0,75 é um equilíbrio que a teoria e a prática mostraram funcionar bem.
+Por que 0,75 e não 0,1 ou 0,95? Se o limite for baixo, o redimensionamento acontece o tempo todo, e ele custa \(O(n)\). Se for alto, as colisões se multiplicam. Lembra da tabela de Knuth: em \(\alpha = 0{,}9\), uma busca sem sucesso na sondagem linear já custa mais de 50 posições, contra 8,5 em \(\alpha = 0{,}75\). O 0,75 é um equilíbrio que a teoria e a prática mostraram funcionar bem.
 
 Há uma pegadinha que derruba muita gente: **não basta copiar** os objetos para o array novo. O índice depende do tamanho da tabela (`% tamanho`), então a mesma chave pode ir para outra posição. Por exemplo, `4815 % 10 = 5`, mas `4815 % 20 = 15`. É preciso calcular o `hash` de novo para cada objeto. Esse recálculo se chama **rehash**.
 
@@ -524,7 +516,7 @@ private int tamanho;   // novo atributo: quantos pedidos a tabela guarda
 
 // no fim do put, depois de lista.add(valor):
 tamanho++;
-if ((double) tamanho / tabela.length > FATOR_DE_CARGA) {
+if ((double) tamanho / tabela.size() > FATOR_DE_CARGA) {
     redimensiona();
 }
 
@@ -532,20 +524,20 @@ if ((double) tamanho / tabela.length > FATOR_DE_CARGA) {
 tamanho--;
 ```
 
-E o `redimensiona` cria um array com o dobro do tamanho e reinsere todo mundo com o `put`. Como o `hash` usa `tabela.length`, que já é o tamanho novo, o rehash acontece sozinho:
+E o `redimensiona` cria uma nova lista de baldes com o dobro do tamanho e reinsere todo mundo com o `put`. Como o `hash` usa `tabela.size()`, que já é o tamanho novo, o rehash acontece sozinho:
 
 ```java
-@SuppressWarnings("unchecked")
 private void redimensiona() {
-    ArrayList<Pedido>[] antiga = tabela;
-    tabela = new ArrayList[antiga.length * 2];
+    ArrayList<ArrayList<Pedido>> antiga = tabela;
+    tabela = new ArrayList<>(antiga.size() * 2);
+    for (int i = 0; i < antiga.size() * 2; i++) {
+        tabela.add(new ArrayList<>());
+    }
     tamanho = 0;
 
     for (ArrayList<Pedido> lista : antiga) {
-        if (lista != null) {
-            for (Pedido p : lista) {
-                put(p.getNumero(), p);
-            }
+        for (Pedido p : lista) {
+            put(p.getNumero(), p);
         }
     }
 }

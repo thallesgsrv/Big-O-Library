@@ -83,7 +83,7 @@ for nome in turma:
 - `len(m)` é o número de **linhas**. `len(m[0])` é o número de **colunas**.
 - Para percorrer tudo, use **dois `for` aninhados**: um para as linhas, outro para as colunas.
 
-![Matriz 3 por 3 com linhas e colunas numeradas a partir de 0, o elemento m[1][2] igual a 6 e a diagonal destacados](matriz-indices.png)
+![Matriz 3 por 3 com linhas e colunas numeradas a partir de 0, o elemento m\[1\]\[2\] igual a 6 e a diagonal destacados](matriz-indices.png)
 
 ## Exemplo 5: acessar e percorrer
 

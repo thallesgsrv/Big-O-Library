@@ -59,7 +59,7 @@ Três padrões que se repetiram nas quatro provas:
 
 1. Monte \(v = a\,u_1 + b\,u_2\) e iguale **coordenada a coordenada**: sai um sistema.
 2. Com mais equações do que incógnitas: **resolva duas** e **teste o resultado na que sobrou**. Se não bate, o sistema é impossível e \(v\) **não** é combinação linear.
-3. Para achar \(k\): resolva \(a\) e \(b\) com as equações que não têm \(k\) e deixe a equação com \(k\) dar o valor dele. Se o \(k\) vier numa expressão como \(k^2 - 6k\), a equação que sobra é do 2º grau: **resolva e confira cada raiz** (podem ser duas, [exemplo aqui](../combinacao-linear-e-geradores/#quando-o-parâmetro-aparece-ao-quadrado)).
+3. Para achar \(k\): resolva \(a\) e \(b\) com as equações que não têm \(k\) e deixe a equação com \(k\) dar o valor dele. Se o \(k\) vier numa expressão como \(k^2 - 6k\), a equação que sobra é do 2º grau: **resolva e confira cada raiz** (podem ser duas, [exemplo na página de Combinação linear](../combinacao-linear-e-geradores/), seção "Quando o parâmetro aparece ao quadrado").
 
 *Exemplo:* \((3, k, 7)\) como combinação de \((1,2,1)\) e \((2,1,3)\). As equações sem \(k\) são \(a + 2b = 3\) e \(a + 3b = 7\), que dão \(b = 4\) e \(a = -5\). A do meio dá \(k = 2a + b = -10 + 4 = -6\).
 
@@ -89,7 +89,7 @@ Três padrões que se repetiram nas quatro provas:
 
 *Exemplo:* \(\{(a + b, b + c, a - c)\}\) gera \((1,0,1)\), \((1,1,0)\), \((0,1,-1)\), e o segundo é a soma do primeiro com o terceiro. Base \(\{(1,0,1), (0,1,-1)\}\), \(\dim = 2\).
 
-### Receita 6: base contida no conjunto e completar base ([Base e dimensão](../base-e-dimensao/#base-contida-no-conjunto-dado))
+### Receita 6: base contida no conjunto e completar base ([Base e dimensão](../base-e-dimensao/))
 
 **Base contida em \(\{v_1, \ldots, v_n\}\)** (questão de LD):
 
@@ -213,8 +213,8 @@ Com \(b = 0\), o vetor é \((a, -a, 0, 0) = a(1,-1,0,0)\). Logo \(W_1 \cap W_2 =
 | --- | --- |
 | 1a | [Subespaços](../subespacos/) |
 | 1b, 2a | [Combinação linear](../combinacao-linear-e-geradores/) e [Dependência linear](../dependencia-linear/) |
-| 2b | [Base e dimensão](../base-e-dimensao/#quando-o-subespaço-vem-por-parâmetros) |
-| 3a ou 3b | [Base e dimensão](../base-e-dimensao/#base-contida-no-conjunto-dado), seções "Base contida" e "Completar" |
+| 2b | [Base e dimensão](../base-e-dimensao/), seção "Quando o subespaço vem por parâmetros" |
+| 3a ou 3b | [Base e dimensão](../base-e-dimensao/), seções "Base contida" e "Completar" |
 | 4c | [Soma de subespaços](../soma-de-subespacos/), "Interseção quando um subespaço vem por parâmetros" |
 | 4d | [Soma de subespaços](../soma-de-subespacos/), "Soma direta" |
 
