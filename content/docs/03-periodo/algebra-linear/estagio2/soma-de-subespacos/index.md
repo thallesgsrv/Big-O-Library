@@ -54,6 +54,48 @@ $$
 
 Uma base de \(W_1 \cap W_2\) é \(\{(1, 1, -2)\}\), e \(\dim(W_1 \cap W_2) = 1\).
 
+### Interseção quando um subespaço vem por parâmetros
+
+Nas provas é muito comum um subespaço vir por **equações** e o outro por uma **fórmula com letras**, como \(W_2 = \{(a + b,\; a,\; a - b,\; b)\}\). Juntar equações não funciona, porque \(W_2\) não tem equações. A saída é **substituir**:
+
+1. Pegue o **vetor genérico** do subespaço dado por parâmetros.
+2. **Substitua** as coordenadas dele nas equações do outro subespaço.
+3. Resolva em função dos parâmetros: sai uma condição (ou mais).
+4. Escreva o vetor genérico **com a condição aplicada** e separe por parâmetro livre.
+
+**Exemplo 4b.** Em \(\mathbb{R}^4\), \(W_1 = \{(x, y, z, t) \mid x = z + t\}\) e \(W_2 = \{(a + b,\; a,\; a - b,\; b) \mid a, b \in \mathbb{R}\}\).
+
+O vetor genérico de \(W_2\) tem \(x = a + b\), \(y = a\), \(z = a - b\), \(t = b\). A equação de \(W_1\) pede \(x = z + t\):
+
+$$
+a + b = (a - b) + b = a \;\Longrightarrow\; b = 0.
+$$
+
+Com \(b = 0\), o vetor fica \((a, a, a, 0) = a\,(1, 1, 1, 0)\). Então
+
+$$
+W_1 \cap W_2 = [(1, 1, 1, 0)], \qquad \dim(W_1 \cap W_2) = 1.
+$$
+
+Para a soma, falta contar as dimensões: \(W_1\) tem uma equação em \(\mathbb{R}^4\), então \(\dim W_1 = 3\); \(W_2\) tem geradores \((1,1,1,0)\) e \((1,0,-1,1)\), que não são múltiplos, então \(\dim W_2 = 2\). Pela fórmula,
+
+$$
+\dim(W_1 + W_2) = 3 + 2 - 1 = 4,
+$$
+
+então \(W_1 + W_2 = \mathbb{R}^4\), mas **não é soma direta**, porque a interseção não é \(\{0\}\).
+
+**Quando os dois vêm por parâmetros.** Se \(W_1 = [u_1, u_2]\) e \(W_2 = [w_1, w_2]\), um vetor da interseção satisfaz
+
+$$
+a\,u_1 + b\,u_2 = c\,w_1 + d\,w_2,
+$$
+
+que é um sistema homogêneo em \(a, b, c, d\). Resolva e escreva o vetor \(a\,u_1 + b\,u_2\) com os valores achados. Se os geradores de cada subespaço são LI, o número de variáveis livres do sistema é a dimensão da interseção.
+
+> [!TIP]
+> **Base da soma por parâmetros:** junte todos os geradores como **colunas**, escalone e use as colunas com pivô (veja "Base contida no conjunto dado", na página de Base e Dimensão). A quantidade de pivôs é \(\dim(W_1 + W_2)\) e serve para conferir a fórmula.
+
 ### Soma: junte os geradores
 
 A soma é formada por \(w_1 + w_2\). Se \(W_1 = [a_1, \ldots, a_p]\) e \(W_2 = [b_1, \ldots, b_q]\), então todo elemento da soma é combinação de \(a_1, \ldots, a_p, b_1, \ldots, b_q\). Então **junte os geradores**: \(W_1 + W_2 = [a_1, \ldots, a_p, b_1, \ldots, b_q]\).
@@ -146,6 +188,7 @@ Por exemplo, \((4, 3, 1) = 2(1,0,0) + 2(1,1,0) + 1(0,1,1)\), ou seja, \(w_1 = (2
 | Quero... | Faço... |
 | --- | --- |
 | \(W_1 \cap W_2\) (subespaços por equações) | juntar as equações e resolver |
+| \(W_1 \cap W_2\) (um deles por parâmetros) | substituir o vetor genérico nas equações do outro |
 | \(W_1 + W_2\) (subespaços por geradores) | juntar os geradores e escalonar |
 | \(\dim(W_1 + W_2)\) | \(\dim W_1 + \dim W_2 - \dim(W_1 \cap W_2)\) |
 | saber se \(V = W_1 + W_2\) | ver se \(\dim(W_1 + W_2) = \dim V\) |
@@ -264,6 +307,34 @@ $$
 **Conclusão.** A soma é o eixo \(x\) e **não** é direta.
 {{< /details >}}
 
+**Exercício 5.** Em \(M(2,2)\), \(W_1 = \left\{\begin{bmatrix} x & y \\ z & t \end{bmatrix} \;\mid\; x = t \text{ e } y = z\right\}\) e \(W_2 = \left\{\begin{bmatrix} a & a + b \\ 0 & b \end{bmatrix} \;\mid\; a, b \in \mathbb{R}\right\}\). Determine \(W_1 \cap W_2\), \(\dim(W_1 + W_2)\) e diga se a soma é direta.
+
+{{< details title="Resolução" >}}
+**Passo 1: substituir o vetor genérico de \(W_2\) nas equações de \(W_1\).**
+
+Em \(W_2\): \(x = a\), \(y = a + b\), \(z = 0\), \(t = b\).
+
+- \(x = t\) vira \(a = b\);
+- \(y = z\) vira \(a + b = 0\).
+
+Da segunda, \(b = -a\). Juntando com \(a = b\): \(a = -a\), então \(a = 0\) e \(b = 0\).
+
+**Passo 2: a interseção.** Só sobra a matriz nula, então \(W_1 \cap W_2 = \{0\}\).
+
+**Passo 3: as dimensões.**
+
+- \(W_1\): \(\begin{bmatrix} x & y \\ y & x \end{bmatrix} = x\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} + y\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}\), então \(\dim W_1 = 2\).
+- \(W_2\): \(a\begin{bmatrix} 1 & 1 \\ 0 & 0 \end{bmatrix} + b\begin{bmatrix} 0 & 1 \\ 0 & 1 \end{bmatrix}\); os dois geradores não são múltiplos, então \(\dim W_2 = 2\).
+
+**Passo 4: a soma.**
+
+$$
+\dim(W_1 + W_2) = 2 + 2 - 0 = 4 = \dim M(2,2).
+$$
+
+**Conclusão.** \(W_1 + W_2 = M(2,2)\) e a interseção é \(\{0\}\), então a soma **é direta**: \(M(2,2) = W_1 \oplus W_2\).
+{{< /details >}}
+
 ## Teste rápido
 
 {{< quiz titulo="soma e soma direta" >}}
@@ -299,6 +370,17 @@ Para achar \(W_1 \cap W_2\) quando os dois são dados por equações, você...
 - [ ] testa só o vetor nulo
 ---
 Estar na interseção é passar nos filtros dos dois subespaços ao mesmo tempo, então basta juntar as equações.
+{{< /questao >}}
+
+{{< questao >}}
+\(W_1\) é dado por equações e \(W_2\) por parâmetros \((a, b)\). Para achar \(W_1 \cap W_2\), você...
+
+- [ ] soma os geradores dos dois
+- [x] substitui o vetor genérico de \(W_2\) nas equações de \(W_1\) e resolve em função de \(a\) e \(b\)
+- [ ] subtrai as dimensões
+- [ ] junta as equações dos dois, que \(W_2\) já tem
+---
+\(W_2\) não tem equações. Um vetor está na interseção quando é da forma de \(W_2\) **e** passa nas equações de \(W_1\), então se substitui.
 {{< /questao >}}
 
 {{< /quiz >}}

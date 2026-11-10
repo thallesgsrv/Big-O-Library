@@ -8,6 +8,9 @@ autores:
 date: 2026-11-09
 ---
 
+> [!TIP]
+> **Prova amanhã?** Vá direto para a [Revisão Relâmpago](revisao-relampago/): receitas, armadilhas e um mini-simulado com gabarito. Cada receita aponta a página onde o assunto está explicado com calma.
+
 ## Pode começar do zero
 
 Você **não precisa ter cursado Vetorial** (Geometria Analítica) para este estágio. Tudo o que vem de lá e que você vai usar cabe em três ideias:
@@ -65,6 +68,7 @@ Se um conjunto tem essas duas operações e elas se comportam bem, ele é um **e
 5. [**Dependência linear**](dependencia-linear/): quando um vetor é desnecessário.
 6. [**Base e dimensão**](base-e-dimensao/): o menor conjunto que gera tudo, e o "tamanho" de um espaço.
 7. [**Coordenadas e mudança de base**](coordenadas-e-mudanca-de-base/): o "endereço" de um vetor e como ele muda quando a base muda.
+8. [**Revisão Relâmpago**](revisao-relampago/): o resumo de véspera de prova, com mini-simulado.
 
 As páginas seguem essa ordem de propósito: cada uma usa a anterior.
 
@@ -80,6 +84,10 @@ As páginas seguem essa ordem de propósito: cada uma usa a anterior.
 | "É LI? Para que valores de \(k\)?" | Sistema homogêneo ou determinante | [Dependência linear](dependencia-linear/) |
 | "É base? Qual a dimensão?" | LI + contar vetores | [Base e dimensão](base-e-dimensao/) |
 | "Encontre base de \(W_1 \cap W_2\) e \(W_1 + W_2\)" | Juntar equações / juntar geradores | [Soma de subespaços](soma-de-subespacos/) |
+| "Interseção quando um subespaço vem por parâmetros" | Substituir o vetor genérico nas equações do outro | [Soma de subespaços](soma-de-subespacos/) |
+| "Dimensão de um subespaço dado por parâmetros ou geradores" | Separar por parâmetro e **escalonar** | [Base e dimensão](base-e-dimensao/) |
+| "Base de \(W\) contida em \(\{v_1, \ldots, v_n\}\)" | Colunas com pivô da matriz original | [Base e dimensão](base-e-dimensao/) |
+| "Complete \(S\) a uma base do \(\mathbb{R}^4\)" | Acrescentar \(e_j\) nas colunas sem pivô e provar LI | [Base e dimensão](base-e-dimensao/) |
 | "Calcule \([v]_B\)" | Resolver \(v = a_1b_1 + \cdots + a_nb_n\) | [Coordenadas](coordenadas-e-mudanca-de-base/) |
 | "Matriz de mudança de base" | Colunas = vetores da base de partida escritos na de chegada | [Coordenadas](coordenadas-e-mudanca-de-base/) |
 
