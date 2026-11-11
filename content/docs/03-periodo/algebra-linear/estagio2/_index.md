@@ -8,9 +8,6 @@ autores:
 date: 2026-11-09
 ---
 
-> [!TIP]
-> **Prova amanhã?** Vá direto para a [Revisão Relâmpago](revisao-relampago/): receitas, armadilhas e um mini-simulado com gabarito. Cada receita aponta a página onde o assunto está explicado com calma. Para treinar com provas reais, use as [Provas Resolvidas](provas-resolvidas/).
-
 ## Pode começar do zero
 
 Você **não precisa ter cursado Vetorial** (Geometria Analítica) para este estágio. Tudo o que vem de lá e que você vai usar cabe em três ideias:

@@ -1,5 +1,24 @@
-/* Larguras máximas do layout (usadas pelas classes abaixo e pelo Tailwind). */
+/* Paleta */
+:root{
+  --bg:#FAF8F3;--card:#FFFFFF;--line:#E3DDCF;--txt:#1C1B18;--body:#4A463F;--mute:#6B675E;
+  --ac:#B45309;--ac-h:#92400E;--btn:#B45309;--btn-t:#FFFFFF;--axis:#B9B2A2;
+  --c1:#16A34A;--c2:#65A30D;--c3:#CA8A04;--c4:#EA580C;--c5:#DC2626;
+}
+html.dark{
+  --bg:#0B0F14;--card:#141A22;--line:#243040;--txt:#E6E1D5;--body:#B8B3A8;--mute:#9AA3AE;
+  --ac:#FFB000;--ac-h:#FFCB4D;--btn:#FFB000;--btn-t:#0B0F14;--axis:#3A4757;
+  --c1:#4ADE80;--c2:#A3E635;--c3:#FACC15;--c4:#FB923C;--c5:#EF4444;
+  --p1:#4ADE80;--p2:#86E36B;--p3:#A3E635;--p4:#FACC15;--p5:#FBA82C;--p6:#FB923C;--p7:#F0603A;--p8:#EF4444;--p9:#FF4D4D;
+}
 
+/* Raio, movimento e sombra */
+:root{
+  --r-sm:8px;--r-md:10px;--r-lg:12px;--r-pill:999px;
+  --dur:.2s;--ease:ease;
+  --shadow-1:0 1px 2px rgba(20,16,8,.04);
+}
+
+/* Larguras máximas do layout */
 :root {
   --hextra-max-page-width: 80rem;
   --hextra-max-content-width: 72rem;
@@ -7,18 +26,7 @@
   --hextra-max-footer-width: 80rem;
 }
 
-.hextra-max-page-width {
-  max-width: var(--hextra-max-page-width);
-}
-
-.hextra-max-content-width {
-  max-width: var(--hextra-max-content-width);
-}
-
-.hextra-max-navbar-width {
-  max-width: var(--hextra-max-navbar-width);
-}
-
-.hextra-max-footer-width {
-  max-width: var(--hextra-max-footer-width);
-}
+.hextra-max-page-width { max-width: var(--hextra-max-page-width); }
+.hextra-max-content-width { max-width: var(--hextra-max-content-width); }
+.hextra-max-navbar-width { max-width: var(--hextra-max-navbar-width); }
+.hextra-max-footer-width { max-width: var(--hextra-max-footer-width); }
