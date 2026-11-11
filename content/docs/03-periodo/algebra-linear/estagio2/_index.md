@@ -8,6 +8,9 @@ autores:
 date: 2026-11-09
 ---
 
+> [!TIP]
+> **Estudando de véspera?** Vá direto para a [Revisão Relâmpago](revisao-relampago/): receitas, armadilhas e um mini-simulado com gabarito. Cada receita aponta a página onde o assunto está explicado com calma. Para treinar, use as [Questões Resolvidas](questoes-resolvidas/).
+
 ## Pode começar do zero
 
 Você **não precisa ter cursado Vetorial** (Geometria Analítica) para este estágio. Tudo o que vem de lá e que você vai usar cabe em três ideias:
@@ -66,7 +69,7 @@ Se um conjunto tem essas duas operações e elas se comportam bem, ele é um **e
 6. [**Base e dimensão**](base-e-dimensao/): o menor conjunto que gera tudo, e o "tamanho" de um espaço.
 7. [**Coordenadas e mudança de base**](coordenadas-e-mudanca-de-base/): o "endereço" de um vetor e como ele muda quando a base muda.
 8. [**Revisão Relâmpago**](revisao-relampago/): o resumo de véspera de prova, com mini-simulado.
-9. [**Provas Resolvidas**](provas-resolvidas/): as quatro provas do 2º estágio de 2025.2 resolvidas passo a passo.
+9. [**Questões Resolvidas**](questoes-resolvidas/): exercícios completos, agrupados por tipo e resolvidos passo a passo, para treinar depois da teoria.
 
 As páginas seguem essa ordem de propósito: cada uma usa a anterior.
 
@@ -84,6 +87,8 @@ As páginas seguem essa ordem de propósito: cada uma usa a anterior.
 | "Encontre base de \(W_1 \cap W_2\) e \(W_1 + W_2\)" | Juntar equações / juntar geradores | [Soma de subespaços](soma-de-subespacos/) |
 | "Interseção quando um subespaço vem por parâmetros" | Substituir o vetor genérico nas equações do outro | [Soma de subespaços](soma-de-subespacos/) |
 | "Dimensão de um subespaço dado por parâmetros ou geradores" | Separar por parâmetro e **escalonar** | [Base e dimensão](base-e-dimensao/) |
+| "Para que valores de \(k\) é LD / LI / base?" | Determinante em função de \(k\) e resolver \(\det = 0\) (com \(k^2\), há duas raízes) | [Dependência linear](dependencia-linear/) |
+| "Mostre que \(S\) é LI" (conta não quadrada) | Sistema homogêneo ou escalonar e ver se alguma linha zera | [Dependência linear](dependencia-linear/) |
 | "Base de \(W\) contida em \(\{v_1, \ldots, v_n\}\)" | Colunas com pivô da matriz original | [Base e dimensão](base-e-dimensao/) |
 | "Complete \(S\) a uma base do \(\mathbb{R}^4\)" | Acrescentar \(e_j\) nas colunas sem pivô e provar LI | [Base e dimensão](base-e-dimensao/) |
 | "Calcule \([v]_B\)" | Resolver \(v = a_1b_1 + \cdots + a_nb_n\) | [Coordenadas](coordenadas-e-mudanca-de-base/) |
@@ -103,4 +108,4 @@ As páginas seguem essa ordem de propósito: cada uma usa a anterior.
 
 ## Contribuição
 
-Se você tiver listas de exercícios ou provas anteriores do Estágio 2, pode colaborar com a biblioteca e ajudar a enriquecer esta página.
+Se você tiver listas de exercícios ou resoluções do Estágio 2, pode colaborar com a biblioteca e ajudar a enriquecer esta página.

@@ -95,6 +95,35 @@ então **LI**.
 
 **Exemplo 5: quatro matrizes.** Para \(\left\{\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix}, \begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix}\right\}\), as listas \((1,0,0,1)\), \((0,1,1,0)\), \((1,1,0,1)\), \((1,0,1,1)\) formam uma matriz \(4 \times 4\) de determinante \(0\). **LD**. De fato, a soma das duas últimas é \(2\cdot I + \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix}\).
 
+**Exemplo 5b: três matrizes (a conta não é quadrada).** \(\left\{\begin{bmatrix} 1 & 1 \\ 0 & -1 \end{bmatrix}, \begin{bmatrix} 1 & -1 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 1 & 0 \\ 3 & 2 \end{bmatrix}\right\}\) em \(M(2,2)\).
+
+São 3 matrizes e \(\dim M(2,2) = 4\), então **não dá para usar determinante** (a matriz seria \(3 \times 4\)). Vá pelo sistema homogêneo, entrada por entrada:
+
+$$
+\alpha \begin{bmatrix} 1 & 1 \\ 0 & -1 \end{bmatrix} + \beta \begin{bmatrix} 1 & -1 \\ 1 & 0 \end{bmatrix} + \gamma \begin{bmatrix} 1 & 0 \\ 3 & 2 \end{bmatrix} = 0
+\;\Longrightarrow\;
+\begin{cases}
+\alpha + \beta + \gamma = 0 \\
+\alpha - \beta = 0 \\
+\beta + 3\gamma = 0 \\
+-\alpha + 2\gamma = 0
+\end{cases}
+$$
+
+Da segunda, \(\alpha = \beta\). Da terceira, \(\beta = -3\gamma\). Da quarta, \(\alpha = 2\gamma\). Então \(2\gamma = -3\gamma\), ou seja, \(\gamma = 0\), e com isso \(\alpha = \beta = 0\). Só a solução trivial: **LI**.
+
+**Exemplo 5c: o mesmo tipo, mas LD.** \(\left\{\begin{bmatrix} 1 & -1 \\ 3 & 3 \end{bmatrix}, \begin{bmatrix} -1 & 3 \\ 1 & 5 \end{bmatrix}, \begin{bmatrix} 2 & -3 \\ 4 & 2 \end{bmatrix}\right\}\). Escreva as listas **como linhas** e escalone:
+
+$$
+\begin{bmatrix} 1 & -1 & 3 & 3 \\ -1 & 3 & 1 & 5 \\ 2 & -3 & 4 & 2 \end{bmatrix}
+\xrightarrow{\substack{L_2 \to L_2 + L_1 \\ L_3 \to L_3 - 2L_1}}
+\begin{bmatrix} 1 & -1 & 3 & 3 \\ 0 & 2 & 4 & 8 \\ 0 & -1 & -2 & -4 \end{bmatrix}
+\xrightarrow{L_3 \to L_3 + \frac12 L_2}
+\begin{bmatrix} 1 & -1 & 3 & 3 \\ 0 & 2 & 4 & 8 \\ 0 & 0 & 0 & 0 \end{bmatrix}
+$$
+
+Uma linha zerou: **LD**. (A relação é \(3A - B - 2C = 0\).) **Regra prática:** com os vetores nas linhas, \(n\) vetores são LI quando **nenhuma linha zera** no escalonamento.
+
 ## Valores de k que tornam o conjunto LI
 
 Quando o enunciado traz um parâmetro \(k\), o determinante vira uma expressão em \(k\), e a pergunta é **quando ele é diferente de zero**.
@@ -110,6 +139,15 @@ O determinante é diferente de zero quando \(k \neq 0\) e \(k \neq 2\). Então o
 
 **Exemplo 7.** Para \(\{(1, 1, 0), (0, 1, k), (k, 0, 1)\}\), o determinante é \(1 \cdot (1 - 0) - 1 \cdot (0 - k^2) = 1 + k^2\), que é sempre positivo. Então é **LI para todo \(k\)**. (Pode acontecer de nenhum valor de \(k\) quebrar a independência.)
 
+**Exemplo 8: \(k\) ao quadrado.** Para que valores de \(k\) o conjunto \(\{(1, 0, -3), (0, 2, 4), (1, k^2, 5)\}\) é LD?
+
+$$
+\det \begin{bmatrix} 1 & 0 & -3 \\ 0 & 2 & 4 \\ 1 & k^2 & 5 \end{bmatrix}
+= 1\,(10 - 4k^2) - 0 + (-3)(0 - 2) = 16 - 4k^2.
+$$
+
+LD é \(\det = 0\): \(16 - 4k^2 = 0 \Rightarrow k^2 = 4\). Logo **\(k = 2\) ou \(k = -2\)**, os dois valores. Quando o \(k\) aparece ao quadrado, não esqueça a raiz negativa.
+
 > [!TIP]
 > "**Base de \(\mathbb{R}^3\)**" para três vetores é a mesma coisa que "**LI**", porque \(\dim \mathbb{R}^3 = 3\). Então os exercícios do tipo "para que \(k\) é base" e "para que \(k\) é LI" se resolvem do mesmo jeito: \(\det \neq 0\).
 
@@ -124,6 +162,7 @@ O determinante é diferente de zero quando \(k \neq 0\) e \(k \neq 2\). Então o
 - **Usar determinante com matriz não quadrada.** Só vale quando o número de vetores é igual à dimensão.
 - **Achar que a solução trivial prova LD.** Ela sempre existe; o que importa é existir outra.
 - **Esquecer de "traduzir" polinômios e matrizes para listas** antes de montar a matriz.
+- **Perder uma raiz.** Se o determinante tem \(k^2\), resolva a equação inteira: \(k^2 = 4\) dá \(k = 2\) **e** \(k = -2\).
 - **Cortar valores de \(k\) sem conferir.** Se \(\det = k(k - 2)\), os valores problemáticos são os que **zeram** o determinante (\(k = 0\) e \(k = 2\)).
 
 ## Exercícios
@@ -242,6 +281,31 @@ $$
 - Dois vetores geram, no máximo, um plano pela origem.
 
 **Resposta:** **não** geram.
+{{< /details >}}
+
+**Exercício 7.** Para que \(k\) o conjunto \(\{(1, 0, -1), (1, 1, 0), (k, 1, -1)\}\) é LI?
+
+{{< details title="Resolução" >}}
+**Passo 1: determinante em função de \(k\).**
+
+$$
+\det \begin{bmatrix} 1 & 0 & -1 \\ 1 & 1 & 0 \\ k & 1 & -1 \end{bmatrix}
+= 1\,(-1 - 0) - 0 + (-1)(1 - k) = -1 - 1 + k = k - 2.
+$$
+
+**Passo 2: quando é diferente de zero.** \(k - 2 \neq 0\) quando \(k \neq 2\).
+
+**Resposta:** LI para todo \(k \neq 2\) (e LD para \(k = 2\)). Como são 3 vetores em \(\mathbb{R}^3\), isso também diz quando eles formam base.
+{{< /details >}}
+
+**Exercício 8.** Decida se \(\{(1, 2, 3, 4),\; (0, 1, 2, 3),\; (0, 0, 1, 2)\}\) é LI em \(\mathbb{R}^4\). Dá para usar determinante?
+
+{{< details title="Resolução" >}}
+**Passo 1: o determinante não serve.** São 3 vetores em \(\mathbb{R}^4\): a matriz é \(3 \times 4\), e determinante só existe em matriz quadrada.
+
+**Passo 2: olhar o escalonamento.** Com os vetores nas linhas, a matriz já está escalonada (pivôs nas colunas 1, 2 e 3) e **nenhuma linha é nula**.
+
+**Resposta:** são **LI**. (Equivalente: \(\alpha(1,2,3,4) + \beta(0,1,2,3) + \gamma(0,0,1,2) = 0\) dá \(\alpha = 0\) pela 1ª coordenada, depois \(\beta = 0\), depois \(\gamma = 0\).)
 {{< /details >}}
 
 ## Teste rápido

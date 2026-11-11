@@ -1,0 +1,26 @@
+{{- /*
+  Histórico do terminal da home: os 3 materiais atualizados mais recentemente.
+  A data vem do último commit que mexeu no arquivo (enableGitInfo), então o
+  "history" se atualiza sozinho a cada publicação, sem manter lista à mão.
+  Ordem de `history`: o mais antigo primeiro, o mais recente colado no prompt.
+*/ -}}
+{{- $recentes := slice -}}
+{{- with site.GetPage "/docs" -}}
+  {{- $recentes = (.RegularPagesRecursive.ByLastmod.Reverse | first 3).Reverse -}}
+{{- end -}}
+{{- if $recentes }}
+        <p><span class="bo-ps" aria-hidden="true">$</span> history 3</p>
+        <ol class="bo-hist" aria-label="Últimos materiais atualizados">
+          {{- range $i, $pg := $recentes }}
+            {{- $partes := slice -}}
+            {{- range split (strings.TrimPrefix "/docs/" $pg.Path) "/" -}}
+              {{- if and . (not (findRE `^\d+-periodo$` .)) }}{{ $partes = $partes | append . }}{{ end -}}
+            {{- end -}}
+            {{- $n := len $partes -}}
+            {{- $caminho := delimit $partes "/" -}}
+            {{- if gt $n 2 }}{{ $caminho = printf "%s/%s" (index $partes 0) (index $partes (sub $n 1)) }}{{ end -}}
+            {{- $data := $pg.Lastmod.Format "02/01/2006" }}
+          <li><a href="{{ $pg.RelPermalink }}" title="{{ $pg.Title }}"><span class="bo-hist-n" aria-hidden="true">{{ add $i 1 }}</span><span class="bo-hist-cmd"><span class="bo-hist-sh">cat</span> {{ $caminho }}</span><time class="bo-hist-d" datetime="{{ $pg.Lastmod.Format "2006-01-02" }}">{{ $data }}</time></a></li>
+          {{- end }}
+        </ol>
+{{- end -}}

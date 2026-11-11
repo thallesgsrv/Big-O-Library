@@ -97,7 +97,7 @@ que é um sistema homogêneo em \(a, b, c, d\). Resolva e escreva o vetor \(a\,u
 > **Base da soma por parâmetros:** junte todos os geradores como **colunas**, escalone e use as colunas com pivô (veja "Base contida no conjunto dado", na página de Base e Dimensão). A quantidade de pivôs é \(\dim(W_1 + W_2)\) e serve para conferir a fórmula.
 
 > [!TIP]
-> **Propriedades também são equações.** Um subespaço descrito por uma palavra, como "matrizes simétricas", entra na conta depois de traduzido. Em \(\begin{bmatrix} x & y \\ z & t \end{bmatrix}\), simétrica quer dizer \(A = A^T\), ou seja, **\(y = z\)**. A partir daí é "juntar as equações" com as do outro subespaço (veja a Prova da Tarde, Questão 4, em [Provas Resolvidas](../provas-resolvidas/)).
+> **Propriedades também são equações.** Um subespaço descrito por uma palavra, como "matrizes simétricas", entra na conta depois de traduzido. Em \(\begin{bmatrix} x & y \\ z & t \end{bmatrix}\), simétrica quer dizer \(A = A^T\), ou seja, **\(y = z\)**. A partir daí é "juntar as equações" com as do outro subespaço (há um exemplo completo em [Questões Resolvidas](../questoes-resolvidas/), na seção sobre soma e interseção).
 
 ### Soma: junte os geradores
 

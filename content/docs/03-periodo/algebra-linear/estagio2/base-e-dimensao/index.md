@@ -91,6 +91,17 @@ LI com 3 vetores: **é base de \(P_2\)**.
 > [!WARNING]
 > Se o número de vetores **não for igual** à dimensão, o determinante não se aplica, mas você nem precisa dele: com mais vetores é LD, com menos não gera. A resposta sai pela contagem.
 
+**Exemplo 6b: a contagem certa não basta.** \(S = \left\{\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix}, \begin{bmatrix} 0 & 0 \\ 1 & 1 \end{bmatrix}, \begin{bmatrix} 5 & 5 \\ 5 & 5 \end{bmatrix}\right\}\) é base de \(M(2,2)\)?
+
+São 4 matrizes e \(\dim M(2,2) = 4\), então a contagem não resolve: falta testar se são LI. Procure uma matriz que seja combinação das outras. A quarta é:
+
+$$
+\begin{bmatrix} 5 & 5 \\ 5 & 5 \end{bmatrix}
+= 5\begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} + 5\begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} + 5\begin{bmatrix} 0 & 0 \\ 1 & 1 \end{bmatrix}.
+$$
+
+A quarta é combinação das outras três, então \(S\) é **LD** e **não é base**. (Com 4 vetores LD, o gerado tem dimensão 3, que é pouco para \(M(2,2)\).)
+
 ## Como achar uma base de um subespaço
 
 ### Quando o subespaço vem por equações
@@ -413,6 +424,26 @@ $$
 $$
 
 **Conclusão.** São 4 vetores LI em \(\mathbb{R}^4\), então \(\{(0,1,0,1), (1,1,0,0), (0,0,1,0), (0,0,0,1)\}\) é uma base de \(\mathbb{R}^4\) que contém \(S\).
+{{< /details >}}
+
+**Exercício 9.** \(\left\{\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \begin{bmatrix} 0 & -1 \\ 1 & 0 \end{bmatrix}, \begin{bmatrix} 1 & 1 \\ 1 & -1 \end{bmatrix}, \begin{bmatrix} 2 & 1 \\ 1 & 0 \end{bmatrix}\right\}\) é base de \(M(2,2)\)?
+
+{{< details title="Resolução" >}}
+**Passo 1: contar.** São 4 matrizes e \(\dim M(2,2) = 4\). Falta ver se são LI.
+
+**Passo 2: traduzir para listas** (entradas \(11, 12, 21, 22\)).
+
+$$
+M_1 = (1, 0, 0, 1), \quad M_2 = (0, -1, 1, 0), \quad M_3 = (1, 1, 1, -1), \quad M_4 = (2, 1, 1, 0).
+$$
+
+**Passo 3: procurar uma relação.** Somando \(M_1\) e \(M_3\):
+
+$$
+M_1 + M_3 = (2, 1, 1, 0) = M_4.
+$$
+
+**Resposta:** \(M_4\) é combinação das outras, então o conjunto é LD (o determinante da matriz \(4 \times 4\) é \(0\)) e **não é base**.
 {{< /details >}}
 
 ## Teste rápido

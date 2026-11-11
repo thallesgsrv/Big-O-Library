@@ -173,6 +173,20 @@ $$
 
 Logo \(p = bt\): \(W\) é o conjunto dos múltiplos de \(t\), que é subespaço. (Ele é uma reta dentro de \(P_2\).)
 
+**Exemplo 6b: o polinômio e a derivada juntos.** \(W = \{p \in P_2 \mid p(t) + p'(t) = 0 \text{ para todo } t\}\).
+
+Com \(p = a + bt + ct^2\) e \(p' = b + 2ct\):
+
+$$
+p + p' = (a + b) + (b + 2c)\,t + c\,t^2 = 0
+\;\Longrightarrow\;
+c = 0,\quad b + 2c = 0,\quad a + b = 0
+\;\Longrightarrow\;
+a = b = c = 0.
+$$
+
+Só o polinômio nulo passa no filtro, então \(W = \{0\}\), que é subespaço (o menor de todos). Dá para concluir **sem calcular nada**: a derivada respeita soma e escalar, \((p + q)' = p' + q'\) e \((\alpha p)' = \alpha p'\). Então, se \(p + p' = 0\) e \(q + q' = 0\), também \((p + q) + (p + q)' = 0\) e \(\alpha p + (\alpha p)' = 0\). ✓
+
 ## Enxergando no plano e no espaço
 
 Subespaço tem cara de coisa "reta e que passa pela origem":
@@ -212,6 +226,23 @@ Aqui basta **um** contraexemplo, e ele usa números. A estratégia:
 
 **Exemplo 12: desigualdade em matrizes.** \(W = \left\{\begin{bmatrix} a & b \\ c & d \end{bmatrix} \mid a + d \leq b + c\right\}\). Escolha uma matriz com folga: \(a = 0, b = 1, c = 0, d = 0\) satisfaz \(0 \leq 1\). Multiplicando por \(-1\): \(b = -1\), e fica \(0 \leq -1\), que é falso. **Não é subespaço.**
 
+**Exemplo 13: o zero passa, e mesmo assim não é.** \(U = \{(x, y, z, t) \in \mathbb{R}^4 \mid t = xz\}\).
+
+O vetor nulo passa (\(0 = 0 \cdot 0\)), então esse teste não derruba nada. Mas o filtro tem um **produto** de coordenadas, e produto costuma quebrar. Pegue um elemento simples, \(u = (1, 0, 1, 1)\) (vale, pois \(1 = 1 \cdot 1\)), e multiplique por 2:
+
+$$
+2u = (2, 0, 2, 2), \qquad xz = 2 \cdot 2 = 4 \neq 2 = t.
+$$
+
+\(2u \notin U\): não fecha no escalar. **Não é subespaço.** (A soma também falha: \((1, 0, 0, 0)\) e \((0, 0, 1, 0)\) estão em \(U\), mas a soma \((1, 0, 1, 0)\) tem \(xz = 1 \neq 0 = t\).)
+
+> [!WARNING]
+> Passar no teste do zero **não prova** que é subespaço. Ele só serve para derrubar quando **falha**. O mesmo vale para qualquer filtro com quadrado, como \(z = x^2 + y\): o zero passa, mas \(u = (1, 0, 1)\) está no conjunto e \(2u = (2, 0, 2)\) não (\(4 \neq 2\)).
+
+**Exemplo 14: número solto em matrizes.** \(W = \left\{\begin{bmatrix} a & b \\ c & d \end{bmatrix} \mid b = c + 1\right\}\).
+
+A matriz nula tem \(b = 0\) e \(c + 1 = 1\), e \(0 \neq 1\). Então \(0 \notin W\). **Não é subespaço.** Repare na diferença para \(b = c\) (matrizes simétricas), que **é** subespaço: o \(+1\) é o que tira o zero do conjunto.
+
 ## Receita para decidir
 
 1. **Teste o zero.** Se não passa, acabou: não é subespaço.
@@ -233,6 +264,7 @@ A união ser subespaço só acontece quando um dos dois está dentro do outro.
 - **Conferir só uma das condições** quando o filtro tem "e" (duas condições).
 - **Achar que "multiplicar por \(-1\)" derruba qualquer conjunto.** Só derruba quando há desigualdade com folga.
 - **Confundir \(p(0)\) com o polinômio.** \(p(0)\) é um número; \(p\) é o vetor.
+- **Parar no teste do zero.** Se o zero passa, ainda falta provar a soma e o escalar (ou achar o contraexemplo).
 
 ## Exercícios
 
