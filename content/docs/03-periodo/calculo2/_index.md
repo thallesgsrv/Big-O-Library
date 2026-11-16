@@ -30,4 +30,10 @@ Cálculo 2 dá continuidade a Cálculo 1, aprofundando o estudo de integrais e s
 
 - Somas de Riemann e integral definida
 - Área entre curvas
-- Volume de sólidos (em construção)
+- Volume por discos e anéis
+- Volume por cascas cilíndricas
+- Comprimento de arco
+- Área de superfície de revolução
+
+> [!NOTE]
+> Da página de discos em diante, toda resolução segue o padrão do professor: espessura, raio (ou base e altura), volume da fatia, aproximação do sólido e volume do sólido.

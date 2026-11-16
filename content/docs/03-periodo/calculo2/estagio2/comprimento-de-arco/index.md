@@ -1,6 +1,6 @@
 ---
 title: Comprimento de arco
-weight: 3
+weight: 5
 description: Medir uma curva, some pedacinhos retos e passe ao limite.
 autores:
   - thallesgsrv

@@ -1,6 +1,6 @@
 ---
 title: Volume por cascas cilíndricas
-weight: 2
+weight: 4
 description: Quando discos complicam, fatie paralelo ao eixo e some cascas.
 autores:
   - thallesgsrv

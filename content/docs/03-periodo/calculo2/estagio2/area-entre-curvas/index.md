@@ -39,6 +39,19 @@ Uma forma de enxergar: a área entre as curvas é a área sob \(f\) **menos** a 
 
 Para a descrição em \(y\), o raciocínio é o mesmo girado em 90°: os retângulos ficam **deitados**, de espessura \(\Delta y\), indo da curva da esquerda até a da direita.
 
+## No padrão de resolução do estágio
+
+Toda questão deste estágio segue a mesma ordem. Para a área entre \(y=f(x)\) (em cima) e \(y=g(x)\) (embaixo):
+
+- **Espessura:** \(\Delta x_i\)
+- **Base do retângulo:** \(\Delta x_i\)
+- **Altura do retângulo:** \(f(x_i^*)-g(x_i^*)\)
+- **Área da fatia:** \(\big[f(x_i^*)-g(x_i^*)\big]\Delta x_i\)
+- **Aproximação da região:** \(\displaystyle\sum_{i=1}^{n}\big[f(x_i^*)-g(x_i^*)\big]\Delta x_i\)
+- **Área da região:** \(\displaystyle\lim_{n\to\infty}\sum_{i=1}^{n}\big[f(x_i^*)-g(x_i^*)\big]\Delta x_i=\int_a^b\big[f(x)-g(x)\big]dx\)
+
+Nas próximas páginas só muda a **fatia**: o retângulo vira disco, anel, casca, segmento ou faixa de cone.
+
 ## Receita
 
 1. **Desenhe** a região (ou use o GeoGebra) e decida a variável: a descrição é \(y = \ldots\) ou \(x = \ldots\)?

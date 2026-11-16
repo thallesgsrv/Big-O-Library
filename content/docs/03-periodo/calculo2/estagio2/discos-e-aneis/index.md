@@ -1,6 +1,6 @@
 ---
 title: Volume por discos e anéis
-weight: 1
+weight: 3
 description: Fatiar, aproximar e somar, volume de sólidos de revolução com discos e anéis.
 autores:
   - thallesgsrv
@@ -11,7 +11,7 @@ date: 2026-11-16
 
 ## 1. A ideia: fatiar, aproximar, somar
 
-Como medir o volume de um sólido que não é caixa nem cilindro? Fatie em pedaços finos, trate cada pedaço como algo que você sabe medir, some e faça as fatias ficarem infinitamente finas. É a mesma ideia da soma de Riemann, só que agora cada retângulo vira uma **fatia 3D**.
+Como medir o volume de um sólido que não é caixa nem cilindro? Fatie em pedaços finos, trate cada pedaço como algo que você sabe medir, some e faça as fatias ficarem infinitamente finas. É a mesma ideia da [soma de Riemann](../rieman/) (e da [área entre curvas](../area-entre-curvas/)), só que agora cada retângulo vira uma **fatia 3D**.
 
 > [!IMPORTANT]
 > **Receita do professor (use em toda questão, sempre nesta ordem):**
@@ -167,7 +167,7 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 - **Raio do disco:** \(\operatorname{sen}{x_i^*}\cos{x_i^*}\)
 - **Volume da fatia:** \(\pi\big(\operatorname{sen}{x_i^*}\cos{x_i^*}\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\operatorname{sen}{x_i^*}\cos{x_i^*}\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\operatorname{sen}{x_i^*}\cos{x_i^*}\big)^2\,\Delta x_i=\pi\int_{0}^{\pi/2}\big(\operatorname{sen}x\cosx\big)^2\,dx\)
+- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\operatorname{sen}{x_i^*}\cos{x_i^*}\big)^2\,\Delta x_i=\pi\int_{0}^{\pi/2}\big(\operatorname{sen}x\cos x\big)^2\,dx\)
 - **Conta:** \(\pi\int_0^{\pi/2}\tfrac{\operatorname{sen}^22x}{4}dx=\tfrac\pi8\int_0^{\pi/2}(1-\cos4x)dx=\tfrac\pi8\cdot\tfrac\pi2\)
 - **Resposta:** \(\boxed{\tfrac{\pi^2}{16}}\)
 {{< /details >}}

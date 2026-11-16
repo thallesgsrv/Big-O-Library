@@ -7,7 +7,7 @@ autores:
 rotulo: Tópicos
 baseadoEm:
   - rodrigocohen
-date: 2026-11-16
+date: 2026-10-29
 ---
 
 ## A ideia central
@@ -32,10 +32,12 @@ Toda aplicação deste estágio é a mesma jogada: **fatiar** o objeto, medir **
 
 ## Mapa do estágio
 
-1. **Discos e anéis:** questões 1 a 8 e 14(a),(d).
-2. **Cascas cilíndricas:** questões 9 a 13 e 14(b),(c).
-3. **Comprimento de arco:** questões 15 e 16.
-4. **Área de superfície:** questões 17 a 21.
+1. **Somas de Riemann e integral definida:** de onde vem \(\lim\sum=\int\).
+2. **Área entre curvas:** a fatia é um retângulo.
+3. **Discos e anéis:** questões 1 a 8 e 14(a),(d) da lista.
+4. **Cascas cilíndricas:** questões 9 a 13 e 14(b),(c).
+5. **Comprimento de arco:** questões 15 e 16.
+6. **Área de superfície:** questões 17 a 21.
 
 ## Bagagem esperada
 
