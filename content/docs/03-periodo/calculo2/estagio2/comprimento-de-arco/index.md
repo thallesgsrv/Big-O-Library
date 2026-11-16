@@ -4,8 +4,6 @@ weight: 5
 description: Medir uma curva, some pedacinhos retos e passe ao limite.
 autores:
   - thallesgsrv
-baseadoEm:
-  - rodrigocohen
 date: 2026-11-16
 ---
 

@@ -5,8 +5,6 @@ description: Volumes por discos, anéis e cascas; comprimento de arco; área de 
 autores:
   - thallesgsrv
 rotulo: Tópicos
-baseadoEm:
-  - rodrigocohen
 date: 2026-10-29
 ---
 

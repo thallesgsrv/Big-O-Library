@@ -4,8 +4,6 @@ weight: 3
 description: Fatiar, aproximar e somar, volume de sólidos de revolução com discos e anéis.
 autores:
   - thallesgsrv
-baseadoEm:
-  - rodrigocohen
 date: 2026-11-16
 ---
 

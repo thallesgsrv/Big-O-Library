@@ -4,8 +4,6 @@ weight: 6
 description: Girar uma curva gera uma superfície, some faixas de cone fininhas.
 autores:
   - thallesgsrv
-baseadoEm:
-  - rodrigocohen
 date: 2026-11-16
 ---
 
