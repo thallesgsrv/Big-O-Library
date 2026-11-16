@@ -9,7 +9,7 @@ date: 2026-11-16
 
 ## 1. A ideia: fatiar, aproximar, somar
 
-Como medir o volume de um sólido que não é caixa nem cilindro? Fatie em pedaços finos, trate cada pedaço como algo que você sabe medir, some e faça as fatias ficarem infinitamente finas. É a mesma ideia da [soma de Riemann](../rieman/) (e da [área entre curvas](../area-entre-curvas/)), só que agora cada retângulo vira uma **fatia 3D**.
+Como medir o volume de um sólido que não é caixa nem cilindro? Fatie em pedaços finos, trate cada pedaço como algo que você sabe medir, some e faça as fatias ficarem infinitamente finas. É a mesma ideia da soma de Riemann, só que agora cada retângulo vira uma **fatia 3D**.
 
 > [!IMPORTANT]
 > **Receita do professor (use em toda questão, sempre nesta ordem):**
@@ -22,13 +22,21 @@ Como medir o volume de um sólido que não é caixa nem cilindro? Fatie em peda�
 
 ### Aquecimento: fatias que não são discos
 
-Sólido com base no triângulo sob \(y=1-x\), \(0\le x\le1\), cujas fatias perpendiculares ao eixo \(x\) são triângulos retângulos isósceles, com cateto na região.
+Sólido com base no triângulo sob \(y=1-x\), \(0\le x\le1\), cujas fatias perpendiculares ao eixo \(x\) são triângulos retângulos isósceles, com um cateto na região.
 
+- **Como pensar:** em cada \(x\), a região tem altura \(1-x\) (a reta). Esse segmento é o cateto da fatia, e como o triângulo é isósceles, o outro cateto também vale \(1-x\).
 - **Espessura:** \(\Delta x_i\)
 - **Base:** \(1-x_i^*\)  **Altura:** \(1-x_i^*\)
-- **Volume da fatia:** área do triângulo \(\times\) espessura \(=\dfrac{(1-x_i^*)^2}{2}\Delta x_i\)
+- **Volume da fatia:** área do triângulo \(\times\) espessura \(=\dfrac{(1-x_i^*)^2}{2}\Delta x_i\) (área \(=\tfrac{\text{base}\cdot\text{altura}}2\))
 - **Aproximação:** \(\displaystyle\sum_{i=1}^{n}\frac12(1-x_i^*)^2\Delta x_i\)
-- **Volume do sólido:** \(\displaystyle\int_0^1\frac12(1-x)^2dx=\Big[-\frac{(1-x)^3}{6}\Big]_0^1=\boxed{\frac16}\)
+- **Volume do sólido:** \(V=\displaystyle\int_0^1\frac12(1-x)^2dx\). Primitiva (regra da cadeia ao contrário): \(-\dfrac{(1-x)^3}{6}\). Em \(1\): \(0\). Em \(0\): \(-\tfrac16\). Logo \(0-(-\tfrac16)=\boxed{\tfrac16}\)
+
+### Quatro perguntas para montar qualquer integral de volume
+
+1. **Em torno de quê gira?** Se é \(x\) ou uma reta horizontal, a espessura é \(\Delta x\) (disco/anel) e as curvas entram como \(y=\ldots\). Se é \(y\) ou uma reta vertical, a espessura é \(\Delta y\) e as curvas entram como \(x=\ldots\).
+2. **A região encosta no eixo?** Sim: **disco** (um raio). Não: **anel** (raio externo e interno).
+3. **Qual é o raio?** A **distância** da curva ao eixo, nunca só a posição da curva.
+4. **Quais são os limites?** Onde a região começa e termina na variável da espessura, achados **igualando as curvas** quando elas se cruzam.
 
 ## 2. Método dos discos
 
@@ -61,28 +69,29 @@ $$
 
 **Exemplo 1.** \(y=\sqrt x,\ 0\le x\le4\), em torno do eixo \(x\).
 
-- **Método:** disco, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** A curva \(\sqrt x\) sobe de \(0\) a \(2\) e a região está **colada** no eixo \(x\): não há buraco, então a fatia é um **disco**. O raio é a altura da curva, \(\sqrt x\). Limites: os do enunciado.
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \(\sqrt{{x_i^*}}\)
 - **Volume da fatia:** \(\pi\big(\sqrt{{x_i^*}}\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\sqrt{{x_i^*}}\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\sqrt{{x_i^*}}\big)^2\,\Delta x_i=\pi\int_{0}^{4}\big(\sqrt{x}\big)^2\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{4}\big(\sqrt{x}\big)^2\,dx\)
 - **Conta:** \(\pi\int_0^4x\,dx=\pi\Big[\tfrac{x^2}2\Big]_0^4\)
 - **Resposta:** \(\boxed{8\pi}\)
 
 **Exemplo 2 (esfera).** Círculo \(x^2+y^2=a^2\) em torno do eixo \(x\): \(y=\sqrt{a^2-x^2}\), \(-a\le x\le a\).
 
-- **Método:** disco, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Só a metade de cima do círculo, \(y=\sqrt{a^2-x^2}\), basta: ao girar ela gera a esfera inteira. Vai de \(-a\) a \(a\) (onde \(y=0\)) e o raio é a altura do semicírculo. O quadrado **desfaz a raiz**.
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \(\sqrt{a^2-{x_i^*}^2}\)
 - **Volume da fatia:** \(\pi\big(\sqrt{a^2-{x_i^*}^2}\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\sqrt{a^2-{x_i^*}^2}\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\sqrt{a^2-{x_i^*}^2}\big)^2\,\Delta x_i=\pi\int_{-a}^{a}\big(\sqrt{a^2-x^2}\big)^2\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{-a}^{a}\big(\sqrt{a^2-x^2}\big)^2\,dx\)
 - **Conta:** \(\pi\int_{-a}^{a}(a^2-x^2)dx=\pi\Big[a^2x-\tfrac{x^3}3\Big]_{-a}^{a}=\pi\Big(2a^3-\tfrac{2a^3}3\Big)\)
 - **Resposta:** \(\boxed{\tfrac43\pi a^3}\)
 
 **Exemplo 3.** Primeiro quadrante entre \(y=x^2\), \(y=-x+2\) e o eixo \(x\), em torno do eixo \(x\). As curvas se cruzam em \(x=1\) (\(x^2=2-x\)): a região tem **duas partes**, uma por regra.
 
+- **Como pensar:** Veja a região: sobe pela parábola até \(x=1\) e desce pela reta até \(x=2\). Como a curva de cima **muda** em \(x=1\), cada trecho tem sua integral. Os dois trechos encostam no eixo \(x\): discos.
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \(x_i^{*2}\) se \(0\le x\le1\); \(2-x_i^*\) se \(1\le x\le2\)
 - **Volume da fatia:** \(\pi\,x_i^{*4}\,\Delta x_i\) ou \(\pi(2-x_i^*)^2\Delta x_i\)
@@ -91,34 +100,34 @@ $$
 
 **Exemplo 4 (o da lousa).** Região entre o eixo \(y\) e \(x=\dfrac2y\), \(1\le y\le4\), em torno do eixo \(y\).
 
-- **Método:** disco, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Gira em torno de \(y\), então as fatias ficam **deitadas** e a espessura é \(\Delta y\). Por isso a curva precisa estar como \(x\) em função de \(y\): já está. O raio de cada disco é a distância ao eixo \(y\), isto é, o próprio \(x=\tfrac2y\). Veja a lousa: raio \(\tfrac{2}{y_i^*}\), volume do disco \(\pi\big(\tfrac2{y_i^*}\big)^2\Delta y_i\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio do disco:** \(\tfrac{2}{{y_i^*}}\)
 - **Volume da fatia:** \(\pi\big(\tfrac{2}{{y_i^*}}\big)^2\,\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\tfrac{2}{{y_i^*}}\big)^2\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\tfrac{2}{{y_i^*}}\big)^2\,\Delta y_i=\pi\int_{1}^{4}\big(\tfrac{2}{y}\big)^2\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{1}^{4}\big(\tfrac{2}{y}\big)^2\,dy\)
 - **Conta:** \(4\pi\int_1^4y^{-2}dy=4\pi\Big[-\tfrac1y\Big]_1^4=4\pi\Big(-\tfrac14+1\Big)\)
 - **Resposta:** \(\boxed{3\pi}\)
 
 **Exemplo 5.** Região entre \(y=\sqrt x\), \(y=1\) e \(x=4\), em torno de \(y=1\) (\(1\le x\le4\)).
 
-- **Método:** disco, girando em torno da a reta \(y=1\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** A reta \(y=1\) é a **borda** da região (a curva \(\sqrt x\) fica acima dela). Raio = distância da curva até o eixo \(y=1\): \(\sqrt x-1\). Limites: \(\sqrt x=1\Rightarrow x=1\) até \(x=4\). O eixo sendo a borda, é disco.
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \(\sqrt{{x_i^*}}-1\)
 - **Volume da fatia:** \(\pi\big(\sqrt{{x_i^*}}-1\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\sqrt{{x_i^*}}-1\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\sqrt{{x_i^*}}-1\big)^2\,\Delta x_i=\pi\int_{1}^{4}\big(\sqrt{x}-1\big)^2\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{1}^{4}\big(\sqrt{x}-1\big)^2\,dx\)
 - **Conta:** \(\pi\int_1^4(x-2\sqrt x+1)dx=\pi\Big[\tfrac{x^2}2-\tfrac{4x^{3/2}}3+x\Big]_1^4=\pi\Big(\tfrac{15}2-\tfrac{28}3+3\Big)\)
 - **Resposta:** \(\boxed{\tfrac{7\pi}{6}}\)
 
 **Exemplo 6.** Região entre \(x=y^2+1\) e \(x=3\), em torno de \(x=3\) (\(-\sqrt2\le y\le\sqrt2\)).
 
-- **Método:** disco, girando em torno da a reta \(x=3\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** A reta \(x=3\) é a borda direita e a parábola a esquerda. Cruzam em \(y^2+1=3\Rightarrow y=\pm\sqrt2\). Eixo vertical: fatias deitadas, \(dy\). Raio = distância até \(x=3\): \(3-(y^2+1)=2-y^2\). A região é simétrica, então \(\int_{-\sqrt2}^{\sqrt2}=2\int_0^{\sqrt2}\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio do disco:** \(2-{y_i^*}^2\)
 - **Volume da fatia:** \(\pi\big(2-{y_i^*}^2\big)^2\,\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(2-{y_i^*}^2\big)^2\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(2-{y_i^*}^2\big)^2\,\Delta y_i=\pi\int_{-\sqrt2}^{\sqrt2}\big(2-y^2\big)^2\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{-\sqrt2}^{\sqrt2}\big(2-y^2\big)^2\,dy\)
 - **Conta:** \(\pi\int_{-\sqrt2}^{\sqrt2}(2-y^2)^2dy=2\pi\Big[4y-\tfrac{4y^3}3+\tfrac{y^5}5\Big]_0^{\sqrt2}=2\pi\sqrt2\Big(4-\tfrac83+\tfrac45\Big)\)
 - **Resposta:** \(\boxed{\tfrac{64\sqrt2\,\pi}{15}}\)
 
@@ -147,12 +156,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **1(a)** Região sob \(x+2y=2\), \(0\le x\le2\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** A reta \(y=1-\tfrac x2\) vai de \(1\) a \(0\) e a região encosta no eixo \(x\): disco de raio igual à altura da reta.
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \(1-\tfrac{{x_i^*}}{2}\)
 - **Volume da fatia:** \(\pi\big(1-\tfrac{{x_i^*}}{2}\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(1-\tfrac{{x_i^*}}{2}\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(1-\tfrac{{x_i^*}}{2}\big)^2\,\Delta x_i=\pi\int_{0}^{2}\big(1-\tfrac{x}{2}\big)^2\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{2}\big(1-\tfrac{x}{2}\big)^2\,dx\)
 - **Conta:** \(\pi\int_0^2\Big(1-x+\tfrac{x^2}4\Big)dx=\pi\Big[x-\tfrac{x^2}2+\tfrac{x^3}{12}\Big]_0^2\)
 - **Resposta:** \(\boxed{\tfrac{2\pi}3}\)
 {{< /details >}}
@@ -160,12 +169,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **1(b)** Região sob \(y=\operatorname{sen}x\cos x\), \(0\le x\le\pi/2\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Uma colina sobre o eixo \(x\): disco de raio \(f(x)\). Para integrar, \(\operatorname{sen}x\cos x=\tfrac12\operatorname{sen}2x\), logo o quadrado é \(\tfrac14\operatorname{sen}^22x\), e \(\operatorname{sen}^2u=\tfrac{1-\cos2u}2\).
 - **Espessura:** \(\Delta x_i\)
-- **Raio do disco:** \(\operatorname{sen}{x_i^*}\cos{x_i^*}\)
-- **Volume da fatia:** \(\pi\big(\operatorname{sen}{x_i^*}\cos{x_i^*}\big)^2\,\Delta x_i\)
-- **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\operatorname{sen}{x_i^*}\cos{x_i^*}\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\operatorname{sen}{x_i^*}\cos{x_i^*}\big)^2\,\Delta x_i=\pi\int_{0}^{\pi/2}\big(\operatorname{sen}x\cos x\big)^2\,dx\)
+- **Raio do disco:** \(\operatorname{sen}{x_i^*}\cos{{x_i^*}}\)
+- **Volume da fatia:** \(\pi\big(\operatorname{sen}{x_i^*}\cos{{x_i^*}}\big)^2\,\Delta x_i\)
+- **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\operatorname{sen}{x_i^*}\cos{{x_i^*}}\big)^2\,\Delta x_i\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{\pi/2}\big(\operatorname{sen}x\cos{x}\big)^2\,dx\)
 - **Conta:** \(\pi\int_0^{\pi/2}\tfrac{\operatorname{sen}^22x}{4}dx=\tfrac\pi8\int_0^{\pi/2}(1-\cos4x)dx=\tfrac\pi8\cdot\tfrac\pi2\)
 - **Resposta:** \(\boxed{\tfrac{\pi^2}{16}}\)
 {{< /details >}}
@@ -175,12 +184,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **2(a)** Região entre o eixo \(y\) e \(x=\tfrac{3y}2\), \(0\le y\le2\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Eixo \(y\): fatias deitadas (\(dy\)) e \(x\) em função de \(y\), que já está. Raio = \(x=\tfrac{3y}2\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio do disco:** \(\tfrac{3{y_i^*}}{2}\)
 - **Volume da fatia:** \(\pi\big(\tfrac{3{y_i^*}}{2}\big)^2\,\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\tfrac{3{y_i^*}}{2}\big)^2\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\tfrac{3{y_i^*}}{2}\big)^2\,\Delta y_i=\pi\int_{0}^{2}\big(\tfrac{3y}{2}\big)^2\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{2}\big(\tfrac{3y}{2}\big)^2\,dy\)
 - **Conta:** \(\pi\int_0^2\tfrac{9y^2}4dy=\tfrac{9\pi}4\cdot\tfrac83\)
 - **Resposta:** \(\boxed{6\pi}\)
 {{< /details >}}
@@ -188,12 +197,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **2(b)** Região entre o eixo \(y\) e \(x=\operatorname{tg}\big(\tfrac\pi4y\big)\), \(0\le y\le1\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Igual: raio \(x=\operatorname{tg}\big(\tfrac\pi4y\big)\). Para integrar \(\operatorname{tg}^2\), use \(\operatorname{tg}^2=\sec^2-1\); a primitiva de \(\sec^2\tfrac{\pi y}4\) leva o fator \(\tfrac4\pi\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio do disco:** \(\operatorname{tg}\big(\tfrac\pi4{y_i^*}\big)\)
 - **Volume da fatia:** \(\pi\big(\operatorname{tg}\big(\tfrac\pi4{y_i^*}\big)\big)^2\,\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\operatorname{tg}\big(\tfrac\pi4{y_i^*}\big)\big)^2\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\operatorname{tg}\big(\tfrac\pi4{y_i^*}\big)\big)^2\,\Delta y_i=\pi\int_{0}^{1}\big(\operatorname{tg}\big(\tfrac\pi4y\big)\big)^2\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{1}\big(\operatorname{tg}\big(\tfrac\pi4y\big)\big)^2\,dy\)
 - **Conta:** \(\pi\int_0^1\big(\sec^2\tfrac{\pi y}4-1\big)dy=\pi\Big[\tfrac4\pi\operatorname{tg}\tfrac{\pi y}4-y\Big]_0^1=\pi\Big(\tfrac4\pi-1\Big)\)
 - **Resposta:** \(\boxed{4-\pi}\)
 {{< /details >}}
@@ -203,12 +212,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **3(a)** \(y=x^2,\ y=0,\ x=2\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Região sob a parábola, colada no eixo \(x\): disco de raio \(x^2\). Quadrado: \(x^4\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \({x_i^*}^2\)
 - **Volume da fatia:** \(\pi\big({x_i^*}^2\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big({x_i^*}^2\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big({x_i^*}^2\big)^2\,\Delta x_i=\pi\int_{0}^{2}\big(x^2\big)^2\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{2}\big(x^2\big)^2\,dx\)
 - **Conta:** \(\pi\int_0^2x^4dx=\pi\tfrac{32}5\)
 - **Resposta:** \(\boxed{\tfrac{32\pi}5}\)
 {{< /details >}}
@@ -216,12 +225,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **3(b)** \(y=\sqrt{9-x^2},\ y=0\) (de \(-3\) a \(3\)).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** É um semicírculo, de \(-3\) a \(3\) (onde \(y=0\)). Disco, e o quadrado **tira a raiz**: sobra \(9-x^2\). Função par: dá para fazer \(2\int_0^3\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \(\sqrt{9-{x_i^*}^2}\)
 - **Volume da fatia:** \(\pi\big(\sqrt{9-{x_i^*}^2}\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\sqrt{9-{x_i^*}^2}\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\sqrt{9-{x_i^*}^2}\big)^2\,\Delta x_i=\pi\int_{-3}^{3}\big(\sqrt{9-x^2}\big)^2\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{-3}^{3}\big(\sqrt{9-x^2}\big)^2\,dx\)
 - **Conta:** \(\pi\int_{-3}^3(9-x^2)dx=\pi(54-18)\)
 - **Resposta:** \(\boxed{36\pi}\)
 {{< /details >}}
@@ -229,12 +238,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **3(c)** \(y=x-x^2,\ y=0\) (de \(0\) a \(1\)).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** A parábola toca \(y=0\) quando \(x(1-x)=0\): limites \(0\) e \(1\). Raio = a altura \(x-x^2\); expanda o quadrado: \(x^2-2x^3+x^4\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \({x_i^*}-{x_i^*}^2\)
 - **Volume da fatia:** \(\pi\big({x_i^*}-{x_i^*}^2\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big({x_i^*}-{x_i^*}^2\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big({x_i^*}-{x_i^*}^2\big)^2\,\Delta x_i=\pi\int_{0}^{1}\big(x-x^2\big)^2\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{1}\big(x-x^2\big)^2\,dx\)
 - **Conta:** \(\pi\int_0^1(x^2-2x^3+x^4)dx=\pi\Big(\tfrac13-\tfrac12+\tfrac15\Big)\)
 - **Resposta:** \(\boxed{\dfrac{\pi}{30}}\)
 {{< /details >}}
@@ -242,12 +251,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **3(d)** \(y=\sqrt{\cos x},\ 0\le x\le\pi/2,\ y=0\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Raio \(\sqrt{\cos x}\). O quadrado tira a raiz e sobra \(\cos x\), integral imediata.
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \(\sqrt{\cos {x_i^*}}\)
 - **Volume da fatia:** \(\pi\big(\sqrt{\cos {x_i^*}}\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\sqrt{\cos {x_i^*}}\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\sqrt{\cos {x_i^*}}\big)^2\,\Delta x_i=\pi\int_{0}^{\pi/2}\big(\sqrt{\cos x}\big)^2\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{\pi/2}\big(\sqrt{\cos x}\big)^2\,dx\)
 - **Conta:** \(\pi\int_0^{\pi/2}\cos x\,dx=\pi[\operatorname{sen}x]_0^{\pi/2}\)
 - **Resposta:** \(\boxed{\pi}\)
 {{< /details >}}
@@ -255,12 +264,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **3(e)** \(y=e^{-x},\ y=0,\ x=0,\ x=1\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Raio \(e^{-x}\); o quadrado é \(e^{-2x}\), e \(\int e^{-2x}dx=-\tfrac{e^{-2x}}2\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \(e^{-{x_i^*}}\)
 - **Volume da fatia:** \(\pi\big(e^{-{x_i^*}}\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(e^{-{x_i^*}}\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(e^{-{x_i^*}}\big)^2\,\Delta x_i=\pi\int_{0}^{1}\big(e^{-x}\big)^2\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{1}\big(e^{-x}\big)^2\,dx\)
 - **Conta:** \(\pi\int_0^1e^{-2x}dx=\pi\Big[-\tfrac{e^{-2x}}2\Big]_0^1\)
 - **Resposta:** \(\boxed{\tfrac\pi2(1-e^{-2})}\)
 {{< /details >}}
@@ -268,12 +277,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **3(f)** \(y=\dfrac1{2\sqrt x},\ y=0,\ x=\tfrac14,\ x=4\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Raio \(\tfrac1{2\sqrt x}\); o quadrado é \(\tfrac1{4x}\), cuja primitiva é \(\tfrac14\ln x\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio do disco:** \(\tfrac{1}{2\sqrt{{x_i^*}}}\)
 - **Volume da fatia:** \(\pi\big(\tfrac{1}{2\sqrt{{x_i^*}}}\big)^2\,\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\tfrac{1}{2\sqrt{{x_i^*}}}\big)^2\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\tfrac{1}{2\sqrt{{x_i^*}}}\big)^2\,\Delta x_i=\pi\int_{\tfrac14}^{4}\big(\tfrac{1}{2\sqrt{x}}\big)^2\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{\tfrac14}^{4}\big(\tfrac{1}{2\sqrt{x}}\big)^2\,dx\)
 - **Conta:** \(\pi\int_{1/4}^4\tfrac{1}{4x}dx=\tfrac\pi4[\ln x]_{1/4}^4=\tfrac\pi4\ln16\)
 - **Resposta:** \(\boxed{\tfrac\pi2\ln4}\)
 {{< /details >}}
@@ -283,12 +292,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **4(a)** \(x=\sqrt5\,y^2,\ x=0,\ y=\pm1\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Eixo \(y\): fatias deitadas, raio \(x=\sqrt5y^2\), \(y\) de \(-1\) a \(1\). Quadrado: \(5y^4\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio do disco:** \(\sqrt5\,{y_i^*}^2\)
 - **Volume da fatia:** \(\pi\big(\sqrt5\,{y_i^*}^2\big)^2\,\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\sqrt5\,{y_i^*}^2\big)^2\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\sqrt5\,{y_i^*}^2\big)^2\,\Delta y_i=\pi\int_{-1}^{1}\big(\sqrt5\,y^2\big)^2\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{-1}^{1}\big(\sqrt5\,y^2\big)^2\,dy\)
 - **Conta:** \(\pi\int_{-1}^15y^4dy=\pi\cdot2\)
 - **Resposta:** \(\boxed{2\pi}\)
 {{< /details >}}
@@ -296,12 +305,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **4(b)** \(x=y^{3/2},\ x=0,\ y=2\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** A região vai do eixo \(y\) até \(x=y^{3/2}\), com \(y\) de \(0\) a \(2\). Quadrado: \(y^3\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio do disco:** \({y_i^*}^{3/2}\)
 - **Volume da fatia:** \(\pi\big({y_i^*}^{3/2}\big)^2\,\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big({y_i^*}^{3/2}\big)^2\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big({y_i^*}^{3/2}\big)^2\,\Delta y_i=\pi\int_{0}^{2}\big(y^{3/2}\big)^2\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{2}\big(y^{3/2}\big)^2\,dy\)
 - **Conta:** \(\pi\int_0^2y^3dy=\pi\tfrac{16}4\)
 - **Resposta:** \(\boxed{4\pi}\)
 {{< /details >}}
@@ -309,12 +318,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **4(c)** \(x=\sqrt{2\operatorname{sen}2y},\ 0\le y\le\pi/2,\ x=0\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Raio \(x=\sqrt{2\operatorname{sen}2y}\); quadrado \(2\operatorname{sen}2y\). Primitiva: \(-\cos2y\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio do disco:** \(\sqrt{2\operatorname{sen}2{y_i^*}}\)
 - **Volume da fatia:** \(\pi\big(\sqrt{2\operatorname{sen}2{y_i^*}}\big)^2\,\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\sqrt{2\operatorname{sen}2{y_i^*}}\big)^2\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\sqrt{2\operatorname{sen}2{y_i^*}}\big)^2\,\Delta y_i=\pi\int_{0}^{\pi/2}\big(\sqrt{2\operatorname{sen}2y}\big)^2\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{\pi/2}\big(\sqrt{2\operatorname{sen}2y}\big)^2\,dy\)
 - **Conta:** \(\pi\int_0^{\pi/2}2\operatorname{sen}2y\,dy=\pi[-\cos2y]_0^{\pi/2}=\pi(1+1)\)
 - **Resposta:** \(\boxed{2\pi}\)
 {{< /details >}}
@@ -322,12 +331,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **4(d)** \(x=\sqrt{\cos(\pi y/4)},\ -2\le y\le0,\ x=0\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Raio \(\sqrt{\cos(\pi y/4)}\); quadrado \(\cos\tfrac{\pi y}4\). Primitiva \(\tfrac4\pi\operatorname{sen}\tfrac{\pi y}4\): o \(\pi\) **cancela**, por isso a resposta não tem \(\pi\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio do disco:** \(\sqrt{\cos(\pi {y_i^*}/4)}\)
 - **Volume da fatia:** \(\pi\big(\sqrt{\cos(\pi {y_i^*}/4)}\big)^2\,\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\sqrt{\cos(\pi {y_i^*}/4)}\big)^2\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\sqrt{\cos(\pi {y_i^*}/4)}\big)^2\,\Delta y_i=\pi\int_{-2}^{0}\big(\sqrt{\cos(\pi y/4)}\big)^2\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{-2}^{0}\big(\sqrt{\cos(\pi y/4)}\big)^2\,dy\)
 - **Conta:** \(\pi\int_{-2}^0\cos\tfrac{\pi y}4dy=\pi\cdot\tfrac4\pi\Big[\operatorname{sen}\tfrac{\pi y}4\Big]_{-2}^0=4(0+1)\)
 - **Resposta:** \(\boxed{4}\)
 {{< /details >}}
@@ -335,12 +344,12 @@ Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações 
 **4(e)** Primeiro quadrante, eixos, \(y=3\) e \(x=\dfrac2{\sqrt{y+1}}\).
 
 {{< details title="Resolução" >}}
-- **Método:** disco, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Limites em \(y\): de \(0\) a \(3\). Raio \(x=\tfrac2{\sqrt{y+1}}\); quadrado \(\tfrac4{y+1}\), primitiva \(4\ln(y+1)\). Como \(\ln4\) fica, \(4\pi\ln4\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio do disco:** \(\tfrac{2}{\sqrt{{y_i^*}+1}}\)
 - **Volume da fatia:** \(\pi\big(\tfrac{2}{\sqrt{{y_i^*}+1}}\big)^2\,\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\big(\tfrac{2}{\sqrt{{y_i^*}+1}}\big)^2\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\big(\tfrac{2}{\sqrt{{y_i^*}+1}}\big)^2\,\Delta y_i=\pi\int_{0}^{3}\big(\tfrac{2}{\sqrt{y+1}}\big)^2\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{3}\big(\tfrac{2}{\sqrt{y+1}}\big)^2\,dy\)
 - **Conta:** \(\pi\int_0^3\tfrac4{y+1}dy=4\pi[\ln(y+1)]_0^3=4\pi\ln4\)
 - **Resposta:** \(\boxed{4\pi\ln4}\)
 {{< /details >}}
@@ -352,51 +361,51 @@ Achou os cruzamentos? Igualar as curvas dá os limites.
 **5(a)** \(y=x,\ y=1,\ x=0\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Entre \(y=x\) (embaixo) e \(y=1\) (em cima) há um espaço até o eixo \(x\): a região **não encosta** nele, então a fatia é um **anel**. Raio externo = curva mais longe do eixo, \(1\); interno = mais perto, \(x\).
 - **Espessura:** \(\Delta x_i\)
 - **Raios do anel:** externo \(R=1\), interno \(r={x_i^*}\)
 - **Volume da fatia:** \(\pi\Big[\big(1\big)^2-\big({x_i^*}\big)^2\Big]\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(1\big)^2-\big({x_i^*}\big)^2\Big]\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(1\big)^2-\big({x_i^*}\big)^2\Big]\Delta x_i=\pi\int_{0}^{1}\Big[\big(1\big)^2-\big(x\big)^2\Big]dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{1}\Big[\big(1\big)^2-\big(x\big)^2\Big]dx\)
 - **Conta:** \(\pi\int_0^1(1-x^2)dx=\pi\Big(1-\tfrac13\Big)\)
 - **Resposta:** \(\boxed{\tfrac{2\pi}3}\)
 {{< /details >}}
 
-**5(b)** \(y=2\sqrt x,\ y=2,\ x=0\) (cruzam em \(x=1\)).
+**5(b)** \(y=2\sqrt x,\ y=2,\ x=0\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Cruzamento: \(2\sqrt x=2\Rightarrow x=1\). Em \([0,1]\), \(2\sqrt x\le2\): externo \(2\), interno \(2\sqrt x\). Quadrados: \(4\) e \(4x\).
 - **Espessura:** \(\Delta x_i\)
 - **Raios do anel:** externo \(R=2\), interno \(r=2\sqrt{{x_i^*}}\)
 - **Volume da fatia:** \(\pi\Big[\big(2\big)^2-\big(2\sqrt{{x_i^*}}\big)^2\Big]\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(2\big)^2-\big(2\sqrt{{x_i^*}}\big)^2\Big]\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(2\big)^2-\big(2\sqrt{{x_i^*}}\big)^2\Big]\Delta x_i=\pi\int_{0}^{1}\Big[\big(2\big)^2-\big(2\sqrt{x}\big)^2\Big]dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{1}\Big[\big(2\big)^2-\big(2\sqrt{x}\big)^2\Big]dx\)
 - **Conta:** \(\pi\int_0^1(4-4x)dx=\pi(4-2)\)
 - **Resposta:** \(\boxed{2\pi}\)
 {{< /details >}}
 
-**5(c)** \(y=x^2+1,\ y=x+3\) (\(x^2-x-2=0\Rightarrow x=-1,\,2\)).
+**5(c)** \(y=x^2+1,\ y=x+3\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Cruzamentos: \(x^2+1=x+3\Rightarrow x^2-x-2=0\Rightarrow x=-1,2\). No meio a reta fica acima da parábola: externo = reta, interno = parábola. Expanda \((x+3)^2-(x^2+1)^2\) antes de integrar.
 - **Espessura:** \(\Delta x_i\)
 - **Raios do anel:** externo \(R={x_i^*}+3\), interno \(r={x_i^*}^2+1\)
 - **Volume da fatia:** \(\pi\Big[\big({x_i^*}+3\big)^2-\big({x_i^*}^2+1\big)^2\Big]\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big({x_i^*}+3\big)^2-\big({x_i^*}^2+1\big)^2\Big]\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big({x_i^*}+3\big)^2-\big({x_i^*}^2+1\big)^2\Big]\Delta x_i=\pi\int_{-1}^{2}\Big[\big(x+3\big)^2-\big(x^2+1\big)^2\Big]dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{-1}^{2}\Big[\big(x+3\big)^2-\big(x^2+1\big)^2\Big]dx\)
 - **Conta:** \(\pi\int_{-1}^2(-x^4-x^2+6x+8)dx=\pi\Big[-\tfrac{x^5}5-\tfrac{x^3}3+3x^2+8x\Big]_{-1}^2=\pi\Big(30-\tfrac{33}5\Big)\)
 - **Resposta:** \(\boxed{\tfrac{117\pi}5}\)
 {{< /details >}}
 
-**5(d)** \(y=4-x^2,\ y=2-x\) (cruzam em \(x=-1,\,2\)).
+**5(d)** \(y=4-x^2,\ y=2-x\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Cruzamentos: \(4-x^2=2-x\Rightarrow x=-1,2\). A parábola fica em cima: externo \(4-x^2\), interno \(2-x\). Expanda os quadrados.
 - **Espessura:** \(\Delta x_i\)
 - **Raios do anel:** externo \(R=4-{x_i^*}^2\), interno \(r=2-{x_i^*}\)
 - **Volume da fatia:** \(\pi\Big[\big(4-{x_i^*}^2\big)^2-\big(2-{x_i^*}\big)^2\Big]\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(4-{x_i^*}^2\big)^2-\big(2-{x_i^*}\big)^2\Big]\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(4-{x_i^*}^2\big)^2-\big(2-{x_i^*}\big)^2\Big]\Delta x_i=\pi\int_{-1}^{2}\Big[\big(4-x^2\big)^2-\big(2-x\big)^2\Big]dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{-1}^{2}\Big[\big(4-x^2\big)^2-\big(2-x\big)^2\Big]dx\)
 - **Conta:** \(\pi\int_{-1}^2(x^4-9x^2+4x+12)dx=\pi\Big[\tfrac{x^5}5-3x^3+2x^2+12x\Big]_{-1}^2=\pi\Big(15+\tfrac{33}5\Big)\)
 - **Resposta:** \(\boxed{\tfrac{108\pi}5}\)
 {{< /details >}}
@@ -404,12 +413,12 @@ Achou os cruzamentos? Igualar as curvas dá os limites.
 **5(e)** \(y=\sec x,\ y=\sqrt2,\ -\tfrac\pi4\le x\le\tfrac\pi4\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Em \([-\tfrac\pi4,\tfrac\pi4]\), \(\sec x\le\sqrt2\) (igual nas pontas). Externo \(\sqrt2\), interno \(\sec x\). Quadrados: \(2\) e \(\sec^2x\), com \(\int\sec^2=\operatorname{tg}\).
 - **Espessura:** \(\Delta x_i\)
 - **Raios do anel:** externo \(R=\sqrt2\), interno \(r=\sec {x_i^*}\)
 - **Volume da fatia:** \(\pi\Big[\big(\sqrt2\big)^2-\big(\sec {x_i^*}\big)^2\Big]\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(\sqrt2\big)^2-\big(\sec {x_i^*}\big)^2\Big]\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(\sqrt2\big)^2-\big(\sec {x_i^*}\big)^2\Big]\Delta x_i=\pi\int_{-\pi/4}^{\pi/4}\Big[\big(\sqrt2\big)^2-\big(\sec x\big)^2\Big]dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{-\pi/4}^{\pi/4}\Big[\big(\sqrt2\big)^2-\big(\sec x\big)^2\Big]dx\)
 - **Conta:** \(\pi\int_{-\pi/4}^{\pi/4}(2-\sec^2x)dx=\pi[2x-\operatorname{tg}x]_{-\pi/4}^{\pi/4}=\pi(\pi-2)\)
 - **Resposta:** \(\boxed{\pi^2-2\pi}\)
 {{< /details >}}
@@ -417,81 +426,81 @@ Achou os cruzamentos? Igualar as curvas dá os limites.
 **5(f)** \(y=\sec x,\ y=\operatorname{tg}x,\ x=0,\ x=1\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** \(\sec x\) está acima de \(\operatorname{tg}x\) (\(\sec^2=1+\operatorname{tg}^2\)): externo \(\sec\), interno \(\operatorname{tg}\). A diferença dos quadrados é \(1\).
 - **Espessura:** \(\Delta x_i\)
 - **Raios do anel:** externo \(R=\sec {x_i^*}\), interno \(r=\operatorname{tg}{x_i^*}\)
 - **Volume da fatia:** \(\pi\Big[\big(\sec {x_i^*}\big)^2-\big(\operatorname{tg}{x_i^*}\big)^2\Big]\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(\sec {x_i^*}\big)^2-\big(\operatorname{tg}{x_i^*}\big)^2\Big]\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(\sec {x_i^*}\big)^2-\big(\operatorname{tg}{x_i^*}\big)^2\Big]\Delta x_i=\pi\int_{0}^{1}\Big[\big(\sec x\big)^2-\big(\operatorname{tg}x\big)^2\Big]dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{1}\Big[\big(\sec x\big)^2-\big(\operatorname{tg}x\big)^2\Big]dx\)
 - **Conta:** \(\pi\int_0^1(\sec^2x-\operatorname{tg}^2x)dx=\pi\int_0^11\,dx\)
 - **Resposta:** \(\boxed{\pi}\)
 {{< /details >}}
 
 ### Questão 6: eixo \(y\), por anéis (fatias horizontais)
 
-**6(a)** Triângulo de vértices \((1,0),(2,1),(1,1)\): para cada \(y\), \(x\) vai de \(1\) a \(y+1\).
+**6(a)** Triângulo de vértices \((1,0),(2,1),(1,1)\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Esboce o triângulo: lado vertical \(x=1\), topo \(y=1\), hipotenusa \(y=x-1\), isto é, \(x=y+1\). Eixo \(y\): fatias deitadas. A região não toca o eixo \(y\): anel com externo \(y+1\) e interno \(1\).
 - **Espessura:** \(\Delta y_i\)
 - **Raios do anel:** externo \(R={y_i^*}+1\), interno \(r=1\)
 - **Volume da fatia:** \(\pi\Big[\big({y_i^*}+1\big)^2-\big(1\big)^2\Big]\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big({y_i^*}+1\big)^2-\big(1\big)^2\Big]\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big({y_i^*}+1\big)^2-\big(1\big)^2\Big]\Delta y_i=\pi\int_{0}^{1}\Big[\big(y+1\big)^2-\big(1\big)^2\Big]dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{1}\Big[\big(y+1\big)^2-\big(1\big)^2\Big]dy\)
 - **Conta:** \(\pi\int_0^1(y^2+2y)dy=\pi\Big(\tfrac13+1\Big)\)
 - **Resposta:** \(\boxed{\tfrac{4\pi}3}\)
 {{< /details >}}
 
-**6(b)** Primeiro quadrante, sob \(y=x^2\), até \(x=2\): para cada \(y\in[0,4]\), \(x\) vai de \(\sqrt y\) a \(2\).
+**6(b)** Primeiro quadrante, sob \(y=x^2\), até \(x=2\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Para cada \(y\in[0,4]\), a região vai da parábola (\(x=\sqrt y\)) até \(x=2\). Distâncias ao eixo \(y\): externo \(2\), interno \(\sqrt y\).
 - **Espessura:** \(\Delta y_i\)
 - **Raios do anel:** externo \(R=2\), interno \(r=\sqrt{{y_i^*}}\)
 - **Volume da fatia:** \(\pi\Big[\big(2\big)^2-\big(\sqrt{{y_i^*}}\big)^2\Big]\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(2\big)^2-\big(\sqrt{{y_i^*}}\big)^2\Big]\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(2\big)^2-\big(\sqrt{{y_i^*}}\big)^2\Big]\Delta y_i=\pi\int_{0}^{4}\Big[\big(2\big)^2-\big(\sqrt{y}\big)^2\Big]dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{4}\Big[\big(2\big)^2-\big(\sqrt{y}\big)^2\Big]dy\)
 - **Conta:** \(\pi\int_0^4(4-y)dy=\pi(16-8)\)
 - **Resposta:** \(\boxed{8\pi}\)
 {{< /details >}}
 
-**6(c)** Primeiro quadrante, entre \(x^2+y^2=3\) (esquerda), \(x=\sqrt3\) e \(y=\sqrt3\): \(x\) vai de \(\sqrt{3-y^2}\) a \(\sqrt3\).
+**6(c)** Primeiro quadrante, entre \(x^2+y^2=3\) (esquerda), \(x=\sqrt3\) e \(y=\sqrt3\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno do eixo \(y\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** O arco do círculo, \(x=\sqrt{3-y^2}\), é o lado de **dentro** da região (cria o buraco). Externo \(\sqrt3\), interno \(\sqrt{3-y^2}\). A diferença dos quadrados é \(y^2\).
 - **Espessura:** \(\Delta y_i\)
 - **Raios do anel:** externo \(R=\sqrt3\), interno \(r=\sqrt{3-{y_i^*}^2}\)
 - **Volume da fatia:** \(\pi\Big[\big(\sqrt3\big)^2-\big(\sqrt{3-{y_i^*}^2}\big)^2\Big]\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(\sqrt3\big)^2-\big(\sqrt{3-{y_i^*}^2}\big)^2\Big]\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(\sqrt3\big)^2-\big(\sqrt{3-{y_i^*}^2}\big)^2\Big]\Delta y_i=\pi\int_{0}^{\sqrt3}\Big[\big(\sqrt3\big)^2-\big(\sqrt{3-y^2}\big)^2\Big]dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{\sqrt3}\Big[\big(\sqrt3\big)^2-\big(\sqrt{3-y^2}\big)^2\Big]dy\)
 - **Conta:** \(\pi\int_0^{\sqrt3}\big(3-(3-y^2)\big)dy=\pi\tfrac{(\sqrt3)^3}3\)
 - **Resposta:** \(\boxed{\sqrt3\,\pi}\)
 {{< /details >}}
 
 ### Questões 7 e 8: eixo deslocado
 
-**7** Região sob \(y=x^2\), \(0\le x\le1\), em torno de \(x=-1\). Para cada \(y\in[0,1]\), \(x\) vai de \(\sqrt y\) a \(1\); distâncias até \(x=-1\): externo \(1+1=2\), interno \(\sqrt y+1\).
+**7** Região sob \(y=x^2\), \(0\le x\le1\), em torno de \(x=-1\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno da a reta \(x=-1\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Região: \(0\le y\le x^2\), \(x\le1\). Para cada \(y\in[0,1]\), \(x\) vai de \(\sqrt y\) a \(1\). O eixo \(x=-1\) fica **fora** da região, então o raio é a **distância até ele**: distâncias: externo \(1+1=2\), interno \(\sqrt y+1\). Há buraco: anel.
 - **Espessura:** \(\Delta y_i\)
 - **Raios do anel:** externo \(R=2\), interno \(r=\sqrt{{y_i^*}}+1\)
 - **Volume da fatia:** \(\pi\Big[\big(2\big)^2-\big(\sqrt{{y_i^*}}+1\big)^2\Big]\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(2\big)^2-\big(\sqrt{{y_i^*}}+1\big)^2\Big]\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(2\big)^2-\big(\sqrt{{y_i^*}}+1\big)^2\Big]\Delta y_i=\pi\int_{0}^{1}\Big[\big(2\big)^2-\big(\sqrt{y}+1\big)^2\Big]dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{1}\Big[\big(2\big)^2-\big(\sqrt{y}+1\big)^2\Big]dy\)
 - **Conta:** \(\pi\int_0^1(3-2\sqrt y-y)dy=\pi\Big(3-\tfrac43-\tfrac12\Big)\)
 - **Resposta:** \(\boxed{\tfrac{7\pi}6}\)
 {{< /details >}}
 
-**8** Região no 2º quadrante sob \(y=-x^3\), \(-1\le x\le0\), em torno de \(x=-2\). Para cada \(y\in[0,1]\), \(x\) vai de \(-1\) a \(-\sqrt[3]y\); distâncias até \(x=-2\): interno \(1\), externo \(2-\sqrt[3]y\).
+**8** Região no 2º quadrante sob \(y=-x^3\), \(-1\le x\le0\), em torno de \(x=-2\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno da a reta \(x=-2\); fatias perpendiculares ao eixo, logo integra em \(dy\)
+- **Como pensar:** Região: \(-1\le x\le0\), \(0\le y\le-x^3\). Para cada \(y\in[0,1]\), \(x\) vai de \(-1\) a \(-\sqrt[3]y\). O eixo \(x=-2\) fica à esquerda. A distância de \(x\) até \(-2\) é \(x+2\). Isolando \(x\) na curva: \(y=-x^3\Rightarrow x=-\sqrt[3]y\), logo a distância é \(2-\sqrt[3]y\).
 - **Espessura:** \(\Delta y_i\)
 - **Raios do anel:** externo \(R=2-{y_i^*}^{1/3}\), interno \(r=1\)
 - **Volume da fatia:** \(\pi\Big[\big(2-{y_i^*}^{1/3}\big)^2-\big(1\big)^2\Big]\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(2-{y_i^*}^{1/3}\big)^2-\big(1\big)^2\Big]\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(2-{y_i^*}^{1/3}\big)^2-\big(1\big)^2\Big]\Delta y_i=\pi\int_{0}^{1}\Big[\big(2-y^{1/3}\big)^2-\big(1\big)^2\Big]dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{1}\Big[\big(2-y^{1/3}\big)^2-\big(1\big)^2\Big]dy\)
 - **Conta:** \(\pi\int_0^1\big(3-4y^{1/3}+y^{2/3}\big)dy=\pi\Big(3-3+\tfrac35\Big)\)
 - **Resposta:** \(\boxed{\tfrac{3\pi}5}\)
 {{< /details >}}
@@ -503,25 +512,25 @@ Vértices \((0,0),(0,2),(4,4)\). Em \(0\le x\le4\), a reta de cima é \(y=\tfrac
 **14(a)** Em torno do eixo \(x\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno do eixo \(x\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** Esboce: vértices \((0,0),(0,2),(4,4)\). Para cada \(x\), a região vai da reta \(y=x\) (embaixo) até \(y=\tfrac{x+4}2\) (em cima), sem tocar o eixo \(x\): anel. Externo = reta de cima, interno = reta de baixo.
 - **Espessura:** \(\Delta x_i\)
 - **Raios do anel:** externo \(R=\tfrac{{x_i^*}+4}{2}\), interno \(r={x_i^*}\)
 - **Volume da fatia:** \(\pi\Big[\big(\tfrac{{x_i^*}+4}{2}\big)^2-\big({x_i^*}\big)^2\Big]\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(\tfrac{{x_i^*}+4}{2}\big)^2-\big({x_i^*}\big)^2\Big]\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(\tfrac{{x_i^*}+4}{2}\big)^2-\big({x_i^*}\big)^2\Big]\Delta x_i=\pi\int_{0}^{4}\Big[\big(\tfrac{x+4}{2}\big)^2-\big(x\big)^2\Big]dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{4}\Big[\big(\tfrac{x+4}{2}\big)^2-\big(x\big)^2\Big]dx\)
 - **Conta:** \(\pi\int_0^4\Big[\tfrac{(x+4)^2}4-x^2\Big]dx=\pi\Big(\tfrac{448}{12}-\tfrac{64}3\Big)\)
 - **Resposta:** \(\boxed{16\pi}\)
 {{< /details >}}
 
-**14(d)** Em torno de \(y=8\): distâncias \(8-x\) (externo, curva de baixo) e \(8-\tfrac{x+4}2\) (interno).
+**14(d)** Em torno de \(y=8\).
 
 {{< details title="Resolução" >}}
-- **Método:** anel, girando em torno da a reta \(y=8\); fatias perpendiculares ao eixo, logo integra em \(dx\)
+- **Como pensar:** O eixo \(y=8\) está **acima** da região, então a curva mais longe dele é a de **baixo** (\(y=x\)): externo \(8-x\), interno \(8-\tfrac{x+4}2=6-\tfrac x2\).
 - **Espessura:** \(\Delta x_i\)
 - **Raios do anel:** externo \(R=8-{x_i^*}\), interno \(r=8-\tfrac{{x_i^*}+4}{2}\)
 - **Volume da fatia:** \(\pi\Big[\big(8-{x_i^*}\big)^2-\big(8-\tfrac{{x_i^*}+4}{2}\big)^2\Big]\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}\pi\Big[\big(8-{x_i^*}\big)^2-\big(8-\tfrac{{x_i^*}+4}{2}\big)^2\Big]\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}\pi\Big[\big(8-{x_i^*}\big)^2-\big(8-\tfrac{{x_i^*}+4}{2}\big)^2\Big]\Delta x_i=\pi\int_{0}^{4}\Big[\big(8-x\big)^2-\big(8-\tfrac{x+4}{2}\big)^2\Big]dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=\pi\int_{0}^{4}\Big[\big(8-x\big)^2-\big(8-\tfrac{x+4}{2}\big)^2\Big]dx\)
 - **Conta:** \(\pi\int_0^4\Big[(8-x)^2-\big(6-\tfrac x2\big)^2\Big]dx=\pi\Big(\tfrac{448}3-\tfrac{304}3\Big)\)
 - **Resposta:** \(\boxed{48\pi}\)
 {{< /details >}}

@@ -41,13 +41,13 @@ Escolha o método em que a **curva já está escrita na variável certa** e a re
 
 **Exemplo.** Região sob \(y=1+\tfrac{x^2}4\), \(0\le x\le2\), em torno do eixo \(y\).
 
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Eixo \(y\) e curva \(y=f(x)\): em vez de deitar a fatia, deixe-a **em pé**, paralela ao eixo, com espessura \(\Delta x\). Girando, vira uma **casca** (lata). Distância ao eixo \(y\) = \(x\); altura = \(f(x)\). Não precisa isolar \(x\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(1+\tfrac{{x_i^*}^2}{4}\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,(1+\tfrac{{x_i^*}^2}{4})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,(1+\tfrac{{x_i^*}^2}{4})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,(1+\tfrac{{x_i^*}^2}{4})\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,(1+\tfrac{{x_i^*}^2}{4})\,\Delta x_i=2\pi\int_{0}^{2}(x)\,(1+\tfrac{x^2}{4})\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{2}(x)\,(1+\tfrac{x^2}{4})\,dx\)
 - **Conta:** \(2\pi\int_0^2\Big(x+\tfrac{x^3}4\Big)dx=2\pi\Big[\tfrac{x^2}2+\tfrac{x^4}{16}\Big]_0^2=2\pi(2+1)\)
 - **Resposta:** \(\boxed{6\pi}\)
 
@@ -74,13 +74,13 @@ A casca é horizontal, então a altura é a largura da região em \(x\): direita
 **9(a)** \(y=1+\tfrac{x^2}4\), \(0\le x\le2\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Faixa vertical de base \(y=0\) e topo na curva: raio \(x\), altura \(1+\tfrac{x^2}4\). Multiplique \(x\) pela altura antes de integrar.
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(1+\tfrac{{x_i^*}^2}4\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,(1+\tfrac{{x_i^*}^2}4)\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,(1+\tfrac{{x_i^*}^2}4)\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,(1+\tfrac{{x_i^*}^2}4)\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,(1+\tfrac{{x_i^*}^2}4)\,\Delta x_i=2\pi\int_{0}^{2}(x)\,(1+\tfrac{x^2}4)\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{2}(x)\,(1+\tfrac{x^2}4)\,dx\)
 - **Conta:** \(2\pi\int_0^2\big(x+\tfrac{x^3}4\big)dx=2\pi(2+1)\)
 - **Resposta:** \(\boxed{6\pi}\)
 {{< /details >}}
@@ -88,13 +88,13 @@ A casca é horizontal, então a altura é a largura da região em \(x\): direita
 **9(b)** \(y=2-\tfrac{x^2}4\), \(0\le x\le2\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Mesmo molde: raio \(x\), altura \(2-\tfrac{x^2}4\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(2-\tfrac{{x_i^*}^2}4\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,(2-\tfrac{{x_i^*}^2}4)\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,(2-\tfrac{{x_i^*}^2}4)\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,(2-\tfrac{{x_i^*}^2}4)\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,(2-\tfrac{{x_i^*}^2}4)\,\Delta x_i=2\pi\int_{0}^{2}(x)\,(2-\tfrac{x^2}4)\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{2}(x)\,(2-\tfrac{x^2}4)\,dx\)
 - **Conta:** \(2\pi\int_0^2\big(2x-\tfrac{x^3}4\big)dx=2\pi(4-1)\)
 - **Resposta:** \(\boxed{6\pi}\)
 {{< /details >}}
@@ -102,13 +102,13 @@ A casca é horizontal, então a altura é a largura da região em \(x\): direita
 **9(c)** \(y=\sqrt{x^2+1}\), \(0\le x\le\sqrt3\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Raio \(x\), altura \(\sqrt{x^2+1}\). O \(x\) sobrando é a derivada de \(x^2+1\) (a menos de um fator): faça \(u=x^2+1\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(\sqrt{{x_i^*}^2+1}\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,(\sqrt{{x_i^*}^2+1})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,(\sqrt{{x_i^*}^2+1})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,(\sqrt{{x_i^*}^2+1})\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,(\sqrt{{x_i^*}^2+1})\,\Delta x_i=2\pi\int_{0}^{\sqrt3}(x)\,(\sqrt{x^2+1})\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{\sqrt3}(x)\,(\sqrt{x^2+1})\,dx\)
 - **Conta:** \(2\pi\int_0^{\sqrt3}x\sqrt{x^2+1}\,dx\ \ (u=x^2+1)=2\pi\Big[\tfrac{(x^2+1)^{3/2}}3\Big]_0^{\sqrt3}=2\pi\cdot\tfrac{8-1}3\)
 - **Resposta:** \(\boxed{\tfrac{14\pi}3}\)
 {{< /details >}}
@@ -119,13 +119,13 @@ A casca é horizontal, então a altura é a largura da região em \(x\): direita
 **9(d)** \(y=\dfrac{9x}{\sqrt{x^3+9}}\), \(0\le x\le3\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Raio \(x\), altura \(\tfrac{9x}{\sqrt{x^3+9}}\), logo o integrando é \(\tfrac{9x^2}{\sqrt{x^3+9}}\). O \(x^2\) é a derivada de \(x^3\): faça \(u=x^3+9\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(\tfrac{9{x_i^*}}{\sqrt{{x_i^*}^3+9}}\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,(\tfrac{9{x_i^*}}{\sqrt{{x_i^*}^3+9}})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,(\tfrac{9{x_i^*}}{\sqrt{{x_i^*}^3+9}})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,(\tfrac{9{x_i^*}}{\sqrt{{x_i^*}^3+9}})\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,(\tfrac{9{x_i^*}}{\sqrt{{x_i^*}^3+9}})\,\Delta x_i=2\pi\int_{0}^{3}(x)\,(\tfrac{9x}{\sqrt{x^3+9}})\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{3}(x)\,(\tfrac{9x}{\sqrt{x^3+9}})\,dx\)
 - **Conta:** \(18\pi\int_0^3\tfrac{x^2}{\sqrt{x^3+9}}dx\ \ (u=x^3+9,\ du=3x^2dx)=12\pi\big[\sqrt{x^3+9}\big]_0^3=12\pi(6-3)\)
 - **Resposta:** \(\boxed{36\pi}\)
 {{< /details >}}
@@ -135,13 +135,13 @@ A casca é horizontal, então a altura é a largura da região em \(x\): direita
 **10(a)** Região entre o eixo \(y\), \(y=\sqrt2\) e \(x=y^2\) (largura \(y^2\)), \(0\le y\le\sqrt2\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** Eixo \(x\): a faixa paralela é **horizontal**, de espessura \(\Delta y\). Raio = distância ao eixo \(x\) = \(y\). Comprimento da faixa: de \(x=0\) até a curva \(x=y^2\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \({y_i^*}^2\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,({y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,({y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,({y_i^*}^2)\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,({y_i^*}^2)\,\Delta y_i=2\pi\int_{0}^{\sqrt2}(y)\,(y^2)\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{\sqrt2}(y)\,(y^2)\,dy\)
 - **Conta:** \(2\pi\int_0^{\sqrt2}y^3dy=2\pi\tfrac{(\sqrt2)^4}4=2\pi\cdot1\)
 - **Resposta:** \(\boxed{2\pi}\)
 {{< /details >}}
@@ -149,13 +149,13 @@ A casca é horizontal, então a altura é a largura da região em \(x\): direita
 **10(b)** Região entre o eixo \(y\), \(y=\sqrt3\) e \(x=3-y^2\), \(0\le y\le\sqrt3\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** Mesma ideia: faixa horizontal, raio \(y\), comprimento de \(x=0\) até \(x=3-y^2\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(3-{y_i^*}^2\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,(3-{y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,(3-{y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,(3-{y_i^*}^2)\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,(3-{y_i^*}^2)\,\Delta y_i=2\pi\int_{0}^{\sqrt3}(y)\,(3-y^2)\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{\sqrt3}(y)\,(3-y^2)\,dy\)
 - **Conta:** \(2\pi\int_0^{\sqrt3}(3y-y^3)dy=2\pi\Big(\tfrac92-\tfrac94\Big)\)
 - **Resposta:** \(\boxed{\tfrac{9\pi}2}\)
 {{< /details >}}
@@ -167,13 +167,13 @@ Altura = curva de cima − curva de baixo.
 **11(a)** \(y=x,\ y=-\tfrac x2,\ x=2\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Eixo \(y\): faixas verticais, raio \(x\). Altura = de cima menos de baixo: \(x-\big(-\tfrac x2\big)=\tfrac{3x}2\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \({x_i^*}-\big(-\tfrac{{x_i^*}}{2}\big)\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,({x_i^*}-\big(-\tfrac{{x_i^*}}{2}\big))\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,({x_i^*}-\big(-\tfrac{{x_i^*}}{2}\big))\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,({x_i^*}-\big(-\tfrac{{x_i^*}}{2}\big))\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,({x_i^*}-\big(-\tfrac{{x_i^*}}{2}\big))\,\Delta x_i=2\pi\int_{0}^{2}(x)\,(x-\big(-\tfrac{x}{2}\big))\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{2}(x)\,(x-\big(-\tfrac{x}{2}\big))\,dx\)
 - **Conta:** \(2\pi\int_0^2\tfrac{3x^2}2dx=3\pi\cdot\tfrac83\)
 - **Resposta:** \(\boxed{8\pi}\)
 {{< /details >}}
@@ -181,13 +181,13 @@ Altura = curva de cima − curva de baixo.
 **11(b)** \(y=2x,\ y=\tfrac x2,\ x=1\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Faixas verticais. Em cima \(2x\), embaixo \(\tfrac x2\): altura \(\tfrac{3x}2\), \(x\) de \(0\) a \(1\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(2{x_i^*}-\tfrac{{x_i^*}}{2}\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,(2{x_i^*}-\tfrac{{x_i^*}}{2})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,(2{x_i^*}-\tfrac{{x_i^*}}{2})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,(2{x_i^*}-\tfrac{{x_i^*}}{2})\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,(2{x_i^*}-\tfrac{{x_i^*}}{2})\,\Delta x_i=2\pi\int_{0}^{1}(x)\,(2x-\tfrac{x}{2})\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(x)\,(2x-\tfrac{x}{2})\,dx\)
 - **Conta:** \(2\pi\int_0^1\tfrac{3x^2}2dx=3\pi\cdot\tfrac13\)
 - **Resposta:** \(\boxed{\pi}\)
 {{< /details >}}
@@ -195,13 +195,13 @@ Altura = curva de cima − curva de baixo.
 **11(c)** \(y=x^2,\ y=2-x,\ x=0\) (cruzam em \(x=1\)).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Cruzamento: \(x^2=2-x\Rightarrow x=1\) (com \(x\ge0\)). Em cima a reta \(2-x\), embaixo a parábola \(x^2\): altura \(2-x-x^2\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(2-{x_i^*}-{x_i^*}^2\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,(2-{x_i^*}-{x_i^*}^2)\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,(2-{x_i^*}-{x_i^*}^2)\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,(2-{x_i^*}-{x_i^*}^2)\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,(2-{x_i^*}-{x_i^*}^2)\,\Delta x_i=2\pi\int_{0}^{1}(x)\,(2-x-x^2)\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(x)\,(2-x-x^2)\,dx\)
 - **Conta:** \(2\pi\int_0^1(2x-x^2-x^3)dx=2\pi\Big(1-\tfrac13-\tfrac14\Big)\)
 - **Resposta:** \(\boxed{\tfrac{5\pi}6}\)
 {{< /details >}}
@@ -209,13 +209,13 @@ Altura = curva de cima − curva de baixo.
 **11(d)** \(y=2-x^2,\ y=x^2,\ x=0\) (cruzam em \(x=1\)).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Cruzamento: \(2-x^2=x^2\Rightarrow x=1\). Em cima \(2-x^2\), embaixo \(x^2\): altura \(2-2x^2\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(2-2{x_i^*}^2\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,(2-2{x_i^*}^2)\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,(2-2{x_i^*}^2)\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,(2-2{x_i^*}^2)\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,(2-2{x_i^*}^2)\,\Delta x_i=2\pi\int_{0}^{1}(x)\,(2-2x^2)\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(x)\,(2-2x^2)\,dx\)
 - **Conta:** \(2\pi\int_0^1(2x-2x^3)dx=2\pi\Big(1-\tfrac12\Big)\)
 - **Resposta:** \(\boxed{\pi}\)
 {{< /details >}}
@@ -223,13 +223,13 @@ Altura = curva de cima − curva de baixo.
 **11(e)** \(y=2x-1,\ y=\sqrt x,\ x=0\) (cruzam em \(x=1\); em cima \(\sqrt x\)).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Cruzamento: \(2x-1=\sqrt x\Rightarrow x=1\). Em \(x=0\): \(\sqrt x=0>-1\), então \(\sqrt x\) está em cima. Altura \(\sqrt x-2x+1\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(\sqrt{{x_i^*}}-2{x_i^*}+1\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,(\sqrt{{x_i^*}}-2{x_i^*}+1)\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,(\sqrt{{x_i^*}}-2{x_i^*}+1)\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,(\sqrt{{x_i^*}}-2{x_i^*}+1)\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,(\sqrt{{x_i^*}}-2{x_i^*}+1)\,\Delta x_i=2\pi\int_{0}^{1}(x)\,(\sqrt{x}-2x+1)\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(x)\,(\sqrt{x}-2x+1)\,dx\)
 - **Conta:** \(2\pi\int_0^1\big(x^{3/2}-2x^2+x\big)dx=2\pi\Big(\tfrac25-\tfrac23+\tfrac12\Big)\)
 - **Resposta:** \(\boxed{\tfrac{7\pi}{15}}\)
 {{< /details >}}
@@ -241,13 +241,13 @@ Casca horizontal: raio \(y\), altura = **direita − esquerda** (em \(x\)).
 **12(a)** \(x=\sqrt y,\ x=-y,\ y=2\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** Eixo \(x\): faixas **horizontais** (\(\Delta y\)), raio \(y\). Altura = direita menos esquerda **em \(x\)**: direita \(\sqrt y\), esquerda \(-y\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(\sqrt{{y_i^*}}+{y_i^*}\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,(\sqrt{{y_i^*}}+{y_i^*})\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,(\sqrt{{y_i^*}}+{y_i^*})\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,(\sqrt{{y_i^*}}+{y_i^*})\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,(\sqrt{{y_i^*}}+{y_i^*})\,\Delta y_i=2\pi\int_{0}^{2}(y)\,(\sqrt{y}+y)\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{2}(y)\,(\sqrt{y}+y)\,dy\)
 - **Conta:** \(2\pi\int_0^2\big(y^{3/2}+y^2\big)dy=2\pi\Big(\tfrac{8\sqrt2}5+\tfrac83\Big)\)
 - **Resposta:** \(\boxed{\tfrac{16\pi}{15}(3\sqrt2+5)}\)
 {{< /details >}}
@@ -255,13 +255,13 @@ Casca horizontal: raio \(y\), altura = **direita − esquerda** (em \(x\)).
 **12(b)** \(x=y^2,\ x=-y,\ y=2,\ y\ge0\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** Direita \(x=y^2\), esquerda \(x=-y\): comprimento \(y^2+y\), \(y\) de \(0\) a \(2\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \({y_i^*}^2+{y_i^*}\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,({y_i^*}^2+{y_i^*})\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,({y_i^*}^2+{y_i^*})\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,({y_i^*}^2+{y_i^*})\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,({y_i^*}^2+{y_i^*})\,\Delta y_i=2\pi\int_{0}^{2}(y)\,(y^2+y)\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{2}(y)\,(y^2+y)\,dy\)
 - **Conta:** \(2\pi\int_0^2(y^3+y^2)dy=2\pi\Big(4+\tfrac83\Big)\)
 - **Resposta:** \(\boxed{\tfrac{40\pi}3}\)
 {{< /details >}}
@@ -269,13 +269,13 @@ Casca horizontal: raio \(y\), altura = **direita − esquerda** (em \(x\)).
 **12(c)** \(x=2y-y^2,\ x=0\) (\(0\le y\le2\)).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** A parábola \(x=2y-y^2\) é positiva para \(0<y<2\) (zeros em \(0\) e \(2\)). Direita \(2y-y^2\), esquerda \(0\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(2{y_i^*}-{y_i^*}^2\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,(2{y_i^*}-{y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,(2{y_i^*}-{y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,(2{y_i^*}-{y_i^*}^2)\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,(2{y_i^*}-{y_i^*}^2)\,\Delta y_i=2\pi\int_{0}^{2}(y)\,(2y-y^2)\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{2}(y)\,(2y-y^2)\,dy\)
 - **Conta:** \(2\pi\int_0^2(2y^2-y^3)dy=2\pi\Big(\tfrac{16}3-4\Big)\)
 - **Resposta:** \(\boxed{\tfrac{8\pi}3}\)
 {{< /details >}}
@@ -283,13 +283,13 @@ Casca horizontal: raio \(y\), altura = **direita − esquerda** (em \(x\)).
 **12(d)** \(x=2y-y^2,\ x=y\) (cruzam em \(y=0,1\); parábola à direita).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** Cruzamento: \(2y-y^2=y\Rightarrow y=0,1\). No meio, \(2y-y^2\ge y\): parábola à direita. Comprimento \(y-y^2\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \({y_i^*}-{y_i^*}^2\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,({y_i^*}-{y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,({y_i^*}-{y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,({y_i^*}-{y_i^*}^2)\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,({y_i^*}-{y_i^*}^2)\,\Delta y_i=2\pi\int_{0}^{1}(y)\,(y-y^2)\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(y)\,(y-y^2)\,dy\)
 - **Conta:** \(2\pi\int_0^1(y^2-y^3)dy=2\pi\Big(\tfrac13-\tfrac14\Big)\)
 - **Resposta:** \(\boxed{\tfrac\pi6}\)
 {{< /details >}}
@@ -297,13 +297,13 @@ Casca horizontal: raio \(y\), altura = **direita − esquerda** (em \(x\)).
 **12(e)** \(y=|x|,\ y=1\): para cada \(y\), \(x\) vai de \(-y\) a \(y\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** \(y=|x|\) vira \(|x|\le y\), isto é, \(x\) de \(-y\) a \(y\) em cada altura. Comprimento \(2y\), \(y\) de \(0\) a \(1\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(2{y_i^*}\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,(2{y_i^*})\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,(2{y_i^*})\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,(2{y_i^*})\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,(2{y_i^*})\,\Delta y_i=2\pi\int_{0}^{1}(y)\,(2y)\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(y)\,(2y)\,dy\)
 - **Conta:** \(2\pi\int_0^12y^2dy=2\pi\cdot\tfrac23\)
 - **Resposta:** \(\boxed{\tfrac{4\pi}3}\)
 {{< /details >}}
@@ -311,13 +311,13 @@ Casca horizontal: raio \(y\), altura = **direita − esquerda** (em \(x\)).
 **12(f)** \(y=x,\ y=2x,\ y=2\): \(x\) vai de \(y/2\) a \(y\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** Isole \(x\): \(y=x\Rightarrow x=y\) (direita) e \(y=2x\Rightarrow x=\tfrac y2\) (esquerda). Comprimento \(\tfrac y2\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(\tfrac{{y_i^*}}{2}\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,(\tfrac{{y_i^*}}{2})\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,(\tfrac{{y_i^*}}{2})\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,(\tfrac{{y_i^*}}{2})\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,(\tfrac{{y_i^*}}{2})\,\Delta y_i=2\pi\int_{0}^{2}(y)\,(\tfrac{y}{2})\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{2}(y)\,(\tfrac{y}{2})\,dy\)
 - **Conta:** \(2\pi\int_0^2\tfrac{y^2}2dy=\pi\cdot\tfrac83\)
 - **Resposta:** \(\boxed{\tfrac{8\pi}3}\)
 {{< /details >}}
@@ -325,13 +325,13 @@ Casca horizontal: raio \(y\), altura = **direita − esquerda** (em \(x\)).
 **12(g)** \(y=\sqrt x,\ y=0,\ y=x-2\): \(x\) vai de \(y^2\) a \(y+2\) (\(0\le y\le2\)).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** Isole \(x\): \(y=\sqrt x\Rightarrow x=y^2\) (esquerda) e \(y=x-2\Rightarrow x=y+2\) (direita). Cruzam em \(y=2\). Comprimento \(y+2-y^2\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \({y_i^*}+2-{y_i^*}^2\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,({y_i^*}+2-{y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,({y_i^*}+2-{y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,({y_i^*}+2-{y_i^*}^2)\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,({y_i^*}+2-{y_i^*}^2)\,\Delta y_i=2\pi\int_{0}^{2}(y)\,(y+2-y^2)\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{2}(y)\,(y+2-y^2)\,dy\)
 - **Conta:** \(2\pi\int_0^2(y^2+2y-y^3)dy=2\pi\Big(\tfrac83+4-4\Big)\)
 - **Resposta:** \(\boxed{\tfrac{16\pi}3}\)
 {{< /details >}}
@@ -339,13 +339,13 @@ Casca horizontal: raio \(y\), altura = **direita − esquerda** (em \(x\)).
 **12(h)** \(y=\sqrt x,\ y=0,\ y=2-x\): \(x\) vai de \(y^2\) a \(2-y\) (\(0\le y\le1\)).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** Isole \(x\): esquerda \(x=y^2\), direita \(x=2-y\). Cruzam em \(y^2=2-y\Rightarrow y=1\); \(y\) de \(0\) a \(1\). Comprimento \(2-y-y^2\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(2-{y_i^*}-{y_i^*}^2\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,(2-{y_i^*}-{y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,(2-{y_i^*}-{y_i^*}^2)\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,(2-{y_i^*}-{y_i^*}^2)\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,(2-{y_i^*}-{y_i^*}^2)\,\Delta y_i=2\pi\int_{0}^{1}(y)\,(2-y-y^2)\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(y)\,(2-y-y^2)\,dy\)
 - **Conta:** \(2\pi\int_0^1(2y-y^2-y^3)dy=2\pi\Big(1-\tfrac13-\tfrac14\Big)\)
 - **Resposta:** \(\boxed{\tfrac{5\pi}6}\)
 {{< /details >}}
@@ -357,13 +357,13 @@ Região entre o eixo \(y\) e \(x=12(y^2-y^3)\), \(0\le y\le1\). Altura da casca 
 **13(a)** Em torno do eixo \(x\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(x\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** Faixas horizontais: altura = \(x=12(y^2-y^3)\) (de \(0\) até a curva). O eixo só muda o **raio**. Em torno do eixo \(x\): raio \(y\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(12({y_i^*}^2-{y_i^*}^3)\)
-- **Volume da casca:** \(2\pi\,({y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i=2\pi\int_{0}^{1}(y)\,(12(y^2-y^3))\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(y)\,(12(y^2-y^3))\,dy\)
 - **Conta:** \(24\pi\int_0^1(y^3-y^4)dy=24\pi\Big(\tfrac14-\tfrac15\Big)\)
 - **Resposta:** \(\boxed{\tfrac{6\pi}5}\)
 {{< /details >}}
@@ -371,13 +371,13 @@ Região entre o eixo \(y\) e \(x=12(y^2-y^3)\), \(0\le y\le1\). Altura da casca 
 **13(b)** Em torno de \(y=1\): raio \(1-y\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno da reta \(y=1\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** A reta \(y=1\) está **acima** da região (\(y\le1\)): raio = distância \(1-y\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \(1-{y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(12({y_i^*}^2-{y_i^*}^3)\)
-- **Volume da casca:** \(2\pi\,(1-{y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,(1-{y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,(1-{y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,(1-{y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i=2\pi\int_{0}^{1}(1-y)\,(12(y^2-y^3))\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(1-y)\,(12(y^2-y^3))\,dy\)
 - **Conta:** \(24\pi\int_0^1(y^2-2y^3+y^4)dy=24\pi\Big(\tfrac13-\tfrac12+\tfrac15\Big)\)
 - **Resposta:** \(\boxed{\tfrac{4\pi}5}\)
 {{< /details >}}
@@ -385,13 +385,13 @@ Região entre o eixo \(y\) e \(x=12(y^2-y^3)\), \(0\le y\le1\). Altura da casca 
 **13(c)** Em torno de \(y=\tfrac85\): raio \(\tfrac85-y\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno da reta \(y=8/5\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** \(y=\tfrac85\) também está acima: raio \(\tfrac85-y\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \(\tfrac85-{y_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(12({y_i^*}^2-{y_i^*}^3)\)
-- **Volume da casca:** \(2\pi\,(\tfrac85-{y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,(\tfrac85-{y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,(\tfrac85-{y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,(\tfrac85-{y_i^*})\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i=2\pi\int_{0}^{1}(\tfrac85-y)\,(12(y^2-y^3))\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(\tfrac85-y)\,(12(y^2-y^3))\,dy\)
 - **Conta:** \(24\pi\Big(\tfrac85\cdot\tfrac1{12}-\tfrac1{20}\Big)=24\pi\Big(\tfrac2{15}-\tfrac1{20}\Big)\)
 - **Resposta:** \(\boxed{2\pi}\)
 {{< /details >}}
@@ -399,13 +399,13 @@ Região entre o eixo \(y\) e \(x=12(y^2-y^3)\), \(0\le y\le1\). Altura da casca 
 **13(d)** Em torno de \(y=-\tfrac25\): raio \(y+\tfrac25\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno da reta \(y=-2/5\); fatias paralelas ao eixo, logo integra em \(dy\)
+- **Como pensar:** \(y=-\tfrac25\) está **abaixo**: raio \(y-(-\tfrac25)=y+\tfrac25\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio da casca:** \({y_i^*}+\tfrac25\) (distância ao eixo)
 - **Altura da casca:** \(12({y_i^*}^2-{y_i^*}^3)\)
-- **Volume da casca:** \(2\pi\,({y_i^*}+\tfrac25)\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta y_i\)
+- **Volume da casca:** \(2\pi\,({y_i^*}+\tfrac25)\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta y_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({y_i^*}+\tfrac25)\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({y_i^*}+\tfrac25)\,(12({y_i^*}^2-{y_i^*}^3))\,\Delta y_i=2\pi\int_{0}^{1}(y+\tfrac25)\,(12(y^2-y^3))\,dy\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{1}(y+\tfrac25)\,(12(y^2-y^3))\,dy\)
 - **Conta:** \(24\pi\Big(\tfrac1{20}+\tfrac25\cdot\tfrac1{12}\Big)=24\pi\Big(\tfrac1{20}+\tfrac1{30}\Big)\)
 - **Resposta:** \(\boxed{2\pi}\)
 {{< /details >}}
@@ -417,13 +417,13 @@ Altura da casca: \(\tfrac{x+4}2-x=\tfrac{4-x}2\), \(0\le x\le4\).
 **14(b)** Em torno do eixo \(y\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno do eixo \(y\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** Eixo \(y\): faixas verticais, raio \(x\). Em cima \(\tfrac{x+4}2\), embaixo \(x\): altura \(\tfrac{4-x}2\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \({x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(\tfrac{4-{x_i^*}}{2}\)
-- **Volume da casca:** \(2\pi\,({x_i^*})\,(\tfrac{4-{x_i^*}}{2})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,({x_i^*})\,(\tfrac{4-{x_i^*}}{2})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,({x_i^*})\,(\tfrac{4-{x_i^*}}{2})\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,({x_i^*})\,(\tfrac{4-{x_i^*}}{2})\,\Delta x_i=2\pi\int_{0}^{4}(x)\,(\tfrac{4-x}{2})\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{4}(x)\,(\tfrac{4-x}{2})\,dx\)
 - **Conta:** \(\pi\int_0^4(4x-x^2)dx=\pi\Big(32-\tfrac{64}3\Big)\)
 - **Resposta:** \(\boxed{\tfrac{32\pi}3}\)
 {{< /details >}}
@@ -431,13 +431,13 @@ Altura da casca: \(\tfrac{x+4}2-x=\tfrac{4-x}2\), \(0\le x\le4\).
 **14(c)** Em torno de \(x=4\): raio \(4-x\).
 
 {{< details title="Resolução" >}}
-- **Método:** casca cilíndrica, girando em torno da reta \(x=4\); fatias paralelas ao eixo, logo integra em \(dx\)
+- **Como pensar:** O eixo \(x=4\) fica à direita da região: raio = distância \(4-x\). Mesma altura \(\tfrac{4-x}2\).
 - **Espessura:** \(\Delta x_i\)
 - **Raio da casca:** \(4-{x_i^*}\) (distância ao eixo)
 - **Altura da casca:** \(\tfrac{4-{x_i^*}}{2}\)
-- **Volume da casca:** \(2\pi\,(4-{x_i^*})\,(\tfrac{4-{x_i^*}}{2})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) com espessura \(\Delta x_i\)
+- **Volume da casca:** \(2\pi\,(4-{x_i^*})\,(\tfrac{4-{x_i^*}}{2})\,\Delta x_i\), pois a casca aberta é um retângulo \(2\pi r\times h\) de espessura \(\Delta x_i\)
 - **Aproximação do sólido:** \(\sum_{i=1}^{n}2\pi\,(4-{x_i^*})\,(\tfrac{4-{x_i^*}}{2})\,\Delta x_i\)
-- **Volume do sólido:** \(\lim_{n\to\infty}\sum_{i=1}^{n}2\pi\,(4-{x_i^*})\,(\tfrac{4-{x_i^*}}{2})\,\Delta x_i=2\pi\int_{0}^{4}(4-x)\,(\tfrac{4-x}{2})\,dx\)
+- **Volume do sólido:** \(V=\lim_{n\to\infty}(\text{aproximação})=2\pi\int_{0}^{4}(4-x)\,(\tfrac{4-x}{2})\,dx\)
 - **Conta:** \(\pi\int_0^4(4-x)^2dx=\pi\Big[-\tfrac{(4-x)^3}3\Big]_0^4\)
 - **Resposta:** \(\boxed{\tfrac{64\pi}3}\)
 {{< /details >}}

@@ -29,6 +29,7 @@ $$
 
 **Exemplo 1.** \(y=2\sqrt x,\ 1\le x\le2\), em torno do eixo \(x\).
 
+- **Como pensar:** Eixo \(x\): raio da faixa = altura da curva, \(2\sqrt x\). \(y'=\tfrac1{\sqrt x}\), então \(ds=\sqrt{1+\tfrac1x}\,dx\). Combine \(\sqrt x\cdot\sqrt{1+\tfrac1x}=\sqrt{x+1}\): a raiz fica simples.
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(y=2\sqrt x\) (distância ao eixo)
 - **Comprimento da faixa:** \(ds=\sqrt{1+\tfrac1x}\,dx\)
@@ -39,6 +40,7 @@ $$
 
 **Exemplo 2.** \(x=1-y,\ 0\le y\le1\), em torno do eixo \(y\) (cone).
 
+- **Como pensar:** Eixo \(y\) e \(x=g(y)\): raio da faixa = \(x=1-y\). \(g'=-1\), \(ds=\sqrt2\,dy\). Confere com a geometria: cone de raio e altura \(1\), geratriz \(\sqrt2\), área \(\pi r\ell=\sqrt2\pi\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(g(y)=1-y\) (distância ao eixo)
 - **Comprimento da faixa:** \(ds=\sqrt{1+1}\,dy=\sqrt2\,dy\)
@@ -56,6 +58,7 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 **17** \(y=\tfrac x2,\ 0\le x\le4\), eixo \(x\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** Reta \(y=\tfrac x2\): \(y'=\tfrac12\), \(ds=\sqrt{1+\tfrac14}=\tfrac{\sqrt5}2\) (constante). Raio da faixa: a altura, \(\tfrac x2\). Confira: \(\pi r\ell=\pi\cdot2\cdot2\sqrt5\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(\tfrac x2\) (distância ao eixo)
 - **Comprimento da faixa:** \(\tfrac{\sqrt5}2dx\)
@@ -68,6 +71,7 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 **18** \(y=\tfrac x2,\ 0\le x\le4\), eixo \(y\) (raio \(x\)).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** Mesma reta, mas girando em torno de \(y\): o raio é a distância ao eixo \(y\), isto é, \(x\). Mesmo \(ds\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(x\) (distância ao eixo)
 - **Comprimento da faixa:** \(\tfrac{\sqrt5}2dx\)
@@ -80,6 +84,7 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 **19** \(y=\tfrac{x}2+\tfrac12,\ 1\le x\le3\), eixo \(x\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** Reta \(y=\tfrac{x+1}2\): \(y'=\tfrac12\), mesmo \(ds=\tfrac{\sqrt5}2dx\). Eixo \(x\): raio = altura \(\tfrac{x+1}2\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(\tfrac{x+1}2\) (distância ao eixo)
 - **Comprimento da faixa:** \(\tfrac{\sqrt5}2dx\)
@@ -92,6 +97,7 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 **20** \(y=\tfrac x2+\tfrac12,\ 1\le x\le3\), eixo \(y\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** Mesma reta, eixo \(y\): raio \(x\), \(ds=\tfrac{\sqrt5}2dx\). \(\int_1^3x\,dx=4\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(x\) (distância ao eixo)
 - **Comprimento da faixa:** \(\tfrac{\sqrt5}2dx\)
@@ -106,6 +112,7 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 **21(a)** \(y=\tfrac{x^3}9,\ 0\le x\le2\), eixo \(x\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** \(y'=\tfrac{x^2}3\), \(y'^2=\tfrac{x^4}9\). Raio \(\tfrac{x^3}9\). O \(x^3\) sobrando é a derivada de \(1+\tfrac{x^4}9\) (a menos de \(\tfrac49\)): \(u=1+\tfrac{x^4}9\); limites \(u(0)=1\), \(u(2)=\tfrac{25}9\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(\tfrac{x^3}9\) (distância ao eixo)
 - **Comprimento da faixa:** \(\sqrt{1+\tfrac{x^4}9}\,dx\ \ (y'=\tfrac{x^2}3)\)
@@ -118,6 +125,7 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 **21(b)** \(x=\tfrac{y^3}3,\ 0\le y\le1\), eixo \(y\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** Curva \(x=\tfrac{y^3}3\): \(x'=y^2\), \(ds=\sqrt{1+y^4}\,dy\). Raio (eixo \(y\)) = \(x=\tfrac{y^3}3\). \(u=1+y^4\), \(u:1\to2\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(\tfrac{y^3}3\) (distância ao eixo)
 - **Comprimento da faixa:** \(\sqrt{1+y^4}\,dy\)
@@ -130,6 +138,7 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 **21(c)** \(x=2\sqrt{4-y},\ 0\le y\le\tfrac{15}4\), eixo \(y\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** \(x'=-\tfrac1{\sqrt{4-y}}\), logo \(1+x'^2=\tfrac{(4-y)+1}{4-y}\). Raio \(2\sqrt{4-y}\) **cancela** o \(\sqrt{4-y}\) de baixo, sobra \(\sqrt{5-y}\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(2\sqrt{4-y}\) (distância ao eixo)
 - **Comprimento da faixa:** \(\sqrt{\tfrac{5-y}{4-y}}\,dy\ \ (x'=\tfrac{-1}{\sqrt{4-y}})\)
@@ -142,6 +151,7 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 **21(d)** \(x=\cos t,\ y=2+\operatorname{sen}t,\ 0\le t\le2\pi\), eixo \(x\) (circunferência de raio 1).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** É uma circunferência de raio \(1\) centrada em \((0,2)\): \(ds=dt\) (velocidade \(1\)). Raio da faixa (eixo \(x\)) = \(y=2+\operatorname{sen}t\). Confere com Pappus: \(2\pi\cdot2\cdot2\pi\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(2+\operatorname{sen}t\) (distância ao eixo)
 - **Comprimento da faixa:** \(ds=\sqrt{\operatorname{sen}^2t+\cos^2t}\,dt=dt\)
@@ -154,6 +164,7 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 **21(e)** \(x=t+\sqrt2,\ y=\tfrac{t^2}2+\sqrt2t,\ -\sqrt2\le t\le\sqrt2\), eixo \(y\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** \(x'=1\), \(y'=t+\sqrt2\). Eixo \(y\): raio \(x=t+\sqrt2\). Chame \(u=t+\sqrt2\): \(ds=\sqrt{1+u^2}\) e o raio é \(u\); limites \(u:0\to2\sqrt2\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(x=t+\sqrt2\) (distância ao eixo)
 - **Comprimento da faixa:** \(ds=\sqrt{1+(t+\sqrt2)^2}\,dt\ \ (x'=1,\ y'=t+\sqrt2)\)
@@ -166,6 +177,7 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 **21(f)** \(x=e^t-t,\ y=4e^{t/2},\ 0\le t\le1\), eixo \(x\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** Mesma curva de 15(f): \(ds=(e^t+1)dt\). Eixo \(x\): raio \(y=4e^{t/2}\). Multiplique: \(e^{t/2}(e^t+1)=e^{3t/2}+e^{t/2}\).
 - **Faixa:** pedaço \(\Delta s_i\) da curva gira e vira um tronco de cone fininho
 - **Raio da faixa:** \(4e^{t/2}\) (distância ao eixo)
 - **Comprimento da faixa:** \(ds=(e^t+1)\,dt\ \ (\text{como em 15(f)})\)

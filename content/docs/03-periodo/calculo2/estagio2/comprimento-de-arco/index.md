@@ -32,6 +32,7 @@ $$
 
 **Exemplo 1.** \(y=\tfrac{4\sqrt2}3x^{3/2}-1,\ 0\le x\le1\).
 
+- **Como pensar:** Derive \(x^{3/2}\): \(\tfrac32\sqrt x\). Então \(y'=\tfrac{4\sqrt2}3\cdot\tfrac32\sqrt x=2\sqrt2\sqrt x\), e \(y'^2=8x\). A raiz **não** some, mas \(\sqrt{1+8x}\) é uma substituição simples.
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}\) (hipotenusa de um triângulo minúsculo)
 - **Derivada:** \(y'=2\sqrt2\,\sqrt x\)
 - **Radicando:** \(1+8x\)
@@ -41,6 +42,7 @@ $$
 
 **Exemplo 2 (o da lousa).** \(f(x)=\tfrac{x^3}{12}+\tfrac1x,\ 1\le x\le4\).
 
+- **Como pensar:** Derive: \(\tfrac{3x^2}{12}=\tfrac{x^2}4\) e \(\big(\tfrac1x\big)'=-\tfrac1{x^2}\). Eleve ao quadrado: \(\tfrac{x^4}{16}-\tfrac12+\tfrac1{x^4}\). Somando \(1\): \(\tfrac{x^4}{16}+\tfrac12+\tfrac1{x^4}\), que é \(\big(\tfrac{x^2}4+\tfrac1{x^2}\big)^2\) (confira o termo do meio: \(2\cdot\tfrac{x^2}4\cdot\tfrac1{x^2}=\tfrac12\)). A raiz some.
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}\) (hipotenusa de um triângulo minúsculo)
 - **Derivada:** \(f'(x)=\tfrac{x^2}4-\tfrac1{x^2}\)
 - **Radicando:** \(1+\Big(\tfrac{x^2}4-\tfrac1{x^2}\Big)^2=\tfrac{x^4}{16}+\tfrac12+\tfrac1{x^4}=\Big(\tfrac{x^2}4+\tfrac1{x^2}\Big)^2\)
@@ -53,6 +55,7 @@ $$
 
 **Exemplo 3.** \(y=(x/2)^{2/3},\ 0\le x\le2\). Derivar em \(x\) dá \(y'\) infinito em \(0\). **Saída:** inverta, \(x=2y^{3/2}\), \(0\le y\le1\).
 
+- **Como pensar:** Derivando, \(y'=\tfrac13\big(\tfrac x2\big)^{-1/3}\) explode em \(x=0\). **Saída:** isole \(x=2y^{3/2}\) e integre em \(dy\), com \(y\) de \(0\) a \(1\) (quando \(x=2\), \(y=1\)).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}\) (hipotenusa de um triângulo minúsculo)
 - **Derivada:** \(\tfrac{dx}{dy}=3\sqrt y\)
 - **Radicando:** \(1+9y\)
@@ -69,6 +72,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **15(a)** \(x=1-t,\ y=2+3t,\ -\tfrac23\le t\le1\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** Reta: velocidade constante \(\sqrt{(-1)^2+3^2}=\sqrt{10}\). Só multiplique pelo tamanho do intervalo, \(1-(-\tfrac23)=\tfrac53\).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\)
 - **Derivadas:** \(x'=-1,\quad y'=3\)
 - **Radicando:** \(1+9=10\)
@@ -80,6 +84,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **15(b)** \(x=\cos t,\ y=t+\operatorname{sen}t,\ 0\le t\le\pi\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** Derive: \(x'=-\operatorname{sen}t\), \(y'=1+\cos t\). Some os quadrados e use \(1+\cos t=2\cos^2\tfrac t2\): \(2+2\cos t=4\cos^2\tfrac t2\). A raiz é \(2\cos\tfrac t2\) (positivo em \([0,\pi]\)).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\)
 - **Derivadas:** \(x'=-\operatorname{sen}t,\quad y'=1+\cos t\)
 - **Radicando:** \(\operatorname{sen}^2t+1+2\cos t+\cos^2t=2+2\cos t=4\cos^2\tfrac t2\)
@@ -91,6 +96,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **15(c)** \(x=t^3,\ y=\tfrac{3t^2}2,\ 0\le t\le\sqrt3\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** \(x'=3t^2\), \(y'=3t\). Fatore: \(9t^4+9t^2=9t^2(t^2+1)\), raiz \(3t\sqrt{t^2+1}\). O \(t\) sobrando permite \(u=t^2+1\).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\)
 - **Derivadas:** \(x'=3t^2,\quad y'=3t\)
 - **Radicando:** \(9t^4+9t^2=9t^2(t^2+1)\)
@@ -102,6 +108,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **15(d)** \(x=\tfrac{t^2}2,\ y=\tfrac{(2t+1)^{3/2}}3,\ 0\le t\le4\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** \(\tfrac{d}{dt}\tfrac{(2t+1)^{3/2}}3=\tfrac12\cdot2\,(2t+1)^{1/2}=\sqrt{2t+1}\). Soma: \(t^2+(2t+1)=(t+1)^2\).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\)
 - **Derivadas:** \(x'=t,\quad y'=\sqrt{2t+1}\)
 - **Radicando:** \(t^2+2t+1=(t+1)^2\)
@@ -113,6 +120,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **15(e)** \(x=\tfrac{(2t+3)^{3/2}}3,\ y=t+\tfrac{t^2}2,\ 0\le t\le3\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** Aqui \(x\) é a de potência \(\tfrac32\): \(x'=\sqrt{2t+3}\). Soma: \((2t+3)+(1+t)^2=t^2+4t+4=(t+2)^2\).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\)
 - **Derivadas:** \(x'=\sqrt{2t+3},\quad y'=1+t\)
 - **Radicando:** \(2t+3+1+2t+t^2=(t+2)^2\)
@@ -124,6 +132,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **15(f)** \(x=e^t-t,\ y=4e^{t/2},\ 0\le t\le3\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** \(x'=e^t-1\), \(y'=2e^{t/2}\). Soma: \(e^{2t}-2e^t+1+4e^t=(e^t+1)^2\).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\)
 - **Derivadas:** \(x'=e^t-1,\quad y'=2e^{t/2}\)
 - **Radicando:** \((e^t-1)^2+4e^t=(e^t+1)^2\)
@@ -137,6 +146,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **16(a)** \(y=\tfrac13(x^2+2)^{3/2},\ 0\le x\le3\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** Regra da cadeia: \(y'=\tfrac13\cdot\tfrac32(x^2+2)^{1/2}\cdot2x=x\sqrt{x^2+2}\). Então \(1+y'^2=x^4+2x^2+1=(x^2+1)^2\).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}\) (hipotenusa de um triângulo minúsculo)
 - **Derivada:** \(y'=x\sqrt{x^2+2}\)
 - **Radicando:** \(1+x^2(x^2+2)=(x^2+1)^2\)
@@ -148,6 +158,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **16(b)** \(y=x^{3/2},\ 0\le x\le4\).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** \(y'=\tfrac32\sqrt x\), \(y'^2=\tfrac94x\). A raiz não some, mas \(u=1+\tfrac94x\) resolve (\(du=\tfrac94dx\), por isso o fator \(\tfrac49\)).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}\) (hipotenusa de um triângulo minúsculo)
 - **Derivada:** \(y'=\tfrac32\sqrt x\)
 - **Radicando:** \(1+\tfrac94x\)
@@ -159,6 +170,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **16(c)** \(x=\tfrac{y^3}3+\tfrac1{4y},\ 1\le y\le3\) (derive em \(y\); integra em \(dy\)).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** A curva é \(x\) em função de \(y\): derive em \(y\) e integre em \(dy\). Em \((a-b)^2+1\), o termo do meio \(-2\cdot y^2\cdot\tfrac1{4y^2}=-\tfrac12\) vira \(+\tfrac12\) ao somar \(1\): quadrado perfeito \((a+b)^2\).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}\) (hipotenusa de um triângulo minúsculo)
 - **Derivada:** \(x'=y^2-\tfrac1{4y^2}\)
 - **Radicando:** \(1+\Big(y^2-\tfrac1{4y^2}\Big)^2=\Big(y^2+\tfrac1{4y^2}\Big)^2\)
@@ -170,6 +182,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **16(d)** \(x=\tfrac{y^3}6+\tfrac1{2y},\ 2\le y\le3\) (o enunciado escreve \(y\) dos dois lados; é \(x\) em função de \(y\)).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** É \(x\) em função de \(y\). Mesmo truque: \(2\cdot\tfrac{y^2}2\cdot\tfrac1{2y^2}=\tfrac12\), logo \(1+\big(\tfrac{y^2}2-\tfrac1{2y^2}\big)^2=\big(\tfrac{y^2}2+\tfrac1{2y^2}\big)^2\).
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}\) (hipotenusa de um triângulo minúsculo)
 - **Derivada:** \(x'=\tfrac{y^2}2-\tfrac1{2y^2}\)
 - **Radicando:** \(1+x'^2=\Big(\tfrac{y^2}2+\tfrac1{2y^2}\Big)^2\)
@@ -181,6 +194,7 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 **16(e)** \(y=\sqrt{1-x^2},\ -\tfrac12\le x\le\tfrac12\) (arco de circunferência).
 
 {{< details title="Resolução" >}}
+- **Como pensar:** É um arco de circunferência de raio \(1\). \(y'=\tfrac{-x}{\sqrt{1-x^2}}\) e \(1+y'^2=\tfrac1{1-x^2}\). A primitiva de \(\tfrac1{\sqrt{1-x^2}}\) é \(\operatorname{arcsen}x\): o comprimento é o ângulo \(\tfrac\pi3\), conferindo com a geometria.
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}\) (hipotenusa de um triângulo minúsculo)
 - **Derivada:** \(y'=\tfrac{-x}{\sqrt{1-x^2}}\)
 - **Radicando:** \(1+\tfrac{x^2}{1-x^2}=\tfrac1{1-x^2}\)
