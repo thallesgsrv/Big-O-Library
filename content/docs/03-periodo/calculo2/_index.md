@@ -36,4 +36,4 @@ Cálculo 2 dá continuidade a Cálculo 1, aprofundando o estudo de integrais e s
 - Área de superfície de revolução
 
 > [!NOTE]
-> Da página de discos em diante, toda resolução segue o padrão do professor: espessura, raio (ou base e altura), volume da fatia, aproximação do sólido e volume do sólido.
+> Da página de discos em diante, toda resolução segue o mesmo padrão: espessura, raio (ou base e altura), volume da fatia, aproximação do sólido e volume do sólido.

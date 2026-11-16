@@ -12,7 +12,7 @@ date: 2026-11-16
 Como medir o volume de um sólido que não é caixa nem cilindro? Fatie em pedaços finos, trate cada pedaço como algo que você sabe medir, some e faça as fatias ficarem infinitamente finas. É a mesma ideia da soma de Riemann, só que agora cada retângulo vira uma **fatia 3D**.
 
 > [!IMPORTANT]
-> **Receita do professor (use em toda questão, sempre nesta ordem):**
+> **Receita (use em toda questão, sempre nesta ordem):**
 > 1. **Esboço:** desenhe a região e o eixo de rotação.
 > 2. **Espessura** da fatia: \(\Delta x_i\) ou \(\Delta y_i\).
 > 3. **Raio** (ou **base** e **altura**) da fatia.
@@ -65,7 +65,7 @@ $$
 
 **Eixo deslocado** (reta \(y=k\) ou \(x=k\)): o raio é sempre uma **distância**, isto é, \(|\text{curva}-k|\). Para girar em torno de \(y=1\) uma curva \(y=\sqrt x\) acima da reta, o raio é \(\sqrt x-1\).
 
-## 4. Exemplos resolvidos (aula)
+## 4. Exemplos resolvidos
 
 **Exemplo 1.** \(y=\sqrt x,\ 0\le x\le4\), em torno do eixo \(x\).
 
@@ -98,9 +98,9 @@ $$
 - **Aproximação do sólido:** \(\sum\pi\,x_i^{*4}\Delta x_i+\sum\pi(2-x_i^*)^2\Delta x_i\)
 - **Volume do sólido:** \(\pi\int_0^1x^4dx+\pi\int_1^2(2-x)^2dx=\pi\Big(\tfrac15+\tfrac13\Big)=\boxed{\tfrac{8\pi}{15}}\)
 
-**Exemplo 4 (o da lousa).** Região entre o eixo \(y\) e \(x=\dfrac2y\), \(1\le y\le4\), em torno do eixo \(y\).
+**Exemplo 4.** Região entre o eixo \(y\) e \(x=\dfrac2y\), \(1\le y\le4\), em torno do eixo \(y\).
 
-- **Como pensar:** Gira em torno de \(y\), então as fatias ficam **deitadas** e a espessura é \(\Delta y\). Por isso a curva precisa estar como \(x\) em função de \(y\): já está. O raio de cada disco é a distância ao eixo \(y\), isto é, o próprio \(x=\tfrac2y\). Veja a lousa: raio \(\tfrac{2}{y_i^*}\), volume do disco \(\pi\big(\tfrac2{y_i^*}\big)^2\Delta y_i\).
+- **Como pensar:** Gira em torno de \(y\), então as fatias ficam **deitadas** e a espessura é \(\Delta y\). Por isso a curva precisa estar como \(x\) em função de \(y\): já está. O raio de cada disco é a distância ao eixo \(y\), isto é, o próprio \(x=\tfrac2y\). Em cada fatia, o raio é \(\tfrac{2}{y_i^*}\) e o volume do disco é \(\pi\big(\tfrac2{y_i^*}\big)^2\Delta y_i\).
 - **Espessura:** \(\Delta y_i\)
 - **Raio do disco:** \(\tfrac{2}{{y_i^*}}\)
 - **Volume da fatia:** \(\pi\big(\tfrac{2}{{y_i^*}}\big)^2\,\Delta y_i\)
@@ -149,7 +149,7 @@ A região não encosta no eixo \(x\): é um anel com \(R=1\) e \(r=x\). Daí \(\
 
 ## 6. Lista de exercícios
 
-Resolva primeiro, abra depois. Os números seguem a **1ª lista** (Aplicações da Integral Definida).
+Resolva primeiro, abra depois.
 
 ### Questão 1: eixo \(x\)
 

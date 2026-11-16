@@ -113,9 +113,6 @@ A casca é horizontal, então a altura é a largura da região em \(x\): direita
 - **Resposta:** \(\boxed{\tfrac{14\pi}3}\)
 {{< /details >}}
 
-> [!NOTE]
-> O gabarito impresso da lista mostra \(14\pi\) em 9(c), mas a conta fecha em \(\tfrac{14\pi}3\). Confira com o professor.
-
 **9(d)** \(y=\dfrac{9x}{\sqrt{x^3+9}}\), \(0\le x\le3\).
 
 {{< details title="Resolução" >}}

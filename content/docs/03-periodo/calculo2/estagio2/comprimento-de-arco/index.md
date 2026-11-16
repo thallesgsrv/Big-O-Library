@@ -28,7 +28,7 @@ $$
 - **Curva \(x=g(y)\):** troque tudo: \(L=\int_c^d\sqrt{1+[g'(y)]^2}\,dy\). Use quando \(x=g(y)\) é mais simples.
 - **Paramétrica:** \(L=\displaystyle\int_\alpha^\beta\sqrt{(x')^2+(y')^2}\,dt\).
 
-## 2. Exemplos resolvidos (aula)
+## 2. Exemplos resolvidos
 
 **Exemplo 1.** \(y=\tfrac{4\sqrt2}3x^{3/2}-1,\ 0\le x\le1\).
 
@@ -40,7 +40,7 @@ $$
 - **Conta:** \(\Big[\tfrac{(1+8x)^{3/2}}{12}\Big]_0^1=\tfrac{27-1}{12}\)
 - **Resposta:** \(\boxed{\tfrac{13}6}\)
 
-**Exemplo 2 (o da lousa).** \(f(x)=\tfrac{x^3}{12}+\tfrac1x,\ 1\le x\le4\).
+**Exemplo 2.** \(f(x)=\tfrac{x^3}{12}+\tfrac1x,\ 1\le x\le4\).
 
 - **Como pensar:** Derive: \(\tfrac{3x^2}{12}=\tfrac{x^2}4\) e \(\big(\tfrac1x\big)'=-\tfrac1{x^2}\). Eleve ao quadrado: \(\tfrac{x^4}{16}-\tfrac12+\tfrac1{x^4}\). Somando \(1\): \(\tfrac{x^4}{16}+\tfrac12+\tfrac1{x^4}\), que é \(\big(\tfrac{x^2}4+\tfrac1{x^2}\big)^2\) (confira o termo do meio: \(2\cdot\tfrac{x^2}4\cdot\tfrac1{x^2}=\tfrac12\)). A raiz some.
 - **Pedaço da curva:** \(\Delta s_i\approx\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}\) (hipotenusa de um triângulo minúsculo)

@@ -25,7 +25,7 @@ $$
 > [!TIP]
 > Em **retas**, o resultado confere com a geometria: área lateral do cone \(=\pi r\ell\). Use para checar 17 a 20.
 
-## 2. Exemplos resolvidos (aula)
+## 2. Exemplos resolvidos
 
 **Exemplo 1.** \(y=2\sqrt x,\ 1\le x\le2\), em torno do eixo \(x\).
 

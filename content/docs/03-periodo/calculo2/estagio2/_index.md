@@ -32,7 +32,7 @@ Toda aplicação deste estágio é a mesma jogada: **fatiar** o objeto, medir **
 
 1. **Somas de Riemann e integral definida:** de onde vem \(\lim\sum=\int\).
 2. **Área entre curvas:** a fatia é um retângulo.
-3. **Discos e anéis:** questões 1 a 8 e 14(a),(d) da lista.
+3. **Discos e anéis:** questões 1 a 8 e 14(a),(d).
 4. **Cascas cilíndricas:** questões 9 a 13 e 14(b),(c).
 5. **Comprimento de arco:** questões 15 e 16.
 6. **Área de superfície:** questões 17 a 21.
