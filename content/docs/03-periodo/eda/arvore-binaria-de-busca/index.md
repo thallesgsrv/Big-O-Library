@@ -25,6 +25,8 @@ Uma árvore é feita de **nós** ligados. Em uma árvore binária, cada nó tem 
 - **Filhos** (esquerdo e direito) e **pai**: quem está logo abaixo e logo acima.
 - **Folha**: nó sem filhos.
 - **Subárvore**: um nó e tudo que está pendurado nele. E o detalhe bonito: toda subárvore é, ela mesma, uma árvore. Guarda isso, porque é por causa disso que a recursão funciona tão bem aqui.
+- **Grau** de um nó: quantos filhos ele tem. Em uma árvore binária, o grau é `0`, `1` ou `2`; folha tem grau `0`.
+- **Nível** de um nó: a distância dele até a raiz. A raiz está no nível `0`, os filhos dela no nível `1`, e assim por diante.
 - **Altura** de um nó: número de arestas no caminho mais longo até uma folha. Aqui, folha tem altura 0 e a árvore vazia tem altura \(-1\). A altura da árvore é a da raiz.
 
 ![Árvore com raiz 50, folhas destacadas e a subárvore do 40 tracejada](bst-vocabulario.png)
@@ -240,6 +242,34 @@ pré-ordem: [50, 30, 20, 40, 35, 45, 70, 60, 80]
 pós-ordem: [20, 35, 45, 40, 30, 60, 80, 70, 50]
 ```
 
+Esses três são percursos **em profundidade**: descem até o fim de um lado antes de olhar o outro. Existe também o percurso **em largura**, que visita a árvore **nível por nível**, da raiz para baixo e da esquerda para a direita. Aqui a recursão não ajuda, e quem entra em cena é a [Fila](../fila/):
+
+```java
+public List<Integer> emLargura() {
+    List<Integer> saida = new ArrayList<>();
+    if (raiz == null) return saida;
+
+    Queue<No> fila = new ArrayDeque<>();
+    fila.add(raiz);
+
+    while (!fila.isEmpty()) {
+        No no = fila.remove();
+        saida.add(no.valor);
+        if (no.esq != null) fila.add(no.esq);
+        if (no.dir != null) fila.add(no.dir);
+    }
+    return saida;
+}
+```
+
+Passo a passo: a raiz entra na fila. A cada volta, tiramos o primeiro da fila (`remove`), visitamos e colocamos os filhos **no final**. Como a fila é FIFO, todo mundo do nível `0` sai antes de qualquer um do nível `1`, e assim por diante (imports: `java.util.Queue` e `java.util.ArrayDeque`). Na árvore de exemplo:
+
+```text
+em largura: [50, 30, 70, 20, 40, 60, 80, 35, 45]
+```
+
+Cada nó entra e sai da fila uma vez, então o percurso custa \(O(n)\), como os outros.
+
 ### Passo 8: remover (o chefão da fase)
 
 Remover é a parte delicada, porque a árvore precisa **continuar sendo uma BST** depois. Acha o nó (como na busca) e então são **três casos**:
@@ -420,7 +450,7 @@ O sucessor pode ter um filho direito, então nem sempre é folha, mas sempre tem
 
 - Em uma BST, para todo nó: esquerda menor, direita maior.
 - Busca, inserção e remoção descem por um caminho só e custam \(O(h)\).
-- O percurso **em ordem** devolve os valores ordenados.
+- O percurso **em ordem** devolve os valores ordenados; o percurso **em largura** usa uma fila e visita nível por nível.
 - Remoção: três casos (folha, um filho, dois filhos com troca pelo sucessor).
 - Balanceada: \(h \approx \log n\). Mas inserir em ordem degenera a árvore numa lista, com \(h = n - 1\).
 - Para garantir \(O(\log n)\), é preciso uma árvore autobalanceada, como a AVL.

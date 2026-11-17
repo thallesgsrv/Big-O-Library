@@ -17,6 +17,8 @@ Na estrutura de dados é a mesma ideia: a gente adiciona e remove pelo **topo**.
 
 Um exemplo fácil é o desfazer de um editor: cada ação fica guardada, e o `Ctrl + Z` desfaz primeiro a ação mais recente. O botão de voltar do navegador segue uma lógica parecida. E quando uma função chama outra, o programa também usa uma pilha para saber qual chamada precisa terminar primeiro.
 
+Já tomou um `StackOverflowError`? Isso costuma acontecer com algoritmo recursivo sem condição de parada. O Java usa uma pilha para controlar as chamadas; sem condição de parada, ela enche sem parar, e quando atinge o limite que o Java estabeleceu, ele lança `java.lang.StackOverflowError`. É a pilha cheia, na vida real.
+
 ## Representação com array
 
 Vou montar uma pilha simples com um array de capacidade fixa, que guarda `String`. O array reserva o espaço; `topo` marca o índice do último elemento que realmente está na pilha.
@@ -171,6 +173,47 @@ System.out.println(historico.isEmpty()); // true
 
 Cada `pop` desfaz a ação mais recente primeiro, que é exatamente a política LIFO.
 
+## Lidando com a pilha cheia
+
+Veja esta pilha:
+
+```text
+elementos = ["a", "b", "c"]   topo = 2   pilha cheia
+```
+
+O que deve fazer `push("d")`? Como na [Fila](../fila/), temos três saídas: lançar uma exceção, crescer o array (como no [ArrayList](../arraylist/)) ou sobrescrever alguém (o topo). Nesta implementação escolhi a primeira: está no código do `push`, que lança `IllegalStateException`. Eu faço assim porque gosto de explorar decisões de design diferentes enquanto a gente aprende.
+
+**Desafio.** Que tal implementar a pilha das outras duas maneiras? Quando encher, faça o resize em vez de lançar exceção. E tente também sobrescrever o topo.
+
+## Usando a pilha como cliente
+
+Se você não tem acesso ao array interno, algumas operações ficam desafiadoras. Por exemplo: como saber se um elemento está na pilha tendo só `push`, `pop` e `peek`?
+
+Se eu for removendo e comparando, quando achar, já terei desmontado a pilha, e preciso remontá-la. É preciso **desempilhar e empilhar de volta**, e para isso usamos uma **pilha auxiliar** para guardar o que está saindo:
+
+```java
+public static boolean contem(Pilha pilha, String alvo) {
+    Pilha aux = new Pilha(pilha.size());
+    boolean achou = false;
+
+    // 1) desempilha até achar (ou esvaziar), guardando na auxiliar
+    while (!pilha.isEmpty() && !achou) {
+        String atual = pilha.pop();
+        if (atual.equals(alvo)) achou = true;
+        aux.push(atual);
+    }
+
+    // 2) devolve tudo para a pilha original, na ordem certa
+    while (!aux.isEmpty()) {
+        pilha.push(aux.pop());
+    }
+
+    return achou;
+}
+```
+
+Como a auxiliar inverte a ordem ao receber, quando devolvemos ela inverte de novo e a pilha original volta exatamente como estava. O custo é \(O(n)\).
+
 ## Análise de custo
 
 Esses métodos só leem ou alteram alguns valores, sem percorrer o array. Por isso, `push`, `pop`, `peek`, `isEmpty`, `isFull` e `size` custam \(O(1)\). O array ocupa \(O(c)\) de memória, em que `c` é a capacidade escolhida no construtor.
@@ -182,12 +225,20 @@ Só lembra que essa versão tem capacidade fixa: se encher, `push` lança uma ex
 1. Para uma pilha de capacidade 4, acompanhe o conteúdo e o valor de `topo` após cada operação: `push("a")`, `push("b")`, `pop()`, `push("c")`, `peek()`, `pop()`.
 2. O que acontece se `pop()` ou `peek()` forem chamados em uma pilha vazia? E se `push` for chamado em uma pilha cheia?
 3. Implemente um método `clear()` que remova todos os elementos da pilha.
+4. Com uma pilha de capacidade 4, acompanhe `push("a")`, `pop()`, `push("b")`, `push("c")`, `push("d")`, `pop()`, `pop()`, `pop()`, `push("e")`, `push("f")`.
 
 {{< details title="Gabarito" >}}
 1. Os estados são: `["a", null, null, null]`, topo `0`; `["a", "b", null, null]`, topo `1`; depois do `pop`, topo `0`; depois do `push("c")`, `["a", "c", null, null]`, topo `1`; `peek()` devolve `"c"` sem mudar o estado; o último `pop()` devolve `"c"` e deixa topo `0`.
 2. `pop` e `peek` lançam `NoSuchElementException`; `push` em uma pilha cheia lança `IllegalStateException`.
 3. Uma solução é limpar as posições de `0` até `topo` e, ao final, definir `topo = -1`.
+4. Depois de `push("a")` e `pop()`, a pilha volta a ficar vazia (`topo = -1`). Depois de `"b"`, `"c"`, `"d"`: `["b", "c", "d", null]`, `topo = 2`. Três `pop()` esvaziam a pilha (`topo = -1`). `push("e")` e `push("f")` deixam `["e", "f", null, null]`, `topo = 1`.
 {{< /details >}}
+
+## Onde encontro isso na biblioteca padrão?
+
+> Não use a classe `Stack` do Java.
+
+Em Java, para uma pilha baseada em array, use a classe [`ArrayDeque`](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html). Dois detalhes: ela é *resizable* (ao encher, cresce em vez de lançar exceção) e serve tanto de pilha quanto de fila. Se você olhar a API, todos os métodos estão lá: `addFirst`, `addLast`, `removeFirst`, `removeLast`. Dependendo de como você usa, ela é uma pilha ou uma fila.
 
 ## Resumo
 
@@ -195,6 +246,8 @@ Só lembra que essa versão tem capacidade fixa: se encher, `push` lança uma ex
 - `topo` delimita a região ocupada; `-1` representa a pilha vazia.
 - `push` insere, `pop` remove e devolve, e `peek` consulta sem remover.
 - Nesta implementação com array fixo, operações básicas custam \(O(1)\); inserir cheia ou remover/consultar vazia gera exceção.
+- Quando enche, há três saídas: exceção, crescer o array ou sobrescrever o topo.
+- Como cliente, só com `push`, `pop` e `peek`, use uma pilha auxiliar para desempilhar e empilhar de volta.
 
 ## Para estudar mais
 
