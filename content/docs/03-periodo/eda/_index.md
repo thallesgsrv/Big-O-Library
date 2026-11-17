@@ -1,31 +1,58 @@
 ---
 title: Estruturas de Dados e Algoritmos
 weight: 1
-description: Análise assintótica e algoritmos
-rotulo: Conteúdos
+description: Análise de algoritmos, ordenação, estruturas lineares e árvores.
+rotulo: Unidades
 autores:
   - thallesgsrv
 baseadoEm:
   - joaoarthurbm
   - fabriciocostadias
-date: 2026-10-09
+date: 2026-11-17
 ---
 
-## Sobre
+## Direto ao ponto
 
 Aqui a gente aprende a medir o custo de um algoritmo sem depender de cronômetro e usa essa régua para comparar os principais algoritmos.
 
-## Conteúdo previsto
+## Conteúdo
 
-- análise de algoritmos: contagem de operações, notação assintótica e recorrências
-- ordenação quadrática: selection sort, insertion sort e bubble sort
-- ordenação por divisão e conquista: merge sort e quick sort (com os particionamentos de Lomuto e de Hoare)
-- ordenação com heap: heap sort
-- ordenação linear: counting sort e radix sort
-- busca binária
-- estruturas de dados lineares: pilha, fila, lista com array (ArrayList), lista encadeada e tabela hash
-- cache: memória, localidade e cache LRU
-- árvores: árvore binária de busca, heap e árvore AVL
+O material segue a mesma divisão do curso do João Arthur: primeiro a régua (análise), depois ordenação, estruturas lineares e árvores. Cada unidade tem sua página, e os tópicos estão listados na ordem em que devem ser estudados.
+
+### Análise de algoritmos
+
+- [Introdução à análise](analise-de-algoritmos/introducao-a-analise/)
+- [Análise assintótica](analise-de-algoritmos/analise-assintotica/)
+- [Análise de algoritmos recursivos](analise-de-algoritmos/analise-algoritmos-recursivos/)
+
+### Ordenação e busca
+
+- [Selection sort](ordenacao/selection-sort/)
+- [Insertion sort](ordenacao/insertion-sort/)
+- [Bubble sort](ordenacao/bubble-sort/)
+- [Merge sort](ordenacao/merge-sort/)
+- [Quick sort](ordenacao/quick-sort/)
+  - [Particionamento de Hoare](ordenacao/particionamento-hoare/)
+- [Heap sort](ordenacao/heap-sort/)
+- [Counting sort](ordenacao/counting-sort/)
+- [Radix sort](ordenacao/radix-sort/)
+- [Busca binária](ordenacao/busca-binaria/)
+
+### Estruturas de dados lineares
+
+- [ArrayList](estruturas-lineares/arraylist/)
+- [Pilha](estruturas-lineares/pilha/)
+- [Fila](estruturas-lineares/fila/)
+- [Cache e localidade](estruturas-lineares/cache/)
+- [Lista encadeada](estruturas-lineares/lista-encadeada/)
+- [Tabela hash](estruturas-lineares/tabela-hash/)
+  - [Endereçamento aberto: só perguntas](estruturas-lineares/enderecamento-aberto-perguntas/)
+
+### Árvores
+
+- [Árvore binária de busca](arvores/arvore-binaria-de-busca/)
+- [Heap e fila de prioridade](arvores/heap/)
+- [Árvore AVL](arvores/avl/)
 
 ## Comparando os algoritmos
 
@@ -63,11 +90,11 @@ Na BST comum, \(h\) vai de \(\log n\) (balanceada) a \(n - 1\) (degenerada). Pil
 ## Ordem sugerida de estudo
 
 1. **Análise**: introdução, assintótica e recursivos. É a régua para todo o resto.
-2. **Ordenação**: quadráticas, depois merge, quick (e Hoare), heap e as lineares.
-3. **Estruturas lineares**: pilha, fila, ArrayList, cache, lista encadeada e tabela hash.
-4. **Árvores**: BST, heap e AVL, nessa ordem. A AVL só faz sentido depois de ver o problema da BST, e o heap sort fica mais claro depois do heap.
+2. **Ordenação**: quadráticas, depois merge, quick (e Hoare) e as lineares. O heap sort fica mais claro depois do heap, então pode ficar para a volta das árvores.
+3. **Estruturas lineares**: ArrayList, pilha, fila, cache, lista encadeada e tabela hash (e a aula de perguntas sobre endereçamento aberto).
+4. **Árvores**: BST, heap e AVL, nessa ordem. A AVL só faz sentido depois de ver o problema da BST.
 
-## Materiais
+## Notas
 
 ### Links úteis
 
