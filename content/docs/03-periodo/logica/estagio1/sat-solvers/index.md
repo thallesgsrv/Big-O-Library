@@ -815,6 +815,3 @@ $$
 Monte a fórmula $\neg\alpha$, converta-a para FNC e execute o DPLL.
 
 Resultado esperado: UNSAT, indicando que o argumento é válido.
-
-## Materiais
-
