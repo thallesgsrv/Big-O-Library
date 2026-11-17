@@ -1,6 +1,6 @@
 ---
 title: SAT Solvers
-weight: 7
+weight: 10
 description: SAT Problem, simplificação, unit propagation, backtracking e o método DPLL..
 autores:
   - JuaooRMS

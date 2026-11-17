@@ -20,4 +20,4 @@ Ordenar é o melhor laboratório para aprender análise de algoritmos: o problem
 - **Lineares:** counting sort e radix sort.
 - **Busca:** a busca binária, que depende de o array estar ordenado.
 
-A tabela comparativa de todos os algoritmos está na [página da disciplina](../#comparando-os-algoritmos).
+A tabela comparativa de todos os algoritmos está na [página da disciplina](../../eda/#comparando-os-algoritmos).
