@@ -4,8 +4,6 @@ weight: 3
 description: Como traduzir frases do português para fórmulas com quantificadores, funções e igualdade.
 autores:
   - thallesgsrv
-baseadoEm:
-  - salatiel
 date: 2026-11-18
 ---
 

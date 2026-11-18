@@ -4,8 +4,6 @@ weight: 2
 description: Por que a lógica proposicional não basta e quais ingredientes a lógica de predicados acrescenta.
 autores:
   - thallesgsrv
-baseadoEm:
-  - salatiel
 date: 2026-11-18
 ---
 

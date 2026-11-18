@@ -5,8 +5,6 @@ rotulo: Tópicos
 description: SAT solvers e DPLL, lógica de predicados, tradução, modelos e tableaux com quantificadores.
 autores:
   - thallesgsrv
-baseadoEm:
-  - salatiel
 date: 2026-11-18
 ---
 

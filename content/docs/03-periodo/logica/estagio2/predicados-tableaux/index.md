@@ -4,8 +4,6 @@ weight: 5
 description: Regras do ∃ e do ∀ nos tableaux, saturação, validade e o problema da indecidibilidade.
 autores:
   - thallesgsrv
-baseadoEm:
-  - salatiel
 date: 2026-11-18
 ---
 

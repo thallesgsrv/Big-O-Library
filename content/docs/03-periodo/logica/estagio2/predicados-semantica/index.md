@@ -4,8 +4,6 @@ weight: 4
 description: Modelos, valor de uma fórmula, satisfazibilidade, validade e consequência lógica com quantificadores.
 autores:
   - thallesgsrv
-baseadoEm:
-  - salatiel
 date: 2026-11-18
 ---
 
