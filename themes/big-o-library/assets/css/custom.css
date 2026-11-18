@@ -858,7 +858,7 @@ a.bo-card:is(:hover, :active, :focus-visible) .bo-go {
 .bo-people {
   counter-reset: bo-p;
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(17rem, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(100%, 22rem), 1fr));
   gap: 1rem;
   width: 100%;
   margin: 0 0 1.75rem;
