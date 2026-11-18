@@ -1,4 +1,4 @@
-var SEM_ARG = ['help', 'ls', 'tree', 'pwd', 'whoami', 'fortune', 'sabios', 'jogo', 'mapa', 'lab', 'theme', 'tema', 'clear', 'exit', 'vim'];
+var SEM_ARG = ['help', 'ls', 'tree', 'pwd', 'whoami', 'fortune', 'sabios', 'jogo', 'mapa', 'grafico', 'lab', 'theme', 'tema', 'clear', 'exit', 'vim'];
 var COM_ARG = ['cd', 'cat', 'man', 'sudo', 'rm'];
 var meta = document.querySelector('meta[name="bo-tree"]');
 var TREE = null, loading = null;
@@ -87,7 +87,7 @@ var HELP = [
   ['tree [pasta]', 'mostra a árvore do acervo'],
   ['fortune', 'sorteia uma frase do Conselho dos Sábios'],
   ['sabios', 'lista o Conselho'],
-  ['lab', 'jogo e mapa de pré-requisitos'],
+  ['lab', 'jogo, mapa de pré-requisitos e graficador'],
   ['man <assunto>', 'resumo de uma página'],
   ['theme', 'alterna claro/escuro'],
   ['pwd · whoami · clear · exit', 'o de sempre']
@@ -150,10 +150,12 @@ function runCmd(d, p) {
     case 'lab':
       return [
         link('complexidade', 'jogo: qual a complexidade deste código?', d.lab + 'complexidade/'),
-        link('mapa', 'grafo de pré-requisitos das disciplinas', d.lab + 'mapa/')
+        link('mapa', 'grafo de pré-requisitos das disciplinas', d.lab + 'mapa/'),
+        link('graficador', 'funções, área, volume e sólidos em 3D', d.lab + 'graficador/')
       ];
     case 'jogo': return [link('complexidade', 'jogo: qual a complexidade deste código?', d.lab + 'complexidade/')];
     case 'mapa': return [link('mapa', 'grafo de pré-requisitos das disciplinas', d.lab + 'mapa/')];
+    case 'grafico': return [link('graficador', 'funções, área, volume e sólidos em 3D', d.lab + 'graficador/')];
     case 'theme': case 'tema':
       return [act('alternar tema', 'agora: ' + (themeNow() === 'dark' ? 'escuro' : 'claro'), 'theme')];
     case 'clear': return [act('limpar', '', 'clear')];

@@ -1,0 +1,117 @@
+{{ define "main" }}
+{{ partial "sidebar.html" (dict "context" .) }}
+{{- $teclas := slice
+  (dict "t" "x" "i" "x") (dict "t" "t" "i" "t") (dict "t" "θ" "i" "θ") (dict "t" "π" "i" "π")
+  (dict "t" "^" "i" "^") (dict "t" "(" "i" "(") (dict "t" ")" "i" ")")
+  (dict "t" "√" "i" "√(") (dict "t" "sen" "i" "sen(") (dict "t" "cos" "i" "cos(") (dict "t" "tg" "i" "tg(")
+  (dict "t" "ln" "i" "ln(") (dict "t" "e" "i" "e") (dict "t" "abs" "i" "abs(") -}}
+{{- $css := resources.Get "graficador/graficador.css" | resources.Minify | resources.Fingerprint -}}
+<link rel="stylesheet" href="{{ $css.RelPermalink }}">
+<main class="bo-wrap" id="content">
+  {{ partial "bo-mhead.html" (dict
+      "page" . "cmd" "./graficador"
+      "title" .Title
+      "lead" (.Params.summary | default .Params.description)) }}
+
+  <section class="gf" id="bo-graf" aria-label="Graficador de funções">
+    <noscript><p class="bo-small">O graficador precisa de JavaScript ligado.</p></noscript>
+
+    <div class="gf-plot">
+      <div class="gf-bar" role="toolbar" aria-label="Controles do gráfico">
+        <button type="button" class="gf-btn" data-acao="mais" aria-label="Aproximar">+</button>
+        <button type="button" class="gf-btn" data-acao="menos" aria-label="Afastar">−</button>
+        <button type="button" class="gf-btn" data-acao="reset">Centralizar</button>
+        <button type="button" class="gf-btn" data-so="2d" data-acao="prop" aria-pressed="false" title="Mesma escala nos dois eixos">1:1</button>
+        <button type="button" class="gf-btn" data-acao="3d" aria-pressed="false" title="Ver o sólido de revolução">3D</button>
+        <button type="button" class="gf-btn" data-so="3d" data-acao="eixo" hidden></button>
+        <button type="button" class="gf-btn" data-acao="png" aria-label="Baixar imagem">PNG</button>
+        <button type="button" class="gf-btn" data-acao="link" aria-label="Copiar link deste gráfico">Link</button>
+      </div>
+      <canvas class="gf-canvas" tabindex="0" role="img" aria-label="Gráfico" aria-describedby="gf-teclas-ajuda"></canvas>
+      <canvas class="gf-canvas gf-canvas3d" tabindex="0" role="img" aria-label="Sólido de revolução" aria-describedby="gf-teclas-ajuda" hidden></canvas>
+      <p id="gf-teclas-ajuda" class="gf-so">Setas movem ou giram, mais e menos aproximam, zero volta ao início.</p>
+      <p class="gf-leitura" aria-live="off"></p>
+      <p class="gf-status bo-small" role="status"></p>
+    </div>
+
+    <div class="gf-lado">
+      <div class="gf-ctl3d" hidden>
+        <div class="gf-lin">
+          <label class="gf-rng">Giro <input type="range" data-g3="ang" min="0" max="360" step="1" value="360"><output>360°</output></label>
+          <button type="button" class="gf-btn" data-acao="girar" aria-pressed="false" aria-label="Animar o giro">▶</button>
+        </div>
+        <div class="gf-seg" role="group" aria-label="Mostrar">
+          <button type="button" class="gf-btn" data-g3modo="solido" aria-pressed="true">Sólido</button>
+          <button type="button" class="gf-btn" data-g3modo="fatias" aria-pressed="false">Fatias</button>
+        </div>
+        <label class="gf-rng gf-so-fatias" hidden>Quantidade <input type="range" data-g3="n" min="1" max="30" step="1" value="12"><output>12</output></label>
+        <label class="gf-rng gf-so-fatias" hidden>Fatia <input type="range" data-g3="sel" min="1" max="12" step="1" value="1"><output>1</output></label>
+      </div>
+
+      <details class="gf-ex" open>
+        <summary>Exemplos</summary>
+        <div class="gf-chips">
+          {{- range hugo.Data.graficador.exemplos }}
+          <button type="button" class="gf-chip" data-ex="{{ .id }}" title="{{ .dica }}">{{ .nome }}</button>
+          {{- end }}
+        </div>
+      </details>
+
+      <div class="gf-curvas">
+        <h2 class="gf-h">Curvas</h2>
+        <ol class="gf-linhas"></ol>
+        <div class="gf-teclas" role="group" aria-label="Teclado matemático">
+          {{- range $teclas }}
+          <button type="button" class="gf-tecla" data-ins="{{ .i }}">{{ .t }}</button>
+          {{- end }}
+        </div>
+        <button type="button" class="gf-btn gf-add" data-acao="add">+ Adicionar curva</button>
+      </div>
+
+      <div class="gf-params" hidden>
+        <h2 class="gf-h">Parâmetros</h2>
+        <div class="gf-plist"></div>
+      </div>
+
+      <fieldset class="gf-analise">
+        <legend class="gf-h">Análise</legend>
+        <div class="gf-grade">
+          <label>Curva <select data-a="linha"></select></label>
+          <label>Até <select data-a="contra"></select></label>
+          <label>a <input data-a="a" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"></label>
+          <label>b <input data-a="b" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"></label>
+          <label>Riemann
+            <select data-a="metodo">
+              <option value="nenhum">desligada</option>
+              <option value="esq">esquerda</option>
+              <option value="dir">direita</option>
+              <option value="med">meio</option>
+            </select>
+          </label>
+          <label>n <span class="gf-n"><input data-a="n" type="range" min="1" max="200" step="1"><output></output></span></label>
+        </div>
+        <label class="gf-chk"><input type="checkbox" data-a="sombra"> Sombrear</label>
+        <label class="gf-chk"><input type="checkbox" data-a="deriv"> Derivada de f</label>
+        <div class="gf-pontos" hidden>
+          <p class="bo-small gf-pontos-t"></p>
+          <div class="gf-chips"></div>
+        </div>
+        <label class="gf-x0">f em x = <input data-a="x0" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="1"></label>
+        <p class="gf-x0-res"></p>
+        <dl class="gf-res"></dl>
+        <p class="bo-small gf-nota">Valores numéricos. “Sem resultado”: a função não existe no intervalo ou a integral diverge.</p>
+      </fieldset>
+
+      <details class="gf-tab">
+        <summary>Tabela de valores</summary>
+        <div class="gf-tab-corpo"></div>
+      </details>
+    </div>
+  </section>
+
+  <script type="application/json" id="gf-exemplos">{{ hugo.Data.graficador.exemplos }}</script>
+  {{- $js := slice (resources.Get "graficador/expr.js") (resources.Get "graficador/graficador.js") | resources.Concat "graficador/graficador.js" | resources.Minify | resources.Fingerprint -}}
+  <script src="{{ $js.RelPermalink }}" defer></script>
+  {{ partial "bo-voltar.html" . }}
+</main>
+{{ end }}

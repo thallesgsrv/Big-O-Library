@@ -1,0 +1,90 @@
+# Exemplos do Graficador (/lab/graficador/).
+# linhas: tipo = y (y = f(x)), polar (r(θ)) ou param (x(t), y(t)); f é a expressão; g só vale na paramétrica (y(t)); t0 e t1 são o intervalo de θ ou t.
+# analise: linha e contra são posições na lista de linhas (contra: eixo = região entre a curva e o eixo x).
+# vista3d abre o exemplo no sólido de revolução: eixo (x ou y), modo (solido ou fatias), n (fatias) e ang (giro em graus, 360 = volta inteira).
+# janela: [xmín, xmáx, ymín, ymáx]. prop: true fixa a escala 1:1.
+exemplos:
+  - id: inicio
+    nome: Comece por aqui
+    dica: Senoide com controle de amplitude
+    linhas:
+      - {tipo: y, f: "a*sen(x)"}
+    analise: {linha: 0, contra: eixo, a: "0", b: "pi", n: 8, metodo: nenhum, sombra: true, deriv: false}
+    janela: [-7, 7, -4.5, 4.5]
+
+  - id: riemann
+    nome: Soma de Riemann
+    dica: Retângulos sob x² entre 0 e 2
+    linhas:
+      - {tipo: y, f: "x^2"}
+    analise: {linha: 0, contra: eixo, a: "0", b: "2", n: 8, metodo: med, sombra: true, deriv: false}
+    janela: [-0.5, 2.5, -1, 5]
+
+  - id: area-entre-curvas
+    nome: Área entre curvas
+    dica: 4 − x² e x + 2
+    linhas:
+      - {tipo: y, f: "4 - x^2"}
+      - {tipo: y, f: "x + 2"}
+    analise: {linha: 0, contra: 1, a: "-2", b: "1", n: 8, metodo: nenhum, sombra: true, deriv: false}
+    janela: [-4, 3, -3, 6]
+
+  - id: discos
+    nome: Volume por discos
+    dica: √x em torno do eixo x (8π)
+    linhas:
+      - {tipo: y, f: "sqrt(x)"}
+    analise: {linha: 0, contra: eixo, a: "0", b: "4", n: 8, metodo: nenhum, sombra: true, deriv: false}
+    janela: [-1, 5, -1, 3]
+    vista3d: {eixo: x, modo: fatias, n: 10, ang: 270}
+
+  - id: cascas
+    nome: Volume por cascas
+    dica: 2x − x² em torno do eixo y (8π/3)
+    linhas:
+      - {tipo: y, f: "2x - x^2"}
+    analise: {linha: 0, contra: eixo, a: "0", b: "2", n: 8, metodo: nenhum, sombra: true, deriv: false}
+    janela: [-1, 3, -1, 2]
+    vista3d: {eixo: y, modo: fatias, n: 8, ang: 270}
+
+  - id: arco
+    nome: Comprimento de arco
+    dica: x^(3/2) entre 0 e 4
+    linhas:
+      - {tipo: y, f: "x^(3/2)"}
+    analise: {linha: 0, contra: eixo, a: "0", b: "4", n: 8, metodo: nenhum, sombra: false, deriv: true}
+    janela: [-1, 5, -1, 9]
+
+  - id: superficie
+    nome: Área de superfície
+    dica: √x em torno do eixo x
+    linhas:
+      - {tipo: y, f: "sqrt(x)"}
+    analise: {linha: 0, contra: eixo, a: "0", b: "1", n: 8, metodo: nenhum, sombra: true, deriv: false}
+    janela: [-0.5, 1.5, -0.5, 1.5]
+    vista3d: {eixo: x, modo: solido, ang: 360}
+
+  - id: taylor
+    nome: Polinômio de Taylor
+    dica: sen(x) e Taylor de grau 5
+    linhas:
+      - {tipo: y, f: "sen(x)"}
+      - {tipo: y, f: "x - x^3/6 + x^5/120"}
+    analise: {linha: 0, contra: 1, a: "-3", b: "3", n: 8, metodo: nenhum, sombra: true, deriv: false}
+    janela: [-6, 6, -3, 3]
+
+  - id: cardioide
+    nome: Cardioide (polar)
+    dica: r = 1 + cos θ
+    linhas:
+      - {tipo: polar, f: "1 + cos(θ)", t0: "0", t1: "2pi"}
+    janela: [-1.5, 2.5, -2, 2]
+    prop: true
+
+  - id: cicloide
+    nome: Cicloide (paramétrica)
+    dica: x = t − sen t, y = 1 − cos t
+    linhas:
+      - {tipo: param, f: "t - sen(t)", g: "1 - cos(t)", t0: "0", t1: "4pi"}
+    janela: [-1, 13, -1, 3]
+    prop: true
