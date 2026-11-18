@@ -1,7 +1,7 @@
 ---
 title: Lógica para Computação
 weight: 5
-description: Raciocínio, lógica proposicional, tabela-verdade, tableaux, forma normal conjuntiva, método axiomático, dedução natural.
+description: Lógica proposicional, tableaux, FNC, dedução natural, SAT solvers e lógica de predicados.
 rotulo: Estágios
 autores:
   - thallesgsrv
