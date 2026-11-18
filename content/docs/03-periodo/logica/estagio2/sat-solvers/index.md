@@ -1,7 +1,7 @@
 ---
 title: SAT Solvers
-weight: 10
-description: SAT Problem, simplificação, unit propagation, backtracking e o método DPLL..
+weight: 1
+description: SAT Problem, simplificação, unit propagation, backtracking e o método DPLL.
 autores:
   - JuaooRMS
 date: 2026-11-17
@@ -92,7 +92,7 @@ A ordem dos literais e das cláusulas não importa, e as repetições são elimi
 
 O problema SAT aparece em diversas situações práticas nas quais precisamos encontrar uma combinação de valores que respeite determinadas restrições.
 
-### Exemplo : organização de um almoço
+### Exemplo: organização de um almoço
 
 Quatro amigos querem almoçar juntos de segunda a sexta. Entretanto, cada um possui algumas restrições:
 
@@ -137,15 +137,15 @@ $$
 \land\neg Jane^{qui}
 $$
 
-Verificando os dias disponíveis:
+Verificando os dias disponíveis (✓ pode, ✗ não pode):
 
 | Dia | Ana | Johnny | Mike | Jane | Todos? |
 |---|---|---|---|---|---|
-| Segunda | Sim | Sim | Sim | Sim | **Sim** |
-| Terça | Sim | Não | Não | Sim | Não |
-| Quarta | Sim | Sim | Sim | Não | Não |
-| Quinta | Sim | Não | Não | Não | Não |
-| Sexta | Não | Não | Sim | Sim | Não |
+| Segunda | ✓ | ✓ | ✓ | ✓ | **✓** |
+| Terça | ✓ | ✗ | ✗ | ✓ | ✗ |
+| Quarta | ✓ | ✓ | ✓ | ✗ | ✗ |
+| Quinta | ✓ | ✗ | ✗ | ✗ | ✗ |
+| Sexta | ✗ | ✗ | ✓ | ✓ | ✗ |
 
 O único dia em que todos podem almoçar é **segunda-feira**.
 
@@ -214,6 +214,12 @@ Essa estratégia é chamada de **backtracking**.
 
 O backtracking consiste em voltar atrás quando uma atribuição parcial já falsifica alguma cláusula, abandonando aquele caminho e tentando outra possibilidade.
 
+Veja a árvore de decisão completa para o mesmo conjunto $F$, decidindo $p$, depois $q$ e depois $r$:
+
+<figure class="bo-arv"><div class="bo-arv-sc" tabindex="0" role="group" aria-label="Árvore de decisão com backtracking"><svg viewBox="0 0 760 352" role="img" aria-labelledby="arv1-t arv1-d" style="min-width:640px"><title id="arv1-t">Árvore de decisão com backtracking</title><desc id="arv1-d">Decide p, depois q, depois r. Os cinco caminhos terminam em conflito: p falso com q falso falsifica p ou q; p falso com q verdadeiro falsifica p ou não q; p verdadeiro com q falso falsifica não p ou q; p verdadeiro, q verdadeiro e r falso falsifica não p ou r; p, q e r verdadeiros falsifica não p ou não q ou não r.</desc><line class="e" x1="312" y1="40" x2="160" y2="130"/><line class="e" x1="312" y1="40" x2="465" y2="130"/><line class="e" x1="160" y1="130" x2="90" y2="220"/><line class="e" x1="160" y1="130" x2="230" y2="220"/><line class="e" x1="465" y1="130" x2="360" y2="220"/><line class="e" x1="465" y1="130" x2="570" y2="220"/><line class="e" x1="570" y1="220" x2="500" y2="310"/><line class="e" x1="570" y1="220" x2="640" y2="310"/><text class="l" x="226" y="80" text-anchor="middle">F</text><text class="l" x="404" y="80" text-anchor="middle">V</text><text class="l" x="112" y="170" text-anchor="middle">F</text><text class="l" x="218" y="170" text-anchor="middle">V</text><text class="l" x="396" y="170" text-anchor="middle">F</text><text class="l" x="540" y="170" text-anchor="middle">V</text><text class="l" x="522" y="262" text-anchor="middle">F</text><text class="l" x="612" y="262" text-anchor="middle">V</text><g class="n"><circle cx="312" cy="40" r="21"/><text x="312" y="41">p</text></g><g class="n"><circle cx="160" cy="130" r="21"/><text x="160" y="131">q</text></g><g class="n"><circle cx="465" cy="130" r="21"/><text x="465" y="131">q</text></g><g class="n"><circle cx="570" cy="220" r="21"/><text x="570" y="221">r</text></g><g class="x"><rect x="31" y="193" width="118" height="54" rx="9"/><text class="m" x="90" y="215" text-anchor="middle">✗</text><text class="c" x="90" y="236" text-anchor="middle">p ∨ q</text></g><g class="x"><rect x="171" y="193" width="118" height="54" rx="9"/><text class="m" x="230" y="215" text-anchor="middle">✗</text><text class="c" x="230" y="236" text-anchor="middle">p ∨ ¬q</text></g><g class="x"><rect x="301" y="193" width="118" height="54" rx="9"/><text class="m" x="360" y="215" text-anchor="middle">✗</text><text class="c" x="360" y="236" text-anchor="middle">¬p ∨ q</text></g><g class="x"><rect x="441" y="283" width="118" height="54" rx="9"/><text class="m" x="500" y="305" text-anchor="middle">✗</text><text class="c" x="500" y="326" text-anchor="middle">¬p ∨ r</text></g><g class="x"><rect x="575" y="283" width="130" height="54" rx="9"/><text class="m" x="640" y="305" text-anchor="middle">✗</text><text class="c" x="640" y="326" text-anchor="middle">¬p ∨ ¬q ∨ ¬r</text></g><text class="r" x="160" y="266" text-anchor="middle">r nem foi decidido</text><text class="r" x="360" y="266" text-anchor="middle">r nem foi decidido</text><text class="r" x="752" y="44" text-anchor="end">decide p</text><text class="r" x="752" y="134" text-anchor="end">decide q</text><text class="r" x="752" y="224" text-anchor="end">decide r</text></svg></div><figcaption>Árvore de decisão de <em>F</em> com backtracking. Cada ✗ é um ramo encerrado, e o texto dentro dele é a cláusula que ficou falsa. Em vez de 8 folhas, foram 5 caminhos.</figcaption></figure>
+
+Os ramos que começam com $p=F$ morrem logo depois de decidir $q$, e o ramo $p=V,q=F$ também. Só o caminho $p=V,q=V$ precisa chegar a $r$. Como **todos** os ramos terminaram em ✗, o conjunto $F$ é insatisfazível (vamos confirmar isso com unit propagation na seção 6).
+
 > [!IMPORTANT]
 > Um ramo marcado com $\times$ significa que aquela atribuição parcial já produziu uma contradição.
 >
@@ -245,9 +251,16 @@ O processo é invertido:
 1. Uma cláusula que contém $p$ perde esse literal.
 2. Uma cláusula que contém $\neg p$ torna-se verdadeira e pode ser removida.
 
+Resumindo as duas situações:
+
+| Decisão | Cláusula que contém $p$ | Cláusula que contém $\neg p$ |
+|---|---|---|
+| $p=V$ | ✓ **sai** (já é verdadeira) | perde o literal $\neg p$ |
+| $p=F$ | perde o literal $p$ | ✓ **sai** (já é verdadeira) |
+
 ### Exemplo de simplificação
 
-Utilizando novamente o conjunto:
+Utilizando novamente o conjunto (a coluna *Por quê* mostra o motivo de cada linha):
 
 $$
 \begin{aligned}
@@ -263,13 +276,13 @@ $$
 
 Supondo $p=V$, temos:
 
-| Original | Simplificada |
-|---|---|
-| $p\lor q$ | Sai |
-| $p\lor\neg q$ | Sai |
-| $\neg p\lor q$ | $q$ |
-| $\neg p\lor\neg q\lor\neg r$ | $\neg q\lor\neg r$ |
-| $\neg p\lor r$ | $r$ |
+| Cláusula | Resultado | Por quê |
+|---|---|---|
+| $p\lor q$ | ✓ **sai** | contém $p$, verdadeiro com $p=V$ |
+| $p\lor\neg q$ | ✓ **sai** | contém $p$, verdadeiro com $p=V$ |
+| $\neg p\lor q$ | $q$ · **unidade** | $\neg p$ é falso com $p=V$ e sai da cláusula |
+| $\neg p\lor\neg q\lor\neg r$ | $\neg q\lor\neg r$ | $\neg p$ é falso com $p=V$ e sai da cláusula |
+| $\neg p\lor r$ | $r$ · **unidade** | $\neg p$ é falso com $p=V$ e sai da cláusula |
 
 Duas situações especiais podem acontecer durante a simplificação:
 
@@ -314,13 +327,13 @@ Voltando ao exemplo anterior, vamos analisar os dois possíveis valores de $p$.
 
 Após a simplificação:
 
-| Original | Simplificada |
-|---|---|
-| $p\lor q$ | $q$ |
-| $p\lor\neg q$ | $\neg q$ |
-| $\neg p\lor q$ | Sai |
-| $\neg p\lor\neg q\lor\neg r$ | Sai |
-| $\neg p\lor r$ | Sai |
+| Cláusula | Resultado | Por quê |
+|---|---|---|
+| $p\lor q$ | $q$ · **unidade** | $p$ é falso com $p=F$ e sai da cláusula |
+| $p\lor\neg q$ | $\neg q$ · **unidade** | $p$ é falso com $p=F$ e sai da cláusula |
+| $\neg p\lor q$ | ✓ **sai** | contém $\neg p$, verdadeiro com $p=F$ |
+| $\neg p\lor\neg q\lor\neg r$ | ✓ **sai** | contém $\neg p$, verdadeiro com $p=F$ |
+| $\neg p\lor r$ | ✓ **sai** | contém $\neg p$, verdadeiro com $p=F$ |
 
 Temos duas cláusulas unitárias:
 
@@ -369,6 +382,10 @@ $$
 Novamente encontramos um conflito.
 
 Como os dois possíveis valores de $p$ produziram conflitos, concluímos que o conjunto é **insatisfazível**.
+
+Compare com a árvore da seção 4: com unit propagation, uma única decisão bastou, e as 5 folhas viraram 2.
+
+<figure class="bo-arv"><div class="bo-arv-sc" tabindex="0" role="group" aria-label="Árvore do DPLL para o mesmo conjunto"><svg viewBox="0 0 600 250" role="img" aria-labelledby="arv2-t arv2-d" style="min-width:520px"><title id="arv2-t">Árvore do DPLL para o mesmo conjunto</title><desc id="arv2-d">Uma decisão em p. Com p falso aparecem as unidades q e não q, conflito. Com p verdadeiro, q é unidade, depois r e não r aparecem, conflito.</desc><line class="e" x1="300" y1="40" x2="150" y2="160"/><line class="e" x1="300" y1="40" x2="450" y2="160"/><text class="l" x="214" y="92" text-anchor="middle">F</text><text class="l" x="386" y="92" text-anchor="middle">V</text><g class="n"><circle cx="300" cy="40" r="21"/><text x="300" y="41">p</text></g><g class="x"><rect x="25" y="133" width="250" height="54" rx="9"/><text class="m" x="150" y="155" text-anchor="middle">✗ conflito</text><text class="c" x="150" y="176" text-anchor="middle">unidades q e ¬q</text></g><g class="x"><rect x="325" y="133" width="250" height="54" rx="9"/><text class="m" x="450" y="155" text-anchor="middle">✗ conflito</text><text class="c" x="450" y="176" text-anchor="middle">após q=V: unidades r e ¬r</text></g><text class="r" x="150" y="214" text-anchor="middle">propagação, sem decidir mais nada</text><text class="r" x="450" y="214" text-anchor="middle">propagação, sem decidir mais nada</text></svg></div><figcaption>O mesmo conjunto <em>F</em> resolvido pelo DPLL: uma única decisão (<em>p</em>) e os dois ramos morrem por unit propagation.</figcaption></figure>
 
 ### Exemplo: cascata de unidades
 
@@ -459,11 +476,11 @@ $$
 
 Simplificando:
 
-| Original | Simplificada |
-|---|---|
-| $\neg p\lor\neg q$ | Sai |
-| $p\lor\neg q$ | $\neg q$ |
-| $\neg p\lor q$ | Sai |
+| Cláusula | Resultado | Por quê |
+|---|---|---|
+| $\neg p\lor\neg q$ | ✓ **sai** | contém $\neg p$, verdadeiro com $p=F$ |
+| $p\lor\neg q$ | $\neg q$ · **unidade** | $p$ é falso com $p=F$ e sai da cláusula |
+| $\neg p\lor q$ | ✓ **sai** | contém $\neg p$, verdadeiro com $p=F$ |
 
 A unidade $\neg q$ força:
 
@@ -515,13 +532,13 @@ $$
 
 Simplificando:
 
-| Original | Simplificada |
-|---|---|
-| $\neg p\lor\neg q\lor r$ | Sai |
-| $\neg p\lor q\lor\neg r$ | Sai |
-| $\neg p\lor q\lor r$ | Sai |
-| $p\lor\neg q\lor r$ | $\neg q\lor r$ |
-| $p\lor q\lor r$ | $q\lor r$ |
+| Cláusula | Resultado | Por quê |
+|---|---|---|
+| $\neg p\lor\neg q\lor r$ | ✓ **sai** | contém $\neg p$, verdadeiro com $p=F$ |
+| $\neg p\lor q\lor\neg r$ | ✓ **sai** | contém $\neg p$, verdadeiro com $p=F$ |
+| $\neg p\lor q\lor r$ | ✓ **sai** | contém $\neg p$, verdadeiro com $p=F$ |
+| $p\lor\neg q\lor r$ | $\neg q\lor r$ | $p$ é falso com $p=F$ e sai da cláusula |
+| $p\lor q\lor r$ | $q\lor r$ | $p$ é falso com $p=F$ e sai da cláusula |
 
 Não existem cláusulas unitárias. Portanto, precisamos realizar outra decisão.
 
@@ -544,7 +561,7 @@ $$
 A variável $q$ pode assumir qualquer valor.
 
 > [!NOTE]
-> No slide original, o ramo $p=V$ aparece marcado com conflito. Entretanto, a atribuição $p=V$, $q=V$, $r=V$ também satisfaz as cinco cláusulas. Isso não altera o resultado: o DPLL pode encerrar a busca assim que encontra o primeiro modelo.
+> O ramo $p=V$ **não** é um conflito: a atribuição $p=V$, $q=V$, $r=V$ também satisfaz as cinco cláusulas. Isso não altera o resultado, porque o DPLL pode encerrar a busca assim que encontra o primeiro modelo, sem precisar explorar esse ramo.
 
 ### Exemplo 3
 
@@ -562,11 +579,11 @@ $$
 
 Simplificando:
 
-| Original | Simplificada |
-|---|---|
-| $A\lor\neg B$ | Sai |
-| $B\lor C$ | $B\lor C$ |
-| $\neg A\lor\neg C$ | $\neg C$ |
+| Cláusula | Resultado | Por quê |
+|---|---|---|
+| $A\lor\neg B$ | ✓ **sai** | contém $A$, verdadeiro com $A=V$ |
+| $B\lor C$ | $B\lor C$ | não contém $A$ nem $\neg A$ |
+| $\neg A\lor\neg C$ | $\neg C$ · **unidade** | $\neg A$ é falso com $A=V$ e sai da cláusula |
 
 A unidade $\neg C$ força:
 
@@ -643,12 +660,12 @@ $$
 
 Simplificando:
 
-| Original | Simplificada |
-|---|---|
-| $x\lor y\lor z$ | Sai |
-| $\neg x\lor\neg y$ | $\neg y$ |
-| $\neg x\lor\neg z$ | $\neg z$ |
-| $\neg y\lor\neg z$ | $\neg y\lor\neg z$ |
+| Cláusula | Resultado | Por quê |
+|---|---|---|
+| $x\lor y\lor z$ | ✓ **sai** | contém $x$, verdadeiro com $x=V$ |
+| $\neg x\lor\neg y$ | $\neg y$ · **unidade** | $\neg x$ é falso com $x=V$ e sai da cláusula |
+| $\neg x\lor\neg z$ | $\neg z$ · **unidade** | $\neg x$ é falso com $x=V$ e sai da cláusula |
+| $\neg y\lor\neg z$ | $\neg y\lor\neg z$ | não contém $x$ nem $\neg x$ |
 
 As unidades forçam:
 
@@ -786,11 +803,27 @@ $$
 (p\lor q)\land(\neg p\lor r)\land(\neg q\lor r)\land(\neg r\lor s)
 $$
 
+{{< details title="Gabarito" >}}
+Não há unidades no início, então **decidimos** $p=V$. Simplificando: $p\lor q$ sai e $\neg p\lor r$ vira $r$.
+
+**Propagando** $r=V$: $\neg q\lor r$ sai e $\neg r\lor s$ vira $s$. **Propagando** $s=V$: não sobra nenhuma cláusula.
+
+**Resultado: satisfazível.** Modelo: $p=V,\ r=V,\ s=V$ ($q$ pode ser qualquer valor).
+{{< /details >}}
+
 **Exercício 2.**
 
 $$
 (p\lor q)\land(\neg p\lor q)\land\neg q
 $$
+
+{{< details title="Gabarito" >}}
+Já existe a unidade $\neg q$, então **propagamos** $q=F$ sem precisar decidir nada. Então $p\lor q$ vira $p$ e $\neg p\lor q$ vira $\neg p$.
+
+Agora temos as unidades $\{p\}$ e $\{\neg p\}$: conflito.
+
+**Resultado: insatisfazível**, sem nenhuma decisão.
+{{< /details >}}
 
 **Exercício 3.**
 
@@ -804,6 +837,14 @@ $$
 \end{aligned}
 $$
 
+{{< details title="Gabarito" >}}
+Não há unidades, então **decidimos** $a=V$. Simplificando: $a\lor b\lor c$ e $a\lor\neg b$ saem; $\neg a\lor\neg b$ vira $\neg b$; $\neg a\lor\neg c$ vira $\neg c$.
+
+**Propagando** $b=F$ e $c=F$, a cláusula $\neg b\lor\neg c$ também fica satisfeita e o conjunto esvazia.
+
+**Resultado: satisfazível.** Modelo: $a=V,\ b=F,\ c=F$.
+{{< /details >}}
+
 **Exercício 4.**
 
 Utilize um SAT solver para decidir a validade do seguinte argumento:
@@ -815,3 +856,76 @@ $$
 Monte a fórmula $\neg\alpha$, converta-a para FNC e execute o DPLL.
 
 Resultado esperado: UNSAT, indicando que o argumento é válido.
+
+{{< details title="Gabarito" >}}
+Com $\alpha=(p\to q)\to((q\to r)\to(p\to r))$, a negação equivale a $(p\to q)\land(q\to r)\land p\land\neg r$. Em FNC:
+
+$$
+\{\neg p\lor q,\ \neg q\lor r,\ p,\ \neg r\}
+$$
+
+**Propagando** $p=V$: $\neg p\lor q$ vira $q$. **Propagando** $r=F$: $\neg q\lor r$ vira $\neg q$. Agora as unidades $\{q\}$ e $\{\neg q\}$ entram em conflito.
+
+**Resultado: UNSAT**, logo $\alpha$ é válida e o argumento é válido.
+{{< /details >}}
+
+**Exercício 5.** Teste o que você aprendeu.
+
+{{< quiz titulo="sat e dpll" >}}
+
+{{< questao >}}
+Em um ramo do DPLL decidimos $p=V$. O que acontece com a cláusula $\neg p\lor q$?
+
+- [ ] Sai inteira, porque $p$ é verdadeiro
+- [x] Vira $q$, porque o literal $\neg p$ ficou falso
+- [ ] Vira a cláusula vazia
+- [ ] Continua igual
+---
+Com $p=V$, o literal $\neg p$ é falso e sai da cláusula, mas $q$ continua lá. A cláusula só sairia inteira se contivesse $p$.
+{{< /questao >}}
+
+{{< questao >}}
+Depois de simplificar, aparece uma **cláusula vazia**. O que isso significa?
+
+- [ ] Encontramos um modelo
+- [ ] A fórmula inteira é insatisfazível
+- [x] O ramo atual falhou e é preciso voltar atrás
+- [ ] Todas as cláusulas foram satisfeitas
+---
+Cláusula vazia é F: um conflito **naquele ramo**. A fórmula só é UNSAT se todos os ramos falharem. Quem representa sucesso é o *conjunto* vazio de cláusulas.
+{{< /questao >}}
+
+{{< questao >}}
+Qual é a resposta para o conjunto $\{p\},\ \{\neg p\lor q\},\ \{\neg q\}$?
+
+- [ ] SAT, com $p=V$ e $q=V$
+- [ ] SAT, com $p=V$ e $q=F$
+- [x] UNSAT, só com unit propagation
+- [ ] Não dá para saber sem decidir uma variável
+---
+A unidade $p$ força $p=V$, então $\neg p\lor q$ vira $q$. Agora $\{q\}$ e $\{\neg q\}$ conflitam, sem nenhuma decisão.
+{{< /questao >}}
+
+{{< questao >}}
+Para verificar com um SAT solver se $\alpha$ é **válida**, o que fazemos?
+
+- [ ] Rodamos o solver em $\alpha$ e esperamos SAT
+- [x] Rodamos o solver em $\neg\alpha$ e esperamos UNSAT
+- [ ] Rodamos o solver em $\neg\alpha$ e esperamos SAT
+- [ ] Rodamos o solver em $\alpha$ e esperamos UNSAT
+---
+$\alpha$ é válida se, e somente se, $\neg\alpha$ é insatisfazível. Se o solver devolver SAT para $\neg\alpha$, o modelo é um contraexemplo.
+{{< /questao >}}
+
+{{< questao >}}
+Quantas cláusulas são necessárias para dizer "**no máximo uma**" entre 5 variáveis?
+
+- [ ] 5
+- [x] 10
+- [ ] 15
+- [ ] 20
+---
+Uma cláusula por par de variáveis: $\frac{5\cdot4}{2}=10$.
+{{< /questao >}}
+
+{{< /quiz >}}

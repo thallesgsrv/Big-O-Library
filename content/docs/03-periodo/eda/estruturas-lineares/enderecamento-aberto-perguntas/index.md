@@ -40,6 +40,7 @@ Total: \(1 + 2 + 3 + 4 = 10\) posições examinadas. Repare que a soma é uma PA
 posição:  0  1  2  3  4  5   6   7   8  9
 conteúdo: -  -  -  -  -  15  25  35  5  -
 ```
+
 {{< /details >}}
 
 ### 2. Buscando o que não existe

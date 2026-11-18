@@ -7,6 +7,8 @@ include_fragments = "anchor-only"   # confere também as âncoras (#secao), não
 # Falso positivo conhecido: ao checar "pasta/#ancora" o lychee não abre o index.html da pasta e acusa
 # "Cannot find fragment", mesmo com o id presente (o navegador resolve normalmente). Exclusão restrita aos
 # cards do Conselho; qualquer outra âncora quebrada continua sendo apontada.
+# Mesmo caso na página de Ordenação, que aponta para a tabela comparativa da disciplina (EDA).
 exclude = [
   '/conselho/?#sabio-',
+  '/docs/03-periodo/eda/?#comparando-os-algoritmos',
 ]

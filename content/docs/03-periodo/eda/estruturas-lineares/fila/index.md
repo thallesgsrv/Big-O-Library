@@ -48,27 +48,27 @@ Repara nos dois atributos `head` e `tail`. Eles são os **índices do array que 
 
 ## Operações
 
-Temos só duas operações principais: `addLast(String element)` e `removeFirst()`. Vamos simular várias delas numa fila de 3 posições. No estado abaixo, os elementos **dentro** da fila estão em azul e as posições **fora** dela em vermelho.
+Temos só duas operações principais: `addLast(String element)` e `removeFirst()`. Vamos simular várias delas numa fila de 3 posições. Em cada desenho abaixo, as caixas **preenchidas** são os elementos **dentro** da fila (de `head` até `tail`) e as **tracejadas** são as posições **fora** dela.
 
 Fila vazia:
 
-fila = [<font color="red">null, null, null</font>]; `head` = -1, `tail` = -1
+{{< fila v="null,null,null" head="-1" tail="-1" >}}
 
 `addLast("a")`:
 
-fila = [<font color="blue">"a"</font>, <font color="red">null, null</font>]; `head` = 0, `tail` = 0
+{{< fila v="a,null,null" head="0" tail="0" >}}
 
 Agora o início e o fim apontam para o mesmo índice: a fila só tem o `"a"`.
 
 `addLast("b")`:
 
-fila = [<font color="blue">"a", "b"</font>, <font color="red">null</font>]; `head` = 0, `tail` = 1
+{{< fila v="a,b,null" head="0" tail="1" >}}
 
 O `head` continua no `0`, mas o `tail` andou uma posição. O `"a"` está no início e o `"b"` está no fim.
 
 `addLast("c")`:
 
-fila = [<font color="blue">"a", "b", "c"</font>]; `head` = 0, `tail` = 2
+{{< fila v="a,b,c" head="0" tail="2" >}}
 
 Adição já entendemos. Agora, como a política é clara, remover significa tirar o primeiro que entrou: o `"a"`.
 
@@ -76,7 +76,7 @@ Adição já entendemos. Agora, como a política é clara, remover significa tir
 
 A abordagem mais direta é fazer o **shiftLeft**: puxar todo mundo uma casa para a esquerda (o `"b"` ocupa o lugar do `"a"`, o `"c"` o lugar do `"b"`) e diminuir o `tail`, já que a fila encolheu. Depois de um `removeFirst`:
 
-fila = [<font color="blue">"b", "c"</font>, <font color="red">"c"</font>]; `head` = 0, `tail` = 1
+{{< fila v="b,c,c" head="0" tail="1" >}}
 
 Preste atenção: a fila **não** é `"b", "c", "c"`. A fila é `"b"` e `"c"`, porque quem manda são `head` e `tail`. O último `"c"` ficou ali por simplicidade, mas está fora dos limites. Poderíamos ter colocado `null`, só que não precisava: bastou mover o `tail`. Pense assim: se eu tiver que imprimir a fila, imprimo o que está entre `head` e `tail`, inclusive.
 
@@ -98,11 +98,11 @@ private void shiftLeft(int index) {
 
 Mais uma remoção:
 
-fila = [<font color="blue">"c"</font>, <font color="red">"c", "c"</font>]; `head` = 0, `tail` = 0
+{{< fila v="c,c,c" head="0" tail="0" >}}
 
 Só sobrou o `"c"`, porque `head` e `tail` apontam para o índice `0`. E se removermos mais uma vez, a fila fica vazia e os dois voltam para `-1`:
 
-fila = [<font color="red">"c", "c", "c"</font>]; `head` = -1, `tail` = -1
+{{< fila v="c,c,c" head="-1" tail="-1" >}}
 
 ---
 
@@ -116,7 +116,7 @@ fila = [<font color="red">"c", "c", "c"</font>]; `head` = -1, `tail` = -1
 
 Olha esta fila:
 
-fila = [<font color="blue">"a", "b", "c"</font>]; `head` = 0, `tail` = 2
+{{< fila v="a,b,c" head="0" tail="2" >}}
 
 Ela está cheia. O que deve fazer `addLast("d")`? Existem três saídas:
 
@@ -128,11 +128,11 @@ Vamos de 3. Essa solução é muito usada quando o tamanho da estrutura é limit
 
 Primeiro o shift:
 
-fila = [<font color="blue">"b", "c"</font>, <font color="red">"c"</font>]; `head` = 0, `tail` = 1
+{{< fila v="b,c,c" head="0" tail="1" >}}
 
 E agora sim o novo elemento:
 
-fila = [<font color="blue">"b", "c", "d"</font>]; `head` = 0, `tail` = 2
+{{< fila v="b,c,d" head="0" tail="2" >}}
 
 ### Análise de custo (com shift)
 
@@ -149,23 +149,23 @@ Remover o início deveria ser só `head = head + 1`, certo? \(O(1)\). O problema
 
 Vamos de novo encher a fila:
 
-fila = [<font color="blue">"a", "b", "c"</font>]; `head` = 0, `tail` = 2
+{{< fila v="a,b,c" head="0" tail="2" >}}
 
 `removeFirst()` agora é só `head = head + 1`:
 
-fila = [<font color="red">"a"</font>, <font color="blue">"b", "c"</font>]; `head` = 1, `tail` = 2
+{{< fila v="a,b,c" head="1" tail="2" >}}
 
 A fila vai do índice `1` ao `2`: ela é `"b"` e `"c"`. O índice `0` está livre.
 
 Agora vem o pulo do gato. Para adicionar o `"d"`, a próxima posição é `(tail + 1) % fila.length`, ou seja, \((2 + 1) \bmod 3 = 0\). Quando a conta passa do fim do array, o `%` faz a posição **voltar para o começo**:
 
-fila = [<font color="blue">"d"</font>, <font color="blue">"b", "c"</font>]; `head` = 1, `tail` = 0
+{{< fila v="d,b,c" head="1" tail="0" >}}
 
 O `head` está no índice `1` (`"b"`) e o `tail` está no índice `0` (`"d"`). A fila é `"b"`, `"c"`, `"d"`, nessa ordem. O `tail` pode ficar "antes" do `head` no array e a fila continua correta.
 
 Mais um `removeFirst()`: o `head` vai para `(1 + 1) % 3 = 2`.
 
-fila = [<font color="blue">"d"</font>, <font color="red">"b"</font>, <font color="blue">"c"</font>]; `head` = 2, `tail` = 0
+{{< fila v="d,b,c" head="2" tail="0" >}}
 
 A fila é `"c"` e `"d"`. Estamos tratando o array de forma **circular**: nenhum shift, só o cuidado de usar `% fila.length` sempre que andarmos com `head` ou `tail`.
 

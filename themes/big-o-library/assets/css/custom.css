@@ -3559,3 +3559,170 @@ html .bo-term .highlight pre.chroma .nt {
     display: none;
   }
 }
+
+/* ---------- {{< fila >}}: array de uma fila com head e tail ---------- */
+.bo-fila {
+  margin: 1.1rem 0 1.4rem;
+  padding: 16px 18px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-1);
+  overflow-x: auto;
+}
+.bo-fila:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+.bo-fila-row {
+  display: flex;
+  gap: 8px;
+  width: max-content;
+  min-width: 100%;
+}
+.bo-fila-c {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  min-width: 3.6rem;
+}
+.bo-fila-v {
+  box-sizing: border-box;
+  min-width: 3.6rem;
+  padding: 0.5rem 0.7rem;
+  border: 2px solid var(--ac);
+  border-radius: var(--r-sm);
+  background: color-mix(in srgb, var(--ac) 13%, var(--card));
+  color: var(--txt);
+  font: 600 0.95rem/1.3 "IBM Plex Mono", ui-monospace, monospace;
+  text-align: center;
+}
+.bo-fila-c.is-out .bo-fila-v {
+  border: 2px dashed var(--axis);
+  background: transparent;
+  color: var(--mute);
+  font-weight: 400;
+}
+.bo-fila-v.is-null {
+  font-style: italic;
+}
+.bo-fila-i {
+  color: var(--mute);
+  font: 500 0.75rem/1 "IBM Plex Mono", ui-monospace, monospace;
+}
+.bo-fila-p {
+  min-height: 1.1rem;
+  color: var(--ac);
+  font: 700 0.72rem/1.25 "IBM Plex Mono", ui-monospace, monospace;
+  text-align: center;
+  white-space: nowrap;
+}
+.bo-fila figcaption {
+  margin-top: 8px;
+  color: var(--body);
+  font-size: 0.85rem;
+  text-align: left;
+}
+.bo-fila figcaption code {
+  font-size: 0.85em;
+}
+.bo-fila-leg {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 4px 8px;
+  margin: 8px 0 0 !important;
+  color: var(--mute);
+  font-size: 0.78rem;
+}
+.bo-fila-k {
+  display: inline-block;
+  width: 1.1rem;
+  height: 0.8rem;
+  border: 2px solid var(--ac);
+  border-radius: 3px;
+  background: color-mix(in srgb, var(--ac) 13%, var(--card));
+}
+.bo-fila-k.is-out {
+  margin-left: 10px;
+  border: 2px dashed var(--axis);
+  background: transparent;
+}
+
+/* ---------- árvores de decisão (SVG inline nos materiais de lógica) ---------- */
+.bo-arv {
+  margin: 1.2rem 0 1.5rem;
+  padding: 14px 16px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-1);
+}
+.bo-arv-sc {
+  overflow-x: auto;
+}
+.bo-arv-sc:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+.bo-arv svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.bo-arv svg text {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  fill: var(--txt);
+}
+.bo-arv .e {
+  stroke: var(--axis);
+  stroke-width: 2;
+  fill: none;
+}
+.bo-arv .n circle {
+  fill: color-mix(in srgb, var(--ac) 13%, var(--card));
+  stroke: var(--ac);
+  stroke-width: 2;
+}
+.bo-arv .n text {
+  font-size: 17px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-style: italic;
+}
+.bo-arv .x rect {
+  fill: color-mix(in srgb, var(--c5) 10%, var(--card));
+  stroke: var(--c5);
+  stroke-width: 2;
+}
+.bo-arv .x .m {
+  fill: var(--c5);
+  font-size: 15px;
+  font-weight: 700;
+}
+.bo-arv .x .c {
+  fill: var(--body);
+  font-size: 12px;
+}
+.bo-arv .l {
+  fill: var(--ac);
+  font-size: 13px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: var(--card);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.bo-arv .r {
+  fill: var(--mute);
+  font-size: 11.5px;
+}
+.bo-arv figcaption {
+  margin-top: 8px;
+  color: var(--body);
+  font-size: 0.85rem;
+  text-align: left;
+}

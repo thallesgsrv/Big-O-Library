@@ -1,0 +1,54 @@
+{{- /*
+Desenha o array de uma fila com head e tail. As posições dentro da fila (de head até tail, dando a
+volta no fim do array quando head > tail) saem preenchidas; as de fora, tracejadas e apagadas.
+Não é preciso marcar cor nenhuma: o desenho é calculado a partir de head e tail.
+
+Uso:  {{< fila v="a,b,c" head="0" tail="2" >}}
+      {{< fila v="null,null,null" head="-1" tail="-1" >}}   (fila vazia)
+
+@param {string} v     valores das posições, separados por vírgula ("null" = posição sem elemento)
+@param {string} head  índice do início (-1 = fila vazia)
+@param {string} tail  índice do fim (-1 = fila vazia)
+*/ -}}
+{{- $raw := .Get "v" -}}
+{{- if not $raw -}}{{- errorf "fila: o parâmetro 'v' é obrigatório, por exemplo v=\"a,b,c\" (%s)" .Position -}}{{- end -}}
+{{- $head := -1 -}}{{- $tail := -1 -}}
+{{- if isset .Params "head" }}{{ $head = int (index .Params "head") }}{{ end -}}
+{{- if isset .Params "tail" }}{{ $tail = int (index .Params "tail") }}{{ end -}}
+{{- $vals := slice -}}
+{{- range split $raw "," }}{{ $vals = $vals | append (trim . " ") }}{{ end -}}
+{{- $n := len $vals -}}
+{{- if or (ge $head $n) (ge $tail $n) (lt $head -1) (lt $tail -1) (ne (lt $head 0) (lt $tail 0)) -}}
+  {{- errorf "fila: head=%d e tail=%d não cabem num array de %d posições (use -1 nos dois para fila vazia) (%s)" $head $tail $n .Position -}}
+{{- end -}}
+{{- $desc := slice -}}
+{{- range $i, $v := $vals -}}
+  {{- $dentro := false -}}
+  {{- if ge $head 0 -}}
+    {{- if le $head $tail -}}{{- $dentro = and (ge $i $head) (le $i $tail) -}}
+    {{- else -}}{{- $dentro = or (ge $i $head) (le $i $tail) -}}{{- end -}}
+  {{- end -}}
+  {{- $txt := cond (eq $v "null") "vazia" (printf "com \"%s\"" $v) -}}
+  {{- $desc = $desc | append (printf "posição %d %s, %s" $i $txt (cond $dentro "dentro da fila" "fora da fila")) -}}
+{{- end -}}
+<figure class="bo-fila" role="group" tabindex="0" aria-label="Array da fila: {{ delimit $desc "; " }}. head = {{ $head }}, tail = {{ $tail }}.">
+  <div class="bo-fila-row" aria-hidden="true">
+    {{- range $i, $v := $vals }}
+    {{- $dentro := false -}}
+    {{- if ge $head 0 -}}
+      {{- if le $head $tail -}}{{- $dentro = and (ge $i $head) (le $i $tail) -}}
+      {{- else -}}{{- $dentro = or (ge $i $head) (le $i $tail) -}}{{- end -}}
+    {{- end }}
+    <div class="bo-fila-c {{ if $dentro }}is-in{{ else }}is-out{{ end }}">
+      <span class="bo-fila-v{{ if eq $v "null" }} is-null{{ end }}">{{ if eq $v "null" }}null{{ else }}"{{ $v | htmlEscape }}"{{ end }}</span>
+      <span class="bo-fila-i">{{ $i }}</span>
+      <span class="bo-fila-p">{{ if and (eq $i $head) (eq $i $tail) }}▲ head<br>▲ tail{{ else if eq $i $head }}▲ head{{ else if eq $i $tail }}▲ tail{{ end }}</span>
+    </div>
+    {{- end }}
+  </div>
+  <figcaption aria-hidden="true"><code>head</code> = {{ $head }} · <code>tail</code> = {{ $tail }}{{ if lt $head 0 }} · fila vazia{{ end }}</figcaption>
+  {{- if not (.Page.Store.Get "fila-legenda") }}
+  {{- .Page.Store.Set "fila-legenda" true }}
+  <p class="bo-fila-leg" aria-hidden="true"><span class="bo-fila-k is-in"></span> dentro da fila <span class="bo-fila-k is-out"></span> fora da fila (posição livre ou valor antigo)</p>
+  {{- end }}
+</figure>
