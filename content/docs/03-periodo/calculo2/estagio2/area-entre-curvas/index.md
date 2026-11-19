@@ -11,6 +11,19 @@ date: 2026-10-29
 
 É a mesma construção da página anterior, com um retângulo a mais na cabeça. Entre dois gráficos, cada retângulo da soma de Riemann tem **altura = (curva de cima) − (curva de baixo)** e base \(\Delta x\):
 
+Ao final você deve conseguir:
+
+- montar a integral da área entre dois gráficos, integrando em $x$ ou em $y$;
+- decidir quem está por cima (ou à direita) em cada trecho;
+- dividir a região em mais de uma integral quando necessário, como em funções definidas por partes;
+- seguir o padrão de resolução usado em todo o estágio.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Somas de Riemann e integral definida](../rieman/);
+> - integrais definidas e primitivas básicas.
+
 $$
 A \approx \sum_{i=1}^{n}\big[f(x_i^*) - g(x_i^*)\big]\,\Delta x
 \;\xrightarrow{\,n\to\infty\,}\;
@@ -61,6 +74,8 @@ Nas próximas páginas só muda a **fatia**: o retângulo vira disco, anel, casc
 
 > [!WARNING]
 > Sempre "de cima menos de baixo". Se você inverter, a integral dá o negativo da área. E se as curvas se cruzam no intervalo, uma única integral de \(f - g\) **cancela** áreas positivas com negativas: quebre nos cruzamentos.
+
+Calma, vamos por partes: o desenho vem antes de qualquer conta. Muitos erros desaparecem quando a região está bem desenhada.
 
 ## Exemplos
 
@@ -122,6 +137,9 @@ $$
 > Aqui a variável de integração é \(y\) porque o problema foi descrito em \(y\): os limites \([0,1]\) são valores de \(y\) e o \(dy\) aparece na integral.
 
 ## Exercícios propostos
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
+
 
 **Exercício 1.** Calcule a área entre \(y = \operatorname{sen} x\) e \(y = \cos x\) em \([0, \tfrac\pi2]\).
 

@@ -11,6 +11,17 @@ date: 2026-11-02
 
 Antes de falar de função, logaritmo e seno, a gente precisa ficar **tranquilo** com três coisas que aparecem em *todo* canto: frações, raízes e a arte de deixar uma expressão com cara de resposta final. Quase todo erro bobo de prova nasce aqui (e o pior: só aparece três páginas depois, quando a conta já deu errado).
 
+Ao final você deve conseguir:
+
+- somar, subtrair, multiplicar e dividir frações com segurança;
+- simplificar raízes;
+- racionalizar denominadores, inclusive com o conjugado e com raízes de outros índices.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - as quatro operações e a tabuada em dia.
+
 Este tópico é o aquecimento. Se você já domina, passe o olho nos quadros de resumo e vá para os exercícios.
 
 ## Para que serve isso tudo

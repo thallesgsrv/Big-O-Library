@@ -7,7 +7,19 @@ autores:
 date: 2026-10-17
 ---
 
-Até aqui ignoramos o sinal. Mas subtrair pode dar resultado negativo, então precisamos decidir **como escrever um sinal em binário**. Não existe uma resposta única: existem quatro convenções. A que vale ouro é o **complemento de 2**.
+Olha só, agora vem um problema bem concreto. Até aqui ignoramos o sinal. Mas subtrair pode dar resultado negativo, então precisamos decidir **como escrever um sinal em binário**. Não existe uma resposta única: existem quatro convenções. A que vale ouro é o **complemento de 2**.
+
+Ao final você deve conseguir:
+
+- representar números negativos em sinal e magnitude, complemento de 1, complemento de 2 e excesso de $n$;
+- reconhecer a faixa de valores de cada representação em 8 bits;
+- comparar as quatro representações.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Conversão entre bases](../conversao-de-bases/);
+> - a página de [Bits, bytes e códigos de caracteres](../bits-bytes-codigos/).
 
 ## 1. A ideia comum
 
@@ -148,6 +160,9 @@ Subtrair vira somar com o complemento. E só existe um zero.
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Escreva $-50$ nas quatro representações (8 bits).
 2. Qual o valor decimal de $11111010_2$ em complemento de 2?

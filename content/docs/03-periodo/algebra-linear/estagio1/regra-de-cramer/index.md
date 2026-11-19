@@ -11,6 +11,18 @@ date: 2026-10-11
 
 A **Regra de Cramer** resolve um sistema linear usando só determinantes, sem escalonar. Ela vale quando o sistema tem **o mesmo número de equações e de variáveis** (matriz \(A\) quadrada) e \(\det A \neq 0\).
 
+Ao final você deve conseguir:
+
+- aplicar a Regra de Cramer em sistemas com duas e três variáveis;
+- saber quando a regra vale (sistema quadrado com determinante diferente de zero);
+- comparar métodos e escolher o mais conveniente para cada sistema.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Determinantes](../determinantes/);
+> - a página de [Resolvendo e classificando sistemas](../resolucao-de-sistemas/).
+
 ## A regra
 
 Considere \(AX = B\), com \(A\) quadrada de ordem \(n\) e \(\det A \neq 0\). Para cada variável \(x_i\):
@@ -143,6 +155,8 @@ Teste na primeira equação: \(1 + 2 + 3 = 6\). Na segunda: \(2 + 2 - 3 = 1\). N
 > [!NOTE]
 > **Para quem programa:** Cramer pede \(n + 1\) determinantes de ordem \(n\). Se cada um for calculado por cofatores (da ordem de \(n!\) operações), o custo é astronômico para \(n\) grande. A eliminação de Gauss resolve o mesmo sistema com da ordem de \(n^3\) operações. Cramer é elegante e ótimo para teoria e contas pequenas, mas ninguém o usa em sistemas grandes.
 
+Olha só: cada método tem o seu momento. O que importa é saber escolher, e é isso que esta seção ajuda a fazer.
+
 ## Comparando os métodos no mesmo sistema
 
 Considere
@@ -168,6 +182,9 @@ Os três chegam à mesma resposta. Na prova, escolha o que você tem mais confia
 - Arrume as equações (variáveis alinhadas, constantes à direita) antes de começar.
 
 ## Exercícios propostos
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 ### Exercício 1
 

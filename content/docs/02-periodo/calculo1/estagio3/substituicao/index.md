@@ -11,6 +11,19 @@ date: 2026-10-14
 
 A substituição é a **regra da cadeia de trás para frente**. Ao derivar uma função composta, aparece um fator extra (a derivada do miolo). Na integral, se esse fator extra estiver sobrando ao lado, é o sinal de que dá para trocar o miolo por uma letra só, \(u\).
 
+Ao final você deve conseguir:
+
+- reconhecer a substituição como a regra da cadeia de trás para frente;
+- escolher o $u$ certo;
+- trocar $dx$ por $du$;
+- resolver integrais definidas por substituição.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Primitivas e integral indefinida](../primitivas/);
+> - a regra da cadeia, da página de [Regras de derivação](../../estagio2/regras-de-derivacao/).
+
 $$
 \int f(g(x))\,g'(x)\,dx=\int f(u)\,du,\qquad u=g(x),\quad du=g'(x)\,dx
 $$
@@ -100,6 +113,8 @@ $$
 
 **Iguais.** Moral: integrais podem ter respostas de aparência diferente que diferem só por uma constante. Para conferir, derive.
 
+Até aqui, tranquilo? O exemplo-mestre mostra todos os passos. Nos próximos, tente prever cada passo antes de ler.
+
 ## 4. Mais exemplos
 
 **Exemplo A.** \(\displaystyle\int\sqrt{2x+1}\,dx\)
@@ -142,6 +157,9 @@ $$
 Não precisa voltar para \(x\): o resultado já é um número.
 
 ## 5. Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** \(\displaystyle\int x\,e^{x^2}\,dx\).
 

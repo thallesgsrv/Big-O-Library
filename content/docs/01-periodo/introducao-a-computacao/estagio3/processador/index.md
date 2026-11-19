@@ -9,6 +9,19 @@ date: 2026-10-17
 
 O hardware é a parte física do sistema computacional, e se divide em três grandes blocos: **processador (UCP/CPU)**, **memória** e **entrada/saída (E/S)**. Esta página é sobre o primeiro.
 
+Ao final você deve conseguir:
+
+- descrever a arquitetura de von Neumann;
+- explicar a CPU (ULA, unidade de controle e registradores) e os barramentos;
+- comparar CISC e RISC;
+- reconhecer o que influencia o desempenho de um processador.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Primeiros conceitos](../../estagio1/primeiros-conceitos/);
+> - a página de [Somadores e comparadores](../../estagio2/somadores-e-comparadores/), para a ideia da ULA.
+
 ## 1. Arquitetura básica
 
 Os computadores atuais seguem a **arquitetura de von Neumann**: instruções e dados ficam na memória, e a CPU os busca de lá, um por um. A CPU conversa com a memória e com a E/S por **barramentos**.
@@ -137,6 +150,9 @@ RISC: conjunto reduzido e ciclo rápido, mas programas maiores.
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Quantos ciclos por segundo faz uma CPU de 3,2 GHz?
 2. Diga em uma frase a diferença entre ULA e registrador.

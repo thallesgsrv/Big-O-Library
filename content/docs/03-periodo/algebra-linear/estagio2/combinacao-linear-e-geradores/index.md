@@ -11,6 +11,20 @@ date: 2026-11-09
 
 Imagine que você tem **dois vetores** e só pode fazer duas coisas com eles: esticar e somar. A pergunta desta página é: **que vetores dá para fabricar assim?**
 
+Ao final você deve conseguir:
+
+- decidir se um vetor é combinação linear de outros;
+- mostrar que um vetor NÃO é combinação linear;
+- achar a condição para um vetor pertencer ao subespaço gerado;
+- encontrar geradores de um subespaço dado por equações.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Espaços vetoriais](../espacos-vetoriais/);
+> - a página de [Subespaços](../subespacos/);
+> - a página de [Resolvendo e classificando sistemas](../../estagio1/resolucao-de-sistemas/).
+
 A resposta chama-se **subespaço gerado**, e a pergunta "este vetor dá para fabricar?" vira, em toda questão, a mesma coisa: **montar e resolver um sistema linear**.
 
 ## Combinação linear
@@ -57,6 +71,8 @@ $$
 
 > [!TIP]
 > Sempre que der, **confira a resposta** substituindo os coeficientes na combinação. Leva 20 segundos e evita perder a questão por um erro de sinal.
+
+Olha só: toda esta seção se resume a montar e resolver um sistema. Se esse movimento ficar claro, o resto é variação.
 
 ## Mostrar que NÃO é combinação linear
 
@@ -255,6 +271,9 @@ $$
 > O número de geradores obtidos por esse método é o número de **variáveis livres** (no Exemplo 8, 2; no Exemplo 9, 1). Esse mesmo número será a **dimensão** do subespaço, na página de Base e Dimensão.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** Escreva \((1, -3, 10)\) como combinação linear de \(u = (1, 0, 0)\), \(v = (1, 1, 0)\) e \(w = (2, -3, 5)\).
 

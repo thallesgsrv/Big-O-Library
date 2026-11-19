@@ -9,6 +9,13 @@ date: 2026-10-06
 
 **O que você vai aprender:** como ordenar uma lista passo a passo. O Python já tem formas prontas de ordenar, mas entender **como** ordenar treina o raciocínio, junta tudo que você aprendeu (loops, índices, listas, funções) e é cobrado em prova. Nas atividades, implemente você mesmo, sem usar as ordenações prontas.
 
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página da [Unidade 08: listas e seus métodos](../unidade-08-listas/);
+> - a página da [Unidade 06: funções](../unidade-06-funcoes/).
+
 ## Conceitos
 
 - **Ordenar** é rearrumar os elementos do menor para o maior.

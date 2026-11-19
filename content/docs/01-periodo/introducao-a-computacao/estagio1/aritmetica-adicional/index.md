@@ -7,7 +7,21 @@ autores:
 date: 2026-10-17
 ---
 
-Esta página reúne o conteúdo **adicional** do estágio. A moral é a mesma de antes: cada representação tem seu algoritmo de conta, e o complemento de 2 ganhou para inteiros justamente por ter o algoritmo mais simples.
+Bora completar o quadro da aritmética do computador. Esta página reúne o conteúdo **adicional** do estágio. A moral é a mesma de antes: cada representação tem seu algoritmo de conta, e o complemento de 2 ganhou para inteiros justamente por ter o algoritmo mais simples.
+
+Ao final você deve conseguir:
+
+- somar e subtrair em sinal e magnitude;
+- fazer operações em ponto flutuante;
+- fazer aritmética em BCD (soma, subtração, multiplicação e divisão).
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Aritmética binária](../aritmetica-binaria/);
+> - a página de [Números negativos](../numeros-negativos/);
+> - a página de [Ponto flutuante e IEEE 754](../ponto-flutuante/);
+> - a página de [BCD e ponto fixo](../bcd-e-ponto-fixo/).
 
 ## 1. Sinal e magnitude
 
@@ -198,6 +212,9 @@ As fórmulas $(m_1 m_2)\,b^{e_1+e_2}$ e $(m_1/m_2)\,b^{e_1-e_2}$ não pedem nenh
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Em sinal e magnitude com 6 bits, calcule $+14 + (-20)$.
 2. Em BCD, some $58 + 67$.

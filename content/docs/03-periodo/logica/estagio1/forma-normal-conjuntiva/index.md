@@ -18,6 +18,12 @@ Ao final você deve conseguir:
 - converter uma fórmula para FNC (pela tabela-verdade ou pelo algoritmo de 4 passos);
 - provar um argumento transformando-o em fórmula e convertendo para FNC.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Linguagem](../linguagem/);
+> - a página de [Tabela-verdade](../tabela-verdade/), principalmente equivalência.
+
 ## 1. A ideia: um formato padrão
 
 Fórmulas podem ser escritas de infinitas formas ($p\to q$, $\neg p\lor q$, $\neg(p\land\neg q)$... são a mesma coisa). Seria ótimo ter **um formato único** em que seja **fácil** decidir se a fórmula é válida.
@@ -196,6 +202,9 @@ A conversão para FNC pode **explodir** o tamanho da fórmula (no pior caso, $2^
 
 ## Erros comuns
 
+
+Estes são os tropeços mais frequentes por aqui. Se algum deles pegar você, sem drama: faz parte do treino.
+
 - **Distribuir o $\land$ sobre o $\lor$** (o contrário do que se quer). Isso leva à FND, não à FNC.
 - **Esquecer de eliminar o $\leftrightarrow$.** Ele vira **duas** implicações, $(\neg p\lor q)\land(\neg q\lor p)$, antes de qualquer outra coisa.
 - **De Morgan sem trocar o conectivo.** $\neg(p\land q)$ é $\neg p\lor\neg q$, e não $\neg p\land\neg q$.
@@ -210,6 +219,9 @@ A conversão para FNC pode **explodir** o tamanho da fórmula (no pior caso, $2^
 - **Argumento:** vira fórmula $\varphi_1\to(\cdots\to\psi)$, depois FNC, depois checar cláusulas.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** Converta para FNC: $p\to(q\land r)$.
 

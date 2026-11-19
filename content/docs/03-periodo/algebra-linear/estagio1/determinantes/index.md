@@ -11,6 +11,19 @@ date: 2026-10-11
 
 O **determinante** é um número associado a uma matriz **quadrada**. Escrevemos \(\det A\) ou \(|A|\).
 
+Ao final você deve conseguir:
+
+- calcular determinantes de ordem 1, 2 e 3 (regra de Sarrus);
+- usar menor, cofator e a expansão de Laplace;
+- aproveitar as propriedades e o escalonamento para determinantes grandes;
+- achar os valores de um parâmetro que anulam o determinante.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Matrizes](../matrizes/);
+> - a página de [Escalonamento, posto e nulidade](../escalonamento/), usada nos determinantes grandes.
+
 Por que ele importa? Porque esse único número responde perguntas importantes sobre a matriz. A mais útil neste estágio:
 
 > [!NOTE]
@@ -183,6 +196,8 @@ $$
 = 3 \cdot 2 \cdot 4 = 24
 $$
 
+Não precisa decorar todas as propriedades agora. O segredo está em reconhecer, na hora da conta, quais delas simplificam o trabalho.
+
 ## Calculando determinantes grandes por escalonamento
 
 Para ordem 4 ou mais, a expansão de Laplace é trabalhosa. O melhor caminho costuma ser **escalonar até ficar triangular**, lembrando o efeito de cada operação:
@@ -285,6 +300,9 @@ A matriz é triangular superior, então \(\det A = (t - 1)(t + 2)(t - 4)\), que 
 - \(\det(AB) = \det A \det B\), mas \(\det(A + B) \neq \det A + \det B\).
 
 ## Exercícios propostos
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 ### Exercício 1
 

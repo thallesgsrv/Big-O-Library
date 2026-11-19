@@ -11,6 +11,20 @@ date: 2026-10-29
 
 Em Cálculo 1 você aprendeu a **calcular** \(\int_a^b f(x)\,dx\) (ache a primitiva e subtraia). Aqui o foco muda: **por que** uma integral resolve um problema, **quantas** integrais são necessárias e **em qual variável** integrar. Quem entende a construção abaixo nunca mais precisa decorar fórmulas de aplicação (área, volume, trabalho, distância): elas saem todas do mesmo molde.
 
+Ao final você deve conseguir:
+
+- explicar por que uma integral resolve problemas de acumulação (as três perguntas);
+- usar a notação de somatório sem medo;
+- construir uma soma de Riemann e passar ao limite no problema da área;
+- calcular um limite direto da definição, sem primitivas;
+- enunciar e interpretar o Teorema Fundamental do Cálculo e a variação total.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - calcular integrais definidas com primitivas, de Cálculo 1;
+> - a ideia de limite.
+
 > [!NOTE]
 > Esta página aprofunda a revisão feita na seção 2 de [Integral Definida e Teorema Fundamental do Cálculo](/docs/02-periodo/calculo1/estagio3/integral-definida/), de Cálculo 1. Se o símbolo \(\Sigma\) ou a ideia de "somar retângulos" estiver enferrujada, comece por lá.
 
@@ -211,6 +225,8 @@ $$
 - **Quantas integrais?** Ao longo do intervalo que descreve o fenômeno, se **a expressão das funções muda**, quebre o intervalo em partes e trate cada expressão no seu intervalo. Aqui o problema é puramente de escrita: a integral é aditiva, \(\int_a^c=\int_a^b+\int_b^c\).
 - **Qual variável?** A variável usada para descrever o problema é a variável de integração. Se a região é descrita como \(y=f(x)\), integra-se em \(x\) (\(dx\)). Se é descrita como \(x=f(y)\), em \(y\) (\(dy\)).
 
+Até aqui, tranquilo? Este esquema é o molde de toda aplicação que vem a seguir (área, volume, comprimento). Vale voltar a ele sempre que uma integral parecer misteriosa.
+
 ## 6. Teorema Fundamental do Cálculo e variação total
 
 > [!IMPORTANT]
@@ -286,6 +302,9 @@ $$
 {{< /details >}}
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 {{< quiz titulo="Somas de Riemann" >}}
 

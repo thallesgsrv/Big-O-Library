@@ -19,6 +19,12 @@ Ao final você deve conseguir:
 - definir **satisfazível**, **válida** e **consequência lógica** em predicados;
 - explicar por que uma máquina não consegue simplesmente "testar todos os modelos".
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Predicados: introdução](../predicados-introducao/);
+> - a página de [Tabela-verdade](../../estagio1/tabela-verdade/).
+
 ## 1. O que é um modelo
 
 Um **modelo** $\mathcal{M}$ dá significado concreto aos símbolos. Ele tem quatro partes:
@@ -238,6 +244,9 @@ Precisamos de um método que **não dependa de testar modelos um a um**. Esse m�
 
 ## Erros comuns
 
+
+Estes são os tropeços mais frequentes por aqui. Se algum deles pegar você, sem drama: faz parte do treino.
+
 - **Dizer que uma fórmula "é verdadeira" sem dizer em qual modelo.** O valor depende do modelo.
 - **Universo vazio.** Todo modelo tem pelo menos um objeto; sem isso, $\forall x\,P(x)\to\exists x\,P(x)$ falharia.
 - **Confundir "existe um modelo" com "vale em todos".** Satisfazível pede um; válida pede todos.
@@ -253,6 +262,9 @@ Precisamos de um método que **não dependa de testar modelos um a um**. Esse m�
 - Testar todos os modelos é impossível; por isso precisamos de métodos como **tableaux**.
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 **Exercício 1.** Encontre um modelo e dois predicados unários $P(x)$ e $Q(x)$ tais que $\forall x\,(P(x)\to Q(x))$ seja verdadeira.
 

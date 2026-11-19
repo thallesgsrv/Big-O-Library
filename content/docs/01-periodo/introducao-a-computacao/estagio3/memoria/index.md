@@ -9,6 +9,19 @@ date: 2026-10-17
 
 Memória é o componente que **armazena as informações** usadas ou que serão usadas pelo sistema, para recuperá-las quando precisar. Pense num depósito com duas operações: **guardar** e **recuperar**.
 
+Ao final você deve conseguir:
+
+- explicar por que existem vários tipos de memória;
+- descrever registradores, cache e memória principal (RAM e ROM);
+- calcular endereços e capacidade de uma memória;
+- reconhecer a memória secundária.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Bits, bytes e códigos de caracteres](../../estagio1/bits-bytes-codigos/), para a capacidade;
+> - a página de [Hardware: processador](../processador/).
+
 ## 1. Elementos e operações
 
 - A informação é guardada em **bits**, agrupados em **bytes** (8 bits) ou **palavras** (32 ou 64 bits, ou seja, 4 ou 8 bytes).
@@ -144,6 +157,9 @@ $2^{20}=1.048.576$ (1 M de células).
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Uma RAM tem espaço de endereçamento de 2K células de 16 bits. Qual o total de bits e o tamanho do endereço?
 2. Quantos bits de endereço são necessários para 1 GB com células de 1 byte?

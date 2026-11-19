@@ -11,6 +11,17 @@ date: 2026-10-16
 
 A aritmética dos inteiros guarda ideias que sustentam **hash, criptografia e verificação de erros**. Esta página cobre divisibilidade, números primos e o relógio da aritmética modular.
 
+Ao final você deve conseguir:
+
+- usar a divisibilidade e o algoritmo de Euclides para calcular o mdc;
+- reconhecer números primos;
+- trabalhar com congruências e restos.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - divisão com resto, como na escola.
+
 ## Divisibilidade
 
 $a\mid b$ ("$a$ divide $b$") quando $b=a\cdot k$ para algum inteiro $k$. Exemplo: $3\mid12$, porque $12=3\cdot4$.
@@ -61,6 +72,9 @@ Exemplo: o último dígito de $7^{100}$ é $7^{100}\bmod10$. Como $7^2=49\equiv9
 - **Criptografia RSA** depende de potências módulo o produto de dois primos grandes.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Calcule $\text{mdc}(84,36)$ pelo algoritmo de Euclides.
 2. Qual o resto de $2^{10}$ na divisão por 7?

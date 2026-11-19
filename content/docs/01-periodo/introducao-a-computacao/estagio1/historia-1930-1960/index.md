@@ -7,7 +7,18 @@ autores:
 date: 2026-10-17
 ---
 
-Entre 1930 e 1960 o computador deixa de ser mecânico e vira eletrônico. O motor disso foi a **guerra**: governos pagaram por máquinas que calculassem trajetórias, decifrassem mensagens e se comunicassem à distância.
+Bora viajar no tempo. Entre 1930 e 1960 o computador deixa de ser mecânico e vira eletrônico. O motor disso foi a **guerra**: governos pagaram por máquinas que calculassem trajetórias, decifrassem mensagens e se comunicassem à distância.
+
+Ao final você deve conseguir:
+
+- descrever a passagem dos relés para as válvulas e para o transistor;
+- explicar as ideias de Turing e von Neumann;
+- situar ENIAC, EDVAC e UNIVAC na linha do tempo.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Evolução dos Computadores: primórdios](../historia-primordios/).
 
 ## 1. Primeira tentativa: relés
 
@@ -119,6 +130,9 @@ O que o transistor trouxe em relação à válvula?
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Compare relé, válvula e transistor em uma frase cada.
 2. Por que o programa armazenado foi um avanço sobre o ENIAC?

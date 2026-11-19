@@ -7,7 +7,19 @@ autores:
 date: 2026-10-17
 ---
 
-O computador é uma máquina eletrônica. Por isso só distingue **dois estados físicos**: tem sinal ou não tem (energia, polaridade magnética, luz refletida). É como um interruptor: ligado ou desligado. Tudo o que ele guarda, de uma foto a um vídeo, é feito de combinações desses dois estados.
+Bora começar do começo: por que o computador só entende 0 e 1? O computador é uma máquina eletrônica. Por isso só distingue **dois estados físicos**: tem sinal ou não tem (energia, polaridade magnética, luz refletida). É como um interruptor: ligado ou desligado. Tudo o que ele guarda, de uma foto a um vídeo, é feito de combinações desses dois estados.
+
+Ao final você deve conseguir:
+
+- explicar por que o computador usa o sistema binário;
+- calcular quantas combinações cabem em $n$ bits;
+- usar as unidades de medida (bit, byte e múltiplos);
+- explicar o papel dos códigos de caracteres.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - potências de 2.
 
 ## 1. Analógico x digital
 
@@ -139,6 +151,9 @@ Se `A` é `0100 0001` no ASCII, qual é a letra `D`?
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Quantos bits são necessários para representar 100 símbolos diferentes?
 2. Quantos DVDs de 4,7 GB cabem, aproximadamente, em um HD de 1 TB?

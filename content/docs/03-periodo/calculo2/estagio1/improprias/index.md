@@ -11,6 +11,19 @@ date: 2026-10-14
 
 Até aqui, toda integral \(\int_a^b f(x)\,dx\) tinha um intervalo finito e uma função bem-comportada. Integrais **impróprias** quebram uma dessas duas regras: o intervalo é infinito, ou a função "explode" em algum ponto. A pergunta passa a ser: *a área, apesar de ilimitada, tem um valor finito?*
 
+Ao final você deve conseguir:
+
+- explicar por que uma integral é imprópria (intervalo infinito ou função que "explode");
+- escrever uma integral imprópria como um limite, quebrando-a quando o problema está no meio do intervalo;
+- calcular o limite e decidir se a integral converge ou diverge.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - integrais definidas e primitivas básicas;
+> - limites, inclusive no infinito;
+> - a página de [Integração por partes](../integracao-por-partes/), que aparece em um dos exemplos.
+
 ## Sobre
 
 Uma função \(f : [a,b] \to \mathbb{R}\) é integrável (no sentido usual) se:
@@ -81,6 +94,8 @@ Em todos os casos:
 
 - se o limite **existe** (é um número real), dizemos que a integral **converge** e o limite é o valor da integral;
 - se o limite **não existe** (ou é \(\pm\infty\)), dizemos que a integral **diverge**.
+
+Até aqui, tranquilo? O fio condutor é um só: toda integral imprópria vira um limite, e a resposta está no que acontece com ele.
 
 ## Receita
 
@@ -190,6 +205,9 @@ $$
 As duas convergem, então a integral **converge** para \(3 + 3\sqrt[3]{2}\).
 
 ## Exercícios propostos
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
+
 
 **Exercício 1.** Calcule \(\displaystyle\int_0^{+\infty}e^{-x}\,dx\).
 

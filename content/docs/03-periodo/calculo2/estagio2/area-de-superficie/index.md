@@ -11,6 +11,18 @@ date: 2026-11-16
 
 Gire um pedaço \(\Delta s_i\) da curva em torno do eixo: ele vira uma **faixa** (um tronco de cone fininho). Desenrolada, é um retângulo de comprimento \(2\pi\cdot\text{raio}\) e largura \(\Delta s_i\).
 
+Ao final você deve conseguir:
+
+- explicar como a área de uma superfície de revolução vira uma soma de faixas de tronco de cone;
+- montar a integral de área de superfície;
+- calcular áreas de superfícies de revolução, inclusive as de cones.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Comprimento de arco](../comprimento-de-arco/);
+> - área lateral de cilindros e cones.
+
 > [!IMPORTANT]
 > **Receita:** (1) faixa \(\Delta s_i\) (do capítulo de arco); (2) **raio da faixa** = distância ao eixo; (3) **área da faixa** \(=2\pi\cdot\text{raio}\cdot\Delta s_i\); (4) \(\sum\); (5) \(\lim=\int\); (6) conta.
 
@@ -50,6 +62,9 @@ $$
 - **Resposta:** \(\boxed{\sqrt2\,\pi}\)
 
 ## 3. Lista de exercícios
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
+
 
 ### Questões 17 a 20: cones
 
@@ -186,4 +201,3 @@ Todas têm \(ds=\sqrt{1+\tfrac14}\,dx=\tfrac{\sqrt5}2dx\).
 - **Conta:** \(8\pi\Big[\tfrac23e^{3t/2}+2e^{t/2}\Big]_0^1=8\pi\Big(\tfrac23e^{3/2}+2e^{1/2}-\tfrac83\Big)\)
 - **Resposta:** \(\boxed{\tfrac{16\pi}3\big(e^{3/2}+3e^{1/2}-4\big)}\)
 {{< /details >}}
-

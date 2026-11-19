@@ -11,6 +11,19 @@ date: 2026-11-02
 
 Lembra da divisão que você aprendeu na escola, com a "casinha" e o resto? Pois polinômio também se divide, e o esquema é **o mesmo**. Neste tópico você aprende dois métodos de divisão e depois usa tudo isso para domar as expressões fracionárias (aquelas frações com letras em cima e embaixo).
 
+Ao final você deve conseguir:
+
+- dividir polinômios pelo método das chaves;
+- usar Briot-Ruffini quando o divisor tem grau 1;
+- usar o teorema do resto;
+- simplificar e somar expressões fracionárias.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Polinômios](../polinomios/);
+> - a página de [Frações, raízes e racionalização](../fracoes-e-raizes/).
+
 ## A ideia: dividendo, divisor, quociente e resto
 
 Divida 315 por 2: dá 157 e **sobra 1**. A forma de conferir é

@@ -11,6 +11,20 @@ date: 2026-10-15
 
 No tópico anterior, seno e cosseno só existiam dentro de triângulos retângulos (ângulos entre $0^\circ$ e $90^\circ$). Mas e o $\operatorname{sen}(200^\circ)$? E o $\cos(-30^\circ)$? Para ir além precisamos de um palco maior: o **ciclo trigonométrico**. E quando você olha o seno "rodando" nesse círculo, surge uma das curvas mais importantes de toda a ciência: a **senoide**. Este é o tópico que conecta triângulos com ondas.
 
+Ao final você deve conseguir:
+
+- usar o ciclo trigonométrico para qualquer ângulo;
+- reduzir ângulos ao 1º quadrante com as simetrias;
+- usar a soma e a diferença de arcos;
+- aplicar a Lei dos Senos e a Lei dos Cossenos;
+- esboçar seno, cosseno e tangente, com amplitude e período.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Trigonometria](../trigonometria/);
+> - a página de [Introdução a funções](../introducao-a-funcoes/).
+
 ## O ciclo trigonométrico
 
 É uma circunferência de **raio 1** centrada na origem do plano. Com raio 1, tudo fica simples: um ponto da circunferência é descrito por um ângulo $\theta$, medido a partir do eixo $x$ positivo.

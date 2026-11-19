@@ -11,6 +11,17 @@ date: 2026-10-14
 
 Otimizar é achar o **maior** ou **menor** valor de algo (área, volume, custo, material) sujeito a uma restrição. Tudo se resume a: **escrever a grandeza como função de uma variável só** e achar o extremo dela.
 
+Ao final você deve conseguir:
+
+- traduzir um problema de "maior" ou "menor" em uma função objetivo;
+- seguir a receita: desenhar, equacionar, derivar e conferir;
+- decidir se o ponto crítico é máximo ou mínimo e conferir o domínio.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Extremos, monotonicidade e esboço de gráficos](../extremos-e-graficos/).
+
 ## 2. Receita
 
 1. **Desenhe** e nomeie as variáveis.
@@ -23,6 +34,8 @@ Otimizar é achar o **maior** ou **menor** valor de algo (área, volume, custo, 
 
 > [!WARNING]
 > Muita gente acha o \(x\) e esquece de calcular a outra dimensão ou o valor máximo. Releia a pergunta antes de escrever a resposta.
+
+Não precisa decorar a receita agora: ela se aprende fazendo. O exemplo da caixa feita de uma folha mostra cada passo.
 
 ## 3. Exemplos
 
@@ -82,6 +95,9 @@ $$
 5. A altura pedida: \(h=\dfrac{8}{x^2}=\dfrac{8}{4\sqrt[3]{4}}=\dfrac{2}{\sqrt[3]4}=\sqrt[3]2\approx1{,}26\).
 
 ## 4. Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 **Exercício 1.** Cerca-se um terreno retangular com \(100\) m de tela. Que dimensões dão a maior área?
 

@@ -11,6 +11,17 @@ date: 2026-10-30
 
 Na indução comum, para provar $P(k+1)$ usamos só $P(k)$. Mas há afirmações em que o caso $k+1$ depende de casos bem menores, não do imediatamente anterior. Por exemplo, um número composto é o produto de dois números menores, que podem estar longe de $k$. Para esses casos usamos a **indução forte**.
 
+Ao final você deve conseguir:
+
+- reconhecer quando o passo da prova precisa de mais de um caso anterior;
+- estruturar uma prova por indução forte;
+- provar que todo inteiro maior que 1 é produto de primos e resolver o problema das notas de 4 e 5 reais.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Indução matemática](../inducao/).
+
 ## Estrutura da prova
 
 Para provar $P(n)$ para todo $n \ge n_0$:
@@ -56,6 +67,9 @@ Afirmação: todo valor inteiro $n \ge 12$ pode ser pago só com notas de 4 e de
 - **Esquecer de verificar que os casos usados são menores que $k+1$** (e maiores ou iguais a $n_0$).
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Seja $F_1 = F_2 = 1$ e $F_n = F_{n-1} + F_{n-2}$ para $n \ge 3$ (sequência de Fibonacci). Prove que $F_n < 2^n$ para todo $n \ge 1$.
 2. Prove que todo valor inteiro $n \ge 8$ pode ser pago só com notas de 3 e de 5 reais.

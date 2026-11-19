@@ -13,6 +13,19 @@ date: 2026-11-04
 
 Na [página do heap sort](../../ordenacao/heap-sort/) usamos o heap como ferramenta para ordenar. Agora vamos olhar para ele como o que ele realmente é: uma **estrutura de dados completa**, com inserção e remoção, e que sustenta a **fila de prioridade**.
 
+Ao final você deve conseguir:
+
+- explicar o heap máximo e a árvore completa guardada em um array;
+- implementar o `sobe` e o `afunda`;
+- inserir, remover o maior e construir um heap em $O(n)$;
+- usar uma fila de prioridade.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Heap sort](../../ordenacao/heap-sort/);
+> - a página de [ArrayList](../../estruturas-lineares/arraylist/), por causa do array que cresce.
+
 Fila de prioridade é uma fila com um furo-fila **legalizado**. Não importa quem chegou primeiro: sai sempre o de **maior prioridade**. Pensa no pronto-socorro: quem chegou com um dedo cortado espera, quem chegou infartando passa na frente. O contrato:
 
 | Operação | O que faz |
@@ -264,6 +277,9 @@ A altura de uma árvore completa com \(n\) nós é \(\lfloor \log_2 n \rfloor\),
 O heap é craque em "o maior (ou menor)", mas **não é bom em tudo**. Procurar um valor qualquer custa \(O(n)\), porque a regra só compara pai e filho, sem relação entre irmãos. E não dá para percorrer em ordem sem ir removendo um por um, o que, aliás, é exatamente o heap sort: \(n\) remoções de \(O(\log n)\), ou seja, \(O(n \log n)\).
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Insira em um heap máximo vazio, nessa ordem: `4, 10, 3, 5, 1`. Mostre o array após cada inserção. Depois faça um `remove()`.
 2. Construa o heap máximo a partir de `[1, 2, 3, 4, 5, 6]` com o algoritmo de baixo para cima. Qual o array final?

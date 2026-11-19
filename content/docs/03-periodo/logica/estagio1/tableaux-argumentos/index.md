@@ -18,6 +18,12 @@ Ao final você deve conseguir:
 - usar o ramo aberto como **contra-exemplo**;
 - detectar requisitos que se contradizem (um uso real em engenharia de software).
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Tableaux](../tableaux/);
+> - a página de [Tabela-verdade](../tabela-verdade/), principalmente consequência lógica.
+
 ## 1. Conjuntos de fórmulas
 
 O tableaux funciona também para **várias fórmulas ao mesmo tempo**: colocamos **todas na raiz** (é como ligá-las com $\land$), e perguntamos se **existe um mundo em que todas são V**.
@@ -160,6 +166,9 @@ Para o terceiro, a negação da conclusão dá $P,\ Q,\ \neg R$; a premissa $P\t
 
 ## Erros comuns
 
+
+Estes são os tropeços mais frequentes por aqui. Se algum deles pegar você, sem drama: faz parte do treino.
+
 - **Esquecer de negar a conclusão.** Na raiz vão as premissas **e** a negação da conclusão. Sem isso você estaria testando outra coisa.
 - **Negar uma premissa em vez da conclusão.** Só a conclusão é negada.
 - **Ler "ramo aberto" como "argumento válido".** É o contrário: ramo aberto é um mundo com premissas V e conclusão F, ou seja, um **contra-exemplo**. Válido é quando **tudo fecha**.
@@ -173,6 +182,9 @@ Para o terceiro, a negação da conclusão dá $P,\ Q,\ \neg R$; a premissa $P\t
 - Dica: aplique $\alpha$ antes de $\beta$; feche o ramo assim que achar $X$ e $\neg X$.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1.** Teste cada argumento com tableaux (negue a conclusão e procure ramos abertos) e responda: válido ou inválido? Os itens (a) a (d) estão no quiz; o exercício 2, mais abaixo, você resolve no caderno.
 

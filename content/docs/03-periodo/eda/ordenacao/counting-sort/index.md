@@ -13,6 +13,18 @@ date: 2026-10-09
 
 Existe um limite teórico: qualquer algoritmo que ordena **comparando** elementos precisa de \(\Omega(n \log n)\) comparações no pior caso. Merge sort e quick sort estão perto desse piso. Para furar o piso, só parando de comparar. O counting sort faz isso.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de contar as ocorrências em vez de comparar;
+- implementar a versão estável;
+- reconhecer as limitações do método.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Análise assintótica](../../analise-de-algoritmos/analise-assintotica/);
+> - a ideia de estabilidade, da página de [Insertion sort](../insertion-sort/).
+
 ## A ideia
 
 Suponha que os valores são inteiros pequenos, de \(0\) a \(k\). Em vez de comparar um elemento com outro, a gente simplesmente **conta quantas vezes cada valor aparece**. Se o 3 aparece duas vezes e o 5 aparece uma, a saída só pode ter dois 3 e depois um 5.
@@ -126,6 +138,9 @@ Mas o termo \(k\) é a armadilha. Ordenar 10 números entre 0 e um bilhão com c
 - Quando \(k\) é muito maior que \(n\), não compensa.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 Faça a contagem e a acumulada de \([2, 5, 3, 0, 2, 3, 0, 3]\) com \(k = 5\).
 

@@ -11,6 +11,17 @@ date: 2026-10-01
 
 Muitos problemas, de física, economia ou computação, acabam em várias equações que precisam ser verdadeiras **ao mesmo tempo**. Este é o assunto de um sistema linear. Aqui vemos o que ele é, como escrevê-lo em forma de matriz e como conferir se um valor é solução.
 
+Ao final você deve conseguir:
+
+- reconhecer um sistema linear e a sua solução;
+- escrever o sistema na forma matricial e como matriz ampliada;
+- conferir se um conjunto de valores é solução.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Matrizes](../matrizes/).
+
 ## Sistema de equações lineares
 
 Uma equação é **linear** quando as variáveis aparecem só multiplicadas por números e somadas, sem potências, raízes ou produtos entre variáveis. Por exemplo, \(2x + 3y = 1\) é linear, mas \(x^2 + y = 1\) e \(xy = 1\) não são.

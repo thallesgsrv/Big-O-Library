@@ -11,6 +11,17 @@ date: 2026-10-30
 
 Uma **recorrência** define o valor de uma sequência a partir de valores anteriores dela mesma. É o jeito natural de descrever problemas recursivos: o custo de resolver um problema grande em função do custo de resolver os menores. Por isso elas aparecem o tempo todo na análise de algoritmos.
 
+Ao final você deve conseguir:
+
+- definir uma sequência por recorrência;
+- resolver expandindo e provar a solução por indução;
+- analisar exemplos clássicos: Torre de Hanói, soma dos primeiros números e dividir ao meio.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Indução matemática](../inducao/).
+
 Uma recorrência vem sempre com **casos iniciais**, que dizem onde a conta começa. Sem eles, não há um valor definido.
 
 ## Exemplo 1: Torre de Hanói
@@ -80,6 +91,9 @@ $$
 - **Confundir $T(n-1)$ com $T(n) - 1$.** O primeiro é o valor da sequência no termo anterior.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Resolva $T(0) = 1$, $T(n) = T(n-1) + 2$ e prove por indução.
 2. Resolva $T(1) = 0$, $T(n) = 2\,T(n/2) + n$ para $n$ potência de 2. (Essa é a recorrência do merge sort, contando só as operações de intercalar.)

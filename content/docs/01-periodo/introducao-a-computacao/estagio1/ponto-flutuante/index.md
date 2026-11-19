@@ -7,7 +7,21 @@ autores:
 date: 2026-10-17
 ---
 
-Como guardar a massa do elétron ($9\times10^{-28}$ g) e a do Sol ($2\times10^{33}$ g) no mesmo formato? Escrever todos os zeros exigiria uma sequência enorme de bits. A solução é a mesma da física: **notação científica**.
+Bora entender como a máquina guarda números gigantes e minúsculos no mesmo formato. Como guardar a massa do elétron ($9\times10^{-28}$ g) e a do Sol ($2\times10^{33}$ g) no mesmo formato? Escrever todos os zeros exigiria uma sequência enorme de bits. A solução é a mesma da física: **notação científica**.
+
+Ao final você deve conseguir:
+
+- explicar a ideia de vírgula flutuante (mantissa e expoente);
+- normalizar um número em binário;
+- converter para e de IEEE 754 (32 e 64 bits);
+- reconhecer casos especiais, overflow, underflow e limites de precisão.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Números negativos](../numeros-negativos/), por causa do excesso de $n$;
+> - a página de [Conversão entre bases](../conversao-de-bases/);
+> - notação científica.
 
 ## 1. A ideia
 
@@ -174,6 +188,9 @@ Como todo número normalizado começa em $1{,}\dots$, não é preciso guardar es
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Converta $-6{,}25$ para IEEE 754 (32 bits).
 2. Converta $15213{,}0$ para IEEE 754 (32 bits) e dê só o expoente guardado.

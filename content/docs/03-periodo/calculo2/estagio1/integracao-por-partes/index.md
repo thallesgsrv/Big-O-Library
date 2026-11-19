@@ -11,6 +11,19 @@ date: 2026-10-14
 
 A integração por partes serve para integrais que são **produto de funções de tipos diferentes**, como polinômio vezes exponencial, ou logaritmo, ou arctg. Ela troca uma integral difícil por outra mais simples, mas **a um custo**: você vai precisar derivar uma parte e integrar a outra.
 
+Ao final você deve conseguir:
+
+- reconhecer integrais que são produto de funções de tipos diferentes;
+- explicar de onde vem a fórmula (a regra do produto "ao contrário");
+- escolher o $u$ com a regra LIATE;
+- aplicar a fórmula também em integrais definidas.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a regra do produto para derivadas;
+> - derivadas e primitivas básicas (polinômios, exponenciais, logaritmos e arctg).
+
 ## Sobre
 
 Uma pergunta para começar: qual é mais fácil de integrar, $x^2 e^x$ ou $e^x$?
@@ -53,6 +66,8 @@ A lógica: logaritmos e inversas trigonométricas ficam *mais simples* ao deriva
 
 > [!WARNING]
 > LIATE é uma regra de bolso, não um teorema. Se a escolha deixar a integral mais complicada, volte e troque.
+
+Não precisa decorar a sigla na marra: LIATE é só uma regra prática do que costuma dar certo. O segredo está em escolher como $u$ aquilo que fica mais simples ao derivar.
 
 ## Exemplos
 
@@ -267,6 +282,9 @@ e - (e-1) = e - e + 1 = 1
 $$
 
 ## Exercícios propostos
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
+
 
 **Exercício 1.** Calcule $\displaystyle\int x\ln x\,dx$.
 

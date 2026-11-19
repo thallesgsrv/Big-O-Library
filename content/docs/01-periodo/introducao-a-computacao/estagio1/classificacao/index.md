@@ -7,7 +7,13 @@ autores:
 date: 2026-10-17
 ---
 
-Existe muita variedade de computador: tamanhos, custos e usos diferentes. Por isso eles são agrupados em categorias. A classificação não é única, mas ajuda quem vai escolher uma máquina a definir o que precisa.
+Bora organizar a bagunça: do supercomputador ao smartphone, como classificar os computadores? Existe muita variedade de computador: tamanhos, custos e usos diferentes. Por isso eles são agrupados em categorias. A classificação não é única, mas ajuda quem vai escolher uma máquina a definir o que precisa.
+
+Ao final você deve conseguir:
+
+- classificar os computadores por geração;
+- diferenciar o computador analógico do digital;
+- classificar por âmbito e por porte.
 
 ## 1. Quatro critérios
 
@@ -117,6 +123,9 @@ Mainframe: grande volume de dados e muitos usuários ao mesmo tempo, acessando p
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Associe: (a) válvula, (b) transistor, (c) circuito integrado, (d) microprocessador, às gerações de computadores.
 2. Por que supercomputadores são de âmbito específico?

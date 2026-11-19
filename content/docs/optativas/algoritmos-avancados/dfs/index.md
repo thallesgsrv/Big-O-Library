@@ -13,6 +13,19 @@ A DFS segue um caminho até o fim e só então volta para tentar os outros.
 
 É explorar um labirinto com um fio na mão: você segue em frente até esbarrar num beco ou num lugar já visitado, e então volta pelo fio até a última bifurcação com opções. A **pilha de chamadas** é o fio.
 
+Ao final você deve conseguir:
+
+- explicar o mergulho em profundidade e a volta (backtracking);
+- implementar a DFS de forma recursiva e com pilha;
+- analisar a complexidade e saber quando usar.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - grafos e a lista de adjacência;
+> - a página de [Pilha](../../../03-periodo/eda/estruturas-lineares/pilha/);
+> - recursão.
+
 ## Visualização
 
 {{< viz algoritmo="dfs" >}}
@@ -54,6 +67,9 @@ Tempo \(O(V + E)\) e espaço \(O(V)\) pela profundidade da recursão.
 Detectar ciclos, ordenação topológica, componentes fortemente conexos (Tarjan) e backtracking.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Em que ordem os vértices são descobertos na animação?
 

@@ -11,6 +11,19 @@ date: 2026-10-01
 
 Uma função é **contínua** quando seu gráfico pode ser traçado sem levantar o lápis. Se há um **buraco**, um **salto** ou uma **explosão** (assíntota), há descontinuidade.
 
+Ao final você deve conseguir:
+
+- explicar continuidade com a imagem do lápis e com a definição em três condições;
+- classificar uma descontinuidade (removível, de salto ou infinita);
+- reconhecer funções contínuas sem precisar testar;
+- achar o valor que torna uma função contínua;
+- usar o Teorema do Valor Intermediário.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Limites](../limites/), principalmente os limites laterais.
+
 ## 2. Definição
 
 \(f\) é contínua em \(x=a\) quando:
@@ -65,6 +78,8 @@ $$
 
 **Exemplo 2 (removível).** \(f(x)=\dfrac{x^2-9}{x-3}\) para \(x\ne3\). Como \(\dfrac{(x-3)(x+3)}{x-3}=x+3\) perto de \(3\), o limite é \(6\). Definindo \(f(3)=6\), a função vira contínua.
 
+Até aqui, tranquilo? A receita é sempre a mesma: os limites laterais têm que ser iguais entre si e ao valor da função.
+
 ## 6. Teorema do Valor Intermediário (TVI)
 
 > Se \(f\) é **contínua** em \([a,b]\) e \(N\) é qualquer número entre \(f(a)\) e \(f(b)\), então existe \(c\in[a,b]\) com \(f(c)=N\).
@@ -84,6 +99,9 @@ $$
 > O TVI **exige continuidade no intervalo todo**. Com \(f(x)=\frac1x\): \(f(-1)=-1\) e \(f(1)=1\), mas **não há** raiz: \(f\) não é contínua em \(0\).
 
 ## 7. Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1.** \(f\) é contínua em \(x=1\), com \(f(x)=\dfrac{x^2-1}{x-1}\) para \(x\ne1\) e \(f(1)=3\)?
 

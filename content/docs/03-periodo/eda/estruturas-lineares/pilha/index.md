@@ -13,6 +13,17 @@ date: 2026-10-25
 
 Pensa numa pilha de pratos: você coloca um prato em cima e, quando vai pegar um, pega justamente o que está no topo. O último que entrou é o primeiro que sai. Esse comportamento é chamado **LIFO**, do inglês *Last In, First Out*.
 
+Ao final você deve conseguir:
+
+- explicar o contrato LIFO;
+- implementar uma pilha com array e lidar com a pilha cheia;
+- usar a pilha como cliente e analisar o custo.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [ArrayList](../arraylist/).
+
 Na estrutura de dados é a mesma ideia: a gente adiciona e remove pelo **topo**. As operações principais são `push`, para colocar um elemento, e `pop`, para remover e devolver o elemento que está no topo. Não dá para tirar direto um elemento do meio.
 
 ## Onde pode ser usado?
@@ -230,6 +241,9 @@ Em Java, para uma pilha baseada em array, use a classe [`ArrayDeque`](https://do
 
 ## Exercícios
 
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
+
 1. Para uma pilha de capacidade 4, acompanhe o conteúdo e o valor de `topo` após cada operação: `push("a")`, `push("b")`, `pop()`, `push("c")`, `peek()`, `pop()`.
 2. O que acontece se `pop()` ou `peek()` forem chamados em uma pilha vazia? E se `push` for chamado em uma pilha cheia?
 3. Implemente um método `clear()` que remova todos os elementos da pilha.
@@ -254,4 +268,3 @@ Em Java, para uma pilha baseada em array, use a classe [`ArrayDeque`](https://do
 ## Notas
 
 - [Pilhas (LIFO) baseadas em Arrays](https://joaoarthurbm.github.io/eda/posts/lifoarray/) — João Arthur Brunet
-

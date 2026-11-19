@@ -9,6 +9,12 @@ date: 2026-10-06
 
 **O que você vai aprender:** repetir ações com `while` e `for`, e guardar vários valores em **listas**. A ideia central é que **o computador é bom em repetir**: você descreve o passo uma vez e diz quantas vezes (ou até quando) repetir.
 
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página da [Unidade 02: decisões, strings e índices](../unidade-02-decisoes-strings/).
+
 ## Conceitos
 
 - **`while`** repete **enquanto** a condição for verdadeira.

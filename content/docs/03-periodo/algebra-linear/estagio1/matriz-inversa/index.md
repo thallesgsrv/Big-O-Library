@@ -11,6 +11,19 @@ date: 2026-10-11
 
 Com números, "desfazer" uma multiplicação por \(5\) é multiplicar por \(\tfrac{1}{5}\), pois \(5 \cdot \tfrac{1}{5} = 1\). A **matriz inversa** faz o mesmo papel para matrizes: é a matriz que **desfaz** o efeito de \(A\).
 
+Ao final você deve conseguir:
+
+- decidir quando uma matriz tem inversa;
+- calcular a inversa de uma matriz 2×2 pela fórmula;
+- calcular a inversa pela adjunta e por operações elementares (Gauss-Jordan);
+- resolver sistemas com a inversa e estudar a existência da inversa com parâmetro.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Determinantes](../determinantes/);
+> - a página de [Escalonamento, posto e nulidade](../escalonamento/).
+
 O "1" das matrizes é a **matriz identidade** \(I\) (lembre que \(AI = IA = A\)). Então:
 
 > Uma matriz quadrada \(A\) de ordem \(n\) é **invertível** se existe uma matriz \(B\), também de ordem \(n\), tal que
@@ -244,6 +257,8 @@ $$
 > [!NOTE]
 > **Se o lado esquerdo não conseguir virar \(I\)** (aparece uma linha de zeros), a matriz **não é invertível**. O método detecta isso sozinho, sem precisar calcular o determinante antes.
 
+Não precisa decorar os dois métodos de uma vez: a adjunta serve para qualquer ordem, e Gauss-Jordan costuma ser mais rápido à mão a partir da ordem 3.
+
 ## Resolvendo um sistema com a inversa
 
 Exemplo 4:
@@ -300,6 +315,9 @@ Para quais valores de \(a\) a matriz \(\begin{bmatrix} 1 & 2 \\ 3 & a \end{bmatr
 - Sempre confira multiplicando \(A \cdot A^{-1}\).
 
 ## Exercícios propostos
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 ### Exercício 1
 

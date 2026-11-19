@@ -13,6 +13,17 @@ date: 2026-10-09
 
 Dois programas resolvem o mesmo problema. Qual é o melhor? A primeira ideia é cronometrar os dois e ficar com o mais rápido. Funciona até você rodar no computador do colega e o resultado inverter.
 
+Ao final você deve conseguir:
+
+- explicar por que contar operações é melhor do que cronometrar;
+- contar operações em laços simples e aninhados;
+- diferenciar melhor caso, pior caso e caso médio.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - laços e arrays em Java.
+
 ## Por que não cronometrar
 
 O tempo em segundos depende da máquina, da linguagem, do que mais está aberto no computador. E, pior, depende da entrada: um algoritmo pode voar com 100 elementos e travar com 10 milhões.
@@ -89,6 +100,9 @@ Nem sempre o custo depende só do tamanho da entrada. Pense numa busca linear: p
 Quase sempre o foco é o pior caso, porque ele é uma garantia: não importa a entrada, o algoritmo não vai fazer mais do que isso. O melhor caso costuma ser otimista demais para servir de base para decisões.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **1.** Quantas vezes `cont++` é executado?
 

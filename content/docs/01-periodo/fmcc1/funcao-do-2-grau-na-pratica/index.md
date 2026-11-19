@@ -11,6 +11,17 @@ date: 2026-11-02
 
 No tópico anterior a gente andou em **um** sentido: dada a função, desenhar a parábola. Agora vamos andar no sentido contrário (dada a parábola, **descobrir a função**) e depois usar tudo em problemas com cara de jogo: flechas, catapultas, drones.
 
+Ao final você deve conseguir:
+
+- descobrir a equação da parábola a partir de três pontos;
+- resolver problemas de trajetória e otimização;
+- usar atalhos quando a pista do enunciado é outra.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Função do 2º grau](../funcao-do-2-grau/).
+
 Se algum elemento da parábola (vértice, raízes, intercepto, $\Delta$) estiver nebuloso, dê uma passada rápida no tópico *Função do 2º grau* antes de continuar.
 
 ## Revisão relâmpago

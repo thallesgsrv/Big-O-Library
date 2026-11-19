@@ -13,6 +13,19 @@ date: 2026-10-30
 
 O bubble sort é o algoritmo de ordenação mais fácil de explicar: compare dois vizinhos e, se estiverem fora de ordem, troque. Repita até não precisar trocar mais nada. O nome vem do efeito visual, porque o maior elemento "borbulha" até o fim do array a cada rodada, como uma bolha subindo na água.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de trocar vizinhos fora de ordem;
+- acompanhar o algoritmo passo a passo e implementá-lo;
+- analisar custo, estabilidade e memória;
+- decidir quando vale (ou não) a pena usá-lo.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Análise assintótica](../../analise-de-algoritmos/analise-assintotica/);
+> - arrays e laços em Java.
+
 Quase ninguém usa na prática, mas ele é um ótimo exercício de análise: dá para ver direto no código de onde vem o \(n^2\) e como uma pequena ideia (parar cedo) muda o melhor caso.
 
 ## A ideia
@@ -104,6 +117,9 @@ Raramente. Comparado ao insertion sort, que também é \(\Theta(n^2)\) no pior c
 O valor dele é didático: é um bom primeiro algoritmo para praticar laços aninhados, invariantes e contagem de operações.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 Quantas comparações e quantas trocas o bubble sort (com parada antecipada) faz em \([3, 2, 1]\)?
 

@@ -11,6 +11,20 @@ date: 2026-11-16
 
 Como medir o volume de um sólido que não é caixa nem cilindro? Fatie em pedaços finos, trate cada pedaço como algo que você sabe medir, some e faça as fatias ficarem infinitamente finas. É a mesma ideia da soma de Riemann, só que agora cada retângulo vira uma **fatia 3D**.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de fatiar, aproximar e somar para montar volumes de revolução;
+- usar o método dos discos quando a região encosta no eixo de rotação;
+- usar o método dos anéis (arruelas) quando sobra um buraco no meio;
+- montar a integral certa para cada eixo de rotação.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Somas de Riemann e integral definida](../rieman/);
+> - a página de [Área entre curvas](../area-entre-curvas/);
+> - área do círculo e volume do cilindro.
+
 > [!IMPORTANT]
 > **Receita (use em toda questão, sempre nesta ordem):**
 > 1. **Esboço:** desenhe a região e o eixo de rotação.
@@ -64,6 +78,8 @@ V=\int_a^b\pi\big[R(x)^2-r(x)^2\big]dx
 $$
 
 **Eixo deslocado** (reta \(y=k\) ou \(x=k\)): o raio é sempre uma **distância**, isto é, \(|\text{curva}-k|\). Para girar em torno de \(y=1\) uma curva \(y=\sqrt x\) acima da reta, o raio é \(\sqrt x-1\).
+
+Até aqui, tranquilo? Para não se perder: **disco** quando a região encosta no eixo de giro, **anel** quando sobra um buraco no meio.
 
 ## 4. Exemplos resolvidos
 
@@ -534,4 +550,3 @@ Vértices \((0,0),(0,2),(4,4)\). Em \(0\le x\le4\), a reta de cima é \(y=\tfrac
 - **Conta:** \(\pi\int_0^4\Big[(8-x)^2-\big(6-\tfrac x2\big)^2\Big]dx=\pi\Big(\tfrac{448}3-\tfrac{304}3\Big)\)
 - **Resposta:** \(\boxed{48\pi}\)
 {{< /details >}}
-

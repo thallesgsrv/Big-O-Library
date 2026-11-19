@@ -13,6 +13,19 @@ date: 2026-10-09
 
 O quick sort também é divisão e conquista, mas com uma inversão em relação ao merge sort. No merge sort, a divisão é boba (corta ao meio) e o trabalho está em juntar. No quick sort, o trabalho está em dividir, e juntar não custa nada.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de particionar em torno de um pivô;
+- implementar o particionamento de Lomuto e o quick sort;
+- analisar o custo e explicar por que o pior caso quadrático é raro;
+- escolher bons pivôs.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Merge sort](../merge-sort/), pela ideia de dividir e conquistar;
+> - recursão.
+
 ## A ideia: particionar
 
 Escolha um elemento qualquer do array, o **pivô**. **Particionar** é reorganizar o array de modo que:
@@ -171,6 +184,9 @@ Agora nenhuma entrada específica é "a entrada ruim". Para dar quadrático, o s
 Merge sort e quick sort são ambos \(\Theta(n \log n)\) no caso típico, mas o quick sort costuma ganhar. Seu laço interno é curto e trabalha em cima do próprio array, sem copiar para um auxiliar. Ele também acessa a memória de forma sequencial, o que o cache do processador adora. Constantes menores, mesma classe de complexidade.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 Faça o particionamento de Lomuto (pivô = último) em \([4, 7, 1, 6, 3]\).
 

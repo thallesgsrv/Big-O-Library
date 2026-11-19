@@ -11,6 +11,18 @@ date: 2026-10-11
 
 Queremos a reta que "encosta" no gráfico de \(f\) no ponto \(P(x_0,\,f(x_0))\). Só com **um** ponto não dá para achar a inclinação, então fazemos um truque:
 
+Ao final você deve conseguir:
+
+- explicar a derivada como inclinação da reta tangente e como taxa de variação;
+- derivar pela definição seguindo uma receita;
+- usar as derivadas laterais para dizer quando a derivada não existe.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Limites](../../estagio1/limites/);
+> - a página de [Funções](../../estagio1/funcoes/).
+
 1. Pegamos um segundo ponto \(Q\big(x_0+h,\ f(x_0+h)\big)\), vizinho de \(P\) (a distância horizontal entre eles é \(h\)).
 2. A reta por \(P\) e \(Q\) é a **secante**. Sua inclinação é "quanto sobe dividido por quanto anda":
 
@@ -44,6 +56,8 @@ Notações equivalentes: \(f'(x)\), \(\dfrac{df}{dx}\), \(\dfrac{dy}{dx}\).
 
 > [!WARNING]
 > Nunca substitua \(h=0\) **antes** de simplificar: você cai em \(\frac00\).
+
+Não precisa decorar a receita agora: ela só organiza o que a definição já pede.
 
 ## 4. Exemplos
 
@@ -119,6 +133,9 @@ A derivada **não existe** em:
 > **Derivável implica contínua.** A volta é falsa: \(\lvert x\rvert\) é contínua em \(0\) e não é derivável.
 
 ## 6. Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** Use a definição para achar \(f'(x)\) se \(f(x)=x^2\), e \(f'(3)\).
 

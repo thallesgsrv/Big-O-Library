@@ -9,6 +9,13 @@ date: 2026-10-06
 
 **O que você vai aprender:** modificar listas, adicionando e removendo elementos com `append`, `insert` e `pop`.
 
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página da [Unidades 03 a 05: repetições e listas](../unidades-03-05-repeticoes/);
+> - a página da [Unidade 06: funções](../unidade-06-funcoes/).
+
 ## Conceitos
 
 - Uma **lista** guarda vários valores em ordem: `[10, 20, 30]`. Os índices e o `len` funcionam como nas strings.

@@ -11,6 +11,19 @@ date: 2026-11-09
 
 Se \(W_1\) e \(W_2\) são subespaços de \(V\), dá para criar dois subespaços novos a partir deles:
 
+Ao final você deve conseguir:
+
+- definir soma e interseção de subespaços;
+- calcular a interseção (juntando equações) e a soma (juntando geradores);
+- usar a fórmula da dimensão da soma;
+- reconhecer uma soma direta.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Subespaços](../subespacos/);
+> - a página de [Base e dimensão](../base-e-dimensao/).
+
 - a **interseção** \(W_1 \cap W_2\): os vetores que estão **nos dois** ao mesmo tempo;
 - a **soma** \(W_1 + W_2\): tudo o que dá para formar **pegando um vetor de cada** e somando.
 
@@ -199,6 +212,9 @@ Por exemplo, \((4, 3, 1) = 2(1,0,0) + 2(1,1,0) + 1(0,1,1)\), ou seja, \(w_1 = (2
 | saber se \(V = W_1 \oplus W_2\) | as duas condições acima |
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 **Exercício 1.** Em \(\mathbb{R}^3\), \(W_1 = \{(x, y, z) \mid x + y - z = 0\}\) e \(W_2 = \{(x, y, z) \mid x = y\}\). Ache uma base e a dimensão de \(W_1 \cap W_2\) e de \(W_1 + W_2\). \(\mathbb{R}^3 = W_1 \oplus W_2\)?
 

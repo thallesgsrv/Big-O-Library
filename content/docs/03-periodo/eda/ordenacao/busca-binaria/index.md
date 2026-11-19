@@ -13,6 +13,19 @@ date: 2026-10-30
 
 Imagine procurar uma palavra em um dicionário de papel. Você não começa pela primeira página e vai lendo uma por uma. Abre mais ou menos no meio, vê se a palavra vem antes ou depois dali, e descarta metade do livro. Repete com a metade que sobrou. Isso é a **busca binária**.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de descartar metade dos candidatos a cada passo;
+- acompanhar o algoritmo e implementá-lo;
+- analisar o custo $O(\log n)$;
+- decidir quando a busca binária vale a pena.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Análise assintótica](../../analise-de-algoritmos/analise-assintotica/);
+> - arrays ordenados.
+
 Ela só funciona porque o dicionário está **ordenado**. Essa é a condição fundamental: a busca binária exige um array ordenado.
 
 ## A ideia
@@ -82,6 +95,9 @@ Se você vai buscar **muitas vezes** no mesmo conjunto, ordenar uma vez (custo \
 A ideia de "descartar metade com base em uma pergunta de sim ou não" vai além de arrays: aparece em busca da resposta de um problema (por exemplo, achar o menor valor que satisfaz uma condição monotônica) e em estruturas como árvores binárias de busca.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Qual é o número máximo de comparações da busca binária em um array de 1000 elementos?
 2. Execute a busca binária por 8 em \([2, 5, 8, 12, 16, 23, 38, 56, 72, 91]\). Quais valores de `meio` são testados?

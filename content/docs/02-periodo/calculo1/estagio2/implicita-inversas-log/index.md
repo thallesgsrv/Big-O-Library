@@ -11,6 +11,19 @@ date: 2026-10-11
 
 Às vezes \(y\) está "misturado" com \(x\), como em \(x^2+y^2=25\). Não precisa isolar \(y\):
 
+Ao final você deve conseguir:
+
+- derivar uma função dada implicitamente;
+- derivar funções inversas e as trigonométricas inversas;
+- derivar $e^x$ e $\ln x$;
+- usar a derivação logarítmica quando a variável está no expoente.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Regras de derivação](../regras-de-derivacao/);
+> - a ideia de função inversa, da página de [Funções](../../estagio1/funcoes/).
+
 1. Derive **os dois lados** em relação a \(x\).
 2. Sempre que derivar algo com \(y\), use a cadeia e escreva \(y'\) (ou \(\frac{dy}{dx}\)) no final: \((y^2)'=2y\,y'\).
 3. Isole \(y'\).
@@ -107,6 +120,8 @@ $$
 g'(x)=0+\frac1x-\frac{2x}{x^2+1}
 $$
 
+Olha só: usar as propriedades do $\ln$ antes de derivar pode poupar muita conta.
+
 ## 5. Derivação logarítmica
 
 Para produtos, quocientes e potências enormes, ou quando a **variável está no expoente**:
@@ -135,6 +150,9 @@ $$
 > \(x^x\) **não** é \(x\cdot x^{x-1}\). A regra da potência só vale com expoente **constante**.
 
 ## 6. Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 **Exercício 1.** \(y'\) se \(x^2+xy+y^2=3\).
 

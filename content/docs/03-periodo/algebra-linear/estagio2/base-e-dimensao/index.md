@@ -11,6 +11,21 @@ date: 2026-11-09
 
 Nas páginas anteriores apareceram duas qualidades de uma lista de vetores:
 
+Ao final você deve conseguir:
+
+- definir base e dimensão;
+- usar os atalhos para decidir se uma lista é base;
+- achar uma base de um subespaço (por equações, geradores ou parâmetros);
+- extrair uma base de um conjunto gerador e completar uma lista LI até uma base;
+- calcular a dimensão da soma de subespaços.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Dependência linear](../dependencia-linear/);
+> - a página de [Combinação linear e geradores](../combinacao-linear-e-geradores/);
+> - a página de [Subespaços](../subespacos/).
+
 - **gerar** o espaço (dá para fabricar qualquer vetor com ela);
 - ser **LI** (nenhum vetor sobra).
 
@@ -101,6 +116,8 @@ $$
 $$
 
 A quarta é combinação das outras três, então \(S\) é **LD** e **não é base**. (Com 4 vetores LD, o gerado tem dimensão 3, que é pouco para \(M(2,2)\).)
+
+Não precisa decorar todos os atalhos de uma vez: eles são consequência de uma ideia só, a de que base é uma lista LI que gera tudo.
 
 ## Como achar uma base de um subespaço
 
@@ -256,6 +273,9 @@ Em particular, a soma é direta quando \(\dim(W_1 + W_2) = \dim W_1 + \dim W_2\)
 | completar uma lista LI até uma base | acrescentar \(e_j\) nas colunas sem pivô e provar que a nova lista é LI |
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1.** Encontre uma base e a dimensão de \(W = \{(x, y, z) \mid x = y = z\}\) e de \(W' = \{(x, y, z) \mid x + y + z = 0\}\).
 

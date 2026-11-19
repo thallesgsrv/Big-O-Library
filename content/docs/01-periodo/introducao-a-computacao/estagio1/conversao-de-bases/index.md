@@ -7,7 +7,7 @@ autores:
 date: 2026-10-17
 ---
 
-Existem quatro técnicas básicas para inteiros: **divisão**, **polinômio**, **agrupamento de 3 bits** e **agrupamento de 4 bits**. Elas servem para qualquer par de bases. Escolha a certa para cada caso.
+Calma, vamos por partes. Existem quatro técnicas básicas para inteiros: **divisão**, **polinômio**, **agrupamento de 3 bits** e **agrupamento de 4 bits**. Elas servem para qualquer par de bases. Escolha a certa para cada caso.
 
 | De → Para | Técnica |
 | --- | --- |
@@ -16,6 +16,18 @@ Existem quatro técnicas básicas para inteiros: **divisão**, **polinômio**, *
 | Binário ↔ octal | Agrupar de 3 em 3 bits |
 | Binário ↔ hexadecimal | Agrupar de 4 em 4 bits |
 | Octal ↔ hexadecimal | Passar pelo binário |
+
+Ao final você deve conseguir:
+
+- converter de decimal para outra base por divisões sucessivas;
+- converter de outra base para decimal pelo polinômio;
+- converter entre binário, octal e hexadecimal por agrupamento de bits;
+- converter números fracionários.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - potências e divisão com resto.
 
 ## 1. Decimal para outra base: divisões sucessivas
 
@@ -150,6 +162,9 @@ $0{,}1\to0{,}2\to0{,}4\to0{,}8\to1{,}6\to1{,}2\dots$ e o ciclo repete. É uma d�
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Converta $130_{10}$ para binário, octal e hexadecimal.
 2. Converta $11001011_2$ para decimal.

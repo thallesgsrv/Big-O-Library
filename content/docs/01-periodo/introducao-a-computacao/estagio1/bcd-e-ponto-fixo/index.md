@@ -7,7 +7,20 @@ autores:
 date: 2026-10-17
 ---
 
-O ponto flutuante é ótimo para ciência, mas **perde precisão** em alguns decimais. Para dinheiro, onde cada centavo importa, isso não serve. Aí entra o **BCD** (*Binary Coded Decimal*).
+Bora ver o que fazer quando o ponto flutuante não serve. O ponto flutuante é ótimo para ciência, mas **perde precisão** em alguns decimais. Para dinheiro, onde cada centavo importa, isso não serve. Aí entra o **BCD** (*Binary Coded Decimal*).
+
+Ao final você deve conseguir:
+
+- representar números em BCD e em BCD comprimido;
+- escrever o sinal em BCD;
+- explicar o que é o ponto fixo e quando usá-lo;
+- reconhecer os tipos primitivos de dados que o hardware entende.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Conversão entre bases](../conversao-de-bases/);
+> - a página de [Ponto flutuante e IEEE 754](../ponto-flutuante/).
 
 ## 1. BCD
 
@@ -119,6 +132,9 @@ Se o número é inteiro, os bits da fração ficam sem uso (e vice-versa).
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Escreva $1953_{10}$ em BCD.
 2. Qual o decimal de $0111\ 0101\ 0001_{BCD}$?

@@ -18,6 +18,11 @@ Ao final você deve conseguir:
 - explicar a diferença entre argumento **válido**, **correto** e **inválido**;
 - provar que um argumento é inválido com um **contra-exemplo**.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - raciocínio lógico do dia a dia: argumentos que você já usa sem perceber.
+
 ## 1. O que é lógica?
 
 Considere:
@@ -196,6 +201,9 @@ Executar o código **é** deduzir. Por isso lógica é a base de verificação d
 - **Lógica:** o estudo de quando um argumento é válido.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1.** Quais destas frases são proposições? (Pode haver mais de uma.)
 

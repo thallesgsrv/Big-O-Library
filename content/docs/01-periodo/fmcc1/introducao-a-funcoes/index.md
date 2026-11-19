@@ -11,6 +11,18 @@ date: 2026-11-02
 
 Se existe **uma** ideia de matemática que vai te acompanhar o curso inteiro, é a de **função**. Ela está em todo `def` e em todo `return` que você escrever. Quando você escreve `def area(base, altura)`, está definindo uma função: entra um par de números, sai um número. Neste tópico a gente deixa essa ideia bem redonda, com os nomes certos, para os próximos tópicos (reta, parábola, exponencial, log, seno) serem só "mais uma função".
 
+Ao final você deve conseguir:
+
+- explicar o que é uma relação e o que é uma função;
+- identificar domínio, contradomínio e imagem;
+- achar o domínio máximo de uma função dada por fórmula;
+- usar o teste da reta vertical.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - conjuntos numéricos e o plano cartesiano.
+
 ## Relação: o ponto de partida
 
 Uma **relação** é uma regra que diz se dois objetos estão (ou não) ligados. Exemplo: "a cor de uma fruta".

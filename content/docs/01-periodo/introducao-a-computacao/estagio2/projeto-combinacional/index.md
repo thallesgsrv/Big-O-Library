@@ -9,6 +9,18 @@ date: 2026-10-17
 
 Esta é a página mais prática do estágio. O método tem um fio condutor só: **situação → tabela-verdade → expressão → circuito**. Se você domina isso, sabe projetar circuito digital.
 
+Ao final você deve conseguir:
+
+- diferenciar circuitos combinacionais e sequenciais;
+- seguir o método de projeto, da tabela-verdade ao circuito;
+- escrever a expressão em soma de produtos (mintermos) e simplificá-la;
+- ler o que um circuito faz.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Álgebra de Boole e portas lógicas](../algebra-de-boole/).
+
 ## 1. Combinacional x sequencial
 
 | | Combinacional | Sequencial |
@@ -182,6 +194,9 @@ $X + \overline{X}Y = X+Y$. Aqui $X=\overline{A}$, e $\overline{X}=A$, com $Y=\ov
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Monte a tabela-verdade e a expressão simplificada de um circuito com entradas $A$ e $B$ cuja saída é 1 **somente quando $A=1$ e $B=0$**.
 2. Mostre, usando De Morgan, que $\overline{\overline{A}+\overline{B}}=A\cdot B$.

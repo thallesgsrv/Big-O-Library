@@ -9,6 +9,16 @@ date: 2026-10-17
 
 Um exemplo completo para praticar o método: **como implementar o circuito de um semáforo?** São sete passos, e cada um corresponde a uma etapa que você já conhece.
 
+Ao final você deve conseguir:
+
+- aplicar o método de projeto num caso completo: tabela-verdade, expressões, diagrama e implementação;
+- explicar como o software controla o circuito.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Projeto de circuitos combinacionais](../projeto-combinacional/).
+
 ## 1. Situação
 
 O circuito tem **3 saídas**: $R$ (vermelho), $Y$ (amarelo) e $G$ (verde). Valendo 1, a luz fica acesa, e só **uma** pode estar acesa por vez. Para ter quatro estados diferentes (incluindo tudo apagado) precisamos de **2 entradas**, $A$ e $B$, pois $2^2=4$ combinações.
@@ -111,6 +121,9 @@ Mintermo: A entra direta (vale 1) e B entra negada (vale 0).
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Qual palavra (A B) acende a luz verde? E qual deixa tudo apagado?
 2. Quais CIs são usados na implementação?

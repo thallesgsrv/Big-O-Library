@@ -11,6 +11,19 @@ date: 2026-10-01
 
 Até agora perguntávamos: quanto vale \(f(2)\)? O limite pergunta outra coisa:
 
+Ao final você deve conseguir:
+
+- explicar a ideia de limite como "para onde a função está indo";
+- calcular limites laterais, com módulo e com funções por partes;
+- usar as propriedades dos limites;
+- resolver $\frac00$ fatorando e usando o conjugado;
+- usar os limites trigonométricos e o teorema do confronto.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Funções](../funcoes/), principalmente domínio e leitura de gráficos.
+
 > O que acontece com \(f(x)\) quando \(x\) está **chegando perto** de \(2\)?
 
 > [!TIP]
@@ -170,6 +183,8 @@ $$
 \boxed{\lim_{x\to0}\frac{\sqrt{x+1}-1}{x}=\frac12}
 $$
 
+Calma, vamos por partes: a estratégia é sempre a mesma, substituir primeiro. Só quando aparecer $\frac00$ é que entram os truques.
+
 ## 8. Limites trigonométricos
 
 O limite fundamental:
@@ -228,6 +243,9 @@ $$
 $$
 
 ## 10. Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1.** \(\displaystyle\lim_{x\to0}\frac{\operatorname{sen}3x}{x}\).
 

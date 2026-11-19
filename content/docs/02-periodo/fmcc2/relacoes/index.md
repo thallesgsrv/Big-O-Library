@@ -11,6 +11,18 @@ date: 2026-10-30
 
 Uma relação é uma forma de dizer que certos elementos "estão ligados" a outros: um número é menor que outro, uma pessoa é irmã de outra, um número divide outro. Formalizar isso com conjuntos dá um vocabulário para falar de igualdade, de ordem e de agrupamentos, que aparece em bancos de dados, grafos e ordenação.
 
+Ao final você deve conseguir:
+
+- definir relação binária;
+- testar as propriedades reflexiva, simétrica, antissimétrica e transitiva;
+- reconhecer relações de equivalência e as suas classes;
+- reconhecer relações de ordem parcial.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - conjuntos e produto cartesiano.
+
 ## Definição
 
 Uma **relação binária** de $A$ em $B$ é um subconjunto $R \subseteq A \times B$. Quando $(a, b) \in R$ escrevemos $a \mathrel{R} b$. Quando $A = B$, dizemos que $R$ é uma relação **em $A$**.
@@ -81,6 +93,9 @@ Em uma ordem **total**, quaisquer dois elementos são comparáveis: $a \mathrel{
 - **Esquecer o contexto.** A divisibilidade em $\mathbb{Z}_{>0}$ é antissimétrica, mas em $\mathbb{Z}$ não é: $2 \mid -2$ e $-2 \mid 2$ com $2 \ne -2$.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Em $A = \{1, 2, 3\}$, seja $R = \{(1,1), (2,2), (1,2), (2,1)\}$. Classifique $R$ quanto às quatro propriedades.
 2. A relação "$a$ e $b$ têm a mesma paridade" em $\mathbb{Z}$ é de equivalência? Quais são as classes?

@@ -11,6 +11,18 @@ date: 2026-10-01
 
 O símbolo \(\infty\) **não é um número**: é uma forma de dizer "cresce sem parar". Ele aparece de duas maneiras muito diferentes:
 
+Ao final você deve conseguir:
+
+- diferenciar um limite infinito de um limite no infinito;
+- achar assíntotas verticais e horizontais;
+- lidar com formas indeterminadas envolvendo o infinito;
+- comparar a ordem de crescimento de funções.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Limites](../limites/).
+
 | | Quem vai ao infinito? | Exemplo |
 | --- | --- | --- |
 | **Limite infinito** | o **valor da função** \(f(x)\) | \(\displaystyle\lim_{x\to2^+}\frac1{x-2}=+\infty\) |
@@ -116,7 +128,12 @@ Por isso \(\dfrac{x^2}{e^x}\to0\). (L'Hôpital é mais uma ferramenta para isso.
 - **Vertical:** o denominador zera em \(x=1\) e o numerador \((2)\) não: \(x=1\).
 - **Horizontal:** graus iguais, razão dos líderes \(\frac21=2\): \(y=2\).
 
+Até aqui, tranquilo? As duas ideias do início continuam valendo: limite infinito é a função explodindo; limite no infinito é o $x$ ficando gigante.
+
 ## 5. Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 **Exercício 1.** \(\displaystyle\lim_{x\to1^\pm}\frac1{x-1}\).
 

@@ -9,6 +9,18 @@ date: 2026-10-17
 
 Mais quatro circuitos combinacionais clássicos. Todos aparecem dentro de chips reais, e todos se projetam com o método da página anterior.
 
+Ao final você deve conseguir:
+
+- explicar codificadores e decodificadores;
+- usar multiplexadores e demultiplexadores;
+- calcular o bit de paridade para detectar erros.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Álgebra de Boole e portas lógicas](../algebra-de-boole/);
+> - a página de [Projeto de circuitos combinacionais](../projeto-combinacional/).
+
 ## 1. Codificadores e decodificadores
 
 A mesma informação pode ser representada de formas diferentes: um negativo em sinal e magnitude ou em complemento de 2, por exemplo. Para converter entre representações, usam-se circuitos que mapeiam um **código de entrada em outro código de saída**.
@@ -112,6 +124,9 @@ Qual bit de paridade **par** deve ser anexado a `1011`?
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Qual o bit de paridade ímpar de `0110`? E de `01011`?
 2. Para a palavra recebida `10110` (4 bits de dado mais bit de paridade par), há erro?

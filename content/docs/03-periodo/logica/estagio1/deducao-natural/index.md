@@ -20,6 +20,13 @@ Ao final você deve conseguir:
 - ler e montar uma prova completa, com justificativa em cada linha;
 - escolher a regra certa olhando para a **conclusão** e para as **premissas**.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Linguagem](../linguagem/);
+> - a página de [Tabela-verdade](../tabela-verdade/);
+> - a página de [Método axiomático](../metodo-axiomatico/), para comparar os dois estilos de prova.
+
 ## 1. Como uma prova se parece
 
 ```
@@ -340,6 +347,9 @@ Compare: provar $p\to p$ em Hilbert exige 5 passos (veja o [método axiomático]
 
 ## Erros comuns
 
+
+Estes são os tropeços mais frequentes por aqui. Se algum deles pegar você, sem drama: faz parte do treino.
+
 - **Usar linha de uma caixa já fechada.** Só vale para quem está dentro dela.
 - **Esquecer de fechar a hipótese.** Cada hipótese precisa ser "descarregada" por $\to i$, $\neg i$ ou $\lor e$. Uma hipótese solta não prova nada.
 - **MP ao contrário.** De $\psi$ e $\varphi\to\psi$ não se conclui $\varphi$.
@@ -357,6 +367,9 @@ Compare: provar $p\to p$ em Hilbert exige 5 passos (veja o [método axiomático]
 - Estratégia: olhe o conectivo principal da **conclusão** e quebre as **premissas**.
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 **Exercício 1.** $(d\land c)\land p,\ t\land f\ \vdash\ c\land t$
 

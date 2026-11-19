@@ -11,6 +11,20 @@ date: 2026-11-02
 
 Agora que a gente sabe o que é uma função, vamos conhecer a **família**. Tudo neste tópico é parente: a **potência** é o tijolo, a **polinomial** é a casa feita de tijolos, e a **função do 1º grau** (a reta) é o primeiro cômodo dessa casa. Quando você entender a reta direitinho, a parábola do próximo tópico vai ficar bem mais fácil.
 
+Ao final você deve conseguir:
+
+- reconhecer funções potência e polinomiais;
+- calcular valores de uma função, inclusive $f(a+h)$;
+- traçar o gráfico da função do 1º grau e achar sua raiz;
+- descobrir a função a partir de dois pontos;
+- estudar o sinal da função afim.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Introdução a funções](../introducao-a-funcoes/);
+> - a página de [Polinômios](../polinomios/).
+
 ## Função potência
 
 Uma **função potência** tem a forma

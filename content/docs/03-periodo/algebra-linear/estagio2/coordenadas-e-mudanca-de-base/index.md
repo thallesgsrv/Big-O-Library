@@ -11,6 +11,19 @@ date: 2026-11-09
 
 Ao dizer "o ponto \((3, 2)\)", você já usou **coordenadas** sem perceber: "3 passos para a direita e 2 para cima". Os "passos" são medidos com as réguas \((1, 0)\) e \((0, 1)\), a base canônica.
 
+Ao final você deve conseguir:
+
+- calcular as coordenadas de um vetor numa base e fazer o caminho de volta;
+- fazer o mesmo em polinômios e matrizes;
+- montar a matriz de mudança de base;
+- mudar de base nos dois sentidos (com a inversa) e por etapas.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Base e dimensão](../base-e-dimensao/);
+> - a página de [Matriz inversa](../../estagio1/matriz-inversa/).
+
 A ideia desta página: **nada obriga a usar essas réguas**. Dá para medir o mesmo ponto com outras réguas (outra base), e as coordenadas mudam, mas o ponto continua o mesmo. Mudança de base é a ferramenta que traduz um endereço no outro.
 
 ## Coordenadas numa base
@@ -275,6 +288,9 @@ Com \(p = 3 + 2t\): \([p]_\alpha = (3, 2, 0)\) e, como visto no Exemplo 4, \([p]
 | a base \(\alpha\), dada \(M_{\alpha \to \beta}\) | desfazer as coordenadas das colunas usando \(\beta\) |
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** Em \(\mathbb{R}^2\), \(B = ((2, 1), (1, -1))\). Mostre que \(B\) é base e calcule \([(4, -1)]_B\).
 

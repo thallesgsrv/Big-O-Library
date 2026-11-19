@@ -21,6 +21,12 @@ Ao final você deve conseguir:
 - ler e montar uma **prova axiomática**, com ou sem premissas;
 - reescrever $\land,\lor,\leftrightarrow$ usando só $\to$ e $\neg$.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Linguagem](../linguagem/);
+> - a página de [Tabela-verdade](../tabela-verdade/), para a ideia de validade.
+
 ## 1. Sistemas dedutivos
 
 Um **sistema dedutivo** é uma "máquina de provar" com três partes:
@@ -189,6 +195,9 @@ Por isso, para **fazer** provas, usamos a [dedução natural](../deducao-natural
 
 ## Erros comuns
 
+
+Estes são os tropeços mais frequentes por aqui. Se algum deles pegar você, sem drama: faz parte do treino.
+
 - **Troca não uniforme.** Instanciar $\alpha\to(\beta\to\alpha)$ como $p\to(q\to r)$ é errado: os dois $\alpha$ precisam ser a mesma fórmula.
 - **MP "ao contrário".** De $\beta$ e $\alpha\to\beta$ **não** se conclui $\alpha$ (isso é a falácia da afirmação do consequente).
 - **Esquecer de anotar a troca.** Sem dizer quanto valem $\alpha,\beta,\gamma$ fica difícil de conferir; é a primeira coisa que o corretor procura.
@@ -204,6 +213,9 @@ Por isso, para **fazer** provas, usamos a [dedução natural](../deducao-natural
 - Sistema $Z$: A1, A2, A3 e MP. $\land,\lor,\leftrightarrow$ são abreviações em $\to,\neg$.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 {{< quiz titulo="instância de A1" >}}
 

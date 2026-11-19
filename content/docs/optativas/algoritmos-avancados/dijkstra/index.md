@@ -13,6 +13,19 @@ O Dijkstra encontra a menor distância da origem até todos os outros vértices 
 
 Imagine uma mancha de tinta se espalhando a partir da origem. Ela sempre alcança primeiro o vértice mais próximo ainda não pintado. Quando um vértice é alcançado, a distância dele é definitiva, porque qualquer outro caminho teria de passar por vértices mais distantes.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de expandir sempre o vértice mais próximo;
+- achar o menor caminho a partir de uma origem em grafos com pesos não negativos;
+- implementar o algoritmo com uma fila de prioridade;
+- analisar a complexidade e saber quando usar.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [BFS](../bfs/);
+> - a página de [Heap e fila de prioridade](../../../03-periodo/eda/arvores/heap/).
+
 ## Visualização
 
 Use ▶| para avançar um passo por vez e acompanhe a linha destacada no pseudocódigo. Vermelho é a aresta em análise, azul é o vértice extraído e verde são os vértices finalizados e os caminhos mínimos.
@@ -91,6 +104,9 @@ e o espaço é \(O(V + E)\).
 Use para rotas em mapas, roteamento de redes e qualquer menor caminho com custos não negativos.
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Execute o algoritmo à mão partindo de **C** no grafo da animação. Qual é a distância final até E?
 

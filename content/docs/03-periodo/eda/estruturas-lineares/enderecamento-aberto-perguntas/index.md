@@ -13,6 +13,14 @@ date: 2026-11-17
 
 Esta página não explica nada de novo. Ela parte do princípio de que você já leu a [tabela hash](../tabela-hash/), principalmente a parte de **endereçamento aberto**, e transforma o conteúdo em perguntas. Tente responder cada uma no papel **antes** de abrir o gabarito.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Tabela hash](../tabela-hash/), principalmente o endereçamento aberto.
+
+> [!TIP]
+> **Dica de estudo:** responda cada pergunta sozinho, no papel, antes de abrir a resposta. É lembrar por conta própria que fixa o assunto, mais do que reler.
+
 Em todas as perguntas valem as mesmas regras:
 
 - a tabela tem **10 posições** (índices de 0 a 9);

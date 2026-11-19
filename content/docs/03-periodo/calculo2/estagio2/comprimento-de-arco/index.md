@@ -11,6 +11,19 @@ date: 2026-11-16
 
 Uma curva não tem régua, mas um **pedacinho minúsculo** dela é quase reto. Cada pedaço é a hipotenusa de um triângulo com catetos \(\Delta x_i\) e \(\Delta y_i\):
 
+Ao final você deve conseguir:
+
+- explicar por que um pedaço minúsculo de curva é a hipotenusa de um triângulo;
+- montar a integral do comprimento de arco, inclusive para curvas dadas por paramétricas;
+- resolver as integrais que aparecem.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Somas de Riemann e integral definida](../rieman/);
+> - o teorema de Pitágoras;
+> - derivadas e integrais básicas, com substituição simples.
+
 $$
 \Delta s_i\approx\sqrt{(\Delta x_i)^2+(\Delta y_i)^2}=\sqrt{1+\Big(\frac{\Delta y_i}{\Delta x_i}\Big)^2}\,\Delta x_i
 $$
@@ -27,6 +40,8 @@ $$
 
 - **Curva \(x=g(y)\):** troque tudo: \(L=\int_c^d\sqrt{1+[g'(y)]^2}\,dy\). Use quando \(x=g(y)\) é mais simples.
 - **Paramétrica:** \(L=\displaystyle\int_\alpha^\beta\sqrt{(x')^2+(y')^2}\,dt\).
+
+Olha só: o pulo do gato é que o pedacinho de curva é só Pitágoras em escala minúscula. A fórmula final nada mais é do que somar essas hipotenusas.
 
 ## 2. Exemplos resolvidos
 
@@ -64,6 +79,9 @@ $$
 - **Resposta:** \(\boxed{\tfrac{2}{27}\big(10\sqrt{10}-1\big)}\)
 
 ## 3. Lista de exercícios
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
+
 
 ### Questão 15: paramétricas
 
@@ -202,4 +220,3 @@ Aqui o pedaço é \(\Delta s_i\approx\sqrt{x'^2+y'^2}\,\Delta t_i\) e integra em
 - **Conta:** \([\operatorname{arcsen}x]_{-1/2}^{1/2}=\tfrac\pi6+\tfrac\pi6\)
 - **Resposta:** \(\boxed{\tfrac\pi3}\)
 {{< /details >}}
-

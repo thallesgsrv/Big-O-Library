@@ -13,6 +13,19 @@ date: 2026-11-04
 
 Imagina uma biblioteca sem catálogo e sem estantes organizadas. Você quer o livro "Dom Casmurro" e anda pelas prateleiras olhando lombada por lombada. É a busca em lista: \(O(n)\).
 
+Ao final você deve conseguir:
+
+- explicar por que o acesso direto por índice "quebra" e como a função de hash resolve;
+- usar as funções de hash por divisão e por multiplicação de Knuth;
+- tratar colisões por encadeamento e por endereçamento aberto;
+- explicar o fator de carga e o redimensionamento.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [ArrayList](../arraylist/);
+> - a página de [Lista encadeada](../lista-encadeada/), usada no encadeamento.
+
 Agora imagina que, dado o **nome do livro**, alguém te dissesse **na hora** em qual prateleira ele está. Sem procurar, sem comparar. Essa é a **tabela hash**, a estrutura por trás de `HashMap`, `HashSet`, dos dicionários do Python e dos objetos do JavaScript. Buscar, inserir e remover em \(O(1)\) **em média**.
 
 Em vez de começar pelo resultado, vamos construir a tabela hash por etapas: partimos de algo que você já conhece (o array), vemos exatamente onde ele deixa de servir e consertamos uma peça de cada vez.
@@ -603,6 +616,9 @@ O pior caso é todas as chaves colidirem no mesmo balde (ou na mesma sequência 
 E o que a gente paga pela velocidade? **A tabela não guarda ordem.** Não dá para pegar o menor elemento, o próximo maior ou percorrer em ordem crescente sem ordenar tudo. Para isso existem as árvores, que vêm logo depois.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Uma tabela com 7 posições usa \(h(k) = k \bmod 7\) e **sondagem linear**. Insira, nessa ordem, as chaves 10, 17, 24, 3 e 8. Desenhe o array final.
 2. Na tabela do exercício anterior, remova a chave 17 **apenas esvaziando a posição**. O que acontece ao buscar a chave 24? Como o marcador de apagado resolve?

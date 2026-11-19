@@ -9,6 +9,12 @@ date: 2026-10-06
 
 **O que você vai aprender:** escrever funções mais úteis (com `if` e repetições dentro delas) e **testar** cada uma com `assert`, para ter certeza de que funcionam antes de seguir adiante.
 
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página da [Unidade 06: funções](../unidade-06-funcoes/).
+
 ## Conceitos
 
 - **`assert condição`** afirma que a condição é verdadeira. Se for, nada acontece. Se for falsa, o programa para com `AssertionError`.

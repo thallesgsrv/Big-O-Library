@@ -11,6 +11,18 @@ date: 2026-10-16
 
 Uma **demonstração** é um argumento que convence qualquer leitor, passo a passo, de que uma afirmação é verdadeira. Exemplos não provam uma afirmação geral ("vale para todo $n$"), mas **um contraexemplo basta para refutá-la**.
 
+Ao final você deve conseguir:
+
+- fazer provas diretas, por contrapositiva, por absurdo e por casos;
+- escolher a técnica mais conveniente para cada afirmação;
+- refutar uma afirmação com um contraexemplo.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a ideia de implicação ("se… então");
+> - números pares e ímpares.
+
 ## Vocabulário
 
 - **Teorema:** afirmação que se prova. **Lema:** teorema auxiliar. **Corolário:** consequência direta.
@@ -53,6 +65,9 @@ Se $n$ é par, $n^2$ e $n$ são pares, e a soma é par. Se $n$ é ímpar, $n^2$ 
 - **Confundir $p\to q$ com $q\to p$.** A recíproca não é equivalente.
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Prove que a soma de dois números ímpares é par.
 2. Refute: "todo número da forma $n^2+n+41$ é primo".

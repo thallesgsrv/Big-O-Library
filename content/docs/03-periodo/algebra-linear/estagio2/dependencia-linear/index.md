@@ -11,6 +11,20 @@ date: 2026-11-09
 
 Imagine que você tem uma lista de vetores e quer saber se **algum deles está sobrando**. "Sobrando" quer dizer que dá para fabricá-lo usando os outros. Por exemplo, na lista \(\{(1, 0), (0, 1), (3, 5)\}\), o terceiro vetor sobra, porque \((3, 5) = 3(1, 0) + 5(0, 1)\).
 
+Ao final você deve conseguir:
+
+- explicar a definição de LI e LD;
+- testar LI com um sistema ou com o determinante;
+- resolver de cabeça os casos simples;
+- achar os valores de $k$ que tornam um conjunto LI;
+- relacionar LI e geradores.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Combinação linear e geradores](../combinacao-linear-e-geradores/);
+> - a página de [Determinantes](../../estagio1/determinantes/).
+
 Uma lista **sem nenhum vetor sobrando** é **linearmente independente (LI)**. Uma lista **com pelo menos um vetor sobrando** é **linearmente dependente (LD)**.
 
 ## A definição
@@ -166,6 +180,9 @@ LD é \(\det = 0\): \(16 - 4k^2 = 0 \Rightarrow k^2 = 4\). Logo **\(k = 2\) ou \
 - **Cortar valores de \(k\) sem conferir.** Se \(\det = k(k - 2)\), os valores problemáticos são os que **zeram** o determinante (\(k = 0\) e \(k = 2\)).
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 **Exercício 1.** \(\{(1, 2), (2, 4)\}\) é LI?
 

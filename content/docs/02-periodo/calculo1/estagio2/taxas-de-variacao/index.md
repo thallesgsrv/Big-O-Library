@@ -11,6 +11,18 @@ date: 2026-10-11
 
 Se \(f(t)\) muda com o tempo, a **taxa média** entre \(t\) e \(t+\Delta t\) é \(\dfrac{f(t+\Delta t)-f(t)}{\Delta t}\) (inclinação da secante), e a **taxa instantânea** em \(t\) é \(f'(t)\) (inclinação da tangente).
 
+Ao final você deve conseguir:
+
+- interpretar a derivada como taxa de variação instantânea (velocidade);
+- usar a derivada em problemas de física;
+- resolver problemas de taxas relacionadas, derivando uma equação em relação ao tempo.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Regras de derivação](../regras-de-derivacao/), principalmente a regra da cadeia;
+> - a página de [Derivação implícita](../implicita-inversas-log/).
+
 Se \(f(t)\) é a **posição** de uma partícula:
 
 | Grandeza | Derivada |
@@ -27,6 +39,8 @@ Se \(f(t)\) é a **posição** de uma partícula:
 
 1. Velocidade: \(v=3t^2-12t+9=3(t^2-4t+3)=3(t-1)(t-3)\). A partícula para em \(t=1\) e \(t=3\).
 2. Aceleração: \(a=6t-12\).
+
+Até aqui, tranquilo? A taxa média é a inclinação de uma reta que corta o gráfico; a instantânea é o limite disso, ou seja, a derivada.
 
 ## 2. Taxas relacionadas
 
@@ -84,6 +98,9 @@ O objeto se aproxima a \(\frac{4\pi}{15}\) km/s.
 > Em taxas com ângulos, **sempre use radianos**. As derivadas de \(\operatorname{sen}\), \(\cos\) etc. só valem em radianos.
 
 ## 3. Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** Um quadrado tem lado crescendo a \(3\) cm/s. Quão rápido cresce a área quando o lado vale \(10\) cm?
 

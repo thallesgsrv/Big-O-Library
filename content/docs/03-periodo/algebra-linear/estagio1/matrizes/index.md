@@ -11,6 +11,18 @@ date: 2026-10-01
 
 Uma matriz é uma tabela de números reais, dispostos em linhas e colunas, numa certa ordem, e colocada entre colchetes (ou parênteses).
 
+Ao final você deve conseguir:
+
+- reconhecer os principais tipos de matriz (quadrada, nula, coluna, linha, diagonal e identidade);
+- decidir quando duas matrizes são iguais;
+- efetuar adição, multiplicação por escalar, transposição e produto de matrizes.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - operações com números reais;
+> - a ideia de organizar números em linhas e colunas.
+
 ## Forma
 
 Representamos uma matriz com \(m\) linhas e \(n\) colunas, por:
@@ -455,7 +467,12 @@ $$
 > [!WARNING]
 > Em geral, \(AB \neq BA\): o produto de matrizes **não é comutativo**. Às vezes vale a igualdade, mas não dá para contar com isso.
 
+Até aqui, tranquilo? O produto de matrizes é o que mais pega: confira sempre o tamanho das matrizes antes de multiplicar. A página [Matrizes na prática](../pratica/) tem um checklist para isso.
+
 ## Exercícios propostos
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 ### Exercício 1
 

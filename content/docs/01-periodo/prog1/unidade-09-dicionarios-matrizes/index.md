@@ -9,6 +9,12 @@ date: 2026-10-06
 
 **O que você vai aprender:** guardar dados por **nome** (dicionários) e por **linha e coluna** (matrizes).
 
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página da [Unidade 08: listas e seus métodos](../unidade-08-listas/).
+
 ## Conceitos: dicionários
 
 - **Dicionário** associa **chaves** a **valores**: `{"ana": 8.5, "bia": 7.0}`.

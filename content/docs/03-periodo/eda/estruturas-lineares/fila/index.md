@@ -13,6 +13,19 @@ date: 2026-11-17
 
 Fila de banco, fila de impressão, fila de espera: quem chegou primeiro é atendido primeiro. Esse comportamento se chama **FIFO**, do inglês *First In, First Out*, e é o oposto da pilha, que é LIFO.
 
+Ao final você deve conseguir:
+
+- explicar o contrato FIFO;
+- implementar uma fila com array usando `head` e `tail`;
+- entender por que a remoção com shift custa $O(n)$;
+- implementar a fila circular, com remoção em $O(1)$.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [ArrayList](../arraylist/);
+> - a página de [Pilha](../pilha/).
+
 O que define a fila é a **política de acesso**: toda adição é feita no final (`addLast`) e toda remoção é feita no início (`removeFirst`). Só isso. Essas duas operações implementam a política FIFO.
 
 > **FIFO.** O primeiro elemento a entrar na fila é o primeiro a sair. O final da fila é o **tail** e o início é o **head**.
@@ -252,6 +265,9 @@ A memória é \(O(c)\), em que `c` é a capacidade. Esse é o motivo de a fila c
 Em Java, a fila baseada em array é a classe [`ArrayDeque`](https://docs.oracle.com/javase/8/docs/api/java/util/ArrayDeque.html). Dois detalhes: ela é *resizable* (ao encher, cresce em vez de lançar exceção ou sobrescrever) e serve tanto de fila quanto de pilha. Se você olhar a API, todos os métodos estão lá: `addFirst`, `addLast`, `removeFirst`, `removeLast`. Dependendo de como você usa, ela é uma fila ou uma pilha.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Considere uma fila vazia de capacidade 4 com remoção por shift. Acompanhe array, `head` e `tail` em: `addLast("a")`, `removeFirst()`, `addLast("b")`, `addLast("c")`, `addLast("d")`, `addLast("e")`, `removeFirst()`, `removeFirst()`, `removeFirst()`, `removeFirst()`.
 2. Agora uma fila **circular** vazia de capacidade 3: `addLast("a")`, `addLast("b")`, `addLast("c")`, `removeFirst()`, `removeFirst()`, `addLast("d")`, `addLast("e")`, `addLast("f")`. Qual é a fila no final e quem foi sobrescrito?

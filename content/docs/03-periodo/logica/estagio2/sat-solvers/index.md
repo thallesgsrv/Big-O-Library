@@ -9,7 +9,15 @@ date: 2026-11-17
 
 ## Sobre
 
-Na página de FNC vimos que a validade ficava fácil: basta olhar cada cláusula. Mas, para **satisfazibilidade**, não existe um atalho tão simples. Este material apresenta como programas chamados *SAT solvers* resolvem esse problema e explica o algoritmo clássico por trás da maioria deles: o **DPLL**.
+Bora entender como um computador resolve um problema que, à primeira vista, parece só tentativa e erro? Na página de FNC vimos que a **validade** ficava fácil: basta olhar cada cláusula. Para a **satisfazibilidade**, não existe um atalho tão simples. Aqui você vai ver como programas chamados *SAT solvers* atacam esse problema e vai destrinchar o algoritmo clássico por trás da maioria deles: o **DPLL**.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - cláusulas e literais, da página de [Forma normal conjuntiva](../../estagio1/forma-normal-conjuntiva/);
+> - a ideia de *modelo* (uma atribuição que torna a fórmula verdadeira), da página de [Tabela-verdade](../../estagio1/tabela-verdade/).
+>
+> Se alguma dessas ideias estiver nebulosa, vale uma passada rápida por lá primeiro.
 
 Ao final você deve conseguir:
 
@@ -18,6 +26,8 @@ Ao final você deve conseguir:
 - executar o DPLL manualmente, utilizando *backtracking*, e interpretar seus resultados;
 - decidir a validade de um argumento utilizando um SAT solver, por meio da negação da fórmula;
 - identificar e evitar os erros mais comuns do método.
+
+Não precisa decorar nada disso agora: o segredo está em entender o raciocínio, e a gente constrói cada peça com exemplos.
 
 ## 1. Recapitulando: validade e FNC
 
@@ -29,7 +39,7 @@ $$
 
 Depois, convertemos $\alpha$ para FNC e testamos sua validade cláusula por cláusula.
 
-Entretanto, existem dois problemas:
+Olha só: esse caminho tem dois problemas:
 
 - A conversão para FNC pode aumentar consideravelmente o tamanho da fórmula.
 - A tabela-verdade possui $2^n$ linhas para $n$ variáveis.
@@ -37,7 +47,7 @@ Entretanto, existem dois problemas:
 É nesse contexto que surgem os **SAT solvers**. Eles recebem fórmulas em FNC e respondem a uma pergunta: *essa fórmula possui algum modelo?*
 
 > [!TIP]
-> **Como utilizar um solver para verificar validade?**
+> **Aqui está o pulo do gato: como usar um solver para verificar validade?**
 >
 > Uma fórmula $\alpha$ é válida se, e somente se, sua negação é insatisfazível:
 >
@@ -53,6 +63,8 @@ Entretanto, existem dois problemas:
 ## 2. O problema SAT
 
 **SAT** (do inglês *satisfiability*) é o problema de determinar, dada uma fórmula proposicional, se existe uma atribuição de valores às variáveis que torne a fórmula verdadeira.
+
+Pense num quebra-cabeça de restrições, como marcar um almoço entre amigos com agendas diferentes: o SAT pergunta se existe *algum* jeito de respeitar todas as restrições ao mesmo tempo. Esse exemplo aparece completo na seção 3.
 
 Existem dois resultados possíveis:
 
@@ -94,14 +106,14 @@ O problema SAT aparece em diversas situações práticas nas quais precisamos en
 
 ### Exemplo: organização de um almoço
 
-Quatro amigos querem almoçar juntos de segunda a sexta. Entretanto, cada um possui algumas restrições:
+Bora a um exemplo do dia a dia: quatro amigos querem almoçar juntos de segunda a sexta, mas cada um tem suas restrições:
 
 - Ana não pode na sexta-feira.
 - Johnny só pode na segunda ou na quarta-feira.
 - Mike não pode na terça nem na quinta-feira.
 - Jane almoça com a mãe na quarta e na quinta-feira.
 
-Criamos uma variável para cada pessoa e dia. Por exemplo, $Ana^{seg}$ representa que Ana pode almoçar na segunda-feira.
+Calma, vamos por partes. Primeiro criamos uma variável para cada pessoa e dia. Por exemplo, $Ana^{seg}$ representa que Ana pode almoçar na segunda-feira.
 
 A fórmula que representa as restrições de cada pessoa é:
 
@@ -160,6 +172,8 @@ O único dia em que todos podem almoçar é **segunda-feira**.
 
 ## 4. Árvore de decisão e backtracking
 
+### Testando todas as possibilidades
+
 Uma maneira simples de resolver SAT seria testar todas as atribuições possíveis das variáveis.
 
 Podemos representar esse processo como uma **árvore de decisão**, na qual cada nível determina o valor de uma variável.
@@ -172,7 +186,9 @@ Por exemplo, com três variáveis $p,q,r$, teríamos:
 
 Com $n$ variáveis, a árvore possui até $2^n$ folhas, assim como uma tabela-verdade.
 
-Entretanto, existe uma maneira de melhorar esse processo: não precisamos chegar até uma folha quando já sabemos que determinado caminho não pode produzir um modelo.
+### Podando a árvore: backtracking
+
+Olha só: dá para melhorar bastante isso. Não precisamos chegar até uma folha quando já sabemos que determinado caminho não pode produzir um modelo.
 
 Considere:
 
@@ -224,6 +240,8 @@ Os ramos que começam com $p=F$ morrem logo depois de decidir $q$, e o ramo $p=V
 > Um ramo marcado com $\times$ significa que aquela atribuição parcial já produziu uma contradição.
 >
 > Isso não significa que a fórmula inteira é insatisfazível. Só podemos concluir UNSAT quando todos os caminhos possíveis forem descartados.
+
+Até aqui, tranquilo? A ideia central é que um ramo só morre quando alguma cláusula já ficou falsa. Nas próximas seções vamos aprender a perceber isso mais cedo, e com menos trabalho.
 
 ## 5. Simplificação
 
@@ -291,7 +309,7 @@ Duas situações especiais podem acontecer durante a simplificação:
 **Conjunto vazio de cláusulas:** todas as cláusulas foram satisfeitas e removidas. Encontramos um modelo.
 
 > [!WARNING]
-> Não confunda cláusula vazia com conjunto vazio de cláusulas:
+> Esse é um erro bem comum: confundir cláusula vazia com conjunto vazio de cláusulas.
 >
 > - Cláusula vazia = F (conflito).
 > - Nenhuma cláusula sobrando = V (sucesso).
@@ -299,6 +317,8 @@ Duas situações especiais podem acontecer durante a simplificação:
 > Um OU de nada é falso, enquanto um E de nada é verdadeiro.
 
 ## 6. Unit propagation
+
+Chegamos à ideia que mais economiza trabalho no DPLL.
 
 Uma **cláusula unitária**, também chamada de *unit*, é uma cláusula que possui apenas um literal.
 
@@ -414,6 +434,8 @@ $$
 A variável $b$ pode assumir qualquer valor, pois não aparece mais nas cláusulas restantes.
 
 ## 7. O algoritmo DPLL
+
+Hora de juntar as peças.
 
 O algoritmo **DPLL** recebeu esse nome em homenagem aos seus criadores: Davis, Putnam, Logemann e Loveland.
 
@@ -773,6 +795,8 @@ Também existe uma competição anual chamada **SAT Competition**, na qual difer
 
 ## Erros comuns
 
+Estes são os tropeços mais frequentes ao executar o DPLL na mão. Se algum deles te pegar, sem drama: faz parte do treino.
+
 - **Deletar o lado errado na simplificação:** com $p=V$, a cláusula que contém $p$ sai inteira, enquanto a cláusula com $\neg p$ perde apenas esse literal. Com $p=F$, acontece o contrário.
 - **Confundir cláusula vazia com conjunto vazio:** cláusula vazia representa conflito; conjunto sem cláusulas representa sucesso.
 - **Esquecer de propagar novamente:** a simplificação pode criar novas cláusulas unitárias. Continue propagando até não haver nenhuma.
@@ -793,9 +817,13 @@ Também existe uma competição anual chamada **SAT Competition**, na qual difer
 - **DPLL:** combina propagação de unidades, simplificação e decisões com backtracking.
 - **Validade:** uma fórmula é válida quando sua negação é insatisfazível.
 
+Até aqui, tranquilo? Se alguma linha acima ficou nebulosa, volte à seção correspondente antes de partir para os exercícios.
+
 ## Exercícios
 
-Resolva os exercícios utilizando o DPLL, descrevendo cada decisão e propagação. Ao final, indique se a fórmula é satisfazível ou insatisfazível. Se for satisfazível, apresente um modelo.
+Bora colocar isso em prática! Resolva cada exercício no papel usando o DPLL, descrevendo cada decisão e propagação, e só depois abra o gabarito. Tentar primeiro, mesmo errando no meio do caminho, fixa muito mais do que ler a solução pronta. Ao final, indique se a fórmula é satisfazível ou insatisfazível e, se for satisfazível, apresente um modelo.
+
+Quando terminar, refaça os que errou daqui a alguns dias: rever o conteúdo com intervalos entre as tentativas ajuda a lembrar por mais tempo.
 
 **Exercício 1.**
 
@@ -869,7 +897,7 @@ $$
 **Resultado: UNSAT**, logo $\alpha$ é válida e o argumento é válido.
 {{< /details >}}
 
-**Exercício 5.** Teste o que você aprendeu.
+**Exercício 5.** Última parada: um teste rápido para ver o que ficou. Pode errar à vontade, a explicação de cada questão está lá para ajudar.
 
 {{< quiz titulo="sat e dpll" >}}
 

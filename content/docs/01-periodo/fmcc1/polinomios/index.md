@@ -11,6 +11,19 @@ date: 2026-11-02
 
 Polinômio parece coisa de ensino médio que você deixou para trás, mas ele está escondido em muita coisa que você vai usar no curso: regressão e *machine learning*, curvas de Bézier nos gráficos, códigos corretores de erro, criptografia, compressão de imagem... e até na pergunta "esse algoritmo é polinomial ou exponencial?". Você já usa polinômios em Computação, só não sabia o nome.
 
+Ao final você deve conseguir:
+
+- reconhecer monômios e polinômios (grau e coeficientes);
+- somar, subtrair e multiplicar polinômios;
+- usar os produtos notáveis;
+- fatorar com as quatro técnicas.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a propriedade distributiva e as regras de sinais;
+> - a página de [Frações, raízes e racionalização](../fracoes-e-raizes/), para as operações com números.
+
 ## Quem é quem
 
 ### Monômio: um termo só

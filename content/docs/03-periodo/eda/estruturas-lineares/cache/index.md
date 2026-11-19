@@ -13,6 +13,19 @@ date: 2026-10-31
 
 Existe uma pegadinha que ninguém conta no começo de EDA: dois algoritmos com **a mesma complexidade** podem ter tempos de execução muito diferentes. Se \(O(n)\) é \(O(n)\), por que um código leva um tempo e o outro leva várias vezes mais?
 
+Ao final você deve conseguir:
+
+- explicar a hierarquia de memória e o papel do cache;
+- explicar a localidade e por que percorrer uma matriz por linhas costuma ser mais rápido;
+- comparar array e lista encadeada do ponto de vista do cache;
+- montar um cache LRU.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [ArrayList](../arraylist/);
+> - a página de [Lista encadeada](../lista-encadeada/).
+
 Boa parte da resposta se chama **cache**. E a palavra aparece em dois lugares que parecem diferentes, mas têm a mesma alma:
 
 - **Cache de hardware**: uma memória minúscula e velocíssima dentro do processador. Você não controla, mas pode escrever código que ajuda ou atrapalha ela.
@@ -173,6 +186,9 @@ Repara que saiu o `"b"`, e não o `"a"`, mesmo `"a"` tendo entrado primeiro. O `
 O `LinkedHashMap` junta duas estruturas que você vai ver neste conteúdo: uma **tabela hash** (achar a entrada pela chave em \(O(1)\)) e uma **lista duplamente encadeada** (manter a ordem de uso, movendo um nó para o fim em \(O(1)\) a cada acesso). Por isso `get` e `put` do LRU saem \(O(1)\) em média. Duas estruturas simples, juntas, virando uma esperta.
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Por que percorrer uma matriz por linhas costuma ser mais rápido que por colunas, se o número de somas é o mesmo?
 2. Um cache LRU de capacidade 3 recebe, em ordem: `put(a)`, `put(b)`, `put(c)`, `get(b)`, `put(d)`, `get(a)`, `put(e)`. Qual o conteúdo final, do menos para o mais recente? (`get` de uma chave ausente não altera nada.)

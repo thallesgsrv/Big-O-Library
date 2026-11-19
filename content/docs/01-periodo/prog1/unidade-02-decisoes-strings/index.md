@@ -9,6 +9,12 @@ date: 2026-10-06
 
 **O que você vai aprender:** fazer o programa seguir caminhos diferentes conforme uma condição, e olhar **dentro** de um texto: descobrir seu tamanho com `len` e acessar cada letra por **índice**.
 
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página da [Unidade 01: variáveis, entrada e saída](../unidade-01-variaveis/).
+
 ## Conceitos: decisões
 
 - **Comparações** dão `True` ou `False`: `==`, `!=`, `<`, `<=`, `>`, `>=`.

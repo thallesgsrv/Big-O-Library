@@ -13,6 +13,19 @@ date: 2026-10-09
 
 Se você já organizou cartas de baralho na mão, já usou o insertion sort sem saber. Pega uma carta nova e encaixa no lugar certo entre as que você já tem ordenadas.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de inserir cada elemento na parte já ordenada, como cartas na mão;
+- acompanhar o algoritmo e implementá-lo;
+- analisar custo, estabilidade e memória;
+- reconhecer por que ele é ótimo em arrays quase ordenados.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Análise assintótica](../../analise-de-algoritmos/analise-assintotica/);
+> - arrays e laços em Java.
+
 ## A ideia
 
 O array é dividido em duas partes: o começo, que já está ordenado, e o resto, que ainda não foi visto. Começamos com só o primeiro elemento na parte ordenada (um elemento sozinho sempre está ordenado). Em cada rodada pegamos o próximo elemento, a **chave**, e o empurramos para a esquerda até encontrar sua posição.
@@ -94,6 +107,9 @@ Para entradas grandes e aleatórias, \(n^2\) perde feio para merge sort e quick 
 - **Arrays pequenos.** A constante é baixa e o código é simples. Por isso implementações de ordenação de bibliotecas reais costumam usar insertion sort para os pedaços pequenos dentro de um algoritmo mais sofisticado (o Timsort, usado pelo `sorted` do Python e pelo `Arrays.sort` de objetos em Java, é assim).
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 Quantos deslocamentos o insertion sort faz em \([3, 2, 1]\)?
 

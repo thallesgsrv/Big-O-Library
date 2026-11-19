@@ -19,6 +19,12 @@ Ao final você deve conseguir:
 - usar **funções** e **igualdade** para frases como "só Paulo deve a Hasina";
 - expressar "pelo menos", "no máximo" e "exatamente" $n$ objetos.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Predicados: introdução](../predicados-introducao/);
+> - a página de [Tradução](../../estagio1/traducao/), com a receita de tradução.
+
 ## 1. As quatro formas categóricas
 
 Boa parte das frases do dia a dia tem uma destas quatro formas, em que $S$ e $P$ são **classes** (conjuntos de objetos):
@@ -311,6 +317,9 @@ Esse é o mesmo molde de "exatamente um": existe um objeto com a propriedade e t
 
 ## Erros comuns
 
+
+Estes são os tropeços mais frequentes por aqui. Se algum deles pegar você, sem drama: faz parte do treino.
+
 - **$\forall$ com $\land$ e $\exists$ com $\to$:** o erro número um. Veja a seção 2.
 - **Trocar "todo" por "apenas":** a seta troca de lado.
 - **Usar $\land$ onde o português tem "e" no sujeito:** "gatos e cachorros são domésticos" pede $\lor$ dentro do antecedente.
@@ -328,6 +337,9 @@ Esse é o mesmo molde de "exatamente um": existe um objeto com a propriedade e t
 - Frases grandes: monte em camadas, de fora para dentro.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** Traduza, com domínio de todas as coisas e glossário à sua escolha:
 

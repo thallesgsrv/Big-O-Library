@@ -11,6 +11,18 @@ date: 2026-11-09
 
 Conferir as 8 regras toda vez que aparece um conjunto novo seria cansativo. Existe um atalho: se o conjunto que você quer estudar **está dentro de um espaço vetorial que você já conhece**, as contas herdam quase tudo do espaço maior. Sobram só **três verificações**.
 
+Ao final você deve conseguir:
+
+- aplicar o teste dos 3 passos;
+- provar com letras que um conjunto é subespaço;
+- achar um contraexemplo com números quando não é;
+- ler com cuidado o que vem depois da barra no enunciado, inclusive em polinômios.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Espaços vetoriais](../espacos-vetoriais/).
+
 Um **subespaço** de \(V\) é um subconjunto \(W \subset V\) que, com as mesmas operações de \(V\), também é um espaço vetorial. É um "espaço vetorial morando dentro de outro".
 
 ## O teste dos 3 passos
@@ -250,6 +262,8 @@ A matriz nula tem \(b = 0\) e \(c + 1 = 1\), e \(0 \neq 1\). Então \(0 \notin W
    - **Só igualdades lineares "= 0"** (\(x - 3z = 0\), \(A = A^T\), \(p(0) = 0\)): provavelmente **é**. Prove com letras.
    - **Desigualdade, "\(\in \mathbb{Z}\)", número solto, produto ou quadrado**: provavelmente **não é**. Ache o contraexemplo.
 
+Até aqui, tranquilo? Essa receita é a que você mais vai usar: teste o zero primeiro, porque se ele falha a conversa já acabou.
+
 ## Interseção e união
 
 - A **interseção** de dois subespaços é sempre um subespaço. Quem passa nos dois filtros passa no filtro "junto", e as contas de soma e escalar continuam valendo.
@@ -267,6 +281,9 @@ A união ser subespaço só acontece quando um dos dois está dentro do outro.
 - **Parar no teste do zero.** Se o zero passa, ainda falta provar a soma e o escalar (ou achar o contraexemplo).
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1.** Prove que \(W = \{(x, y, z) \in \mathbb{R}^3 \mid x = 2y\}\) é subespaço.
 

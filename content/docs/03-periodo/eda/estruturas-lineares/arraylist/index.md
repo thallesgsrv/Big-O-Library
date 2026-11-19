@@ -13,6 +13,18 @@ date: 2026-11-04
 
 Array tem um defeito de personalidade: ele é **teimoso**. Você diz `new String[4]` e pronto, são quatro posições para sempre. Quer o quinto elemento? Azar. Na pilha com array, a gente já sentiu isso: encheu, estourou exceção.
 
+Ao final você deve conseguir:
+
+- explicar por que um array puro é "teimoso" e como a lista resolve isso;
+- montar do zero uma lista sobre array (tamanho, índice, add, remove e busca);
+- explicar por que dobrar a capacidade é a escolha certa.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - arrays e classes em Java;
+> - a página de [Introdução à análise de algoritmos](../../analise-de-algoritmos/introducao-a-analise/).
+
 Só que, na vida real, ninguém sabe de antemão quantas coisas vai guardar. Quantos usuários vão se cadastrar? Quantas mensagens vão chegar? Dá para chutar um número gigante e desperdiçar memória, ou dá para fazer algo mais esperto.
 
 O tamanho fixo é só o primeiro incômodo. O array também **não sabe remover**: o máximo que você consegue é colocar `null` na posição, e isso deixa um buraco que você precisa tratar (empurrando todo mundo para a esquerda ou espalhando `if (v[i] != null)` pelo código). E, como o array quase nunca está cheio, quem usa precisa controlar sozinho **quantas posições estão em uso**.
@@ -269,6 +281,9 @@ Porque a cópia é **rara**. Começando com capacidade 1 e fazendo 16 inserçõe
 O preço do dobro é memória: no pior caso, quase metade do array fica reservada e sem uso. Troca justa.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Com `new ListaArray(2)`, adicione 5 elementos. Em quais `add` o array é copiado? Qual a capacidade no final?
 2. Quantos elementos são copiados, no total, para fazer \(n = 32\) inserções começando com capacidade 1 e dobrando? E se o crescimento fosse de um em um?

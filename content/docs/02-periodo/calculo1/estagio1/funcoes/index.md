@@ -11,6 +11,20 @@ date: 2026-10-01
 
 Imagine uma máquina. Você coloca um número nela e ela devolve outro número.
 
+Ao final você deve conseguir:
+
+- explicar uma função como uma máquina de entrada e saída;
+- encontrar o domínio e a imagem de uma função;
+- analisar onde uma função cresce e onde decresce;
+- classificar uma função em injetora, sobrejetora ou bijetora;
+- compor funções, achar a inversa e usar o ciclo trigonométrico.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - operações com números reais, equações e inequações simples;
+> - leitura básica de gráficos.
+
 Por exemplo:
 
 $$
@@ -152,6 +166,8 @@ Três perguntas sobre como a "máquina" se comporta:
 > [!TIP]
 > Dá para consertar quase qualquer função: **restringindo o domínio** ela fica injetora; **trocando o contradomínio pela imagem** ela fica sobrejetora.
 
+Calma, vamos por partes: injetora, sobrejetora e bijetora são só três perguntas sobre a mesma máquina.
+
 ## 7. Operações e composição de funções
 
 Funções podem ser somadas, multiplicadas e... encaixadas:
@@ -228,6 +244,9 @@ No círculo de raio \(1\), o ponto associado ao ângulo \(\theta\) (em **radiano
 - **Composição:** de dentro para fora, e a ordem importa.
 
 ## 11. Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** Domínio de \(f(x)=\sqrt{x-2}\) e de \(g(x)=\dfrac{1}{x^2-4}\).
 

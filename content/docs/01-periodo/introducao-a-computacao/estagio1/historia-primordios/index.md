@@ -7,7 +7,14 @@ autores:
 date: 2026-10-17
 ---
 
-Antes de existir eletricidade, já existia a vontade de **calcular sem errar**. Esta página vai do pastor de ovelhas até a empresa que virou IBM. A graça é perceber que cada ideia foi herdada pela seguinte.
+Bora começar pelo começo: calcular sem esforço é um desejo bem antigo. Antes de existir eletricidade, já existia a vontade de **calcular sem errar**. Esta página vai do pastor de ovelhas até a empresa que virou IBM. A graça é perceber que cada ideia foi herdada pela seguinte.
+
+Ao final você deve conseguir:
+
+- situar os marcos do ábaco aos cartões de Hollerith;
+- explicar o "vai um" em engrenagem de Pascal;
+- reconhecer a Máquina Analítica de Babbage e o papel de Ada Lovelace;
+- ligar o trabalho de Boole aos computadores.
 
 ## 1. Contar e calcular
 
@@ -107,6 +114,9 @@ Em 1924, a Tabulating Machine Company virou a International Business Machines (I
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Por que a régua de cálculo é considerada um computador analógico?
 2. Qual foi o ganho prático do tabulador de Hollerith?

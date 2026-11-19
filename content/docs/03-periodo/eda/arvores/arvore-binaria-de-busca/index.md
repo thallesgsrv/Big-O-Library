@@ -13,6 +13,20 @@ date: 2026-11-04
 
 Vamos fazer um balanço do que temos até aqui, porque cada estrutura tem um defeito de personalidade:
 
+Ao final você deve conseguir:
+
+- usar o vocabulário básico de árvores;
+- explicar a regra que organiza uma árvore binária de busca;
+- implementar busca, inserção, mínimo, máximo e altura, e entender a remoção;
+- analisar o custo e explicar o risco de a árvore degenerar.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Lista encadeada](../../estruturas-lineares/lista-encadeada/), pelos nós ligados por referências;
+> - a página de [Busca binária](../../ordenacao/busca-binaria/);
+> - recursão.
+
 - o **array ordenado** busca em \(O(\log n)\), mas inserir e remover custa \(O(n)\), por causa dos deslocamentos;
 - a **lista encadeada** insere e remove com facilidade, mas buscar é \(O(n)\);
 - a **tabela hash** é rápida, mas não guarda ordem.
@@ -373,6 +387,9 @@ Nos meus testes, inserir `1..5000` em ordem produziu uma árvore de altura 4999.
 Então, qual o remédio? Uma árvore que **se arruma sozinha** para manter a altura pequena. Esse é o papel da [árvore AVL](../avl/), e é a próxima parada.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Insira, nessa ordem, `8, 3, 10, 1, 6, 14, 4, 7, 13`. Desenhe a árvore e dê os percursos pré-ordem e em ordem, além da altura.
 2. Remova o `3` da árvore do exercício anterior. Qual caso de remoção é esse e como fica a pré-ordem?

@@ -11,6 +11,9 @@ date: 2026-11-11
 
 Esta página reúne exercícios completos do Estágio 2, **agrupados por tipo** e resolvidos passo a passo. Cada seção aponta a página onde a teoria está explicada com calma.
 
+> [!TIP]
+> **Dica de estudo:** cubra a solução, tente a questão no papel e só então compare. É lembrar sozinho que fixa, mais do que reler. Se errar, melhor ainda: o ponto onde você se separou da solução é exatamente o que vale revisar.
+
 **Como usar:** tente cada questão sozinho primeiro e só abra a resolução depois. Se travar, as receitas resumidas estão na [Revisão Relâmpago](../revisao-relampago/).
 
 > [!TIP]

@@ -13,6 +13,18 @@ date: 2026-10-09
 
 Na página anterior contamos operações e chegamos a coisas como \(3n^2 + 10n + 5\). Dá para trabalhar com isso, mas é muita informação. Quando \(n\) é grande, quase tudo nessa expressão é ruído.
 
+Ao final você deve conseguir:
+
+- explicar por que só o termo dominante importa;
+- usar as notações O, Ω e Θ;
+- reconhecer as classes de crescimento mais comuns;
+- aplicar as regras práticas para classificar um algoritmo.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Introdução à análise de algoritmos](../introducao-a-analise/).
+
 ## Só o que domina importa
 
 Compare o tamanho de cada termo de \(3n^2 + 10n + 5\) para \(n = 1.000\):
@@ -97,6 +109,9 @@ Com \(n = 100\), um algoritmo exponencial já está fora de questão, mesmo no m
 - **Base do log não importa:** \(\log_2 n\) e \(\log_{10} n\) diferem por uma constante, então ambos são só \(O(\log n)\).
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 Dê a classe \(\Theta\) de cada função.
 

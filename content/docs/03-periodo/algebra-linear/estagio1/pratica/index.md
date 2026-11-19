@@ -11,6 +11,18 @@ date: 2026-10-11
 
 Na página anterior vimos **o que é** uma matriz e quais operações existem. Aqui vamos usar tudo isso para resolver os tipos de problema que mais aparecem em exercícios e provas:
 
+Ao final você deve conseguir:
+
+- montar uma matriz a partir de uma lei de formação;
+- resolver igualdade e simetria de matrizes com incógnitas;
+- combinar operações na ordem certa;
+- explicar por que $AB \neq BA$ em geral e evitar os erros mais comuns no produto.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Matrizes](../matrizes/), com os tipos e as operações.
+
 1. montar uma matriz a partir de uma **fórmula** para \(a_{ij}\);
 2. descobrir **incógnitas** dentro de matrizes iguais;
 3. usar **simetria** para achar valores desconhecidos;
@@ -191,6 +203,8 @@ Igualando casa por casa:
 
 Conclusão: \(y = 0\) e \(x\) pode ser **qualquer número real**.
 
+Esse é um erro bem comum: tratar o produto de matrizes como o produto de números. Se ele pegar você, sem drama: o checklist abaixo foi feito para isso.
+
 ## Checklist antes de multiplicar
 
 1. Escreva o tamanho de cada matriz: \(A_{m \times n}\) e \(B_{r \times s}\).
@@ -199,6 +213,9 @@ Conclusão: \(y = 0\) e \(x\) pode ser **qualquer número real**.
 4. Cada elemento \(c_{ij}\) é **linha \(i\) de \(A\) vezes coluna \(j\) de \(B\)**, somando os produtos.
 
 ## Exercícios propostos
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 ### Exercício 1
 

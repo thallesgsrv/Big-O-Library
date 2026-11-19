@@ -11,6 +11,18 @@ date: 2026-10-11
 
 Agora juntamos duas peças: a **matriz ampliada** (da página de sistemas) e o **escalonamento** (da página anterior). A receita é:
 
+Ao final você deve conseguir:
+
+- classificar um sistema (possível determinado, possível indeterminado ou impossível) lendo a forma escada;
+- identificar as variáveis livres e escrever a solução;
+- resolver sistemas homogêneos e sistemas com parâmetro.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Escalonamento, posto e nulidade](../escalonamento/);
+> - a página de [Sistemas lineares e matrizes](../sistemas-lineares-e-matrizes/).
+
 1. Escreva a matriz ampliada \([A : B]\).
 2. Leve-a à forma escada reduzida.
 3. **Leia** a resposta nas linhas.
@@ -253,6 +265,8 @@ Neste exemplo não existe valor de \(k\) que torne o sistema impossível, porque
 5. Senão, sobram variáveis livres: **indeterminado**. Nomeie as livres e isole as demais.
 6. Confira testando na equação original.
 
+Até aqui, tranquilo? Esse roteiro serve para qualquer sistema. Se travar num exercício, volte a ele e confira em que passo você saiu do caminho.
+
 ## Resumo
 
 - Todo sistema linear tem **0, 1 ou infinitas** soluções.
@@ -261,6 +275,9 @@ Neste exemplo não existe valor de \(k\) que torne o sistema impossível, porque
 - Com parâmetro, escalone e separe os valores que anulam algum pivô.
 
 ## Exercícios propostos
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 ### Exercício 1
 

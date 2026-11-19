@@ -13,6 +13,19 @@ date: 2026-10-09
 
 Ordenar um array de um milhão de elementos é difícil. Ordenar dois arrays de meio milhão cada é mais fácil. Ordenar arrays de um elemento é trivial, porque já estão ordenados. O merge sort aposta nisso: quebra o problema até ficar trivial e depois junta as respostas.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de dividir e conquistar;
+- juntar duas sequências ordenadas;
+- implementar o algoritmo inteiro;
+- analisar o custo com a relação de recorrência e entender a memória extra.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Análise de algoritmos recursivos](../../analise-de-algoritmos/analise-algoritmos-recursivos/);
+> - recursão.
+
 ## A ideia: dividir e conquistar
 
 1. **Dividir** o array ao meio.
@@ -155,6 +168,9 @@ E isso vale para **todos os casos**. O merge sort não liga se o array estava or
 **Não é in-place.** O `merge` precisa de um array auxiliar de até \(n\) posições (a `copia`), então o gasto extra de memória é \(O(n)\). Esse é o preço pela garantia de \(n \log n\).
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 O que aconteceria com a estabilidade se trocássemos `<=` por `<` no `merge`?
 

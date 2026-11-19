@@ -19,6 +19,11 @@ Ao final você deve conseguir:
 - reconhecer os argumentos famosos (e as falácias) e as **equivalências** mais usadas;
 - distinguir `→`, `↔`, `⊨` e `≡`, que parecem primos mas são coisas diferentes.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Linguagem](../linguagem/): fórmulas e conectivos.
+
 ## 1. Da forma ao significado
 
 Até aqui só escrevemos fórmulas. Mas $p\land\neg q$ sozinha é só um desenho: ela ainda **não é verdadeira nem falsa**. Para saber, precisamos dizer **como está o mundo**: $p$ é verdadeira? $q$ é verdadeira?
@@ -350,6 +355,9 @@ A tabela tem $2^n$ linhas. Com 20 letras já são mais de **1 milhão** de linha
 - **Atalho:** para testar um argumento, force "premissas V, conclusão F" e propague; contradição $\Rightarrow$ válido.
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 **Exercício 1.** Classifique cada fórmula como tautologia, contradição ou contingência. Responda direto na tela: depois de cada resposta aparece a explicação.
 

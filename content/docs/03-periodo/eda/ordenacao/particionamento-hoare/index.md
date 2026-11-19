@@ -13,6 +13,17 @@ date: 2026-10-31
 
 Na página do [quick sort](../quick-sort/), usamos o particionamento de **Lomuto**: um índice varre o trecho e outro marca a fronteira dos "menores que o pivô". É simples e dá para entender de primeira, mas tem um jeito meio trabalhoso de fazer as coisas: troca **muito**.
 
+Ao final você deve conseguir:
+
+- explicar a partição com dois índices que se encontram;
+- acompanhar um exemplo;
+- comparar Hoare e Lomuto, inclusive com valores repetidos.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Quick sort](../quick-sort/).
+
 O **particionamento de Hoare** é o original, de Tony Hoare, criado junto com o próprio quick sort em 1959. A ideia é bem mais esperta, e parece uma cena de filme: **dois índices começam nas pontas e caminham um em direção ao outro**. Só trocam quando encontram um par fora do lugar. Quando se encontram no meio, acabou.
 
 ## A ideia
@@ -139,6 +150,9 @@ Muitas implementações práticas de quick sort usam variações do esquema de H
 O particionamento é \(\Theta(n)\), como no Lomuto. O resto da análise do quick sort não muda: melhor caso e caso médio \(\Theta(n \log n)\); o pior caso \(\Theta(n^2)\) existe, mas com pivô no meio (ou aleatório) é raro. Continua **não estável** e **in-place**.
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Particione `[5, 3, 8, 6, 2, 7, 1, 4]` com Hoare (pivô = elemento do meio). Qual o array final e o valor devolvido?
 2. Faça o mesmo com `[4, 4, 4, 4]`. Em quantos pedaços ele é cortado?

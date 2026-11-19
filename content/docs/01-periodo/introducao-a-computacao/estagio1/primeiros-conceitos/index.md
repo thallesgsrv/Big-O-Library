@@ -9,6 +9,12 @@ date: 2026-10-17
 
 Antes de falar de bits e circuitos, vale combinar o vocabulário. Muita gente usa "computação", "informática" e "computador" como se fossem a mesma coisa. Não são, e a prova costuma cobrar a diferença.
 
+Ao final você deve conseguir:
+
+- diferenciar computação e informática, e dado e informação;
+- explicar os três componentes de um sistema computacional e as quatro operações básicas;
+- reconhecer os cursos da área de Computação.
+
 ## 1. Quatro definições
 
 | Termo | O que é |
@@ -139,6 +145,9 @@ Peopleware é o componente humano. SO é software; teclado e memória são hardw
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Dê um exemplo de dado e transforme-o em informação.
 2. Cite as quatro operações básicas de um computador e associe cada uma a um dispositivo.

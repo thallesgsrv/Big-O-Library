@@ -11,6 +11,18 @@ date: 2026-10-11
 
 Para resolver um sistema como \(2x + 3y = 1\) e \(3x + 4y = 0\) você provavelmente já usou "somar uma equação na outra" para sumir com uma variável. O **escalonamento** é essa mesma ideia, feita de forma organizada e na **matriz ampliada**, sem ficar carregando \(x\), \(y\), \(z\) pelo caminho.
 
+Ao final você deve conseguir:
+
+- aplicar as três operações elementares sobre linhas;
+- chegar à forma escada reduzida passo a passo;
+- calcular o posto e a nulidade de uma matriz.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Matrizes](../matrizes/);
+> - a página de [Sistemas lineares e matrizes](../sistemas-lineares-e-matrizes/).
+
 Esta página ensina a ferramenta (as operações e o resultado final, chamado de forma escada reduzida). Na próxima página usamos a ferramenta para resolver e classificar sistemas.
 
 ## Operações elementares sobre linhas
@@ -145,6 +157,8 @@ Chegamos à matriz identidade, que está na forma escada reduzida. Logo \(A\) é
 > [!NOTE]
 > **Dica de prova:** confira o resultado voltando algumas operações, ou verifique que cada pivô é 1 e sua coluna só tem zeros ao redor. A maior parte dos erros é um sinal trocado em alguma soma de linhas.
 
+Calma, vamos por partes: escalonar é seguir uma rotina, coluna por coluna. Com um pouco de prática, vira quase automático.
+
 ## Posto e nulidade
 
 Depois de achar a forma escada reduzida \(B\) de uma matriz \(A\):
@@ -229,6 +243,9 @@ Repare que a linha 2 de \(A\) era o dobro da linha 1: era informação repetida,
 - Nulidade = número de colunas menos o posto.
 
 ## Exercícios propostos
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 ### Exercício 1
 

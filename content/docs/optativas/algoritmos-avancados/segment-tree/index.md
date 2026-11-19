@@ -13,6 +13,18 @@ A árvore de segmentos responde perguntas como "qual a soma de `a[l..r]`?" e ace
 
 Pense num torneio de mata-mata: cada nó guarda o resultado de um grupo de elementos (aqui, a soma). Para somar um intervalo qualquer, você não visita todos os elementos: junta poucos blocos prontos que cobrem exatamente o intervalo.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de guardar resumos de intervalos numa árvore;
+- fazer consultas de intervalo e atualizações pontuais em tempo logarítmico;
+- analisar a complexidade e saber quando usar.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - arrays e recursão;
+> - a página de [Análise assintótica](../../../03-periodo/eda/analise-de-algoritmos/analise-assintotica/).
+
 ## Visualização
 
 Vetor `[5, 3, 8, 6, 2, 7, 4, 1]`. A animação monta a árvore, consulta `soma[2,6]`, muda `a[3]` para 10 e consulta de novo. Em azul está o nó visitado, em verde os blocos que entram na resposta e em laranja os nós alterados.
@@ -113,6 +125,9 @@ O espaço é \(O(n)\) (o vetor da árvore tem tamanho \(4n\) por segurança). Em
 Serve para soma, mínimo, máximo, MDC e qualquer operação **associativa**, quando há muitas consultas intercaladas com atualizações. Se o vetor nunca muda, uma tabela de prefixos (ou *sparse table*, para mínimo) basta. Para atualizar **intervalos** inteiros, veja a [propagação preguiçosa](../lazy-propagation/).
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Quantos nós a consulta `soma[2,6]` visita na animação, e quais blocos entram na resposta?
 

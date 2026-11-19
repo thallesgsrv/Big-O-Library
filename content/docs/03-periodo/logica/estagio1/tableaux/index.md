@@ -18,6 +18,12 @@ Ao final você deve conseguir:
 - decidir se uma fórmula é **satisfazível** ou **válida** (usando a negação);
 - evitar os erros mais comuns do método.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Tabela-verdade](../tabela-verdade/): satisfazibilidade e validade;
+> - a página de [Linguagem](../linguagem/), para subfórmulas e conectivo principal.
+
 ## 1. O problema: tabela demais
 
 A tabela-verdade tem $2^n$ linhas. Para 30 letras seriam **mais de um bilhão**. Mas muitas vezes não precisamos olhar tudo: basta **achar uma linha que funcione** (um modelo) e parar.
@@ -186,6 +192,9 @@ No **pior caso**, o tableaux também cresce como $2^n$ (igual à tabela-verdade)
 
 ## Erros comuns
 
+
+Estes são os tropeços mais frequentes por aqui. Se algum deles pegar você, sem drama: faz parte do treino.
+
 - **Tratar $\neg(p\land q)$ como $\alpha$.** De Morgan **troca** o conectivo: $\neg(p\land q)$ é "$\neg p$ **ou** $\neg q$", logo é $\beta$ e ramifica. Já $\neg(p\lor q)$ é "$\neg p$ **e** $\neg q$", logo é $\alpha$.
 - **Fechar um ramo com literais que não são complementares.** $\{p,\neg q\}$ **não** fecha: complementares são a mesma letra com e sem $\neg$ ($p$ e $\neg p$).
 - **Declarar o ramo "aberto" cedo demais.** Só vale quando ele está **saturado** (só literais). Se ainda há uma fórmula que não é literal, continue expandindo.
@@ -200,6 +209,9 @@ No **pior caso**, o tableaux também cresce como $2^n$ (igual à tabela-verdade)
 - **Válida?** Tableaux da **negação**. Todos fechados $\Rightarrow$ válida.
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 **Exercício 1.** $(p\land q)\lor(q\land r)\lor(r\land p)$ é satisfazível?
 

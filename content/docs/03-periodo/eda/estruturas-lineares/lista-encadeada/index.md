@@ -13,6 +13,18 @@ date: 2026-10-30
 
 Um array guarda os elementos lado a lado na memória, e por isso o elemento da posição `i` fica a um cálculo de distância. A contrapartida é que inserir no começo obriga a empurrar todo mundo uma casa. A **lista encadeada** troca essas vantagens: os elementos ficam espalhados, e cada um sabe onde está o próximo.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de nós ligados por referências;
+- implementar inserção, remoção e busca;
+- analisar o custo e decidir quando a lista encadeada vale a pena.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - referências e objetos em Java;
+> - a página de [ArrayList](../arraylist/), para comparar as duas listas.
+
 Pense numa caça ao tesouro: cada pista diz onde está a seguinte. Para chegar à quinta pista, você precisa passar pelas quatro primeiras.
 
 ## A ideia
@@ -146,6 +158,9 @@ Uma observação importante: remover ou inserir "no meio" só é \(O(1)\) **se v
 Quando há muitas inserções e remoções no início e pouco acesso por posição. É por isso que pilhas e filas costumam ser implementadas assim: a pilha usa a cabeça como topo (inserir e remover no início custam \(O(1)\)). Se você precisa de acesso por índice com frequência, o array é bem melhor.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Desenhe a lista após `adicionaInicio(3)`, `adicionaInicio(2)`, `adicionaFim(4)`, `adicionaInicio(1)` e `remove(2)`.
 2. Escreva um método `inverte()` que inverte a lista sem criar nós novos.

@@ -13,6 +13,18 @@ date: 2026-11-04
 
 Na [árvore binária de busca](../arvore-binaria-de-busca/), a gente descobriu o calcanhar de Aquiles: tudo custa \(O(h)\), e inserir valores em ordem crescente transforma a árvore numa lista torta, com \(h = n - 1\). Para ter \(O(\log n)\) **de verdade**, e não "na sorte", a árvore precisa **manter a própria altura pequena**.
 
+Ao final você deve conseguir:
+
+- explicar o fator de balanceamento e a regra da AVL;
+- explicar por que a altura é $O(\log n)$;
+- aplicar as rotações nos quatro casos de desbalanceamento;
+- implementar inserção, remoção e busca com balanceamento.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Árvore binária de busca](../arvore-binaria-de-busca/).
+
 Inserindo `1, 2, 3, 4` numa BST comum, o que acontece:
 
 ![Inserindo 1, 2, 3, 4: a BST comum vira uma lista de altura 3 e a AVL fica com altura 2](avl-torta-vs-balanceada.png)
@@ -291,6 +303,9 @@ A inserção desce \(O(\log n)\) níveis e cada `balancear` custa \(O(1)\), ent�
 Nos meus testes, inserir `1..100000` em ordem crescente produziu uma AVL de altura 16 (o \(\log_2\) de 100000 é cerca de 16,6). A BST comum, com míseros 5000 elementos na mesma ordem, já tinha altura 4999.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Insira, nessa ordem, `5, 2, 8, 1, 3, 4` em uma AVL. Onde ocorre o desbalanceamento, de qual caso é, e como fica a pré-ordem final?
 2. Qual a altura de uma AVL obtida inserindo `1, 2, ..., 15` em ordem?

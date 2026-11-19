@@ -11,6 +11,18 @@ date: 2026-11-02
 
 O logaritmo tem fama de vilão, mas é uma ideia simples disfarçada: **é só o expoente**. Se a função exponencial responde "quanto dá $2^{10}$?", o logaritmo responde a pergunta ao contrário: "$2$ elevado a **quanto** dá $1024$?". Quando você pegar essa leitura, o resto do tópico vira regra de três (com um pouco mais de charme).
 
+Ao final você deve conseguir:
+
+- explicar o logaritmo como outra maneira de escrever uma potência;
+- calcular logaritmos simples "na mão";
+- usar as bases 10 e $e$ e mudar de base;
+- usar as propriedades operatórias e resolver equações exponenciais com logaritmo.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Função exponencial](../funcao-exponencial/).
+
 ## A motivação: equações que a gente não consegue resolver (ainda)
 
 Algumas equações exponenciais são fáceis porque dá para transformar tudo em potências da mesma base:

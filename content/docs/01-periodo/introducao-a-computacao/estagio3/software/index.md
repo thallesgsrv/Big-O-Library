@@ -7,7 +7,19 @@ autores:
 date: 2026-10-17
 ---
 
-Software é o conjunto de **instruções ordenadas e lógicas** que o hardware executa para resolver problemas. Ele é o que dá ao computador uma variedade ilimitada de usos.
+Bora entender o que faz o computador fazer coisas úteis: o software. Software é o conjunto de **instruções ordenadas e lógicas** que o hardware executa para resolver problemas. Ele é o que dá ao computador uma variedade ilimitada de usos.
+
+Ao final você deve conseguir:
+
+- diferenciar software e hardware;
+- reconhecer as categorias de software;
+- explicar as funções do sistema operacional e os seus tipos;
+- reconhecer utilitários, aplicativos e modalidades de software.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Primeiros conceitos](../../estagio1/primeiros-conceitos/).
 
 ## 1. Software x hardware
 
@@ -149,6 +161,9 @@ No domínio público o autor abre mão também do copyright. Freeware é gratuit
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Qual a diferença entre freeware e software livre?
 2. Para que serve um driver?

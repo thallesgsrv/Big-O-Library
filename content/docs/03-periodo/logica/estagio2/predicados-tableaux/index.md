@@ -19,6 +19,12 @@ A novidade é lidar com $\forall$ e $\exists$. Ao final você deve conseguir:
 - decidir **satisfazibilidade** e **validade** (pela negação) de fórmulas com quantificadores;
 - explicar por que o método pode **nunca terminar**.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Tableaux](../../estagio1/tableaux/);
+> - a página de [Predicados: semântica](../predicados-semantica/).
+
 ## 1. Recapitulando o tableaux proposicional
 
 Você já sabe as duas famílias de regras do Estágio 1:
@@ -234,6 +240,9 @@ Na prática, quando você enxergar o padrão se repetindo, pare e **construa um 
 
 ## Erros comuns
 
+
+Estes são os tropeços mais frequentes por aqui. Se algum deles pegar você, sem drama: faz parte do treino.
+
 - **Reusar constante no $\exists$.** A constante do $\exists$ é sempre **nova** em cada aplicação.
 - **Gastar o $\forall$.** Ele não leva $\checkmark$: continua no ramo e precisa ser aplicado a toda constante que aparecer.
 - **Esquecer de aplicar o $\forall$ às constantes novas** que surgiram depois de um $\exists$.
@@ -251,6 +260,9 @@ Na prática, quando você enxergar o padrão se repetindo, pare e **construa um 
 - **Limite:** a satisfazibilidade é indecidível; o tableau pode ser infinito.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 Para cada fórmula, verifique a **satisfazibilidade** e a **validade**. Se não for válida, dê um contra-exemplo.
 

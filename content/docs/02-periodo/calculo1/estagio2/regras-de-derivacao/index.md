@@ -9,6 +9,17 @@ date: 2026-10-11
 
 Derivar pela definição é lento. As regras abaixo são a definição **já resolvida** de uma vez por todas. Decore-as *entendendo* de onde vêm.
 
+Ao final você deve conseguir:
+
+- usar as regras básicas, a do produto e a do quociente;
+- derivar as funções trigonométricas;
+- aplicar a regra da cadeia em composições.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Definição de derivada](../derivada-definicao/).
+
 ## 1. Regras básicas
 
 | Regra | Fórmula |
@@ -141,7 +152,12 @@ $$
 > [!WARNING]
 > **Erro nº 1 em provas:** esquecer o "vezes a derivada de dentro". Sempre pergunte: *tem algo diferente de \(x\) dentro?*
 
+Até aqui, tranquilo? A cadeia é a regra que mais exige atenção: identifique primeiro quem está por fora e quem está por dentro.
+
 ## 6. Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1.** Derive \(f(x)=(x^2+1)(x^3+x^2)\) de duas formas.
 

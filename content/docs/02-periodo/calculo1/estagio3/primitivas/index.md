@@ -11,6 +11,17 @@ date: 2026-10-14
 
 \(F\) é uma **primitiva** de \(f\) em um intervalo se \(F'(x)=f(x)\) em todo ponto dele. Exemplo: uma primitiva de \(f(x)=2x\) é \(F(x)=x^2\), pois \((x^2)'=2x\).
 
+Ao final você deve conseguir:
+
+- explicar o que é uma primitiva e por que aparece a constante $C$;
+- usar a notação de integral indefinida;
+- usar a tabela básica de primitivas.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Regras de derivação](../../estagio2/regras-de-derivacao/): integrar é o caminho inverso de derivar.
+
 **Por que existe a constante \(C\)?** \(x^2\), \(x^2+5\) e \(x^2-100\) têm todas derivada \(2x\). Constantes somem ao derivar, então ao voltar precisamos reaparecer com uma. A primitiva mais geral é \(F(x)+C\). Para fixar \(C\) usamos uma condição extra.
 
 ![Parábolas x²+C para C igual a -2, 0, 2 e 4: todas têm a mesma derivada 2x](familia-primitivas.png)
@@ -32,6 +43,8 @@ $$
 O \(\int\) é o sinal de integral, \(f(x)\) é o **integrando**, e \(dx\) indica a **variável de integração** (nunca esqueça de escrevê-lo).
 
 **Linearidade:** \(\int[a\,f+b\,g]\,dx=a\int f\,dx+b\int g\,dx\) (a integral abre na soma e a constante sai). **Não** existe regra simples para a integral de um produto ou de um quociente: é para isso que servem as técnicas de Cálculo 2.
+
+Calma, vamos por partes: integrar é derivar ao contrário. Se travar numa primitiva, derive a sua resposta: ela tem que voltar à função original.
 
 ## 3. Tabela básica
 
@@ -72,6 +85,9 @@ $$
 Conferência: \(\left(-2\cos\frac x2\right)'=-2\cdot\left(-\operatorname{sen}\frac x2\right)\cdot\frac12=\operatorname{sen}\frac x2\). \(\checkmark\) Isso é exatamente o que o método da substituição organiza.
 
 ## 4. Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1.** \(\displaystyle\int(4x^3-6x+1)\,dx\).
 

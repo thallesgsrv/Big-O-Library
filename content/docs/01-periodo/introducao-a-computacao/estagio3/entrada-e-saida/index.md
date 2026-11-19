@@ -7,7 +7,19 @@ autores:
 date: 2026-10-17
 ---
 
-O usuário conversa com a CPU e a memória por meio dos **dispositivos de entrada e saída** (E/S ou I/O), também chamados **periféricos**. Eles transformam o mundo humano (letras digitadas, voz, papel) em sinais binários que o computador processa, e o contrário.
+Bora ver como o computador conversa com o mundo lá fora. O usuário conversa com a CPU e a memória por meio dos **dispositivos de entrada e saída** (E/S ou I/O), também chamados **periféricos**. Eles transformam o mundo humano (letras digitadas, voz, papel) em sinais binários que o computador processa, e o contrário.
+
+Ao final você deve conseguir:
+
+- classificar os dispositivos de entrada e saída;
+- explicar o papel das interfaces e a diferença entre velocidade e throughput;
+- diferenciar a comunicação paralela da serial;
+- reconhecer a função da placa-mãe.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Primeiros conceitos](../../estagio1/primeiros-conceitos/).
 
 ## 1. Tipos de dispositivos
 
@@ -105,6 +117,9 @@ Os dois falam ao mesmo tempo. No simplex o fluxo é só em um sentido (rádio, T
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Qual a diferença entre velocidade e throughput?
 2. Por que o mouse e o teclado usam comunicação serial?

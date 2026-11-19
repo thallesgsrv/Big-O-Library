@@ -13,6 +13,18 @@ O LCA de dois nós `u` e `v` de uma árvore enraizada é o ancestral comum mais 
 
 Em uma árvore genealógica, o LCA de dois primos é o avô que eles têm em comum. A estratégia do *binary lifting* é subir em **saltos de potência de 2**: primeiro nivela os dois nós na mesma profundidade, depois sobe os dois juntos com os maiores saltos que ainda os deixam em nós **diferentes**. O pai de onde pararam é o LCA.
 
+Ao final você deve conseguir:
+
+- explicar o que é o ancestral comum mais profundo;
+- usar binary lifting para achar o LCA de dois nós;
+- analisar a complexidade e saber quando usar.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - árvores e profundidade de um nó;
+> - a página de [DFS](../dfs/).
+
 ## Visualização
 
 Consulta `LCA(H, J)`. A tabela mostra `up[k][v]` (o ancestral `2^k` níveis acima) e o número sob cada nó é a profundidade. Em azul está `u`, em laranja `v` e em verde o resultado.
@@ -85,6 +97,9 @@ Distância entre dois nós (`prof[u] + prof[v] - 2·prof[lca]`), caminhos em ár
 > Todo salto precisa respeitar que a raiz aponta para si mesma. Assim `up[k][v]` nunca "sai" da árvore.
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Na animação, por que `u` sobe só 1 nível na primeira fase?
 

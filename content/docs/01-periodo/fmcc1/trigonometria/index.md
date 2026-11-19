@@ -11,6 +11,19 @@ date: 2026-11-02
 
 A palavra **trigonometria** vem do grego: *tri* (três) + *gonía* (ângulo) + *métron* (medida). Literalmente, **"medida dos triângulos"**. Parece restrito, mas é uma das ideias mais versáteis da matemática: dos antigos navegadores achando o rumo no mar até o seu personagem girando num jogo 3D, tudo passa por ângulos e triângulos.
 
+Ao final você deve conseguir:
+
+- medir ângulos em graus e radianos e converter entre eles;
+- usar as propriedades básicas dos triângulos;
+- aplicar o Teorema de Pitágoras;
+- definir e usar seno, cosseno e tangente.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - regra de três e proporções;
+> - a página de [Frações, raízes e racionalização](../fracoes-e-raizes/).
+
 ## Onde isso aparece na vida (e no seu curso)
 
 - **Arquitetura e engenharia:** calcular a altura de um prédio sem subir nele, projetar rampas, telhados e pontes.

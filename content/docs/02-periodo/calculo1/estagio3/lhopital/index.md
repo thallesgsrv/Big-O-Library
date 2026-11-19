@@ -11,6 +11,19 @@ date: 2026-10-14
 
 Quando um limite cai em \(\frac00\) ou \(\frac\infty\infty\), não dá para concluir nada olhando só o resultado. A regra diz: compare **a velocidade com que numerador e denominador chegam lá**, ou seja, as derivadas.
 
+Ao final você deve conseguir:
+
+- reconhecer quando a regra de L'Hôpital pode ser usada ($\frac00$ ou $\frac\infty\infty$);
+- aplicar a regra derivando em cima e embaixo;
+- transformar as outras indeterminações em fração.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Limites](../../estagio1/limites/);
+> - a página de [Limites infinitos](../../estagio1/limites-infinitos/);
+> - a página de [Regras de derivação](../../estagio2/regras-de-derivacao/).
+
 $$
 \boxed{\lim_{x\to a}\frac{f(x)}{g(x)}=\lim_{x\to a}\frac{f'(x)}{g'(x)}}
 $$
@@ -60,6 +73,8 @@ Derive duas vezes (confira a indeterminação a cada rodada): \(\dfrac{e^x}{2x}\
 
 Hierarquia no infinito: \(\ln x\ll x^p\ (p>0)\ll e^x\).
 
+Esse é um erro bem comum: aplicar L'Hôpital sem conferir antes a forma do limite. Confira sempre a indeterminação primeiro.
+
 ## 4. Outras indeterminações: transforme em fração
 
 | Forma | Estratégia |
@@ -94,6 +109,9 @@ $$
 **Exemplo 11 (\(\infty^0\)).** \(\displaystyle\lim_{x\to\infty}x^{1/x}\): \(\ln=\dfrac{\ln x}{x}\to0\) (por L'Hôpital: \(\frac{1/x}{1}\to0\)). Logo o limite é \(e^0=\boxed1\).
 
 ## 5. Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** \(\displaystyle\lim_{x\to0}\frac{e^x-1}{x}\).
 

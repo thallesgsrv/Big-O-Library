@@ -11,6 +11,20 @@ date: 2026-11-02
 
 Chutou uma bola? Jogou um item em um jogo 3D? Passou por uma ponte pênsil? Então você já viu uma **parábola**. A função do 2º grau é a "função da curva" e é, sem exagero, uma das mais úteis que existem. Neste tópico você aprende a **desenhar** qualquer parábola em quatro passos e a fazer o **estudo do sinal**.
 
+Ao final você deve conseguir:
+
+- reconhecer a função do 2º grau e a sua parábola;
+- achar a concavidade, as raízes (Bhaskara), o vértice e o intercepto;
+- construir o gráfico e estudar o sinal;
+- usar a função para modelar a trajetória de uma bola.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Funções potência, polinomial e afim](../funcoes-potencia-polinomial-e-afim/);
+> - a página de [Polinômios](../polinomios/), para fatoração;
+> - a página de [Frações, raízes e racionalização](../fracoes-e-raizes/), para as raízes da fórmula de Bhaskara.
+
 ## Por que isso aparece em Computação?
 
 - **Jogos e animações:** o pulo do personagem, uma granada e uma flecha seguem trajetórias parabólicas. Motores como Unity e Unreal usam isso o tempo todo.

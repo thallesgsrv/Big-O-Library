@@ -11,11 +11,24 @@ date: 2026-10-16
 
 Como provar que uma afirmação vale para **todo** número natural, se não dá para testar infinitos casos? Com **indução**: uma técnica que funciona como uma fileira de dominós.
 
+Ao final você deve conseguir:
+
+- explicar a ideia dos dominós por trás da indução;
+- montar a estrutura de uma prova por indução (base, hipótese e passo);
+- provar a fórmula da soma dos primeiros $n$ números naturais.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - números naturais e álgebra básica.
+
 ## A ideia dos dominós
 
 Se (1) o primeiro dominó cai e (2) cada dominó que cai derruba o próximo, então **todos** caem.
 
 ![Fileira de dominós: o primeiro cai e cada um derruba o próximo](dominos.png)
+
+Olha só: a indução não prova um caso de cada vez. Ela garante que a fila de dominós nunca falha, e é isso que vale para todos os números.
 
 ## Estrutura da prova
 
@@ -51,6 +64,9 @@ Isso é exatamente a fórmula com $n=k+1$. Logo vale para todo $n \ge 1$. $\blac
 - **Passo que só funciona para alguns $k$.** Ele precisa valer para todo $k \ge n_0$.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Prove que $2^n > n$ para todo $n \ge 1$.
 2. Prove que $1+3+5+\cdots+(2n-1)=n^2$.

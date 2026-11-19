@@ -13,6 +13,17 @@ date: 2026-10-09
 
 O counting sort sofre quando os valores são grandes. Ordenar números de até 6 dígitos exigiria um array de contagem de um milhão de posições. O radix sort contorna isso olhando **um dígito de cada vez**: em vez de um intervalo gigante, usa vários intervalos minúsculos (0 a 9).
 
+Ao final você deve conseguir:
+
+- explicar a ideia de ordenar dígito por dígito;
+- explicar por que a estabilidade do counting sort é essencial;
+- implementar o algoritmo e reconhecer as limitações.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Counting sort](../counting-sort/).
+
 ## A ideia
 
 Pense em como se ordena uma pilha de fichas numeradas à mão, sem comparar números inteiros. Começamos pelo **dígito menos significativo** (as unidades), separamos as fichas por esse dígito, juntamos de novo. Depois fazemos o mesmo com as dezenas, depois as centenas. No final, a pilha está ordenada.
@@ -125,6 +136,9 @@ Um cuidado: \(d\) não é de graça. O número de dígitos de \(m\) em base \(b\
 - Na prática, as constantes podem ser maiores que as do quick sort, então \(\Theta(n)\) não significa automaticamente "mais rápido".
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 Quantas passadas o radix sort faz para ordenar \([1200, 35, 7, 98765]\)?
 

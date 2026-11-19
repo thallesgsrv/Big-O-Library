@@ -18,6 +18,11 @@ Ao final você deve conseguir:
 - colocar e tirar parênteses usando a **precedência**;
 - ler uma condição de `if` como uma fórmula lógica.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Conceitos](../conceitos/): proposições e argumentos.
+
 ## 1. Por que inventar uma linguagem?
 
 Uma piada clássica:
@@ -197,6 +202,9 @@ Curiosidade: essa condição pode ser **simplificada** para $p\lor q$, isto é, 
 
 ## Erros comuns
 
+
+Estes são os tropeços mais frequentes por aqui. Se algum deles pegar você, sem drama: faz parte do treino.
+
 - **Duas letras coladas** ($pq$) ou **dois conectivos seguidos** ($p\land\lor q$). Falta uma fórmula no meio.
 - **Esquecer os parênteses** e escrever $p\lor q\land r$ pensando em $(p\lor q)\land r$.
 - **Confundir $\neg p\land q$ com $\neg(p\land q)$**: o primeiro nega só o $p$.
@@ -210,6 +218,9 @@ Curiosidade: essa condição pode ser **simplificada** para $p\lor q$, isto é, 
 - Precedência: $\neg$ > $\land$ > $\lor$ > $\to$ > $\leftrightarrow$. Na dúvida, parênteses.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** $(P\land\to Q)$ é fórmula bem formada?
 

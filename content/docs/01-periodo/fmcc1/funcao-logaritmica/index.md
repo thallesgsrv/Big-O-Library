@@ -11,6 +11,19 @@ date: 2026-11-02
 
 Agora que você sabe o que é um logaritmo, vamos colocá-lo para **trabalhar como função**. A boa notícia: a função logarítmica é a **exponencial vista no espelho**. Tudo que você aprendeu lá (crescente, decrescente, assíntota) volta aqui, só que de lado. A parte nova e cheia de pegadinhas é o **domínio**: o que está dentro do log tem que ser positivo, e isso muda totalmente como você resolve equações e inequações.
 
+Ao final você deve conseguir:
+
+- explicar a função logarítmica como a inversa da exponencial;
+- achar o domínio e esboçar o gráfico;
+- resolver equações e inequações logarítmicas;
+- aplicar a função em juros contínuos e na escala Richter.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Logaritmo](../logaritmo/);
+> - a página de [Função exponencial](../funcao-exponencial/).
+
 ## Definição
 
 Uma **função logarítmica** é uma função escrita como

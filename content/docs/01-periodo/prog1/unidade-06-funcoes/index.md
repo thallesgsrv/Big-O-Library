@@ -9,6 +9,12 @@ date: 2026-10-06
 
 **O que você vai aprender:** dividir um programa em partes pequenas, com nome, que você pode reutilizar e testar separadamente. É a unidade mais difícil, então vá com calma.
 
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página da [Unidades 03 a 05: repetições e listas](../unidades-03-05-repeticoes/).
+
 ## Por que é tão diferente
 
 Até aqui, o programa era uma receita única, lida de cima para baixo. Com funções, você pensa **de fora para dentro**: "o que eu quero que esta parte faça?" vem antes de "como ela faz?". Isso exige abstração, e abstração leva tempo. Se bater confusão, é normal.

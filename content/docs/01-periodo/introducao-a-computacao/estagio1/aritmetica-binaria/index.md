@@ -7,7 +7,19 @@ autores:
 date: 2026-10-17
 ---
 
-A ULA (Unidade Lógica e Aritmética) do processador faz exatamente as contas desta página. Elas seguem as mesmas regras do decimal, só que com **dois algarismos**. E a grande revelação é no final: o computador só sabe **somar**.
+Bora ver como o computador faz contas usando só 0 e 1. A ULA (Unidade Lógica e Aritmética) do processador faz exatamente as contas desta página. Elas seguem as mesmas regras do decimal, só que com **dois algarismos**. E a grande revelação é no final: o computador só sabe **somar**.
+
+Ao final você deve conseguir:
+
+- somar, subtrair, multiplicar e dividir em binário;
+- somar e subtrair em complemento de 2;
+- explicar por que a subtração vira uma soma com complemento.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Números negativos](../numeros-negativos/), principalmente o complemento de 2;
+> - a página de [Conversão entre bases](../conversao-de-bases/).
 
 ## 1. Soma binária
 
@@ -191,6 +203,9 @@ Complementa a 2 o subtraendo e usa o somador. É por isso que um só circuito at
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Some $0110101_2 + 0011011_2$ (e confira em decimal).
 2. Em 6 bits com complemento de 2, calcule $+9 + (-14)$.

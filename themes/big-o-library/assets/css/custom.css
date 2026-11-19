@@ -3250,7 +3250,7 @@ html .bo-term .bo-term-body code {
 html .bo-term .bo-term-body pre {
   padding: 14px 20px 14px 0 !important;
   font:
-    400 13.5px/1.7 "IBM Plex Mono",
+    400 14.5px/1.7 "IBM Plex Mono",
     ui-monospace,
     monospace !important;
   counter-reset: ln;
@@ -3466,7 +3466,7 @@ html .bo-term .highlight pre.chroma .nt {
     display: none;
   }
   html .bo-term .bo-term-body pre {
-    font-size: 12.5px !important;
+    font-size: 13.5px !important;
   }
 }
 .bo-cm {
@@ -3599,7 +3599,7 @@ html .bo-term .highlight pre.chroma .nt {
   text-align: center;
 }
 .bo-fila-c.is-out .bo-fila-v {
-  border: 2px dashed var(--axis);
+  border: 2px dashed var(--mute);
   background: transparent;
   color: var(--mute);
   font-weight: 400;
@@ -3646,7 +3646,7 @@ html .bo-term .highlight pre.chroma .nt {
 }
 .bo-fila-k.is-out {
   margin-left: 10px;
-  border: 2px dashed var(--axis);
+  border: 2px dashed var(--mute);
   background: transparent;
 }
 
@@ -3677,7 +3677,7 @@ html .bo-term .highlight pre.chroma .nt {
   fill: var(--txt);
 }
 .bo-arv .e {
-  stroke: var(--axis);
+  stroke: var(--mute);
   stroke-width: 2;
   fill: none;
 }
@@ -3725,4 +3725,24 @@ html .bo-term .highlight pre.chroma .nt {
   color: var(--body);
   font-size: 0.85rem;
   text-align: left;
+}
+
+/* ---------- Leitura prolongada ----------
+   Tamanhos e medidas justificados em .github/GUIA-PEDAGOGICO.md (seção "Tipografia e leitura").
+   Texto corrido: Rello, Pielot e Marcos (2016) observaram melhor leitura e compreensão com fontes
+   maiores (até 18 pt) e pior compreensão com 10 e 12 pt. Usamos 17 px no celular e 18 px em telas
+   largas; a medida da linha (~70 caracteres) já fica na faixa estudada. */
+.bo-doc .content p,
+.bo-doc .content li {
+  font-size: 1.0625rem;
+}
+@media (min-width: 1024px) {
+  .bo-doc .content p,
+  .bo-doc .content li {
+    font-size: 1.125rem;
+  }
+}
+/* Tabelas: 14 px era menor que o texto; sobem um degrau (extrapolação, ver guia). Código: ver .bo-term. */
+.bo-page .content table {
+  font-size: 0.9375rem;
 }

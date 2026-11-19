@@ -11,6 +11,19 @@ date: 2026-10-14
 
 Nem toda integral imprópria tem primitiva que a gente consiga escrever. Um exemplo famoso: \(\int e^{-x^2}\,dx\). Mas muitas vezes não precisamos do valor, só da resposta a uma pergunta: **converge ou diverge?** Os testes de comparação respondem isso comparando a integral com outra que já conhecemos.
 
+Ao final você deve conseguir:
+
+- decidir se uma integral imprópria converge ou diverge sem calcular a primitiva;
+- usar o teste da comparação e o teste da comparação no limite;
+- escolher a função de comparação olhando o comportamento no infinito;
+- aplicar os testes perto de uma assíntota vertical e quando o integrando muda de sinal.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Integrais impróprias](../improprias/);
+> - limites e a regra de L'Hôpital.
+
 ## Sobre
 
 A intuição é de **sanduíche de áreas**:
@@ -72,6 +85,8 @@ Em palavras: se as duas funções "se parecem" no infinito (razão tendendo a um
    - **Desigualdade fácil de provar?** Comparação direta (precisa de \(0 \le f \le g\)).
    - **Funções parecidas?** Comparação no limite (calcule \(f/g\)).
 4. Conclua usando o resultado da \(g\).
+
+Olha só: o pulo do gato é a primeira linha da receita, olhar quem manda no infinito. Com isso na cabeça, boa parte das comparações sai quase sozinha.
 
 ## Exemplos
 
@@ -157,6 +172,9 @@ Os testes acima exigem \(f\ge0\). Se \(f\) oscila (muda de sinal), use:
 **Exemplo D.** \(\displaystyle\int_1^{\infty}\frac{\operatorname{sen}x}{x^2}\,dx\). Como \(\lvert\operatorname{sen}x\rvert\le1\), \(\left\lvert\dfrac{\operatorname{sen}x}{x^2}\right\rvert\le\dfrac1{x^2}\), e \(\int_1^\infty x^{-2}dx\) converge. Logo a integral original **converge** (absolutamente).
 
 ## Exercícios propostos
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
+
 
 **Exercício 1.** Estude a convergência de \(\displaystyle\int_1^{+\infty}\frac{x+1}{x^3+x}\,dx\).
 

@@ -19,6 +19,13 @@ Ao final você deve conseguir:
 - distinguir **termo** (denota um objeto) de **átomo** (vale V ou F);
 - evitar os erros mais comuns de quem está começando.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Linguagem](../../estagio1/linguagem/);
+> - a página de [Tabela-verdade](../../estagio1/tabela-verdade/);
+> - a página de [Tradução](../../estagio1/traducao/).
+
 ## 1. O limite da lógica proposicional
 
 Pense neste argumento:
@@ -208,6 +215,9 @@ Em $\forall x\,(P(x)\to Q(y))$, a variável $x$ está **ligada** (sob o alcance 
 
 ## Erros comuns
 
+
+Estes são os tropeços mais frequentes por aqui. Se algum deles pegar você, sem drama: faz parte do treino.
+
 - **Usar $\forall$ com $\land$ para "todo S é P":** $\forall x\,(S(x)\land P(x))$ diz que *tudo* é S e P. O certo é $\forall x\,(S(x)\to P(x))$.
 - **Usar $\exists$ com $\to$ para "algum S é P":** vira quase sempre verdadeiro. O certo é $\exists x\,(S(x)\land P(x))$.
 - **Confundir função com predicado:** $m(x)$ (a mãe de $x$) devolve um objeto; $M(x,y)$ ("$x$ é mãe de $y$") devolve V ou F.
@@ -225,6 +235,9 @@ Em $\forall x\,(P(x)\to Q(y))$, a variável $x$ está **ligada** (sob o alcance 
 - Regra de ouro: **$\forall$ com $\to$, $\exists$ com $\land$**.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1 (revisão de SAT).** Três amigos ($A$, $B$, $C$) querem formar um grupo para um projeto, com as condições: se $A$ participa, $B$ não pode participar; se $B$ participa, $C$ também deve participar; $A$ ou $C$ devem participar, mas não ambos. Modele em FNC e resolva com DPLL.
 

@@ -9,6 +9,18 @@ date: 2026-10-17
 
 Os computadores guardam **dados** e nós queremos **informação**. A conversão entre os dois é tão central que é preciso saber como os números são escritos por dentro da máquina. E, infelizmente, ela não usa o nosso sistema.
 
+Ao final você deve conseguir:
+
+- explicar o que é uma base e o que é a notação posicional;
+- diferenciar sistemas posicionais e não posicionais;
+- escrever a base de um numeral;
+- usar as regras gerais e a tabela de correspondência entre binário, octal, decimal e hexadecimal.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a ideia de dado e informação, da página de [Primeiros conceitos](../primeiros-conceitos/).
+
 ## 1. O que é um sistema de numeração
 
 É o conjunto de **símbolos** usados para representar quantidades, mais as **regras** de como combiná-los. Cada sistema é só um jeito diferente de escrever a **mesma quantidade**: a quantidade não muda, mudam os símbolos.
@@ -134,6 +146,9 @@ Em $XXIX$, os três X valem 10 cada. Já em 1944, o 9 vale 900 e o 4 vale 40 ou 
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Qual é a base do sistema em que o numeral $12_b$ vale 14 em decimal?
 2. Em decimal, qual é o valor de $A_{16}$? E de $F_{16}$?

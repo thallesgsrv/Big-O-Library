@@ -11,6 +11,19 @@ date: 2026-10-14
 
 O símbolo \(\Sigma\) abrevia somas longas:
 
+Ao final você deve conseguir:
+
+- usar a notação de somatório;
+- construir uma soma de Riemann;
+- interpretar a integral definida como área com sinal;
+- usar o Teorema Fundamental do Cálculo para calcular integrais definidas.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Primitivas e integral indefinida](../primitivas/);
+> - a ideia de limite, da página de [Limites](../../estagio1/limites/).
+
 $$
 \sum_{i=1}^{n}a_i=a_1+a_2+\cdots+a_n
 $$
@@ -52,6 +65,8 @@ Expanda \(\dfrac{n(n+1)(2n+1)}{6n^3}=\dfrac{2n^3+3n^2+n}{6n^3}=\dfrac13+\dfrac1{
 $$
 S_n\xrightarrow{n\to\infty}\frac13+1=\frac43
 $$
+
+Olha só: a soma de Riemann é só "dividir, aproximar, somar". O limite é o que deixa o resultado exato.
 
 ## 3. Integral definida
 
@@ -106,6 +121,9 @@ $$
 > Se \(f\) tem uma **assíntota vertical** dentro de \([a,b]\), o TFC **não se aplica**. Ex.: \(\int_{-1}^1\frac1{x^2}dx\) não é \([-\frac1x]=-2\) (resultado negativo para função positiva é sinal claro de erro). Esses casos são as **integrais impróprias** de Cálculo 2.
 
 ## 5. Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 **Exercício 1.** Expanda \(\displaystyle\sum_{k=1}^4(2k-1)\).
 

@@ -12,6 +12,19 @@ date: 2026-10-14
 - **Máximo absoluto** em \(c\): \(f(c)\ge f(x)\) para **todo** \(x\) do domínio. **Mínimo absoluto**: \(f(c)\le f(x)\) para todo \(x\).
 - **Extremo local:** vale a desigualdade só perto de \(c\) (num intervalo aberto em volta).
 
+Ao final você deve conseguir:
+
+- achar pontos críticos e classificar máximos e mínimos;
+- usar Rolle e o Teorema do Valor Médio para ligar a derivada ao crescimento;
+- estudar a concavidade de uma função;
+- esboçar um gráfico seguindo uma receita.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Regras de derivação](../../estagio2/regras-de-derivacao/);
+> - a página de [Continuidade](../../estagio1/continuidade/).
+
 > [!IMPORTANT]
 > **Teorema de Weierstrass:** se \(f\) é **contínua em um intervalo fechado** \([a,b]\), então \(f\) **tem** máximo e mínimo absolutos em \([a,b]\). Fora dessas condições eles podem não existir (ex.: \(f(x)=x\) em \((1,2)\)).
 
@@ -77,6 +90,8 @@ Em algum ponto, a tangente é paralela à secante. Consequência: \(f'>0\) num i
 
 ![Gráfico de x³-3x²+2 com máximo local em (0, 2), mínimo local em (2, -2) e inflexão em (1, 0)](concavidade-x3.png)
 
+Até aqui, tranquilo? A primeira derivada diz onde o gráfico sobe e desce; a segunda diz como ele curva. A receita a seguir junta as duas.
+
 ## 5. Receita: esboço de gráfico
 
 1. **Domínio** e interceptos (\(x=0\); raízes, se fáceis).
@@ -113,6 +128,9 @@ Em algum ponto, a tangente é paralela à secante. Consequência: \(f'>0\) num i
 **Esboço em palavras:** o gráfico vem decrescendo, côncavo para cima; em \((0,10)\) achata (tangente horizontal) e vira côncavo para baixo; passa por \((2,-6)\) e vira côncavo para cima; atinge o fundo em \((3,-17)\) e sobe.
 
 ## 6. Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1.** Extremos absolutos de \(f(x)=x^3-3x\) em \([0,2]\).
 

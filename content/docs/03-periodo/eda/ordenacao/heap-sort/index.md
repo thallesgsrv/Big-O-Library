@@ -13,6 +13,18 @@ date: 2026-10-30
 
 O selection sort acha o maior elemento varrendo todo o array, e por isso gasta \(\Theta(n)\) em cada rodada. O heap sort faz a mesma coisa, "tira o maior e coloca no fim", só que usa uma estrutura que entrega o maior elemento rapidamente: o **heap**. O resultado é \(O(n \log n)\) mesmo no pior caso, sem precisar de um array auxiliar como o merge sort.
 
+Ao final você deve conseguir:
+
+- explicar o heap máximo;
+- ordenar um array usando o heap;
+- analisar custo, estabilidade e memória.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Selection sort](../selection-sort/), pela ideia de selecionar o maior ou o menor;
+> - a página de [Análise assintótica](../../analise-de-algoritmos/analise-assintotica/).
+
 ## O que é um heap máximo
 
 Um **heap máximo** é uma árvore binária *completa* (todos os níveis cheios, exceto talvez o último, que é preenchido da esquerda para a direita) em que **todo pai é maior ou igual aos seus filhos**. Consequência direta: o maior elemento está sempre na raiz.
@@ -108,6 +120,9 @@ Quando você precisa de um **limite garantido** de \(O(n \log n)\) e não pode g
 A estrutura de heap vale por si só: ela é a base da **fila de prioridade**, que aparece no algoritmo de Dijkstra e em muitos problemas de "pegue sempre o maior (ou menor) item".
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. O array `[9, 5, 8, 1, 3, 7]` é um heap máximo? E `[9, 5, 8, 6, 3, 7]`?
 2. Em quais posições estão os filhos do elemento da posição 3? E o pai?

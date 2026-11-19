@@ -11,6 +11,20 @@ date: 2026-10-14
 
 Algumas integrais têm raízes que travam qualquer substituição comum, como $\sqrt{4+x^2}$ ou $\sqrt{1-9x^2}$. A substituição trigonométrica resolve isso com um truque: **trocar $x$ por uma função trigonométrica que faz a raiz desaparecer**.
 
+Ao final você deve conseguir:
+
+- reconhecer qual das três substituições usar olhando a forma da raiz;
+- fazer a substituição e reescrever a integral só em função do ângulo;
+- resolver a integral trigonométrica que sobra;
+- voltar para $x$ com a ajuda de um triângulo retângulo.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - as identidades trigonométricas básicas;
+> - substituição simples;
+> - a página de [Integrais trigonométricas](../trigonometrica/), usada no passo 3 da receita.
+
 ## Sobre
 
 A técnica é para expressões do tipo $x^2 + a^2$, $a^2 - x^2$ ou $x^2 - a^2$ (com $a > 0$ constante), geralmente dentro de uma raiz.
@@ -77,6 +91,8 @@ Passo 4. **Volte para $x$** desenhando o triângulo retângulo: marque $\theta$,
 
 > [!WARNING]
 > O passo 4 é o que mais cai em prova e o que mais gente esquece. Resposta em $\theta$ para uma integral em $x$ vale zero.
+
+Calma, vamos por partes: a conta é longa, mas cada passo é pequeno. O triângulo retângulo é o que ajuda a voltar para $x$ no final.
 
 ## Exemplos
 
@@ -192,6 +208,9 @@ $$
 > Quando o radicando é um trinômio $x^2 + bx + c$, complete o quadrado antes de qualquer coisa. Ele sempre recai num dos três casos.
 
 ## Exercícios propostos
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
+
 
 **Exercício 1.** Calcule $\displaystyle\int\frac{dx}{x^2+2x+5}$.
 

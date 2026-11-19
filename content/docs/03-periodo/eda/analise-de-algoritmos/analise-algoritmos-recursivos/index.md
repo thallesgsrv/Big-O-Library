@@ -13,6 +13,18 @@ date: 2026-10-09
 
 Contar laços é fácil. Mas e quando o algoritmo chama a si mesmo? Não há laço para contar, o custo está escondido nas chamadas. A saída é escrever esse custo como uma equação que fala dela mesma.
 
+Ao final você deve conseguir:
+
+- escrever a relação de recorrência de um algoritmo recursivo;
+- resolvê-la por expansão e por árvore de recursão;
+- usar o Teorema Mestre como atalho.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Análise assintótica](../analise-assintotica/);
+> - recursão.
+
 ## Relação de recorrência
 
 Veja o fatorial. Toda recursão precisa de um caso em que ela para. Para o fatorial, esse caso é `n <= 1`:
@@ -170,6 +182,9 @@ $$
 Merge sort: \(a = 2\), \(b = 2\), \(d = 1\). Como \(2 = 2^1\), cai no caso do meio: \(\Theta(n \log n)\). Busca binária: \(a = 1\), \(b = 2\), \(d = 0\). Como \(1 = 2^0\), também é o caso do meio: \(\Theta(\log n)\). Bate com o que fizemos na mão.
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 Resolva as recorrências.
 

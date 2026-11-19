@@ -18,6 +18,12 @@ Ao final você deve conseguir:
 - escolher entre "ou" inclusivo e exclusivo;
 - traduzir um **argumento** inteiro (premissas $\models$ conclusão) e **conferir** a sua tradução com cenários.
 
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Linguagem](../linguagem/);
+> - a página de [Tabela-verdade](../tabela-verdade/), para conferir as traduções.
+
 ## 1. A receita de 4 passos
 
 Traduzir é a parte mais **escorregadia** do curso, porque o português é cheio de jeitinhos. Use sempre esta receita:
@@ -226,6 +232,9 @@ $$
 - **Confira a tradução com cenários**, sobretudo o que **viola** a frase.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 **Exercício 1.** $p$: "Está chovendo"; $q$: "Vou à praia". Traduza: "Só vou à praia se não estiver chovendo."
 

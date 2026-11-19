@@ -11,6 +11,20 @@ date: 2026-10-14
 
 Frações parciais é um truque de **álgebra**: pega uma fração complicada de polinômios e a transforma numa *soma* de frações simples, cada uma fácil de integrar. É o mesmo movimento de somar \(\frac12 + \frac13 = \frac56\), só que de trás para frente.
 
+Ao final você deve conseguir:
+
+- decidir quando é preciso dividir os polinômios antes de decompor;
+- fatorar o denominador e montar uma parcela para cada fator, inclusive fatores repetidos e irredutíveis de grau 2;
+- encontrar os coeficientes de cada parcela;
+- integrar as parcelas resultantes, que levam a ln e arctg.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - divisão e fatoração de polinômios;
+> - as integrais básicas que resultam em ln e arctg;
+> - substituição simples.
+
 ## Sobre
 
 Alguns nomes que vamos usar:
@@ -29,6 +43,8 @@ Alguns nomes que vamos usar:
 3. **Monte a decomposição** conforme a tabela abaixo.
 4. **Ache as constantes** \(A, B, C, \ldots\): multiplique tudo pelo denominador (isso elimina as frações) e use valores de \(x\) convenientes e/ou compare coeficientes.
 5. **Integre** cada parcela.
+
+Não precisa decorar a receita agora: ela só organiza o que você já faz de forma intuitiva ao somar frações. Os exemplos logo abaixo mostram cada passo em ação.
 
 ## Como montar a decomposição
 
@@ -190,6 +206,9 @@ $$
 Seis constantes, seis equações. Dá trabalho, mas nenhuma ideia nova.
 
 ## Exercícios propostos
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
+
 
 **Exercício 1.** Calcule \(\displaystyle\int\frac{dx}{x^2-1}\).
 

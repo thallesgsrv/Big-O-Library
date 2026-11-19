@@ -7,7 +7,18 @@ autores:
 date: 2026-10-17
 ---
 
-Com o transistor e o circuito integrado, o computador deixa de ocupar uma sala e passa a caber numa mesa, depois num bolso. Esta página é uma **linha do tempo por tema**, e não por ano, porque assim fica mais fácil lembrar.
+Bora seguir a história dos computadores de 1960 até hoje. Com o transistor e o circuito integrado, o computador deixa de ocupar uma sala e passa a caber numa mesa, depois num bolso. Esta página é uma **linha do tempo por tema**, e não por ano, porque assim fica mais fácil lembrar.
+
+Ao final você deve conseguir:
+
+- explicar o impacto do circuito integrado e do microprocessador;
+- reconhecer marcos de software, linguagens, redes e internet;
+- explicar a Lei de Moore.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Evolução dos Computadores: 1930 a 1960](../historia-1930-1960/).
 
 ## 1. Hardware: o chip encolhe e o PC aparece
 
@@ -114,6 +125,9 @@ O Macintosh (1984) popularizou mouse e interface gráfica.
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Explique o que aconteceu na decisão da IBM de 1969 e por que ela importa.
 2. Qual a diferença entre ARPANET, internet e World Wide Web nesta linha do tempo?

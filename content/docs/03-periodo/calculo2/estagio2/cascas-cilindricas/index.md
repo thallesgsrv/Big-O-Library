@@ -11,6 +11,18 @@ date: 2026-11-16
 
 Com discos, a fatia é **perpendicular** ao eixo. Às vezes isso obriga a isolar \(x\) em função de \(y\) (ou o contrário) ou a dividir a região em partes. Na **casca**, a fatia é **paralela** ao eixo de rotação, e você integra na variável que já tem.
 
+Ao final você deve conseguir:
+
+- explicar por que as cascas cilíndricas facilitam alguns volumes (a fatia é paralela ao eixo);
+- montar a integral de volume por cascas;
+- escolher entre discos, anéis e cascas olhando como a curva já está escrita.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Volume por discos e anéis](../discos-e-aneis/);
+> - a página de [Área entre curvas](../area-entre-curvas/).
+
 Imagine uma lata de refrigerante de parede finíssima. Abra com uma tesoura e estique: vira um retângulo de **comprimento** \(2\pi r\), **altura** \(h\) e **espessura** \(\Delta x\).
 
 > [!IMPORTANT]
@@ -36,6 +48,8 @@ Escolha o método em que a **curva já está escrita na variável certa** e a re
 
 > [!WARNING]
 > **Raio ≠ posição da curva.** O raio é a distância até o **eixo**. Para girar em torno de \(x=4\), o raio é \(4-x\), não \(x\). Para \(y=\tfrac85\), é \(\tfrac85-y\). Se o eixo está do outro lado da região, a distância vira \(y-(-\tfrac25)=y+\tfrac25\).
+
+Não precisa decorar qual método é "melhor": o segredo está em olhar como a curva já vem escrita e se a região precisaria ser partida em pedaços.
 
 ## 3. Exemplo resolvido
 
@@ -68,6 +82,9 @@ A casca é horizontal, então a altura é a largura da região em \(x\): direita
 {{< /quiz >}}
 
 ## 5. Lista de exercícios
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
+
 
 ### Questão 9: eixo \(y\), \(V=2\pi\int x\,f(x)\,dx\)
 
@@ -438,4 +455,3 @@ Altura da casca: \(\tfrac{x+4}2-x=\tfrac{4-x}2\), \(0\le x\le4\).
 - **Conta:** \(\pi\int_0^4(4-x)^2dx=\pi\Big[-\tfrac{(4-x)^3}3\Big]_0^4\)
 - **Resposta:** \(\boxed{\tfrac{64\pi}3}\)
 {{< /details >}}
-

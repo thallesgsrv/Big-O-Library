@@ -13,6 +13,17 @@ Com a propagação preguiçosa, a [árvore de segmentos](../segment-tree/) tamb�
 
 É como o chefe que avisa "todo mundo deste setor ganha +3" e anota isso num post-it na porta do setor, sem ir de mesa em mesa. Só quando alguém precisa olhar uma mesa específica o aviso é repassado para as subáreas. Esse post-it é o `lazy` do nó.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de adiar o trabalho de uma atualização;
+- fazer atualizações em intervalo em $O(\log n)$;
+- analisar a complexidade e saber quando usar.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Segment tree](../segment-tree/).
+
 ## Visualização
 
 Vetor `[5, 3, 8, 6, 2, 7, 4, 1]`. A animação soma 3 em `[2,5]` (repare nos selos laranja `+3` que ficam pendentes sem descer até as folhas) e depois consulta `soma[3,6]`, que força o empurrão (*push*) das pendências.
@@ -99,6 +110,9 @@ Atualização e consulta de intervalo: \(O(\log n)\) cada. Espaço: \(O(n)\) (do
 Quando há muitas atualizações de intervalo misturadas com consultas de intervalo (somar em faixa e perguntar a soma, atribuir valor a uma faixa, etc.). A operação precisa permitir "acumular" um valor sem abrir o intervalo.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 1. Na animação, por que o nó `[2,3]` precisou empurrar o `+3` para as folhas na consulta `soma[3,6]`?
 

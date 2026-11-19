@@ -13,6 +13,19 @@ A BFS visita primeiro os vértices mais próximos da origem, camada por camada.
 
 É a pedra caindo na água: a onda alcança todos os vértices a 1 aresta, depois os a 2 arestas, e assim por diante. Por isso usa uma **fila**: quem chegou primeiro é explorado primeiro.
 
+Ao final você deve conseguir:
+
+- explicar a exploração de um grafo por camadas;
+- achar o menor caminho em número de arestas;
+- implementar a BFS com uma fila;
+- analisar a complexidade e saber quando usar.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - grafos e a lista de adjacência;
+> - a página de [Fila](../../../03-periodo/eda/estruturas-lineares/fila/).
+
 ## Visualização
 
 {{< viz algoritmo="bfs" >}}
@@ -67,6 +80,9 @@ Tempo \(O(V + E)\) e espaço \(O(V)\).
 Menor caminho em grafos **sem pesos**, componentes conexos e problemas de "mínimo de passos". Com pesos, use Dijkstra.
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Qual o nível de E na animação? Quais arestas formam a árvore da BFS?
 

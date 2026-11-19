@@ -9,6 +9,18 @@ date: 2026-10-17
 
 Agora que você sabe projetar circuitos, vamos usá-los para o que a ULA faz: **somar** e **comparar**. São os **circuitos combinacionais clássicos** usados no projeto de computadores, junto com codificadores, multiplexadores e geradores de paridade (próxima página).
 
+Ao final você deve conseguir:
+
+- explicar o meio somador e o somador completo;
+- ligar somadores para somar números de vários bits;
+- explicar os comparadores.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Projeto de circuitos combinacionais](../projeto-combinacional/);
+> - a página de [Aritmética binária](../../estagio1/aritmetica-binaria/).
+
 ## 1. As operações da ULA
 
 - **Soma:** coluna a coluna, bit a bit, levando o "vai-um" para a coluna seguinte.
@@ -131,6 +143,9 @@ Cada XNOR detecta bits iguais; o AND final exige que todos coincidam.
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar.
 
 1. Some $1101 + 0111$ usando a lógica de somadores, mostrando o carry de cada coluna.
 2. Monte as expressões de $S$ e $C_o$ de um meio somador a partir da tabela-verdade.

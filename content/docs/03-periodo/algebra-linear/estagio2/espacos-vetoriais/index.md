@@ -11,6 +11,19 @@ date: 2026-11-09
 
 Um **espaço vetorial** é um conjunto onde dá para **somar** dois elementos e **esticar** um elemento (multiplicar por um número), **sem nunca sair do conjunto**, e onde essas duas operações se comportam do jeito que a gente espera.
 
+Ao final você deve conseguir:
+
+- explicar o que é um vetor e o que é um espaço vetorial;
+- verificar as 8 regras em um exemplo concreto;
+- reconhecer exemplos e não exemplos de espaço vetorial;
+- usar as propriedades que vêm "de graça" das 8 regras.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - vetores no plano e no espaço (somar e esticar);
+> - operações com matrizes e polinômios, da página de [Matrizes](../../estagio1/matrizes/).
+
 Pense num videogame com só dois botões: "somar" e "esticar". Um conjunto é um espaço vetorial quando esses dois botões funcionam bem em todos os elementos dele. Os elementos são chamados de **vetores** e os números usados para esticar são chamados de **escalares** (neste curso, sempre números reais).
 
 > [!NOTE]
@@ -88,6 +101,8 @@ As regras 1 a 4 falam só da soma. As regras 5 a 8 dizem como a soma e o esticar
 
 > [!TIP]
 > Na prática você quase nunca confere as 8 regras uma por uma. Se as operações são as usuais (de números, listas, matrizes, polinômios, funções), as regras já valem. **O que costuma falhar é o fechamento** (ou o conjunto ter operações estranhas). Comece sempre por aí.
+
+Não precisa decorar as 8 regras na primeira leitura. O segredo está em entender que elas só dizem que somar e esticar se comportam como você espera.
 
 ## Exemplos que valem a pena guardar
 
@@ -170,6 +185,9 @@ Agora some o oposto de \(0 \cdot v\) nos dois lados. À esquerda sobra o vetor n
 > O "\(0\)" do número e o "\(0\)" do vetor são coisas diferentes. Nos livros os dois se escrevem igual e você descobre pelo contexto. Alguns autores usam \(\vec{0}\) para o vetor.
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 **Exercício 1.** Em \(P_2\), qual é o vetor nulo e qual é o oposto de \(p(t) = t^2 - 3t + 1\)?
 

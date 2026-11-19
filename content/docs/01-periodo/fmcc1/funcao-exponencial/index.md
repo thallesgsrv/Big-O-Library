@@ -11,6 +11,18 @@ date: 2026-11-02
 
 Dobrar um número é fácil. Dobrar de novo também. Agora dobre **cinquenta vezes**: você acabou de passar de um quatrilhão. É isso que a função exponencial faz: ela começa comportada e, de repente, **explode**. Entender esse comportamento é essencial para Computação, porque é exatamente a fronteira entre um algoritmo viável e um que não termina nunca.
 
+Ao final você deve conseguir:
+
+- reconhecer a função $P_0\cdot a^x$ e os quatro tipos de gráfico;
+- resolver equações e inequações exponenciais;
+- modelar problemas de crescimento e decaimento.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - potenciação e as suas propriedades;
+> - a página de [Introdução a funções](../introducao-a-funcoes/).
+
 ## Por que isso importa em Computação
 
 A **complexidade** de um algoritmo diz quanto tempo (ou espaço) ele gasta em função do tamanho $n$ da entrada:

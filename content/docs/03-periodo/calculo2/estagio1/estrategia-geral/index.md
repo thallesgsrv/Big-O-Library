@@ -11,6 +11,21 @@ date: 2026-10-14
 
 A parte mais difícil de integrar **não é executar** a técnica, e sim **escolher** qual usar. Esta página é o "mapa do tesouro": olhe para o integrando, ache o padrão, aplique a técnica certa. No final, há problemas misturados, como na prova.
 
+Ao final você deve conseguir:
+
+- escolher qual técnica de integração usar olhando o integrando;
+- completar quadrado em expressões do segundo grau;
+- usar o método tabular e as fórmulas de redução quando valerem a pena;
+- combinar várias técnicas na mesma integral.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - [Integração por partes](../integracao-por-partes/);
+> - [Integrais trigonométricas](../trigonometrica/);
+> - [Substituição trigonométrica](../substituicao-trigonometrica/);
+> - [Frações parciais](../fracoes-parciais/).
+
 ## 1. Tabela de decisão: o que vejo, o que faço
 
 | O integrando tem... | Técnica |
@@ -34,6 +49,8 @@ A parte mais difícil de integrar **não é executar** a técnica, e sim **escol
 
 > [!TIP]
 > Duas técnicas quase sempre aparecem **juntas**: a substituição trigonométrica termina em integrais trigonométricas, e frações parciais termina em \(\ln\) e \(\operatorname{arctg}\) (que pedem substituição simples).
+
+Não precisa decorar essa tabela: com a prática, o olho aprende os padrões sozinho. O segredo está em seguir a ordem de ataque.
 
 ## 2. Completar quadrado
 
@@ -121,6 +138,9 @@ $$
 $$
 
 ## Problemas mistos
+
+Bora praticar! Resolva no papel antes de abrir o gabarito: tentar primeiro fixa mais do que ler a solução pronta. Se travar, volte à receita e tente de novo antes de espiar. Aqui o desafio não é executar, e sim escolher: antes de calcular, escreva em uma linha qual técnica você vai usar e por quê.
+
 
 **Problema 1.** \(\displaystyle\int xe^{x^2}\,dx\)
 

@@ -13,6 +13,18 @@ date: 2026-10-09
 
 O selection sort é o jeito mais direto de ordenar: ache o menor elemento, coloque na primeira posição. Ache o menor entre os que sobraram, coloque na segunda. Repita até acabar.
 
+Ao final você deve conseguir:
+
+- explicar a ideia de selecionar o menor elemento;
+- acompanhar o algoritmo e implementá-lo;
+- analisar custo, estabilidade e memória.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - a página de [Análise assintótica](../../analise-de-algoritmos/analise-assintotica/);
+> - arrays e laços em Java.
+
 ## A ideia
 
 Imagine uma fila de pessoas que você quer organizar por altura. Você olha a fila inteira, escolhe a mais baixa e manda ela para o começo. Depois ignora essa pessoa, olha o resto, escolhe a mais baixa de novo e manda para a segunda posição. Em cada rodada, o pedaço já arrumado cresce em um.
@@ -91,6 +103,9 @@ Na primeira rodada o menor é o `2`. Ele troca com o `4_a`, e o `4_a` vai parar 
 Os dois quatros inverteram. Ele é **in-place**: usa só algumas variáveis extras, memória \(O(1)\).
 
 ## Exercícios
+
+
+Hora de colocar a mão na massa. Tente cada exercício sozinho, mesmo que não chegue ao fim, e só então confira o gabarito. Errar no meio do caminho faz parte do treino.
 
 O selection sort faz mais ou menos comparações em um array já ordenado do que em um array em ordem inversa?
 

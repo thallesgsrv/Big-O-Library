@@ -7,7 +7,19 @@ autores:
 date: 2026-10-17
 ---
 
-Um computador digital só manipula **dois valores**, 0 e 1. Toda operação, somar, comparar, mover, é uma combinação de operações lógicas básicas. Fisicamente elas são feitas por **circuitos digitais**, cujos blocos são as **portas lógicas** (*gates*), que deixam ou não passar sinais elétricos.
+Bora descobrir como a lógica vira circuito. Um computador digital só manipula **dois valores**, 0 e 1. Toda operação, somar, comparar, mover, é uma combinação de operações lógicas básicas. Fisicamente elas são feitas por **circuitos digitais**, cujos blocos são as **portas lógicas** (*gates*), que deixam ou não passar sinais elétricos.
+
+Ao final você deve conseguir:
+
+- usar os operadores E, OU e NÃO;
+- montar tabelas-verdade;
+- fazer operações bit a bit;
+- reconhecer portas lógicas e circuitos integrados.
+
+> [!NOTE]
+> **Antes de começar, ajuda ter à mão:**
+>
+> - o sistema binário, da página de [Sistemas de numeração](../../estagio1/sistemas-de-numeracao/).
 
 ## 1. De onde vem a lógica
 
@@ -161,6 +173,9 @@ A lâmpada só acende com as duas fechadas: AND. Em paralelo seria OR.
 {{< /quiz >}}
 
 ## Exercícios
+
+
+Agora é com você. Resolva no papel, compare com o gabarito e, se o resultado não bater, procure o passo em que os caminhos se separaram. Refazer os que errou daqui a alguns dias ajuda a fixar.
 
 1. Dados $A=0011\,1100$ e $B=0000\,1111$, calcule $A\cdot B$, $A+B$ e $A\oplus B$.
 2. Quantas linhas tem a tabela-verdade de uma função com 4 entradas?
