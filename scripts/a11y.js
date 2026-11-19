@@ -24,13 +24,19 @@ function servir(dir) {
   });
 }
 
+// Páginas geradas por `aliases:` só redirecionam (meta refresh): não têm conteúdo a auditar
+// e navegam no meio da execução do axe ("Execution context was destroyed").
+function ehRedirecionamento(arquivo) {
+  return /http-equiv=["']?refresh/i.test(fs.readFileSync(arquivo, 'utf8').slice(0, 2048));
+}
+
 function listarPaginas(dir) {
   const out = [];
   (function andar(d) {
     for (const e of fs.readdirSync(d, { withFileTypes: true })) {
       const p = path.join(d, e.name);
       if (e.isDirectory()) andar(p);
-      else if (e.name === 'index.html') out.push('/' + path.relative(dir, path.dirname(p)).split(path.sep).join('/') + (path.dirname(p) === dir ? '' : '/'));
+      else if (e.name === 'index.html' && !ehRedirecionamento(p)) out.push('/' + path.relative(dir, path.dirname(p)).split(path.sep).join('/') + (path.dirname(p) === dir ? '' : '/'));
       else if (e.name === '404.html') out.push('/404.html');
     }
   })(dir);
