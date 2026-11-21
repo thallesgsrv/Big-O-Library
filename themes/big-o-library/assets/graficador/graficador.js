@@ -1,6 +1,6 @@
 /*
  * Graficador (/lab/graficador/): curvas y = f(x), polares e paramétricas, controles deslizantes,
- * soma de Riemann, área, volume e comprimento de arco. Usa o interpretador de expr.js (carregado antes).
+ * soma de Riemann, área, volume e comprimento de arco, mais as abas de limites e derivadas. Usa o interpretador de expr.js (carregado antes).
  */
 (function () {
   'use strict';
@@ -9,6 +9,7 @@
   if (!raiz) return;
 
   const NOMES = ['f', 'g', 'h', 'p', 'q', 's'];
+  const MODOS = ['funcoes', 'limite', 'derivada', 'integral', 'solido'];
   const TIPOS = { y: 'y = f(x)', polar: 'polar r(θ)', param: 'paramétrica' };
   const calmo = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
   const EXEMPLOS = JSON.parse(document.getElementById('gf-exemplos').textContent);
@@ -18,6 +19,13 @@
   const limitar = (v, a, b) => Math.min(b, Math.max(a, v));
   const num = texto => parseFloat(String(texto).replace(',', '.').replace('−', '-'));
   const visivel = nome => (nome === 'theta' ? 'θ' : nome);
+  const DICAS = {
+    funcoes: 'Escreva uma ou mais funções. Arraste o gráfico para mover e use a roda do mouse para aproximar.',
+    limite: 'Mova “Distância” para ver x chegando perto de a. Toque no gráfico para escolher o ponto a.',
+    derivada: 'Arraste o ponto sobre a curva, ou toque no gráfico: a reta tangente mostra a inclinação f′(x₀).',
+    integral: 'Área entre a curva e o eixo, de a até b. Ligue os retângulos para ver a soma de Riemann.',
+    solido: 'Escolha o que estudar: volume por revolução (discos, anéis, cascas), volume por seções ou área de superfície.'
+  };
 
   const cv = $('.gf-canvas');
   const g2 = cv.getContext('2d');
@@ -29,6 +37,8 @@
   let L = 0, Alt = 0, dpr = 1;      // tamanho do canvas em pixels de CSS
   let traco = null, R = null, cores = {}, pedido = 0, adiado = 0, proxLimite = 'a', ultimoCampo = null;
   const animando = new Set();
+  let modo = 'funcoes', proj = false, animSec = false, ver3d = true, arrasto = null;
+  const esp = () => (proj ? 1.5 : 1);   // espessura: em tela cheia o traço engrossa para ler de longe
   let malha;                        // malha do sólido (undefined = precisa recalcular)
 
   /* ---------- coordenadas ---------- */
@@ -301,8 +311,14 @@
     requestAnimationFrame(quadro);
   }
 
-  /* ---------- análise: integral, área, volume, arco ---------- */
-  const padraoA = { linha: '', contra: 'eixo', a: '0', b: '1', n: 8, metodo: 'nenhum', sombra: true, deriv: false, x0: '' };
+  /* ---------- análise: limites, derivadas, integrais e sólidos ---------- */
+  const padraoA = {
+    linha: '', contra: 'eixo', a: '0', b: '1', n: 8, metodo: 'nenhum', sombra: true,
+    ltipo: 'valor', la: '0', lado: 'ambos', lk: 1,
+    dx0: '1', dtan: true, dsec: false, dk: 0, d1: false, d2: false,
+    tipo3: 'rev', eixo: 'x', ek: '0', sec: 'quad'
+  };
+  let LIM = null, DER = null, nYs = 0;   // resultado do assunto em foco (limite ou derivada)
 
   function popularSelects() {
     const ys = linhas.filter(l => l.tipo === 'y');
@@ -314,110 +330,361 @@
     };
     A.linha = preencher($('[data-a=linha]'), ys.length ? ys.map(l => [l.nome, l.nome + '(x)']) : [['', '—']], A.linha);
     A.contra = preencher($('[data-a=contra]'), [['eixo', 'o eixo x']].concat(ys.filter(l => l.nome !== A.linha).map(l => [l.nome, l.nome + '(x)'])), A.contra);
+    // com uma curva só não há o que escolher: esconde a pergunta
+    $('[data-sel=linha]').hidden = ys.length < 2;
+    $('[data-sel=linha]').parentElement.toggleAttribute('data-vazio', ys.length < 2);
+    nYs = ys.length;
+    atualizarVisibilidade();
+  }
+
+  const fmtH = k => Expr.formatar(Math.pow(10, -k));
+
+  function atualizarSaidas() {
+    const saida = k => $('[data-a=' + k + ']').parentElement.querySelector('output');
+    saida('n').textContent = A.n;
+    saida('lk').textContent = A.ltipo === 'valor' ? 'h = ' + fmtH(A.lk) : 'x = ' + (A.ltipo === 'mais' ? '' : '−') + Expr.formatar(Math.pow(10, A.lk + 1));
+    saida('dk').textContent = 'h = ' + fmtH(A.dk);
+  }
+
+  const DICAS_TIPO = {
+    rev: 'Gira a região em torno de um eixo. Se sobra um buraco no meio, cada fatia vira um anel (arruela); se não, um disco. Eixo vertical: cascas.',
+    sec: 'A região é a base e não gira. Cada corte perpendicular ao eixo x é um quadrado, semicírculo ou triângulo apoiado nela.',
+    sup: 'Só a curva gira: o resultado é a “casca” do sólido, sem tampas. Use o corte para ver que é oca.'
+  };
+
+  function atualizarVisibilidade() {
+    $$('[data-so-valor]').forEach(el => { el.hidden = A.ltipo !== 'valor'; });
+    $('.gf-rng-sec').hidden = !A.dsec;
+    $('[data-sel=contra]').hidden = nYs < 2 || (modo === 'solido' && A.tipo3 === 'sup');
+    $$('[data-so-eixo]').forEach(el => { el.hidden = A.tipo3 === 'sec'; });
+    $$('[data-so-k]').forEach(el => { el.hidden = A.eixo !== 'h' && A.eixo !== 'v'; });
+    $$('[data-so-sec]').forEach(el => { el.hidden = A.tipo3 !== 'sec'; });
+    $$('[data-so-giro]').forEach(el => { el.hidden = A.tipo3 === 'sec'; });
+    $('.gf-dica-tipo').textContent = DICAS_TIPO[A.tipo3] || '';
   }
 
   function escreverA() {
     $$('[data-a]').forEach(el => {
       const k = el.dataset.a;
-      if (el.tagName === 'SELECT' && (k === 'linha' || k === 'contra')) return;
+      if (k === 'dx0r' || (el.tagName === 'SELECT' && (k === 'linha' || k === 'contra'))) return;
       if (el.type === 'checkbox') el.checked = !!A[k]; else el.value = A[k];
     });
-    $('.gf-n output').textContent = A.n;
+    atualizarSaidas();
+    atualizarVisibilidade();
   }
 
-  $('.gf-analise').addEventListener('input', e => {
-    const k = e.target.dataset.a;
+  $('.gf-painel').addEventListener('input', e => {
+    const el = e.target, k = el.dataset.a;
     if (!k) return;
-    A[k] = e.target.type === 'checkbox' ? e.target.checked : e.target.type === 'range' ? +e.target.value : e.target.value;
+    const v = el.type === 'checkbox' ? el.checked : el.type === 'range' ? +el.value : el.value;
+    if (k === 'dx0r') { A.dx0 = String(+v.toPrecision(5)); $('[data-a=dx0]').value = A.dx0; } else A[k] = v;
     if (k === 'linha') popularSelects();
-    if (k === 'n') $('.gf-n output').textContent = A.n;
+    if (k === 'dsec' && !v) pararSecante();
+    atualizarSaidas();
+    atualizarVisibilidade();
     calcular();
     pedir();
     adiarSalvar();
   });
 
-  function resultado(itens, msg) {
-    const dl = $('.gf-res');
+  function resultado(itens, msg, nota) {
+    const dl = $('.gf-res'), aviso = $('.gf-resmsg');
     dl.innerHTML = '';
-    if (msg) {
-      const p = document.createElement('p');
-      p.className = 'gf-msg';
-      p.textContent = msg;
-      dl.append(p);
-      return;
-    }
-    itens.forEach(([rotulo, valor]) => {
+    aviso.textContent = msg || nota || '';
+    if (msg) return;
+    (itens || []).forEach(([rotulo, valor]) => {
       const dt = document.createElement('dt'), dd = document.createElement('dd');
       dt.textContent = rotulo;
-      dd.textContent = Number.isNaN(valor) ? 'sem resultado' : Expr.formatar(valor);
+      dd.textContent = typeof valor === 'string' ? valor : Number.isNaN(valor) ? 'sem resultado' : Expr.formatar(valor);
       dl.append(dt, dd);
     });
   }
 
-  function calcular() {
-    R = null;
-    malha = undefined;
-    $('.gf-x0-res').textContent = '';
-    const lf = linhas.find(l => l.nome === A.linha && l.tipo === 'y' && l.c.fx);
-    if (!lf) { resultado(null, 'Escreva uma função y = f(x).'); atualizarPontos(); return; }
-    const lg = A.contra === 'eixo' ? null : linhas.find(l => l.nome === A.contra && l.tipo === 'y' && l.c.fx);
-    let a, b;
-    try { a = Expr.constante(A.a); b = Expr.constante(A.b); }
-    catch (e) { resultado(null, 'Limites: ' + (e.amigavel ? e.message : 'não consegui ler.')); atualizarPontos(); return; }
-    if (!Number.isFinite(a) || !Number.isFinite(b)) { resultado(null, 'Os limites precisam ser números.'); atualizarPontos(); return; }
-    const lo = Math.min(a, b), hi = Math.max(a, b);
-    const f = lf.c.fx, g = lg ? lg.c.fx : () => 0, nf = lf.nome, ng = lg ? lg.nome : '0';
-    R = { lf, lg, f, g, lo, hi, n: A.n, metodo: A.metodo, sombra: A.sombra, deriv: A.deriv, pts: [] };
-
-    const I = fn => Expr.integrar(fn, lo, hi);
-    const df = x => Expr.derivada(f, x);
-    const dif = lg ? '(' + nf + ' − ' + ng + ')' : nf;
-    const vol = {
-      x: Math.PI * I(x => { const [Re, ri] = raios(x); return Re * Re - ri * ri; }),
-      y: 2 * Math.PI * I(x => Math.abs(x) * Math.abs(f(x) - g(x)))
-    };
-    R.vol = vol;
-    const itens = [['∫ ' + dif + ' dx', I(x => f(x) - g(x))], ['Área', I(x => Math.abs(f(x) - g(x)))]];
-    if (!lg) itens.push(['Valor médio', lo === hi ? NaN : I(f) / (hi - lo)]);
-    if (!lg && A.metodo !== 'nenhum') {
-      const h = (hi - lo) / A.n, desloc = A.metodo === 'esq' ? 0 : A.metodo === 'dir' ? 1 : 0.5;
-      let soma = 0;
-      for (let i = 0; i < A.n; i++) soma += f(lo + (i + desloc) * h) * h;
-      itens.push(['Soma de Riemann', soma], ['Erro', Math.abs(soma - I(f))]);
+  function textoLim(r) {
+    if (r.tipo === 'num') {
+      const f = Expr.formatar(r.v), t = r.texto.replace(/-/g, '−');
+      return !t ? '≈ ' + f : t === f ? f : t + ' (≈ ' + f + ')';
     }
-    itens.push(
-      ['Volume (discos, eixo x)', vol.x],
-      ['Volume (cascas, eixo y)', vol.y],
-      ['Comprimento do arco', I(x => Math.sqrt(1 + df(x) ** 2))],
-      ['Área de superfície', 2 * Math.PI * I(x => Math.abs(f(x)) * Math.sqrt(1 + df(x) ** 2))]
-    );
-    resultado(itens);
-
-    if (A.x0.trim()) {
-      try {
-        const x0 = Expr.constante(A.x0), y0 = f(x0);
-        $('.gf-x0-res').textContent = Number.isFinite(y0)
-          ? nf + '(' + Expr.formatar(x0) + ') = ' + Expr.formatar(y0) + '  ·  ' + nf + '′ = ' + Expr.formatar(df(x0))
-          : nf + ' não está definida em x = ' + Expr.formatar(x0) + '.';
-      } catch (e) { $('.gf-x0-res').textContent = 'x: ' + (e.amigavel ? e.message : 'não consegui ler.'); }
-    }
-    atualizarPontos();
-    if (modo3d) sincronizar3d();
+    if (r.tipo === 'inf') return r.s > 0 ? '+∞' : '−∞';
+    return r.tipo === 'indef' ? 'f não existe aí' : 'não existe';
   }
 
-  /* pontos onde as curvas se encontram (ou onde f cruza o eixo): clique para usar como limite */
+  function reta(m, b) {
+    const f = Expr.formatar, ma = Math.abs(m) < 1e-9 ? '' : (Math.abs(m - 1) < 1e-9 ? '' : Math.abs(m + 1) < 1e-9 ? '−' : f(m)) + 'x';
+    if (!ma) return 'y = ' + f(b);
+    return 'y = ' + ma + (Math.abs(b) < 1e-9 ? '' : (b < 0 ? ' − ' : ' + ') + f(Math.abs(b)));
+  }
+
+  function calcular() {
+    R = null; LIM = null; DER = null;
+    malha = undefined;
+    const lf = linhas.find(l => l.nome === A.linha && l.tipo === 'y' && l.c.fx);
+    if (modo === 'funcoes') { resultado([]); atualizarPontos(); return; }
+    if (!lf) { resultado(null, 'Escreva uma função y = f(x).'); atualizarPontos(); atualizarTabLim(); return; }
+    if (modo === 'limite') calcLimite(lf);
+    else if (modo === 'derivada') calcDerivada(lf);
+    else calcIntegral(lf);
+    atualizarPontos();
+  }
+
+  function calcLimite(lf) {
+    const f = lf.c.fx, tipo = A.ltipo;
+    let a = tipo === 'mais' ? Infinity : -Infinity;
+    if (tipo === 'valor') {
+      try { a = Expr.constante(A.la); }
+      catch (e) { resultado(null, 'Valor: ' + (e.amigavel ? e.message : 'não consegui ler.')); atualizarTabLim(); return; }
+      if (!Number.isFinite(a)) { resultado(null, 'O valor precisa ser um número.'); atualizarTabLim(); return; }
+    }
+    LIM = { lf, f, a, tipo, h: tipo === 'valor' ? Math.pow(10, -A.lk) : Math.pow(10, A.lk + 1), lado: A.lado };
+    const itens = [];
+    let nota = '';
+    if (tipo === 'valor') {
+      const b = LIM.b = Expr.limiteBilateral(f, a), fa = f(a);
+      if (A.lado === 'ambos') {
+        itens.push(['Pela esquerda (x → a⁻)', textoLim(b.esq)], ['Pela direita (x → a⁺)', textoLim(b.dir)], ['Limite', textoLim(b.bi)]);
+        if (b.bi.tipo === 'nao') nota = 'O limite não existe: ' + b.bi.motivo + '.';
+        LIM.alvos = b.bi.tipo === 'num' ? [b.bi] : [b.esq, b.dir].filter(r => r.tipo === 'num');
+      } else {
+        const r = A.lado === 'esq' ? b.esq : b.dir;
+        itens.push([A.lado === 'esq' ? 'Limite pela esquerda' : 'Limite pela direita', textoLim(r)]);
+        LIM.alvos = r.tipo === 'num' ? [r] : [];
+      }
+      itens.push(['f(a)', Number.isFinite(fa) ? fa : 'não existe']);
+    } else {
+      const r = Expr.limite(f, a, 1);
+      itens.push([tipo === 'mais' ? 'Limite quando x → +∞' : 'Limite quando x → −∞', textoLim(r)]);
+      LIM.alvos = r.tipo === 'num' ? [r] : [];
+    }
+    resultado(itens, null, nota);
+    atualizarTabLim();
+  }
+
+  /* tabela de aproximação: x chegando perto de a, e o que f(x) faz */
+  function atualizarTabLim() {
+    const corpo = $('.gf-lim-tab');
+    if (!LIM) { corpo.textContent = ''; return; }
+    const { f, a, tipo } = LIM, F = Expr.formatar, lado = LIM.lado;
+    let cab, linhasT = [];
+    if (tipo === 'valor') {
+      const esq = lado !== 'dir', dir = lado !== 'esq';
+      cab = (esq ? '<th scope="col">x → a⁻</th><th scope="col">f(x)</th>' : '') + (dir ? '<th scope="col">x → a⁺</th><th scope="col">f(x)</th>' : '');
+      for (let k = 0; k <= 5; k++) {
+        const h = Math.pow(10, -k);
+        linhasT.push((esq ? '<td>' + F(a - h) + '</td><td>' + F(f(a - h)) + '</td>' : '') + (dir ? '<td>' + F(a + h) + '</td><td>' + F(f(a + h)) + '</td>' : ''));
+      }
+    } else {
+      const s = Math.sign(a);
+      cab = '<th scope="col">x</th><th scope="col">f(x)</th>';
+      for (let k = 1; k <= 6; k++) linhasT.push('<td>' + F(s * Math.pow(10, k)) + '</td><td>' + F(f(s * Math.pow(10, k))) + '</td>');
+    }
+    corpo.innerHTML = '<table><caption>Valores de f perto do ponto</caption><thead><tr>' + cab + '</tr></thead><tbody>' +
+      linhasT.map(t => '<tr>' + t + '</tr>').join('') + '</tbody></table>';
+  }
+
+  function calcDerivada(lf) {
+    let x0;
+    try { x0 = Expr.constante(A.dx0); }
+    catch (e) { resultado(null, 'x₀: ' + (e.amigavel ? e.message : 'não consegui ler.')); return; }
+    if (!Number.isFinite(x0)) { resultado(null, 'x₀ precisa ser um número.'); return; }
+    const f = lf.c.fx, nf = lf.nome, y0 = f(x0);
+    R = { lf, lg: null, f, g: () => 0, lo: x0, hi: x0, deriv: A.d1, deriv2: A.d2, pts: [] };
+    if (!Number.isFinite(y0)) { resultado(null, nf + ' não está definida em x = ' + Expr.formatar(x0) + '.'); return; }
+    const m = Expr.derivada(f, x0), h = Math.pow(10, -A.dk), y1 = f(x0 + h);
+    DER = { lf, f, x0, y0, m, h, y1, ms: (y1 - y0) / h };
+    const itens = [[nf + '(x₀)', y0], [nf + '′(x₀): inclinação', m]];
+    if (Number.isFinite(m)) itens.push(['Reta tangente', reta(m, y0 - m * x0)]);
+    itens.push([nf + '″(x₀)', Expr.derivada2(f, x0)]);
+    if (A.dsec) itens.push(['Inclinação da secante', DER.ms]);
+    if (Number.isFinite(m)) itens.push(['Comportamento', Math.abs(m) < 1e-4 ? 'ponto crítico (f′ = 0)' : m > 0 ? 'crescente' : 'decrescente']);
+    resultado(itens);
+  }
+
+  const NOMES_SEC = { quad: 'quadrados', semi: 'semicírculos', tri: 'triângulos equiláteros' };
+  const secArea = (s, tipo) => (tipo === 'semi' ? Math.PI * s * s / 8 : tipo === 'tri' ? Math.sqrt(3) / 4 * s * s : s * s);
+  const kDoEixo = () => (A.eixo === 'h' || A.eixo === 'v' ? Expr.constante(A.ek) : 0);
+
+  function calcIntegral(lf) {
+    const solido = modo === 'solido', tipo3 = solido ? A.tipo3 : null, sup = tipo3 === 'sup';
+    const lg = A.contra === 'eixo' || sup ? null : linhas.find(l => l.nome === A.contra && l.tipo === 'y' && l.c.fx);
+    let a, b, kk = 0;
+    try { a = Expr.constante(A.a); b = Expr.constante(A.b); if (solido) kk = kDoEixo(); }
+    catch (e) { resultado(null, 'Valor inválido: ' + (e.amigavel ? e.message : 'não consegui ler.')); return; }
+    if (!Number.isFinite(a) || !Number.isFinite(b) || !Number.isFinite(kk)) { resultado(null, 'Os limites e o valor de k precisam ser números.'); return; }
+    const lo = Math.min(a, b), hi = Math.max(a, b);
+    const f = lf.c.fx, g = lg ? lg.c.fx : () => 0, nf = lf.nome, ng = lg ? lg.nome : '0';
+    const integral = modo === 'integral', horiz = A.eixo === 'x' || A.eixo === 'h';
+    R = { lf, lg, f, g, lo, hi, n: A.n, metodo: integral ? A.metodo : 'nenhum', sombra: integral ? A.sombra : !sup, pts: [], kk, horiz, tipo3, sec: A.sec };
+
+    const I = fn => Expr.integrar(fn, lo, hi);
+    const poligonal = peso => {
+      let t = 0, xa = lo, ya = f(lo);
+      for (let i = 1; i <= 6000; i++) { const xb = lo + (hi - lo) * i / 6000, yb = f(xb); t += peso(xa, ya, xb, yb); xa = xb; ya = yb; }
+      return t;
+    };
+    // arco e superfície somam segmentos finos (troncos de cone): não dependem da derivada, que falha onde a tangente é vertical
+    const arco = poligonal((xa, ya, xb, yb) => Math.hypot(xb - xa, yb - ya));
+    let itens, nota = '';
+    if (integral) {
+      const dif = lg ? '(' + nf + ' − ' + ng + ')' : nf;
+      itens = [['∫ ' + dif + ' dx', I(x => f(x) - g(x))], ['Área', I(x => Math.abs(f(x) - g(x)))]];
+      if (!lg) itens.push(['Valor médio', lo === hi ? NaN : I(f) / (hi - lo)]);
+      if (!lg && A.metodo !== 'nenhum') {
+        const h = (hi - lo) / A.n, desloc = A.metodo === 'esq' ? 0 : A.metodo === 'dir' ? 1 : 0.5;
+        let soma = 0;
+        for (let i = 0; i < A.n; i++) soma += f(lo + (i + desloc) * h) * h;
+        itens.push(['Soma de Riemann', soma], ['Erro', Math.abs(soma - I(f))]);
+      }
+      if (!lg) itens.push(['Comprimento do arco', arco]);
+    } else if (tipo3 === 'rev') {
+      let anel = false;
+      for (let k = 0; k <= 200 && horiz; k++) if (raios(lo + (hi - lo) * k / 200)[1] > 1e-9) { anel = true; break; }
+      R.anel = anel;
+      if (horiz) {
+        R.valor = Math.PI * I(x => { const [Re, ri] = raios(x); return Re * Re - ri * ri; });
+        itens = [[anel ? 'Volume (anéis)' : 'Volume (discos)', R.valor]];
+      } else {
+        R.valor = 2 * Math.PI * I(x => Math.abs(x - kk) * Math.abs(f(x) - g(x)));
+        itens = [['Volume (cascas)', R.valor]];
+        if (kk > lo && kk < hi) nota = 'A reta x = ' + Expr.formatar(kk) + ' passa por dentro da região: as cascas dos dois lados se sobrepõem e o volume não vale. Use uma região de um lado só da reta.';
+      }
+    } else if (tipo3 === 'sec') {
+      R.valor = I(x => secArea(Math.abs(f(x) - g(x)), A.sec));
+      itens = [['Volume (cortes: ' + NOMES_SEC[A.sec] + ')', R.valor], ['Área da base', I(x => Math.abs(f(x) - g(x)))]];
+    } else {
+      R.valor = poligonal((xa, ya, xb, yb) => Math.PI * (raioSup(xa, ya) + raioSup(xb, yb)) * Math.hypot(xb - xa, yb - ya));
+      itens = [['Área de superfície', R.valor], ['Comprimento da curva', arco]];
+    }
+    resultado(itens, null, nota);
+    if (solido) { atualizarPassos(); if (modo3d) sincronizar3d(); }
+  }
+
+  /* distância da curva ao eixo de giro (raio da faixa da superfície) */
+  function raioSup(x, y) {
+    return R.horiz ? Math.abs((y === undefined ? R.f(x) : y) - R.kk) : Math.abs(x - R.kk);
+  }
+
+  /** Raios externo e interno do giro em torno de uma reta horizontal: anel se f e g ficam do mesmo lado da reta, disco se não. */
+  function raios(x) {
+    const yf = R.f(x) - R.kk, yg = R.g(x) - R.kk, a = Math.abs(yf), b = Math.abs(yg);
+    return yf * yg > 0 ? [Math.max(a, b), Math.min(a, b)] : [Math.max(a, b), 0];
+  }
+
+  /**
+   * O "elemento" do cálculo: a i-ésima de n fatias finas da região, com tudo que a fórmula usa.
+   * Serve ao desenho 2D, ao sólido 3D e ao passo a passo.
+   */
+  function fatia(i, n = s3.n) {
+    if (!R || !R.tipo3) return null;
+    const w = (R.hi - R.lo) / n, xa = R.lo + w * i, xb = xa + w, xm = xa + w / 2, F = Expr.formatar;
+    const yf = R.f(xm), yg = R.g(xm), o = { i, n, w, xa, xb, xm, yf, yg, ok: false, d: NaN, texto: '' };
+    if (R.tipo3 === 'sup') {
+      const ya = R.f(xa), yb = R.f(xb), ra = raioSup(xa, ya), rb = raioSup(xb, yb);
+      o.ds = Math.hypot(w, yb - ya);
+      o.r = (ra + rb) / 2;
+      o.d = Math.PI * (ra + rb) * o.ds;   // área do tronco de cone
+      o.ok = Number.isFinite(o.d);
+      o.texto = 'faixa · raio médio ' + F(o.r) + ' · comprimento ' + F(o.ds) + ' · área 2π·r·ds = ' + F(o.d);
+    } else if (!Number.isFinite(yf) || !Number.isFinite(yg)) {
+      return o;
+    } else if (R.tipo3 === 'sec') {
+      o.s = Math.abs(yf - yg);
+      o.area = secArea(o.s, R.sec);
+      o.d = o.area * w;
+      o.ok = true;
+      o.texto = 'corte · base s = ' + F(o.s) + ' · área ' + F(o.area);
+    } else if (R.horiz) {
+      const [Re, ri] = raios(xm);
+      o.R = Re; o.r = ri;
+      o.area = Math.PI * (Re * Re - ri * ri);
+      o.d = o.area * w;
+      o.ok = Number.isFinite(o.d);
+      o.texto = (ri > 0 ? 'anel' : 'disco') + ' · R = ' + F(Re) + (ri > 0 ? ' · r = ' + F(ri) : '') + ' · área π(R² − r²) = ' + F(o.area);
+    } else {
+      o.rho = Math.abs(xm - R.kk); o.h = Math.abs(yf - yg);
+      o.area = 2 * Math.PI * o.rho * o.h;
+      o.d = o.area * w;
+      o.ok = Number.isFinite(o.d);
+      o.texto = 'casca · raio ' + F(o.rho) + ' · altura ' + F(o.h) + ' · área 2π·raio·altura = ' + F(o.area);
+    }
+    return o;
+  }
+
+  /* painel "Como se calcula": passo a passo da conta, com os números do elemento escolhido */
+  function atualizarPassos() {
+    const corpo = $('.gf-passos-corpo');
+    corpo.textContent = '';
+    if (modo !== 'solido' || !R || !R.tipo3) return;
+    const F = Expr.formatar, { lf, lg, lo, hi, kk, horiz, tipo3 } = R, nf = lf.nome, ng = lg ? lg.nome : '0', gx = lg ? ng + '(x)' : '0';
+    const e = fatia(limitar(s3.sel, 1, s3.n) - 1);
+    const eixoNome = A.eixo === 'x' ? 'o eixo x' : A.eixo === 'y' ? 'o eixo y' : A.eixo === 'h' ? 'a reta y = ' + F(kk) : 'a reta x = ' + F(kk);
+    const reg = lg ? 'a região entre ' + nf + '(x) = ' + lf.f + ' e ' + ng + '(x) = ' + lg.f : 'a região entre ' + nf + '(x) = ' + lf.f + ' e o eixo x';
+    const dist = c => '|' + c + (kk === 0 ? '' : kk < 0 ? ' + ' + F(-kk) : ' − ' + F(kk)) + '|';
+    const de = 'de x = ' + F(lo) + ' até x = ' + F(hi);
+    let passos, formula;
+    if (tipo3 === 'rev' && horiz) {
+      passos = [
+        'Gire ' + reg + ', ' + de + ', em torno d' + eixoNome.replace(/^o /, 'o ').replace(/^a /, 'a ') + '.',
+        'Corte a região em fatias finas, perpendiculares ao eixo de giro. Cada fatia, ao girar, vira ' + (R.anel ? 'um anel (a arruela, com um buraco no meio)' : 'um disco') + '.',
+        'R(x) é a distância do eixo até a curva mais afastada: ' + dist(nf + '(x)') + ' ou ' + dist(gx) + '. r(x) é até a mais próxima (r = 0 quando a região encosta no eixo: aí a fatia é um disco).',
+        'Área da fatia: A(x) = π·R(x)² − π·r(x)². Volume da fatia: A(x)·dx.'
+      ];
+      formula = 'V = π ∫ [R(x)² − r(x)²] dx = ' + F(R.valor);
+    } else if (tipo3 === 'rev') {
+      passos = [
+        'Gire ' + reg + ', ' + de + ', em torno d' + eixoNome + '.',
+        'Corte a região em tiras finas, paralelas ao eixo de giro. Cada tira, ao girar, vira uma casca cilíndrica.',
+        'Raio da casca: ρ(x) = |x' + (kk === 0 ? '' : kk < 0 ? ' + ' + F(-kk) : ' − ' + F(kk)) + '| (distância da tira ao eixo). Altura: h(x) = |' + nf + '(x) − ' + gx + '|.',
+        'Abrindo a casca, ela vira um retângulo de base 2π·ρ e altura h. Volume da casca: 2π·ρ·h·dx.'
+      ];
+      formula = 'V = 2π ∫ ρ(x)·h(x) dx = ' + F(R.valor);
+    } else if (tipo3 === 'sec') {
+      const forma = { quad: 'um quadrado', semi: 'um semicírculo', tri: 'um triângulo equilátero' }[R.sec], lado = R.sec === 'semi' ? 'diâmetro' : 'lado';
+      passos = [
+        reg.charAt(0).toUpperCase() + reg.slice(1) + ', ' + de + ', é a BASE do sólido (ela não gira).',
+        'Em cada x, um corte perpendicular ao eixo x é ' + forma + ' apoiado na base, com ' + lado + ' s(x) = |' + nf + '(x) − ' + gx + '|.',
+        'Área do corte: A(x) = ' + (R.sec === 'semi' ? 'π·s²/8' : R.sec === 'tri' ? '(√3/4)·s²' : 's²') + '. Volume da fatia: A(x)·dx.'
+      ];
+      formula = 'V = ∫ A(x) dx = ' + F(R.valor);
+    } else {
+      passos = [
+        'Só a curva y = ' + lf.f + ', ' + de + ', gira em torno d' + eixoNome + '. A superfície é a "casca" do sólido, sem as tampas.',
+        'Um pedacinho da curva tem comprimento ds = √(1 + ' + nf + '′(x)²)·dx. Ao girar, vira uma faixa estreita de raio r(x) = ' + (horiz ? dist(nf + '(x)') : dist('x')) + '.',
+        'Área da faixa = comprimento da circunferência × ds = 2π·r·ds.'
+      ];
+      formula = 'S = 2π ∫ r(x)·√(1 + ' + nf + '′(x)²) dx = ' + F(R.valor);
+    }
+    const ol = document.createElement('ol');
+    ol.className = 'gf-passos-lista';
+    passos.forEach(t => { const li = document.createElement('li'); li.textContent = t; ol.append(li); });
+    const fm = document.createElement('p');
+    fm.className = 'gf-formula';
+    fm.textContent = formula;
+    corpo.append(ol, fm);
+    if (e && e.ok) {
+      const p = document.createElement('p');
+      p.className = 'gf-elem';
+      p.textContent = (tipo3 === 'sup' ? 'Faixa ' : 'Fatia ') + (e.i + 1) + ' de ' + e.n + ' (x = ' + F(e.xm) + '): ' + e.texto + '. ' +
+        (tipo3 === 'sup' ? 'Soma de todas as faixas ≈ ' : 'Soma de todas as fatias ≈ ') + F(somaFatias()) + '.';
+      corpo.append(p);
+    }
+  }
+
+  const somaFatias = () => { let t = 0; for (let i = 0; i < s3.n; i++) { const o = fatia(i); if (o && o.ok) t += o.d; } return t; };
+
+  /* pontos de interesse na janela: onde as curvas se encontram (integral) ou onde f′ = 0 (derivada); clique para usar */
   function atualizarPontos() {
-    const caixa = $('.gf-pontos');
-    if (!R || !vista) { caixa.hidden = true; return; }
+    const crit = modo === 'derivada', caixa = $('[data-pts=' + (crit ? 'crit' : 'int') + ']');
+    $$('[data-pts]').forEach(c => { if (c !== caixa) c.hidden = true; });
+    if (!R || !vista || modo === 'funcoes' || modo === 'limite') { caixa.hidden = true; R && (R.pts = []); return; }
     const centro = (ix(0) + ix(L)) / 2;
-    R.pts = Expr.raizes(x => R.f(x) - R.g(x), ix(0), ix(L))
-      .sort((p, q) => Math.abs(p - centro) - Math.abs(q - centro)).slice(0, 8).sort((p, q) => p - q);
-    const sig = R.pts.map(x => x.toPrecision(8)).join() + A.contra + A.linha;
+    const achados = crit ? Expr.raizes(x => Expr.derivada(R.f, x), ix(0), ix(L)) : Expr.raizes(x => R.f(x) - R.g(x), ix(0), ix(L));
+    R.pts = achados.sort((p, q) => Math.abs(p - centro) - Math.abs(q - centro)).slice(0, 8).sort((p, q) => p - q);
+    const sig = R.pts.map(x => x.toPrecision(8)).join() + A.contra + A.linha + modo;
     caixa.hidden = !R.pts.length;
     if (caixa.dataset.sig === sig) return;
     caixa.dataset.sig = sig;
-    $('.gf-pontos-t').textContent = R.lg ? R.lf.nome + ' e ' + R.lg.nome + ' se cruzam em' : 'Raízes de ' + R.lf.nome;
-    const chips = $('.gf-pontos .gf-chips');
+    $('.gf-pontos-t', caixa).textContent = crit ? 'Pontos críticos de ' + R.lf.nome + ' (f′ = 0)' : R.lg ? R.lf.nome + ' e ' + R.lg.nome + ' se cruzam em' : 'Raízes de ' + R.lf.nome;
+    const chips = $('.gf-chips', caixa);
     chips.innerHTML = '';
     R.pts.forEach(x => {
       const b = document.createElement('button');
@@ -425,21 +692,41 @@
       b.className = 'gf-chip';
       b.textContent = 'x = ' + Expr.formatar(x);
       b.dataset.x = String(+x.toPrecision(12));
-      b.title = 'Usar como limite (alterna a e b)';
+      b.title = crit ? 'Mover o ponto para cá' : 'Usar como limite (alterna a e b)';
       chips.append(b);
     });
   }
 
-  $('.gf-pontos').addEventListener('click', e => {
+  $$('.gf-pontos').forEach(caixa => caixa.addEventListener('click', e => {
     const b = e.target.closest('[data-x]');
     if (!b) return;
-    A[proxLimite] = b.dataset.x;
-    $('[data-a=' + proxLimite + ']').value = A[proxLimite];
-    proxLimite = proxLimite === 'a' ? 'b' : 'a';
+    if (modo === 'derivada') { A.dx0 = b.dataset.x; $('[data-a=dx0]').value = A.dx0; }
+    else {
+      A[proxLimite] = b.dataset.x;
+      $('[data-a=' + proxLimite + ']').value = A[proxLimite];
+      proxLimite = proxLimite === 'a' ? 'b' : 'a';
+    }
     calcular();
     pedir();
     adiarSalvar();
-  });
+  }));
+
+  /* animação da secante: h vai diminuindo até quase zero */
+  let tSec = 0;
+  function pararSecante() { animSec = false; const b = $('[data-acao=secante]'); b.setAttribute('aria-pressed', 'false'); b.textContent = '▶'; }
+  function quadroSecante(t) {
+    if (!animSec) { tSec = 0; return; }
+    const dt = tSec ? Math.min(0.05, (t - tSec) / 1000) : 0;
+    tSec = t;
+    A.dk = Math.min(3.5, A.dk + 0.7 * dt);
+    $('[data-a=dk]').value = A.dk;
+    if (A.dk >= 3.5) pararSecante();
+    atualizarSaidas();
+    calcular();
+    pedir();
+    adiarSalvar();
+    if (animSec) requestAnimationFrame(quadroSecante);
+  }
 
   /* ---------- desenho ---------- */
   function lerCores() {
@@ -470,7 +757,7 @@
     if (X0 >= 0 && X0 <= L) { g2.moveTo(X0, 0); g2.lineTo(X0, Alt); }
     if (Y0 >= 0 && Y0 <= Alt) { g2.moveTo(0, Y0); g2.lineTo(L, Y0); }
     g2.stroke();
-    g2.font = '11px ui-monospace, SFMono-Regular, Menlo, monospace';
+    g2.font = (proj ? 15 : 11) + 'px ui-monospace, SFMono-Regular, Menlo, monospace';
     g2.fillStyle = cores.mute;
     g2.strokeStyle = cores.fundo;
     g2.lineWidth = 3;
@@ -565,18 +852,192 @@
     if (!l.vis || !l.c.fx || (l.tipo === 'param' && !l.c.fy)) return;
     l.segs = amostrar(l);
     g2.strokeStyle = cores.curvas[l.cor];
-    g2.lineWidth = 2.5;
+    g2.lineWidth = 2.5 * esp();
     g2.lineJoin = g2.lineCap = 'round';
     tracar(l.segs);
   }
 
+  const aux = i => (i === (DER || R || { lf: { cor: -1 } }).lf.cor ? cores.curvas[5] : cores.curvas[i]);
+
   function desenharDerivada() {
-    if (!R || !R.deriv) return;
-    g2.strokeStyle = cores.curvas[R.lf.cor];
-    g2.lineWidth = 2;
-    g2.setLineDash([7, 5]);
-    tracar(amostrarY(x => Expr.derivada(R.f, x)));
+    if (!R) return;
+    g2.lineWidth = 2 * esp();
+    if (R.deriv) {
+      g2.strokeStyle = aux(2);
+      g2.setLineDash([7, 5]);
+      tracar(amostrarY(x => Expr.derivada(R.f, x)));
+    }
+    if (R.deriv2) {
+      g2.strokeStyle = aux(4);
+      g2.setLineDash([2, 5]);
+      tracar(amostrarY(x => Expr.derivada2(R.f, x)));
+    }
     g2.setLineDash([]);
+  }
+
+  function anel(x, y, cor, raio = 6) {
+    g2.fillStyle = cor;
+    g2.strokeStyle = cores.fundo;
+    g2.lineWidth = 3;
+    g2.beginPath();
+    g2.arc(x, y, raio * esp(), 0, 2 * Math.PI);
+    g2.stroke();
+    g2.fill();
+  }
+
+  function retaNaTela(y0, m, x0, cor, larg, tracejada) {
+    g2.strokeStyle = cor;
+    g2.lineWidth = larg * esp();
+    g2.setLineDash(tracejada || []);
+    g2.beginPath();
+    g2.moveTo(0, py(y0 + m * (ix(0) - x0)));
+    g2.lineTo(L, py(y0 + m * (ix(L) - x0)));
+    g2.stroke();
+    g2.setLineDash([]);
+  }
+
+  /* ponto sobre a curva, reta tangente e (se ligada) a secante com o triângulo de h */
+  function desenharTangente() {
+    const leitura = $('.gf-leitura');
+    if (!DER) { leitura.textContent = ''; return; }
+    const { x0, y0, m, h, y1 } = DER, F = Expr.formatar;
+    if (A.dtan && Number.isFinite(m)) retaNaTela(y0, m, x0, aux(1), 2.5);
+    if (A.dsec && Number.isFinite(y1)) {
+      retaNaTela(y0, DER.ms, x0, aux(3), 2, [8, 5]);
+      g2.strokeStyle = aux(3);
+      g2.lineWidth = 1.2 * esp();
+      g2.setLineDash([3, 4]);
+      g2.beginPath();
+      g2.moveTo(px(x0), py(y0));
+      g2.lineTo(px(x0 + h), py(y0));
+      g2.lineTo(px(x0 + h), py(y1));
+      g2.stroke();
+      g2.setLineDash([]);
+      anel(px(x0 + h), py(y1), aux(3), 5);
+    }
+    anel(px(x0), py(y0), cores.curvas[DER.lf.cor], 7);
+    leitura.textContent = DER.lf.nome + '(' + F(x0) + ') = ' + F(y0) + '  ·  ' + DER.lf.nome + '′(' + F(x0) + ') = ' + F(m) +
+      (A.dsec ? '  ·  secante: ' + F(DER.ms) : '');
+  }
+
+  /* sólidos (desenho 2D): o eixo de giro e o elemento da conta, com R, r, h ou ds marcados */
+  function desenharElemento() {
+    const leitura = $('.gf-leitura');
+    if (!R || !R.tipo3) { leitura.textContent = ''; return; }
+    const { kk, horiz, tipo3 } = R, cor = cores.ac, e = fatia(limitar(s3.sel, 1, s3.n) - 1), F = Expr.formatar;
+    g2.font = (proj ? 16 : 13) + 'px ui-monospace, SFMono-Regular, Menlo, monospace';
+    g2.textAlign = 'left';
+    g2.lineJoin = 'round';
+    const texto = (t, x, y) => { g2.lineWidth = 3; g2.strokeStyle = cores.fundo; g2.fillStyle = cor; rotular(t, x, y); };
+    const seg = (x0, y0, x1, y1, larg, tracejado) => {
+      g2.strokeStyle = cor;
+      g2.lineWidth = larg * esp();
+      g2.setLineDash(tracejado || []);
+      g2.beginPath();
+      g2.moveTo(x0, y0);
+      g2.lineTo(x1, y1);
+      g2.stroke();
+      g2.setLineDash([]);
+    };
+    if (tipo3 !== 'sec') {   // eixo de giro
+      if (horiz) { seg(0, py(kk), L, py(kk), 2, [10, 6]); texto('eixo de giro', 8, py(kk) - 8); }
+      else { seg(px(kk), 0, px(kk), Alt, 2, [10, 6]); texto('eixo de giro', px(kk) + 8, 18); }
+    }
+    if (!e || !e.ok) { leitura.textContent = ''; return; }
+    const X0 = px(e.xa), X1 = px(e.xb), XM = px(e.xm), larg = Math.max(X1 - X0, 3);
+    if (tipo3 === 'sup') {
+      g2.beginPath();
+      for (let k = 0; k <= 12; k++) { const x = e.xa + (e.xb - e.xa) * k / 12; (k ? g2.lineTo : g2.moveTo).call(g2, px(x), py(R.f(x))); }
+      g2.strokeStyle = cor;
+      g2.lineWidth = 6 * esp();
+      g2.stroke();
+      const ym = R.f(e.xm);
+      if (horiz) seg(XM, py(kk), XM, py(ym), 2, [4, 4]); else seg(px(kk), py(ym), XM, py(ym), 2, [4, 4]);
+      texto('r', horiz ? XM + 6 : (px(kk) + XM) / 2, horiz ? (py(kk) + py(ym)) / 2 : py(ym) - 7);
+      texto('ds', XM + 8, py(ym) - 10);
+    } else {
+      const yt = Math.min(py(e.yf), py(e.yg)), yb = Math.max(py(e.yf), py(e.yg));
+      g2.fillStyle = cor;
+      g2.globalAlpha = 0.35;
+      g2.fillRect(X0, yt, larg, yb - yt);
+      g2.globalAlpha = 1;
+      g2.strokeStyle = cor;
+      g2.lineWidth = 1.5 * esp();
+      g2.strokeRect(X0 + 0.5, yt, larg, yb - yt);
+      if (tipo3 === 'sec') texto('s', XM + larg / 2 + 6, (yt + yb) / 2 + 4);
+      else if (horiz) {
+        const longe = Math.abs(e.yf - kk) >= Math.abs(e.yg - kk) ? e.yf : e.yg, perto = longe === e.yf ? e.yg : e.yf;
+        seg(XM, py(kk), XM, py(longe), 2.5);
+        texto('R', XM + 6, (py(kk) + py(longe)) / 2);
+        if (e.r > 0) { seg(XM - 4, py(kk), XM - 4, py(perto), 2.5, [4, 3]); texto('r', XM - 18, (py(kk) + py(perto)) / 2); }
+      } else {
+        const ym = (e.yf + e.yg) / 2;
+        seg(px(kk), py(ym), XM, py(ym), 2.5);
+        texto('ρ', (px(kk) + XM) / 2, py(ym) - 7);
+        texto('h', XM + larg / 2 + 6, (yt + yb) / 2 + 4);
+      }
+    }
+    leitura.textContent = (tipo3 === 'sup' ? 'Faixa ' : 'Fatia ') + (e.i + 1) + ' de ' + e.n + ': ' + e.texto + '. Toque no gráfico para escolher outra.';
+  }
+
+  /* limite: guias do ponto a, valor para onde f vai e as sondas x = a ± h */
+  function desenharLimite() {
+    const leitura = $('.gf-leitura');
+    if (!LIM) { leitura.textContent = ''; return; }
+    const { f, a, h, tipo, lf } = LIM, cor = cores.curvas[lf.cor], F = Expr.formatar;
+    g2.setLineDash([6, 5]);
+    g2.lineWidth = 1.5 * esp();
+    g2.strokeStyle = cores.mute;
+    if (tipo === 'valor') { g2.beginPath(); g2.moveTo(px(a), 0); g2.lineTo(px(a), Alt); g2.stroke(); }
+    LIM.alvos.forEach(r => {
+      g2.strokeStyle = cor;
+      g2.beginPath();
+      g2.moveTo(0, py(r.v));
+      g2.lineTo(L, py(r.v));
+      g2.stroke();
+    });
+    g2.setLineDash([]);
+    g2.font = (proj ? 16 : 13) + 'px ui-monospace, SFMono-Regular, Menlo, monospace';
+    g2.textAlign = 'right';
+    g2.strokeStyle = cores.fundo;
+    g2.lineWidth = 3;
+    g2.fillStyle = cor;
+    LIM.alvos.forEach(r => rotular('L = ' + F(r.v), L - 8, py(r.v) - 7));
+    if (tipo === 'valor') {   // círculo vazio: o limite não depende de f(a) existir
+      g2.lineWidth = 2.5 * esp();
+      g2.strokeStyle = cor;
+      g2.fillStyle = cores.fundo;
+      LIM.alvos.forEach(r => {
+        g2.beginPath();
+        g2.arc(px(a), py(r.v), 6 * esp(), 0, 2 * Math.PI);
+        g2.fill();
+        g2.stroke();
+      });
+    }
+    if (tipo === 'valor') {
+      const fa = f(a);
+      if (Number.isFinite(fa)) anel(px(a), py(fa), cores.txt, 5);
+    }
+    const sondas = tipo === 'valor'
+      ? [LIM.lado !== 'dir' ? a - h : null, LIM.lado !== 'esq' ? a + h : null].filter(v => v !== null)
+      : [Math.sign(a) * h];
+    const partes = [];
+    sondas.forEach(x => {
+      const y = f(x);
+      partes.push('x = ' + F(x) + ' → f = ' + F(y));
+      if (!Number.isFinite(y)) return;
+      g2.strokeStyle = cor;
+      g2.lineWidth = 1.2 * esp();
+      g2.setLineDash([3, 4]);
+      g2.beginPath();
+      g2.moveTo(px(x), Math.min(Math.max(py(0), 0), Alt));
+      g2.lineTo(px(x), py(y));
+      g2.lineTo(Math.min(Math.max(px(0), 0), L), py(y));
+      g2.stroke();
+      g2.setLineDash([]);
+      anel(px(x), py(y), cor, 6);
+    });
+    leitura.textContent = partes.join('  ·  ');
   }
 
   function desenharPontos() {
@@ -624,7 +1085,7 @@
   }
 
   function atualizarTabela() {
-    const corpo = $('.gf-tab-corpo'), ys = linhas.filter(l => l.tipo === 'y' && l.vis && l.c.fx);
+    const corpo = $('.gf-tab-vals .gf-tab-corpo'), ys = linhas.filter(l => l.tipo === 'y' && l.vis && l.c.fx);
     if (!ys.length) { corpo.textContent = 'Nenhuma curva y = f(x) visível.'; return; }
     const x0 = ix(0), x1 = ix(L);
     let html = '<table><caption>Valores na janela atual</caption><thead><tr><th scope="col">x</th>' + ys.map(l => '<th scope="col">' + l.nome + '(x)</th>').join('') + '</tr></thead><tbody>';
@@ -643,18 +1104,31 @@
     g2.fillStyle = cores.fundo;
     g2.fillRect(0, 0, L, Alt);
     desenharGrade();
-    desenharRegiao();
+    if (modo === 'integral' || modo === 'solido') desenharRegiao();
     linhas.forEach(desenharCurva);
-    desenharDerivada();
-    desenharPontos();
-    desenharTraco();
+    if (modo === 'derivada') { desenharDerivada(); desenharTangente(); }
+    if (modo === 'solido') desenharElemento();
+    if (modo === 'limite') desenharLimite();
+    if (modo === 'derivada' || modo === 'integral' || modo === 'solido') desenharPontos();
+    if (modo === 'funcoes' || modo === 'integral') desenharTraco();
+    if (modo === 'derivada') sincX0();
     const desc = descrever();
     if (cv.getAttribute('aria-label') !== desc) cv.setAttribute('aria-label', desc);
-    if ($('.gf-tab').open) atualizarTabela();
+    if ($('.gf-tab-vals').open) atualizarTabela();
+  }
+
+  /* o controle deslizante de x₀ acompanha a janela e o ponto */
+  function sincX0() {
+    const r = $('[data-a=dx0r]'), t = $('[data-a=dx0]');
+    if (!DER) return;
+    const lo = Math.min(ix(0), DER.x0), hi = Math.max(ix(L), DER.x0);
+    r.min = +lo.toPrecision(6); r.max = +hi.toPrecision(6); r.step = (hi - lo) / 500;
+    if (document.activeElement !== r) r.value = DER.x0;
+    if (document.activeElement !== t) t.value = A.dx0;
   }
 
   const pedir = () => { if (!pedido) pedido = requestAnimationFrame(desenhar); };
-  $('.gf-tab').addEventListener('toggle', pedir);
+  $('.gf-tab-vals').addEventListener('toggle', pedir);
 
   /* ---------- gestos: arrastar, pinça, roda e teclado ---------- */
   function mover(dx, dy) {
@@ -675,21 +1149,44 @@
 
   function mudouVista() { pedir(); adiarSalvar(); }
 
+  /* tocar no gráfico escolhe x₀ (derivada) ou o ponto a (limite), arredondado para um valor fácil de ler */
+  function escolherPonto(X, fino) {
+    const d = passo(vista.sx) / (modo === 'derivada' ? (fino ? 50 : 10) : 2);
+    const x = +(Math.round(ix(X) / d) * d).toPrecision(8);
+    if (modo === 'derivada') A.dx0 = String(x); else { A.ltipo = 'valor'; A.la = String(x); }
+    escreverA();
+    calcular();
+    pedir();
+    adiarSalvar();
+  }
+
+  /* no desenho 2D dos sólidos, tocar escolhe qual fatia aparece destacada */
+  function escolherFatia(X) {
+    const i = Math.floor((ix(X) - R.lo) / ((R.hi - R.lo) / s3.n));
+    s3.sel = limitar(i + 1, 1, s3.n);
+    sincronizar3d();
+    pedir();
+  }
+
   const toques = new Map();
   let movido = 0, pinca = null;
   const posicao = (e, el = cv) => { const r = el.getBoundingClientRect(); return { x: e.clientX - r.left, y: e.clientY - r.top }; };
 
   cv.addEventListener('pointerdown', e => {
     cv.setPointerCapture(e.pointerId);
-    toques.set(e.pointerId, posicao(e));
+    const pos = posicao(e);
+    toques.set(e.pointerId, pos);
     movido = 0;
     pinca = null;
+    // na aba Derivadas, pegar o ponto da curva e arrastar move x₀ em vez de mover o gráfico
+    if (modo === 'derivada' && DER && Math.hypot(px(DER.x0) - pos.x, py(DER.y0) - pos.y) < 26) arrasto = e.pointerId;
     cv.classList.add('is-arrastando');
   });
   cv.addEventListener('pointermove', e => {
     const p = posicao(e), ant = toques.get(e.pointerId);
     if (!ant) { if (e.pointerType === 'mouse') { traco = p; pedir(); } return; }
     toques.set(e.pointerId, p);
+    if (arrasto === e.pointerId) { movido += 10; escolherPonto(p.x, true); return; }
     if (toques.size === 1) {
       movido += Math.abs(p.x - ant.x) + Math.abs(p.y - ant.y);
       mover(p.x - ant.x, p.y - ant.y);
@@ -701,7 +1198,12 @@
     }
   });
   const soltar = toque => e => {
-    if (toque && toques.size === 1 && movido < 6) { traco = posicao(e); pedir(); }
+    if (toque && toques.size === 1 && movido < 6) {
+      if (modo === 'solido' && R && R.tipo3) escolherFatia(posicao(e).x);
+      else if (modo === 'derivada' || modo === 'limite') escolherPonto(posicao(e).x);
+      else { traco = posicao(e); pedir(); }
+    }
+    if (arrasto === e.pointerId) arrasto = null;
     toques.delete(e.pointerId);
     pinca = null;
     if (!toques.size) cv.classList.remove('is-arrastando');
@@ -735,94 +1237,123 @@
   const PASSOS = 60;   // quantos passos angulares formam a volta inteira
   const FOLGA = 0.92;  // fração da largura que cada fatia ocupa, para as fatias aparecerem separadas
   const GRAU = Math.PI / 180;
-  let modo3d = false, eixo3d = 'x';
+  let modo3d = false;
 
   function rgb(hex) {
     const m = /^#([0-9a-f]{6})$/i.exec(hex.trim()), n = m ? parseInt(m[1], 16) : 0x888888;
     return [n >> 16, (n >> 8) & 255, n & 255];
   }
 
-  /** Raios externo e interno do giro em torno do eixo x: anel se f e g têm o mesmo sinal, disco se não. */
-  function raios(x) {
-    const yf = R.f(x), yg = R.g(x), a = Math.abs(yf), b = Math.abs(yg);
-    return yf * yg > 0 ? [Math.max(a, b), Math.min(a, b)] : [Math.max(a, b), 0];
-  }
-
-  const nomeFatia = () => (eixo3d === 'y' ? 'cascas' : R && R.lg ? 'anéis' : 'discos');
-
   /**
-   * Monta o sólido a partir de perfis (curvas no plano da região) e seções (a região em si).
-   * Cada perfil, girado, vira uma superfície; as seções aparecem quando o giro ainda não fechou a volta.
+   * Monta o sólido a partir de peças. Revolução e superfície: perfis (curvas no plano da região) que giram em torno do eixo.
+   * Seções: polígonos fixos (os cortes) ligados de um x ao próximo. As "seções" da malha são a região em si, mostrada nas bordas do giro.
    */
   function montarMalha() {
     malha = null;
-    if (!R) return;
-    const { f, g, lo, hi } = R, noX = eixo3d === 'x', fatias = s3.modo === 'fatias';
-    const n = fatias ? s3.n : 40, w = (hi - lo) / n, d = 2 * Math.PI / PASSOS;
-    const pecas = [], secoes = [], info = [];
+    if (!R || !R.tipo3) return;
+    const { f, g, lo, hi, kk, horiz, tipo3 } = R, fatias = s3.modo === 'fatias';
+    const n = fatias ? s3.n : tipo3 === 'sup' ? 80 : 40, w = (hi - lo) / n, d = 2 * Math.PI / PASSOS;
+    const pecas = [], secoes = [], solidas = [], info = [];
     let vN = 0;
     const finito = p => Number.isFinite(p[0]) && Number.isFinite(p[1]);
-    const peca = (pl, i) => {
+    const peca = (pl, i, k = 'ext') => {
       let trecho = [];
       pl.concat([[NaN, NaN]]).forEach(p => {
         if (finito(p)) trecho.push(p);
-        else { if (trecho.length > 1) pecas.push({ pl: trecho, i }); trecho = []; }
+        else { if (trecho.length > 1) pecas.push({ pl: trecho, i, k }); trecho = []; }
       });
     };
     const secao = (poly, i) => { if (poly.every(finito)) secoes.push({ poly, i }); };
+    const lado = (x, y) => [x, y];
+    // se a região fica abaixo da reta de giro, o giro começa por baixo: o sólido é o mesmo, mas a região "girando" fica fiel
+    const meio = (lo + hi) / 2, sg = (f(meio) + g(meio)) / 2 - kk < 0 ? -1 : 1;
 
-    if (!fatias) {
+    if (fatias) for (let i = 0; i < n; i++) { const o = fatia(i, n); info[i] = o; if (o && o.ok) vN += o.d; }
+
+    if (tipo3 === 'sec') {
+      const M = 14;
+      const poly = x => {
+        const yf = f(x), yg = g(x);
+        if (!Number.isFinite(yf) || !Number.isFinite(yg)) return null;
+        const y0 = Math.min(yf, yg), y1 = Math.max(yf, yg), s = y1 - y0, yc = (y0 + y1) / 2;
+        if (R.sec === 'semi') return Array.from({ length: M + 1 }, (_, k) => { const t = Math.PI * k / M; return [yc + s / 2 * Math.cos(t), s / 2 * Math.sin(t)]; });
+        if (R.sec === 'tri') return [[y0, 0], [y1, 0], [yc, s * Math.sqrt(3) / 2]];
+        return [[y0, 0], [y1, 0], [y1, s], [y0, s]];
+      };
+      const P3 = (x, q) => [x, q[0], q[1]];
+      const tampa = (x, pl, i) => {
+        const c = pl.reduce((t, q) => [t[0] + q[0] / pl.length, t[1] + q[1] / pl.length], [0, 0]);
+        pl.forEach((q, k) => solidas.push({ p: [P3(x, c), P3(x, q), P3(x, pl[(k + 1) % pl.length])], i, k: 'tampa' }));
+      };
+      const bloco = (xa, pa, xb, pb, i) => {
+        pa.forEach((q, k) => { const k2 = (k + 1) % pa.length; solidas.push({ p: [P3(xa, q), P3(xa, pa[k2]), P3(xb, pb[k2]), P3(xb, pb[k])], i, k: 'ext' }); });
+      };
+      if (fatias) {
+        for (let i = 0; i < n; i++) {
+          const xm = lo + w * (i + 0.5), xa = xm - w * FOLGA / 2, xb = xm + w * FOLGA / 2, p = poly(xm);
+          if (!p) continue;
+          bloco(xa, p, xb, p, i);
+          tampa(xa, p, i);
+          tampa(xb, p, i);
+        }
+      } else {
+        const xs = Array.from({ length: n + 1 }, (_, k) => lo + w * k), ps = xs.map(poly);
+        for (let k = 0; k < n; k++) if (ps[k] && ps[k + 1]) bloco(xs[k], ps[k], xs[k + 1], ps[k + 1], -1);
+        if (ps[0]) tampa(xs[0], ps[0], -1);
+        if (ps[n]) tampa(xs[n], ps[n], -1);
+      }
+    } else if (tipo3 === 'sup') {
+      const perfil = x => lado(x, R.horiz ? Math.abs(f(x) - kk) : f(x));
+      if (!fatias) peca(Array.from({ length: n + 1 }, (_, k) => perfil(lo + w * k)), -1);
+      else for (let i = 0; i < n; i++) {
+        const xm = lo + w * (i + 0.5);
+        peca([perfil(xm - w * FOLGA / 2), perfil(xm + w * FOLGA / 2)], i);
+      }
+    } else if (!fatias) {
       const xs = Array.from({ length: n + 1 }, (_, k) => lo + w * k);
-      const topo = xs.map(x => (noX ? [x, raios(x)[0]] : [x, f(x)])), base = xs.map(x => (noX ? [x, raios(x)[1]] : [x, g(x)]));
+      const topo = xs.map(x => (horiz ? [x, raios(x)[0]] : [x, f(x)])), base = xs.map(x => (horiz ? [x, raios(x)[1]] : [x, g(x)]));
       peca(topo, -1);
-      if (!noX || base.some(p => p[1] > 1e-9)) peca(base, -1);
-      [lo, hi].forEach(x => peca([base[x === lo ? 0 : n], topo[x === lo ? 0 : n]], -1));
+      if (!horiz || base.some(p => p[1] > 1e-9)) peca(base, -1, horiz || R.lg ? 'int' : 'ext');
+      [0, n].forEach(k => peca([base[k], topo[k]], -1, 'tampa'));
       for (let k = 0; k < n; k++) secao([base[k], topo[k], topo[k + 1], base[k + 1]], -1);
     } else {
       for (let i = 0; i < n; i++) {
         const xm = lo + w * (i + 0.5), xa = xm - w * FOLGA / 2, xb = xm + w * FOLGA / 2;
-        if (noX) {
+        if (horiz) {
           const [Re, ri] = raios(xm);
           if (!Number.isFinite(Re)) continue;
           peca([[xa, Re], [xb, Re]], i);
-          peca([[xa, ri], [xa, Re]], i);
-          peca([[xb, ri], [xb, Re]], i);
-          if (ri > 0) peca([[xa, ri], [xb, ri]], i);
+          peca([[xa, ri], [xa, Re]], i, 'tampa');
+          peca([[xb, ri], [xb, Re]], i, 'tampa');
+          if (ri > 0) peca([[xa, ri], [xb, ri]], i, 'int');
           secao([[xa, ri], [xa, Re], [xb, Re], [xb, ri]], i);
-          vN += Math.PI * (Re * Re - ri * ri) * w;
-          info[i] = { x: xm, texto: (ri > 0 ? 'anel' : 'disco') + ' · raio ' + Expr.formatar(Re) + (ri > 0 ? ' e ' + Expr.formatar(ri) : '') + ' · área ' + Expr.formatar(Math.PI * (Re * Re - ri * ri)) };
         } else {
           const yg = g(xm), yf = f(xm);
           if (!Number.isFinite(yg) || !Number.isFinite(yf)) continue;
-          peca([[xb, yg], [xb, yf]], i);
-          peca([[xa, yg], [xa, yf]], i);
+          peca([[xb, yg], [xb, yf]], i, 'tampa');
+          peca([[xa, yg], [xa, yf]], i, 'tampa');
           peca([[xa, yf], [xb, yf]], i);
-          peca([[xa, yg], [xb, yg]], i);
+          peca([[xa, yg], [xb, yg]], i, R.lg ? 'int' : 'ext');
           secao([[xa, yg], [xa, yf], [xb, yf], [xb, yg]], i);
-          vN += 2 * Math.PI * Math.abs(xm) * Math.abs(yf - yg) * w;
-          info[i] = { x: xm, texto: 'casca · raio ' + Expr.formatar(Math.abs(xm)) + ' · altura ' + Expr.formatar(Math.abs(yf - yg)) + ' · área ' + Expr.formatar(2 * Math.PI * Math.abs(xm) * Math.abs(yf - yg)) };
         }
       }
     }
-    if (!pecas.length) return;
+    if (!pecas.length && !solidas.length) return;
 
-    const girar = (u, v, fi) => (noX ? [u, v * Math.cos(fi), v * Math.sin(fi)] : [u * Math.cos(fi), v, u * Math.sin(fi)]);
+    const girar = (u, v, fi) => (horiz ? [u, kk + sg * v * Math.cos(fi), sg * v * Math.sin(fi)] : [kk + (u - kk) * Math.cos(fi), v, (u - kk) * Math.sin(fi)]);
     const faces = [];
-    pecas.forEach(({ pl, i }) => {
-      for (let k = 0; k < pl.length - 1; k++) {
-        const a = pl[k], b = pl[k + 1];
+    pecas.forEach(({ pl, i, k }) => {
+      for (let q = 0; q < pl.length - 1; q++) {
+        const a = pl[q], b = pl[q + 1];
         for (let j = 0; j < PASSOS; j++) {
-          faces.push({ a, b, j, i, p: [girar(a[0], a[1], j * d), girar(b[0], b[1], j * d), girar(b[0], b[1], (j + 1) * d), girar(a[0], a[1], (j + 1) * d)] });
+          faces.push({ a, b, j, i, k, p: [girar(a[0], a[1], j * d), girar(b[0], b[1], j * d), girar(b[0], b[1], (j + 1) * d), girar(a[0], a[1], (j + 1) * d)] });
         }
       }
     });
-    const todos = pecas.flatMap(pc => pc.pl);
-    const eixoU = todos.map(p => p[0]), eixoV = todos.map(p => p[1]);
-    const lim = noX ? Math.max(...eixoV.map(Math.abs)) : Math.max(...eixoU.map(Math.abs));
-    const min = noX ? [Math.min(...eixoU), -lim, -lim] : [-lim, Math.min(...eixoV), -lim];
-    const max = noX ? [Math.max(...eixoU), lim, lim] : [lim, Math.max(...eixoV), lim];
+    const pontos = faces.flatMap(fc => fc.p).concat(solidas.flatMap(fc => fc.p));
+    const min = [0, 1, 2].map(k => Math.min(...pontos.map(p => p[k]))), max = [0, 1, 2].map(k => Math.max(...pontos.map(p => p[k])));
     const centro = min.map((v, k) => (v + max[k]) / 2);
-    malha = { faces, secoes, girar, d, min, max, centro, vN, info, raio: Math.max(1e-9, Math.hypot(...max.map((v, k) => v - centro[k]))) };
+    malha = { faces, solidas, secoes, girar, d, min, max, centro, vN, info, raio: Math.max(1e-9, Math.hypot(...max.map((v, k) => v - centro[k]))) };
   }
 
   function desenhar3d() {
@@ -847,12 +1378,14 @@
       return [x * cy + z * sy, y * cp - z1 * sp, y * sp + z1 * cp];
     };
     const tela = q => [L / 2 + q[0] * esc, Alt / 2 - q[1] * esc];
+    const { horiz, kk, tipo3 } = R, sup = tipo3 === 'sup';
     const base = rgb(cores.curvas[R.lf.cor]), destaque = rgb(cores.ac), luz = [0.35, 0.55, 0.75];
+    const interior = base.map((c, k) => c * 0.4 + destaque[k] * 0.6);   // por dentro (buraco, parede interna): outra cor
     const fatias = s3.modo === 'fatias', ang = s3.ang * GRAU, d = malha.d;
     const cheios = Math.floor(ang / d + 1e-9), parcial = ang - cheios * d;
 
     // eixo de giro, atrás do sólido
-    const ponta = sinal => { const v = C.slice(), k = eixo3d === 'x' ? 0 : 1; v[k] = (sinal < 0 ? malha.min[k] : malha.max[k]) + sinal * malha.raio * 0.25; return v; };
+    const ponta = sinal => (horiz ? [(sinal < 0 ? malha.min[0] : malha.max[0]) + sinal * malha.raio * 0.25, kk, 0] : [kk, (sinal < 0 ? malha.min[1] : malha.max[1]) + sinal * malha.raio * 0.25, 0]);
     const e0 = tela(girado(ponta(-1))), e1 = tela(girado(ponta(1)));
     g3.strokeStyle = cores.mute;
     g3.lineWidth = 1.5;
@@ -864,28 +1397,45 @@
     g3.setLineDash([]);
 
     const lista = [];
-    const juntar = (p, i, secao) => {
+    // p: vértices; k: 'ext' (por fora), 'int' (parede de dentro), 'tampa' (extremidades); fundoVisto: lado de dentro de uma superfície
+    const juntar = (p, i, k, ghost, dentro) => {
       const q = p.map(girado);
-      const u = [q[2][0] - q[0][0], q[2][1] - q[0][1], q[2][2] - q[0][2]], w = [q[3][0] - q[1][0], q[3][1] - q[1][1], q[3][2] - q[1][2]];
-      const n = [u[1] * w[2] - u[2] * w[1], u[2] * w[0] - u[0] * w[2], u[0] * w[1] - u[1] * w[0]], m = Math.hypot(n[0], n[1], n[2]) || 1;
-      const lum = 0.4 + 0.6 * Math.abs((n[0] * luz[0] + n[1] * luz[1] + n[2] * luz[2]) / m);
+      let nx = 0, ny = 0, nz = 0;
+      for (let a = 0; a < q.length; a++) {   // normal pelo método de Newell: vale para qualquer polígono
+        const u = q[a], v = q[(a + 1) % q.length];
+        nx += (u[1] - v[1]) * (u[2] + v[2]);
+        ny += (u[2] - v[2]) * (u[0] + v[0]);
+        nz += (u[0] - v[0]) * (u[1] + v[1]);
+      }
+      const m = Math.hypot(nx, ny, nz) || 1;
+      const lum = 0.4 + 0.6 * Math.abs((nx * luz[0] + ny * luz[1] + nz * luz[2]) / m);
       const marcada = fatias && i === s3.sel - 1;
-      const tom = (marcada ? destaque : base).map(c => c * lum * (fatias && i % 2 && !marcada ? 0.88 : 1));
-      const cor = tom.map(c => Math.round(secao ? c + (255 - c) * 0.4 : c));
-      lista.push({ q, z: (q[0][2] + q[1][2] + q[2][2] + q[3][2]) / 4, cor: 'rgb(' + cor.join(',') + ')' });
+      const paleta = marcada ? destaque : k === 'int' || dentro ? interior : base;
+      const tom = paleta.map(c => c * lum * (fatias && i % 2 && !marcada ? 0.88 : 1));
+      const claro = ghost ? 0.4 : k === 'tampa' ? 0.22 : 0;
+      const cor = tom.map(c => Math.round(c + (255 - c) * claro));
+      lista.push({ q, z: q.reduce((t, v) => t + v[2], 0) / q.length, cor: 'rgb(' + cor.join(',') + ')' });
+    };
+    // numa superfície aberta, o lado de dentro é o que está virado para trás
+    const eDentro = p => {
+      if (!sup) return false;
+      const c = [0, 1, 2].map(k => (p[0][k] + p[1][k] + p[2][k] + p[3][k]) / 4);
+      const eixoPt = horiz ? [c[0], kk, 0] : [kk, c[1], 0];
+      return girado(c)[2] - girado(eixoPt)[2] < 0;
     };
     malha.faces.forEach(fc => {
-      if (fc.j < cheios) juntar(fc.p, fc.i, false);
+      if (fc.j < cheios) juntar(fc.p, fc.i, fc.k, false, eDentro(fc.p));
       else if (fc.j === cheios && parcial > 1e-6) {
-        const gi = malha.girar, f0 = cheios * d;
-        juntar([gi(fc.a[0], fc.a[1], f0), gi(fc.b[0], fc.b[1], f0), gi(fc.b[0], fc.b[1], ang), gi(fc.a[0], fc.a[1], ang)], fc.i, false);
+        const gi = malha.girar, f0 = cheios * d, pp = [gi(fc.a[0], fc.a[1], f0), gi(fc.b[0], fc.b[1], f0), gi(fc.b[0], fc.b[1], ang), gi(fc.a[0], fc.a[1], ang)];
+        juntar(pp, fc.i, fc.k, false, eDentro(pp));
       }
     });
+    malha.solidas.forEach(fc => juntar(fc.p, fc.i, fc.k, false, false));
     // a própria região, no começo e no fim do giro: é a função "girando"
-    if (s3.ang < 359.99) {
+    if (s3.ang < 359.99 && tipo3 === 'rev') {
       [0, ang].forEach((fi, k) => {
         if (k && !ang) return;
-        malha.secoes.forEach(sc => juntar(sc.poly.map(v => malha.girar(v[0], v[1], fi)), sc.i, true));
+        malha.secoes.forEach(sc => juntar(sc.poly.map(v => malha.girar(v[0], v[1], fi)), sc.i, 'ext', true, false));
       });
     }
     lista.sort((a, b) => a.z - b.z);
@@ -900,23 +1450,31 @@
       g3.stroke();
     });
 
+    const f2 = Expr.formatar;
     g3.fillStyle = cores.txt;
     g3.font = '13px ui-monospace, SFMono-Regular, Menlo, monospace';
     g3.textAlign = 'left';
-    g3.fillText(eixo3d, e1[0] + 6, e1[1] + 4);
+    g3.fillText(rotuloEixo(), e1[0] + 6, e1[1] + 4);
 
-    const exato = R.vol[eixo3d], f2 = Expr.formatar;
+    const q = sup ? 'S' : 'V', exato = R.valor, unid = sup ? 'faixa' : tipo3 === 'sec' ? 'corte' : 'fatia';
     let texto;
     if (fatias) {
       const inf = malha.info[s3.sel - 1];
-      texto = (inf ? 'Fatia ' + s3.sel + ' de ' + s3.n + ' · x = ' + f2(inf.x) + ' · ' + inf.texto + '. ' : '') + 'Soma das fatias = ' + f2(malha.vN) + ' (exato ' + f2(exato) + ')';
+      texto = (inf && inf.ok ? unid[0].toUpperCase() + unid.slice(1) + ' ' + s3.sel + ' de ' + s3.n + ' · x = ' + f2(inf.xm) + ' · ' + inf.texto + '. ' : '') +
+        'Soma d' + (sup ? 'as faixas' : 'as fatias') + ' = ' + f2(malha.vN) + ' (exato ' + f2(exato) + ')';
+    } else if (tipo3 === 'sec') {
+      texto = 'Cortes em forma de ' + NOMES_SEC[R.sec] + ' sobre a base: V = ' + f2(exato);
     } else {
-      texto = 'Giro de ' + s3.ang + '° em torno do eixo ' + eixo3d + ': V = ' + (Number.isNaN(exato) ? 'sem resultado' : f2(exato * s3.ang / 360)) + (s3.ang < 360 ? ' (volta inteira: ' + f2(exato) + ')' : '');
+      texto = 'Giro de ' + s3.ang + '° em torno ' + (A.eixo === 'x' ? 'do eixo x' : A.eixo === 'y' ? 'do eixo y' : 'da ' + rotuloEixo()) + ': ' + q + ' = ' +
+        (Number.isNaN(exato) ? 'sem resultado' : f2(exato * s3.ang / 360)) + (s3.ang < 360 ? ' (volta inteira: ' + f2(exato) + ')' : '');
     }
     leitura.textContent = texto;
-    const desc = 'Sólido de revolução da região entre ' + (R.lg ? R.lf.nome + ' e ' + R.lg.nome : R.lf.nome + ' e o eixo x') + ' de ' + f2(R.lo) + ' a ' + f2(R.hi) + ', em torno do eixo ' + eixo3d + '. ' + texto + '.';
+    const desc = (sup ? 'Superfície de revolução da curva ' + R.lf.nome : tipo3 === 'sec' ? 'Sólido com cortes em forma de ' + NOMES_SEC[R.sec] + ' sobre a região' : 'Sólido de revolução da região') +
+      (sup ? '' : ' entre ' + (R.lg ? R.lf.nome + ' e ' + R.lg.nome : R.lf.nome + ' e o eixo x')) + ' de ' + f2(R.lo) + ' a ' + f2(R.hi) + '. ' + texto + '.';
     if (cv3.getAttribute('aria-label') !== desc) cv3.setAttribute('aria-label', desc);
   }
+
+  const rotuloEixo = () => (A.eixo === 'h' ? 'reta y = ' + Expr.formatar(R.kk) : A.eixo === 'v' ? 'reta x = ' + Expr.formatar(R.kk) : A.eixo);
 
   function sincronizar3d() {
     const campo = k => $('[data-g3="' + k + '"]'), saida = k => campo(k).parentElement.querySelector('output');
@@ -924,11 +1482,18 @@
     campo('sel').max = s3.n;
     ['ang', 'n', 'sel'].forEach(k => { campo(k).value = s3[k]; saida(k).textContent = k === 'ang' ? s3.ang + '°' : s3[k]; });
     $$('[data-g3modo]').forEach(b => b.setAttribute('aria-pressed', b.dataset.g3modo === s3.modo));
+    // os nomes dos botões acompanham o assunto: anéis, cascas, faixas...
+    const sup = A.tipo3 === 'sup', horiz = A.eixo === 'x' || A.eixo === 'h';
+    $('[data-g3modo=solido]').textContent = sup ? 'Superfície' : 'Sólido';
+    $('[data-g3modo=fatias]').textContent = sup ? 'Faixas' : A.tipo3 === 'sec' ? 'Cortes' : horiz ? (R && R.anel ? 'Anéis' : 'Discos') : 'Cascas';
     $$('.gf-so-fatias', ctl3).forEach(el => { el.hidden = s3.modo !== 'fatias'; });
     const girar = $('[data-acao=girar]');
     girar.setAttribute('aria-pressed', s3.tocando);
     girar.textContent = s3.tocando ? '❚❚' : '▶';
-    $('[data-acao=eixo]').textContent = 'Eixo ' + eixo3d + ' · ' + nomeFatia();
+    $('[data-acao=corte]').setAttribute('aria-pressed', s3.ang < 360);
+    $$('[data-tipo3]').forEach(b => b.setAttribute('aria-pressed', b.dataset.tipo3 === A.tipo3));
+    $$('[data-vista]').forEach(b => b.setAttribute('aria-pressed', (b.dataset.vista === '3d') === ver3d));
+    atualizarPassos();
   }
 
   function reiniciar3d() { Object.assign(cam, { yaw: -0.7, pit: 0.4, zoom: 1 }); pedir(); }
@@ -941,7 +1506,6 @@
     ctl3.hidden = !ligado;
     $$('[data-so="2d"]').forEach(b => { b.hidden = ligado; });
     $$('[data-so="3d"]').forEach(b => { b.hidden = !ligado; });
-    $('[data-acao="3d"]').setAttribute('aria-pressed', ligado);
     sincronizar3d();
     medir();
     pedir();
@@ -968,6 +1532,11 @@
     if (k === 'n') malha = undefined;
     sincronizar3d();
     pedir();
+  });
+  raiz.addEventListener('click', e => {
+    const bt = e.target.closest('[data-tipo3]'), bv = e.target.closest('[data-vista]');
+    if (bt) { A.tipo3 = bt.dataset.tipo3; atualizarVisibilidade(); malha = undefined; calcular(); sincronizar3d(); pedir(); adiarSalvar(); }
+    if (bv) { ver3d = bv.dataset.vista === '3d'; ligar3d(modo === 'solido' && ver3d); adiarSalvar(); }
   });
   ctl3.addEventListener('click', e => {
     const b = e.target.closest('[data-g3modo]');
@@ -1028,14 +1597,35 @@
   /* ---------- botões ---------- */
   const avisar = msg => { $('.gf-status').textContent = msg; };
 
+  /* tela cheia para projetar: usa a API do navegador quando existe e, se não, cobre a janela com a própria página */
+  function telaCheia(liga) {
+    proj = liga;
+    raiz.classList.toggle('is-tela', liga);
+    document.documentElement.classList.toggle('gf-tela-aberta', liga);
+    const b = $('[data-acao=tela]');
+    b.setAttribute('aria-pressed', liga);
+    b.textContent = liga ? 'Sair da tela cheia' : 'Tela cheia';
+    if (liga && raiz.requestFullscreen) raiz.requestFullscreen().catch(() => {});
+    else if (!liga && document.fullscreenElement) document.exitFullscreen().catch(() => {});
+    medir();
+    pedir();
+  }
+  document.addEventListener('fullscreenchange', () => { if (!document.fullscreenElement && proj) telaCheia(false); });
+  document.addEventListener('keydown', e => { if (e.key === 'Escape' && proj && !document.fullscreenElement) telaCheia(false); });
+
   function acao(nome) {
     if (nome === 'mais' || nome === 'menos') {
       const fator = nome === 'mais' ? 1.25 : 0.8;
       if (modo3d) { cam.zoom = limitar(cam.zoom * fator, 0.3, 6); pedir(); } else zoom(fator);
     }
     else if (nome === 'reset') { if (modo3d) reiniciar3d(); else { ajustarJanela(); traco = null; mudouVista(); } }
-    else if (nome === '3d') ligar3d(!modo3d);
-    else if (nome === 'eixo') { eixo3d = eixo3d === 'x' ? 'y' : 'x'; malha = undefined; sincronizar3d(); pedir(); }
+    else if (nome === 'tela') telaCheia(!proj);
+    else if (nome === 'corte') { s3.tocando = false; s3.ang = s3.ang < 360 ? 360 : 270; sincronizar3d(); pedir(); }
+    else if (nome === 'ponta') { cam.yaw = A.eixo === 'x' || A.eixo === 'h' ? Math.PI / 2 : 0; cam.pit = A.eixo === 'x' || A.eixo === 'h' ? 0 : Math.PI / 2; pedir(); }
+    else if (nome === 'secante') {
+      if (animSec) pararSecante();
+      else { if (A.dk >= 3.5) A.dk = 0; animSec = true; $('[data-acao=secante]').setAttribute('aria-pressed', 'true'); $('[data-acao=secante]').textContent = '❚❚'; requestAnimationFrame(quadroSecante); }
+    }
     else if (nome === 'girar') {
       if (s3.tocando) s3.tocando = false;
       else { if (s3.ang >= 360) s3.ang = 0; s3.tocando = true; requestAnimationFrame(girando); }
@@ -1082,23 +1672,24 @@
     Object.keys(params).forEach(n => { p[n] = [+params[n].v.toPrecision(8), params[n].min, params[n].max]; });
     return {
       l: linhas.map(l => ({ tipo: l.tipo, f: l.f, g: l.g, t0: l.t0, t1: l.t1, nome: l.nome, vis: l.vis })),
-      p, a: A, j: janelaAtual(), r: prop
+      p, a: A, j: janelaAtual(), r: prop, m: modo
     };
   }
 
   function desserializar(d) {
     if (!d || !Array.isArray(d.l) || !d.l.length || !Array.isArray(d.j) || d.j.length !== 4 || !d.j.every(Number.isFinite)) return null;
     if (d.j[0] >= d.j[1] || d.j[2] >= d.j[3]) return null;
-    return { linhas: d.l, params: d.p || {}, analise: d.a || {}, janela: d.j, prop: !!d.r };
+    const modoOk = MODOS.includes(d.m) ? d.m : d.a && d.a.a !== undefined ? 'integral' : 'funcoes';
+    return { linhas: d.l, params: d.p || {}, analise: d.a || {}, janela: d.j, prop: !!d.r, modo: modoOk, v3: d.e ? { eixo: d.e === 'y' ? 'y' : 'x' } : undefined };
   }
 
   function deExemplo(ex) {
     const nomes = NOMES.slice(0, ex.linhas.length), a = Object.assign({}, ex.analise);
     if (ex.analise) {
       a.linha = nomes[ex.analise.linha];
-      a.contra = ex.analise.contra === 'eixo' ? 'eixo' : nomes[ex.analise.contra];
+      if (ex.analise.contra !== undefined) a.contra = ex.analise.contra === 'eixo' ? 'eixo' : nomes[ex.analise.contra];
     }
-    return { linhas: ex.linhas.map((l, i) => Object.assign({ nome: nomes[i] }, l)), params: {}, analise: a, janela: ex.janela, prop: !!ex.prop, v3: ex.vista3d };
+    return { linhas: ex.linhas.map((l, i) => Object.assign({ nome: nomes[i] }, l)), params: {}, analise: a, janela: ex.janela, prop: !!ex.prop, v3: ex.vista3d, modo: ex.modo || 'funcoes' };
   }
 
   function salvarHash() {
@@ -1129,7 +1720,17 @@
     est.linhas.slice(0, NOMES.length).forEach(d => linhas.push(novaLinha(Object(d))));
     A = Object.assign({}, padraoA, est.analise);
     A.n = limitar(Math.round(+A.n) || 8, 1, 200);
-    A.a = String(A.a); A.b = String(A.b); A.x0 = String(A.x0 || '');
+    A.a = String(A.a); A.b = String(A.b); A.la = String(A.la); A.dx0 = String(A.dx0);
+    A.lk = limitar(+A.lk || 0, 0, 6); A.dk = limitar(+A.dk || 0, 0, 3.5);
+    ['sombra', 'dtan', 'dsec', 'd1', 'd2'].forEach(k => { A[k] = !!A[k]; });
+    if (!['valor', 'mais', 'menos'].includes(A.ltipo)) A.ltipo = 'valor';
+    if (!['ambos', 'esq', 'dir'].includes(A.lado)) A.lado = 'ambos';
+    if (!['rev', 'sec', 'sup'].includes(A.tipo3)) A.tipo3 = 'rev';
+    if (!['x', 'y', 'h', 'v'].includes(A.eixo)) A.eixo = 'x';
+    if (!['quad', 'semi', 'tri'].includes(A.sec)) A.sec = 'quad';
+    A.ek = String(A.ek);
+    pararSecante();
+    modo = MODOS.includes(est.modo) ? est.modo : 'funcoes';
     janelaBase = est.janela;
     prop = est.prop;
     $('[data-acao=prop]').setAttribute('aria-pressed', prop);
@@ -1147,12 +1748,45 @@
     traco = null;
     if (L) ajustarJanela();
     const v3 = est.v3 || {};
-    eixo3d = v3.eixo || 'x';
+    if (v3.eixo) A.eixo = v3.eixo;
+    ver3d = true;
     Object.assign(s3, { ang: v3.ang === undefined ? 360 : v3.ang, modo: v3.modo || 'solido', n: v3.n || 12 });
     s3.sel = Math.ceil(s3.n / 2); // a fatia em destaque começa no meio, onde ela é maior
     Object.assign(cam, { yaw: -0.7, pit: 0.4, zoom: 1 });
-    ligar3d(!!est.v3);
+    irParaModo(modo);
   }
+
+  /* ---------- assuntos: Funções, Limites, Derivadas, Integrais, Sólidos ---------- */
+  function irParaModo(m) {
+    modo = m;
+    raiz.dataset.modo = m;
+    pararSecante();
+    $$('.gf-modo').forEach(b => { const on = b.dataset.modo === m; b.setAttribute('aria-selected', on); b.tabIndex = on ? 0 : -1; });
+    $('#gf-painel').setAttribute('aria-labelledby', 'gf-aba-' + m);
+    $$('[data-m]').forEach(el => { el.hidden = !el.dataset.m.split(' ').includes(m); });
+    $$('.gf-chip[data-ex]').forEach(c => { c.hidden = c.dataset.modo !== m; });
+    $('.gf-dica').textContent = DICAS[m];
+    traco = null;
+    $('.gf-leitura').textContent = '';
+    atualizarVisibilidade();
+    calcular();
+    ligar3d(m === 'solido' && ver3d);
+    pedir();
+    adiarSalvar();
+  }
+
+  $('.gf-modos').addEventListener('click', e => {
+    const b = e.target.closest('.gf-modo');
+    if (b && b.dataset.modo !== modo) irParaModo(b.dataset.modo);
+  });
+  $('.gf-modos').addEventListener('keydown', e => {
+    const i = MODOS.indexOf(modo), d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
+    if (e.key === 'Home' || e.key === 'End' || d) {
+      e.preventDefault();
+      irParaModo(MODOS[e.key === 'Home' ? 0 : e.key === 'End' ? MODOS.length - 1 : (i + d + MODOS.length) % MODOS.length]);
+      $('.gf-modo[aria-selected=true]').focus();
+    }
+  });
 
   function abrirExemplo(id, rolar) {
     const ex = EXEMPLOS.find(x => x.id === id);

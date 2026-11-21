@@ -11,7 +11,7 @@
     {{- $cards := slice
       (dict "slug" "complexidade" "o" "O(?)" "c" "var(--p5)" "n" "Qual a complexidade?" "d" "10 trechos de código. Descubra em qual classe Big-O você mais acerta.")
       (dict "slug" "mapa" "o" "DAG" "c" "var(--p2)" "n" "Mapa de pré-requisitos" "d" "O curso como grafo: clique numa disciplina e veja o caminho até ela.")
-      (dict "slug" "graficador" "o" "f(x)" "c" "var(--p8)" "n" "Graficador" "d" "Funções, área, volume e sólidos em 3D.") -}}
+      (dict "slug" "graficador" "o" "f(x)" "c" "var(--p8)" "n" "Graficador" "d" "Funções, limites, derivadas, integrais, volumes e superfícies de revolução em 3D.") -}}
     {{- range $cards }}
     <a class="bo-card bo-per" style="--c:{{ .c | safeCSS }}" href="{{ printf "lab/%s/" .slug | relURL }}">
       <span class="bo-per-o" aria-hidden="true">{{ .o }}</span>

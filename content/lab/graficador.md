@@ -1,6 +1,6 @@
 ---
 title: Graficador
 layout: graficador
-summary: "Funções, área, volume e arco, com sólidos em 3D."
+summary: "Funções, limites, derivadas, integrais, volumes (discos, anéis, cascas, seções) e superfície de revolução, para usar em aula."
 hideEdit: true
 ---

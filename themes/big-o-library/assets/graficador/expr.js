@@ -186,6 +186,72 @@ const Expr = (function () {
     return Number.isFinite(frente) ? frente : (3 * f(x) - 4 * f(x - h) + f(x - 2 * h)) / (2 * h);
   }
 
+
+  /** Segunda derivada por diferença centrada. */
+  function derivada2(f, x) {
+    const h = 1e-3 * Math.max(1, Math.abs(x));
+    return (f(x + h) - 2 * f(x) + f(x - h)) / (h * h);
+  }
+
+  /** Procura um número simples (inteiro, fração, múltiplo de π ou e) a menos de tol de v. */
+  function bonito(v, tol) {
+    if (Math.abs(v) <= tol) return { v: 0, texto: '0' };
+    for (let d = 1; d <= 12; d++) {
+      const n = Math.round(v * d);
+      if (Math.abs(n / d - v) <= tol) return { v: n / d, texto: d === 1 ? String(n) : n + '/' + d };
+    }
+    for (let d = 1; d <= 6; d++) {
+      const n = Math.round(v * d / Math.PI);
+      if (n && Math.abs(n * Math.PI / d - v) <= tol) return { v: n * Math.PI / d, texto: (n === 1 ? '' : n === -1 ? '-' : n) + 'π' + (d > 1 ? '/' + d : '') };
+    }
+    if (Math.abs(Math.E - v) <= tol) return { v: Math.E, texto: 'e' };
+    return { v, texto: '' };
+  }
+
+  /**
+   * Limite numérico de f quando x se aproxima de a por um lado (dir = -1 esquerda, +1 direita);
+   * se a for ±Infinity, x cresce em módulo. Olha quatro pontos cada vez mais próximos e decide:
+   * { tipo: 'num', v, texto }, { tipo: 'inf', s: ±1 }, { tipo: 'indef' } (f não existe ali) ou { tipo: 'nao', motivo }.
+   */
+  function limite(f, a, dir) {
+    // com pontos muito próximos o computador perde dígitos (1 − cos x perto de 0): se não convergir, tenta mais longe
+    const r = limiteEm(f, a, dir, 3);
+    return r.tipo === 'num' || r.tipo === 'inf' || r.tipo === 'indef' ? r : limiteEm(f, a, dir, 2);
+  }
+
+  function limiteEm(f, a, dir, k0) {
+    const noInfinito = !Number.isFinite(a);
+    const ponto = k => (noInfinito ? Math.sign(a) * Math.pow(10, k + 1) : a + dir * Math.pow(10, -k));
+    const v = [0, 1, 2, 3].map(i => f(ponto(k0 + i)));
+    if (v.every(Number.isNaN)) return { tipo: 'indef' };
+    if (v.some(Number.isNaN)) return { tipo: 'nao', motivo: 'f deixa de existir perto desse valor' };
+    if (v.every(y => y === v[0] && !Number.isFinite(y))) return { tipo: 'inf', s: Math.sign(v[0]) };
+    if (v.some(y => !Number.isFinite(y))) return { tipo: 'nao', motivo: 'f explode perto desse valor' };
+    const d0 = Math.abs(v[1] - v[0]), d1 = Math.abs(v[2] - v[1]), d2 = Math.abs(v[3] - v[2]);
+    const escala = Math.max(1, Math.abs(v[3]));
+    if (d2 <= 1e-5 * escala || (d2 < 0.5 * d1 && d2 <= 1e-2 * escala)) {
+      const b = bonito(v[3], Math.max(1.5 * d2, 1e-6));
+      return { tipo: 'num', v: b.v, texto: b.texto };
+    }
+    const subindo = v[1] > v[0] && v[2] > v[1] && v[3] > v[2], descendo = v[1] < v[0] && v[2] < v[1] && v[3] < v[2];
+    if ((subindo || descendo) && d2 >= 0.5 * d1 && d1 >= 0.5 * d0 && Math.abs(v[3]) - Math.abs(v[0]) > 0.5 + 0.1 * Math.abs(v[0])) return { tipo: 'inf', s: subindo ? 1 : -1 };
+    return { tipo: 'nao', motivo: 'f oscila e não se aproxima de um valor' };
+  }
+
+  /** Limite nos dois lados: devolve { esq, dir, bi }; bi é o limite bilateral (ou 'nao' se os lados discordam). */
+  function limiteBilateral(f, a) {
+    const esq = limite(f, a, -1), dir = limite(f, a, 1);
+    let bi;
+    if (esq.tipo === 'num' && dir.tipo === 'num') {
+      bi = Math.abs(esq.v - dir.v) <= 1e-4 * Math.max(1, Math.abs(esq.v)) ? esq : { tipo: 'nao', motivo: 'os limites laterais são diferentes' };
+    } else if (esq.tipo === 'inf' && dir.tipo === 'inf') {
+      bi = esq.s === dir.s ? esq : { tipo: 'nao', motivo: 'os limites laterais são diferentes' };
+    } else if (esq.tipo === 'indef' || dir.tipo === 'indef') {
+      bi = { tipo: 'nao', motivo: 'f não está definida dos dois lados' };
+    } else bi = { tipo: 'nao', motivo: esq.motivo || dir.motivo || 'os limites laterais são diferentes' };
+    return { esq, dir, bi };
+  }
+
   /**
    * Integral definida pela regra de Simpson, com a troca x = a + (b - a)(3u² - 2u³).
    * A troca concentra pontos nas pontas e zera o jacobiano lá, o que doma singularidades integráveis (1/√x).
@@ -245,7 +311,7 @@ const Expr = (function () {
     return s.replace('.', ',').replace(/-/g, '−');
   }
 
-  return { analisar, compilar, str, derivada, integrar, raizes, constante, formatar };
+  return { analisar, compilar, str, derivada, derivada2, integrar, raizes, constante, formatar, limite, limiteBilateral };
 })();
 
 if (typeof module !== 'undefined') module.exports = Expr;

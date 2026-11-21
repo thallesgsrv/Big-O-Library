@@ -109,3 +109,51 @@ test('formatar usa vírgula e sinal de menos tipográfico', () => {
   assert.equal(Expr.formatar(NaN), 'indefinido');
   assert.equal(Expr.formatar(Infinity), '∞');
 });
+
+const lim = (texto, a, dir) => {
+  const { ast } = Expr.analisar(texto, { variavel: 'x', linhas: [] });
+  return Expr.limite(Expr.compilar(ast, { P: {}, F: {} }), a, dir);
+};
+
+test('limites finitos, inclusive indeterminações 0/0', () => {
+  assert.equal(lim('sen(x)/x', 0, 1).v, 1);
+  assert.equal(lim('sen(x)/x', 0, -1).v, 1);
+  assert.equal(lim('(x^2-1)/(x-1)', 1, 1).v, 2);
+  assert.equal(lim('(1-cos(x))/x^2', 0, 1).texto, '1/2');
+  assert.equal(lim('sqrt(x)', 0, 1).v, 0);
+  assert.equal(lim('x*sen(1/x)', 0, 1).v, 0);
+});
+
+test('limites infinitos e laterais diferentes', () => {
+  assert.deepEqual(lim('1/x', 0, 1), { tipo: 'inf', s: 1 });
+  assert.deepEqual(lim('1/x', 0, -1), { tipo: 'inf', s: -1 });
+  const f = x => 1 / x ** 2;
+  assert.equal(Expr.limiteBilateral(f, 0).bi.tipo, 'inf');
+  const g = x => 1 / x;
+  assert.equal(Expr.limiteBilateral(g, 0).bi.tipo, 'nao');
+  const h = x => Math.abs(x) / x;
+  const r = Expr.limiteBilateral(h, 0);
+  assert.equal(r.esq.v, -1);
+  assert.equal(r.dir.v, 1);
+  assert.equal(r.bi.tipo, 'nao');
+});
+
+test('limites no infinito', () => {
+  assert.equal(lim('(2x^2+1)/(x^2+3)', Infinity).v, 2);
+  assert.equal(lim('1/x', Infinity).v, 0);
+  assert.deepEqual(lim('ln(x)', Infinity), { tipo: 'inf', s: 1 });
+  assert.deepEqual(lim('x^2', -Infinity), { tipo: 'inf', s: 1 });
+  assert.equal(lim('(1+1/x)^x', Infinity).texto, 'e');
+  assert.equal(lim('sen(x)', Infinity).tipo, 'nao');
+});
+
+test('limite onde a função não existe, ou oscila', () => {
+  assert.equal(lim('sqrt(x)', 0, -1).tipo, 'indef');
+  assert.equal(lim('sen(1/x)', 0, 1).tipo, 'nao');
+});
+
+test('segunda derivada', () => {
+  const f = x => x ** 3;
+  perto(Expr.derivada2(f, 2), 12, 1e-4);
+  perto(Expr.derivada2(x => Math.sin(x), 1), -Math.sin(1), 1e-4);
+});

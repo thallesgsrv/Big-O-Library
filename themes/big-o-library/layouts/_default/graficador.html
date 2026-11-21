@@ -13,7 +13,7 @@
       "title" .Title
       "lead" (.Params.summary | default .Params.description)) }}
 
-  <section class="gf" id="bo-graf" aria-label="Graficador de funções">
+  <section class="gf" id="bo-graf" aria-label="Graficador de funções" data-modo="funcoes">
     <noscript><p class="bo-small">O graficador precisa de JavaScript ligado.</p></noscript>
 
     <div class="gf-plot">
@@ -22,10 +22,9 @@
         <button type="button" class="gf-btn" data-acao="menos" aria-label="Afastar">−</button>
         <button type="button" class="gf-btn" data-acao="reset">Centralizar</button>
         <button type="button" class="gf-btn" data-so="2d" data-acao="prop" aria-pressed="false" title="Mesma escala nos dois eixos">1:1</button>
-        <button type="button" class="gf-btn" data-acao="3d" aria-pressed="false" title="Ver o sólido de revolução">3D</button>
-        <button type="button" class="gf-btn" data-so="3d" data-acao="eixo" hidden></button>
-        <button type="button" class="gf-btn" data-acao="png" aria-label="Baixar imagem">PNG</button>
-        <button type="button" class="gf-btn" data-acao="link" aria-label="Copiar link deste gráfico">Link</button>
+        <button type="button" class="gf-btn" data-acao="tela" aria-pressed="false" title="Para projetar em sala: ocupa a tela toda e aumenta o traço">Tela cheia</button>
+        <button type="button" class="gf-btn" data-acao="png">Baixar PNG</button>
+        <button type="button" class="gf-btn" data-acao="link">Copiar link</button>
       </div>
       <canvas class="gf-canvas" tabindex="0" role="img" aria-label="Gráfico" aria-describedby="gf-teclas-ajuda"></canvas>
       <canvas class="gf-canvas gf-canvas3d" tabindex="0" role="img" aria-label="Sólido de revolução" aria-describedby="gf-teclas-ajuda" hidden></canvas>
@@ -35,37 +34,20 @@
     </div>
 
     <div class="gf-lado">
-      <div class="gf-ctl3d" hidden>
-        <div class="gf-lin">
-          <label class="gf-rng">Giro <input type="range" data-g3="ang" min="0" max="360" step="1" value="360"><output>360°</output></label>
-          <button type="button" class="gf-btn" data-acao="girar" aria-pressed="false" aria-label="Animar o giro">▶</button>
-        </div>
-        <div class="gf-seg" role="group" aria-label="Mostrar">
-          <button type="button" class="gf-btn" data-g3modo="solido" aria-pressed="true">Sólido</button>
-          <button type="button" class="gf-btn" data-g3modo="fatias" aria-pressed="false">Fatias</button>
-        </div>
-        <label class="gf-rng gf-so-fatias" hidden>Quantidade <input type="range" data-g3="n" min="1" max="30" step="1" value="12"><output>12</output></label>
-        <label class="gf-rng gf-so-fatias" hidden>Fatia <input type="range" data-g3="sel" min="1" max="12" step="1" value="1"><output>1</output></label>
-      </div>
-
-      <details class="gf-ex" open>
-        <summary>Exemplos</summary>
-        <div class="gf-chips">
-          {{- range hugo.Data.graficador.exemplos }}
-          <button type="button" class="gf-chip" data-ex="{{ .id }}" title="{{ .dica }}">{{ .nome }}</button>
-          {{- end }}
-        </div>
-      </details>
-
       <div class="gf-curvas">
-        <h2 class="gf-h">Curvas</h2>
+        <h2 class="gf-h">Função</h2>
         <ol class="gf-linhas"></ol>
-        <div class="gf-teclas" role="group" aria-label="Teclado matemático">
-          {{- range $teclas }}
-          <button type="button" class="gf-tecla" data-ins="{{ .i }}">{{ .t }}</button>
-          {{- end }}
+        <div class="gf-linha-acoes">
+          <button type="button" class="gf-btn gf-add" data-acao="add">+ Outra função</button>
+          <details class="gf-teclado">
+            <summary>Teclado matemático</summary>
+            <div class="gf-teclas" role="group" aria-label="Teclado matemático">
+              {{- range $teclas }}
+              <button type="button" class="gf-tecla" data-ins="{{ .i }}">{{ .t }}</button>
+              {{- end }}
+            </div>
+          </details>
         </div>
-        <button type="button" class="gf-btn gf-add" data-acao="add">+ Adicionar curva</button>
       </div>
 
       <div class="gf-params" hidden>
@@ -73,39 +55,160 @@
         <div class="gf-plist"></div>
       </div>
 
-      <fieldset class="gf-analise">
-        <legend class="gf-h">Análise</legend>
-        <div class="gf-grade">
-          <label>Curva <select data-a="linha"></select></label>
-          <label>Até <select data-a="contra"></select></label>
-          <label>a <input data-a="a" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"></label>
-          <label>b <input data-a="b" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"></label>
-          <label>Riemann
-            <select data-a="metodo">
-              <option value="nenhum">desligada</option>
-              <option value="esq">esquerda</option>
-              <option value="dir">direita</option>
-              <option value="med">meio</option>
+      <div class="gf-modos" role="tablist" aria-label="O que estudar">
+        <button type="button" role="tab" class="gf-modo" id="gf-aba-funcoes" data-modo="funcoes" aria-selected="true" aria-controls="gf-painel">Funções</button>
+        <button type="button" role="tab" class="gf-modo" id="gf-aba-limite" data-modo="limite" aria-selected="false" tabindex="-1" aria-controls="gf-painel">Limites</button>
+        <button type="button" role="tab" class="gf-modo" id="gf-aba-derivada" data-modo="derivada" aria-selected="false" tabindex="-1" aria-controls="gf-painel">Derivadas</button>
+        <button type="button" role="tab" class="gf-modo" id="gf-aba-integral" data-modo="integral" aria-selected="false" tabindex="-1" aria-controls="gf-painel">Integrais</button>
+        <button type="button" role="tab" class="gf-modo" id="gf-aba-solido" data-modo="solido" aria-selected="false" tabindex="-1" aria-controls="gf-painel">Sólidos</button>
+      </div>
+
+      <div class="gf-painel" id="gf-painel" role="tabpanel" aria-labelledby="gf-aba-funcoes">
+        <p class="gf-dica"></p>
+        <div class="gf-ex">
+          <span class="gf-ex-t">Exemplos</span>
+          <div class="gf-chips">
+            {{- range hugo.Data.graficador.exemplos }}
+            <button type="button" class="gf-chip" data-ex="{{ .id }}" data-modo="{{ .modo | default "funcoes" }}" title="{{ .dica }}">{{ .nome }}</button>
+            {{- end }}
+          </div>
+        </div>
+
+        <div class="gf-bloco" data-m="limite derivada integral solido">
+          <label class="gf-campo" data-sel="linha">Função <select data-a="linha"></select></label>
+        </div>
+
+        <div class="gf-bloco" data-m="limite">
+          <div class="gf-grade">
+            <label class="gf-campo">x tende a
+              <select data-a="ltipo">
+                <option value="valor">um valor</option>
+                <option value="mais">+∞</option>
+                <option value="menos">−∞</option>
+              </select>
+            </label>
+            <label class="gf-campo" data-so-valor>Valor <input data-a="la" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"></label>
+          </div>
+          <label class="gf-campo" data-so-valor>Aproximar por
+            <select data-a="lado">
+              <option value="ambos">os dois lados</option>
+              <option value="esq">a esquerda (x &lt; a)</option>
+              <option value="dir">a direita (x &gt; a)</option>
             </select>
           </label>
-          <label>n <span class="gf-n"><input data-a="n" type="range" min="1" max="200" step="1"><output></output></span></label>
+          <label class="gf-rng">Distância <input type="range" data-a="lk" min="0" max="6" step="0.05"><output></output></label>
+          <details class="gf-tab" open>
+            <summary>Tabela de aproximação</summary>
+            <div class="gf-tab-corpo gf-lim-tab"></div>
+          </details>
         </div>
-        <label class="gf-chk"><input type="checkbox" data-a="sombra"> Sombrear</label>
-        <label class="gf-chk"><input type="checkbox" data-a="deriv"> Derivada de f</label>
-        <div class="gf-pontos" hidden>
-          <p class="bo-small gf-pontos-t"></p>
-          <div class="gf-chips"></div>
-        </div>
-        <label class="gf-x0">f em x = <input data-a="x0" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done" placeholder="1"></label>
-        <p class="gf-x0-res"></p>
-        <dl class="gf-res"></dl>
-        <p class="bo-small gf-nota">Valores numéricos. “Sem resultado”: a função não existe no intervalo ou a integral diverge.</p>
-      </fieldset>
 
-      <details class="gf-tab">
-        <summary>Tabela de valores</summary>
-        <div class="gf-tab-corpo"></div>
-      </details>
+        <div class="gf-bloco" data-m="derivada">
+          <label class="gf-campo">Ponto x₀ <input data-a="dx0" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"></label>
+          <input class="gf-rng-sozinho" type="range" data-a="dx0r" min="-5" max="5" step="any" aria-label="Mover o ponto x₀">
+          <label class="gf-chk"><input type="checkbox" data-a="dtan"> <span class="gf-sw" style="--cor: var(--gf-c1)"></span>Reta tangente</label>
+          <label class="gf-chk"><input type="checkbox" data-a="dsec"> <span class="gf-sw" style="--cor: var(--gf-c3)"></span>Reta secante</label>
+          <div class="gf-rng gf-rng-sec" hidden>
+            <span>Distância h</span>
+            <input type="range" data-a="dk" min="0" max="3.5" step="0.05" aria-label="Distância h da secante">
+            <output></output>
+            <button type="button" class="gf-btn" data-acao="secante" aria-pressed="false" aria-label="Animar h até zero">▶</button>
+          </div>
+          <label class="gf-chk"><input type="checkbox" data-a="d1"> <span class="gf-sw" style="--cor: var(--gf-c2)"></span>Gráfico de f′ (tracejado)</label>
+          <label class="gf-chk"><input type="checkbox" data-a="d2"> <span class="gf-sw" style="--cor: var(--gf-c4)"></span>Gráfico de f″ (pontilhado)</label>
+          <div class="gf-pontos" data-pts="crit" hidden>
+            <p class="bo-small gf-pontos-t"></p>
+            <div class="gf-chips"></div>
+          </div>
+        </div>
+
+        <div class="gf-bloco" data-m="integral solido">
+          <div class="gf-grade">
+            <label class="gf-campo" data-sel="contra">Até <select data-a="contra"></select></label>
+            <label class="gf-campo">a <input data-a="a" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"></label>
+            <label class="gf-campo">b <input data-a="b" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"></label>
+          </div>
+          <div class="gf-pontos" data-pts="int" hidden>
+            <p class="bo-small gf-pontos-t"></p>
+            <div class="gf-chips"></div>
+          </div>
+        </div>
+
+        <div class="gf-bloco" data-m="integral">
+          <div class="gf-grade">
+            <label class="gf-campo">Retângulos de Riemann
+              <select data-a="metodo">
+                <option value="nenhum">desligados</option>
+                <option value="esq">esquerda</option>
+                <option value="dir">direita</option>
+                <option value="med">meio</option>
+              </select>
+            </label>
+            <label class="gf-campo">Quantidade (n) <span class="gf-n"><input data-a="n" type="range" min="1" max="200" step="1" aria-label="Quantidade de retângulos"><output></output></span></label>
+          </div>
+          <label class="gf-chk"><input type="checkbox" data-a="sombra"> Sombrear a área</label>
+        </div>
+
+        <div class="gf-bloco" data-m="solido">
+          <div class="gf-seg gf-seg-3" role="group" aria-label="O que estudar">
+            <button type="button" class="gf-btn" data-tipo3="rev" aria-pressed="true">Volume</button>
+            <button type="button" class="gf-btn" data-tipo3="sec" aria-pressed="false">Seções</button>
+            <button type="button" class="gf-btn" data-tipo3="sup" aria-pressed="false">Superfície</button>
+          </div>
+          <p class="bo-small gf-dica-tipo"></p>
+          <div class="gf-grade" data-so-eixo>
+            <label class="gf-campo">Girar em torno de
+              <select data-a="eixo">
+                <option value="x">o eixo x</option>
+                <option value="y">o eixo y</option>
+                <option value="h">uma reta y = k</option>
+                <option value="v">uma reta x = k</option>
+              </select>
+            </label>
+            <label class="gf-campo" data-so-k>k <input data-a="ek" type="text" autocomplete="off" autocapitalize="off" spellcheck="false" enterkeyhint="done"></label>
+          </div>
+          <label class="gf-campo" data-so-sec>Forma de cada corte
+            <select data-a="sec">
+              <option value="quad">quadrado</option>
+              <option value="semi">semicírculo</option>
+              <option value="tri">triângulo equilátero</option>
+            </select>
+          </label>
+          <div class="gf-seg" role="group" aria-label="Visualização">
+            <button type="button" class="gf-btn" data-vista="2d" aria-pressed="false">Desenho 2D</button>
+            <button type="button" class="gf-btn" data-vista="3d" aria-pressed="true">Em 3D</button>
+          </div>
+          <div class="gf-ctl3d" hidden>
+            <div class="gf-lin" data-so-giro>
+              <label class="gf-rng">Giro <input type="range" data-g3="ang" min="0" max="360" step="1" value="360"><output>360°</output></label>
+              <button type="button" class="gf-btn" data-acao="girar" aria-pressed="false" aria-label="Animar o giro">▶</button>
+            </div>
+            <div class="gf-seg" role="group" aria-label="Mostrar">
+              <button type="button" class="gf-btn" data-g3modo="solido" aria-pressed="true">Sólido</button>
+              <button type="button" class="gf-btn" data-g3modo="fatias" aria-pressed="false">Fatias</button>
+            </div>
+            <label class="gf-rng gf-so-fatias" hidden>Quantidade <input type="range" data-g3="n" min="1" max="30" step="1" value="12"><output>12</output></label>
+            <label class="gf-rng gf-so-fatias" hidden>Destacar <input type="range" data-g3="sel" min="1" max="12" step="1" value="1"><output>1</output></label>
+            <div class="gf-seg">
+              <button type="button" class="gf-btn" data-so-giro data-acao="corte" aria-pressed="false" title="Tira um pedaço do sólido para mostrar o que há por dentro">Cortar um pedaço</button>
+              <button type="button" class="gf-btn" data-acao="ponta" title="Olha ao longo do eixo de giro: mostra anéis e buracos">Ver pela ponta</button>
+            </div>
+          </div>
+          <details class="gf-tab gf-passos" open>
+            <summary>Como se calcula</summary>
+            <div class="gf-tab-corpo gf-passos-corpo"></div>
+          </details>
+        </div>
+
+        <dl class="gf-res"></dl>
+        <p class="gf-resmsg"></p>
+        <p class="bo-small gf-nota" data-m="limite derivada integral solido">Valores numéricos. “Sem resultado”: a função não existe no intervalo ou o cálculo diverge.</p>
+
+        <details class="gf-tab gf-tab-vals" data-m="funcoes">
+          <summary>Tabela de valores</summary>
+          <div class="gf-tab-corpo"></div>
+        </details>
+      </div>
     </div>
   </section>
 

@@ -2,27 +2,33 @@
 # linhas: tipo = y (y = f(x)), polar (r(θ)) ou param (x(t), y(t)); f é a expressão; g só vale na paramétrica (y(t)); t0 e t1 são o intervalo de θ ou t.
 # analise: linha e contra são posições na lista de linhas (contra: eixo = região entre a curva e o eixo x).
 # vista3d abre o exemplo no sólido de revolução: eixo (x ou y), modo (solido ou fatias), n (fatias) e ang (giro em graus, 360 = volta inteira).
+# modo: funcoes (padrão), limite, derivada, integral ou solido (a aba que o exemplo abre).
+# analise por modo: integral e solido usam linha, contra, a, b, n, metodo, sombra;
+#   limite usa linha, ltipo (valor, mais, menos), la, lado (ambos, esq, dir) e lk (distância: h = 10^-lk);
+#   derivada usa linha, dx0, dtan, dsec, dk (h = 10^-dk), d1 (mostra f′) e d2 (mostra f″).
 # janela: [xmín, xmáx, ymín, ymáx]. prop: true fixa a escala 1:1.
 exemplos:
   - id: inicio
     nome: Comece por aqui
-    dica: Senoide com controle de amplitude
+    dica: "Senoide com controle de amplitude"
     linhas:
       - {tipo: y, f: "a*sen(x)"}
     analise: {linha: 0, contra: eixo, a: "0", b: "pi", n: 8, metodo: nenhum, sombra: true, deriv: false}
     janela: [-7, 7, -4.5, 4.5]
 
   - id: riemann
+    modo: integral
     nome: Soma de Riemann
-    dica: Retângulos sob x² entre 0 e 2
+    dica: "Retângulos sob x² entre 0 e 2"
     linhas:
       - {tipo: y, f: "x^2"}
     analise: {linha: 0, contra: eixo, a: "0", b: "2", n: 8, metodo: med, sombra: true, deriv: false}
     janela: [-0.5, 2.5, -1, 5]
 
   - id: area-entre-curvas
+    modo: integral
     nome: Área entre curvas
-    dica: 4 − x² e x + 2
+    dica: "4 − x² e x + 2"
     linhas:
       - {tipo: y, f: "4 - x^2"}
       - {tipo: y, f: "x + 2"}
@@ -30,43 +36,111 @@ exemplos:
     janela: [-4, 3, -3, 6]
 
   - id: discos
-    nome: Volume por discos
-    dica: √x em torno do eixo x (8π)
+    modo: solido
+    nome: Discos
+    dica: "√x em torno do eixo x (8π)"
     linhas:
       - {tipo: y, f: "sqrt(x)"}
-    analise: {linha: 0, contra: eixo, a: "0", b: "4", n: 8, metodo: nenhum, sombra: true, deriv: false}
+    analise: {linha: 0, contra: eixo, a: "0", b: "4", n: 8, metodo: nenhum, sombra: true, tipo3: rev, eixo: x}
     janela: [-1, 5, -1, 3]
     vista3d: {eixo: x, modo: fatias, n: 10, ang: 270}
 
   - id: cascas
-    nome: Volume por cascas
-    dica: 2x − x² em torno do eixo y (8π/3)
+    modo: solido
+    nome: Cascas
+    dica: "2x − x² em torno do eixo y (8π/3)"
     linhas:
       - {tipo: y, f: "2x - x^2"}
-    analise: {linha: 0, contra: eixo, a: "0", b: "2", n: 8, metodo: nenhum, sombra: true, deriv: false}
+    analise: {linha: 0, contra: eixo, a: "0", b: "2", n: 8, metodo: nenhum, sombra: true, tipo3: rev, eixo: y}
     janela: [-1, 3, -1, 2]
     vista3d: {eixo: y, modo: fatias, n: 8, ang: 270}
 
+  - id: aneis
+    modo: solido
+    nome: Anéis
+    dica: "Entre y = x e y = x², em torno do eixo x (2π/15)"
+    linhas:
+      - {tipo: y, f: "x"}
+      - {tipo: y, f: "x^2"}
+    analise: {linha: 0, contra: 1, a: "0", b: "1", n: 8, metodo: nenhum, sombra: true, tipo3: rev, eixo: x}
+    janela: [-0.5, 1.5, -0.5, 1.5]
+    vista3d: {modo: fatias, n: 8, ang: 270}
+
+  - id: aneis-reta
+    modo: solido
+    nome: Em torno de y = −1
+    dica: "x² de 0 a 1 girando em torno da reta y = −1 (13π/15). O buraco aparece sozinho"
+    linhas:
+      - {tipo: y, f: "x^2"}
+    analise: {linha: 0, contra: eixo, a: "0", b: "1", n: 8, metodo: nenhum, sombra: true, tipo3: rev, eixo: h, ek: "-1"}
+    janela: [-1, 2, -2, 2]
+    vista3d: {modo: fatias, n: 8, ang: 270}
+
+  - id: sec-quad
+    modo: solido
+    nome: Cortes quadrados
+    dica: "Base entre √x e x²; cada corte é um quadrado (9/70)"
+    linhas:
+      - {tipo: y, f: "sqrt(x)"}
+      - {tipo: y, f: "x^2"}
+    analise: {linha: 0, contra: 1, a: "0", b: "1", n: 8, metodo: nenhum, sombra: true, tipo3: sec, sec: quad}
+    janela: [-0.5, 1.5, -0.5, 1.5]
+    vista3d: {modo: fatias, n: 10, ang: 360}
+
+  - id: sec-semi
+    modo: solido
+    nome: Cortes semicirculares
+    dica: "Mesma base, cada corte é um semicírculo (9π/560)"
+    linhas:
+      - {tipo: y, f: "sqrt(x)"}
+      - {tipo: y, f: "x^2"}
+    analise: {linha: 0, contra: 1, a: "0", b: "1", n: 8, metodo: nenhum, sombra: true, tipo3: sec, sec: semi}
+    janela: [-0.5, 1.5, -0.5, 1.5]
+    vista3d: {modo: solido, ang: 360}
+
+  - id: cone
+    modo: solido
+    nome: Superfície do cone
+    dica: "y = x de 0 a 2, em torno do eixo x. Confira com π·r·s = 4π√2"
+    linhas:
+      - {tipo: y, f: "x"}
+    analise: {linha: 0, contra: eixo, a: "0", b: "2", n: 8, metodo: nenhum, sombra: false, tipo3: sup, eixo: x}
+    janela: [-0.5, 3, -0.5, 3]
+    vista3d: {modo: fatias, n: 10, ang: 270}
+
+  - id: esfera
+    modo: solido
+    nome: Superfície da esfera
+    dica: "Semicírculo de raio 2 girando: 4πr² = 16π"
+    linhas:
+      - {tipo: y, f: "sqrt(4 - x^2)"}
+    analise: {linha: 0, contra: eixo, a: "-2", b: "2", n: 8, metodo: nenhum, sombra: false, tipo3: sup, eixo: x}
+    janela: [-3, 3, -3, 3]
+    vista3d: {modo: fatias, n: 12, ang: 270}
+
   - id: arco
+    modo: integral
     nome: Comprimento de arco
-    dica: x^(3/2) entre 0 e 4
+    dica: "x^(3/2) entre 0 e 4"
     linhas:
       - {tipo: y, f: "x^(3/2)"}
-    analise: {linha: 0, contra: eixo, a: "0", b: "4", n: 8, metodo: nenhum, sombra: false, deriv: true}
+    analise: {linha: 0, contra: eixo, a: "0", b: "4", n: 8, metodo: nenhum, sombra: false}
     janela: [-1, 5, -1, 9]
 
   - id: superficie
-    nome: Área de superfície
-    dica: √x em torno do eixo x
+    modo: solido
+    nome: Superfície de √x
+    dica: "Só a casca de √x girando em torno do eixo x"
     linhas:
       - {tipo: y, f: "sqrt(x)"}
-    analise: {linha: 0, contra: eixo, a: "0", b: "1", n: 8, metodo: nenhum, sombra: true, deriv: false}
+    analise: {linha: 0, contra: eixo, a: "0", b: "1", n: 8, metodo: nenhum, sombra: false, tipo3: sup, eixo: x}
     janela: [-0.5, 1.5, -0.5, 1.5]
-    vista3d: {eixo: x, modo: solido, ang: 360}
+    vista3d: {eixo: x, modo: solido, ang: 270}
 
   - id: taylor
+    modo: integral
     nome: Polinômio de Taylor
-    dica: sen(x) e Taylor de grau 5
+    dica: "sen(x) e Taylor de grau 5"
     linhas:
       - {tipo: y, f: "sen(x)"}
       - {tipo: y, f: "x - x^3/6 + x^5/120"}
@@ -75,7 +149,7 @@ exemplos:
 
   - id: cardioide
     nome: Cardioide (polar)
-    dica: r = 1 + cos θ
+    dica: "r = 1 + cos θ"
     linhas:
       - {tipo: polar, f: "1 + cos(θ)", t0: "0", t1: "2pi"}
     janela: [-1.5, 2.5, -2, 2]
@@ -83,8 +157,89 @@ exemplos:
 
   - id: cicloide
     nome: Cicloide (paramétrica)
-    dica: x = t − sen t, y = 1 − cos t
+    dica: "x = t − sen t, y = 1 − cos t"
     linhas:
       - {tipo: param, f: "t - sen(t)", g: "1 - cos(t)", t0: "0", t1: "4pi"}
     janela: [-1, 13, -1, 3]
     prop: true
+
+  - id: lim-sen
+    modo: limite
+    nome: sen(x)/x em 0
+    dica: "Limite fundamental, igual a 1"
+    linhas:
+      - {tipo: y, f: "sen(x)/x"}
+    analise: {linha: 0, ltipo: valor, la: "0", lado: ambos, lk: 1}
+    janela: [-10, 10, -1.5, 2]
+
+  - id: lim-removivel
+    modo: limite
+    nome: Buraco na curva
+    dica: "(x² − 1)/(x − 1) em x = 1 (limite 2, mas f(1) não existe)"
+    linhas:
+      - {tipo: y, f: "(x^2 - 1)/(x - 1)"}
+    analise: {linha: 0, ltipo: valor, la: "1", lado: ambos, lk: 1}
+    janela: [-2, 4, -1, 5]
+
+  - id: lim-salto
+    modo: limite
+    nome: Laterais diferentes
+    dica: "|x|/x em 0, sem limite"
+    linhas:
+      - {tipo: y, f: "abs(x)/x"}
+    analise: {linha: 0, ltipo: valor, la: "0", lado: ambos, lk: 1}
+    janela: [-4, 4, -3, 3]
+
+  - id: lim-assintota
+    modo: limite
+    nome: Limite infinito
+    dica: "1/x² em 0 tende a +∞"
+    linhas:
+      - {tipo: y, f: "1/x^2"}
+    analise: {linha: 0, ltipo: valor, la: "0", lado: ambos, lk: 1}
+    janela: [-4, 4, -1, 10]
+
+  - id: lim-infinito
+    modo: limite
+    nome: x tende ao infinito
+    dica: "(2x² + 1)/(x² + 3) tende a 2"
+    linhas:
+      - {tipo: y, f: "(2x^2 + 1)/(x^2 + 3)"}
+    analise: {linha: 0, ltipo: mais, la: "0", lado: ambos, lk: 1}
+    janela: [-10, 30, -1, 3]
+
+  - id: lim-e
+    modo: limite
+    nome: O número e
+    dica: "(1 + 1/x)^x quando x tende a +∞"
+    linhas:
+      - {tipo: y, f: "(1 + 1/x)^x"}
+    analise: {linha: 0, ltipo: mais, la: "0", lado: ambos, lk: 1}
+    janela: [-2, 40, 0, 4]
+
+  - id: deriv-tangente
+    modo: derivada
+    nome: Reta tangente
+    dica: "Tangente a x² em x = 1"
+    linhas:
+      - {tipo: y, f: "x^2"}
+    analise: {linha: 0, dx0: "1", dtan: true, dsec: false, dk: 0, d1: false, d2: false}
+    janela: [-3, 3, -1, 6]
+
+  - id: deriv-secante
+    modo: derivada
+    nome: Da secante à tangente
+    dica: "Diminua h e veja a secante virar a tangente"
+    linhas:
+      - {tipo: y, f: "sen(x)"}
+    analise: {linha: 0, dx0: "1", dtan: true, dsec: true, dk: 0, d1: false, d2: false}
+    janela: [-5, 6, -3, 3]
+
+  - id: deriv-criticos
+    modo: derivada
+    nome: Pontos críticos
+    dica: "x³ − 3x, com f′ e f″"
+    linhas:
+      - {tipo: y, f: "x^3 - 3x"}
+    analise: {linha: 0, dx0: "-1", dtan: true, dsec: false, dk: 0, d1: true, d2: true}
+    janela: [-4, 4, -5, 5]

@@ -99,12 +99,13 @@ a:hover {
   transition: transform 0.25s ease;
 }
 .hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)):hover,
-.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)):focus-visible {
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)):focus-visible,
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg))[aria-current="page"] {
   color: var(--ac);
 }
 .hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)):hover::after,
 .hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)):focus-visible::after,
-.hextra-nav-container nav a[aria-current="page"]::after {
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg))[aria-current="page"]::after {
   transform: scaleX(1);
 }
 
@@ -3562,7 +3563,7 @@ html .bo-term .highlight pre.chroma .nt {
 
 /* ---------- {{< fila >}}: array de uma fila com head e tail ---------- */
 .bo-fila {
-  margin: 1.1rem 0 1.4rem;
+  margin: 1.25rem 0;
   padding: 16px 18px 12px;
   border: 1px solid var(--line);
   border-radius: var(--r-lg);
@@ -3618,13 +3619,14 @@ html .bo-term .highlight pre.chroma .nt {
   text-align: center;
   white-space: nowrap;
 }
-.bo-fila figcaption {
+.bo-fila .bo-fila-cap {
   margin-top: 8px;
-  color: var(--body);
-  font-size: 0.85rem;
+  color: var(--mute);
+  font-size: 14px;
+  line-height: 1.6;
   text-align: left;
 }
-.bo-fila figcaption code {
+.bo-fila .bo-fila-cap code {
   font-size: 0.85em;
 }
 .bo-fila-leg {

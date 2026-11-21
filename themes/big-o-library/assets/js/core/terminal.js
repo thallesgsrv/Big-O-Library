@@ -151,11 +151,11 @@ function runCmd(d, p) {
       return [
         link('complexidade', 'jogo: qual a complexidade deste código?', d.lab + 'complexidade/'),
         link('mapa', 'grafo de pré-requisitos das disciplinas', d.lab + 'mapa/'),
-        link('graficador', 'funções, área, volume e sólidos em 3D', d.lab + 'graficador/')
+        link('graficador', 'funções, limites, derivadas, integrais, volumes e superfícies de revolução em 3D', d.lab + 'graficador/')
       ];
     case 'jogo': return [link('complexidade', 'jogo: qual a complexidade deste código?', d.lab + 'complexidade/')];
     case 'mapa': return [link('mapa', 'grafo de pré-requisitos das disciplinas', d.lab + 'mapa/')];
-    case 'grafico': return [link('graficador', 'funções, área, volume e sólidos em 3D', d.lab + 'graficador/')];
+    case 'grafico': return [link('graficador', 'funções, limites, derivadas, integrais, volumes e superfícies de revolução em 3D', d.lab + 'graficador/')];
     case 'theme': case 'tema':
       return [act('alternar tema', 'agora: ' + (themeNow() === 'dark' ? 'escuro' : 'claro'), 'theme')];
     case 'clear': return [act('limpar', '', 'clear')];

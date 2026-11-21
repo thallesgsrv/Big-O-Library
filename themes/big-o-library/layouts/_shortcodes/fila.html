@@ -31,7 +31,7 @@ Uso:  {{< fila v="a,b,c" head="0" tail="2" >}}
   {{- $txt := cond (eq $v "null") "vazia" (printf "com \"%s\"" $v) -}}
   {{- $desc = $desc | append (printf "posição %d %s, %s" $i $txt (cond $dentro "dentro da fila" "fora da fila")) -}}
 {{- end -}}
-<figure class="bo-fila" role="group" tabindex="0" aria-label="Array da fila: {{ delimit $desc "; " }}. head = {{ $head }}, tail = {{ $tail }}.">
+<div class="bo-fila" role="group" tabindex="0" aria-label="Array da fila: {{ delimit $desc "; " }}. head = {{ $head }}, tail = {{ $tail }}.">
   <div class="bo-fila-row" aria-hidden="true">
     {{- range $i, $v := $vals }}
     {{- $dentro := false -}}
@@ -46,9 +46,9 @@ Uso:  {{< fila v="a,b,c" head="0" tail="2" >}}
     </div>
     {{- end }}
   </div>
-  <figcaption aria-hidden="true"><code>head</code> = {{ $head }} · <code>tail</code> = {{ $tail }}{{ if lt $head 0 }} · fila vazia{{ end }}</figcaption>
+  <div class="bo-fila-cap" aria-hidden="true"><code>head</code> = {{ $head }} · <code>tail</code> = {{ $tail }}{{ if lt $head 0 }} · fila vazia{{ end }}</div>
   {{- if not (.Page.Store.Get "fila-legenda") }}
   {{- .Page.Store.Set "fila-legenda" true }}
   <p class="bo-fila-leg" aria-hidden="true"><span class="bo-fila-k is-in"></span> dentro da fila <span class="bo-fila-k is-out"></span> fora da fila (posição livre ou valor antigo)</p>
   {{- end }}
-</figure>
+</div>
