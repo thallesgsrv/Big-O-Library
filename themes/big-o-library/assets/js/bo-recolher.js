@@ -54,25 +54,39 @@
     all.forEach(function (d, i) { d.open = was[i]; });
   });
 
+  /* Marca como rolável (tabindex + aria) só o que de fato transborda. Medir tudo ao abrir a seção
+     forçava um layout gigante e travava o celular; agora cada item é medido uma vez, quando chega perto da tela. */
+  function marcar(el) {
+    if (el.scrollWidth <= el.clientWidth + 1) return;
+    el.tabIndex = 0;
+    if (el.tagName === 'TABLE') {
+      el.setAttribute('aria-label', el.getAttribute('aria-label') || 'Tabela, role na horizontal para ver tudo');
+    } else {
+      el.setAttribute('role', 'group');
+      el.setAttribute('aria-label', 'Equação, role na horizontal para ver tudo');
+    }
+  }
+  var visto = typeof WeakSet === 'function' ? new WeakSet() : null;
+  var io = 'IntersectionObserver' in window ? new IntersectionObserver(function (es) {
+    es.forEach(function (e) {
+      if (!e.isIntersecting) return;
+      io.unobserve(e.target);
+      marcar(e.target);
+    });
+  }, { rootMargin: '300px 0px' }) : null;
   function marcarRolagem(root) {
-    root.querySelectorAll('table').forEach(function (t) {
-      if (t.scrollWidth > t.clientWidth + 1) {
-        t.tabIndex = 0;
-        t.setAttribute('aria-label', t.getAttribute('aria-label') || 'Tabela, role na horizontal para ver tudo');
-      }
-    });
-    root.querySelectorAll('.katex-display').forEach(function (m) {
-      if (m.scrollWidth > m.clientWidth + 1) {
-        m.tabIndex = 0;
-        m.setAttribute('role', 'group');
-        m.setAttribute('aria-label', 'Equação, role na horizontal para ver tudo');
-      }
-    });
+    var itens = root.querySelectorAll('table, .katex-display');
+    for (var i = 0; i < itens.length; i++) {
+      var el = itens[i];
+      if (visto) { if (visto.has(el)) continue; visto.add(el); }
+      if (io) io.observe(el); else marcar(el);
+    }
   }
   all.forEach(function (d) {
     d.addEventListener('toggle', function () { if (d.open) marcarRolagem(d); });
   });
+  var ocioso = window.requestIdleCallback || function (f) { return setTimeout(f, 200); };
   window.addEventListener('load', function () {
-    all.forEach(function (d) { if (d.open) marcarRolagem(d); });
+    ocioso(function () { all.forEach(function (d) { if (d.open) marcarRolagem(d); }); });
   });
 })();

@@ -725,7 +725,6 @@ a.bo-card:is(:hover, :active, :focus-visible) .bo-go {
   overflow-y: hidden;
   white-space: nowrap;
   scrollbar-width: none;
-  -webkit-overflow-scrolling: touch;
   overscroll-behavior-x: contain;
 }
 .bo-crumbs-list::-webkit-scrollbar {
@@ -1248,7 +1247,6 @@ html {
   overflow-x: auto;
   overflow-y: hidden;
   padding: 0.35em 0.1em;
-  -webkit-overflow-scrolling: touch;
 }
 .katex-display:focus-visible {
   outline: 2px solid var(--ac);
@@ -1265,11 +1263,9 @@ html {
   display: block;
   max-width: 100%;
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
 }
 .bo-page .content pre {
   overflow-x: auto;
-  -webkit-overflow-scrolling: touch;
   line-height: 1.6;
   tab-size: 2;
 }
@@ -3747,4 +3743,53 @@ html .bo-term .highlight pre.chroma .nt {
 /* Tabelas: 14 px era menor que o texto; sobem um degrau (extrapolação, ver guia). Código: ver .bo-term. */
 .bo-page .content table {
   font-size: 0.9375rem;
+}
+
+/* ───── Desempenho no celular ─────
+   Páginas com muitas fórmulas têm dezenas de milhares de elementos. Ao abrir uma seção (lista de
+   exercícios, gabarito) o navegador montava tudo de uma vez e travava. Com content-visibility, só o
+   que está perto da tela é desenhado; o resto espera. O "auto" no tamanho guarda a altura real já
+   vista, então a rolagem não pula. */
+.bo-sec-body > *,
+.bo-doc .content details > div > * {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 5rem;
+}
+.bo-sec-body > .katex-display,
+.bo-sec-body > p:has(> .katex-display) {
+  contain-intrinsic-size: auto 3.5rem;
+}
+.bo-sec-body > table,
+.bo-sec-body > pre,
+.bo-sec-body > figure,
+.bo-sec-body > .bo-qz {
+  contain-intrinsic-size: auto 12rem;
+}
+.bo-sec-body > .bo-qz-q,
+.bo-sec-body .bo-qz-q {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 14rem;
+}
+details.bo-sec > summary {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (max-width: 640px) {
+  /* O desfoque do cabeçalho fixo é redesenhado a cada quadro da rolagem; no celular pesa muito */
+  .hextra-nav-container-blur {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: color-mix(in srgb, var(--bg) 97%, transparent) !important;
+  }
+  .bo-sec,
+  .bo-person {
+    box-shadow: none;
+  }
+}
+@media print {
+  .bo-sec-body > *,
+  .bo-doc .content details > div > *,
+  .bo-sec-body .bo-qz-q {
+    content-visibility: visible;
+  }
 }
