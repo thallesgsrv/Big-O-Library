@@ -80,17 +80,18 @@ data/disciplinas.yaml              disciplinas e pré-requisitos do mapa (com ou
 data/conselho.yaml                 Conselho dos Sábios
 data/jogo.yaml                     trechos do jogo "Qual a complexidade?"
 themes/big-o-library/layouts/      templates do site (páginas, cards, parciais bo-*)
-themes/big-o-library/assets/css/   estilo do projeto (custom.css)
+themes/big-o-library/assets/css/   estilo do projeto (projeto/, veja o README da pasta)
 themes/big-o-library/assets/viz/   motor das animações de algoritmos (viz.js / viz.css)
 themes/big-o-library/archetypes/   modelo para novas disciplinas
+docs/                              guias para quem desenvolve (este arquivo, animações, quiz e pedagógico)
 scripts/                           validar.py, a11y.js, deploy.sh, baixar_fontes.py, baixar_vendor.py e tests/ (testes das animações)
 package.json                       ferramentas de manutenção (CSS, testes, lint, a11y); contribuir não precisa de Node
 hugo.yaml                          configuração do Hugo
-.github/                           CONTRIBUTING, DESENVOLVIMENTO, código de conduta, guias (animações e quiz), configuração dos links (lychee/), regras do markdownlint e workflows do CI
+.github/                           CONTRIBUTING, código de conduta, configuração dos links (lychee/), regras do markdownlint e workflows do CI
 ```
 
-Para criar uma animação de algoritmo, veja o [guia de animações](.github/GUIA-ANIMACOES.md).
-Para colocar um quiz interativo em qualquer página, veja o [guia de quiz](.github/GUIA-QUIZ.md).
+Para criar uma animação de algoritmo, veja o [guia de animações](GUIA-ANIMACOES.md).
+Para colocar um quiz interativo em qualquer página, veja o [guia de quiz](GUIA-QUIZ.md).
 
 ## Checagens de qualidade
 

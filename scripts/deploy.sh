@@ -18,7 +18,7 @@ fi
 if ! grep -q "hugo v${HUGO_ESPERADO}[-+ ]" <<<"$HUGO_ATUAL" || ! grep -q "+extended" <<<"$HUGO_ATUAL"; then
   echo "Hugo incorreto. Esperado: v${HUGO_ESPERADO} extended." >&2
   echo "Encontrado: ${HUGO_ATUAL:-hugo não encontrado no PATH}" >&2
-  echo "Veja .github/DESENVOLVIMENTO.md para instalar a versão certa." >&2
+  echo "Veja docs/DESENVOLVIMENTO.md para instalar a versão certa." >&2
   exit 1
 fi
 

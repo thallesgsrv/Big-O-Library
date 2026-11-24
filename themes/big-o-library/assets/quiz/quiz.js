@@ -1,4 +1,4 @@
-/* Quiz interativo: motor de {{< quiz >}} / {{< questao >}}. Guia: .github/GUIA-QUIZ.md
+/* Quiz interativo: motor de {{< quiz >}} / {{< questao >}}. Guia: docs/GUIA-QUIZ.md
    O HTML das questões já vem pronto do Hugo (com fórmulas); aqui só mostramos, escondemos e corrigimos. */
 (function () {
   "use strict";

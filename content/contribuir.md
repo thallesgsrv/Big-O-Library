@@ -255,7 +255,7 @@ Regras rápidas:
 - Use como alternativas erradas os enganos mais comuns, e não respostas absurdas.
 - Perguntas de **construir** (montar uma tabela, desenhar uma árvore) continuam como exercício com `Gabarito`.
 
-Todos os parâmetros (`modo`, `embaralhar`, `fixa`…), as dicas e a lista de erros de build estão no [guia de quiz](https://github.com/thallesgsrv/Big-O-Library/blob/main/.github/GUIA-QUIZ.md).
+Todos os parâmetros (`modo`, `embaralhar`, `fixa`…), as dicas e a lista de erros de build estão no [guia de quiz](https://github.com/thallesgsrv/Big-O-Library/blob/main/docs/GUIA-QUIZ.md).
 
 **Animação de algoritmo**, para páginas de ordenação, grafos e árvores. Se o algoritmo já existe no site, basta uma linha na página:
 
@@ -263,7 +263,7 @@ Todos os parâmetros (`modo`, `embaralhar`, `fixa`…), as dicas e a lista de er
 {{</* viz algoritmo="merge" */>}}
 ```
 
-Os algoritmos disponíveis hoje são `selection`, `insertion`, `merge`, `quick`, `counting`, `radix`, `bfs`, `dfs`, `dijkstra`, `segtree`, `lazy` e `lca`. Para animar um algoritmo novo, é preciso registrá-lo em `viz.js`; o passo a passo está no [guia de animações](https://github.com/thallesgsrv/Big-O-Library/blob/main/.github/GUIA-ANIMACOES.md).
+Os algoritmos disponíveis hoje são `selection`, `insertion`, `merge`, `quick`, `counting`, `radix`, `bfs`, `dfs`, `dijkstra`, `segtree`, `lazy` e `lca`. Para animar um algoritmo novo, é preciso registrá-lo em `viz.js`; o passo a passo está no [guia de animações](https://github.com/thallesgsrv/Big-O-Library/blob/main/docs/GUIA-ANIMACOES.md).
 
 **Imagens e arquivos** ficam na mesma pasta do `index.md` e são referenciados só pelo nome:
 
