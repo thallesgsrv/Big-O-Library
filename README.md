@@ -73,7 +73,7 @@ Use `git clone`, não o ZIP do GitHub: o site lê as datas de atualização do h
 
 Prefere não instalar nada? O repositório tem um [`.devcontainer`](.devcontainer/devcontainer.json) com Hugo, Node e Python já configurados, pronto para o GitHub Codespaces.
 
-Instalação por sistema (Linux, macOS e Windows), erros comuns, checagens de qualidade e publicação estão em [DESENVOLVIMENTO.md](.github/DESENVOLVIMENTO.md).
+Instalação por sistema (Linux, macOS e Windows), erros comuns, checagens de qualidade e publicação estão em [DESENVOLVIMENTO.md](docs/DESENVOLVIMENTO.md).
 
 ## Contribuindo
 
@@ -88,9 +88,9 @@ Depois é só preencher o conteúdo, conferir com `hugo server` e abrir um Pull 
 | Quero... | Onde ver |
 | :-- | :-- |
 | Escrever ou melhorar uma disciplina | [Guia de escrita](https://thallesgsrv.github.io/Big-O-Library/contribuir/) e [CONTRIBUTING.md](.github/CONTRIBUTING.md) |
-| Criar a animação de um algoritmo | [Guia de animações](.github/GUIA-ANIMACOES.md) |
-| Colocar um quiz em uma página | [Guia de quiz](.github/GUIA-QUIZ.md) |
-| Rodar as checagens antes do PR | [Checagens de qualidade](.github/DESENVOLVIMENTO.md#checagens-de-qualidade) |
+| Criar a animação de um algoritmo | [Guia de animações](docs/GUIA-ANIMACOES.md) |
+| Colocar um quiz em uma página | [Guia de quiz](docs/GUIA-QUIZ.md) |
+| Rodar as checagens antes do PR | [Checagens de qualidade](docs/DESENVOLVIMENTO.md#checagens-de-qualidade) |
 
 Material de terceiros entra como link para a fonte original, não como cópia. Ao contribuir, você concorda em seguir o [Código de Conduta](.github/CODE_OF_CONDUCT.md) e em publicar o material próprio sob a licença MIT.
 
