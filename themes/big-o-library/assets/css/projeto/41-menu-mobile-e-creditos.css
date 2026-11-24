@@ -1,0 +1,147 @@
+/* Gaveta do menu no celular (.bo-drawer), células de tabela do .bo-doc e créditos (.bo-credits).
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* Menu mobile */
+.bo-drawer {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bo-drawer li {
+  margin: 0;
+  padding: 0;
+}
+.bo-drawer a {
+  display: block;
+  padding: 14px 16px;
+  border-left: 2px solid var(--line);
+  color: var(--txt);
+  font-size: 18px;
+  text-decoration: none !important;
+  border-radius: 0 8px 8px 0;
+  transition:
+    background 0.2s ease,
+    border-color 0.2s ease,
+    color 0.2s ease;
+}
+.bo-drawer a:hover,
+.bo-drawer a:focus-visible {
+  background: var(--card);
+  border-left-color: var(--ac);
+  color: var(--ac);
+}
+.bo-drawer a[aria-current="page"] {
+  border-left-color: var(--ac);
+  color: var(--ac);
+  background: var(--card);
+}
+
+.bo-doc .content th,
+.bo-doc .content td {
+  min-width: 7.5rem;
+  vertical-align: top;
+}
+
+.bo-credits {
+  margin-top: 32px;
+  padding: 16px 20px;
+  border: 1px dashed var(--axis);
+  background: transparent;
+  font-size: 13px;
+  color: var(--mute);
+}
+.bo-credits-cmd {
+  font-size: 12px;
+  color: var(--ac);
+  margin-bottom: 10px;
+}
+.bo-credits-row {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 24px;
+}
+.bo-credits-by {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 12px;
+}
+.bo-credits-label {
+  color: var(--mute);
+}
+.bo-credits-list {
+  list-style: none;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.bo-credits-list li {
+  margin: 0 !important;
+  padding: 0 !important;
+}
+.bo-credits-list li::marker {
+  content: none;
+}
+.bo-credits-person {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 3px 12px 3px 3px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-pill);
+  background: var(--card);
+  color: var(--txt) !important;
+  text-decoration: none !important;
+  transition:
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+.bo-credits-person.sem-foto,
+.bo-credits-person:not(:has(img)) {
+  padding-left: 12px;
+}
+.bo-credits-person img {
+  width: 24px;
+  height: 24px;
+  margin: 0;
+  border-radius: 50%;
+  object-fit: cover;
+  background: var(--line);
+}
+a.bo-credits-person:hover,
+a.bo-credits-person:focus-visible {
+  border-color: var(--ac);
+  color: var(--ac) !important;
+}
+a.bo-credits-person:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+.bo-credits-dates {
+  color: var(--txt);
+}
+.bo-credits-dates .bo-credits-label {
+  margin-right: 2px;
+}
+.bo-credits-sep {
+  margin: 0 6px;
+  color: var(--axis);
+}
+@media (max-width: 640px) {
+  .bo-credits {
+    padding: 14px 16px;
+  }
+  .bo-credits-sep {
+    display: none;
+  }
+  .bo-credits-dates time {
+    display: inline-block;
+    margin-right: 12px;
+  }
+}

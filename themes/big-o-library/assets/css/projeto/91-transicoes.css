@@ -1,0 +1,32 @@
+/* Transição entre páginas e progresso de leitura (CSS puro).
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* Transição entre páginas e progresso de leitura (CSS puro, só onde o navegador suporta) */
+@media (prefers-reduced-motion: no-preference) {
+  @view-transition {
+    navigation: auto;
+  }
+  ::view-transition-old(root),
+  ::view-transition-new(root) {
+    animation-duration: 0.18s;
+  }
+  @supports (animation-timeline: scroll()) {
+    body.bo-tem-doc::before {
+      content: "";
+      position: fixed;
+      inset: 0 0 auto 0;
+      height: 3px;
+      z-index: 60;
+      pointer-events: none;
+      background: var(--ac);
+      transform-origin: left center;
+      transform: scaleX(0);
+      animation: bo-progresso linear both;
+      animation-timeline: scroll(root block);
+    }
+    @keyframes bo-progresso {
+      to {
+        transform: scaleX(1);
+      }
+    }
+  }
+}

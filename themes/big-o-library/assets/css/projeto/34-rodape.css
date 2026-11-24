@@ -1,0 +1,33 @@
+/* Rodapé (.bo-footer).
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+.bo-footer {
+  margin-top: 56px;
+  border-top: 1px solid var(--line);
+  padding: 28px 0 36px;
+  font-size: 13px;
+  line-height: 1.6;
+  color: var(--mute);
+}
+.bo-footer-in {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  flex-wrap: wrap;
+}
+.bo-footer-col {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.bo-footer-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 20px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.bo-footer-links > li {
+  margin: 0;
+  padding: 0;
+}

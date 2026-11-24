@@ -1,0 +1,30 @@
+/* Links dentro de main, página 404 e links em .bo-small.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+main p a,
+main li a,
+main td a,
+main blockquote a {
+  text-decoration: underline;
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.2em;
+}
+main p a:hover,
+main li a:hover,
+main td a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.bo-404 {
+  min-height: 60vh;
+  min-height: 60svh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 18px;
+  padding-top: 64px;
+  padding-bottom: 64px;
+}
+main .bo-small a {
+  text-decoration: underline;
+  text-underline-offset: 0.2em;
+}

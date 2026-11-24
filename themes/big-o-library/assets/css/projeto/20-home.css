@@ -1,0 +1,80 @@
+/* Hero da home: prompt, título, texto de abertura e botões (.bo-b1, .bo-b2).
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* Home */
+.bo-prompt {
+  font-size: 15px;
+  color: var(--ac);
+}
+.bo-h1 {
+  margin: 0;
+  font:
+    600 clamp(28px, 4vw, 38px)/1.15 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.5px;
+  color: var(--txt);
+}
+.bo-h1 em {
+  font-weight: 500;
+  color: var(--ac);
+}
+.bo-h1-big {
+  font-size: clamp(40px, 7vw, 60px);
+  letter-spacing: -1px;
+}
+.bo-lead {
+  margin: 0;
+  font-size: 16px;
+  line-height: 1.7;
+  color: var(--body);
+  max-width: 520px;
+}
+.bo-hero {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 56px;
+  align-items: center;
+  padding: 72px 0 64px;
+}
+.bo-hero-text {
+  flex: 1 1 380px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  min-width: 0;
+}
+.bo-hero-logo {
+  margin: 4px 0;
+  max-width: 100%;
+  container-type: inline-size;
+  overflow: hidden;
+}
+.bo-hero-logo .lg {
+  max-width: 100%;
+}
+@supports not (width: 1cqi) {
+  .bo-hero-logo .lg {
+    font-size: clamp(40px, 7vw, 72px) !important;
+  }
+}
+.bo-btns {
+  display: flex;
+  gap: 16px;
+  flex-wrap: wrap;
+  margin-top: 8px;
+}
+.bo-b1 {
+  background: var(--btn);
+  color: var(--btn-t) !important;
+  text-decoration: none !important;
+  font-weight: 500;
+  font-size: 15px;
+  padding: 14px 24px;
+}
+.bo-b2 {
+  border: 1px solid var(--line);
+  color: var(--txt) !important;
+  text-decoration: none !important;
+  font-size: 15px;
+  padding: 14px 24px;
+}

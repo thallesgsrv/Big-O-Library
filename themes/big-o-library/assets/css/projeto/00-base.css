@@ -1,0 +1,83 @@
+/* Base: matiz do tema, html/body/links, ajustes do cabeçalho herdado do Hextra, tipografia de .content e .bo-wrap.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+:root {
+  --primary-hue: 30deg;
+  --primary-saturation: 90%;
+  --primary-lightness: 37%;
+  --pc: var(--ac);
+}
+html.dark {
+  --primary-hue: 41deg;
+  --primary-saturation: 100%;
+  --primary-lightness: 50%;
+}
+
+/* Base e Hextra */
+html,
+body,
+html.dark body {
+  background: var(--bg) !important;
+  color: var(--txt);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+}
+a {
+  color: var(--ac);
+}
+a:hover {
+  color: var(--ac-h);
+}
+.hextra-nav-container-blur {
+  box-shadow: 0 1px 0 var(--line) !important;
+}
+.hextra-nav-container nav a,
+.hextra-nav-container nav button {
+  font-size: 14px;
+  text-transform: lowercase;
+  color: var(--mute);
+}
+.hextra-nav-container nav a:hover {
+  color: var(--txt);
+}
+.bo-nav-logo {
+  text-decoration: none;
+}
+.hextra-sidebar-container,
+.hextra-sidebar-container * {
+  font-family: inherit;
+}
+.hextra-sidebar-active-item {
+  color: var(--ac) !important;
+  background: transparent !important;
+}
+.content h1,
+.content h2,
+.content h3 {
+  font-family: Fraunces, Georgia, serif;
+  font-weight: 600;
+  color: var(--txt);
+}
+.content p,
+.content li {
+  color: var(--body);
+  line-height: 1.75;
+}
+.content a {
+  color: var(--ac);
+}
+.content code,
+.content pre {
+  background: var(--card) !important;
+  border: 1px solid var(--line);
+  color: var(--txt);
+}
+.content pre code {
+  border: 0 !important;
+  background: transparent !important;
+  padding: 0 !important;
+  border-radius: 0;
+}
+.bo-wrap {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 0 clamp(20px, 5vw, 64px);
+}

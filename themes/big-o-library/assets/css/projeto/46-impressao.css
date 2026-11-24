@@ -1,0 +1,65 @@
+/* Estilos de impressão (parte 1). A parte 2 está em 80-navegacao-e-ajustes.css.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+@media print {
+  html,
+  body,
+  html.dark body {
+    background: #fff !important;
+    color: #000 !important;
+  }
+  html.dark {
+    --bg: #fff;
+    --card: #fff;
+    --line: #ccc;
+    --txt: #000;
+    --body: #222;
+    --mute: #444;
+    --ac: #8a3f00;
+    --axis: #999;
+    --p1: #15803d;
+    --p2: #2f7d1e;
+    --p3: #4d7c0f;
+    --p4: #a16207;
+    --p5: #b45309;
+    --p6: #c2410c;
+    --p7: #ba3412;
+    --p8: #b91c1c;
+    --p9: #991b1b;
+  }
+  .hextra-nav-container,
+  .hextra-sidebar-container,
+  .hextra-toc,
+  .bo-toc-m,
+  .bo-consent,
+  .bo-footer,
+  .bo-btns,
+  .bo-page-foot,
+  .bo-go {
+    display: none !important;
+  }
+  .bo-sec,
+  .bo-card,
+  .bo-credits {
+    box-shadow: none !important;
+    transform: none !important;
+  }
+  details.bo-sec > summary::after {
+    display: none;
+  }
+  .bo-doc .content pre {
+    white-space: pre-wrap;
+    overflow: visible;
+    break-inside: avoid;
+  }
+  .bo-doc .content table,
+  .bo-doc .content img,
+  .katex-display {
+    break-inside: avoid;
+  }
+  .bo-doc .content a[href^="http"]::after {
+    content: " (" attr(href) ")";
+    font-size: 0.85em;
+    color: #444;
+    overflow-wrap: anywhere;
+  }
+}

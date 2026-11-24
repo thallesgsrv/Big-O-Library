@@ -1,0 +1,89 @@
+/* Cabeçalho (barra de navegação) e sua versão no celular.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* Header */
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)) {
+  position: relative;
+  transition: color var(--dur) var(--ease);
+}
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg))::after {
+  content: "";
+  position: absolute;
+  left: 0.5rem;
+  right: 0.5rem;
+  bottom: 0.15rem;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--ac);
+  transform: scaleX(0);
+  transform-origin: left center;
+  transition: transform 0.25s ease;
+}
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)):hover,
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)):focus-visible,
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg))[aria-current="page"] {
+  color: var(--ac);
+}
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)):hover::after,
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)):focus-visible::after,
+.hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg))[aria-current="page"]::after {
+  transform: scaleX(1);
+}
+
+.hextra-nav-container nav button,
+.hextra-nav-container nav a:has(svg) {
+  border-radius: var(--r-sm);
+  transition:
+    color var(--dur) var(--ease),
+    background-color 0.2s ease,
+    transform 0.15s ease;
+}
+.hextra-nav-container nav button:hover,
+.hextra-nav-container nav a:has(svg):hover {
+  color: var(--ac);
+  background: color-mix(in srgb, var(--ac) 14%, transparent);
+}
+.hextra-nav-container nav button:active,
+.hextra-nav-container nav a:has(svg):active {
+  transform: scale(0.94);
+}
+.hextra-nav-container nav a:focus-visible,
+.hextra-nav-container nav button:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+
+/* Header*/
+@media (max-width: 767px) {
+  .hextra-nav-container nav {
+    gap: 0.25rem;
+    padding-inline: 1rem;
+  }
+  .bo-nav-logo .lg {
+    font-size: 20px !important;
+  }
+  .hextra-hamburger-menu,
+  .hextra-nav-container nav button {
+    min-width: 40px;
+    min-height: 40px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .hextra-sidebar-container {
+    background: var(--bg) !important;
+    border-top: 1px solid var(--line);
+  }
+  .hextra-sidebar-container a {
+    padding: 0.65rem 0.75rem;
+    border-radius: var(--r-sm);
+    font-size: 15px;
+    transition:
+      color var(--dur) var(--ease),
+      background-color 0.2s ease;
+  }
+  .hextra-sidebar-container a:hover {
+    color: var(--ac);
+    background: color-mix(in srgb, var(--ac) 12%, transparent);
+  }
+}

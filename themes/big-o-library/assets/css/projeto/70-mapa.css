@@ -1,0 +1,303 @@
+/* Mapa de pré-requisitos (/lab/mapa).
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* mapa */
+.bo-m {
+  margin-bottom: 72px;
+}
+.bo-mhead > .bo-crumbs {
+  margin-bottom: 0.9rem;
+}
+.bo-m-hint {
+  margin: 6px 0 0;
+  text-align: center;
+}
+.bo-m-scroll {
+  overflow-x: auto;
+  padding-bottom: 8px;
+  border: 1px solid var(--line);
+  background: var(--card);
+}
+.bo-m-scroll svg {
+  display: block;
+  max-width: none;
+}
+.bo-m-colh {
+  font:
+    600 12px "IBM Plex Mono",
+    monospace;
+  letter-spacing: 0.04em;
+  text-transform: lowercase;
+}
+.bo-m-edge {
+  fill: none;
+  stroke: var(--axis);
+  stroke-width: 1.5;
+  opacity: 0.55;
+  transition:
+    opacity 0.2s ease,
+    stroke 0.2s ease;
+}
+.bo-m-edge.is-anc {
+  stroke: var(--ac);
+  stroke-width: 2.5;
+  opacity: 1;
+}
+.bo-m-edge.is-desc {
+  stroke: var(--mute);
+  stroke-width: 2;
+  stroke-dasharray: 5 4;
+  opacity: 0.9;
+}
+.bo-m-node {
+  cursor: pointer;
+  outline: none;
+  transition: opacity 0.2s ease;
+}
+.bo-m-node rect:first-child {
+  fill: var(--bg);
+  stroke: var(--line);
+  stroke-width: 1.5;
+  transition:
+    stroke 0.2s ease,
+    fill 0.2s ease;
+}
+.bo-m-node .bo-m-tick {
+  fill: var(--c);
+  stroke: none;
+}
+.bo-m-node text {
+  font:
+    500 12px "IBM Plex Mono",
+    monospace;
+  fill: var(--txt);
+  pointer-events: none;
+}
+.bo-m-node:hover rect:first-child,
+.bo-m-node:focus-visible rect:first-child {
+  stroke: var(--c);
+}
+.bo-m-node.is-ghost rect:first-child {
+  stroke-dasharray: 5 4;
+}
+.bo-m-node.is-ghost text {
+  fill: var(--mute);
+}
+.bo-m-node.is-sel rect:first-child {
+  stroke: var(--c);
+  stroke-width: 2.5;
+  fill: color-mix(in srgb, var(--c) 14%, var(--bg));
+}
+.bo-m-node.is-anc rect:first-child {
+  stroke: var(--ac);
+  stroke-width: 2;
+}
+.bo-m-node.is-desc rect:first-child {
+  stroke: var(--mute);
+  stroke-dasharray: 3 3;
+}
+.has-sel .bo-m-node:not(.is-sel):not(.is-anc):not(.is-desc) {
+  opacity: 0.28;
+}
+.has-sel .bo-m-edge:not(.is-anc):not(.is-desc) {
+  opacity: 0.12;
+}
+.bo-m-panel {
+  --c: var(--ac);
+  margin-top: 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  overflow: hidden;
+  box-shadow: 0 1px 0 color-mix(in srgb, var(--c) 30%, transparent);
+}
+.bo-m-bar {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-bottom: 1px solid var(--line);
+  background: color-mix(in srgb, var(--c) 7%, var(--bg));
+}
+.bo-m-dots {
+  display: inline-flex;
+  gap: 6px;
+}
+.bo-m-dots i {
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--line);
+}
+.bo-m-dots i:first-child {
+  background: var(--c);
+}
+.bo-m-cmd {
+  font:
+    500 13px "IBM Plex Mono",
+    monospace;
+  color: var(--ac-h);
+  min-width: 0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bo-m-body {
+  padding: 22px 22px 24px;
+}
+.bo-m-top {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
+  margin-bottom: 6px;
+}
+.bo-m-h {
+  margin: 0;
+  font:
+    600 26px/1.2 Fraunces,
+    Georgia,
+    serif;
+  color: var(--txt);
+}
+.bo-m-badge {
+  font:
+    500 12px "IBM Plex Mono",
+    monospace;
+  color: color-mix(in srgb, var(--c) 70%, var(--txt));
+  border: 1px solid var(--c);
+  border-radius: var(--r-pill);
+  padding: 3px 10px;
+  background: color-mix(in srgb, var(--c) 10%, transparent);
+  white-space: nowrap;
+}
+.bo-m-d {
+  margin: 0 0 20px;
+  color: var(--body);
+  line-height: 1.7;
+}
+.bo-m-cols {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 14px;
+  margin-bottom: 20px;
+}
+.bo-m-box {
+  padding: 16px 18px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--bg);
+}
+.bo-m-box h3 {
+  margin: 0 0 14px;
+  font:
+    600 12px "IBM Plex Mono",
+    monospace;
+  color: var(--mute);
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+.bo-m-ord,
+.bo-m-chips {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.bo-m-ord {
+  position: relative;
+}
+.bo-m-ord > li {
+  position: relative;
+  margin: 0;
+  padding: 0 0 16px 22px;
+  border-left: 2px solid var(--line);
+  margin-left: 5px;
+}
+.bo-m-ord > li:last-child {
+  padding-bottom: 0;
+  border-left-color: transparent;
+}
+.bo-m-ord > li::before {
+  content: "";
+  position: absolute;
+  left: -7px;
+  top: 2px;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: var(--c);
+  box-shadow: 0 0 0 3px var(--bg);
+}
+.bo-m-per {
+  display: block;
+  margin-bottom: 6px;
+  font:
+    600 12px "IBM Plex Mono",
+    monospace;
+  color: var(--c);
+}
+.bo-m-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.bo-m-chip {
+  display: inline-flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 2px 8px;
+  padding: 6px 11px;
+  border: 1px solid var(--line);
+  border-radius: 7px;
+  background: var(--card);
+  color: var(--txt) !important;
+  font-size: 14px;
+  line-height: 1.4;
+  text-decoration: none !important;
+  transition:
+    border-color var(--dur) var(--ease),
+    transform var(--dur) var(--ease);
+}
+a.bo-m-chip:hover,
+a.bo-m-chip:focus-visible {
+  border-color: var(--ac);
+  transform: translateY(-1px);
+  outline: none;
+}
+.bo-m-lib .bo-m-chip::before {
+  content: "→";
+  color: var(--ac);
+  font-family: "IBM Plex Mono", monospace;
+}
+.bo-m-chip.is-ghost {
+  border-style: dashed;
+  background: transparent;
+  color: var(--mute) !important;
+}
+.bo-m-chip small {
+  color: var(--mute);
+  font:
+    400 11px "IBM Plex Mono",
+    monospace;
+}
+.bo-m-body .bo-btns {
+  margin-top: 14px;
+}
+.bo-m-body .bo-small {
+  margin: 12px 0 0;
+}
+.bo-m-empty {
+  margin: 0;
+  padding: 10px 12px;
+  border: 1px dashed var(--line);
+  border-radius: 7px;
+  color: var(--mute);
+  font-size: 14px;
+}
+@media (max-width: 560px) {
+  .bo-m-body {
+    padding: 18px 16px 20px;
+  }
+  .bo-m-h {
+    font-size: 22px;
+  }
+}

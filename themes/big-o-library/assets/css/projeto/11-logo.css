@@ -1,0 +1,139 @@
+/* Logo animada (.lg) e sua animação.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* Logo animada */
+.lg {
+  display: inline-flex;
+  align-items: baseline;
+  font-weight: 500;
+  color: var(--txt);
+  line-height: 1;
+  font-family: "IBM Plex Mono", monospace;
+}
+.lg .ac,
+.lg .cur {
+  color: var(--ac);
+}
+.lg .w {
+  position: relative;
+  display: inline-block;
+  width: 7ch;
+  white-space: nowrap;
+}
+.lg .w span {
+  position: absolute;
+  left: 0;
+  top: 0;
+  opacity: 0;
+  animation-duration: 12s;
+  animation-iteration-count: infinite;
+}
+.lg .w .k1 {
+  position: static;
+  display: inline-block;
+  opacity: 1;
+  animation-name: ka;
+}
+.lg .k2 {
+  animation-name: kb;
+  color: var(--c1);
+}
+.lg .k3 {
+  animation-name: kc;
+  color: var(--c2);
+}
+.lg .k4 {
+  animation-name: kd;
+  color: var(--c3);
+}
+.lg .k5 {
+  animation-name: ke;
+  color: var(--c4);
+}
+.lg .cur {
+  margin-left: 0.08em;
+  animation: blink 1s steps(1) 5;
+}
+@keyframes ka {
+  0%,
+  36% {
+    opacity: 1;
+  }
+  38%,
+  88% {
+    opacity: 0;
+  }
+  90%,
+  100% {
+    opacity: 1;
+  }
+}
+@keyframes kb {
+  0%,
+  38% {
+    opacity: 0;
+  }
+  40%,
+  50% {
+    opacity: 1;
+  }
+  52%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes kc {
+  0%,
+  50% {
+    opacity: 0;
+  }
+  52%,
+  62% {
+    opacity: 1;
+  }
+  64%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes kd {
+  0%,
+  62% {
+    opacity: 0;
+  }
+  64%,
+  74% {
+    opacity: 1;
+  }
+  76%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes ke {
+  0%,
+  74% {
+    opacity: 0;
+  }
+  76%,
+  86% {
+    opacity: 1;
+  }
+  88%,
+  100% {
+    opacity: 0;
+  }
+}
+@keyframes blink {
+  50% {
+    opacity: 0;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .lg .w span,
+  .lg .cur {
+    animation: none !important;
+  }
+  .lg .w span:not(.k1) {
+    opacity: 0 !important;
+  }
+}

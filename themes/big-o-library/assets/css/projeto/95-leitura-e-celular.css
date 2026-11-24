@@ -1,0 +1,70 @@
+/* Leitura prolongada e ajustes de desempenho no celular.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* ---------- Leitura prolongada ----------
+   Tamanhos e medidas justificados em .github/GUIA-PEDAGOGICO.md (seção "Tipografia e leitura").
+   Texto corrido: Rello, Pielot e Marcos (2016) observaram melhor leitura e compreensão com fontes
+   maiores (até 18 pt) e pior compreensão com 10 e 12 pt. Usamos 17 px no celular e 18 px em telas
+   largas; a medida da linha (~70 caracteres) já fica na faixa estudada. */
+.bo-doc .content p,
+.bo-doc .content li {
+  font-size: 1.0625rem;
+}
+@media (min-width: 1024px) {
+  .bo-doc .content p,
+  .bo-doc .content li {
+    font-size: 1.125rem;
+  }
+}
+/* Tabelas: 14 px era menor que o texto; sobem um degrau (extrapolação, ver guia). Código: ver .bo-term. */
+.bo-page .content table {
+  font-size: 0.9375rem;
+}
+
+/* ───── Desempenho no celular ─────
+   Páginas com muitas fórmulas têm dezenas de milhares de elementos. Ao abrir uma seção (lista de
+   exercícios, gabarito) o navegador montava tudo de uma vez e travava. Com content-visibility, só o
+   que está perto da tela é desenhado; o resto espera. O "auto" no tamanho guarda a altura real já
+   vista, então a rolagem não pula. */
+.bo-sec-body > *,
+.bo-doc .content details > div > * {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 5rem;
+}
+.bo-sec-body > .katex-display,
+.bo-sec-body > p:has(> .katex-display) {
+  contain-intrinsic-size: auto 3.5rem;
+}
+.bo-sec-body > table,
+.bo-sec-body > pre,
+.bo-sec-body > figure,
+.bo-sec-body > .bo-qz {
+  contain-intrinsic-size: auto 12rem;
+}
+.bo-sec-body > .bo-qz-q,
+.bo-sec-body .bo-qz-q {
+  content-visibility: auto;
+  contain-intrinsic-size: auto 14rem;
+}
+details.bo-sec > summary {
+  touch-action: manipulation;
+  -webkit-tap-highlight-color: transparent;
+}
+@media (max-width: 640px) {
+  /* O desfoque do cabeçalho fixo é redesenhado a cada quadro da rolagem; no celular pesa muito */
+  .hextra-nav-container-blur {
+    -webkit-backdrop-filter: none;
+    backdrop-filter: none;
+    background: color-mix(in srgb, var(--bg) 97%, transparent) !important;
+  }
+  .bo-sec,
+  .bo-person {
+    box-shadow: none;
+  }
+}
+@media print {
+  .bo-sec-body > *,
+  .bo-doc .content details > div > *,
+  .bo-sec-body .bo-qz-q {
+    content-visibility: visible;
+  }
+}

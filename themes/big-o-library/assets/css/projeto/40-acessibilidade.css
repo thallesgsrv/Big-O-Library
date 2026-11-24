@@ -1,0 +1,33 @@
+/* Foco visível e detalhes de acessibilidade.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* Acessibilidade e detalhes */
+a.bo-card:focus-visible,
+.bo-b1:focus-visible,
+.bo-b2:focus-visible,
+.bo-person:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 3px;
+}
+.bo-b1:hover {
+  filter: brightness(1.06);
+}
+.bo-b2:hover {
+  border-color: var(--ac);
+}
+@media (prefers-reduced-motion: reduce) {
+  a.bo-card,
+  a.bo-card *,
+  .bo-person,
+  .bo-b1,
+  .bo-b2 {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+.bo-sec-cta {
+  background: transparent;
+  border: 1px dashed var(--axis);
+}
+.bo-sec-cta::before {
+  display: none;
+}

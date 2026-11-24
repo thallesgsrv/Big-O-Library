@@ -1,0 +1,283 @@
+/* Ajustes tardios: linhas do terminal, selo de sábio nos créditos, aviso de cookies (parte 2), progresso de leitura, voltar ao topo, paginação, impressão (parte 2), listas numeradas e .bo-sr.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+.bo-term-line {
+  margin: 0;
+  padding: 0.5rem 0.85rem;
+  font-size: 13px;
+  line-height: 1.65;
+  color: var(--body);
+  white-space: pre-wrap;
+  list-style: none;
+}
+.bo-term-line.is-err {
+  color: var(--p8);
+}
+.bo-term-line.is-quote {
+  font-size: 15px;
+  color: var(--txt);
+  font-style: italic;
+}
+.bo-term-line.is-man {
+  font-size: 12.5px;
+  color: var(--txt);
+}
+.bo-term-opt .bo-term-t {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+.bo-term-opt .hextra-search-excerpt {
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+}
+
+.bo-credits-person.is-sabio {
+  padding: 3px 12px 3px 3px;
+  border-color: color-mix(in srgb, var(--c) 55%, var(--line));
+}
+.bo-credits-person.is-sabio .bo-av {
+  --s: 24px;
+  border-width: 1px;
+}
+.bo-credits-person.is-sabio .bo-av::before {
+  font-size: 9px;
+}
+@media (prefers-reduced-motion: reduce) {
+  .bo-g-opt,
+  .bo-g-bar i,
+  .bo-rs-sage,
+  .bo-m-node,
+  .bo-m-edge,
+  .bo-m-chip {
+    transition: none !important;
+  }
+  .bo-g-opt:hover,
+  .bo-rs-sage:hover {
+    transform: none;
+  }
+}
+
+.bo-consent {
+  padding: 10px 12px;
+  gap: 8px 12px;
+  font-size: 12px;
+  line-height: 1.45;
+  max-width: 640px;
+}
+.bo-consent-txt {
+  flex: 1 1 240px;
+}
+.bo-consent-btns {
+  width: 100%;
+  margin-left: 0;
+  justify-content: flex-end;
+}
+.bo-consent-btn {
+  min-height: 36px;
+  padding: 0 14px;
+}
+@media (min-width: 640px) {
+  .bo-consent-btns {
+    width: auto;
+    margin-left: auto;
+  }
+}
+@media (max-width: 639px) {
+  .bo-consent-btns {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+  }
+  .bo-consent-btn {
+    min-height: 42px;
+  }
+}
+@media (pointer: coarse) {
+  .bo-consent-btn {
+    min-height: 44px;
+  }
+}
+.bo-prog {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 3px;
+  z-index: 70;
+  background: var(--ac);
+  transform: scaleX(0);
+  transform-origin: 0 50%;
+  pointer-events: none;
+  will-change: transform;
+}
+.bo-top {
+  position: fixed;
+  z-index: 55;
+  right: max(14px, env(safe-area-inset-right));
+  bottom: max(76px, calc(env(safe-area-inset-bottom) + 76px));
+  width: 44px;
+  height: 44px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  color: var(--ac);
+  font: 600 18px/1 inherit;
+  cursor: pointer;
+  box-shadow: 0 8px 20px -10px rgba(0, 0, 0, 0.4);
+  transition:
+    transform 0.15s,
+    border-color 0.15s;
+}
+.bo-top[hidden] {
+  display: none;
+}
+.bo-top:hover,
+.bo-top:focus-visible {
+  border-color: var(--ac);
+  transform: translateY(-2px);
+}
+.bo-top:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+.bo-pager {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin: 40px 0 8px;
+}
+.bo-pager-a {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 14px 16px;
+  border: 1px solid var(--line);
+  background: var(--card);
+  text-decoration: none !important;
+  color: var(--txt);
+  min-height: 64px;
+  transition:
+    border-color 0.15s,
+    transform 0.15s;
+}
+.bo-pager-a span {
+  font-size: 12px;
+  color: var(--ac);
+}
+.bo-pager-a strong {
+  font-weight: 600;
+  line-height: 1.3;
+}
+.bo-pager-n {
+  text-align: right;
+  grid-column: 2;
+}
+.bo-pager-a:hover,
+.bo-pager-a:focus-visible {
+  border-color: var(--ac);
+  transform: translateY(-2px);
+}
+@media (max-width: 560px) {
+  .bo-pager {
+    grid-template-columns: 1fr;
+  }
+  .bo-pager-n {
+    grid-column: 1;
+    text-align: left;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bo-top,
+  .bo-pager-a {
+    transition: none !important;
+    transform: none !important;
+  }
+}
+@media print {
+  .bo-prog,
+  .bo-top,
+  .bo-pager,
+  .bo-consent {
+    display: none !important;
+  }
+}
+.bo-consent:not([hidden]) ~ .bo-top {
+  bottom: max(150px, calc(env(safe-area-inset-bottom) + 150px));
+}
+@media (min-width: 640px) {
+  .bo-consent:not([hidden]) ~ .bo-top {
+    bottom: max(76px, calc(env(safe-area-inset-bottom) + 76px));
+  }
+}
+
+.bo-doc .content .bo-sec ol {
+  list-style: none;
+  counter-reset: n;
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  flex-direction: column;
+  gap: 0.7rem;
+}
+.bo-doc .content .bo-sec ol > li {
+  counter-increment: n;
+  padding-left: 1.8rem;
+}
+.bo-doc .content .bo-sec ol > li::before {
+  content: counter(n) ".";
+  font-weight: 600;
+}
+@media (max-width: 639px) {
+  .bo-sage-body {
+    padding: 18px 18px 0;
+  }
+  .bo-sage-foot {
+    padding: 16px 18px 18px;
+  }
+  .bo-sage-name {
+    font-size: 19px;
+  }
+  .bo-sage-quote p {
+    font-size: 16px;
+  }
+}
+
+body.hx\:overflow-hidden .bo-top {
+  display: none;
+}
+
+.bo-footer a,
+.bo-page-foot a {
+  display: inline-block;
+  padding-block: 8px;
+}
+.bo-pgrid + .bo-lsh {
+  margin-top: 36px;
+}
+
+.content .hextra-alert a,
+.bo-doc .content .bo-sec .hextra-alert a {
+  color: inherit;
+  text-decoration: underline;
+  text-underline-offset: 2px;
+}
+.content .hextra-alert a:hover,
+.bo-doc .content .bo-sec .hextra-alert a:hover {
+  text-decoration-thickness: 2px;
+}
+
+.bo-sr {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  margin: -1px;
+  padding: 0;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .bo-go {
+    transition: none !important;
+    transform: none !important;
+  }
+}
