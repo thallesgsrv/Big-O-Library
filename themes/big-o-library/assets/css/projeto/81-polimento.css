@@ -1,0 +1,69 @@
+/* Polimento visual geral (seleção, sombras, botões, cards).
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* ───── Polimento visual geral ───── */
+::selection {
+  background: color-mix(in srgb, var(--ac) 28%, transparent);
+}
+.hextra-nav-container-blur {
+  background: color-mix(in srgb, var(--bg) 84%, transparent) !important;
+  -webkit-backdrop-filter: saturate(1.4) blur(12px);
+  backdrop-filter: saturate(1.4) blur(12px);
+}
+
+.bo-b1,
+.bo-b2 {
+  border-radius: var(--r-md);
+  transition:
+    filter 0.2s ease,
+    border-color 0.2s ease,
+    transform 0.2s ease,
+    box-shadow 0.2s ease;
+}
+.bo-b1 {
+  box-shadow: 0 10px 22px -12px color-mix(in srgb, var(--btn) 80%, transparent);
+}
+.bo-b2 {
+  background: var(--card);
+}
+@media (hover: hover) {
+  .bo-b1:hover,
+  .bo-b2:hover {
+    transform: translateY(-2px);
+  }
+}
+
+.bo-sec,
+.bo-person,
+.bo-credits,
+.bo-m-scroll {
+  border-radius: 14px;
+}
+.bo-sec,
+.bo-person {
+  box-shadow: var(--shadow-1);
+}
+.bo-stage {
+  border-radius: 20px;
+}
+.bo-sec {
+  padding: 30px;
+}
+.bo-sec::before {
+  height: 4px;
+  border-radius: 0 0 4px 4px;
+}
+
+.bo-page-hero {
+  gap: 18px;
+  padding: 36px 0 32px;
+}
+.content h2 {
+  letter-spacing: -0.3px;
+}
+.bo-pager-a,
+.bo-top {
+  border-radius: var(--r-lg);
+}
+.bo-footer {
+  border-top-style: dashed;
+}

@@ -1,0 +1,110 @@
+/* Página /docs (períodos e extras) e lista de optativas.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* Materiais */
+.bo-mhead {
+  padding: 64px 0 48px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+.bo-small {
+  font-size: 13px;
+  color: var(--mute);
+}
+.bo-lsh {
+  font-size: 15px;
+  color: var(--ac);
+  margin-bottom: 24px;
+}
+.bo-lsh span {
+  color: var(--mute);
+}
+@media (hover: none) {
+  .bo-lsh span,
+  .bo-g-keys {
+    display: none;
+  }
+}
+.bo-pgrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+  gap: 20px;
+}
+.bo-per-o {
+  font-size: 28px;
+  font-weight: 500;
+  color: var(--c);
+  line-height: 1.2;
+}
+.bo-per-n {
+  font-size: 15px;
+  color: var(--txt);
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: 8px;
+}
+.bo-per-c {
+  font-size: 12.5px;
+  color: var(--mute);
+}
+.bo-per.is-soon {
+  opacity: 0.6;
+}
+.bo-per-soon {
+  font-size: 15px;
+  color: var(--mute);
+}
+/* Optativas */
+.bo-optlist {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr);
+  gap: 24px;
+}
+.bo-optlist > li {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+}
+.bo-optlist > li > .bo-card {
+  flex: 1;
+}
+/* páginas com lista de disciplinas: mais largas, mínimo de 3 cards por linha */
+.bo-doc.bo-doc--lista {
+  container-type: inline-size;
+  max-width: 1056px;
+}
+@container (min-width:520px) {
+  .bo-optlist {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .bo-optlist .bo-card {
+    min-height: 176px;
+  }
+}
+@container (min-width:660px) {
+  .bo-optlist {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+}
+/* se sobrar um card sozinho na última fileira, ele ocupa a linha inteira */
+@container (min-width:520px) and (max-width:659.98px) {
+  .bo-optlist > li:last-child:nth-child(2n + 1):not(:first-child) {
+    grid-column: 1/-1;
+  }
+}
+@container (min-width:660px) {
+  .bo-optlist > li:last-child:nth-child(3n + 1):not(:first-child) {
+    grid-column: 1/-1;
+  }
+}
+.content .bo-optlist {
+  margin-left: 0 !important;
+  margin-top: 1rem;
+}
+.content .bo-optlist > li::marker {
+  content: none;
+}

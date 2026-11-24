@@ -1,0 +1,304 @@
+/* Conselho dos Sábios: cards (.bo-sage-*).
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* ───── Conselho dos Sábios: cards ───── */
+.bo-council {
+  list-style: none;
+  margin: 0 0 4rem;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(min(320px, 100%), 1fr));
+  gap: 24px;
+  align-items: stretch;
+}
+.bo-sage {
+  margin: 0 !important;
+  padding: 0 !important;
+  display: flex;
+  scroll-margin-top: 96px;
+}
+.bo-sage::marker {
+  content: none;
+}
+.bo-js .bo-sage {
+  opacity: 0;
+  transform: translateY(18px);
+  transition:
+    opacity 0.5s ease,
+    transform 0.5s cubic-bezier(0.2, 0.7, 0.3, 1);
+  transition-delay: calc(var(--k, 0) * 80ms);
+}
+.bo-js .bo-sage.in {
+  opacity: 1;
+  transform: none;
+}
+
+.bo-sage-card {
+  --ct: color-mix(in srgb, var(--c) 75%, var(--txt));
+  position: relative;
+  flex: 1;
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-top: 3px solid var(--c);
+  border-radius: var(--r-lg);
+  transition:
+    transform 0.25s cubic-bezier(0.2, 0.7, 0.3, 1),
+    border-color 0.2s ease,
+    box-shadow 0.25s ease;
+}
+@media (hover: hover) {
+  .bo-sage-card:hover {
+    transform: translateY(-4px);
+    border-color: var(--c);
+    box-shadow: 0 14px 26px -18px color-mix(in srgb, var(--c) 60%, transparent);
+  }
+  .bo-sage-card:hover .bo-av img {
+    filter: none;
+  }
+}
+.bo-sage-card .bo-av img {
+  filter: grayscale(0.35);
+  transition: filter 0.35s ease;
+}
+.bo-sage:target .bo-sage-card {
+  animation: bo-sage-ping 1.4s ease-out 1;
+}
+@keyframes bo-sage-ping {
+  0% {
+    box-shadow: 0 0 0 0 color-mix(in srgb, var(--c) 70%, transparent);
+  }
+  100% {
+    box-shadow: 0 0 0 16px transparent;
+  }
+}
+
+.bo-sage-body {
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  padding: 20px 22px 0;
+}
+.bo-sage-top {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 12px;
+}
+.bo-sage-per {
+  color: var(--ct);
+  font-weight: 600;
+}
+.bo-sage-per::before {
+  content: "# ";
+}
+.bo-sage-demo {
+  margin-left: auto;
+  padding: 1px 8px;
+  border: 1px dashed var(--mute);
+  border-radius: 99px;
+  color: var(--mute);
+  font-size: 11px;
+  text-transform: uppercase;
+  letter-spacing: 0.6px;
+}
+
+.bo-sage-person {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  min-width: 0;
+}
+.bo-sage-person .bo-av {
+  --s: 64px;
+}
+.bo-sage-id {
+  min-width: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+.bo-sage-name {
+  margin: 0;
+  font:
+    600 20px/1.2 Fraunces,
+    Georgia,
+    serif;
+  letter-spacing: -0.2px;
+  color: var(--txt);
+  overflow-wrap: anywhere;
+}
+.bo-sage-title {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.45;
+  color: var(--ct);
+}
+.bo-sage-title::before {
+  content: "> ";
+  opacity: 0.7;
+}
+.bo-sage-disc {
+  margin: 0;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--mute);
+}
+
+.bo-sage-quote {
+  margin: 2px 0 0;
+  padding: 2px 0 2px 16px;
+  border-left: 3px solid color-mix(in srgb, var(--c) 70%, transparent);
+}
+.bo-sage-quote p {
+  margin: 0;
+  font:
+    italic 500 18px/1.45 Fraunces,
+    Georgia,
+    serif;
+  color: var(--txt);
+  text-wrap: pretty;
+}
+
+.bo-sage-foot {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  margin-top: auto;
+  padding: 18px 22px 20px;
+  min-width: 0;
+}
+.bo-sage-body + .bo-sage-foot {
+  margin-top: auto;
+}
+.bo-sage-foot::before {
+  content: "";
+  display: block;
+  height: 0;
+  border-top: 1px dashed var(--line);
+  margin-bottom: 2px;
+}
+.bo-sage-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  max-width: 100%;
+  font-size: 13px;
+  line-height: 1.5;
+  color: var(--mute);
+}
+.bo-sage-list li {
+  margin: 0;
+  padding-left: 1.2rem;
+  position: relative;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bo-sage-list li::marker {
+  content: none;
+}
+.bo-sage-list li::before {
+  content: ">";
+  position: absolute;
+  left: 0;
+  color: var(--ct);
+  opacity: 0.8;
+}
+.bo-sage-list li.bo-sage-more::before {
+  content: none;
+}
+.bo-sage-list li.bo-sage-more {
+  padding-left: 0;
+  font-size: 12px;
+}
+.bo-sage-list a {
+  color: var(--body);
+  text-decoration: none;
+}
+.bo-sage-list a:hover,
+.bo-sage-list a:focus-visible {
+  color: var(--ct);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+.bo-sage-gh {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  align-self: flex-start;
+  max-width: 100%;
+  min-height: 1.5em;
+  font-size: 13px;
+  color: var(--ct) !important;
+  text-decoration: none !important;
+}
+.bo-sage-gh span:nth-of-type(1) {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+.bo-sage-gh span[aria-hidden] {
+  opacity: 0.6;
+  transition:
+    transform 0.2s ease,
+    opacity 0.2s ease;
+}
+.bo-sage-gh:hover {
+  color: var(--txt) !important;
+}
+.bo-sage-gh:hover span[aria-hidden] {
+  opacity: 1;
+  transform: translate(2px, -2px);
+}
+.bo-sage-gh:focus-visible {
+  outline: 2px solid var(--c);
+  outline-offset: 3px;
+  border-radius: 4px;
+}
+
+@media (max-width: 640px) {
+  .bo-council {
+    gap: 24px;
+  }
+  .bo-slide-go {
+    margin-left: 0;
+    flex-basis: 100%;
+  }
+  .bo-seats {
+    gap: 8px;
+    padding: 8px 8px 20px;
+  }
+  .bo-seat {
+    padding: 3px;
+  }
+  .bo-seat .bo-av {
+    --s: 40px;
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .bo-js .bo-sage {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+  .bo-slide {
+    transition: none;
+    transform: none;
+  }
+  .bo-seat,
+  .bo-seat .bo-av,
+  .bo-sage-card,
+  .bo-sage-card .bo-av img {
+    transition: none !important;
+    transform: none !important;
+  }
+  .bo-sage:target .bo-sage-card {
+    animation: none !important;
+  }
+}

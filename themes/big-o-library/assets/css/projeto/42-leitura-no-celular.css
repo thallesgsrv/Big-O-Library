@@ -1,0 +1,156 @@
+/* Tipografia do conteúdo (.bo-doc, .bo-page), KaTeX, tabelas, imagens e ajustes para celular/toque.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+html {
+  scroll-padding-top: 5rem;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+}
+.bo-doc .content li,
+.bo-doc .content p {
+  overflow-wrap: break-word;
+}
+.bo-doc .content a {
+  text-underline-offset: 3px;
+}
+.bo-doc .content a:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+  border-radius: 3px;
+}
+.bo-doc .content blockquote {
+  max-width: 100%;
+}
+@media (max-width: 640px) {
+  .bo-page {
+    padding-top: 0;
+    padding-bottom: 40px;
+  }
+  .bo-doc .content pre {
+    font-size: 12.5px;
+  }
+  .bo-doc .content .bo-sec ul {
+    gap: 0.75rem;
+  }
+  .bo-doc .content .bo-sec li a {
+    display: inline-block;
+    padding-block: 0.15rem;
+  }
+  .bo-sec {
+    margin-top: 16px;
+  }
+}
+@media (min-width: 1024px) {
+  .bo-doc .content .bo-sec li {
+    line-height: 1.7;
+  }
+}
+
+:root {
+  --p1: #15803d;
+  --p2: #2f7d1e;
+  --p3: #4d7c0f;
+  --p4: #a16207;
+  --p5: #b45309;
+  --p6: #c2410c;
+  --p7: #ba3412;
+  --p8: #b91c1c;
+  --p9: #991b1b;
+}
+
+.katex-display {
+  max-width: 100%;
+  overflow-x: auto;
+  overflow-y: hidden;
+  padding: 0.35em 0.1em;
+}
+.katex-display:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+@media (max-width: 640px) {
+  .katex {
+    font-size: 1.08em;
+  }
+}
+
+.bo-page .content table {
+  display: block;
+  max-width: 100%;
+  overflow-x: auto;
+}
+.bo-page .content pre {
+  overflow-x: auto;
+  line-height: 1.6;
+  tab-size: 2;
+}
+.bo-page .content img,
+.bo-page .content svg {
+  max-width: 100%;
+  height: auto;
+}
+.bo-page .content .katex svg {
+  max-width: none;
+  height: inherit;
+}
+.bo-page .content :not(pre) > code {
+  overflow-wrap: anywhere;
+}
+.bo-page .content figure {
+  margin: 1.25rem 0;
+}
+.bo-page .content figcaption {
+  font-size: 14px;
+  line-height: 1.6;
+  color: var(--mute);
+  margin-top: 0.5rem;
+}
+
+@media (max-width: 640px) {
+  main#content {
+    padding-inline: 1rem;
+  }
+  .bo-doc .content .bo-sec::before {
+    left: 14px;
+  }
+}
+
+@media (pointer: coarse) {
+  .bo-page-foot a {
+    min-height: 44px;
+    padding-inline: 0.25rem;
+  }
+  .bo-credits-person {
+    min-height: 36px;
+  }
+}
+@media (max-width: 640px) {
+  .bo-crumbs,
+  .bo-page-foot,
+  .bo-credits,
+  .bo-small,
+  .bo-footer {
+    font-size: 14px;
+  }
+  .bo-cmd,
+  .bo-credits-cmd {
+    font-size: 13px;
+  }
+  .bo-person-count small {
+    font-size: 0.75rem;
+  }
+}
+@media (max-width: 480px) {
+  .bo-person-text strong {
+    white-space: normal;
+    overflow-wrap: anywhere;
+  }
+}
+
+.bo-nav-logo .lg .w span,
+.bo-nav-logo .lg .cur {
+  animation: none !important;
+}
+.bo-hero-logo .lg .w span {
+  animation-iteration-count: 2;
+}

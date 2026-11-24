@@ -1,0 +1,330 @@
+/* Janela de terminal (blocos de código e hero), sintaxe Chroma e hero-term.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* ───── Terminal: janela macOS (blocos de código, hero) ─────
+   A janela é escura nos dois temas, como um terminal de verdade.
+   --tw-*: cores da janela. Acento fixo âmbar (contraste alto no escuro). */
+.bo-term {
+  /* tema claro: janela de papel */
+  --tw-bg: #f7f4ec;
+  --tw-bar: #ece7da;
+  --tw-line: #ddd5c3;
+  --tw-fg: #2b2822;
+  --tw-dim: #6b675e;
+  --tw-gut: #9a9384;
+  --tw-ac: #b45309;
+  --tw-on-ac: #ffffff;
+  --tw-hover: rgba(0, 0, 0, 0.05);
+  --tw-ok: #2f6f12;
+  --sy-k: #a94a07;
+  --sy-t: #0f766e;
+  --sy-f: #1d4ed8;
+  --sy-b: #7b3fd0;
+  --sy-s: #2f6f12;
+  --sy-n: #b83a08;
+  --sy-c: #6b675e;
+  --sy-o: #5a564d;
+  --sy-g: #be123c;
+  margin-bottom: 1.25rem;
+  overflow: hidden;
+  background: var(--tw-bg);
+  border: 1px solid var(--tw-line);
+  border-radius: var(--r-lg);
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.7) inset,
+    0 18px 32px -24px rgba(28, 20, 8, 0.35),
+    0 1px 4px rgba(28, 20, 8, 0.08);
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  color: var(--tw-fg);
+}
+/* tema escuro: terminal de verdade */
+html.dark .bo-term {
+  --tw-bg: #090c11;
+  --tw-bar: #151b24;
+  --tw-line: #2b3644;
+  --tw-fg: #dad6cb;
+  --tw-dim: #8c97a5;
+  --tw-gut: #5f6b7a;
+  --tw-ac: #ffb000;
+  --tw-on-ac: #0b0f14;
+  --tw-hover: rgba(255, 255, 255, 0.05);
+  --tw-ok: #7bd88f;
+  --sy-k: #ffb000;
+  --sy-t: #7dd3c0;
+  --sy-f: #8ab4f8;
+  --sy-b: #d6a8ff;
+  --sy-s: #a7d98b;
+  --sy-n: #f4986a;
+  --sy-c: #8c97a5;
+  --sy-o: #a9b4c2;
+  --sy-g: #f07178;
+  box-shadow:
+    0 1px 0 rgba(255, 255, 255, 0.04) inset,
+    0 18px 34px -22px rgba(0, 0, 0, 0.85);
+}
+
+/* barra de título: bolinhas + título centralizado */
+.bo-term-bar {
+  display: grid;
+  grid-template-columns: 72px 1fr 72px;
+  align-items: center;
+  height: 38px;
+  padding: 0 14px;
+  background: var(--tw-bar);
+  border-bottom: 1px solid var(--tw-line);
+}
+.bo-term-dots {
+  display: flex;
+  gap: 8px;
+}
+.bo-term-dots i {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.22);
+}
+.bo-term-dots i:nth-child(1) {
+  background: #ff5f57;
+}
+.bo-term-dots i:nth-child(2) {
+  background: #febc2e;
+}
+.bo-term-dots i:nth-child(3) {
+  background: #28c840;
+}
+.bo-term-title {
+  grid-column: 2;
+  text-align: center;
+  font-size: 12px;
+  color: var(--tw-dim);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* botão de copiar: dentro da barra, sempre visível (no celular não existe hover) */
+.bo-term .hextra-code-copy-btn-container {
+  top: 0 !important;
+  margin: 5px 9px !important;
+  opacity: 1 !important;
+}
+.bo-term .hextra-code-copy-btn {
+  background: transparent !important;
+  border: 1px solid transparent !important;
+  color: var(--tw-dim) !important;
+  opacity: 1;
+  backdrop-filter: none;
+}
+.bo-term .hextra-code-copy-btn:hover,
+.bo-term .hextra-code-copy-btn:focus-visible {
+  color: var(--tw-fg) !important;
+  border-color: var(--tw-line) !important;
+  background: var(--tw-hover) !important;
+}
+.bo-term .hextra-code-copy-btn.copied {
+  color: var(--tw-ok) !important;
+}
+
+/* corpo: o <pre> perde o visual de "caixa" do tema e vira a tela do terminal */
+html .bo-term .bo-term-body {
+  overflow-x: auto;
+}
+html .bo-term .bo-term-body .highlight,
+html .bo-term .bo-term-body pre,
+html .bo-term .bo-term-body code {
+  margin: 0 !important;
+  background: transparent !important;
+  border: 0 !important;
+  border-radius: 0 !important;
+  box-shadow: none !important;
+  color: var(--tw-fg) !important;
+}
+html .bo-term .bo-term-body pre {
+  padding: 14px 20px 14px 0 !important;
+  font:
+    400 14.5px/1.7 "IBM Plex Mono",
+    ui-monospace,
+    monospace !important;
+  counter-reset: ln;
+  tab-size: 4;
+}
+html .bo-term .bo-term-body code {
+  padding: 0 !important;
+  font: inherit !important;
+}
+
+/* números de linha (só decoração: não entram no texto copiado) */
+.bo-term pre .line::before {
+  content: counter(ln);
+  counter-increment: ln;
+  display: inline-block;
+  flex: none;
+  width: 2.4em;
+  margin: 0 1.1em 0 14px;
+  text-align: right;
+  color: var(--tw-gut);
+  user-select: none;
+}
+.bo-term--sh pre .line::before {
+  content: "$";
+  counter-increment: none;
+  width: auto;
+  margin: 0 0.8em 0 18px;
+  color: var(--tw-ac);
+}
+.bo-term--out pre .line::before {
+  content: none;
+}
+.bo-term--out .bo-term-body pre,
+.bo-term:not(.bo-term--sh) .bo-term-body pre:not(:has(.line)) {
+  padding-left: 18px !important;
+}
+
+/* barra de status do vim */
+.bo-term-status {
+  display: flex;
+  align-items: center;
+  gap: 14px;
+  height: 26px;
+  padding-right: 14px;
+  background: var(--tw-bar);
+  border-top: 1px solid var(--tw-line);
+  font-size: 11.5px;
+  color: var(--tw-dim);
+  white-space: nowrap;
+  overflow: hidden;
+}
+.bo-term-mode {
+  align-self: stretch;
+  display: flex;
+  align-items: center;
+  padding: 0 12px;
+  background: var(--tw-ac);
+  color: var(--tw-on-ac);
+  font-weight: 600;
+  letter-spacing: 0.05em;
+}
+.bo-term-file {
+  color: var(--tw-fg);
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.bo-term-meta {
+  margin-left: auto;
+}
+
+/* sintaxe (Chroma): paleta por tema (variáveis --sy-*) */
+html .bo-term .highlight pre.chroma .k,
+html .bo-term .highlight pre.chroma .kd,
+html .bo-term .highlight pre.chroma .kn,
+html .bo-term .highlight pre.chroma .kr,
+html .bo-term .highlight pre.chroma .kc,
+html .bo-term .highlight pre.chroma .kp,
+html .bo-term .highlight pre.chroma .ow {
+  color: var(--sy-k);
+  font-weight: 400;
+}
+html .bo-term .highlight pre.chroma .kt,
+html .bo-term .highlight pre.chroma .nc,
+html .bo-term .highlight pre.chroma .nn {
+  color: var(--sy-t);
+}
+html .bo-term .highlight pre.chroma .nf,
+html .bo-term .highlight pre.chroma .fm {
+  color: var(--sy-f);
+}
+html .bo-term .highlight pre.chroma .nb,
+html .bo-term .highlight pre.chroma .bp,
+html .bo-term .highlight pre.chroma .nd,
+html .bo-term .highlight pre.chroma .na {
+  color: var(--sy-b);
+}
+html .bo-term .highlight pre.chroma .s,
+html .bo-term .highlight pre.chroma .s1,
+html .bo-term .highlight pre.chroma .s2,
+html .bo-term .highlight pre.chroma .sa,
+html .bo-term .highlight pre.chroma .sb,
+html .bo-term .highlight pre.chroma .sc,
+html .bo-term .highlight pre.chroma .se,
+html .bo-term .highlight pre.chroma .si {
+  color: var(--sy-s);
+}
+html .bo-term .highlight pre.chroma .m,
+html .bo-term .highlight pre.chroma .mi,
+html .bo-term .highlight pre.chroma .mf,
+html .bo-term .highlight pre.chroma .mh,
+html .bo-term .highlight pre.chroma .mb {
+  color: var(--sy-n);
+}
+html .bo-term .highlight pre.chroma .c,
+html .bo-term .highlight pre.chroma .c1,
+html .bo-term .highlight pre.chroma .cm,
+html .bo-term .highlight pre.chroma .cs,
+html .bo-term .highlight pre.chroma .ch,
+html .bo-term .highlight pre.chroma .cp {
+  color: var(--sy-c);
+  font-style: italic;
+}
+html .bo-term .highlight pre.chroma .o,
+html .bo-term .highlight pre.chroma .p {
+  color: var(--sy-o);
+}
+html .bo-term .highlight pre.chroma .nt {
+  color: var(--sy-g);
+}
+
+/* janela livre (hero): conteúdo montado à mão */
+.bo-term-free {
+  padding: 16px 20px 20px;
+  font-size: 14px;
+  line-height: 1.9;
+}
+.bo-term-free p {
+  margin: 0;
+  color: var(--tw-fg);
+}
+.bo-ps {
+  color: var(--tw-ac);
+}
+.bo-caret {
+  display: inline-block;
+  width: 0.6em;
+  height: 1.1em;
+  margin-left: 2px;
+  vertical-align: -0.2em;
+  background: var(--tw-ac);
+  animation: bo-blink 1.1s steps(1) infinite;
+}
+@keyframes bo-blink {
+  50% {
+    opacity: 0;
+  }
+}
+
+/* hero: texto + janela lado a lado */
+.bo-hero-term {
+  flex: 1 1 400px;
+  max-width: 540px;
+  min-width: 0;
+  margin: 0;
+}
+@media (max-width: 640px) {
+  .bo-term {
+    border-radius: var(--r-md);
+  }
+  .bo-term-bar {
+    grid-template-columns: 56px 1fr 56px;
+    padding: 0 12px;
+  }
+  .bo-term-file {
+    display: none;
+  }
+  html .bo-term .bo-term-body pre {
+    font-size: 13.5px !important;
+  }
+}
+.bo-cm {
+  color: var(--tw-dim) !important;
+}
+.bo-hero-logo {
+  padding-bottom: 0.14em;
+}

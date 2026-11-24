@@ -30,11 +30,12 @@
   {{- partial "twitter_cards.html" . -}}
 
   {{- $mainCss := resources.Get "css/compiled/main.css" -}}
-  {{- $customCss := resources.Get "css/custom.css" -}}
+  {{- /* Estilo do projeto: css/projeto/*.css, na ordem do nome (a ordem é a da cascata). */ -}}
+  {{- $projetoCss := sort (resources.Match "css/projeto/*.css") "Name" -}}
   {{- $variablesCss := resources.Get "css/variables.css" -}}
 
   {{- if hugo.IsProduction }}
-    {{- $styles := slice $variablesCss $mainCss $customCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
+    {{- $styles := (slice $variablesCss $mainCss) | append $projetoCss | resources.Concat "css/compiled/main.css" | minify | fingerprint }}
     <link rel="preload" href="{{ $styles.RelPermalink }}" as="style" />
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
 
@@ -43,10 +44,11 @@
     {{- /* fingerprint: o hash muda a cada edição, então o navegador nunca serve CSS antigo */ -}}
     {{- $styles := $mainCss | fingerprint -}}
     {{- $vars := $variablesCss | fingerprint -}}
-    {{- $custom := $customCss | fingerprint -}}
     <link href="{{ $styles.RelPermalink }}" rel="stylesheet" />
     <link href="{{ $vars.RelPermalink }}" rel="stylesheet" />
-    <link href="{{ $custom.RelPermalink }}" rel="stylesheet" />
+    {{- range $projetoCss }}
+    <link href="{{ (. | fingerprint).RelPermalink }}" rel="stylesheet" />
+    {{- end }}
   {{- end }}
 
   {{ partial "components/analytics/analytics.html" . }}

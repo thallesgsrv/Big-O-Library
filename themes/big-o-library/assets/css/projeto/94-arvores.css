@@ -1,0 +1,78 @@
+/* Árvores de decisão (SVG inline nos materiais de lógica).
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+/* ---------- árvores de decisão (SVG inline nos materiais de lógica) ---------- */
+.bo-arv {
+  margin: 1.2rem 0 1.5rem;
+  padding: 14px 16px 12px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-lg);
+  background: var(--card);
+  box-shadow: var(--shadow-1);
+}
+.bo-arv-sc {
+  overflow-x: auto;
+}
+.bo-arv-sc:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
+.bo-arv svg {
+  display: block;
+  width: 100%;
+  height: auto;
+  margin: 0 auto;
+}
+.bo-arv svg text {
+  font-family: "IBM Plex Mono", ui-monospace, monospace;
+  fill: var(--txt);
+}
+.bo-arv .e {
+  stroke: var(--mute);
+  stroke-width: 2;
+  fill: none;
+}
+.bo-arv .n circle {
+  fill: color-mix(in srgb, var(--ac) 13%, var(--card));
+  stroke: var(--ac);
+  stroke-width: 2;
+}
+.bo-arv .n text {
+  font-size: 17px;
+  font-weight: 700;
+  text-anchor: middle;
+  dominant-baseline: central;
+  font-style: italic;
+}
+.bo-arv .x rect {
+  fill: color-mix(in srgb, var(--c5) 10%, var(--card));
+  stroke: var(--c5);
+  stroke-width: 2;
+}
+.bo-arv .x .m {
+  fill: var(--c5);
+  font-size: 15px;
+  font-weight: 700;
+}
+.bo-arv .x .c {
+  fill: var(--body);
+  font-size: 12px;
+}
+.bo-arv .l {
+  fill: var(--ac);
+  font-size: 13px;
+  font-weight: 700;
+  paint-order: stroke;
+  stroke: var(--card);
+  stroke-width: 5px;
+  stroke-linejoin: round;
+}
+.bo-arv .r {
+  fill: var(--mute);
+  font-size: 11.5px;
+}
+.bo-arv figcaption {
+  margin-top: 8px;
+  color: var(--body);
+  font-size: 0.85rem;
+  text-align: left;
+}

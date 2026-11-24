@@ -1,0 +1,50 @@
+/* Sumário no celular (.bo-toc-m).
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+.bo-toc-m {
+  margin: 0 0 20px;
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  background: var(--card);
+}
+.bo-toc-m > summary {
+  display: flex;
+  align-items: center;
+  min-height: 48px;
+  padding: 0 16px;
+  cursor: pointer;
+  font-size: 15px;
+  color: var(--txt);
+}
+.bo-toc-m > summary:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: -2px;
+  border-radius: var(--r-md);
+}
+.bo-toc-m nav {
+  padding: 0 16px 12px;
+}
+.bo-toc-m ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.bo-toc-m ul ul {
+  padding-left: 1rem;
+}
+.bo-toc-m a {
+  display: block;
+  padding: 9px 0;
+  font-size: 14px;
+  line-height: 1.4;
+  color: var(--body);
+  text-decoration: none;
+}
+.bo-toc-m a:hover,
+.bo-toc-m a:focus-visible {
+  color: var(--ac);
+}
+@media (min-width: 1280px) {
+  .bo-toc-m {
+    display: none;
+  }
+}

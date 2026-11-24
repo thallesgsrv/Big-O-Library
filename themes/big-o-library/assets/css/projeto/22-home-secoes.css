@@ -1,0 +1,51 @@
+/* Linhas de seções da home (.bo-row, .bo-text, .bo-cmd).
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+.bo-row {
+  display: grid;
+  gap: 20px;
+  margin-top: 20px;
+}
+@media (min-width: 860px) {
+  .bo-r1 {
+    grid-template-columns: 1.4fr 1fr;
+  }
+  .bo-r2 {
+    grid-template-columns: 1fr 1.4fr;
+  }
+}
+.bo-text {
+  padding: 28px;
+  gap: 14px;
+}
+.bo-cmd {
+  font-size: 13px;
+  color: var(--ac);
+}
+.bo-text h2 {
+  margin: 0;
+  font:
+    600 28px Fraunces,
+    Georgia,
+    serif;
+  color: var(--txt);
+}
+.bo-text p {
+  margin: 0;
+  font-size: 15px;
+  line-height: 1.75;
+  color: var(--body);
+}
+.bo-text b {
+  color: var(--txt);
+}
+@media (max-width: 640px) {
+  .bo-hero {
+    gap: 32px;
+    padding: 40px 0 40px;
+  }
+  .bo-b1,
+  .bo-b2 {
+    flex: 1 1 auto;
+    text-align: center;
+  }
+}

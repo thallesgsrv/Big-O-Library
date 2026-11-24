@@ -1,0 +1,57 @@
+/* Aviso de cookies (.bo-consent), parte 1. A parte 2 está em 80-navegacao-e-ajustes.css.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+.bo-consent {
+  position: fixed;
+  z-index: 60;
+  left: max(12px, env(safe-area-inset-left));
+  right: max(12px, env(safe-area-inset-right));
+  bottom: max(12px, env(safe-area-inset-bottom));
+  margin-inline: auto;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-md);
+  box-shadow: 0 12px 28px -12px rgba(0, 0, 0, 0.35);
+  color: var(--body);
+}
+.bo-consent[hidden] {
+  display: none;
+}
+.bo-consent-txt {
+  margin: 0;
+  min-width: 0;
+}
+.bo-consent-btns {
+  display: flex;
+  gap: 8px;
+  flex: 0 0 auto;
+}
+.bo-consent-btn {
+  font: inherit;
+  font-weight: 500;
+  border-radius: 6px;
+  border: 1px solid var(--line);
+  background: transparent;
+  color: var(--txt);
+  cursor: pointer;
+}
+.bo-consent-btn:hover {
+  border-color: var(--ac);
+  color: var(--ac);
+}
+.bo-consent-yes {
+  background: var(--btn);
+  border-color: var(--btn);
+  color: var(--btn-t);
+}
+.bo-consent-yes:hover {
+  color: var(--btn-t);
+  filter: brightness(1.08);
+}
+.bo-consent-btn:focus-visible {
+  outline: 2px solid var(--ac);
+  outline-offset: 2px;
+}
