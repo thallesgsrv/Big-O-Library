@@ -73,10 +73,7 @@
           searchUrl += urlPart + '/'
 
           const crumbData = data[searchUrl];
-          if (!crumbData) {
-            console.debug('Excluded page', searchUrl, '- will not be included for search result breadcrumb for', route);
-            continue;
-          }
+          if (!crumbData) continue;
 
           let title = data[searchUrl].title;
           if (title === "_index") {
