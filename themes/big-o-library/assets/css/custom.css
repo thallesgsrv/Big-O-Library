@@ -597,7 +597,7 @@ a.bo-card:is(:hover, :active, :focus-visible) .bo-go {
   flex: 1;
 }
 /* páginas com lista de disciplinas: mais largas, mínimo de 3 cards por linha */
-.bo-doc:has(.bo-optlist) {
+.bo-doc.bo-doc--lista {
   container-type: inline-size;
   max-width: 1056px;
 }
@@ -2921,11 +2921,11 @@ a.bo-m-chip:focus-visible {
     display: none !important;
   }
 }
-body:has(.bo-consent:not([hidden])) .bo-top {
+.bo-consent:not([hidden]) ~ .bo-top {
   bottom: max(150px, calc(env(safe-area-inset-bottom) + 150px));
 }
 @media (min-width: 640px) {
-  body:has(.bo-consent:not([hidden])) .bo-top {
+  .bo-consent:not([hidden]) ~ .bo-top {
     bottom: max(76px, calc(env(safe-area-inset-bottom) + 76px));
   }
 }
@@ -3450,7 +3450,7 @@ html .bo-term .highlight pre.chroma .nt {
     animation-duration: 0.18s;
   }
   @supports (animation-timeline: scroll()) {
-    body:has(.bo-doc)::before {
+    body.bo-tem-doc::before {
       content: "";
       position: fixed;
       inset: 0 0 auto 0;

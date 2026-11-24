@@ -1,0 +1,20 @@
+{{- /*
+  Imagens do Markdown com carregamento preguiçoso e dimensões.
+  - loading="lazy": quase todas ficam dentro de seções fechadas ou abaixo da dobra; sem isso o navegador
+    baixa todas na abertura da página.
+  - width/height: reservam o espaço e evitam o salto de layout quando a imagem chega.
+  - decoding="async": decodifica fora da thread principal.
+  Imagens do próprio material (mesma pasta da página) ganham as dimensões reais; as demais saem só com lazy.
+*/ -}}
+{{- $src := .Destination | safeURL -}}
+{{- $w := 0 -}}{{- $h := 0 -}}
+{{- $u := urls.Parse .Destination -}}
+{{- if and $u.Path (not $u.IsAbs) (not (hasPrefix .Destination "/")) -}}
+  {{- with .PageInner.Resources.Get $u.Path -}}
+    {{- $src = .RelPermalink -}}
+    {{- if eq .ResourceType "image" }}{{ $w = .Width }}{{ $h = .Height }}{{ end -}}
+  {{- end -}}
+{{- end -}}
+<img src="{{ $src }}" alt="{{ .PlainText }}"
+  {{- with .Title }} title="{{ . }}"{{ end }}
+  {{- if and $w $h }} width="{{ $w }}" height="{{ $h }}"{{ end }} loading="lazy" decoding="async">

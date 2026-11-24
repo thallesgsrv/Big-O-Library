@@ -1,4 +1,6 @@
 if (document.querySelector(".bo-doc")) {
+  /* classe no body em vez de body:has(.bo-doc) no CSS: :has() no body é reavaliado a cada mudança do DOM */
+  document.body.classList.add("bo-tem-doc");
   var bar = document.createElement("div");
   bar.className = "bo-prog"; bar.setAttribute("aria-hidden", "true");
   var top = document.createElement("button");

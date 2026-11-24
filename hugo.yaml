@@ -68,6 +68,9 @@ params:
   theme:
     default: system
   math:
+    # false: só o HTML visual do KaTeX, sem MathML (≈25% menos nós, páginas mais leves no celular).
+    # Leitores de tela deixam de ler as fórmulas. Para religar, use true.
+    mathml: false
     katex:
       css: css/vendor/katex.min.css
   search:

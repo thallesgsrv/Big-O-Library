@@ -1,0 +1,40 @@
+{{- /*
+  Dobra o conteúdo em seções <details> já na geração do site.
+
+  Antes isso era feito só pelo JS (bo-recolher.js): o navegador recebia a página inteira aberta,
+  calculava o layout de tudo (dezenas de milhares de elementos nas páginas com muitas fórmulas) e
+  só depois o script movia o DOM e forçava tudo de novo. No celular era isso que travava.
+  Com o HTML já dobrado, as seções fechadas nem entram no layout.
+
+  Uso: {{ partial "bo-fold.html" .Content }}
+  Gera exatamente a mesma estrutura que o bo-recolher.js gerava:
+    <details class="bo-sec" [open]>
+      <summary><span class="bo-cmd" aria-hidden="true">$ cat titulo.md</span><h2>…</h2></summary>
+      <div class="bo-sec-body">…</div>
+    </details>
+  A 1ª seção sai aberta. O que vem antes do 1º <h2> fica solto, como antes.
+  O JS continua capaz de dobrar sozinho se receber HTML sem <details> (ver bo-recolher.js).
+*/ -}}
+{{- $html := string . -}}
+{{- $parts := split $html "<h2 data-hextra-search-id=" -}}
+{{- if le (len $parts) 1 -}}
+  {{- $html | safeHTML -}}
+{{- else -}}
+  {{- index $parts 0 | safeHTML -}}
+  {{- range $i, $seg := after 1 $parts -}}
+    {{- $m := findRESubmatch `(?s)^(.*?)</h2>(.*)$` $seg 1 -}}
+    {{- if $m -}}
+      {{- $head := index $m 0 1 -}}
+      {{- $rest := index $m 0 2 -}}
+      {{- /* texto do título → "$ cat slug.md" (mesma regra do JS: minúsculas, só letras/números) */ -}}
+      {{- $texto := replaceRE `^[^>]*>` "" $head | plainify | htmlUnescape | strings.TrimSpace | lower -}}
+      {{- $slug := strings.Trim (replaceRE `[^\p{L}\p{N}]+` "-" $texto) "-" -}}
+      {{- $head = replaceRE `<a href="#[^"]*" class="subheading-anchor"[^>]*></a>` "" $head -}}
+      {{- $h2 := printf `<h2 data-hextra-search-id=%s</h2>` $head -}}
+<details class="bo-sec"{{ if eq $i 0 }} open{{ end }}><summary><span class="bo-cmd" aria-hidden="true">$ cat {{ $slug }}.md</span>{{ $h2 | safeHTML }}</summary><div class="bo-sec-body">{{ $rest | safeHTML }}</div></details>
+    {{- else -}}
+      {{- /* h2 malformado: devolve como veio, sem dobrar */ -}}
+      {{- printf "<h2 data-hextra-search-id=%s" $seg | safeHTML -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}

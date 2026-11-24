@@ -5,3 +5,8 @@
 {{- else -}}
   {{- errorf "CSS do KaTeX não encontrado em %q (params.math.katex.css)" site.Params.math.katex.css -}}
 {{- end -}}
+
+{{- /* As duas fontes que praticamente toda fórmula usa. O KaTeX declara font-display:block, então sem
+       preload o texto matemático fica invisível e todas as fórmulas são refeitas quando a fonte chega. */ -}}
+<link rel="preload" as="font" type="font/woff2" href="{{ "vendor/katex/fonts/KaTeX_Main-Regular.woff2" | relURL }}" crossorigin>
+<link rel="preload" as="font" type="font/woff2" href="{{ "vendor/katex/fonts/KaTeX_Math-Italic.woff2" | relURL }}" crossorigin>

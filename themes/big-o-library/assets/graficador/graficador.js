@@ -1238,6 +1238,16 @@
   const FOLGA = 0.92;  // fração da largura que cada fatia ocupa, para as fatias aparecerem separadas
   const GRAU = Math.PI / 180;
   let modo3d = false;
+  /* Nível de detalhe: enquanto a pessoa arrasta, dá zoom ou o giro anima, as faces angulares vizinhas são
+     juntadas (menos caminhos no canvas: era a rasterização de milhares de polígonos que travava o celular).
+     Parou há ~170 ms: redesenha em qualidade total, idêntica à de antes. */
+  const SALTO_RAPIDO = 4;   // divide PASSOS
+  let rapidoAte = 0, tRapido = 0;
+  const rapido3 = () => {
+    rapidoAte = performance.now() + 150;
+    clearTimeout(tRapido);
+    tRapido = setTimeout(() => pedir(), 170);
+  };
 
   function rgb(hex) {
     const m = /^#([0-9a-f]{6})$/i.exec(hex.trim()), n = m ? parseInt(m[1], 16) : 0x888888;
@@ -1423,13 +1433,23 @@
       const eixoPt = horiz ? [c[0], kk, 0] : [kk, c[1], 0];
       return girado(c)[2] - girado(eixoPt)[2] < 0;
     };
-    malha.faces.forEach(fc => {
-      if (fc.j < cheios) juntar(fc.p, fc.i, fc.k, false, eDentro(fc.p));
+    const salto = s3.tocando || performance.now() < rapidoAte ? SALTO_RAPIDO : 1, fcs = malha.faces;
+    for (let ix = 0; ix < fcs.length; ix++) {
+      const fc = fcs[ix];
+      if (salto > 1 && fc.j % salto === 0 && fc.j + salto <= cheios && ix + salto - 1 < fcs.length && fcs[ix + salto - 1].j === fc.j + salto - 1) {
+        // junta 'salto' faces seguidas: A_j…A_(j+salto), depois B_(j+salto)…B_j
+        const ult = fcs[ix + salto - 1], poly = [];
+        for (let k = 0; k < salto; k++) poly.push(fcs[ix + k].p[0]);
+        poly.push(ult.p[3], ult.p[2]);
+        for (let k = salto - 1; k >= 0; k--) poly.push(fcs[ix + k].p[1]);
+        juntar(poly, fc.i, fc.k, false, eDentro(fc.p));
+        ix += salto - 1;
+      } else if (fc.j < cheios) juntar(fc.p, fc.i, fc.k, false, eDentro(fc.p));
       else if (fc.j === cheios && parcial > 1e-6) {
         const gi = malha.girar, f0 = cheios * d, pp = [gi(fc.a[0], fc.a[1], f0), gi(fc.b[0], fc.b[1], f0), gi(fc.b[0], fc.b[1], ang), gi(fc.a[0], fc.a[1], ang)];
         juntar(pp, fc.i, fc.k, false, eDentro(pp));
       }
-    });
+    }
     malha.solidas.forEach(fc => juntar(fc.p, fc.i, fc.k, false, false));
     // a própria região, no começo e no fim do giro: é a função "girando"
     if (s3.ang < 359.99 && tipo3 === 'rev') {
@@ -1447,7 +1467,7 @@
       it.q.forEach((v, k) => { const t = tela(v); if (k) g3.lineTo(t[0], t[1]); else g3.moveTo(t[0], t[1]); });
       g3.closePath();
       g3.fill();
-      g3.stroke();
+      if (salto === 1) g3.stroke();
     });
 
     const f2 = Expr.formatar;
@@ -1520,6 +1540,7 @@
     if (s3.ang >= 360) s3.tocando = false;
     s3.ang = Math.round(s3.ang);
     sincronizar3d();
+    rapido3();
     pedir();
     requestAnimationFrame(girando);
   }
@@ -1569,6 +1590,7 @@
       if (pinca3 > 0) cam.zoom = limitar(cam.zoom * dist / pinca3, 0.3, 6);
       pinca3 = dist;
     }
+    rapido3();
     pedir();
   });
   const soltar3 = e => { toques3.delete(e.pointerId); pinca3 = 0; if (!toques3.size) cv3.classList.remove('is-arrastando'); };
@@ -1578,6 +1600,7 @@
   cv3.addEventListener('wheel', e => {
     e.preventDefault();
     cam.zoom = limitar(cam.zoom * Math.exp(-(e.deltaMode === 1 ? e.deltaY * 16 : e.deltaY) * 0.0015), 0.3, 6);
+    rapido3();
     pedir();
   }, { passive: false });
   cv3.addEventListener('keydown', e => {
@@ -1591,6 +1614,7 @@
     if (!teclas[e.key]) return;
     e.preventDefault();
     teclas[e.key]();
+    rapido3();
     pedir();
   });
 

@@ -26,24 +26,42 @@ document.addEventListener('DOMContentLoaded', function () {
   }
 
   // Make scrollable code blocks focusable for keyboard users.
-  const updateScrollableCodeBlocks = () => {
-    document.querySelectorAll('.hextra-code-block pre, .highlight pre').forEach(function (pre) {
-      if (pre.scrollWidth > pre.clientWidth) {
-        pre.setAttribute('tabindex', '0');
-      } else {
-        pre.removeAttribute('tabindex');
-      }
-    });
+  // Medir todos os <pre> de uma vez (scrollWidth) força um layout síncrono da página inteira, e isso
+  // se repetia a cada 'resize' — que no celular dispara sempre que a barra de endereço aparece ou
+  // some durante a rolagem. Agora cada bloco é medido uma vez, quando chega perto da tela, e o
+  // 'resize' só remede se a LARGURA mudou.
+  const codeBlocks = document.querySelectorAll('.hextra-code-block pre, .highlight pre');
+  const measureCodeBlock = (pre) => {
+    if (pre.scrollWidth > pre.clientWidth) {
+      pre.setAttribute('tabindex', '0');
+    } else {
+      pre.removeAttribute('tabindex');
+    }
   };
+  const codeIO = 'IntersectionObserver' in window
+    ? new IntersectionObserver(function (entries) {
+        entries.forEach(function (entry) {
+          if (!entry.isIntersecting) return;
+          codeIO.unobserve(entry.target);
+          measureCodeBlock(entry.target);
+        });
+      }, { rootMargin: '300px 0px' })
+    : null;
+  codeBlocks.forEach(function (pre) { codeIO ? codeIO.observe(pre) : measureCodeBlock(pre); });
 
-  updateScrollableCodeBlocks();
-
+  let lastWidth = window.innerWidth;
   let resizeRaf;
   window.addEventListener('resize', () => {
+    if (window.innerWidth === lastWidth) return; // só a barra de endereço mexeu: nada a remedir
+    lastWidth = window.innerWidth;
     if (resizeRaf) {
       cancelAnimationFrame(resizeRaf);
     }
-    resizeRaf = requestAnimationFrame(updateScrollableCodeBlocks);
+    resizeRaf = requestAnimationFrame(function () {
+      codeBlocks.forEach(function (pre) {
+        if (codeIO) { codeIO.unobserve(pre); codeIO.observe(pre); } else { measureCodeBlock(pre); }
+      });
+    });
   });
 
   document.querySelectorAll('.hextra-code-copy-btn').forEach(function (button) {

@@ -5,6 +5,13 @@
   var all = [];
 
   roots.forEach(function (root) {
+    /* O Hugo já entrega o HTML dobrado (layouts/_partials/bo-fold.html): só adotamos as seções.
+       O código abaixo é o plano B, para HTML sem <details>. */
+    var prontas = root.querySelectorAll(':scope > details.bo-sec');
+    if (prontas.length) {
+      Array.prototype.forEach.call(prontas, function (d) { all.push(d); });
+      return;
+    }
     var body = null;
     Array.prototype.slice.call(root.children).forEach(function (el) {
       if (el.tagName === 'H2') {
