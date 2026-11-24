@@ -3,6 +3,8 @@ title: Fundamentos de Matemática para Ciência da Computação 1
 weight: 2
 autores:
   - thallesgsrv
+baseadoEm:
+  - everton
 date: 2026-10-15
 description: Raciocínio matemático para computação.
 rotulo: Conteúdos

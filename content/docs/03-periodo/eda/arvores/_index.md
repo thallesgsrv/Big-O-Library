@@ -5,8 +5,6 @@ description: Árvore binária de busca, heap e árvore AVL.
 rotulo: Tópicos
 autores:
   - thallesgsrv
-baseadoEm:
-  - joaoarthurbm
 date: 2026-11-17
 ---
 

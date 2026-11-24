@@ -5,8 +5,6 @@ description: Contagem de operações, notação assintótica e recorrências.
 rotulo: Tópicos
 autores:
   - thallesgsrv
-baseadoEm:
-  - joaoarthurbm
 date: 2026-11-17
 ---
 

@@ -32,7 +32,7 @@ professores:
     titulo: Guardião dos Algoritmos
     disciplina: Estruturas de Dados
     periodo: 3
-    frase: "Você não precisa ser o mais rápido da selva, só precisa ser mais rápido que o ultimo."
+    frase: "Você não precisa ser o mais rápido da selva, só precisa ser mais rápido que o último."
     github: joaoarthurbm
 
   - nome: Prof. Rodrigo Cohen
@@ -63,23 +63,34 @@ professores:
     periodo: 3
     id: salatiel
     foto: salatiel.webp
+    frase: "Se dá pra provar, não precisa acreditar."
 
   - nome: Prof. Fabricio Costa
     titulo: Guardião dos Algoritmos
     disciplina: Laboratório de Estruturas de Dados
     periodo: 3
+    frase: "Estrutura de dados boa é a que você consegue depurar."
     github: fabriciocostadias
 
   - nome: Prof. Joseana M. Fechine
-    titulo: "Mãe da Computação"
+    titulo: "Guia dos Primeiros Passos na Computação"
     disciplina: Introdução à Computação
     periodo: 1
     id: joseana
     foto: joseana.webp
+    frase: "Todo grande programador já foi calouro."
 
   - nome: Prof. Maxwell Oliveira
-    titulo: "Mestre da Computação"
+    titulo: "Mestre dos Fundamentos da Computação"
     disciplina: Introdução à Computação
     periodo: 1
     id: maxwell
     foto: maxwell.webp
+    frase: "Antes de dominar a máquina, entenda como ela pensa."
+
+  - nome: Prof. Everton L. G. Alves
+    titulo: Mestre dos Fundamentos Matemáticos
+    disciplina: Fundamentos de Matemática para Ciência da Computação 1
+    periodo: 1
+    id: everton
+    frase: "Matemática não se assiste, se pratica."

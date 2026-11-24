@@ -5,8 +5,6 @@ description: Algoritmos quadráticos, n log n e lineares, mais a busca binária.
 rotulo: Tópicos
 autores:
   - thallesgsrv
-baseadoEm:
-  - joaoarthurbm
 date: 2026-11-17
 ---
 

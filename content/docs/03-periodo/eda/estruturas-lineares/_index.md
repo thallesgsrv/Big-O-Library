@@ -5,8 +5,6 @@ description: ArrayList, pilha, fila, cache, lista encadeada e tabela hash.
 rotulo: Tópicos
 autores:
   - thallesgsrv
-baseadoEm:
-  - joaoarthurbm
 date: 2026-11-17
 ---
 
