@@ -12,9 +12,9 @@
   },
   "devDependencies": {
     "@tailwindcss/cli": "4.3.3",
-    "axe-core": "4.14.0",
-    "markdownlint-cli2": "0.24.0",
-    "puppeteer-core": "25.16.0",
+    "axe-core": "4.14.1",
+    "markdownlint-cli2": "0.24.2",
+    "puppeteer-core": "25.18.1",
     "tailwindcss": "4.3.3"
   },
   "engines": {
