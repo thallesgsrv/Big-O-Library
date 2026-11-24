@@ -77,14 +77,17 @@ content/docs/                      materiais: NN-periodo/disciplina/ e optativas
 content/contribuir.md              guia de escrita (publicado no site)
 content/lab/                       laboratório: jogo de complexidade e mapa de pré-requisitos
 data/disciplinas.yaml              disciplinas e pré-requisitos do mapa (com ou sem pasta)
+data/extras.yaml                   seções fora dos períodos (optativas e guias) e seus selos
 data/conselho.yaml                 Conselho dos Sábios
 data/jogo.yaml                     trechos do jogo "Qual a complexidade?"
+data/graficador.yaml               exemplos do graficador de funções
+docs/                              guias para quem desenvolve: este arquivo, animações, quiz e pedagógico
+themes/big-o-library/              tema do site (veja o README dentro da pasta)
 themes/big-o-library/layouts/      templates do site (páginas, cards, parciais bo-*)
-themes/big-o-library/assets/css/   estilo do projeto (projeto/, veja o README da pasta)
+themes/big-o-library/assets/css/   estilo: variables.css, Tailwind compilado e projeto/ (CSS próprio, veja o README da pasta)
 themes/big-o-library/assets/viz/   motor das animações de algoritmos (viz.js / viz.css)
 themes/big-o-library/archetypes/   modelo para novas disciplinas
-docs/                              guias para quem desenvolve (este arquivo, animações, quiz e pedagógico)
-scripts/                           validar.py, a11y.js, deploy.sh, baixar_fontes.py, baixar_vendor.py e tests/ (testes das animações)
+scripts/                           validar.py, a11y.js, deploy.sh, baixar_fontes.py, baixar_vendor.py, conferir_reescrita.py e tests/ (testes das animações)
 package.json                       ferramentas de manutenção (CSS, testes, lint, a11y); contribuir não precisa de Node
 hugo.yaml                          configuração do Hugo
 .github/                           CONTRIBUTING, código de conduta, configuração dos links (lychee/), regras do markdownlint e workflows do CI
@@ -92,6 +95,13 @@ hugo.yaml                          configuração do Hugo
 
 Para criar uma animação de algoritmo, veja o [guia de animações](GUIA-ANIMACOES.md).
 Para colocar um quiz interativo em qualquer página, veja o [guia de quiz](GUIA-QUIZ.md).
+Para escrever ou reescrever um material, veja o [guia pedagógico](GUIA-PEDAGOGICO.md).
+
+### Conferindo uma reescrita de texto
+
+Ao reescrever materiais em massa, `python3 scripts/conferir_reescrita.py` compara os `.md` alterados com o
+`HEAD` (ou com outro commit, passado como argumento) e falha se algo além da prosa mudou: fórmulas, código,
+shortcodes, destinos de links e o front matter (exceto `description`). Elementos novos são permitidos e listados.
 
 ## Checagens de qualidade
 
