@@ -1,0 +1,26 @@
+# ─────────────────────────────────────────────────────────────────────────────
+#  EXTRAS  (/docs: seção "extras/" e selo das páginas)
+#  Seções de content/docs/ que não são um período: optativas e guias.
+#  Cada bloco gera um card em /docs e define o selo mostrado no topo das
+#  páginas daquela pasta.
+#
+#  slug      Nome da pasta em content/docs/ (ex.: optativas, git-github).
+#            Se a pasta não existir, o card não aparece.
+#  simbolo   Texto grande do card (ex.: "O(∞)", "git").
+#  rotulo    Nome do card.
+#  selo      Texto do selo no topo das páginas da pasta.
+#  classe    Opcional. Classe CSS extra nas páginas da pasta (ex.: bo-page-opt).
+# ─────────────────────────────────────────────────────────────────────────────
+- slug: optativas
+  simbolo: "O(∞)"
+  rotulo: "optativas"
+  selo: "O(∞) · optativa"
+  classe: "bo-page-opt"
+- slug: bash-shell-linux
+  simbolo: "$ _"
+  rotulo: "bash / linux"
+  selo: "$ shell · extra"
+- slug: git-github
+  simbolo: "git"
+  rotulo: "git / github"
+  selo: "git · extra"
