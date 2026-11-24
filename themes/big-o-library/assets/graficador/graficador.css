@@ -69,7 +69,7 @@ html.dark .gf {
   min-height: 40px;
   padding: 0 10px;
   font: inherit;
-  font-size: 16px; /* 16px evita o zoom automático do iOS */
+  font-size: 16px;
   color: var(--txt);
   background: var(--card);
   border: 1px solid var(--line);
