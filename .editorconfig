@@ -11,6 +11,3 @@ indent_size = 2
 [*.md]
 # dois espaços no fim da linha são quebra de linha em markdown
 trim_trailing_whitespace = false
-
-[Makefile]
-indent_style = tab
