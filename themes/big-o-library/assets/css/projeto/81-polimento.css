@@ -19,9 +19,6 @@
     transform 0.2s ease,
     box-shadow 0.2s ease;
 }
-.bo-b1 {
-  box-shadow: 0 10px 22px -12px color-mix(in srgb, var(--btn) 80%, transparent);
-}
 .bo-b2 {
   background: var(--card);
 }

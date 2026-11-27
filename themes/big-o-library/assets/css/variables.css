@@ -11,6 +11,9 @@ html.dark{
   --p1:#4ADE80;--p2:#86E36B;--p3:#A3E635;--p4:#FACC15;--p5:#FBA82C;--p6:#FB923C;--p7:#F0603A;--p8:#EF4444;--p9:#FF4D4D;
 }
 
+/* Fonte monoespaçada (código, rótulos e animações) */
+:root{--font-mono:"IBM Plex Mono",ui-monospace,monospace}
+
 /* Raio, movimento e sombra */
 :root{
   --r-sm:8px;--r-md:10px;--r-lg:12px;--r-pill:999px;
