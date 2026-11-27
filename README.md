@@ -10,7 +10,7 @@
 </p>
 
 <p align="center">
-  <a href="https://thallesgsrv.github.io/Big-O-Library/"><img src="https://img.shields.io/badge/Acessar_o_site-thallesgsrv.github.io-B45309?style=for-the-badge" alt="Acessar o site"></a>
+  <a href="https://thallesgsrv.github.io/Big-O-Library/"><img src="https://img.shields.io/badge/Acessar_o_site-thallesgsrv.github.io-A34A07?style=for-the-badge" alt="Acessar o site"></a>
 </p>
 
 <p align="center">
