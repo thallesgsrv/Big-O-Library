@@ -87,3 +87,36 @@
     background: color-mix(in srgb, var(--ac) 12%, transparent);
   }
 }
+
+/* Tablet (768–1023px): o menu completo ainda aparece, mas não cabe com a busca aberta.
+   A busca vira só o ícone (o atalho Ctrl K continua funcionando) e os espaços encolhem. */
+@media (min-width: 768px) and (max-width: 1023px) {
+  .hextra-nav-container nav {
+    gap: 0.125rem;
+    padding-inline: 1rem;
+  }
+  .hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg)) {
+    padding-inline: 0.375rem;
+    margin-left: -0.375rem;
+  }
+  .hextra-nav-container nav a:not(.bo-nav-logo):not(:has(svg))::after {
+    left: 0.375rem;
+    right: 0.375rem;
+  }
+  .hextra-search-trigger {
+    width: auto;
+    padding: 0.5rem 0.625rem;
+  }
+  .hextra-search-trigger-label {
+    clip-path: inset(50%);
+    white-space: nowrap;
+    width: 1px;
+    height: 1px;
+    margin: -1px;
+    position: absolute;
+    overflow: hidden;
+  }
+  .hextra-search-trigger-kbd {
+    display: none;
+  }
+}

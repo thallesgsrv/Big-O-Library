@@ -42,7 +42,7 @@ menu:
     - name: lab
       pageRef: /lab
       weight: 5
-    - name: como contribuir
+    - name: contribuir
       pageRef: /contribuir
       weight: 6
     - name: Buscar
