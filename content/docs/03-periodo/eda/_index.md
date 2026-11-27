@@ -46,7 +46,6 @@ O material segue a mesma divisão do curso do João Arthur: primeiro a régua (a
 - [Cache e localidade](estruturas-lineares/cache/)
 - [Lista encadeada](estruturas-lineares/lista-encadeada/)
 - [Tabela hash](estruturas-lineares/tabela-hash/)
-  - [Endereçamento aberto: só perguntas](estruturas-lineares/enderecamento-aberto-perguntas/)
 
 ### Árvores
 
