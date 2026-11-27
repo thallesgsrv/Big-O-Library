@@ -26,11 +26,16 @@
     {{- if index $g 1 }}{{ $per = int (index $g 1) }}{{ end -}}
     {{- $title := $pg.Title -}}
     {{- $desc := $pg.Description | default "" -}}
+    {{- $co := slice -}}
+    {{- $cr := 0 -}}{{- $ch := 0 -}}{{- $em := "" -}}
     {{- if $e }}
       {{- with $e.nome }}{{ $title = . }}{{ end -}}
       {{- with $e.descricao }}{{ $desc = . }}{{ end -}}
+      {{- range $e.coreq }}{{ $co = $co | append (printf "%v" .) }}{{ end -}}
+      {{- with $e.creditos }}{{ $cr = int . }}{{ end -}}
+      {{- with $e.carga_horaria }}{{ $ch = int . }}{{ end -}}
     {{- end -}}
-    {{- $nodes = $nodes | append (dict "slug" $slug "title" $title "url" $pg.RelPermalink "per" $per "desc" $desc "pre" $pre "w" $pg.Weight "ghost" false) -}}
+    {{- $nodes = $nodes | append (dict "slug" $slug "title" $title "url" $pg.RelPermalink "per" $per "desc" $desc "pre" $pre "co" $co "cr" $cr "ch" $ch "em" $em "w" $pg.Weight "ghost" false) -}}
     {{- $seen = merge $seen (dict $slug true) -}}
   {{- end -}}
 {{- end -}}
@@ -42,7 +47,9 @@
     {{- $nome := .nome | default (humanize (replace $id "-" " ")) -}}
     {{- if not .nome }}{{ warnf "mapa: a disciplina %q (data/disciplinas.yaml) não tem pasta nem `nome`; usando %q." $id $nome }}{{ end -}}
     {{- if not .periodo }}{{ if ne (printf "%v" .periodo) "0" }}{{ warnf "mapa: a disciplina %q (data/disciplinas.yaml) não tem pasta nem `periodo`; vai para optativas." $id }}{{ end }}{{ end -}}
-    {{- $nodes = $nodes | append (dict "slug" $id "title" $nome "url" "" "per" (int .periodo) "desc" (.descricao | default "") "pre" $pre "w" 0 "ghost" false) -}}
+    {{- $co := slice -}}
+    {{- range .coreq }}{{ $co = $co | append (printf "%v" .) }}{{ end -}}
+    {{- $nodes = $nodes | append (dict "slug" $id "title" $nome "url" "" "per" (int .periodo) "desc" (.descricao | default "") "pre" $pre "co" $co "cr" (int .creditos) "ch" (int .carga_horaria) "em" (.ementa | default "") "w" 0 "ghost" false) -}}
     {{- $seen = merge $seen (dict $id true) -}}
   {{- end -}}
 {{- end -}}
@@ -51,6 +58,9 @@
   {{- range .pre -}}
     {{- if not (index $seen .) }}{{ warnf "mapa: %q tem pré-requisito %q, que não existe em data/disciplinas.yaml nem em content/docs/. Ele vai aparecer pontilhado; confira o id." $n.slug . }}{{ end -}}
     {{- if eq . $n.slug }}{{ warnf "mapa: %q lista a si mesma como pré-requisito." $n.slug }}{{ end -}}
+  {{- end -}}
+  {{- range .co -}}
+    {{- if not (index $seen .) }}{{ warnf "mapa: %q tem co-requisito %q, que não existe em data/disciplinas.yaml nem em content/docs/." $n.slug . }}{{ end -}}
   {{- end -}}
 {{- end -}}
 <main class="bo-wrap" id="content">
@@ -61,6 +71,7 @@
 
   <div class="bo-m" id="bo-m">
     <noscript><p class="bo-small">O mapa precisa de JavaScript ligado.</p></noscript>
+    <div class="bo-m-tools"><button type="button" class="bo-m-toggle" id="bo-m-opt" aria-pressed="false" aria-controls="bo-m-svg">mostrar optativas</button></div>
     <div class="bo-m-scroll" id="bo-m-scroll" tabindex="0" aria-label="Grafo de disciplinas (role para os lados no celular)"><svg id="bo-m-svg" role="group" aria-label="Disciplinas e pré-requisitos"></svg></div>
     <p class="bo-small bo-m-hint" id="bo-m-hint" hidden>← arraste o grafo para os lados →</p>
     <div class="bo-m-panel" id="bo-m-panel" aria-live="polite"></div>
@@ -97,44 +108,51 @@
       return seen;
     };
 
-    /* colunas: 1..9 e "optativas" (per 0) */
-    var cols = [];
-    list.forEach(function (n) { var k = n.per || 99; if (cols.indexOf(k) < 0) cols.push(k); });
-    cols.sort(function (a, b) { return a - b; });
-    var W = 244, H = 68, GX = 64, GY = 16, PAD = 22, HEAD = 36, LH = 16, TX = 18, MAXC = 29;
-    var pos = {};
-    cols.forEach(function (k, ci) {
-      var inCol = list.filter(function (n) { return (n.per || 99) === k; });
-      inCol.forEach(function (n) {
-        var ys = n.pre.filter(function (s) { return pos[s]; }).map(function (s) { return pos[s].row; });
-        n._bar = ys.length ? ys.reduce(function (a, b) { return a + b; }, 0) / ys.length : 999;
-      });
-      inCol.sort(function (a, b) { return a._bar - b._bar; });
-      inCol.forEach(function (n, r) { pos[n.slug] = { col: ci, row: r, x: PAD + ci * (W + GX), y: PAD + HEAD + r * (H + GY) }; });
-    });
-    var maxRows = 0; cols.forEach(function (k) { maxRows = Math.max(maxRows, list.filter(function (n) { return (n.per || 99) === k; }).length); });
-    var VW = PAD * 2 + cols.length * W + (cols.length - 1) * GX, VH = PAD * 2 + HEAD + maxRows * (H + GY) - GY;
-    svg.setAttribute("viewBox", "0 0 " + VW + " " + VH);
-    svg.setAttribute("width", VW); svg.setAttribute("height", VH);
+    /* colunas: 1º ao 9º período e, com o botão ligado, as optativas.
+       As optativas ficam em colunas de no máximo OPT_ROWS nós, e uma optativa que depende de outra vai para
+       uma coluna mais à direita, para a seta nunca voltar. O painel sempre usa o grafo inteiro. */
+    var W = 244, H = 68, GX = 64, GY = 16, PAD = 22, HEAD = 36, LH = 16, TX = 18, MAXC = 29, OPT_ROWS = 9;
+    var showOpt = false, selected = null;
+    var pos = {}, vis = [], colInfo = [], edges = [], nodeEls = {};
+    var avg = function (xs) { return xs.length ? xs.reduce(function (a, b) { return a + b; }, 0) / xs.length : 999; };
+    var layout = function () {
+      vis = list.filter(function (n) { return showOpt || n.per; });
+      pos = {}; colInfo = [];
+      var addCol = function (label, color, nodes) {
+        var ci = colInfo.length;
+        colInfo.push({ label: label, color: color, nodes: nodes });
+        nodes.forEach(function (n, r) { pos[n.slug] = { col: ci, row: r, x: PAD + ci * (W + GX), y: PAD + HEAD + r * (H + GY) }; });
+      };
+      var order = function (nodes) {
+        nodes.forEach(function (n) { n._bar = avg(n.pre.filter(function (s) { return pos[s]; }).map(function (s) { return pos[s].row; })); });
+        return nodes.sort(function (a, b) { return a._bar - b._bar; });
+      };
+      var periods = [];
+      vis.forEach(function (n) { if (n.per && periods.indexOf(n.per) < 0) periods.push(n.per); });
+      periods.sort(function (a, b) { return a - b; });
+      periods.forEach(function (k) { addCol(k + "º período", "var(--p" + k + ")", order(vis.filter(function (n) { return n.per === k; }))); });
+
+      var opt = vis.filter(function (n) { return !n.per; }), isOpt = {};
+      opt.forEach(function (n) { isOpt[n.slug] = n; n._d = null; });
+      var depth = function (n) {
+        if (n._d === null) { n._d = 0; n.pre.forEach(function (s) { if (isOpt[s]) n._d = Math.max(n._d, depth(isOpt[s]) + 1); }); }
+        return n._d;
+      };
+      opt.forEach(depth);
+      var maxD = opt.reduce(function (m, n) { return Math.max(m, n._d); }, 0), seq = 0;
+      for (var d = 0; d <= maxD; d++) {
+        var grp = order(opt.filter(function (n) { return n._d === d; }));
+        for (var i = 0; i < grp.length; i += OPT_ROWS) { seq++; addCol(seq === 1 ? "optativas" : "optativas (" + seq + ")", "var(--ac)", grp.slice(i, i + OPT_ROWS)); }
+      }
+      var rows = colInfo.reduce(function (m, c) { return Math.max(m, c.nodes.length); }, 0);
+      var VW = PAD * 2 + colInfo.length * W + (colInfo.length - 1) * GX, VH = PAD * 2 + HEAD + rows * (H + GY) - GY;
+      svg.setAttribute("viewBox", "0 0 " + VW + " " + VH);
+      svg.setAttribute("width", VW); svg.setAttribute("height", VH);
+    };
 
     var el = function (name, attrs, parent) { var e = document.createElementNS(NS, name); for (var k in attrs) e.setAttribute(k, attrs[k]); if (parent) parent.appendChild(e); return e; };
     var colColor = function (k) { return k === 99 ? "var(--ac)" : "var(--p" + k + ")"; };
 
-    cols.forEach(function (k, ci) {
-      var t = el("text", { x: PAD + ci * (W + GX), y: PAD + 8, "class": "bo-m-colh", fill: colColor(k) }, svg);
-      t.textContent = k === 99 ? "optativas" : k + "º período";
-    });
-    var gE = el("g", { "class": "bo-m-edges" }, svg), gN = el("g", { "class": "bo-m-nodes" }, svg);
-    var edges = [];
-    list.forEach(function (n) {
-      n.pre.forEach(function (s) {
-        var a = pos[s], b = pos[n.slug];
-        var x1 = a.x + W, y1 = a.y + H / 2, x2 = b.x, y2 = b.y + H / 2, dx = Math.max(30, (x2 - x1) / 2);
-        var p = el("path", { d: "M" + x1 + "," + y1 + " C" + (x1 + dx) + "," + y1 + " " + (x2 - dx) + "," + y2 + " " + x2 + "," + y2, "class": "bo-m-edge" }, gE);
-        edges.push({ el: p, from: s, to: n.slug });
-      });
-    });
-    var nodeEls = {};
     /* quebra balanceada: menor nº de linhas (até 3) que cabe em MAXC caracteres, com as linhas mais parecidas possível */
     var wrap = function (s) {
       var w = s.split(/\s+/), N = w.length, best = null;
@@ -154,18 +172,6 @@
       for (var k = 0; k < 3; k++) out.push(t.slice(k * MAXC, (k + 1) * MAXC));
       out[2] = out[2].slice(0, MAXC - 1) + "…"; return out;
     };
-    list.forEach(function (n) {
-      var p = pos[n.slug];
-      var g = el("g", { "class": "bo-m-node" + (!n.url ? " is-ghost" : ""), transform: "translate(" + p.x + "," + p.y + ")", tabindex: 0, role: "button", "aria-pressed": "false", "aria-label": n.title + (!n.url ? " (ainda sem material)" : ""), style: "--c:" + colColor(n.per || 99) }, gN);
-      el("rect", { width: W, height: H, rx: 9 }, g);
-      el("rect", { width: 5, height: H, rx: 2, "class": "bo-m-tick" }, g);
-      var ls = wrap(n.title);
-      var t = el("text", { x: TX, y: H / 2 - (ls.length - 1) * LH / 2 + 4 }, g);
-      ls.forEach(function (l, i) { var s = el("tspan", { x: TX, dy: i ? LH : 0 }, t); s.textContent = i < ls.length - 1 ? l + " " : l; });
-      g.addEventListener("click", function () { choose(n.slug); });
-      g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(n.slug); } });
-      nodeEls[n.slug] = g;
-    });
 
     var fit = function () {
       var avail = W - TX - 12;
@@ -175,8 +181,51 @@
         if (w > avail) t.style.fontSize = Math.max(9, 12 * avail / w) + "px";
       });
     };
-    fit(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
+    var draw = function () {
+      layout();
+      while (svg.firstChild) svg.removeChild(svg.firstChild);
+      edges = []; nodeEls = {};
+      colInfo.forEach(function (c, ci) {
+        var t = el("text", { x: PAD + ci * (W + GX), y: PAD + 8, "class": "bo-m-colh", fill: c.color }, svg);
+        t.textContent = c.label;
+      });
+      var gE = el("g", { "class": "bo-m-edges" }, svg), gN = el("g", { "class": "bo-m-nodes" }, svg);
+      vis.forEach(function (n) {
+        n.pre.forEach(function (s) {
+          var a = pos[s], b = pos[n.slug];
+          if (!a || !b) return;
+          var x1 = a.x + W, y1 = a.y + H / 2, x2 = b.x, y2 = b.y + H / 2, dx = Math.max(30, (x2 - x1) / 2);
+          var p = el("path", { d: "M" + x1 + "," + y1 + " C" + (x1 + dx) + "," + y1 + " " + (x2 - dx) + "," + y2 + " " + x2 + "," + y2, "class": "bo-m-edge" }, gE);
+          edges.push({ el: p, from: s, to: n.slug });
+        });
+      });
+      vis.forEach(function (n) {
+        var p = pos[n.slug];
+        var g = el("g", { "class": "bo-m-node" + (!n.url ? " is-ghost" : ""), transform: "translate(" + p.x + "," + p.y + ")", tabindex: 0, role: "button", "aria-pressed": "false", "aria-label": n.title + (!n.url ? " (ainda sem material)" : ""), style: "--c:" + colColor(n.per || 99) }, gN);
+        el("rect", { width: W, height: H, rx: 9 }, g);
+        el("rect", { width: 5, height: H, rx: 2, "class": "bo-m-tick" }, g);
+        var ls = wrap(n.title);
+        var t = el("text", { x: TX, y: H / 2 - (ls.length - 1) * LH / 2 + 4 }, g);
+        ls.forEach(function (l, i) { var s = el("tspan", { x: TX, dy: i ? LH : 0 }, t); s.textContent = i < ls.length - 1 ? l + " " : l; });
+        g.addEventListener("click", function () { choose(n.slug); });
+        g.addEventListener("keydown", function (e) { if (e.key === "Enter" || e.key === " ") { e.preventDefault(); choose(n.slug); } });
+        nodeEls[n.slug] = g;
+      });
+      fit();
+    };
+    draw(); if (document.fonts && document.fonts.ready) document.fonts.ready.then(fit);
 
+    /* créditos e carga horária (logo abaixo do título) e co-requisitos (cursar junto: sem seta, só no painel) */
+    var meta = function (n) {
+      var a = [];
+      if (n.cr) a.push(n.cr + " créditos");
+      if (n.ch) a.push(n.ch + " h");
+      return a.length ? '<p class="bo-m-meta">' + a.join(" · ") + "</p>" : "";
+    };
+    var coreq = function (n) {
+      var co = (n.co || []).filter(function (s) { return by[s]; });
+      return co.length ? '<div class="bo-m-co"><span class="bo-m-per">cursar junto</span><ul class="bo-m-chips">' + co.map(function (s) { return chip(by[s]); }).join("") + "</ul></div>" : "";
+    };
     var perLabel = function (n) { return n.per ? n.per + "º período" : "optativa"; };
     var chip = function (n) { return !n.url ? '<li><span class="bo-m-chip is-ghost">' + esc(n.title) + '<small>sem material</small></span></li>' : '<li><a class="bo-m-chip" href="' + esc(n.url) + '">' + esc(n.title) + '</a></li>'; };
 
@@ -191,6 +240,7 @@
     var temPaginaNoPeriodo = function (n) { return list.some(function (x) { return x.url && x.per === n.per; }); };
 
     function choose(slug) {
+      selected = slug;
       var n = by[slug], anc = closure(slug, up), desc = closure(slug, down);
       svg.classList.add("has-sel");
       Object.keys(nodeEls).forEach(function (s) {
@@ -215,7 +265,9 @@
         '<div class="bo-m-bar"><span class="bo-m-dots" aria-hidden="true"><i></i><i></i><i></i></span><span class="bo-m-cmd" aria-hidden="true">$ ./mapa --ate ' + esc(slug) + '</span></div>' +
         '<div class="bo-m-body">' +
         '<div class="bo-m-top"><h2 class="bo-m-h">' + esc(n.title) + '</h2><span class="bo-m-badge">' + perLabel(n) + '</span></div>' +
-        (n.desc ? '<p class="bo-m-d">' + esc(n.desc) + '</p>' : '') +
+        meta(n) +
+        (n.desc ? '<p class="bo-m-d">' + esc(n.desc) + '</p>' : (n.em ? '<p class="bo-m-d"><span class="bo-m-lbl">ementa</span> ' + esc(n.em) + '</p>' : '')) +
+        coreq(n) +
         '<div class="bo-m-cols">' +
         '<section class="bo-m-box"><h3>Antes dela, nesta ordem</h3>' +
         (need.length ? '<ol class="bo-m-ord">' + groups.map(function (g) { return '<li style="--c:' + colColor(g.a[0].per || 99) + '"><span class="bo-m-per">' + g.l + '</span><ul class="bo-m-chips">' + g.a.map(chip).join("") + '</ul></li>'; }).join("") + '</ol>'
@@ -233,13 +285,25 @@
     }
 
     /* começa com a disciplina que mais depende de outras (mostra o grafo funcionando) */
-    var start = list.filter(function (n) { return n.url; }).sort(function (a, b) { return Object.keys(closure(b.slug, up)).length - Object.keys(closure(a.slug, up)).length; })[0] || list[0];
+    var start = list.filter(function (n) { return n.url && n.per; }).sort(function (a, b) { return Object.keys(closure(b.slug, up)).length - Object.keys(closure(a.slug, up)).length; })[0] || list[0];
     choose(start.slug);
 
     /* avisa que o grafo rola para os lados quando ele não cabe na tela */
     var hint = document.getElementById("bo-m-hint"), box = document.getElementById("bo-m-scroll");
     var checkScroll = function () { hint.hidden = box.scrollWidth <= box.clientWidth; };
     checkScroll(); window.addEventListener("resize", checkScroll);
+
+    /* optativas: ficam fora do desenho até ligar o botão (são mais de 50) */
+    var optBtn = document.getElementById("bo-m-opt"), nOpt = list.filter(function (n) { return !n.per; }).length;
+    if (optBtn) {
+      var rotulo = function () { optBtn.textContent = (showOpt ? "ocultar" : "mostrar") + " optativas (" + nOpt + ")"; optBtn.setAttribute("aria-pressed", showOpt ? "true" : "false"); };
+      if (!nOpt) optBtn.hidden = true; else rotulo();
+      optBtn.addEventListener("click", function () {
+        showOpt = !showOpt; rotulo(); draw();
+        choose(pos[selected] ? selected : start.slug);
+        checkScroll();
+      });
+    }
   })();
   </script>
   {{ partial "bo-voltar.html" . }}

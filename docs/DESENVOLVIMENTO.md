@@ -68,6 +68,7 @@ hugo new --kind disciplina docs/01-periodo/nome-da-disciplina/index.md
 | `failed to load Git data: not a git repository` | Você baixou o ZIP. Use `git clone`. |
 | Erro de versão ou de recurso do Hugo, ou fórmulas sem estilo | Versão diferente da 0.165.0 ou sem `+extended`. Instale a versão indicada e confira com `hugo version`. |
 | Sua página não aparece | `date` no futuro (use `hugo server -F` para ver mesmo assim), `weight` repetido no período, ou subpáginas dentro de um `index.md` (use `_index.md`). |
+| Atualizar o mapa de pré-requisitos com o PPC | `python3 scripts/importar_ppc.py` mostra o que mudaria; com `--escrever` reescreve `data/disciplinas.yaml` (precisa de Python 3, PyYAML e internet). |
 | Site com fontes diferentes das do site publicado | Opcional: `python3 scripts/baixar_fontes.py` baixa as fontes (precisa de Python 3 e internet). Não é necessário para contribuir. |
 
 ## Estrutura do repositório
@@ -87,7 +88,7 @@ themes/big-o-library/layouts/      templates do site (páginas, cards, parciais 
 themes/big-o-library/assets/css/   estilo: variables.css, Tailwind compilado e projeto/ (CSS próprio, veja o README da pasta)
 themes/big-o-library/assets/viz/   motor das animações de algoritmos (viz.js / viz.css)
 themes/big-o-library/archetypes/   modelo para novas disciplinas
-scripts/                           validar.py, a11y.js, deploy.sh, baixar_fontes.py, baixar_vendor.py, conferir_reescrita.py e tests/ (testes das animações)
+scripts/                           validar.py, a11y.js, deploy.sh, importar_ppc.py, baixar_fontes.py, baixar_vendor.py, conferir_reescrita.py e tests/ (testes das animações)
 package.json                       ferramentas de manutenção (CSS, testes, lint, a11y); contribuir não precisa de Node
 hugo.yaml                          configuração do Hugo
 .github/                           CONTRIBUTING, código de conduta, configuração dos links (lychee/), regras do markdownlint e workflows do CI

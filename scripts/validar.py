@@ -14,7 +14,7 @@ O que confere (as regras estão em content/contribuir.md):
   - date válida e que não esteja no futuro (o Hugo não publica páginas com data futura)
   - descrição curta (aviso acima de 120 caracteres; o guia sugere ~90)
   - {{< viz algoritmo="..." >}} só com algoritmos que existem em assets/viz/viz.js
-  - data/disciplinas.yaml: ids únicos, pré-requisitos que existem, sem ciclos, nó sem pasta com nome e período
+  - data/disciplinas.yaml: ids únicos, pré-requisitos e co-requisitos que existem, sem ciclos, nó sem pasta com nome e período
   - data/conselho.yaml: foto existe em static/images/conselho/
   - baseadoEm aponta para alguém que está no Conselho
   - fórmulas em bloco ($$ ... $$): nenhuma linha pode começar com `+`, `-` ou `*` (seguidos de espaço),
@@ -197,6 +197,14 @@ def validar_disciplinas() -> None:
         for pr in d.get("prereq") or []:
             if pr not in ids:
                 erro("data/disciplinas.yaml", f"'{i}' tem pré-requisito inexistente: '{pr}'")
+        for co in d.get("coreq") or []:
+            if co not in ids:
+                erro("data/disciplinas.yaml", f"'{i}' tem co-requisito inexistente: '{co}'")
+            elif co == i:
+                erro("data/disciplinas.yaml", f"'{i}' lista a si mesma como co-requisito")
+        for campo in ("creditos", "carga_horaria"):
+            if campo in d and not (isinstance(d[campo], int) and d[campo] > 0):
+                erro("data/disciplinas.yaml", f"'{i}': `{campo}` precisa ser um número inteiro positivo")
     cor: dict[str, int] = {}
 
     def visita(u: str, trilha: list[str]) -> None:

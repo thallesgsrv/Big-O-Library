@@ -241,10 +241,7 @@
   gap: 6px;
 }
 .bo-m-chip {
-  display: inline-flex;
-  align-items: baseline;
-  flex-wrap: wrap;
-  gap: 2px 8px;
+  display: inline-block;
   padding: 6px 11px;
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -265,6 +262,7 @@ a.bo-m-chip:focus-visible {
 }
 .bo-m-lib .bo-m-chip::before {
   content: "→";
+  margin-right: 8px;
   color: var(--ac);
   font-family: "IBM Plex Mono", monospace;
 }
@@ -274,6 +272,7 @@ a.bo-m-chip:focus-visible {
   color: var(--mute) !important;
 }
 .bo-m-chip small {
+  margin-left: 8px;
   color: var(--mute);
   font:
     400 11px "IBM Plex Mono",
@@ -300,4 +299,52 @@ a.bo-m-chip:focus-visible {
   .bo-m-h {
     font-size: 22px;
   }
+}
+
+/* Botão que liga as optativas (mais de 50 nós, então ficam fora do desenho até pedir) */
+.bo-m-tools {
+  display: flex;
+  justify-content: flex-end;
+  margin: 0 0 10px;
+}
+.bo-m-toggle {
+  padding: 6px 12px;
+  font:
+    500 13px "IBM Plex Mono",
+    ui-monospace,
+    monospace;
+  color: var(--body);
+  cursor: pointer;
+  background: var(--card);
+  border: 1px solid var(--line);
+  border-radius: var(--r-sm);
+}
+.bo-m-toggle:hover,
+.bo-m-toggle[aria-pressed="true"] {
+  color: var(--txt);
+  border-color: var(--ac);
+}
+.bo-m-toggle[aria-pressed="true"] {
+  background: color-mix(in srgb, var(--ac) 10%, var(--card));
+}
+
+/* Painel: créditos e carga horária, rótulo da ementa e "cursar junto" (co-requisito, sem seta) */
+.bo-m-meta {
+  margin: 4px 0 0;
+  font-size: 0.8125rem;
+  color: var(--mute);
+}
+.bo-m-lbl {
+  margin-right: 0.5em;
+  font:
+    600 12px "IBM Plex Mono",
+    ui-monospace,
+    monospace;
+  color: var(--mute);
+}
+.bo-m-co {
+  margin-top: 12px;
+}
+.bo-m-co .bo-m-per {
+  color: var(--mute);
 }

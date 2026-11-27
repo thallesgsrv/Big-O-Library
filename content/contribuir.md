@@ -154,6 +154,11 @@ disciplinas:
 - **Sem pasta**: informe `nome` e `periodo`. O nó aparece normal no grafo, só que sem link para material, e não é preciso criar arquivo nenhum. Se um dia a pasta for criada, é só usar o mesmo `id` e o nó passa a abrir a página.
 - `prereq` é uma lista de `id`. Sem pré-requisito, deixe vazio ou apague a linha. Optativa: `periodo: 0`.
 - Se um `prereq` apontar para um `id` que não existe, o `hugo server` avisa no terminal e o nó aparece pontilhado (geralmente é erro de digitação).
+- `coreq` é a lista de disciplinas para **cursar junto** (como Programação 1 e o seu laboratório). Não desenha seta: aparece no painel como "cursar junto".
+- `creditos` e `carga_horaria` aparecem sob o título no painel. `ementa` (a oficial do PPC) é mostrada quando a disciplina não tem página nem `descricao`.
+- As **optativas** (50+) ficam fora do desenho até apertar o botão "mostrar optativas" no mapa.
+
+Quase tudo isso vem do PPC e é gerado por `python3 scripts/importar_ppc.py --escrever` (sem `--escrever` ele só mostra o que mudaria). Ele baixa o [`disciplinas.json`](https://github.com/daltonserey/ppc-2023-em-dados), conserta os pré-requisitos que o PDF quebrou, separa os co-requisitos e preserva o `nome`, a `descricao` e o `periodo` escritos à mão. Depois rode `python3 scripts/validar.py`.
 
 ## Como listar os materiais
 

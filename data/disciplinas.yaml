@@ -4,18 +4,28 @@
 #  existir pasta/página para ela: sem página, o nó aparece normal no grafo,
 #  só que sem link para material (é uma disciplina só para o mapa).
 #
-#  id          Nome curto, sem espaços nem acentos. Se a disciplina tem página
-#              em content/docs/, use exatamente o nome da pasta dela (ex.: eda,
-#              calculo1): o nó passa a abrir o material e usa o título e a
-#              descrição da página. É também o nome usado em `prereq` das outras.
-#  nome        Nome que aparece no nó. Obrigatório só quando NÃO existe pasta
-#              (com pasta, vale o título da página; se escrever aqui, este vence).
-#  periodo     1 a 9. Optativa: 0 (ou apague a linha). Com pasta em
-#              docs/NN-periodo/ ou docs/optativas/, o período vem de lá e esta
-#              linha é opcional.
-#  prereq      Lista de `id` das disciplinas que vêm antes. Vazio ou apagado =
-#              sem pré-requisito.
-#  descricao   (opcional) Frase mostrada no painel quando não há página.
+#  Os dados vêm do PPC e são gerados por `python3 scripts/importar_ppc.py --escrever`
+#  (fonte: github.com/daltonserey/ppc-2023-em-dados). Dá para editar à mão, mas uma
+#  nova importação reescreve os pré-requisitos, créditos, carga horária e ementa.
+#  Nome, descrição e período de quem não tem pasta são preservados.
+#
+#  id             Nome curto, sem espaços nem acentos. Se a disciplina tem página
+#                 em content/docs/, use exatamente o nome da pasta dela (ex.: eda,
+#                 calculo1): o nó passa a abrir o material e usa o título e a
+#                 descrição da página. É também o nome usado em `prereq` das outras.
+#  nome           Nome que aparece no nó. Obrigatório só quando NÃO existe pasta
+#                 (com pasta, vale o título da página; se escrever aqui, este vence).
+#  periodo        1 a 9. Optativa: 0 (ou apague a linha). Com pasta em
+#                 docs/NN-periodo/ ou docs/optativas/, o período vem de lá e esta
+#                 linha é opcional.
+#  prereq         Lista de `id` das disciplinas que vêm antes (desenha a seta).
+#                 Vazio ou apagado = sem pré-requisito.
+#  coreq          Lista de `id` para cursar junto (co-requisito). Aparece no painel,
+#                 sem seta.
+#  creditos       Créditos (mostrado no painel).
+#  carga_horaria  Horas (mostrado no painel).
+#  descricao      (opcional) Frase mostrada no painel quando não há página.
+#  ementa         (opcional) Ementa oficial; é mostrada quando não há página nem descrição.
 #
 #  Exemplo de disciplina SEM pasta:
 #    - id: calculo-vetorial
@@ -28,125 +38,609 @@
 #  O build avisa no terminal se algum `prereq` apontar para um id que não existe.
 # ─────────────────────────────────────────────────────────────────────────────
 disciplinas:
-  # As "Optativa" genéricas da grade ficam de fora: optativas reais entram com periodo: 0.
 
   # 1º período
   - id: fmcc1
+    prereq: []
+    creditos: 4
+    carga_horaria: 60
   - id: introducao-a-computacao
+    prereq: []
+    creditos: 4
+    carga_horaria: 60
   - id: lab-p1
     nome: Laboratório de Programação 1
     periodo: 1
     prereq: []
+    coreq: [prog1]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Uso de ferramentas de desenvolvimento. Aprofundamento prático dos assuntos vistos na disciplina Programação I."
   - id: prog1
+    prereq: []
+    coreq: [lab-p1]
+    creditos: 4
+    carga_horaria: 60
   - id: direito
     nome: Direito e Cidadania
     periodo: 1
     prereq: []
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Noções Gerais de Direito. Direito do Trabalho. Direitos humanos. Relações étnico- raciais. Propriedade Intelectual e Industrial. Inovação Tecnológica. Legislação de Informática."
 
   # 2º período
   - id: fmcc2
     prereq: [fmcc1]
+    creditos: 4
+    carga_horaria: 60
   - id: calculo1
-    prereq: [introducao-a-computacao]
+    prereq: [fmcc1]
+    creditos: 4
+    carga_horaria: 60
   - id: lab-prog2
     nome: Laboratório de Programação 2
     periodo: 2
     prereq: [prog1, lab-p1]
+    coreq: [prog2]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Uso de ferramentas de desenvolvimento. Aprofundamento prático dos assuntos vistos na disciplina Programação II."
   - id: prog2
     nome: Programação 2
     periodo: 2
-    descricao: Orientação a objetos e estruturas de dados.
     prereq: [prog1, lab-p1]
+    coreq: [lab-prog2]
+    creditos: 4
+    carga_horaria: 60
+    descricao: Orientação a objetos e estruturas de dados.
+    ementa: "Modularização de programas. Uso de objetos. Criação de classes. Encapsulamento. Herança e composição. Polimorfismo. Tipos abstratos de dados. Tipos de coleções de objetos. Tratamento de erros com exceções. Testes de unidade. Regras básicas de design e refatoramento. Criação e uso de arquivos. Recursividade."
   - id: economia
     nome: Economia
     periodo: 2
     prereq: []
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução ao estudo da Ciência Econômica. Introdução à Microeconomia: demanda e oferta de bens; equilíbrio no mercado e estruturas de mercado. Introdução à Macroeconomia: os agregados macroeconômicos: consumo, poupança, investimento; o setor público; Fundamentos de análise econômico- social de projetos; noções de matemática financeira aplicadas a análise de investimentos."
 
   # 3º período
   - id: logica
     prereq: [fmcc2]
+    creditos: 4
+    carga_horaria: 60
   - id: calculo2
     prereq: [calculo1]
+    creditos: 4
+    carga_horaria: 60
   - id: leda
     nome: Laboratório de Estruturas de Dados
     periodo: 3
     prereq: [prog2, lab-prog2]
+    coreq: [eda]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Uso de ferramentas de desenvolvimento. Aprofundamento prático dos assuntos vistos na disciplina Estruturas de Dados."
   - id: eda
     prereq: [prog2, lab-prog2]
+    coreq: [leda]
+    creditos: 4
+    carga_horaria: 60
   - id: algebra-linear
     prereq: [fmcc2]
+    creditos: 4
+    carga_horaria: 60
 
   # 4º período
   - id: teoria-da-computacao
     nome: Teoria da Computação
     periodo: 4
+    prereq: [logica]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Fundamentos matemáticos. Autômatos finitos e linguagens regulares. Linguagens não- regulares (lema do bombeamento). Gramáticas livres de contexto e autômatos de pilha. Árvores de derivação e ambiguidade. Formas normais. Hierarquia de Chomsky. Algoritmos e máquinas de Turing, Tese de Church-Turing. Funções Turing- computáveis. Decidibilidade e indecidibilidade. Redução."
   - id: introducao-a-probabilidade
     nome: Introdução à Probabilidade
     periodo: 4
+    prereq: [calculo2]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Análise Exploratória de Dados. Probabilidade. Probabilidade Condicional. Teorema de Bayes. Variáveis Aleatórias Discretas e Contínuas. Valor Esperado e Variância. Modelos Probabilísticos para Variáveis Discretas e Contínuas."
   - id: oac
     nome: Organização e Arquitetura de Computadores
     periodo: 4
+    prereq: [introducao-a-computacao]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Visão Geral da Arquitetura e Organização de Computadores. Conceitos Básicos de Circuitos Digitais (Circuitos Combinacionais e Circuitos Sequenciais). Estrutura Básica de Computadores. A Unidade Central de Processamento. Estruturas de Barramentos. Organização de Memória. Sistemas de Entrada/Saída. Estrutura Básica da Arquitetura de Computadores. Suporte ao Sistema Operacional. Modos de Endereçamento. Tipos de Dados. Conjunto de Instruções. Interrupção. Paginação. Segmentação. Linguagens e Ferramentas. Sistemas Paralelos. Introdução a Sistemas Dedicados. Projeto de um Sistema Computacional. Tópicos avançados."
   - id: banco-de-dados-1
     nome: Banco de Dados 1
     periodo: 4
+    prereq: [eda]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Banco de dados: conceitos e terminologia. Modelo de entidades e relacionamentos. Modelo relacional. Tradução de esquemas conceituais para esquemas relacionais. Sistemas de gerência de bancos de dados (SGBDs). Segurança. Integridade. Suporte transacional: controle de concorrência e recuperação contra falhas."
   - id: teoria-dos-grafos
     nome: Teoria dos Grafos
     periodo: 4
+    prereq: [fmcc1, prog2, lab-prog2]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Definição formal de grafo e representações. Tipos de grafos: simples, direcionado, completo, multigrafo, bipartido, caminho, ciclo, conectado, subgrafo, ponderado, gerador, induzido, árvore, árvore geradora, aleatório. Definição, propriedades, operações, algoritmos e problemas computacionais associados aos seguintes conceitos: grau e vizinhança, união e interseção de grafos, isomorfismo, decomposição, corte, cobertura, ponte, passeio, trilha, circuito, cintura, clustering, busca em árvores, co-árvore, matróides, vértice de corte, separações e blocos, orientações, conectividade, contração. Tópicos Avançados: Circuitos de Euler e Hamiltoniano; Fluxos em Redes; Grafos Planares: dualidade, subdivisões e homeomorfismo; Estabilidade e cliques; Coloração: problema aplicado a faces, arestas e vértices; Casamento: grafos arbitrários e grafos bipartidos. Noções básicas de complexidade de algoritmos e aproximações."
   - id: plp
     nome: Paradigmas de Linguagens de Programação
     periodo: 4
+    prereq: [prog2, lab-prog2]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Conceitos e construções fundamentais em linguagens de programação: sintaxe, semântica, armazenamento, comandos, expressões, estruturas de controle, sistema de tipos, abstração e parametrização, encapsulamento, associações e escopo, reflexão e meta-programação. Paradigmas básicos e suas construções, conceitos fundamentais e estilo de programação: Imperativo, Funcional, Lógico, Orientado a Objetos, Concorrente, Funcional e Scripts. Novos Paradigmas, suas construções, conceitos fundamentais e estilo de programação."
 
   # 5º período
   - id: inteligencia-artificial
     nome: Inteligência Artificial
     periodo: 5
+    prereq: [teoria-da-computacao]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução. Agentes Inteligentes e Sistemas Multiagentes. Resolução de Problemas e Estratégias de Busca. Representação do Conhecimento e Raciocínio. Tratamento de Incerteza. Aprendizagem. Comunicação. Percepção. Ação. Aplicações e IA Distribuída. Projeto de Sistemas Inteligentes."
   - id: estatistica-aplicada
     nome: Estatística Aplicada
     periodo: 5
+    prereq: [introducao-a-probabilidade]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução ao Software R. Geração de amostras aleatórias. Estatística descritiva usando o R. Estimação de Parâmetros. Testes de Hipóteses. Comparação entre Grupos. Testes não-paramétricos. Regressão e correlação."
   - id: sistemas-operacionais
     nome: Sistemas Operacionais
     periodo: 5
+    prereq: [oac]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Conceitos básicos de sistemas operacionais. Gerência de processador. “Multithreading”. Comunicação entre processos. Gerência de memória. Gerência de entrada/saída. Sistemas de arquivos. Virtualização. Tópicos avançados."
   - id: projeto-de-software
     nome: Projeto de Software
     periodo: 5
+    prereq: [eda, leda]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Fundamentos; princípios de projeto de software (modularidade, coesão, acoplamento); paradigmas de projeto (funcional, orientado a objetos, outros); projeto orientado a objetos; linguagem de modelagem; abstração, herança, interfaces; bibliotecas e frameworks; padrões de design; noções de arquitetura de software."
   - id: engenharia-de-software
     nome: Engenharia de Software
     periodo: 5
+    prereq: [prog2, lab-prog2]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Processo de desenvolvimento de software. Gerência de projeto de software: estimativas de tempo e custo, análise de riscos, controle de qualidade. Engenharia de Requisitos. Validação e Verificação. Evolução de Software. Tópicos avançados."
   - id: redes-de-computadores
     nome: Redes de Computadores
     periodo: 5
+    prereq: [introducao-a-computacao]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Conceitos básicos de redes de computadores. Conceitos de tecnologias de transmissão de sinais (analógicos e digitais). Apresentação/descrição, de forma geral, de hardware e software para redes de computadores. Modelos de referência OSI e TCP/IP de arquitetura de redes de computadores. Apresentação/descrição de funcionalidades definidas em cada uma das camadas das pilhas de protocolos do modelo OSI e TCP/IP. Estudo de casos."
 
   # 6º período
   - id: programacao-concorrente
     nome: Programação Concorrente
     periodo: 6
+    prereq: [sistemas-operacionais]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução à programação concorrente. Conceitos básicos. Exclusão mútua. Sincronização usando memória compartilhada. Concorrência em linguagens de programação. Problemas clássicos de programação concorrente. Resolução de problemas."
   - id: analise-de-sistemas
     nome: Análise de Sistemas
     periodo: 6
+    prereq: [projeto-de-software]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Diferenciação entre Modelos de processo, de negócio, de dados e de objetos. Modelagem de processos de negócio. Construção e análise de um caso de negócio. Métodos de análise e projeto. Técnicas de levantamento de requisitos. Modelagem de requisitos de sistema com casos de uso. Rastreabilidade de requisitos. Análise e modelagem orientados a objeto. Da análise para o projeto de um sistema. Linguagens para representação de modelos. Ferramentas para Análise e Projeto de um sistema."
   - id: ata
     nome: Análise e Técnicas de Algoritmos
     periodo: 6
+    prereq: [eda, teoria-dos-grafos]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Análise da complexidade de algoritmos. Prova de corretude de algoritmos recursivos e iterativos. Técnicas de algoritmos. Força Bruta, Backtracking, Branch and Bound, Método Guloso, Divisão e Conquista, Programação Dinâmica, Menor Caminho em Grafos e Árvore de Cobertura."
 
   # 7º período
   - id: compiladores
     nome: Compiladores
     periodo: 7
+    prereq: [plp, teoria-da-computacao]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Conceituação de tradutores (e.g. compiladores, interpretadores, montadores). Fases de um compilador. Análise léxica. Análise sintática. Análise semântica. Tratamento e recuperação de erros. Geração e Otimização de Código Intermediário. Tabela de símbolos. Geração e Otimização de Código Objeto. Ambientes de run-time. Ambiente de interpretação. Frameworks, Linguagens e Ferramentas para Construção de Compiladores. Compiladores JITS. Compiladores Avançados."
   - id: metodologia-cientifica
     nome: Metodologia Científica
     periodo: 7
+    prereq: [estatistica-aplicada]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Ciência, o método científico e a ciência da computação; Como realizar uma pesquisa empírica; O processo experimental: identificação de objetivos, planejamento de experimentos; Análise de dados e estatística; Técnicas e ferramentas para modelagem e medição de desempenho; Ilustrações de aplicações de técnicas e ferramentas para modelagem e medição de áreas da computação (p.ex., sistemas distribuídos, engenharia de software); Validação de investigações empíricas; Validação de modelos; Planejamento de estudos de caso; Planejamento e execução de surveys; Leitura de um artigo científico; Como escrever um artigo científico; Como preparar uma apresentação e apresentar um trabalho. Reprodutibilidade de pesquisa; Open Science; Revisão de artigos científicos; Trabalhos em grupo sobre conteúdo da ementa."
 
   # 8º período
   - id: lingua-portuguesa
     nome: Língua Portuguesa
     periodo: 8
+    prereq: []
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Estudo da língua/linguagem em diferentes contextos e situações de uso. Práticas de leitura e produção textual em diferentes contextos. Critérios de textualidade."
   - id: projeto-em-computacao-1
     nome: Projeto em Computação 1
     periodo: 8
+    prereq: [engenharia-de-software, analise-de-sistemas]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Desenvolvimento de um projeto prático em computação. Definição do problema. Análise de requisitos. Estudo de viabilidade. Análise do domínio do problema. Projeto arquitetural. Projeto de baixo nível. Implementação. Testes. Cronograma de execução."
 
   # 9º período
   - id: tcc
     nome: Trabalho de Conclusão de Curso
     periodo: 9
+    prereq: [metodologia-cientifica, lingua-portuguesa]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Acompanhamento de Projeto. Produção de monografia acerca do projeto realizado."
   - id: projeto-em-computacao-2
     nome: Projeto em Computação 2
     periodo: 9
+    prereq: [projeto-em-computacao-1]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Continuação do projeto em computação definido na disciplina. Projeto em Computação I."
+
+  # Optativas (periodo: 0)
+  - id: administracao-de-sistemas
+    nome: Administração de Sistemas
+    periodo: 0
+    prereq: [redes-de-computadores, sistemas-operacionais]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução à Administração de Sistemas. Programação Shell. Utilitários básicos do sistema operacional. Sistemas de infraestrutura de arquivos e de redes. Sistemas de controle de usuários, monitoramento e autenticação. Políticas e práticas na administração de sistemas de TI."
+  - id: administracao-de-sgbd
+    nome: Administração de Sistemas Gerenciadores de Bancos de Dados
+    periodo: 0
+    prereq: [banco-de-dados-1]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "O papel do administrador de banco de dados. Arquitetura de SGBD. Gerenciamento de recursos (memória, disco, usuários, transações). Ajuste de controle de concorrência. Ajuste de desempenho de banco de dados. Ajuste de desempenho de consultas SQL. Ajuste de esquemas. Backup e recuperação de falhas. Segurança e auditoria de banco de dados. Ferramentas de administração. Estudos de Caso. Tópicos avançados."
+  - id: algoritmos-avancados
+    prereq: [prog1, lab-p1]
+    creditos: 4
+    carga_horaria: 60
+  - id: arquitetura-de-software
+    nome: Arquitetura de Software
+    periodo: 0
+    prereq: [projeto-de-software]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Fundamentos e conceitos de design de software. Definição e benefícios de Arquitetura de Software. Conceitos de Arquitetura de Software: Elementos arquiteturais; Stakeholders; Atributos de qualidade, requisitos arquiteturais; Visões arquiteturais; Decisões arquiteturais; Rastreabilidade; Técnicas de Design Arquitetural e Padrões arquiteturais. Documentação da arquitetura de um sistema software."
+  - id: avaliacao-de-desempenho
+    nome: Avaliação de Desempenho de Sistemas Discretos
+    periodo: 0
+    prereq: [introducao-a-probabilidade]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "O processo de modelagem. Métodos de avaliação de desempenho de sistemas discretos. Introdução aos processos estocásticos. Teoria das filas. Medidas básicas de desempenho. Simulação digital. Ferramentas de modelagem e avaliação de desempenho."
+  - id: banco-de-dados-2
+    nome: Banco de Dados II
+    periodo: 0
+    prereq: [banco-de-dados-1]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Modelos de dados orientados a objeto. Modelos de dados objeto-relacionais. SGBDs orientados a objeto. SGBDs objeto-relacionais. Projeto de bancos de dados objeto- relacionais. Módulos de um SGBD: Armazenamento, Indexação, Processamento de Transações e Controle de Concorrência. Sistemas NoSQL."
+  - id: ciencia-de-dados-descritiva
+    nome: Ciência de Dados Descritiva
+    periodo: 0
+    prereq: [estatistica-aplicada]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Conceitos básicos de estatística, análise descritiva e exploratória, estatística inferencial, representação gráfica de dados, técnicas de visualização de dados, agrupamento de dados, redução de dimensionalidade, conceitos de inferência causal, técnicas para aquisição, limpeza e transformação de dados brutos para análise."
+  - id: ciencia-de-dados-preditiva
+    nome: Ciência de Dados Preditiva
+    periodo: 0
+    prereq: [estatistica-aplicada]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Regressão Simples e Multivariada; Regressão Ridge e Lasso; Regressão Logística; Naive Bayes; Árvores de Decisão; Ensembles; Avaliação de Modelos Preditivos; Explicabilidade de Modelos; Bias e Variância; Regularização; Séries Temporais; AutoML; Introdução às Redes Neurais Profundas."
+  - id: computacao-e-musica
+    nome: Computação e Música
+    periodo: 0
+    prereq: [eda]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Fundamentos de Computação e Música, Fundamentos de Sistemas de Computação e Música. Design de Sistemas de Computação e Música. Produção de Sistemas de Computação e Música. Tendências em Computação e Música."
+  - id: computacao-grafica
+    nome: Computação Gráfica
+    periodo: 0
+    prereq: [calculo1, algebra-linear, eda]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Motivação, sistemas, tecnologias e aplicações gráficas, API gráficas, pipeline gráfico, aspectos numéricos, projeto e codificação de programas gráficos. Fundamentos de matemática, análise vetorial e álgebra geométrica aplicados à computação gráfica. Percepção visual, luz, cor, iluminação global e visualização 2D e 3D. Renderização - raytracing, sombreamento de superfícies, transparência e mapeamento de textura. Estruturas de dados para o processamento gráfico. Modelagem implícita. Modelos de reflexão. Animação computacional. Hardware gráfico. Projeto em Computação Gráfica."
+  - id: software-com-agentes-e-ia
+    nome: Desenvolvimento de Software com Agentes e IA Generativa
+    periodo: 0
+    prereq: [engenharia-de-software, inteligencia-artificial]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Fundamentos de agentes de Inteligência Artificial e modelos de linguagem de grande porte (LLMs) aplicados ao desenvolvimento de software, com casos da indústria e de projetos open source. Arquitetura de agentes de codificação. Prompting como técnica de engenharia. Model Context Protocol (MCP) e skills como mecanismos de extensão e especialização de agentes. Desenvolvimento orientado por especificação (Spec-Driven Development) e geração de código assistida por agentes. Qualidade de software baseada em agentes: verificação arquitetural, avaliação e revisão de código, refatoração e testes. Organização de repositórios para uso por agentes. Limitações, riscos e impacto dos LLMs e agentes na prática contemporânea do desenvolvimento de software, incluindo o papel do desenvolvedor, qualidade, produtividade e ética."
+  - id: software-integrado-a-infraestrutura
+    nome: Desenvolvimento de Software Integrado à Operação da Infraestrutura
+    periodo: 0
+    prereq: [banco-de-dados-1, projeto-de-software]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução à metodologia DevOps. Integração e Entrega Contínua. Infraestrutura como código. Versionamento. Controle de mudanças. Gerência de Configuração. Monitoramento de aplicações. Tópicos Avançados."
+  - id: economia-de-tecnologia-da-informacao
+    nome: Economia de Tecnologia da Informação
+    periodo: 0
+    prereq: [introducao-a-probabilidade]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Motivação: Importância da avaliação de investimentos, de benefícios e dos impactos de projetos, produtos e serviços de TI; como definir valor e preço de produtos e serviços de TI a partir desta avaliação. Definição de valor. Exemplos de exercícios de valoração. Revisão da Teoria de Probabilidades, de Álgebra Intervalar e da Teoria da Utilidade. Breve visita à análise de retorno financeiro, à análise de custos e de risco. Análise de cenários. Opções reais. Arcabouços e modelos para avaliação corporativa. Preço e precificação. Tipos de licenças de software. Aplicações à valoração e à precificação na área de Tecnologias da Informação. O papel e a importância do cliente. Projeto."
+  - id: empreendedorismo-e-inovacao
+    nome: Empreendedorismo e Inovação
+    periodo: 0
+    prereq: [engenharia-de-software]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução ao empreendedorismo: tópicos relacionados à criação e administração de empresas inovadoras em geral e no ramo de software. Software sob demanda: tópicos relacionados à prestação de serviços de desenvolvimento de software para clientes, sob demanda dos mesmos. Produto/Serviço de software: tópicos relacionados à criação de produtos e serviços próprios e as mais diversas formas de negociação dos mesmos. Criando um produto: tópicos relacionados à criação de produtos. Inovação: tópicos gerais sobre inovação tecnológica, desde propriedade intelectual à subvenção econômica."
+  - id: gerencia-de-redes
+    nome: Gerência de Redes
+    periodo: 0
+    prereq: [redes-de-computadores]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Conceituação de Gerência de Redes; Modelos de Gerência de Redes; Protocolos de Gerência de Redes; Modelo e Protocolo SNMP; Gerência de Equipamentos de Redes; Gerência de Hospedeiros; Gerência de Aplicações; Estudo de Caso: Instalação, Configuração e Uso de Ferramenta de Gerência de Rede."
+  - id: gestao-de-projetos
+    nome: Gestão de Projetos
+    periodo: 0
+    prereq: [engenharia-de-software]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução à Gestão de Projetos. Definição e benefícios de Gestão de Projetos. Ferramentas de apoio. Exemplos práticos de gestão de projetos de software."
+  - id: governanca-da-internet
+    nome: Governança da Internet
+    periodo: 0
+    prereq: [redes-de-computadores]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Conhecer os principais conceitos ligados ao tema Governança da Internet no mundo e no Brasil. Identificar o conjunto de atividades desenvolvidas por uma complexa rede de agentes envolvidos com a gerência e coordenação de recursos, processos, conteúdos, aplicativos e sistemas relacionados. Sensibilizar os alunos quanto à importância das diretrizes estratégicas relacionadas ao uso e ao desenvolvimento da Internet no Brasil na sua atuação como um profissional da área de computação. Conhecer e analisar o contexto histórico e atual da Governança da Internet de forma a motivar projetos de pesquisa e desenvolvimento que permitam a manutenção do nível de qualidade técnica e inovação no uso da Internet."
+  - id: habilidades-socioemocionais-1
+    nome: Habilidades Socioemocionais I
+    periodo: 0
+    prereq: []
+    creditos: 2
+    carga_horaria: 30
+    ementa: "Introdução a habilidades socioemocionais (soft skills): o que são; qual a importância para um profissional de computação; Hard Skills vs. Soft Skills; exemplos práticos de uso. Visão geral das diferentes habilidades socioemocionais. Inteligência Emocional: autoconhecimento, autoregulação, influência e relacionamentos. Aspectos de comunicação e negociação."
+  - id: habilidades-socioemocionais-2
+    nome: Habilidades Socioemocionais II
+    periodo: 0
+    prereq: []
+    creditos: 2
+    carga_horaria: 30
+    ementa: "Introdução a habilidades socioemocionais (soft skills): o que são; qual a importância para um profissional de computação; Hard Skills vs. Soft Skills; exemplos práticos de uso. Visão geral das diferentes habilidades socioemocionais. Aspectos de planejamento, autogestão e auto-organização. Aspectos de liderança."
+  - id: informatica-e-sociedade
+    nome: Informática e Sociedade
+    periodo: 0
+    prereq: []
+    creditos: 4
+    carga_horaria: 60
+    ementa: "O desenvolvimento científico e tecnológico para a sociedade, a cultura e o indivíduo. A revolução das tecnologias da informação. A emergência da nova economia: informacionalismo, globalização e sociedade em redes. As tecnologias da informação como construção social: relações de trabalho, carreira profissional, ética dos empreendimentos e propriedade intelectual. A política e a cidadania na sociedade do conhecimento."
+  - id: ingles
+    nome: Inglês
+    periodo: 0
+    prereq: []
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Desenvolvimento sistemático da competência comunicativa em língua estrangeira: compreensão e produção orais e escritas em nível elementar. Estudo básico do sistema fonológico da língua inglesa."
+  - id: interconexao-de-redes-de-computadores
+    nome: Interconexão de Redes de Computadores
+    periodo: 0
+    prereq: [redes-de-computadores, sistemas-operacionais]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução e panorama geral sobre os mecanismos de interconexão de redes, com ênfase nas principais tecnologias empregadas na comunicação entre domínios de acesso, agregação e transporte. O conteúdo abrange sistemas sem fio, como por exemplo Wi‑Fi 6, 6E e 7, métodos de coordenação espectral, além de infraestruturas ópticas e metálicas de acesso e backbone, como PON/GPON, xDSL, Ethernet de alta capacidade e arquiteturas de comutação e roteamento baseadas em MPLS. Software para interconexão de redes (a família de protocolos TCP/IP v4 e v6, incluindo estratégias de transição e coexistência entre versões). Hardware para interconexão de redes (p. ex. switches, routers, brouters, etc.). Comutação e serviços de camada 2 (VLANs, agregação de portas, Spanning Tree Protocol, DHCP Snooping). Roteamento unicast e multicast e tecnologias com garantias de serviço (QoS, MPLS, SD-WAN). Redes Definidas por Software (SDN e/ou OpenRAN) e cloud networking. Segurança em interconexão de redes. Tópicos avançados em interconexão de redes. Introdução à Gerência de Redes."
+  - id: interface-humano-computador
+    nome: Interface Humano-Computador
+    periodo: 0
+    prereq: [eda]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "A interface com usuários: Definição; Importância de um projeto de interface centrado no usuário; breve histórico da interação humano-computador; características de interfaces gráficas para aplicações Desktop, Web e Mobile. Projeto contextual: gestão do desenvolvimento de software; usabilidade em desenvolvimento de software; ciclo da Engenharia da Usabilidade. Concepção de interfaces com o usuário: análise de requisitos; projeto da Tarefa, da Informação e da Interação; prototipagem; avaliação."
+  - id: jogos-digitais
+    nome: Jogos Digitais
+    periodo: 0
+    prereq: []
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Fundamentos de jogos digitais. Design de jogos digitais. Produção e teste de jogos digitais. Tendências em jogos digitais."
+  - id: libras
+    nome: Libras - Língua Brasileira de Sinais
+    periodo: 0
+    prereq: []
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Noções gerais sobre os aspectos lingüísticos, sociais, culturais da Libras. Uso do alfabeto digital. A Libras na educação bilíngue-bicultural de surdos. Introdução ao aprendizado da Libras, através de vivências interativas, com enfoque em seus aspectos gramaticais, textuais e culturais."
+  - id: metodos-e-software-numericos
+    nome: Métodos e Software Numéricos
+    periodo: 0
+    prereq: [algebra-linear, calculo2]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Formulação, metodologia e técnicas para análise e solução numéricas de problemas de engenharia, economia, administração. Métodos e ferramentas de software para cálculo numérico. Fundamentos de computação digital e implicações para erros e estabilidade de algoritmos. Tipos e propagação de erros. Métodos para extração de raízes. Métodos para resolução de sistemas de equações lineares. Métodos para interpolação e ajustes de curvas. Métodos para integração e diferenciação numéricas. Análise de complexidade, erro e convergência de métodos numéricos. Exercícios de fixação. Estudos de casos. Trabalho de disciplina."
+  - id: metodos-formais
+    nome: Métodos Formais
+    periodo: 0
+    prereq: []
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução a Métodos Formais. Definição e benefícios de Métodos Formais. Modelos e processos de desenvolvimento. Tipos de Métodos Formais. Especificação formal. Testes baseados em especificações formais. Verificação de modelos. Ferramentas de apoio."
+  - id: otimizacao
+    nome: Otimização
+    periodo: 0
+    prereq: [algebra-linear, calculo2]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Otimização no contínuo, tratamento de restrições; Otimização discreta: métodos tradicionais, enumeração exaustiva, pesquisa local, branch-and-bound, programação dinâmica, programação inteira, programação inteira zero-um; Otimização global: Técnicas numéricas, recozimento simulado, pesquisa tabu, Algoritmos Evolucionários, Tomada de decisão multicritério, Analytic Hierarchy Process, Lógica fuzzy."
+  - id: percepcao-computacional
+    nome: Percepção Computacional
+    periodo: 0
+    prereq: [algebra-linear, calculo2, introducao-a-probabilidade]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução à percepção por computador. Modalidades sensoriais e tipos de sensores. Visão por computador. Aquisição de imagem e sensores de visão. Pré-processamento e segmentação de imagens. Descrição, reconhecimento de padrões e decisão. Representação. Movimento. Rastreamento. Percepção acústica e de Linguagem Natural. Arquiteturas e aplicações."
+  - id: pratica-de-ensino-em-computacao-1
+    nome: Prática de Ensino em Computação I
+    periodo: 0
+    prereq: []
+    creditos: 2
+    carga_horaria: 30
+    ementa: "Noções de didática. Recursos pedagógicos. Preparação de aulas e exercícios, execução e avaliação de resultados."
+  - id: pratica-de-ensino-em-computacao-2
+    nome: Prática de Ensino em Computação II
+    periodo: 0
+    prereq: [pratica-de-ensino-em-computacao-1]
+    creditos: 2
+    carga_horaria: 30
+    ementa: "Noções avançadas de didática e preparação de atividades de educação em computação."
+  - id: processamento-de-linguagem-natural
+    nome: Processamento de Linguagem Natural
+    periodo: 0
+    prereq: [fmcc2, eda, leda]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Processamento e Pré-processamento de Texto; Representação Vetorial de Documentos e Palavras; K-NN para Busca Textual; Descoberta de Tópicos com LDA; Agrupamento com o K-Means; Naive Bayes; Modelos de Linguagem; Regressão Logística e Redes Neurais; Word Embeddings; Redes Neurais Recorrentes; Transfer Learning para NLP; Aplicações de NLP."
+  - id: programacao-em-banco-de-dados
+    nome: Programação em Banco de Dados
+    periodo: 0
+    prereq: [banco-de-dados-1]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução às linguagens de programação de banco de dados. Definição de variáveis e tipos de dados. Controle de Fluxo. Entrada e saída de dados. Cursores. Tratamento de erros e exceções. Construção de subprogramas (procedimentos, funções, pacotes, gatilhos). Utilização de subprogramas embutidos. SQL Avançado."
+  - id: programacao-funcional
+    nome: Programação Funcional
+    periodo: 0
+    prereq: [plp]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Paradigma de linguagens funcionais. Introdução a Lambda Calculus. Sintaxe e Semântica de uma Linguagem de Programação Funcional. Funções. Recursão. Tipos de Dados. Feições funcionais em linguagens de programação imperativas e orientadas a objetos."
+  - id: programacao-para-a-web-1
+    nome: Programação para a Web I
+    periodo: 0
+    prereq: [eda, leda]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "História e fundamentos da Web. Introdução à tríade de tecnologias web: HTML, CSS e JavaScript. Sintaxe e semântica de HTML (parser + DOM). Sintaxe e semântica de CSS (renderização). Sintaxe e semântica de JavaScript (conceitos básicos de programação revistos para JS: tipos de dados, controle de fluxo, funções e classes). Fundamentos de programação funcional com JavaScript. Programação assíncrona com JavaScript no browser (preemptive versus cooperative multitasking; pilha de execução vs fila de eventos; settimeout, setinterval, await, async, promises). Diferenças entre os runtimes de Python, Java e JavaScript (runtime vs language engine). Serviços básicos do browser (objetos, funções e APIs do browser, tais como window, document, Selection e Fetch). Conceitos de elemento e componente web."
+  - id: programacao-para-a-web-2
+    nome: Programação para a Web II
+    periodo: 0
+    prereq: [programacao-para-a-web-1]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Arquitetura e projeto de aplicações Web. APIs Web. Escalabilidade, controle de transações e segurança de aplicações Web. Tópicos Avançados."
+  - id: projeto-de-redes-de-computadores
+    nome: Projeto de Redes de Computadores
+    periodo: 0
+    prereq: [interconexao-de-redes-de-computadores]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Conceituação em Projeto de Redes de Computadores; Metodologias para Projeto de Redes de Computadores; A Metodologia “Top-down” para Projeto de Redes de Computadores; Estudo de caso: projeto de uma Rede de Computadores com atendimento à um conjunto elaborado de requisitos"
+  - id: projeto-de-sistemas-digitais
+    nome: Projeto de Sistemas Digitais
+    periodo: 0
+    prereq: [oac]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Visão geral de sistemas digitais. Metodologias para projeto de sistemas digitais. Análise e projeto de sistemas digitais. Tópicos avançados."
+  - id: projeto-de-sistemas-operacionais
+    nome: Projeto de Sistemas Operacionais
+    periodo: 0
+    prereq: [sistemas-operacionais]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Laboratório de projeto de sistemas operacionais com abordagem prática e experimental, voltado à consolidação dos conceitos de Sistemas Operacionais por meio de implementação, instrumentação e avaliação de desempenho de mecanismos de um kernel didáticos. Desenvolvimento de extensões para kernels envolvendo chamadas de sistema, escalonamento de processos, gerência de memória virtual, concorrência e sincronização, sistemas de arquivos e comunicação entre processos. Metodologia experimental para avaliação de desempenho de sistemas: definição de métricas, instrumentação de kernel, ferramentas de medição e análise estatística de resultados. Estudo comparativo entre os mecanismos implementados nos kernels educacionais e as soluções adotadas em kernels de produção (ex.: Linux). Desenvolvimento de projeto final envolvendo extensão do kernel e/ou avaliação experimental de desempenho, com documentação técnica e apresentação dos resultados."
+  - id: provisionamento-e-operacao-de-infraestrutura
+    nome: Provisionamento e Operação de Infraestrutura
+    periodo: 0
+    prereq: [redes-de-computadores, sistemas-operacionais]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Introdução a conceitos de provisionamento, gerência e operação de sistemas de TI. Modelos de implantação da infraestrutura. Projeto e planejamento da infraestrutura. Monitoramento e operação dos serviços na infraestrutura. Provisionamento de recursos para serviços. Tópicos avançados."
+  - id: padroes-e-redes-neurais
+    nome: Reconhecimento de Padrões e Redes Neurais
+    periodo: 0
+    prereq: [estatistica-aplicada, inteligencia-artificial]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Padrões e suas Representações. Sistema Típico de Reconhecimento de Padrões. Processos Supervisionado e Não-Supervisionado. Introdução ao Reconhecimento Estatístico de Padrões. Aprendizagem em Redes Neurais. Análise de Componentes Principais. Perceptrons de Simples e Múltiplas Camadas. Mapas Auto Organizáveis. Redes Neurais Recorrentes. Previsão e Análise de Séries Temporais. Aplicações."
+  - id: recuperacao-da-informacao
+    nome: Recuperação da Informação e Busca na Web
+    periodo: 0
+    prereq: [banco-de-dados-1]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Arquitetura de uma ferramenta de busca. Técnicas básicas e avançadas de recuperação textual. Técnicas de indexação textual. Modelo de recuperação vetorial e booleano. Busca na Web. Busca em dados semi-estruturados. Tópicos avançados."
+  - id: seguranca-de-sistemas
+    nome: Segurança de Sistemas
+    periodo: 0
+    prereq: [redes-de-computadores, sistemas-operacionais]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Conceituação de Segurança em Sistemas de Tecnologia da Informação e Comunicações. Ferramentas de ataque, ameaças de segurança e vulnerabilidades típicas. Conceitos e Modelos de Esquemas de Criptografia; Conceitos e Esquemas de Aplicações de Autenticação e controle de acesso. Conceituação e Modelos de Firewall. Estudos de casos: Segurança em computação na nuvem, sistemas embarcados, Serviços Web e Internet."
+  - id: sistemas-de-apoio-a-decisao
+    nome: Sistemas de Apoio à Decisão
+    periodo: 0
+    prereq: [banco-de-dados-1]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Os conceitos, níveis e tipos de decisão nas organizações. Os estágios do processo decisório. Os modelos individuais de tomada de decisão. Os modelos organizacionais de tomada de decisão. Teorias, metodologias, técnicas e ferramentas aplicáveis à análise de decisões. Os conceitos de sistema de apoio à decisão. Os tipos de sistemas de apoio à decisão. Componentes de sistemas de apoio à decisão. Metodologias, técnicas e ferramentas de desenvolvimento de sistemas de apoio à decisão. Projeto e implementação de sistema de apoio à decisão focado em dados. Business Intelligence. Descoberta de Conhecimento em Bancos de Dados. Tópicos Avançados."
+  - id: sistemas-de-informacoes-geograficas
+    nome: Sistemas de Informações Geográficas
+    periodo: 0
+    prereq: [banco-de-dados-1]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Conceitos básicos de Geoprocessamento. Fontes de dados espaciais. Introdução à Cartografia. Sistemas de Posicionamento Global. Representação de dados espaciais. Estruturas de Dados Espaciais. Bancos de Dados Espaciais. Análise Espacial. Servidores de Mapas. Serviços Baseados em Localização."
+  - id: sistemas-distribuidos
+    nome: Sistemas Distribuídos
+    periodo: 0
+    prereq: [redes-de-computadores, sistemas-operacionais]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Diferenças entre sistemas distribuídos e sistemas centralizados. Comunicação em sistemas distribuídos. Modelos de sistemas distribuídos. Sincronização em sistemas distribuídos. Arquitetura de Sistemas Distribuídos. Confiabilidade e segurança em sistemas distribuídos. Estudos de caso."
+  - id: topicos-em-ciencia-da-computacao-1
+    nome: Tópicos em Ciência da Computação I
+    periodo: 0
+    prereq: []
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Ementa livre para tópicos nas áreas de Ciência da Computação."
+  - id: topicos-em-ciencia-da-computacao-2
+    nome: Tópicos em Ciência da Computação II
+    periodo: 0
+    prereq: []
+    creditos: 2
+    carga_horaria: 30
+    ementa: "Ementa livre para tópicos nas áreas de Ciência da Computação."
+  - id: transformacao-digital
+    nome: Transformação Digital
+    periodo: 0
+    prereq: []
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Refletir sobre as principais transformações promovidas pela economia digital tendo como foco a formação do profissional de TIC e o seu papel na compreensão dos desafios atuais e futuros. A compreensão dos impactos movidos pela economia digital contemplará temas diversos, abordando desde questões conceituais até as aplicações das tecnologias de transformação digital, estruturados em cinco categorias: (1) a economia que move as empresas e o mundo: onde estamos e aonde podemos chegar; (2) negócios da transformação digital; (3) acesso e adoção de meios digitais; (4) adequação do ecossistema regulatório e de inovação para o digital; (5) o desafio da confiança e da segurança na economia digital."
+  - id: verificacao-e-validacao-de-software
+    nome: Verificação e Validação de Software
+    periodo: 0
+    prereq: [engenharia-de-software]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Terminologia e conceitos fundamentais, níveis e tipos de teste, processos e atividades de teste, princípios e ética, análise estática automática e inspeção de software, o modelo V, planejamento de testes, gerência de processos e artefatos de teste, critérios e ferramentas de cobertura, técnicas e estratégias clássicas Black-box e White-box: partição por equivalências, valores limite, tabelas de decisão, teste de caminhos, teste de fluxo de dados. Técnicas de teste de integração, teste de sistema, teste de aceitação, teste de regressão, teste de GUI, teste de stress, teste de carga, teste de configuração, teste randômico, teste exploratório. Geração, seleção e priorização de casos de teste. Projeto de casos de teste e seleção de dados de teste. Ferramentas de Teste. Teste aplicado a domínios específicos."
+  - id: visualizacao-de-dados
+    nome: Visualização de Dados
+    periodo: 0
+    prereq: [banco-de-dados-1, estatistica-aplicada]
+    creditos: 4
+    carga_horaria: 60
+    ementa: "Objetivo e crítica de visualização de dados; tarefas de análise de dados e suporte de visualizações a essas tarefas; princípios para o projeto de visualização de dados; visualizações interativas; visualizações com uma e com múltiplas visões; visualizações de diferentes tipos de dados."
