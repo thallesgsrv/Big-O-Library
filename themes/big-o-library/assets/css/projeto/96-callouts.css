@@ -1,0 +1,40 @@
+/* Callouts (avisos) na paleta do projeto.
+   Ordem importa: os arquivos de css/projeto/ são juntados pelo nome. Veja README.md desta pasta. */
+
+/* ───── Callouts ─────
+   Uma só regra de cor: a barra lateral carrega o tipo; o texto fica na cor de leitura.
+   note e important são neutros (o azul/roxo do Hextra aparecia em ~240 avisos e brigava com a paleta);
+   tip, warning e caution usam a escala semântica --c1/--c4/--c5, que já existe nos dois temas. */
+.content .hextra-alert {
+  --tone: var(--mute);
+  --tone-title: var(--txt);
+  padding: 14px 18px;
+  border: 1px solid var(--line);
+  border-left: 4px solid var(--tone);
+  border-radius: var(--r-md);
+  background: color-mix(in srgb, var(--tone) 7%, var(--card));
+  color: var(--body);
+}
+.content .hextra-alert[data-alert="important"] {
+  --tone: var(--txt);
+}
+.content .hextra-alert[data-alert="tip"] {
+  --tone: var(--c1);
+  --tone-title: color-mix(in srgb, var(--c1) 60%, var(--txt));
+}
+.content .hextra-alert[data-alert="warning"] {
+  --tone: var(--c4);
+  --tone-title: color-mix(in srgb, var(--c4) 60%, var(--txt));
+}
+.content .hextra-alert[data-alert="caution"] {
+  --tone: var(--c5);
+  --tone-title: color-mix(in srgb, var(--c5) 60%, var(--txt));
+}
+.content .hextra-alert .hextra-alert-title {
+  color: var(--tone-title);
+  font-weight: 600;
+}
+.content .hextra-alert .hextra-alert-content,
+.content .hextra-alert .hextra-alert-content p {
+  color: var(--body);
+}

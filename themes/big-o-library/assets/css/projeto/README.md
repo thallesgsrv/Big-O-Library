@@ -32,6 +32,7 @@ arquivo minificado; no `hugo server` cada arquivo é carregado separado.
 | `81-polimento` | polimento visual geral |
 | `90-terminal` | janela de terminal e sintaxe de código |
 | `91` a `95` | transições, histórico da home, fila, árvores, leitura prolongada e celular |
+| `96-callouts` | cores dos avisos (`note`, `tip`, `warning`...) na paleta do projeto |
 
 ## Componentes definidos em mais de um arquivo
 

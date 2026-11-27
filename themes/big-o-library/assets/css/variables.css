@@ -1,7 +1,7 @@
 /* Paleta */
 :root{
   --bg:#FAF8F3;--card:#FFFFFF;--line:#E3DDCF;--txt:#1C1B18;--body:#4A463F;--mute:#6B675E;
-  --ac:#B45309;--ac-h:#92400E;--btn:#B45309;--btn-t:#FFFFFF;--axis:#B9B2A2;
+  --ac:#A34A07;--ac-h:#7C3305;--btn:#A34A07;--btn-t:#FFFFFF;--axis:#B9B2A2;
   --c1:#16A34A;--c2:#65A30D;--c3:#CA8A04;--c4:#EA580C;--c5:#DC2626;
 }
 html.dark{
